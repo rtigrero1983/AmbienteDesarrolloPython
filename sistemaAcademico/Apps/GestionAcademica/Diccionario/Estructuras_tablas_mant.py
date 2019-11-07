@@ -1,7 +1,10 @@
 from django.db import models
 from django.db.models import AutoField
 
+#from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
+#from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleEmpleado
+
 
 class MantPersona(models.Model):
     id_persona = models.AutoField(primary_key=True)
@@ -72,3 +75,80 @@ class MantPersona(models.Model):
 
     def __str__(self):
         return self.nombres
+
+class MantRepresentante(models.Model):
+    id_representante = models.AutoField(primary_key=True)
+    id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, blank=False, null=False)
+    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
+    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+    id_genr_nivel_formacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False)
+    ingresos_totales = models.FloatField(blank=False, null=False)
+    id_usuario = models.IntegerField(blank=False, null=False)
+
+    class Meta:
+        verbose_name = 'Representante',
+        verbose_name_plural = 'Representantes',
+        db_table = 'mant_representante'
+
+    def __str__(self):
+        return self.usuario_ing, self.terminal_ing
+
+class MantEstudiante(models.Model):
+    id_estudiante = models.AutoField(primary_key=True)
+    id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, blank=False, null=False,
+                                   related_name="fk_estudiante_persona")
+    tipo_estudiante = models.CharField(max_length=45, blank=False, null=False)
+    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
+    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+
+    class Meta:
+        verbose_name = 'Estudiante',
+        verbose_name_plural = 'Estudiantes',
+        db_table = 'mant_estudiante'
+
+    def __str__(self):
+        return self.tipo_estudiante, self.usuario_ing
+
+class MantAnioLectivo(models.Model):
+    id_anio_lectivo = models.AutoField(primary_key=True)
+    anio = models.IntegerField(blank=False, null=False)
+    ciclo = models.IntegerField(blank=False, null=False)
+    fecha_incio_ciclo = models.DateField(blank=False, null=False)
+    fecha_fin_ciclo = models.DateField(blank=False, null=False)
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,
+                                       related_name="fk_aniolectivo_estado")
+
+    class Meta:
+        verbose_name = 'Año lectivo',
+        verbose_name_plural = 'Año lectivo',
+        db_table = 'mant_anio_lectivo'
+
+    def __str__(self):
+        return self.ciclo, self.anio
+
+
+class MantEmpleado(models.Model):
+    id_empleado = models.AutoField(primary_key=True)
+    id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, blank=False, null=False,
+                                   related_name="fk_empleado_persona")
+    id_detalle_empleado = models.ForeignKey('MovDetalleEmpleado', on_delete=models.CASCADE, blank=False, null=False,
+                                            related_name="fk_empleado_detalle")
+    id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE, blank=False, null=False,
+                                        related_name="fk_empleado_anio_lectivo")
+    id_usuario = models.ForeignKey('ConfUsuario', on_delete=models.CASCADE, blank=False, null=False,
+                                   related_name="fk_empleado_usuario")
+    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
+    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+
+    class Meta:
+        verbose_name = 'Empleado',
+        verbose_name_plural = 'Empleados',
+        db_table = 'mant_empleado'
+
+    def __str__(self):
+        return self.usuario_ing
+
+

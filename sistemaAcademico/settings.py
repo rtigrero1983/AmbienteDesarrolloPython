@@ -82,7 +82,7 @@ DATABASES = {
         'USER': 'python',
         'PASSWORD': 'python.2007',
         'HOST': '173.212.207.238',
-        'PORT': '57635',
+        'PORT': 57635,
     }
 }
 

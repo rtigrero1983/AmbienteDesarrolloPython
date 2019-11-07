@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models import AutoField
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantPersona
+
+
 class ConfEmpresa(models.Model):
     id_empresa = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=50, blank=False, null=False)
