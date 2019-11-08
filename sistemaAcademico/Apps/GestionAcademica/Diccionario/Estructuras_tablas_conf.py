@@ -79,9 +79,9 @@ class ConfUsuario(models.Model):
     usuario = models.CharField(max_length=45, blank=False, null=False)
     clave = models.CharField(max_length=45, blank=False, null=False)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE)
-    id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="usuario_tipo_usuario")
+    id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario")
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE)
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado")
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_estado")
 
     class Meta:
         verbose_name = 'Usuario',
@@ -90,4 +90,21 @@ class ConfUsuario(models.Model):
 
     def __str__(self):
         return self.usuario
+
+
+
+class ConfPermiso(models.Model):
+    id_permiso = models.AutoField(primary_key=True)
+    id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_permiso_menu")
+    id_usuario = models.ForeignKey(ConfUsuario, on_delete=models.CASCADE, related_name="fk_permiso_usuario")
+    id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_permiso_modulo")
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_permiso_estado")
+
+    class Meta:
+        verbose_name = 'Permiso',
+        verbose_name_plural = 'Permisos',
+        db_table = 'conf_permiso'
+
+    def __str__(self):
+        return self.id_permiso
 
