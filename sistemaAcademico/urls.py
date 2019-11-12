@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-from sistemaAcademico.Apps.GestionAcademica.views import index
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$',index),
+    path('',include(('sistemaAcademico.Apps.GestionAcademica.urls','Academico'))),    
 ]

@@ -4,9 +4,9 @@ from django.db.models import AutoField
 
 class GenrGeneral(models.Model):
     idgenr_general = models.AutoField(primary_key=True)
-    tipo = models.CharField(max_length=50, blank=False, null=False)
-    codigo = models.CharField(max_length=50, blank=False, null=False)
-    nombre = models.CharField(max_length=50, blank=False, null=False)
+    tipo = models.CharField('Tipo',max_length=50, blank=False, null=False)
+    codigo = models.CharField('Codigo',max_length=50, blank=False, null=False)
+    nombre = models.CharField('Nombre',max_length=50, blank=False, null=False)
 
     class Meta:
         verbose_name = 'Lista',
@@ -23,7 +23,7 @@ class GenrHistorial(models.Model):
     usuario_mod = models.CharField(max_length=50, blank=False, null=False)
     terminal_mod = models.CharField(max_length=50, blank=False, null=False)
     fecha_mod = models.DateField(blank=False, null=False)
-    id_menu = models.ForeignKey('ConfMenu',on_delete=models.CASCADE,blank=False, null=False, related_name="fk_genrhistorial_confmenu")
+    id_menu = models.ForeignKey('ConfMenu',on_delete=models.CASCADE,blank=False, null=False, related_name="fk_genrhistorial_confmenu", db_column='id_menu')
 
     class Meta:
         verbose_name = 'Lista',
