@@ -34,8 +34,8 @@ admin.site.register(ConfEmpresa,ConfEmpresaAdmin)
 
 
 class ConfModuloAdmin(admin.ModelAdmin):
-    search_fields = ['codigo','id_genr_estado']
-    list_display = ('id_modulo','codigo','id_genr_estado',)
+    search_fields = ['codigo','nombre']
+    list_display = ('id_modulo','codigo','nombre','id_genr_estado',)
 
 admin.site.register(ConfModulo,ConfModuloAdmin)
 
@@ -49,8 +49,8 @@ admin.site.register(ConfRol,ConfRolAdmin)
 
 
 class ConfMenuAdmin(admin.ModelAdmin):
-    search_fields = ['nombre','codigo']
-    list_display = ('id_menu','id_modulo','id_padre','orden','version',)
+    search_fields = ['nombre','codigo','descripcion','id_genr_estado']
+    list_display = ('id_menu','id_modulo','id_padre','orden','descripcion','id_genr_estado',)
 
 admin.site.register(ConfMenu,ConfMenuAdmin)
 

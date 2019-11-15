@@ -65,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sistemaAcademico.Apps.GestionAcademica.context_processors.menu_padre',
+                'sistemaAcademico.Apps.GestionAcademica.context_processors.menu_hijos',
             ],
         },
     },
@@ -79,14 +81,27 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'Sistema_academico',
+        'NAME': 'bd_academico_desa',
+        'USER': 'python',
+        'PASSWORD': 'python.2007',
+        'HOST': '173.212.207.238',
+        'PORT': 57635,
+    }
+}
+
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql_cymysql',
+        'NAME': 'sistema_academico',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD':'root',
         'HOST': 'localhost',
         'PORT': 3306,
     }
 }
 
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

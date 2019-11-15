@@ -36,6 +36,7 @@ class ConfEmpresa(models.Model):
 class ConfModulo(models.Model):
         id_modulo = models.AutoField(primary_key=True)
         codigo = models.CharField(max_length=20, blank=False, null=False)
+        nombre = models.CharField(max_length=20,blank=False, null=False)
         id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
 
         class Meta:
@@ -44,7 +45,7 @@ class ConfModulo(models.Model):
             db_table = 'conf_modulo'
 
         def __str__(self):
-            return self.codigo
+            return self.nombre
 
 class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
@@ -64,15 +65,16 @@ class ConfMenu(models.Model):
     id_modulo = models.ForeignKey(ConfModulo,on_delete=models.CASCADE, db_column='id_modulo')
     id_padre = models.IntegerField(blank=False,null=False)
     orden = models.IntegerField(blank=False, null=False)
-    version = models.CharField(max_length=45, blank=False, null=False)
+    descripcion = models.CharField(max_length=45, blank=False, null=False, db_column='descripcion')
+    id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Menu',
-        verbose_name_plural = 'Menus',
+        verbose_name_plural = 'Menu',
         db_table = 'conf_menu'
 
     def __str__(self):
-        return self.version
+        return self.descripcion
 
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
