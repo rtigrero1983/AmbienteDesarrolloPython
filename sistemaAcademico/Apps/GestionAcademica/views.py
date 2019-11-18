@@ -31,9 +31,43 @@ def login(request):
 
 
 
+#Vistas del modulo de Configuraciones---------------------
+def usuarios(request):
+    return render(request,'sistemaAcademico/Configuraciones/usuarios.html')
 
+def roles(request):
+    return render(request,'sistemaAcademico/Configuraciones/roles.html')
 
+def perfiles(request):
+    return render(request,'sistemaAcademico/Configuraciones/perfiles.html')
 
+def menu(request):
+    return render(request,'sistemaAcademico/Configuraciones/menu.html')
 
+def modulo(request):
+    return render(request,'sistemaAcademico/Configuraciones/modulo.html')
+
+def acciones(request):
+    return render(request,'sistemaAcademico/Configuraciones/acciones.html')
+#---------------------------------------------------------
+
+#Vistas del modulo de Admision--------------------------------------------
+def mantenimientoPersonas(request):
+    return render(request,'sistemaAcademico/Admision/admision_personas.html')
+
+def movimientos(request):
+    return render(request,'sistemaAcademico/Admision/movimientos.html')
+
+def consultas(request):
+    return render(request,'sistemaAcademico/Admision/consultas.html')
+
+def procesos(request):
+    return render(request,'sistemaAcademico/Admision/procesos.html')
+
+def reportes(request):
+    return render(request,'sistemaAcademico/Admision/reportes.html')
+    
+
+#-------------------------------------------------------------------------
 
 

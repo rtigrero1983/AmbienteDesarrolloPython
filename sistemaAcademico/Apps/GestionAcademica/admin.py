@@ -2,18 +2,12 @@ from django.contrib import admin
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
-class GenrGeneralresources(resources.ModelResource):
-    class Meta:
-        model = GenrGeneral
 
-class GenrGeneralAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+class GenrGeneralAdmin(admin.ModelAdmin):
     search_fields = ['nombre','tipo','codigo','idgenr_general']
     list_display = ('idgenr_general','tipo','codigo','nombre',)
-    resources_class = GenrGeneralresources
 
 admin.site.register(GenrGeneral,GenrGeneralAdmin)
 
@@ -28,7 +22,7 @@ admin.site.register(ConfUsuario,ConfUsuarioAdmin)
 
 class ConfEmpresaAdmin(admin.ModelAdmin):
     search_fields = ['nombre','correo','telefono','identificacion']
-    list_display = ('id_empresa','nombre','razon_social','id_genr_tipo_identificacion','identificacion','direccion','representante_legal','correo','telefono','fecha_creacion',)
+    list_display = ('id_empresa','nombre','razon_social','id_genr_tipo_identificacion','identificacion','direccion','representante_legal','correo','telefono','fecha_creacion','id_genr_estado')
 
 admin.site.register(ConfEmpresa,ConfEmpresaAdmin)
 

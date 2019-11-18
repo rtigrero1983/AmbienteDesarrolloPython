@@ -1,12 +1,92 @@
-{% extends 'base/base.html' %}
+{% extends 'base/blank.html' %}
 
-{% block header %} {% endblock %}
 
-    {% block content %}
+{% block titulo_menu %}
+        
+        Opciones disponibles para tu cuenta
+
+{% endblock titulo_menu %}
+
+{% block modulo %}
+           <!--
+            PUNTO 1:INICIO
+
+            Los dos ciclos for utilizan dos listas:
+            1.- menu_padre: contiene una lista de todos los menus cuyo id_padre sean 0 y que id_genr_estado == 97 (Activo)
+            2.- menu_hijo: contienen todos los menus que esten en estado activo 
+
+            PUNTO 1:FIN-->
+
+
+         <!-- Este ciclo for crea un objeto menu por cada registro en la lista llamada menu_padre -->
+         
+        {% for menu_p in menu_padre  %}
+            
+            <li class="nav-item"> 
+
+           <!-- En cada ciclo cada vez que crea un objeto llamado menu_p lo va pintar en el menu: 
+                PUNTO 2 INICIO: -->
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
+                     <i class="fas fa-fw fa-cog"></i>
+                     <span> {{menu_p.descripcion}} </span>  <!-- <<<<<<<<<<< nombre del menu padre o modulo -->
+                    </a>
+            <!-- PUNTO 2: FIN -->
+
+             <!-- PUNTO:3 INICIO:ESTE DIV CONTIENE LOS SUB MENUS QUE SE VAN A DESPLEGAR AL DARLE CLICK AL MENU_PADRE DE LA LINEA 26 
+                  EL ID DEBE SER IGUAL AL data-target para indicar al data-target que div va a desplegar
+                  Emejplo: data_target="#menu_1" <<< >>> id=menu_1 -->
+                  <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+               <!-- PUNTO 3 :FIN  -->
+            <div class="bg-white py-2 collapse-inner rounded">
+
+              <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>   
+                
+                      <!-- PUNTO 3 INICIO:
+                        AQUI SE EMPIEZA A PINTAR LOS SUB-MENUS DE CADA MENU QUE SE REGISTRE EN EL UN PUNTO 2
+                        EL CILO DE LA LINEA 47 CREA UN OBJETO LLAMADO menu_h POR CADA REGISTRO
+                        EN LA LISTA menu_hijo
+                        EN CADA CICLO VALIDA EL menu.id_menu(id del menu principal) TIENE COINCIDENCIA CON EL menu_h.id_padre
+                        SI TIENE COINCIDENCIA menu_h es sub-menu del menu DEL PUNTO 2 
+
+                       -->
+                  {% for menu_h in menu_hijo %}
+
+                      {%  if menu_p.id_menu == menu_h.id_padre %}
+                        <a class="collapse-item" href="#" >{{menu_h.descripcion}}</a>
+                      {% endif %}
+
+                  {% endfor %}
+                      <!-- PUNTO 3 FIN -->
+           
+            </div>
+
+           </div>
+           
+           </li>
+
+       {% endfor %}
+
+{% endblock modulo %}
+
+
+
+
+{% block contenido_principal %}
+
+
+        
+    
+{% endblock contenido_principal %}
+
+
+{% block pie_de_pagina %}
+    
+{% endblock pie_de_pagina %}
 
 
 <ul>
     {% for menu  in menu_padre %}
+        
       <li><a href="#">{{ menu.descripcion}}</a>
         <ul>
             {% for menu_h in menu_hijo %}
@@ -17,4 +97,18 @@
     {% endfor %}
 </ul>
 
-    {% endblock %}
+
+
+<ul>
+    {% for menu  in menu_padre %}
+
+      <li><a href="#">{{ menu.descripcion}}</a>
+        <ul>
+            {% for menu_h in menu_hijo %}
+            {%  if menu.id_menu == menu_h.id_padre %}<li> {{menu_h.descripcion}} </li>{% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+

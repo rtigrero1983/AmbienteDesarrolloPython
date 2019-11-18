@@ -18,7 +18,7 @@ class ConfEmpresa(models.Model):
 
     #related_name='estado El atributo related_name especifica el nombre de la relación inversa del modelo de usuario a su modelo.
     # si hay mas de dos claves foraneas que referencian a la misma tabla se debe usar related_name'
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name='estado_empresa', db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name='estado_empresa', db_column='estado')
     #------------------------------------------------------------------------------------------------------------------------
 
     fecha_ingreso = models.DateField(blank=False, null=False, )
