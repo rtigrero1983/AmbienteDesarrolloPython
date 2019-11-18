@@ -2,9 +2,9 @@ from django.urls import path
 from .views import inicio,base,login,usuarios,roles,perfiles,menu,modulo,acciones,mantenimientoPersonas,movimientos,consultas,procesos,reportes
 
 urlpatterns = [
+    path('',login,name='login'),
     path('base/',base, name = 'base'),
     path('inicio/',inicio,name='inicio'),
-    path('login/',login,name='login'),
 
     #Opciones del modulo de Configuaciones:
     path('usuarios/',usuarios,name='usuarios'),
