@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import inicio,base,login,usuarios,roles,perfiles,menu,modulo,acciones,mantenimientoPersonas,movimientos,consultas,procesos,reportes
+from .views import *
 
 urlpatterns = [
     path('',login,name='login'),
@@ -22,5 +22,7 @@ urlpatterns = [
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     #--------------------------------------
+
+    path('salir/',salir,name='logout')
 
 ]

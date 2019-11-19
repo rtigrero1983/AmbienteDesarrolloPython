@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
@@ -10,12 +11,18 @@ def base(request):
     return render(request,'base/base.html')
 
 def inicio(request):
-    return render(request,'sistemaAcademico/inicio.html')
+    #
+    if 'usuario' in request.session:
+        return render(request, 'sistemaAcademico/inicio.html')
+    else:
+        return HttpResponseRedirect('../')
 
 def login(request):
     var_usuario = None
     var_contra = None
-    contexto = {}
+    contexto = {
+
+    }
 
     if request.method == 'POST':
             var_usuario = request.POST.get('usu')
@@ -27,9 +34,9 @@ def login(request):
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
                 contexto['usuario']=usu
+                request.session['usuario'] = "nelio"
                 return redirect("Academico:inicio")
     return render(request,'base/login.html',contexto)
-
 
 
 #Vistas del modulo de Configuraciones---------------------
@@ -67,8 +74,11 @@ def procesos(request):
 
 def reportes(request):
     return render(request,'sistemaAcademico/Admision/reportes.html')
-    
-
 #-------------------------------------------------------------------------
+
+
+def salir(request):
+    del request.session['usuario']
+    return HttpResponseRedirect('../')
 
 
