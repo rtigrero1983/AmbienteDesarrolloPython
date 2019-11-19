@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title>Inicio</title>
 
   <!-- Custom fonts for this template-->
   <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -31,11 +31,15 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'Academico:inicio' %}">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3"> {% block titulo_cab_menu %} SB Admin  {% endblock titulo_cab_menu %} <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3"> 
+          {% block titulo_cab_menu %} 
+          SB Admin<sup>2</sup>
+          {% endblock titulo_cab_menu %}
+        </div>
       </a>
 
       <!-- Divider -->

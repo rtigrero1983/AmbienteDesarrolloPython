@@ -1,6 +1,10 @@
 {% extends 'base/blank.html' %}
 
 
+{% block titulo_cab_menu %}
+      INICIO
+{%endblock titulo_cab_menu %}
+
 {% block titulo_menu %}
         
         Opciones disponibles para tu cuenta
@@ -37,10 +41,9 @@
                   Emejplo: data_target="#menu_1" <<< >>> id=menu_1 -->
                   <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <!-- PUNTO 3 :FIN  -->
-            <div class="bg-white py-2 collapse-inner rounded">
-
-              <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>   
-                
+                    <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>   
+                      
                       <!-- PUNTO 3 INICIO:
                         AQUI SE EMPIEZA A PINTAR LOS SUB-MENUS DE CADA MENU QUE SE REGISTRE EN EL UN PUNTO 2
                         EL CILO DE LA LINEA 47 CREA UN OBJETO LLAMADO menu_h POR CADA REGISTRO
@@ -52,7 +55,7 @@
                   {% for menu_h in menu_hijo %}
 
                       {%  if menu_p.id_menu == menu_h.id_padre %}
-                        <a class="collapse-item" href="#" >{{menu_h.descripcion}}</a>
+                        <a class="collapse-item" href="{% url menu_h.url %}" >{{menu_h.descripcion}}</a>
                       {% endif %}
 
                   {% endfor %}
@@ -70,8 +73,9 @@
 
 
 
-
+<!-- >
 {% block contenido_principal %}
+
     prueba: {{usuario.usuario}}
 
 {% endblock contenido_principal %}
