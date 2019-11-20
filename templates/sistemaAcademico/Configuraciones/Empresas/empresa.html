@@ -1,0 +1,58 @@
+{% extends 'base/blank.html' %}
+
+	{% block contenido_principal %}
+<header>
+	<h2>Empresas</h2>
+
+</header>
+
+	<br/>
+	<br/>
+
+
+<a href="" id="registrar_empresa" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> nuevo</a>
+<br/>
+<br/>
+
+
+	<table class="table table-striped">
+ <tr class="success">
+ 	<td>Codigo</td>
+ 	<td>Nombre</td>
+<td>Razon Social</td>
+	 <td>Tipo </td>
+<td>Identificacion</td>
+<td>Direccion</td>
+	 <td>Representante</td>
+<td>Telefono</td>
+	 <td>Fecha creacion</td>
+<td>Correo</td>
+<td>Estado</td>
+<td>F/Ingreso</td>
+	 <td>Usuario </td>
+	 <td>Terminal</td>
+	 <td>Acciones</td>
+ </tr>
+{% for em in empresas %}
+<tr>
+	<td>{{ em.id_empresa }}</td>
+	<td>{{ em.nombre }}</td>
+	<td>{{ em.razon_social }}</td>
+<td>{{ em.id_genr_tipo_identificacion }}</td>
+	<td>{{ em.identificacion }}</td>
+	<td>{{ em.direccion }}</td>
+	<td>{{ em.representante_legal }}</td>
+	<td>{{ em.telefono }}</td>
+	<td>{{ em.fecha_creacion }}</td>
+	<td>{{ em.correo }}</td>
+	<td> {{ em.fecha_ingreso}}</td>
+	<td> {{ em.usuario_ing}}</td>
+	<td> {{ em.terminal_ing}}</td>
+		<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
+		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+{% endfor %}
+</table>
+
+
+
+{% endblock contenido_principal %}

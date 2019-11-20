@@ -22,80 +22,114 @@ def login(request):
     var_contra = None
     contexto = {}
     if request.method == 'POST':
-            var_usuario = request.POST.get('usu')
-            var_contra = request.POST.get('pass')
-            h = hashlib.new("sha1")
-            var_contra = str.encode(var_contra)
-            h.update(var_contra)
-            usu = ConfUsuario.objects.filter(usuario=var_usuario,clave=h.hexdigest(), id_genr_estado=97)
+        var_usuario = request.POST.get('usu')
+        var_contra = request.POST.get('pass')
+        h = hashlib.new("sha1")
+        var_contra = str.encode(var_contra)
+        h.update(var_contra)
+        usu = ConfUsuario.objects.filter(usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97)
 
-            # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
-            if usu:
+        # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
+        if usu:
 
-                contexto ['usuario_logeado']= usu
-                request.session['usuario'] = usu
-                return redirect("Academico:inicio")
-            else:
-                contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-                print(contexto)
-    return render(request,'base/login.html',contexto)
+            contexto['usuario_logeado'] = usu
+            request.session['usuario'] = usu
+            return redirect("Academico:inicio")
+        else:
+            contexto['error'] = "Credenciales incorrectas o esta cuenta esta inactiva"
+            print(contexto)
+    return render(request,'base/login.html'),#contexto)
 
 
 #Vistas del modulo de Configuraciones---------------------
-def usuarios(request):
+
+#PRINCIPALES
+def lista_us(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/usuarios.html')
-    else:
-        return HttpResponseRedirect('../')
+   # if 'usuario' in request.session:
+        # lista los usuarios en una tabla
+            usuarios = ConfUsuario.objects.all()
+            return render(request, 'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'usuarios': usuarios})
+   # else:
+    #    return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
 
-def roles(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/roles.html')
-    else:
-        return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
+def lista_permisos(request):
+    # lista los registros de permisos
+    permisos = ConfPermiso.objects.all()
+    return render(request, 'sistemaAcademico/Configuraciones/Permisos/permisos.html', {'permisos': permisos})
+
+ #----------------------------------------------------------------
+
+def lista_em(request):
+   # lista los registros de empresas
+    empresas = ConfEmpresa.objects.all()
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'empresas': empresas})
+
+
+# ----------------------------------------------------------------
 
 def perfiles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
+    #if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/perfiles.html')
-    else:
-        return HttpResponseRedirect('../')
+    #else:
+     #   return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
 
-def menu(request):
+def lista_menus(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/menu.html')
-    else:
-        return HttpResponseRedirect('../')
+    #if 'usuario' in request.session:
+      #lista los registros de menu en una tabla
+            menus = ConfMenu.objects.all()
+            return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html', {'menus': menus})
+    #else:
+     #   return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
 
-def modulo(request):
+def lista_modulos(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/modulo.html')
-    else:
-        return HttpResponseRedirect('../')
+    #if 'usuario' in request.session:
+         # lista los registros de modulos en una tabla
+            modulos = ConfModulo.objects.all()
+            return render(request, 'sistemaAcademico/Configuraciones/Modulos/modulo.html', {'modulos': modulos})
+    #else:
+     #   return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
 
 def acciones(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
-    if 'usuario' in request.session:
+    #if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/acciones.html')
-    else:
-        return HttpResponseRedirect('../')
+    #else:
+     #   return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
+
+    
+#FORMULARIOS DE REGISTRO
+def addempresa(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html')
+
+def addrol(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
+
+def addusuario(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html')
+
+
+
+
 #---------------------------------------------------------
+
+
+
 
 #------------------------Vistas del modulo de Admision--------------------------------------------
 def mantenimientoPersonas(request):

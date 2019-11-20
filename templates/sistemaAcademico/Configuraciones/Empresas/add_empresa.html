@@ -1,0 +1,119 @@
+{% load static%}
+<html>
+<head>
+	<title> Configuracion - Empresa </title>
+	<!-- Latest compiled and minified CSS -->
+
+
+	<link href="css/forms.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+
+<body>
+	<header>
+		<br/>
+		<a href="{%  url 'empresas' %}" class="btn btn-info" id="back"><span class="glyphicon glyphicon-arrow-left"></span></a>
+
+
+	<h3 >  DATOS DE LA EMPRESA</h3>
+</header>
+<br/>
+<section>
+	<form>
+
+	<div id="uno">
+
+
+
+		<label>Nombre Empresa </label><br/>
+
+		<input type="text" name="nombre"  />
+<br/>
+<br/>
+
+<label>Razon social </label>
+
+<br/>
+<input type="text" name="rsocial" />
+<br/><br/>
+
+<label>Tipo identificacion </label>
+
+<br/>
+
+	<select value="tipo identificacion">
+  <option>Cedula</option>
+  <option>Ruc</option>
+  <option>Pasaporte</option>
+
+
+</select><br/><br/>
+<br/>
+
+<label>identificacion </label>
+
+<br/>
+
+<input type="text" name="identificacion"/><br/>
+
+<br/>
+
+
+<label>Direccion </label><br/>
+
+<input type="text" name="direccion"/>
+
+	<br/><br/></div>
+<div id="dos">
+	<label>Representante Legal </label>
+
+<br/>
+<input type="text" name="rlegal"/><br/>
+<br/>
+
+<LABEL>Email </LABEL>
+
+<br/>
+
+<input type="email"  id="inputEmail3" placeholder="Email"/><br/><br/>
+
+<label>Telefono</label>
+
+<br/>
+<input type="text" name="telefono"/>
+<br/><br/>
+
+
+<label>Fecha de creacion</label>
+
+<br/>
+ <input type="date" name="f_creacion">
+<br/>
+<br/>
+
+<label>Estado</label>
+
+  <br/>
+    <select  value="estado">
+  <option>Activa</option>
+  <option>Inactiva</option>
+
+  </select><br/>
+
+<br/>
+
+
+</div>
+
+  <input type="submit" name="guardar" value="Guardar" id="boton" class="btn btn-success"/>
+  <br/>
+<input type="button" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-warning"/>
+
+</form></section>
+
+</body>

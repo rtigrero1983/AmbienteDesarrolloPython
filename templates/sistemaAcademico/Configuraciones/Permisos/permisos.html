@@ -1,7 +1,11 @@
 {% extends 'sistemaAcademico/inicio.html' %}
 
-                  {% block contenido_principal %}
+	{% block contenido_principal %}
 
+<header>
+    <h2>Permisos</h2>
+</header>
+<br/>
 
      <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
@@ -10,21 +14,19 @@
 <table class="table table-striped">
 <tr class="success">
 <td>Id</td>
+<td>Menu</td>
+<td>Usuario</td>
 <td>Modulo</td>
-<td>Principal</td>
-<td>Orden</td>
-<td>Descripcion</td>
-    <td>Estado</td>
+<td>estado</td>
     <td>Acciones</td>
 </tr>
-{% for m in menus %}
+{% for p in permisos %}
 <tr>
-<td>{{ m.id_menu }}</td>
-<td>{{ m.id_modulo }}</td>
-<td>{{ m.id_padre }}</td>
-<td>{{ m.orden }}</td>
-    <td>{{ m.descripcion }}</td>
-<td>{{ m.id_genr_estado}}</td>
+<td>{{ p.id_permiso }}</td>
+<td>{{ p.id_menu }}</td>
+<td>{{ p.id_usuario }}</td>
+<td>{{ p.id_modulo }}</td>
+<td>{{ p.id_genr_estado}}</td>
 
 	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
 		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
@@ -32,3 +34,14 @@
 {% endfor %}
 </table>
 {% endblock contenido_principal %}
+
+
+
+
+
+
+
+
+
+
+

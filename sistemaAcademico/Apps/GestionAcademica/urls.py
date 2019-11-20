@@ -2,27 +2,31 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('',login,name='login'),
     path('base/',base, name = 'base'),
     path('inicio/',inicio,name='inicio'),
+    path('login/',login,name='login'),
 
     #Opciones del modulo de Configuaciones:
-    path('usuarios/',usuarios,name='usuarios'),
-    path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
-    path('menu/',menu,name='menu'),
-    path('modulo/',modulo,name='modulo'),
+    path('menus/', lista_menus,name='menu'),
+    path('modulos/',lista_modulos,name='modulo'),
     path('acciones/',acciones,name='acciones'),
+    path('permisos/', lista_permisos, name='permisos'),
+    #path('roles/', lista_rol, name='rol'),
+    path('empresas/', lista_em, name='empresas'),
+    path('usuarios/', lista_us, name='usuarios'),
+
+    #formularios
+    path('add_empresa/', addempresa, name='add_empresa'),
+    path('add_rol/', addrol, name='add_rol'),
     #----------------------------------------
 
     #Opciones para el modulo de Admision
-    path('mantenimiento personas/',mantenimientoPersonas,name='mantenimientoPersonas'),
+    path('mantenimiento personas/',mantenimientoPersonas,name='mantenimiento_personas'),
     path('movimientos/',movimientos, name='movimientos'),
     path('consultas/',consultas, name='consultas'),
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     #--------------------------------------
-
-    path('salir/',salir,name='logout')
 
 ]

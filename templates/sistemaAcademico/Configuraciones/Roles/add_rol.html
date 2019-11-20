@@ -1,0 +1,45 @@
+{% load static %}
+
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static 'css/rol.css' %}" rel="stylesheet">
+    <title>Nuevo rol</title>
+</head>
+<body>
+<header>
+
+		<a href="{% url 'rol' %}" class="btn btn-info" id="back"><span class="glyphicon glyphicon-arrow-left"></span></a>
+<h2>NUEVO ROL</h2>
+</header>
+<div id="centro">
+
+ <center>
+     <br/><br/>
+     <form>
+         <label>Codigo</label>
+<input type="text" class="entradas"> <br/><br/>
+<label>Nombre</label>
+<input type="text" class="entradas" contenteditable="FALSE"> <br/><br/>
+<input type="submit" id="boton" value="Guardar" class="btn btn-success">
+<input type="button" id="boton_dos" value="Cancelar" class="btn btn-warning">
+
+
+     </form>
+
+
+
+</center>
+
+</div>
+
+
+
+</body>
+
+
+
+</html>
