@@ -16,9 +16,14 @@ urlpatterns = [
     path('empresas/', lista_em, name='empresas'),
     path('usuarios/', lista_us, name='usuarios'),
 
-    #formularios
+    #formularios de registro
     path('add_empresa/', addempresa, name='add_empresa'),
     path('add_rol/', addrol, name='add_rol'),
+    path('add_usuario/', addusuario, name='add_usuario'),
+
+    #formularios de edicion
+    path('edit_usuario', editar_usuario, name='edit_usuario'),
+
     #----------------------------------------
 
     #Opciones para el modulo de Admision

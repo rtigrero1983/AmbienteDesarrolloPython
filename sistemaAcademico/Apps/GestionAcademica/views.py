@@ -112,7 +112,7 @@ def acciones(request):
     #----------------------------------------------------------------
 
 
-    
+
 #FORMULARIOS DE REGISTRO
 def addempresa(request):
     return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html')
@@ -123,6 +123,10 @@ def addrol(request):
 def addusuario(request):
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html')
 
+#---------------------------------------------------------
+# formularios de edicion
+def editar_usuario(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html')
 
 
 

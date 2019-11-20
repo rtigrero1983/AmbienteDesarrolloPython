@@ -1,0 +1,43 @@
+
+h1 {
+    font-size: 25px;
+    font-weight: 800;
+    color: blue;
+    text-align: center;
+}
+
+body {
+    font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.cajatexto {
+   background-color: #def;
+   border-radius: 20px;
+   border-style: groove;
+   border-color: #A09D9D;
+   padding-left: 10px;
+   height: 30px;
+   width: 300px;
+   margin: 10px;
+   font-size: 15px;
+   font-family: Arial;
+}
+
+label{
+    margin-left: 270px;
+    text-align: left;
+    width: 200px;
+}
+
+#uno{
+    margin-left: -200px;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+#dos{
+    margin-left: 400px;
+    margin-top: -240px;
+    padding: 0px;
+}

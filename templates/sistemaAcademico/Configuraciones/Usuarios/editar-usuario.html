@@ -1,0 +1,76 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+
+{% block contenido_principal %}
+<header>
+		<a>
+			<span>Configuraciones</span>
+			<span> / Usuario</span>
+		</a>
+</header>
+    <br>
+    <form>
+    <h1>Editar Usuario</h1>
+
+        <label>
+            Nombre de Usuario:
+        </label>
+            <input type="text" class="cajatexto" name="nombreusuario" value="cristhof" readonly="readonly" required="true">
+            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Contraseña:
+        </label>
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" value="1234" readonly="readonly" required="true">
+            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Confirmar Contraseña:
+        </label>
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" value="1234" readonly="readonly" required="true">
+            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Persona:
+        </label>
+
+            <select name="persona" class="cajatexto">
+                    <option class="cajatexto"> estudiante </option>
+
+            </select>
+                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Tipo de Usuario:
+        </label>
+            <select name="tipousuario" class="cajatexto">
+                    <option class="cajatexto"> tip1 </option>
+
+            </select>
+                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Rol:
+        </label>
+            <select name="rol" class="cajatexto">
+                    <option class="cajatexto"> superusuario </option>
+
+            </select>
+                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        </br>
+        <label>
+            Estado:
+        </label>
+            <select name="estado" class="cajatexto">
+                    <option class="cajatexto"> activo </option>
+
+            </select>
+                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+        <br>
+        <br>
+        <center>
+        <button type="button" class="btn btn-success">Grabar</button>
+        <button type="button" class="btn btn-warning">Cancelar</button>
+        </center>
+    </form>
+{% endblock contenido_principal %}
+

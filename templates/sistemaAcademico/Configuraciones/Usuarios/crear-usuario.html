@@ -1,0 +1,75 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+
+{% block contenido_principal %}
+<header>
+		<a>
+			<span>Configuraciones</span>
+			<span> / Usuario</span>
+		</a>
+</header>
+    <br>
+    <form>
+    <h1>Crear Usuario</h1>
+
+        <label>
+            Nombre de Usuario:
+        </label>
+            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario">
+        </br>
+        <label>
+            Contraseña:
+        </label>
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true">
+        </br>
+        <label>
+            Confirmar Contraseña:
+        </label>
+
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true">
+        </br>
+        <label>
+            Persona:
+        </label>
+
+            <select name="persona" class="cajatexto">
+                    <option selected>Elija tipo de persona</option>
+                    <option class="cajatexto"> estudiante </option>
+                    <option class="cajatexto"> profesor </option>
+            </select>
+        </br>
+        <label>
+            Tipo de Usuario:
+        </label>
+                <select name="tipousuario" class="cajatexto">
+                    <option selected value="">Elija tipo de usuario</option>
+                    <option class="cajatexto"> tip1 </option>
+                    <option class="cajatexto"> tip2 </option>
+                </select>
+        </br>
+        <label>
+            Rol:
+        </label>
+                <select name="rol" class="cajatexto">
+                    <option selected value="">Elija un rol</option>
+                    <option class="cajatexto"> superusuario </option>
+                    <option class="cajatexto"> administrador </option>
+                </select>
+        </br>
+        <label>
+            Estado:
+        </label>
+                <select name="estado" class="cajatexto">
+                    <option value="">Elija un estado</option>
+                    <option class="cajatexto"> activo </option>
+                    <option class="cajatexto"> inactivo </option>
+                </select>
+        <br>
+        <br>
+        <center>
+        <button type="button" class="btn btn-success">Grabar</button>
+        <button type="reset" class="btn btn-primary">Limpiar</button>
+        <button type="button" class="btn btn-warning">Cancelar</button>
+        </center>
+    </form>
+{% endblock contenido_principal %}
+
