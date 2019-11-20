@@ -11,19 +11,16 @@ def base(request):
     return render(request,'base/base.html')
 
 def inicio(request):
-    #
+    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/inicio.html')
+        return render(request, 'sistemaAcademico/inicio.html', {'usu':request.session.get('usuario')})
     else:
         return HttpResponseRedirect('../')
-
+    #----------------------------------------------------------------
 def login(request):
     var_usuario = None
     var_contra = None
-    contexto = {
-
-    }
-
+    contexto = {}
     if request.method == 'POST':
             var_usuario = request.POST.get('usu')
             var_contra = request.POST.get('pass')
@@ -31,54 +28,124 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usu = ConfUsuario.objects.filter(usuario=var_usuario,clave=h.hexdigest(), id_genr_estado=97)
+
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
-                contexto['usuario']=usu
-                request.session['usuario'] = "nelio"
+
+                contexto ['usuario_logeado']= usu
+                request.session['usuario'] = usu
                 return redirect("Academico:inicio")
+            else:
+                contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
+                print(contexto)
     return render(request,'base/login.html',contexto)
 
 
 #Vistas del modulo de Configuraciones---------------------
 def usuarios(request):
-    return render(request,'sistemaAcademico/Configuraciones/usuarios.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/usuarios.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def roles(request):
-    return render(request,'sistemaAcademico/Configuraciones/roles.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/roles.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def perfiles(request):
-    return render(request,'sistemaAcademico/Configuraciones/perfiles.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/perfiles.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def menu(request):
-    return render(request,'sistemaAcademico/Configuraciones/menu.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/menu.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def modulo(request):
-    return render(request,'sistemaAcademico/Configuraciones/modulo.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/modulo.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def acciones(request):
-    return render(request,'sistemaAcademico/Configuraciones/acciones.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Configuraciones/acciones.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 #---------------------------------------------------------
 
-#Vistas del modulo de Admision--------------------------------------------
+#------------------------Vistas del modulo de Admision--------------------------------------------
 def mantenimientoPersonas(request):
-    return render(request,'sistemaAcademico/Admision/admision_personas.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Admision/admision_personas.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def movimientos(request):
-    return render(request,'sistemaAcademico/Admision/movimientos.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Admision/movimientos.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def consultas(request):
-    return render(request,'sistemaAcademico/Admision/consultas.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Admision/consultas.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def procesos(request):
-    return render(request,'sistemaAcademico/Admision/procesos.html')
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Admision/procesos.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+
 
 def reportes(request):
-    return render(request,'sistemaAcademico/Admision/reportes.html')
-#-------------------------------------------------------------------------
+    #-----Valida si la sesion sigue activa sino regresa al login.html
+    if 'usuario' in request.session:
+        return render(request,'sistemaAcademico/Admision/reportes.html')
+    else:
+        return HttpResponseRedirect('../')
+    #----------------------------------------------------------------
+#-------------------------------------------------------------------------------------------
 
-
+#-------------------------Salir de la sesion------------------------------------------------
 def salir(request):
     del request.session['usuario']
     return HttpResponseRedirect('../')
-
+#-------------------------------------------------------------------------------------------
 

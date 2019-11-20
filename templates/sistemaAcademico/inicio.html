@@ -42,7 +42,7 @@
                   <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                <!-- PUNTO 3 :FIN  -->
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>   
+                    <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.descripcion}} {% endblock cab_sub_menu%}</h6>
                       
                       <!-- PUNTO 3 INICIO:
                         AQUI SE EMPIEZA A PINTAR LOS SUB-MENUS DE CADA MENU QUE SE REGISTRE EN EL UN PUNTO 2
@@ -72,12 +72,12 @@
 {% endblock modulo %}
 
 
-
-
+<!-- Dentro de este bloque ira el contenido principal de la pagina -->
 {% block contenido_principal %}
-
-
+    <strong>{{usu}}</strong>
 {% endblock contenido_principal %}
+<!-- ************************************************************** -->
+
 
 
 {% block pie_de_pagina %}
