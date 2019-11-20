@@ -1,0 +1,38 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+
+                  {% block contenido_principal %}
+
+<header>
+    <h2>Menus</h2>
+</header>
+<br/>
+
+     <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+</a>
+<br/><br/>
+</table>
+<table class="table table-striped">
+<tr class="success">
+<td>Id</td>
+<td>Modulo</td>
+<td>Principal</td>
+<td>Orden</td>
+<td>Descripcion</td>
+    <td>Estado</td>
+    <td>Acciones</td>
+</tr>
+{% for m in menus %}
+<tr>
+<td>{{ m.id_menu }}</td>
+<td>{{ m.id_modulo }}</td>
+<td>{{ m.id_padre }}</td>
+<td>{{ m.orden }}</td>
+    <td>{{ m.descripcion }}</td>
+<td>{{ m.id_genr_estado}}</td>
+
+	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
+		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock contenido_principal %}

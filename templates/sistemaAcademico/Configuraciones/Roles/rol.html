@@ -1,0 +1,27 @@
+{% load static %}
+
+<!-- tabla roles-->
+ {% block contenido_principal %}
+
+<table class="table table-striped">
+
+<tr class="success">
+	<td>id_rol</td>
+	<td>codigo</td>
+	<td>nombre</td>
+	<td>acciones</td>
+    <td></td>
+</tr>
+{% for rol in roles %}
+	<tr>
+		<td>{{ rol.id_rol}}</td>
+        <td>{{ rol.codigo}}</td>
+		<td>{{ rol.nombre}}</td>
+				<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
+		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+
+	</tr>
+{% endfor %}
+
+</table>
+{% endblock contenido_principal %}

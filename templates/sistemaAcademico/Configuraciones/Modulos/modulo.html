@@ -1,0 +1,38 @@
+{% load static %}
+{% extends 'sistemaAcademico/inicio.html' %}
+
+ {% block contenido_principal %}
+<header>
+    <h2>Modulos</h2>
+</header>
+<br/>
+
+     <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+</a>
+<br/><br/>
+</table>
+<table class="table table-striped">
+<tr class="success">
+<td>Id</td>
+<td>Codigo</td>
+<td>Nombre</td>
+    <td>Estado</td>
+    <td>Acciones</td>
+</tr>
+{% for m in modulos %}
+<tr>
+<td>{{ m.id_modulo }}</td>
+<td>{{ m.codigo }}</td>
+<td>{{ m.nombre }}</td>
+<td>{{ m.id_genr_estado  }}</td>
+	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>
+		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock contenido_principal %}
+
+
+
+
+
