@@ -8,9 +8,11 @@
 		</a>
 </header>
     <br>
-    <form>
+    <form method="POST" >{% csrf_token %}
     <h1>Crear Usuario</h1>
-
+        {% if error %}
+        <label ><strong>{{error}}</strong></label>
+        {% endif %}
         <label>
             Nombre de Usuario:
         </label>
@@ -28,22 +30,27 @@
             <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true">
         </br>
         <label>
+
             Persona:
         </label>
 
             <select name="persona" class="cajatexto">
                     <option selected>Elija tipo de persona</option>
-                    <option class="cajatexto"> estudiante </option>
-                    <option class="cajatexto"> profesor </option>
+                    {% for per in lista_personas %}
+                    <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
+                    {% endfor %}
             </select>
+
+
         </br>
         <label>
             Tipo de Usuario:
         </label>
                 <select name="tipousuario" class="cajatexto">
                     <option selected value="">Elija tipo de usuario</option>
-                    <option class="cajatexto"> tip1 </option>
-                    <option class="cajatexto"> tip2 </option>
+                    {% for genr in genr_general %}
+                    <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
+                    {% endfor %}
                 </select>
         </br>
         <label>
@@ -51,25 +58,31 @@
         </label>
                 <select name="rol" class="cajatexto">
                     <option selected value="">Elija un rol</option>
-                    <option class="cajatexto"> superusuario </option>
-                    <option class="cajatexto"> administrador </option>
+                    {% for r in rol %}
+                    <option class="cajatexto" value="{{r.id_rol}}"> {{r.nombre}} </option>
+                    {% endfor %}
                 </select>
         </br>
         <label>
             Estado:
         </label>
+
                 <select name="estado" class="cajatexto">
                     <option value="">Elija un estado</option>
-                    <option class="cajatexto"> activo </option>
-                    <option class="cajatexto"> inactivo </option>
+                    {% for est in estados %}
+                    <option class="cajatexto" value="{{est.idgenr_general}}"> {{est.nombre}} </option>
+                    {% endfor %}
                 </select>
+
         <br>
         <br>
+
         <center>
-        <button type="button" class="btn btn-success">Grabar</button>
+        <button type="submit" class="btn btn-success">Grabar</button>
         <button type="reset" class="btn btn-primary">Limpiar</button>
         <button type="button" class="btn btn-warning">Cancelar</button>
         </center>
+
     </form>
 {% endblock contenido_principal %}
 
