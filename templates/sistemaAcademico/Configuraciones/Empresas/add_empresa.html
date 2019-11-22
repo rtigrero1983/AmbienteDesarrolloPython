@@ -1,119 +1,86 @@
-{% load static%}
-<html>
-<head>
-	<title> Configuracion - Empresa </title>
-	<!-- Latest compiled and minified CSS -->
+{% extends 'sistemaAcademico/inicio.html' %}
+<!-- tabla roles-->
+{% block titulo_cab_menu %}
+
+{%endblock titulo_cab_menu %}
 
 
-	<link href="css/forms.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="css/sb-admin-2.min.css" rel="stylesheet"/>
-    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-</head>
-
-<body>
+ {% block contenido_principal %}
 	<header>
 		<br/>
-		<a href="{%  url 'empresas' %}" class="btn btn-info" id="back"><span class="glyphicon glyphicon-arrow-left"></span></a>
-
-
-	<h3 >  DATOS DE LA EMPRESA</h3>
+	<h4> Configuracion / Registrar Empresa</h4>
 </header>
 <br/>
 <section>
 	<form>
-
 	<div id="uno">
-
-
-
-		<label>Nombre Empresa </label><br/>
-
-		<input type="text" name="nombre"  />
+		<label class="">Nombre Empresa </label>
+		<input type="text" name="nombre" class="cajatexto" />
 <br/>
-<br/>
-
 <label>Razon social </label>
-
+<input type="text" name="rsocial" class="cajatexto"/>
 <br/>
-<input type="text" name="rsocial" />
-<br/><br/>
 
 <label>Tipo identificacion </label>
-
-<br/>
-
-	<select value="tipo identificacion">
+	<select value="tipo identificacion" class="cajatexto">
   <option>Cedula</option>
   <option>Ruc</option>
   <option>Pasaporte</option>
 
-
-</select><br/><br/>
-<br/>
+</select>
+        <br/>
 
 <label>identificacion </label>
 
-<br/>
 
-<input type="text" name="identificacion"/><br/>
-
-<br/>
+<input type="text" name="identificacion" class="cajatexto"/><br/>
 
 
-<label>Direccion </label><br/>
 
-<input type="text" name="direccion"/>
+<label>Direccion </label>
 
-	<br/><br/></div>
+<input type="text" name="direccion" class="cajatexto"/>
+
+	</div>
 <div id="dos">
 	<label>Representante Legal </label>
-
-<br/>
-<input type="text" name="rlegal"/><br/>
-<br/>
+<input type="text" name="rlegal" class="cajatexto"/><br/>
 
 <LABEL>Email </LABEL>
-
-<br/>
-
-<input type="email"  id="inputEmail3" placeholder="Email"/><br/><br/>
+<input type="email"  id="inputEmail3" placeholder="Email" class="cajatexto"/><br/>
 
 <label>Telefono</label>
-
+<input type="text" name="telefono" class="cajatexto"/>
 <br/>
-<input type="text" name="telefono"/>
-<br/><br/>
 
 
 <label>Fecha de creacion</label>
-
-<br/>
- <input type="date" name="f_creacion">
-<br/>
+ <input type="date" name="f_creacion" class="cajatexto">
 <br/>
 
 <label>Estado</label>
-
-  <br/>
-    <select  value="estado">
+    <select  value="estado" class="cajatexto">
   <option>Activa</option>
   <option>Inactiva</option>
 
-  </select><br/>
+  </select>
 
-<br/>
 
 
 </div>
+    </br>
+    </br>
+<center>
+     <input type="submit" name="guardar" value="Guardar" class="btn btn-success"/>
 
-  <input type="submit" name="guardar" value="Guardar" id="boton" class="btn btn-success"/>
-  <br/>
-<input type="button" name="Cancelar" value="Cancelar" id="Cancelar" class="btn btn-warning"/>
+        <input type="button" name="Cancelar" value="Cancelar"  class="btn btn-warning">
+        <a href="{% url 'Academico:empresas' %}"></a>
+        </input>
+
+</center>
+
 
 </form></section>
 
-</body>
+
+{% endblock contenido_principal %}

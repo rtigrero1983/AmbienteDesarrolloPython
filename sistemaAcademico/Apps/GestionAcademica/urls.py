@@ -14,7 +14,19 @@ urlpatterns = [
     path('modulo/',modulo,name='modulo'),
     path('acciones/',acciones,name='acciones'),
    # path('permisos/', permisos, name='permisos'),
+    path('empresas/', empresas, name='empresas'),
     #----------------------------------------
+    # /////////////RREGISTROS///////////
+    path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
+    path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
+    path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
+    # ---------------------------------
+
+    # -------------EDICION---------------------
+    path('editar_empresa/', editar_empresa, name='editar_empresa'),
+    path('editar_usuario/', editar_usuario, name='editar_usuario'),
+    path('editar_rol/', editar_rol, name='editar_rol'),
+    # -----------------------------------------
 
     #Opciones para el modulo de Admision
     path('mantenimiento personas/',mantenimientoPersonas,name='mantenimientoPersonas'),
@@ -23,18 +35,6 @@ urlpatterns = [
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     #--------------------------------------
-    #/////////////RREGISTROS///////////
-    path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
-    path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
-    path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
-    #---------------------------------
-
-    #-------------EDICION---------------------
-    path('editar_empresa/', editar_empresa, name='editar_empresa'),
-    path('editar_usuario/', editar_usuario, name='editar_usuario'),
-    path('editar_rol/', editar_rol, name='editar_rol'),
-    #-----------------------------------------
-
 
     path('salir/',salir,name='logout')
 

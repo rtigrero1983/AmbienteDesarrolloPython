@@ -70,6 +70,8 @@ def perfiles(request):
     #----------------------------------------------------------------
 
 
+
+
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
@@ -98,6 +100,13 @@ def acciones(request):
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 
+#Modulo de Mantenimiento -----------------------------------
+def empresas(request):
+    if 'usuario' in request.session:
+        empresas= ConfEmpresa.objects.all()
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'empresas': empresas})
+    else:
+        return HttpResponseRedirect('../')
 #---------------------------------------------------------
 
 #------------------------Vistas del modulo de Admision--------------------------------------------
