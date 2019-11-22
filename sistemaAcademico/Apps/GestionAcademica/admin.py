@@ -57,7 +57,7 @@ class ConfPermisoAdmin(admin.ModelAdmin):
 admin.site.register(ConfPermiso,ConfPermisoAdmin)
 
 
-
+""""
 class ConfPersonaAdmin(admin.ModelAdmin):
     search_fields = ['id_persona','nombres','apellidos','identificacion']
 
@@ -68,8 +68,8 @@ class ConfPersonaAdmin(admin.ModelAdmin):
                     'discapacidad_neurologica','enfermedad_alergica','asma','epilepsia','enfermedad_congenita','enfermedad_respiratoria','atencion_psicologica','bono_solidario','mienbros_hogar',
                      'id_genr_tipo_usuario','id_genr_estado_laboralp','pnombres','papellidos','pidentificacion','pdireccion','ptelefono','pvive_con_usted','id_genr_estado_laboralm','mnombres','mapellidos',
                     'mdireccion','mtelefono','midentificacion','mvive_con_usted','rnombres','rapellidos','rapellidos','rtelefono','id_genr_tipo_parentesco','rvive_con_usted','ridentificacion',)
-
-admin.site.register(MantPersona,ConfPersonaAdmin)
+"""
+admin.site.register(MantPersona)
 
 
 
