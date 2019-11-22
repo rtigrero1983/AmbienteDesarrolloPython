@@ -44,7 +44,8 @@ def login(request):
 def usuarios(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html')
+        usuarios= ConfUsuario.objects.all()
+        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'usuarios':usuarios})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -53,7 +54,8 @@ def usuarios(request):
 def roles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/roles.html')
+        roles= ConfRol.objects.all()
+        return render(request,'sistemaAcademico/Configuraciones/Roles/rol.html', {'roles': roles})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -71,7 +73,8 @@ def perfiles(request):
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/menu.html')
+        menus = ConfMenu.objects.all()
+        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html', {'menus':menus})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -80,7 +83,8 @@ def menu(request):
 def modulo(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/modulo.html')
+        modulos= ConfModulo.objects.all()
+        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html', {'modulos': modulos})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------

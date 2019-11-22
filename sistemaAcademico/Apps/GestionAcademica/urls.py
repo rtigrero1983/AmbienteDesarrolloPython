@@ -13,6 +13,7 @@ urlpatterns = [
     path('menu/',menu,name='menu'),
     path('modulo/',modulo,name='modulo'),
     path('acciones/',acciones,name='acciones'),
+   # path('permisos/', permisos, name='permisos'),
     #----------------------------------------
 
     #Opciones para el modulo de Admision
