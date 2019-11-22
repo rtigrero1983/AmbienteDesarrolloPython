@@ -31,9 +31,8 @@ def login(request):
 
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
-
                 contexto ['usuario_logeado']= usu
-                request.session['usuario'] = usu
+                request.session['usuario'] = "usuario"
                 return redirect("Academico:inicio")
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
@@ -45,7 +44,7 @@ def login(request):
 def usuarios(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/usuarios.html')
+        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html')
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -143,9 +142,30 @@ def reportes(request):
     #----------------------------------------------------------------
 #-------------------------------------------------------------------------------------------
 
+
+
 #-------------------------Salir de la sesion------------------------------------------------
 def salir(request):
     del request.session['usuario']
     return HttpResponseRedirect('../')
 #-------------------------------------------------------------------------------------------
 
+#-------------------------crear y editar ------------------------------------
+
+def nueva_empresa(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html')
+
+def editar_empresa(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html')
+
+def nuevo_usuario(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html')
+
+def editar_usuario(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html')
+
+def nuevo_rol(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
+
+def editar_rol(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html')
