@@ -1,0 +1,44 @@
+
+.cuadro_titulo{
+    height: 50px;
+    margin: -10px;
+    background-color:#4e73df;
+    color: white;
+    padding: 14px;
+}
+
+.titulo{
+    font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: large;
+
+}
+
+.formulario{
+    font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.contenido{
+
+}
+
+.texto{
+    margin-left: 10px;
+    text-align: left;
+    width: 150px;
+}
+
+.cajatexto{
+   background-color: #def;
+   border-radius: 10px;
+   border-style: solid;
+   border-color:#CACACA ;
+   padding-left: 10px;
+   height: 30px;
+   width: 250px;
+   margin-left:-20px;
+   margin-top:10px;
+   font-size: 14px;
+   font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
+}

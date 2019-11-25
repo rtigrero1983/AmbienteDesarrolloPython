@@ -2,22 +2,30 @@
 
 	{% block contenido_principal %}
 
-<header>
-<h4 class="title">Configuracion / Registrar Menu</h4>
+<header class="cuadro_titulo">
+    <h4 class="titulo">Configuracion / Registrar Menu</h4>
 </header>
+     <br/>
+     <form class="formulario">
+         <div class="contenido">
+             <br>
+            <label class="texto">
+                Modulo:
+            </label>
+            <input type="text" class="cajatexto">
+             <br/>
 
+            <label class="texto">
+                Nombre:
+            </label>
+            <input type="text" class="cajatexto">
+             <br/>
+         </div>
+             <br/>
+             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+             <button type="reset" class="btn btn-outline-primary">Resetear</button>
+             <button type="button" class="btn btn-outline-primary">Cancelar</button>
 
-     <br/><br/>
-     <form>
-         <div class="contenido_uno">
-         <label>modulo</label>
-<input type="text" class="cajatexto"> <br/><br/>
-<label></label>
-<input type="text"  contenteditable="FALSE" class="cajatexto"> <br/><br/>
-<input type="submit" id="add_rol_guardar"  value="Guardar" class="btn btn-success">
-<input type="button" id="add_rol_cancelar" value="Cancelar" class="btn btn-warning">
-
-     </div>
      </form>
 
 

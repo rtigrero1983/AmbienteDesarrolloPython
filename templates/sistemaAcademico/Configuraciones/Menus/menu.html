@@ -1,11 +1,12 @@
 {% extends 'sistemaAcademico/inicio.html' %}
 
+
                   {% block contenido_principal %}
 
-<header> <h4 class="title"> Configuracion/ Menus</h4></header>
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion/ Menus</h4></header>
 
 <br/><br/>
-     <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <a href="{% url 'Academico:nuevo_menu' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
 <br/><br/>
 </table>
@@ -32,5 +33,22 @@
 		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
 </tr>
 {% endfor %}
+    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 21 to 30 of 57 entries</div>
+
 </table>
+
+   <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul>
+
+
+  <!-- Page level plugins -->
+  <script src="vendor/datatables/jquery.dataTables.min.js">
+      $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+  </script>
+  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/datatables-demo.js"></script>
+
 {% endblock contenido_principal %}

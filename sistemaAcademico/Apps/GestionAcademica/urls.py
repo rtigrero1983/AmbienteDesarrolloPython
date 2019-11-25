@@ -20,6 +20,7 @@ urlpatterns = [
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
+ path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
     # ---------------------------------
 
     # -------------EDICION---------------------

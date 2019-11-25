@@ -220,3 +220,9 @@ def nuevo_rol(request):
 
 def editar_rol(request):
     return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html')
+
+def nuevo_menu(request):
+    return render (request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html')
+
+def editar_menu(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html')
