@@ -1,7 +1,6 @@
 {% load staticfiles %}
 
-<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -41,7 +40,7 @@
                     <h1 class="h4 text-gray-900 mb-4">{% block Mensaje_login %} Inicio de sesion {% endblock Mensaje_login %}</h1>
                   </div>
 
-
+                            {% if error %}
                             <!-- Logout Modal-->
 
                                      <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" >
@@ -61,10 +60,7 @@
                                        </div>
                                      </div>
                                      </div>
-
-
-
-
+                            {% endif %}
 
             <form method="POST" class="user">{% csrf_token %}
                 <div class="form-group">
@@ -79,7 +75,7 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary btn-user btn-block " value="Ingresar">
+                <input type="submit" class="btn btn-primary btn-user btn-block " value="Ingresar" >
            
                     <hr>
                     <a href="index.html" class="btn btn-google btn-user btn-block">
