@@ -172,7 +172,42 @@ def editar_empresa(request):
     return render(request, 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html')
 
 def nuevo_usuario(request):
-    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html')
+    if 'usuario' in request.session:
+        contexto = {}
+        persona = MantPersona.objects.all()
+        permiso = GenrGeneral.objects.filter(tipo='TUS')
+        estado = GenrGeneral.objects.filter(tipo='STA')
+        roles = ConfRol.objects.all()
+        contexto['rol'] = roles
+        contexto['lista_personas'] = persona
+        contexto['genr_general'] = permiso
+        contexto['estados'] = estado
+
+        if request.method == 'POST':
+
+            var_usuario = request.POST.get('usuario')
+            var_contra = request.POST.get('contrasenia')
+            conf_contra = request.POST.get('contrasenia2')
+            tipo_persona = MantPersona.objects.get(id_persona=int(request.POST.get('persona')))
+            tipo_usuario = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('tipousuario')))
+            estado = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('estado')))
+            rol = ConfRol.objects.get(id_rol=int(request.POST.get('rol')))
+
+            if var_contra == conf_contra:
+                h = hashlib.new("sha1")
+                var_contra = str.encode(var_contra)
+                h.update(var_contra)
+                usuario = ConfUsuario(usuario=var_usuario,clave=h.hexdigest(),id_persona=tipo_persona,id_genr_tipo_usuario=tipo_usuario,id_rol=rol,id_genr_estado=estado)
+                usuario.save()
+                return redirect('Academico:usuarios')
+            else:
+                contexto['error'] = 'se murio el scannor :"v'
+
+
+
+        return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html',contexto)
+    else:
+        return HttpResponseRedirect('../')
 
 def editar_usuario(request):
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html')
