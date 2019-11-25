@@ -15,7 +15,6 @@
 <tr class="success">
 <td>Codigo</td>
 <td>Usuario</td>
-<td>Clave</td>
 <td>Nombre</td>
 <td>Tipo usuario</td>
 <td>Rol</td>
@@ -26,13 +25,12 @@
 <tr>
 <td>{{ user.id_usuario }}</td>
 <td>{{ user.usuario }}</td>
-<td>{{ user.clave }}</td>
 <td>{{ user.id_persona }}</td>
 <td>{{ user.id_genr_tipo_usuario}}</td>
 <td>{{ user.id_rol }}</td>
 <td>{{ user.id_genr_estado}}</td>
-	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
-		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+	<td><a href="#" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
+    <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
 </tr>
 {% endfor %}
 </table>
