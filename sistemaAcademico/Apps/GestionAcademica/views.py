@@ -18,8 +18,7 @@ def inicio(request):
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
 def login(request):
-    var_usuario = None
-    var_contra = None
+
     contexto = {}
     if request.method == 'POST':
             var_usuario = request.POST.get('usu')
@@ -27,16 +26,19 @@ def login(request):
             h = hashlib.new("sha1")
             var_contra = str.encode(var_contra)
             h.update(var_contra)
-            usu = ConfUsuario.objects.filter(usuario=var_usuario,clave=h.hexdigest(), id_genr_estado=97)
+            usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(), id_genr_estado=97)
+            permiso = ConfPermiso.objects.filter(id_genr_estado=97,id_usuario=usu.id_usuario)
 
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
-                contexto ['usuario_logeado']= usu
-                request.session['usuario'] = "usuario"
-                return redirect("Academico:inicio")
+                contexto['usuario_logeado']= usu
+                request.session['usuario'] = usu.id_usuario
+                return redirect("Academico:inicio1")
+
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
                 print(contexto)
+
     return render(request,'base/login.html',contexto)
 
 
@@ -44,11 +46,12 @@ def login(request):
 def usuarios(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        usuarios= ConfUsuario.objects.all()
+        usuarios = ConfUsuario.objects.all()
         return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'usuarios':usuarios})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
+
 
 
 def roles(request):
