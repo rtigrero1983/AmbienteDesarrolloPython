@@ -11,75 +11,75 @@
 </header>
 <br/>
 <section>
-	<form>
-	<div id="uno">
-		<label class="">Nombre Empresa </label>
+	<form class="formulario">
+
+		<label class="texto">
+            Nombre Empresa
+        </label>
 		<input type="text" name="nombre" class="cajatexto" />
 <br/>
-<label>Razon social </label>
-<input type="text" name="rsocial" class="cajatexto"/>
+        <label class="texto">
+             Razon social
+        </label>
+        <input type="text" name="rsocial" class="cajatexto"/>
 <br/>
 
-<label>Tipo identificacion </label>
-	<select value="tipo identificacion" class="cajatexto">
-  <option>Cedula</option>
-  <option>Ruc</option>
-  <option>Pasaporte</option>
+        <label class="texto">
+                Tipo identificacion
+        </label>
+	    <select value="tipo identificacion" class="cajatexto">
+                <option>Cedula</option>
+                <option>Ruc</option>
+                <option>Pasaporte</option>
 
-</select>
+        </select>
         <br/>
 
-<label>identificacion </label>
+        <label class="texto">
+            Identificacion
+        </label>
+        <input type="text" name="identificacion" class="cajatexto"/><br/>
 
+        <label class="texto">
+            Direccion
+        </label>
+        <input type="text" name="direccion" class="cajatexto"/>
 
-<input type="text" name="identificacion" class="cajatexto"/><br/>
-
-
-
-<label>Direccion </label>
-
-<input type="text" name="direccion" class="cajatexto"/>
-
-	</div>
 <div id="dos">
-	<label>Representante Legal </label>
-<input type="text" name="rlegal" class="cajatexto"/><br/>
+	    <label class="texto">
+            Representante Legal
+        </label>
+        <input type="text" name="rlegal" class="cajatexto"/><br/>
 
-<LABEL>Email </LABEL>
-<input type="email"  id="inputEmail3" placeholder="Email" class="cajatexto"/><br/>
+        <label class="texto">
+            Email
+        </label>
+        <input type="email"  id="inputEmail3" placeholder="" class="cajatexto"/><br/>
 
-<label>Telefono</label>
-<input type="text" name="telefono" class="cajatexto"/>
-<br/>
-
-
-<label>Fecha de creacion</label>
- <input type="date" name="f_creacion" class="cajatexto">
-<br/>
-
-<label>Estado</label>
-    <select  value="estado" class="cajatexto">
-  <option>Activa</option>
-  <option>Inactiva</option>
-
-  </select>
-
-
-
+        <label class="texto">
+            Telefono
+        </label>
+        <input type="text" name="telefono" class="cajatexto"/>
+        <br/>
+        <label class="texto">
+            Fecha de creacion
+        </label>
+        <input type="date" name="f_creacion" class="cajatexto">
+        <br/>
+        <label class="texto">
+            Estado
+        </label>
+        <select  value="estado" class="cajatexto">
+            <option>Activa</option>
+            <option>Inactiva</option>
+        </select>
 </div>
     </br>
-    </br>
-<center>
-     <input type="submit" name="guardar" value="Guardar" class="btn btn-success"/>
-
-        <input type="button" name="Cancelar" value="Cancelar"  class="btn btn-warning">
-        <a href="{% url 'Academico:empresas' %}"></a>
+        <input type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary"/>
+        <input type="button" name="Cancelar" value="Cancelar"  class="btn btn-outline-primary"><a href="{% url 'Academico:empresas' %}"></a>
         </input>
-
-</center>
-
-
-</form></section>
+    </form>
+</section>
 
 
 {% endblock contenido_principal %}

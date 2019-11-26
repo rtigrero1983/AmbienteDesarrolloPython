@@ -17,6 +17,7 @@
 .formulario{
     font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
     font-weight: bold;
+    font-size: small;
 }
 
 .contenido{
@@ -30,14 +31,15 @@
 }
 
 .cajatexto{
-   background-color: #def;
+
+   background-color: white;
    border-radius: 10px;
    border-style: solid;
    border-color:#CACACA ;
    padding-left: 10px;
    height: 30px;
    width: 250px;
-   margin-left:-20px;
+   margin-left:30px;
    margin-top:10px;
    font-size: 14px;
    font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;

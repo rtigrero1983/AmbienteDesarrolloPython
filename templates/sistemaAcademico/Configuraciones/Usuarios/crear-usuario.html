@@ -2,35 +2,31 @@
 
 {% block contenido_principal %}
 <header class="cuadro_titulo">
-		<a>
-			<span>Configuraciones</span>
-			<span> / Usuario</span>
-		</a>
+		<h4 class="titulo">Configuracion / Registrar Usuario</h4>
 </header>
     <br>
-    <form method="POST" >{% csrf_token %}
-    <h1>Crear Usuario</h1>
+    <form class="formulario" method="POST" >{% csrf_token %}
+        <br>
         {% if error %}
         <label ><strong>{{error}}</strong></label>
         {% endif %}
-        <label>
+        <label class="texto">
             Nombre de Usuario:
         </label>
             <input type="text" class="cajatexto" placeholder="" required="true" name="usuario">
         </br>
-        <label>
+        <label class="texto">
             Contraseña:
         </label>
             <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true">
         </br>
-        <label>
+        <label class="texto">
             Confirmar Contraseña:
         </label>
 
             <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true">
         </br>
-        <label>
-
+        <label class="texto">
             Persona:
         </label>
 
@@ -43,7 +39,7 @@
 
 
         </br>
-        <label>
+        <label class="texto">
             Tipo de Usuario:
         </label>
                 <select name="tipousuario" class="cajatexto">
@@ -53,7 +49,7 @@
                     {% endfor %}
                 </select>
         </br>
-        <label>
+        <label class="texto">
             Rol:
         </label>
                 <select name="rol" class="cajatexto">
@@ -63,7 +59,7 @@
                     {% endfor %}
                 </select>
         </br>
-        <label>
+        <label class="texto">
             Estado:
         </label>
 
@@ -77,11 +73,11 @@
         <br>
         <br>
 
-        <center>
-        <button type="submit" class="btn btn-success">Grabar</button>
-        <button type="reset" class="btn btn-primary">Limpiar</button>
-        <button type="button" class="btn btn-warning">Cancelar</button>
-        </center>
+
+        <button type="submit" class="btn btn-outline-primary">Grabar</button>
+        <button type="reset" class="btn btn-outline-primary">Limpiar</button>
+        <button type="button" class="btn btn-outline-primary">Cancelar</button>
+
 
     </form>
 {% endblock contenido_principal %}
