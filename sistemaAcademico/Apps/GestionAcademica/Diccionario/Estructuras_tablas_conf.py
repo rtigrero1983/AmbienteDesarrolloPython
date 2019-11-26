@@ -83,7 +83,6 @@ class ConfUsuario(models.Model):
     clave = models.CharField(max_length=45, blank=False, null=False)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
-    id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE, db_column='id_rol')
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
 
     class Meta:
@@ -95,11 +94,23 @@ class ConfUsuario(models.Model):
         return self.usuario
 
 
+class ConfUsuario_rol(models.Model):
+    idconf_usuario_rol = models.AutoField(primary_key=True)
+    id_usuario = models.ForeignKey(ConfUsuario, on_delete=models.CASCADE, related_name="fkusuario_rol", db_column='id_usuario')
+    id_rol =models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fkrol_usuario", db_column='id_rol')
+
+    class Meta:
+        verbose_name = 'Rol de usuario',
+        verbose_name_plural = 'Roles de usuarios',
+        db_table = 'conf_usuario_rol'
+
+    def __int__(self):
+        return self.idconf_usuario_rol
+
 
 class ConfPermiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
     id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_permiso_menu", db_column='id_menu')
-    id_usuario = models.ForeignKey(ConfUsuario, on_delete=models.CASCADE, related_name="fk_permiso_usuario", db_column='id_usuario')
     id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_permiso_modulo", db_column='id_modulo')
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_permiso_estado", db_column='id_genr_estado')
 
@@ -111,3 +122,16 @@ class ConfPermiso(models.Model):
     def __int__(self):
         return self.id_permiso
 
+
+class Conf_rol_permiso(models.Model):
+    idconf_rol_permiso = models.AutoField(primary_key=True)
+    id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fk_detalle_rol", db_column='id_rol')
+    id_permiso_rol = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE, related_name="fk_permiso_rol", db_column='id_permiso_rol')
+
+    class Meta:
+        verbose_name = 'Detalle',
+        verbose_name_plural = 'Detalles',
+        db_table = 'conf_rol_permiso'
+
+    def __int__(self):
+        return self.idconf_rol_permiso
