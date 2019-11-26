@@ -43,9 +43,8 @@
         <label class="texto">
             Direccion
         </label>
-        <input type="text" name="direccion" class="cajatexto"/>
+        <input type="text" name="direccion" class="cajatexto"/></br>
 
-<div id="dos">
 	    <label class="texto">
             Representante Legal
         </label>
@@ -73,11 +72,14 @@
             <option>Activa</option>
             <option>Inactiva</option>
         </select>
-</div>
-    </br>
+
+        <div class="botones">
+        </br>
         <input type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary"/>
+        <button type="reset" class="btn btn-outline-primary">Resetear</button>
         <input type="button" name="Cancelar" value="Cancelar"  class="btn btn-outline-primary"><a href="{% url 'Academico:empresas' %}"></a>
         </input>
+        </div>
     </form>
 </section>
 
