@@ -48,3 +48,16 @@
 .botones{
    margin-left: 90px;
 }
+
+#submenu_configuracion{
+padding-left: 10px;
+background-color: #4e73df;
+}
+
+
+#submenu_configuracion  a:hover{
+padding-left: 20px;
+color: white;
+background-color: #5591E2;
+
+}

@@ -23,13 +23,13 @@
 
                 <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="collapse-inner rounded" id="submenu_configuracion">
 
                         <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.descripcion}} {% endblock cab_sub_menu%}</h6>
 
                         {% for menu_h in menu_hijo %}
                                  {%  if menu_p.id_menu == menu_h.id_padre %}
-                                 <a class="collapse-item" href="{% url menu_h.url %}" >{{menu_h.descripcion}}</a>
+                                 <a class="collapse-item" href="{% url menu_h.url %}" id="item" >{{menu_h.descripcion}}</a>
                                  {% endif %}
                         {% endfor %}
 
