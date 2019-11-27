@@ -27,10 +27,11 @@
         <label class="texto">
                 Tipo identificacion
         </label>
-	    <select value="tipo identificacion" class="cajatexto">
-                <option>Cedula</option>
-                <option>Ruc</option>
-                <option>Pasaporte</option>
+	    <select value="tipo identificacion" name="tip_ident" class="cajatexto">
+            {%for tip in tip_indent%}
+                <option value="{{tip.idgenr_general}}">{{tip.nombre}}"></option>
+            {%endfor%}
+
 
         </select>
         <br/>
@@ -68,9 +69,11 @@
         <label class="texto">
             Estado
         </label>
-        <select  value="estado" class="cajatexto">
-            <option>Activa</option>
-            <option>Inactiva</option>
+        <select  value="estado" name = 'estado' class="cajatexto">
+            {%for est in estados%}
+            <option value="{{est.idgenr_general}}">{{est.nombre}}></option>
+            {%endfor%}
+
         </select>
 
         <div class="botones">

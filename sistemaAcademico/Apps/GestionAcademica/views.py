@@ -167,7 +167,41 @@ def salir(request):
 #-------------------------crear y editar ------------------------------------
 
 def nueva_empresa(request):
-    return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html')
+    if 'usuario' in request.session:
+        contexto = {}
+        tip_ident = GenrGeneral.objects.filter(tipo='TID')
+        estado = GenrGeneral.objects.filter(tipo='STA')
+        contexto['tip_ident'] = tip_ident
+        contexto['estados'] = estado
+
+        if request.method == 'POST':
+
+            var_empresa_nombre = request.POST.get('nombre')
+            var_rsocial = request.POST.get('rsocial')
+            var_tip_ident = GenrGeneral.objects.get(idgenr_general=(int(request.POST.get('tip_ident'))))
+            var_ident = request.POST.get('identificacion')
+            direccion = request.POST.get('direccion')
+            representante_legal = request.POST.get('rlegal')
+            correo = request.POST.get('inputEmail3')
+            telefono = request.POST.get('telefono')
+            var_estado = GenrGeneral.objects.get(idgenr_general=(int(request.POST.get('estado'))))
+
+            if var_rsocial == var_rsocial:
+                h = hashlib.new("sha1")
+                var_contra = str.encode(var_rsocial)
+                h.update(var_contra)
+                empresa = ConfEmpresa(nombre=var_empresa_nombre, razon_social=var_rsocial,
+                                      id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
+                                      direccion=direccion, representante_legal=representante_legal, correo=correo,
+                                      telefono=telefono, fecha_de_creacion=var_estado)
+                empresa.save()
+                return redirect('Academico:usuarios')
+            else:
+                contexto['error'] = 'ella te dejo amigo :c :"v'
+
+        return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
+    else:
+        return HttpResponseRedirect('../')
 
 def editar_empresa(request):
     return render(request, 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html')
