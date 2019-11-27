@@ -11,8 +11,8 @@
 </header>
 <br/>
 <section>
-	<form class="formulario">
-
+	<form class="formulario" method="POST">
+        {% csrf_token %}
 		<label class="texto">
             Nombre Empresa
         </label>
@@ -28,8 +28,8 @@
                 Tipo identificacion
         </label>
 	    <select value="tipo identificacion" name="tip_ident" class="cajatexto">
-            {%for tip in tip_indent%}
-                <option value="{{tip.idgenr_general}}">{{tip.nombre}}"></option>
+            {%for tip in tip_ident %}
+                <option value="{{tip.idgenr_general}}">{{tip.nombre}}</option>
             {%endfor%}
 
 
@@ -71,7 +71,7 @@
         </label>
         <select  value="estado" name = 'estado' class="cajatexto">
             {%for est in estados%}
-            <option value="{{est.idgenr_general}}">{{est.nombre}}></option>
+            <option value="{{est.idgenr_general}}">{{est.nombre}}</option>
             {%endfor%}
 
         </select>

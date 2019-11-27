@@ -184,22 +184,17 @@ def nueva_empresa(request):
             representante_legal = request.POST.get('rlegal')
             correo = request.POST.get('inputEmail3')
             telefono = request.POST.get('telefono')
+            fecha_creacion = request.POST.get('f_creacion')
             var_estado = GenrGeneral.objects.get(idgenr_general=(int(request.POST.get('estado'))))
+            empresa = ConfEmpresa(nombre=var_empresa_nombre, razon_social=var_rsocial,
+                                  id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
+                                  direccion=direccion, representante_legal=representante_legal, correo=correo,
+                                  telefono=telefono, fecha_creacion=fecha_creacion,id_genr_estado=var_estado)
+            empresa.save()
+            return redirect('Academico:empresas')
 
-            if var_rsocial == var_rsocial:
-                h = hashlib.new("sha1")
-                var_contra = str.encode(var_rsocial)
-                h.update(var_contra)
-                empresa = ConfEmpresa(nombre=var_empresa_nombre, razon_social=var_rsocial,
-                                      id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
-                                      direccion=direccion, representante_legal=representante_legal, correo=correo,
-                                      telefono=telefono, fecha_de_creacion=var_estado)
-                empresa.save()
-                return redirect('Academico:usuarios')
-            else:
-                contexto['error'] = 'ella te dejo amigo :c :"v'
 
-        return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
     else:
         return HttpResponseRedirect('../')
 
@@ -227,6 +222,7 @@ def nuevo_usuario(request):
             tipo_usuario = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('tipousuario')))
             estado = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('estado')))
             rol = ConfRol.objects.get(id_rol=int(request.POST.get('rol')))
+
 
             if var_contra == conf_contra:
                 h = hashlib.new("sha1")
