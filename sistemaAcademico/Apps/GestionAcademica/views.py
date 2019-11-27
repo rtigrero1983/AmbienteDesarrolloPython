@@ -26,18 +26,16 @@ def login(request):
             h = hashlib.new("sha1")
             var_contra = str.encode(var_contra)
             h.update(var_contra)
-            usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(), id_genr_estado=97)
-            permiso = ConfPermiso.objects.filter(id_genr_estado=97,id_usuario=usu.id_usuario)
-
+            usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
                 contexto['usuario_logeado']= usu
                 request.session['usuario'] = usu.id_usuario
-                return redirect("Academico:inicio1")
+                return redirect("Academico:inicio")
 
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-                print(contexto)
+                print(h.hexdigest())
 
     return render(request,'base/login.html',contexto)
 
