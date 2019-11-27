@@ -3,20 +3,26 @@
 	{% block contenido_principal %}
 
 <header class="cuadro_titulo">
-    <h4 class="titulo">Configuracion / Registrar Menu</h4>
+    <h4 class="titulo">Configuracion / Registrar Permiso</h4>
 </header>
      <br/>
      <form class="formulario">
          <div class="contenido">
              <br>
             <label class="texto">
-                Codigo:
+                Menu:
             </label>
             <input type="text" class="cajatexto">
              <br/>
 
             <label class="texto">
-                Nombre:
+                Modulo:
+            </label>
+            <input type="text" class="cajatexto">
+             <br/>
+
+             <label class="texto">
+                Estado:
             </label>
             <input type="text" class="cajatexto">
              <br/>
@@ -25,7 +31,7 @@
              <br/>
              <button type="submit" class="btn btn-outline-primary">Guardar</button>
              <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <a class="btn btn-outline-primary" href="{% url 'Academico:menu' %}">Cancelar</a>
+             <a class="btn btn-outline-primary" href="{% url 'Academico:permisos' %}">Cancelar</a>
              </div>
      </form>
 
