@@ -57,31 +57,4 @@
 {% endblock pie_de_pagina %}
 
 
-<ul>
-    {% for menu  in menu_padre %}
-        
-      <li><a href="#">{{ menu.descripcion}}</a>
-        <ul>
-            {% for menu_h in menu_hijo %}
-            {%  if menu.id_menu == menu_h.id_padre %}<li> {{menu_h.descripcion}} </li>{% endif %}
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
-
-
-
-<ul>
-    {% for menu  in menu_padre %}
-
-      <li><a href="#">{{ menu.descripcion}}</a>
-        <ul>
-            {% for menu_h in menu_hijo %}
-            {%  if menu.id_menu == menu_h.id_padre %}<li> {{menu_h.descripcion}} </li>{% endif %}
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
 
