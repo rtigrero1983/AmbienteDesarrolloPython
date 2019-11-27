@@ -14,7 +14,7 @@ admin.site.register(GenrGeneral,GenrGeneralAdmin)
 
 class ConfUsuarioAdmin(admin.ModelAdmin):
     search_fields = ['usuario']
-    list_display = ('id_usuario','usuario','clave','id_persona','id_genr_tipo_usuario','id_rol','id_genr_estado',)
+    list_display = ('id_usuario','usuario','clave','id_persona','id_genr_tipo_usuario','id_genr_estado',)
 
 admin.site.register(ConfUsuario,ConfUsuarioAdmin)
 
@@ -52,7 +52,7 @@ admin.site.register(ConfMenu,ConfMenuAdmin)
 
 class ConfPermisoAdmin(admin.ModelAdmin):
     search_fields = ['id_permiso']
-    list_display = ('id_permiso','id_menu','id_usuario','id_modulo','id_genr_estado',)
+    list_display = ('id_permiso','id_menu','id_modulo','id_genr_estado',)
 
 admin.site.register(ConfPermiso,ConfPermisoAdmin)
 
