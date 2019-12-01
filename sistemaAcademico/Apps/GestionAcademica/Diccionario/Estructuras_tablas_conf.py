@@ -129,8 +129,8 @@ class Conf_rol_permiso(models.Model):
     id_permiso_rol = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE, related_name="fk_permiso_rol", db_column='id_permiso_rol')
 
     class Meta:
-        verbose_name = 'Detalle',
-        verbose_name_plural = 'Detalles',
+        verbose_name = 'Rol Permiso',
+        verbose_name_plural = 'Rol Permisos',
         db_table = 'conf_rol_permiso'
 
     def __int__(self):

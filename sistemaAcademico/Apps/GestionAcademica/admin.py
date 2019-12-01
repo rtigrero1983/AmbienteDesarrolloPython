@@ -57,6 +57,12 @@ class ConfPermisoAdmin(admin.ModelAdmin):
 admin.site.register(ConfPermiso,ConfPermisoAdmin)
 
 
+class ConfRolPermisoAdmin(admin.ModelAdmin):
+    search_fields = ['idconf_rol_permiso','id_rol','id_permiso_rol']
+    list_display = ('idconf_rol_permiso','id_rol','id_permiso_rol',)
+admin.site.register(Conf_rol_permiso,ConfRolPermisoAdmin)
+
+
 """"
 class ConfPersonaAdmin(admin.ModelAdmin):
     search_fields = ['id_persona','nombres','apellidos','identificacion']

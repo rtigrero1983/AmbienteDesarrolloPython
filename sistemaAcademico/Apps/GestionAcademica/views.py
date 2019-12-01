@@ -13,7 +13,7 @@ def base(request):
 def inicio(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/inicio.html', {'usu':request.session.get('usuario')})
+        return render(request, 'sistemaAcademico/inicio.html')
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -29,13 +29,12 @@ def login(request):
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
-                contexto['usuario_logeado']= usu
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
 
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-                print(h.hexdigest())
+
 
     return render(request,'base/login.html',contexto)
 
