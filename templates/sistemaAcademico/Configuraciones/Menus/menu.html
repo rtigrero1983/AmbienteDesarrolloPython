@@ -78,14 +78,15 @@
                       <td>
                          <a href="#" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
                          <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></a>
-                         <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button" aria-hidden="false" aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
+                         <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
                       </td>
                     </tr>
                   {% endfor %}
 
                   {% for h in menu_hijo %}
+
                   {% if h.id_padre != 0 %}
-                  <tr id="opcion_{{h.id_padre}}" class="collapse show">
+                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
                       <td>{{h.id_modulo}}</td>
                       <td>{{h.id_genr_estado}}</td>
                       <td>{{h.descripcion}}</td>
@@ -106,11 +107,11 @@
 
   <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardExampl" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExampl">
+                <a href="#collapseCardExampl" class="d-block card-header py-3" data-toggle="collapse" role="button"  aria-controls="collapseCardExampl">
                   <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
                 </a>
                 <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseCardExampl">
+                <div class="collapse show" id="collapseCardExampl" onloadeddata="hide">
                   <div class="card-body">
                     This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
                   </div>
@@ -128,9 +129,9 @@
 
     <script>
 
-        function desplegar_opciones(e){
+        function desplegar_opciones(){
 
-        var subRow = e.parentNode.parentNode.nextElementSibling;
+        var subRow = Document.getElemetbyid;
         subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
         }
 
