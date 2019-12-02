@@ -11,24 +11,23 @@
 
 {% block modulo %}
 
-        {% for menu_p in menu_padre  %}
-
+        {% for menu_p in permisos  %}
 
             <li class="nav-item">
 
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
                          <i class="fas fa-fw fa-cog"></i>
-                         <span> {{menu_p.descripcion}} </span>
+                         <span> {{menu_p.id_menu.descripcion}} </span>
                     </a>
 
-                <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
                     <div class="collapse-inner rounded" id="submenu_configuracion">
 
-                        <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.descripcion}} {% endblock cab_sub_menu%}</h6>
+                        <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.id_menu.descripcion}} {% endblock cab_sub_menu%}</h6>
 
                         {% for menu_h in menu_hijo %}
-                                 {%  if menu_p.id_menu == menu_h.id_padre %}
+                                 {%  if menu_p.id_menu.id_menu == menu_h.id_padre %}
                                  <a class="collapse-item" href="{% url menu_h.url %}" id="item" >{{menu_h.descripcion}}</a>
                                  {% endif %}
                         {% endfor %}
@@ -36,7 +35,7 @@
                     </div>
 
                 </div>
-           
+
            </li>
 
        {% endfor %}
@@ -47,14 +46,16 @@
 <!-- Dentro de este bloque ira el contenido principal de la pagina -->
 {% block contenido_principal %}
     <strong>{{request.session.usuario}}</strong>
+
+        {% for u in permisos %}
+                <label>{{u.id_menu.id_menu}}</label>
+        {% endfor %}
+
 {% endblock contenido_principal %}
 <!-- ************************************************************** -->
 
 
 
 {% block pie_de_pagina %}
-    
+
 {% endblock pie_de_pagina %}
-
-
-
