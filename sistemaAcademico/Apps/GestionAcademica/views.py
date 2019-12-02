@@ -85,12 +85,7 @@ def perfiles(request):
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        menus = ConfMenu.objects.all()
-        #---crea la paginacion de las tablas
-        paginator = Paginator(menus, 5)
-        page = request.GET.get('page')
-        lista_menu = paginator.get_page(page)
-        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html', {'lista_menu':lista_menu})
+        return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html')
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -121,7 +116,7 @@ def acciones(request):
 #Modulo de Mantenimiento -----------------------------------
 def empresas(request):
     if 'usuario' in request.session:
-        empresas= ConfEmpresa.objects.all()
+        empresas= ConfEmpresa.objects.filter(id_genr_estado=97)
         # ---crea la paginacion de las tablas
         paginator = Paginator(empresas, 1)
         page = request.GET.get('page')
