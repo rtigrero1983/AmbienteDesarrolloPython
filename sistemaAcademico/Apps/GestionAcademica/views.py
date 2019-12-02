@@ -75,8 +75,7 @@ def perfiles(request):
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        menus = ConfMenu.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html', {'menus':menus})
+        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html')
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
