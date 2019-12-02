@@ -2,75 +2,96 @@
 
 {% block contenido_principal %}
 <header class="cuadro_titulo">
-		<h4 class="titulo">
-			Configuraciones
-			 / Usuario
-		</h4>
+		<h4 class="titulo">Configuracion / Editar Usuario</h4>
 </header>
     <br>
-    <form>
-    <h1>Editar Usuario</h1>
+    <form class="formulario" method="POST" >{% csrf_token %}
+        <br>
 
-        <label>
+        <label class="texto">
             Nombre de Usuario:
         </label>
-            <input type="text" class="cajatexto" name="nombreusuario" value="cristhof" readonly="readonly" required="true">
-            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario" value="text" readonly="readonly">
+            <button type="button" class="btn btn-primary"></button>
         </br>
-        <label>
+        <label class="texto">
             Contraseña:
         </label>
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" value="1234" readonly="readonly" required="true">
-            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true" value="text" readonly="readonly">
+            <button type="button" class="btn btn-primary"></button>
         </br>
-        <label>
+        <label class="texto">
             Confirmar Contraseña:
         </label>
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" value="1234" readonly="readonly" required="true">
-            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+
+            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true" value="text" readonly="readonly">
+            <button type="button" class="btn btn-primary"></button>
         </br>
-        <label>
+        <label class="texto">
             Persona:
         </label>
 
             <select name="persona" class="cajatexto">
-                    <option class="cajatexto"> estudiante </option>
-
+                    <option selected>Elija tipo de persona</option>
+                    {% for per in lista_personas %}
+                    <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
+                    {% endfor %}
             </select>
-                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button type="button" class="btn btn-primary"></button>
+
+
         </br>
-        <label>
+        <label class="texto">
             Tipo de Usuario:
         </label>
-            <select name="tipousuario" class="cajatexto">
-                    <option class="cajatexto"> tip1 </option>
-
-            </select>
-                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                <select name="tipousuario" class="cajatexto">
+                    <option selected value="">Elija tipo de usuario</option>
+                    {% for genr in genr_general %}
+                    <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
+                    {% endfor %}
+                </select>
+            <button type="button" class="btn btn-primary"></button>
         </br>
-        <label>
-            Rol:
-        </label>
-            <select name="rol" class="cajatexto">
-                    <option class="cajatexto"> superusuario </option>
 
-            </select>
-                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
-        </br>
-        <label>
-            Estado:
-        </label>
-            <select name="estado" class="cajatexto">
-                    <option class="cajatexto"> activo </option>
+        <div class="formulario_lado_derecho">
 
-            </select>
-                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+            <div class="form-row grid tabla_lista">
+                <div>
+                    <ul class="list-group">
+                         <li class="list-group-item tabla_lista_cab">Roles
+                            <button type="button" class="btn btn-info"></button>
+                         </li>
+                            <li class="list-group-item tabla_lista_cont">
+                               <input type="checkbox" class="estilo_checkbox">
+                                <label>
+                                    Prueba
+                                </label>
+                            </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="list-group">
+                         <li class="list-group-item tabla_lista_cab">Descripcion</li>
+                            <li class="list-group-item tabla_lista_cont">
+                                <center>
+                                    Prueba
+                                </center>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
         <br>
         <br>
+
         <center>
-        <button type="button" class="btn btn-success">Grabar</button>
-        <button type="button" class="btn btn-warning">Cancelar</button>
+        <button type="submit" class="btn btn-outline-primary">Grabar</button>
+        <button type="reset" class="btn btn-outline-primary">Limpiar</button>
+        <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
         </center>
+
     </form>
 {% endblock contenido_principal %}
 
