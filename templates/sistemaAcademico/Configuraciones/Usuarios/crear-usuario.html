@@ -49,35 +49,43 @@
                     {% endfor %}
                 </select>
         </br>
-        <label class="texto">
-            Rol:
-        </label>
-                <select name="rol" class="cajatexto">
-                    <option selected value="">Elija un rol</option>
-                    {% for r in rol %}
-                    <option class="cajatexto" value="{{r.id_rol}}"> {{r.nombre}} </option>
-                    {% endfor %}
-                </select>
-        </br>
-        <label class="texto">
-            Estado:
-        </label>
 
-                <select name="estado" class="cajatexto">
-                    <option value="">Elija un estado</option>
-                    {% for est in estados %}
-                    <option class="cajatexto" value="{{est.idgenr_general}}"> {{est.nombre}} </option>
-                    {% endfor %}
-                </select>
+        <div class="formulario_lado_derecho">
+
+            <div class="form-row grid tabla_lista">
+                <div>
+                    <ul class="list-group">
+                         <li class="list-group-item tabla_lista_cab">Roles</li>
+                            <li class="list-group-item tabla_lista_cont">
+                               <input type="checkbox" class="estilo_checkbox">
+                                <label>
+                                    Prueba
+                                </label>
+                            </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="list-group">
+                         <li class="list-group-item tabla_lista_cab">Descripcion</li>
+                            <li class="list-group-item tabla_lista_cont">
+                                <center>
+                                    Prueba
+                                </center>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
 
         <br>
         <br>
 
-        <div class="botones">
+        <center>
         <button type="submit" class="btn btn-outline-primary">Grabar</button>
         <button type="reset" class="btn btn-outline-primary">Limpiar</button>
         <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
-        </div>
+        </center>
 
     </form>
 {% endblock contenido_principal %}

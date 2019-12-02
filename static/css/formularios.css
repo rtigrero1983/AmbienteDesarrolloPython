@@ -86,3 +86,59 @@ float:right;
 margin-top: 0px;
 margin-right: 500px;
 }
+
+.formulario_lado_derecho{
+    float:right;
+    margin-top: -210px;
+    margin-right: 120px;
+    font-size: 14px;
+}
+
+.tabla_lista_cab{
+    background-color: #4e73df;
+    color: white;
+    font-family: "Trebuchet MS", Geneva, Arial, Helvetica, sans-serif;
+    width: 200px;
+    text-align: center;
+}
+
+.tabla_lista_cont{
+    height: 40px;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.tabla_lista_cont label{
+    padding-left: 10px;
+}
+
+input[type=checkbox] {
+         position: relative;
+	       cursor: pointer;
+    }
+    input[type=checkbox]:before {
+         content: "";
+         display: block;
+         position: absolute;
+         width: 16px;
+         height: 16px;
+         top: 0;
+         left: 0;
+         border: 2px solid #555555;
+         border-radius: 3px;
+         background-color: white;
+}
+    input[type=checkbox]:checked:after {
+         content: "";
+         display: block;
+         width: 5px;
+         height: 10px;
+         border: solid black;
+         border-width: 0 2px 2px 0;
+         -webkit-transform: rotate(45deg);
+         -ms-transform: rotate(45deg);
+         transform: rotate(45deg);
+         position: absolute;
+         top: 2px;
+         left: 6px;
+}
