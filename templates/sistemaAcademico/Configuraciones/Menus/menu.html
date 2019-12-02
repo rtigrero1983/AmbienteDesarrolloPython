@@ -48,7 +48,7 @@
 -->
 <div class="card-body">
 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25'>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' onloadeddata="traducir()">
                   <thead>
                     <tr>
                       <th>Modulo</th>
@@ -129,11 +129,32 @@
 
     <script>
 
-        function desplegar_opciones(){
+        function traducir(){
 
-        var subRow = Document.getElemetbyid;
-        subRow.style.display = subRow.style.display === 'none' ? 'table-row' : 'none';
+      var table = $('#dataTable').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
         }
+    },
+    ....
+});
+}
 
     </script>
 
