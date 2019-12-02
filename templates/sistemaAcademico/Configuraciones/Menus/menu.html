@@ -1,21 +1,16 @@
 {% extends 'sistemaAcademico/inicio.html' %}
-{% load staticfiles %}
 
-  {% block extracss %}
-
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-
-  {% endblock extracss %}
 
                   {% block contenido_principal %}
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu</h4></header>
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion/ Menus</h4></header>
 
 <br/><br/>
      <a href="{% url 'Academico:nuevo_menu' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
 <br/><br/>
-  <!-- Page level plugins
+
+</table>
 <table class="table table-striped">
 <tr class="success">
 <td>Id</td>
@@ -26,142 +21,44 @@
     <td>Estado</td>
     <td>Acciones</td>
 </tr>
-{% for m in menus %}
+{% for m in lista_menu %}
 <tr>
-<td>{{ m.id_menu }}</td>
-<td>{{ m.id_modulo }}</td>
-<td>{{ m.id_padre }}</td>
-<td>{{ m.orden }}</td>
-    <td>{{ m.descripcion }}</td>
-<td>{{ m.id_genr_estado}}</td>
+<td>{{ m.id_menu|upper }}</td>
+<td>{{ m.id_modulo|upper }}</td>
+<td>{{ m.id_padre|upper }}</td>
+<td>{{ m.orden|upper }}</td>
+    <td>{{ m.descripcion|upper }}</td>
+<td>{{ m.id_genr_estado|upper}}</td>
 
 	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
 		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
 </tr>
 {% endfor %}
-    <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 21 to 30 of 57 entries</div>
-
 </table>
 
-   <ul class="pagination"><li class="paginate_button page-item previous" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul>
+<!--paginacion-->
 
--->
-<div class="card-body">
-<div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' onloadeddata="traducir()">
-                  <thead>
-                    <tr>
-                      <th>Modulo</th>
-                      <th>Estado</th>
-                      <th>Nombre del menu</th>
-                      <th>Tipo</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                     <th>Modulo</th>
-                      <th>Estado</th>
-                      <th>Nombre del menu</th>
-                      <th>Tipo</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
+    <ul class="pagination">
 
-                  {% for m in menu_padre %}
-                    <tr>
-                      <td><strong>{{m.id_modulo}}</strong></td>
-                      <td><strong>{{m.id_genr_estado}}</strong></td>
-                      <td><strong>{{m.descripcion}}</strong></td>
-                      <td><strong>Menu principal</strong></td>
-                      <td>
-                         <a href="#" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></a>
-                         <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
-                      </td>
-                    </tr>
-                  {% endfor %}
+        {% if lista_menu.has_previous %}
+        <li class="page-item"> <a href="?page=1" class="page-link">&laquo; first</a></li>
+        <li class="page-item"><a href="?page={{ lista_menu.previous_page_number }}" class="page-link">previous</a></li>
+        {% endif %}
 
-                  {% for h in menu_hijo %}
+        <span class="current" class="page-item page-link">
+            Pagina {{ lista_menu.number }} de {{ lista_menu.paginator.num_pages }}.
+        </span>
 
-                  {% if h.id_padre != 0 %}
-                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
-                      <td>{{h.id_modulo}}</td>
-                      <td>{{h.id_genr_estado}}</td>
-                      <td>{{h.descripcion}}</td>
-                      <td>Opcion del menu {{h.id_modulo}}</td>
-                      <td>
-                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
-                         <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
-                      </td>
-                  </tr>
-                  {% endif %}
-                  {% endfor %}
+        {% if lista_menu.has_next %}
+        <li class="page-item"><a href="?page={{ lista_menu.next_page_number }}" class="page-link">next</a></li>
+        <li class="page-item"> <a href="?page={{ lista_menu.paginator.num_pages }}" class="page-link">last &raquo;</a></li>
+        {% endif %}
 
-                  </tbody>
-                </table>
-              </div>
-            </div>
+    </ul>
 
-  <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#collapseCardExampl" class="d-block card-header py-3" data-toggle="collapse" role="button"  aria-controls="collapseCardExampl">
-                  <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="collapseCardExampl" onloadeddata="hide">
-                  <div class="card-body">
-                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                  </div>
-                </div>
-              </div>
+
+
+<!--------------------------------------------->
+
 
 {% endblock contenido_principal %}
-
-
-{% block extrajs %}
-
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-
-    <script>
-
-        function traducir(){
-
-      var table = $('#dataTable').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    },
-    ....
-});
-}
-
-    </script>
-
-{% endblock extrajs %}
-
-
-
-
-
-

@@ -49,7 +49,16 @@
                     {% endfor %}
                 </select>
         </br>
-
+        <label class="texto">
+            Rol:
+        </label>
+                <select name="rol" class="cajatexto">
+                    <option selected value="">Elija un rol</option>
+                    {% for r in rol %}
+                    <option class="cajatexto" value="{{r.id_rol}}"> {{r.nombre}} </option>
+                    {% endfor %}
+                </select>
+        </br>
         <label class="texto">
             Estado:
         </label>
@@ -60,33 +69,6 @@
                     <option class="cajatexto" value="{{est.idgenr_general}}"> {{est.nombre}} </option>
                     {% endfor %}
                 </select>
-
-        <br>
-        <br>
-
-        <div class="lista_empresa_layout">
-
-            <div class="form-row grid tabla_usu_rol">
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item list-group-item-info">ROLES</li>
-                            <li class="list-group-item list-group-item-light">
-                               <input type="checkbox">
-                                Prueba
-                            </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item list-group-item-info">DESCRIPCION</li>
-                            <li class="list-group-item list-group-item-light">
-                               Prueba
-                            </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
 
         <br>
         <br>

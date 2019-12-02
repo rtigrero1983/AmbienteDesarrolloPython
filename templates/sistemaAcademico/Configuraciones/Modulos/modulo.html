@@ -5,6 +5,33 @@
 <header class="cuadro_titulo">
    <h3> Configuracion / Modulos</h3>
 </header>
+<br>
+	<nav aria-label="Page navigation example">
+
+
+  <ul class="pagination">
+
+
+        <!--paginacion-->
+
+
+        {% if lista_modulos.has_previous %}
+        <li class="page-item"> <a href="?page=1" class="page-link">First</a></li>
+        <li class="page-item"><a href="?page={{ lista_modulos.previous_page_number }}" class="page-link">Previous</a></li>
+        {% endif %}
+
+        <span class="page-item" >
+            Pagina {{ lista_modulos.number }} de {{ lista_modulos.paginator.num_pages }}.
+        </span>
+
+        {% if lista_modulos.has_next %}
+        <li class="page-item"><a href="?page={{ lista_modulos.next_page_number }}" class="page-link">Next</a></li>
+        <li class="page-item"> <a href="?page={{ lista_modulos.paginator.num_pages }}" class="page-link">Last</a></li>
+        {% endif %}
+
+    </ul>
+
+</nav>
 <br/>
 
      <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
@@ -19,7 +46,7 @@
     <td>Estado</td>
     <td>Acciones</td>
 </tr>
-{% for m in modulos %}
+{% for m in lista_modulos %}
 <tr>
 <td>{{ m.id_modulo }}</td>
 <td>{{ m.codigo }}</td>

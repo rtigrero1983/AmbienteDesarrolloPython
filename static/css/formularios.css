@@ -31,6 +31,7 @@
 }
 
 .cajatexto{
+
    background-color: white;
    border-radius: 10px;
    border-style: solid;
@@ -49,17 +50,39 @@
 }
 
 #submenu_configuracion{
-    padding-left: 10px;
-    background-color: #4e73df;
+padding-left: 10px;
+background-color: #4e73df;
 }
 
 
 #submenu_configuracion  a:hover{
-    padding-left: 20px;
-    color: white;
-    background-color: #5591E2;
+padding-left: 20px;
+color: white;
+background-color: #5591E2;
+
 }
 
-.tabla_usu_rol{
+.lista_empresa_layout{
+float:right;
+margin-top: -355px;
+margin-right: 70px;
+}
 
+.eliminar_empresa{
+padding: 5px;
+border-top-color: #858796;
+border-left-color: white;
+border-right-color: white;
+border-bottom-color: white;
+ border-style: solid;
+border-top-left-radius: 5px;
+margin-top: 5px;
+margin-left: 0px;
+margin-bottom: -20px;
+}
+
+.paginacion_derecha{
+float:right;
+margin-top: 0px;
+margin-right: 500px;
 }

@@ -4,6 +4,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
 from django.urls import reverse_lazy
 import hashlib
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ def base(request):
 def inicio(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/inicio.html')
+        return render(request, 'sistemaAcademico/inicio.html', {'usu':request.session.get('usuario')})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -29,12 +30,13 @@ def login(request):
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
             # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
+                contexto['usuario_logeado']= usu
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
 
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-
+                print(h.hexdigest())
 
     return render(request,'base/login.html',contexto)
 
@@ -44,7 +46,11 @@ def usuarios(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         usuarios = ConfUsuario.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'usuarios':usuarios})
+        # ---crea la paginacion de las tablas
+        paginator = Paginator(usuarios, 5)
+        page = request.GET.get('page')
+        lista_usuarios = paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'lista_usuarios':lista_usuarios})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -55,7 +61,11 @@ def roles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         roles= ConfRol.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Roles/rol.html', {'roles': roles})
+        # ---crea la paginacion de las tablas
+        paginator = Paginator(roles, 5)
+        page = request.GET.get('page')
+        lista_roles = paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': lista_roles})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -75,7 +85,12 @@ def perfiles(request):
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html')
+        menus = ConfMenu.objects.all()
+        #---crea la paginacion de las tablas
+        paginator = Paginator(menus, 5)
+        page = request.GET.get('page')
+        lista_menu = paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Menus/menu.html', {'lista_menu':lista_menu})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -85,7 +100,11 @@ def modulo(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         modulos= ConfModulo.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html', {'modulos': modulos})
+        # ---crea la paginacion de las tablas
+        paginator = Paginator(modulos, 5)
+        page = request.GET.get('page')
+        lista_modulos= paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html', {'lista_modulos': lista_modulos})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -103,7 +122,11 @@ def acciones(request):
 def empresas(request):
     if 'usuario' in request.session:
         empresas= ConfEmpresa.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'empresas': empresas})
+        # ---crea la paginacion de las tablas
+        paginator = Paginator(empresas, 1)
+        page = request.GET.get('page')
+        lista_empresas = paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresas': lista_empresas})
     else:
         return HttpResponseRedirect('../')
 #---------------------------------------------------------

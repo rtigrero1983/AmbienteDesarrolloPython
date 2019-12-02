@@ -2,56 +2,109 @@
 
 	{% block contenido_principal %}
 <header class="cuadro_titulo">
-	<h2>Configuracion / Empresas</h2>
+	<h4 class="titulo">Configuracion / Empresas</h4>
 
 </header>
-
-	<br/>
-	<br/>
-
-
-<a href="{% url 'Academico:nueva_empresa' %}" id="registrar_empresa" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> nuevo</a>
-<br/>
-<br/>
+<br>
+	<a href="{% url 'Academico:nueva_empresa' %}" id="registrar_empresa" class="btn btn-outline-primary"><span class="glyphicon glyphicon-plus"></span> nuevo</a>
+<div class="paginacion_derecha">
+	<nav aria-label="Page navigation example">
 
 
-	<table class="table table-striped">
- <tr class="success">
- 	<td>Codigo</td>
- 	<td>Nombre</td>
-<td>Razon Social</td>
-	 <td>Tipo </td>
-<td>Identificacion</td>
-<td>Direccion</td>
-	 <td>Representante</td>
-<td>Telefono</td>
-	 <td>Fecha creacion</td>
-<td>Correo</td>
-<td>Estado</td>
-<td>F/Ingreso</td>
-	 <td>Usuario </td>
-	 <td>Terminal</td>
-	 <td>Acciones</td>
- </tr>
-{% for em in empresas %}
-<tr>
-	<td>{{ em.id_empresa }}</td>
-	<td>{{ em.nombre }}</td>
-	<td>{{ em.razon_social }}</td>
-<td>{{ em.id_genr_tipo_identificacion }}</td>
-	<td>{{ em.identificacion }}</td>
-	<td>{{ em.direccion }}</td>
-	<td>{{ em.representante_legal }}</td>
-	<td>{{ em.telefono }}</td>
-	<td>{{ em.fecha_creacion }}</td>
-	<td>{{ em.correo }}</td>
-	<td> {{ em.fecha_ingreso}}</td>
-	<td> {{ em.usuario_ing}}</td>
-	<td> {{ em.terminal_ing}}</td>
-	<td><a href="#" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
-    <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
+  <ul class="pagination">
+
+
+        <!--paginacion-->
+
+
+        {% if lista_empresas.has_previous %}
+        <li class="page-item"> <a href="?page=1" class="page-link">First</a></li>
+        <li class="page-item"><a href="?page={{ lista_empresas.previous_page_number }}" class="page-link">Previous</a></li>
+        {% endif %}
+
+        <span class="page-item" >
+            Pagina {{ lista_empresas.number }} de {{ lista_empresas.paginator.num_pages }}.
+        </span>
+
+        {% if lista_empresas.has_next %}
+        <li class="page-item"><a href="?page={{ lista_empresas.next_page_number }}" class="page-link">Next</a></li>
+        <li class="page-item"> <a href="?page={{ lista_empresas.paginator.num_pages }}" class="page-link">Last</a></li>
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+
+</div>
+
+
+
+<nav class="eliminar_empresa">
+
+<a href="#" class="btn-circle btn btn-outline-primary"><i class="fas fa-trash"></i></a>
+
+
+</nav>
+
+
+<section>
+	{% for em in lista_empresas %}
+	<br>
+
+ 	<label class="texto">Codigo </label>
+	<input type="text" value="{{ em.id_empresa }}" readonly="readonly" class="cajatexto"/>
+</br>
+ 	<label class="texto">Nombre </label>
+<input type="text" value="{{ em.nombre }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Razon Social</label>
+<input type="text" value="{{ em.razon_social }}" readonly="readonly" class="cajatexto"/>
+</br>
+	 <label class="texto">Tipo identificacion</label>
+<input type="text" value="{{ em.id_genr_tipo_identificacion }}"  readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Identificacion</label>
+<input type="text" value="{{ em.identificacion }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Direccion</label>
+<input type="text" value="{{ em.direccion }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Representante</label>
+<input type="text" value="{{ em.representante_legal }}" readonly="readonly" class="cajatexto"/>
+</br>
+<div class="lista_empresa_layout">
+<br>
+
+<label class="texto">Telefono</label>
+<input type="text" value="{{ em.telefono }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Fecha creacion</label>
+<input type="text" value="{{ em.fecha_creacion }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Correo</label>
+<input type="text" value="{{ em.correo }}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Estado</label>
+<input type="text" value="{{ em.estado}}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Fecha Ingreso</label>
+<input type="text" value="{{ em.fecha_ingreso}}" readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Usuario Ingreso</label>
+<input type="text" value="{{ em.usuario_ing}}"	readonly="readonly" class="cajatexto"/>
+</br>
+<label class="texto">Terminal</label>
+<input type="text" value="{{ em.terminal_ing}}" readonly="readonly" class="cajatexto"/>
+
+</div>
+
+
 {% endfor %}
-</table>
+
+</section>
+
+
 
 
 
