@@ -142,3 +142,71 @@ input[type=checkbox] {
          top: 2px;
          left: 6px;
 }
+
+.cuadro_titulo_pag_inicio{
+    height: 100px;
+    margin: -10px;
+    background-color:#4e73df;
+    color: white;
+    padding: 14px;
+}
+
+.titulo_inicio{
+    padding-top: 0px;
+}
+
+.slide_cont{
+        padding-left: 170px;
+        width: 900px;
+        height: 300px;
+}
+
+svg {
+    display: block;
+    font: 7.5em 'Montserrat';
+    width: 400px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+.text-copy {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 6% 29%;
+    stroke-width: 5px;
+    stroke-dashoffset: 0%;
+    animation: stroke-offset 10s infinite linear;
+}
+
+.text-copy:nth-child(1){
+	stroke: #ffffff;
+	animation-delay: -1;
+}
+
+.text-copy:nth-child(2){
+	stroke: #ffffff;
+	animation-delay: -2s;
+}
+
+.text-copy:nth-child(3){
+	stroke: #ffffff;
+	animation-delay: -3s;
+}
+
+.text-copy:nth-child(4){
+	stroke: #ffffff;
+	animation-delay: -4s;
+}
+
+.text-copy:nth-child(5){
+	stroke: #ffffff;
+	animation-delay: -5s;
+}
+
+@keyframes stroke-offset{
+	100% {stroke-dashoffset: -35%;}
+}
+
+.back-color{
+    background-color: black;
+}
