@@ -1,63 +1,109 @@
 {% extends 'sistemaAcademico/inicio.html' %}
+{% load staticfiles %}
 
-{% block contenido_principal %}
-<header class="cuadro_titulo">
-    <h4 class="titulo">Configuarion / Usuarios</h4>
+  {% block extracss %}
 
-</header>
-<br/>
-	<nav aria-label="Page navigation example">
+         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
+  {% endblock extracss %}
 
-  <ul class="pagination">
+                  {% block contenido_principal %}
 
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
 
-        <!--paginacion-->
-
-
-        {% if lista_usuarios.has_previous %}
-        <li class="page-item"> <a href="?page=1" class="page-link">First</a></li>
-        <li class="page-item"><a href="?page={{ lista_usuarios.previous_page_number }}" class="page-link">Previous</a></li>
-        {% endif %}
-
-        <span class="page-item" >
-            Pagina {{ lista_usuarios.number }} de {{ lista_usuarios.paginator.num_pages }}.
-        </span>
-
-        {% if lista_usuarios.has_next %}
-        <li class="page-item"><a href="?page={{ lista_usuarios.next_page_number }}" class="page-link">Next</a></li>
-        <li class="page-item"> <a href="?page={{ lista_usuarios.paginator.num_pages }}" class="page-link">Last</a></li>
-        {% endif %}
-
-    </ul>
-
-</nav>
-
-     <a href="{% url 'Academico:nuevo_usuario' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+<br/><br/>
+     <a href="{% url 'Academico:nuevo_rol' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
 <br/><br/>
 
-<table class="table table-striped">
-<tr class="success">
-<td>Codigo</td>
-<td>Usuario</td>
-<td>Nombre</td>
-<td>Tipo usuario</td>
-<td>Estado</td>
-    <td>Acciones</td>
-</tr>
-{% for user in lista_usuarios %}
-<tr>
-<td>{{ user.id_usuario }}</td>
-<td>{{ user.usuario }}</td>
-<td>{{ user.id_persona }}</td>
-<td>{{ user.id_genr_tipo_usuario}}</td>
-<td>{{ user.id_genr_estado}}</td>
-	<td><a href="#" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
-    <a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
-</tr>
-{% endfor %}
-</table>
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Codigo</th>
+                      <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Tipo usuario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Codigo</th>
+                      <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Tipo usuario</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                  {% for u in lista_usuarios %}
+                    <tr>
+                      <td><strong>{{u.id_usuario}}</strong></td>
+                      <td><strong>{{u.usuario}}</strong></td>
+                        <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
+                        <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
+                        <td><strong>{{u.id_genr_estado}}</strong></td>
+
+                      <td>
+                         <a href="#" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></a>
+                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+
+
 
 {% endblock contenido_principal %}
+
+
+{% block extrajs %}
+
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+    <script>
+    $(document).ready(function (){
+      var table = $('#dataTable').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    ....
+});
+}
+);
+    </script>
+
+{% endblock extrajs %}
+
 
