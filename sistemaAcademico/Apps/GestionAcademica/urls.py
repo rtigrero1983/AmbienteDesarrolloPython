@@ -30,7 +30,7 @@ urlpatterns = [
     # -----------------------------------------
 
     #Opciones para el modulo de Admision
-    path('mantenimiento personas/',mantenimientoPersonas,name='mantenimientoPersonas'),
+    path('mantenimiento_personas/',mantenimientoPersonas,name='mantenimientoPersonas'),
     path('movimientos/',movimientos, name='movimientos'),
     path('consultas/',consultas, name='consultas'),
     path('procesos/',procesos, name='procesos'),

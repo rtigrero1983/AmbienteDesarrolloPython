@@ -1,65 +1,146 @@
-
 {% extends 'sistemaAcademico/inicio.html' %}
+{% load staticfiles %}
 
- {% block contenido_principal %}
-<header class="cuadro_titulo">
-   <h3> Configuracion / Modulos</h3>
-</header>
-<br>
-	<nav aria-label="Page navigation example">
+  {% block extracss %}
 
+         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
-  <ul class="pagination">
+  {% endblock extracss %}
 
+                  {% block contenido_principal %}
 
-        <!--paginacion-->
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Modulos</h4></header>
 
-
-        {% if lista_modulos.has_previous %}
-        <li class="page-item"> <a href="?page=1" class="page-link">First</a></li>
-        <li class="page-item"><a href="?page={{ lista_modulos.previous_page_number }}" class="page-link">Previous</a></li>
-        {% endif %}
-
-        <span class="page-item" >
-            Pagina {{ lista_modulos.number }} de {{ lista_modulos.paginator.num_pages }}.
-        </span>
-
-        {% if lista_modulos.has_next %}
-        <li class="page-item"><a href="?page={{ lista_modulos.next_page_number }}" class="page-link">Next</a></li>
-        <li class="page-item"> <a href="?page={{ lista_modulos.paginator.num_pages }}" class="page-link">Last</a></li>
-        {% endif %}
-
-    </ul>
-
-</nav>
-<br/>
-
-     <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+<br/><br/>
+     <a href="{% url 'Academico:nueva_empresa' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
 <br/><br/>
-</table>
-<table class="table table-striped">
-<tr class="success">
-<td>Id</td>
-<td>Codigo</td>
-<td>Nombre</td>
-    <td>Estado</td>
-    <td>Acciones</td>
-</tr>
-{% for m in lista_modulos %}
-<tr>
-<td>{{ m.id_modulo }}</td>
-<td>{{ m.codigo }}</td>
-<td>{{ m.nombre }}</td>
-<td>{{ m.id_genr_estado  }}</td>
-	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span>
-		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
-</tr>
-{% endfor %}
-</table>
+
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Codigo</th>
+                      <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                     <th>Codigo</th>
+                      <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                  {% for em in lista_modulos %}
+                    <tr>
+                        <td><strong>{{em.codigo}}</strong></td>
+                      <td><strong>{{em.nombre}}</strong></td>
+                        <td><strong>{{em.id_genr_estado}}</strong></td>
+                      <td>
+                         <a href="#" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
+                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+              <!---    {% for h in menu_hijo %}
+
+                  {% if h.id_padre != 0 %}
+                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
+                      <td>{{h.id_modulo}}</td>
+                      <td>{{h.id_genr_estado}}</td>
+                      <td>{{h.descripcion}}</td>
+                      <td>Opcion del menu {{h.id_modulo}}</td>
+                      <td>
+                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
+                         <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
+                      </td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}-->
+
+                  </tbody>
+                </table>
+              </div>
+    <!--<div class="pagination">
+    <span class="step-links">
+        {% if lista_empresa.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ lista_empresa.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ lista_empresa.number }} de {{ lista_empresa.paginator.num_pages }}.
+        </span>
+
+        {% if lista_empresa.has_next %}
+            <a href="?page={{ lista_empresa.next_page_number }}">next</a>
+            <a href="?page={{ lista_empresa.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>-->
+            </div>
+
+<div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExampl" class="d-block card-header py-3" data-toggle="collapse" role="button"  aria-controls="collapseCardExampl">
+                  <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExampl" onloadeddata="hide">
+                  <div class="card-body">
+                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                  </div>
+                </div>
+              </div>
+
 {% endblock contenido_principal %}
 
 
+{% block extrajs %}
 
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+    <script>
+    $(document).ready(function (){
+      var table = $('#dataTable').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    ....
+});
+}
+);
+    </script>
+
+{% endblock extrajs %}
 
 

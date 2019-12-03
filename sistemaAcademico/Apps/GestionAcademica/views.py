@@ -118,10 +118,10 @@ def empresas(request):
     if 'usuario' in request.session:
         empresas= ConfEmpresa.objects.filter(id_genr_estado=97)
         # ---crea la paginacion de las tablas
-        paginator = Paginator(empresas, 1)
+        paginator = Paginator(empresas, 10)
         page = request.GET.get('page')
-        lista_empresas = paginator.get_page(page)
-        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresas': lista_empresas})
+        lista_empresa = paginator.get_page(page)
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('../')
 #---------------------------------------------------------

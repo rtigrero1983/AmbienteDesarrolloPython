@@ -1,111 +1,158 @@
 {% extends 'sistemaAcademico/inicio.html' %}
+{% load staticfiles %}
 
-	{% block contenido_principal %}
-<header class="cuadro_titulo">
-	<h4 class="titulo">Configuracion / Empresas</h4>
+  {% block extracss %}
 
-</header>
-<br>
-	<a href="{% url 'Academico:nueva_empresa' %}" id="registrar_empresa" class="btn btn-outline-primary"><span class="glyphicon glyphicon-plus"></span> nuevo</a>
-<div class="paginacion_derecha">
-	<nav aria-label="Page navigation example">
+         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
+  {% endblock extracss %}
 
-  <ul class="pagination">
+                  {% block contenido_principal %}
 
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
 
-        <!--paginacion-->
+<br/><br/>
+     <a href="{% url 'Academico:nueva_empresa' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+</a>
+<br/><br/>
 
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Representante</th>
+                        <th>Identificacion</th>
+                      <th>Direccion</th>
+                      <th>telefono</th>
+                      <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
 
-        {% if lista_empresas.has_previous %}
-        <li class="page-item"> <a href="?page=1" class="page-link">First</a></li>
-        <li class="page-item"><a href="?page={{ lista_empresas.previous_page_number }}" class="page-link">Previous</a></li>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                    <th>Nombre</th>
+                      <th>Representante</th>
+                        <th>Identificacion</th>
+                      <th>Direccion</th>
+                      <th>telefono</th>
+                      <th>Correo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                  {% for em in lista_empresa %}
+                    <tr>
+                      <td><strong>{{em.nombre}}</strong></td>
+                      <td><strong>{{em.representante}}</strong></td>
+                      <td><strong>{{em.identificacion}}</strong></td>
+                      <td><strong>{{em.direccion}}</strong></td>
+                        <td><strong>{{em.telefono}}</strong></td>
+                        <td><strong>{{em.correo}}</strong></td>
+                        <td><strong>{{em.id_genr_estado}}</strong></td>
+                      <td>
+                         <a href="#" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
+                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+              <!---    {% for h in menu_hijo %}
+
+                  {% if h.id_padre != 0 %}
+                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
+                      <td>{{h.id_modulo}}</td>
+                      <td>{{h.id_genr_estado}}</td>
+                      <td>{{h.descripcion}}</td>
+                      <td>Opcion del menu {{h.id_modulo}}</td>
+                      <td>
+                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
+                         <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
+                      </td>
+                  </tr>
+                  {% endif %}
+                  {% endfor %}-->
+
+                  </tbody>
+                </table>
+              </div>
+    <!--<div class="pagination">
+    <span class="step-links">
+        {% if lista_empresa.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ lista_empresa.previous_page_number }}">previous</a>
         {% endif %}
 
-        <span class="page-item" >
-            Pagina {{ lista_empresas.number }} de {{ lista_empresas.paginator.num_pages }}.
+        <span class="current">
+            Pagina {{ lista_empresa.number }} de {{ lista_empresa.paginator.num_pages }}.
         </span>
 
-        {% if lista_empresas.has_next %}
-        <li class="page-item"><a href="?page={{ lista_empresas.next_page_number }}" class="page-link">Next</a></li>
-        <li class="page-item"> <a href="?page={{ lista_empresas.paginator.num_pages }}" class="page-link">Last</a></li>
+        {% if lista_empresa.has_next %}
+            <a href="?page={{ lista_empresa.next_page_number }}">next</a>
+            <a href="?page={{ lista_empresa.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
+    </span>
+</div>-->
+            </div>
 
-    </ul>
-
-</nav>
-
-
-</div>
-
-
-
-<nav class="eliminar_empresa">
-
-<a href="#" class="btn-circle btn btn-outline-primary"><i class="fas fa-trash"></i></a>
-
-
-</nav>
-
-
-<section>
-	{% for em in lista_empresas %}
-	<br>
-
- 	<label class="texto">Codigo </label>
-	<input type="text" value="{{ em.id_empresa }}" readonly="readonly" class="cajatexto"/>
-</br>
- 	<label class="texto">Nombre </label>
-<input type="text" value="{{ em.nombre }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Razon Social</label>
-<input type="text" value="{{ em.razon_social }}" readonly="readonly" class="cajatexto"/>
-</br>
-	 <label class="texto">Tipo identificacion</label>
-<input type="text" value="{{ em.id_genr_tipo_identificacion }}"  readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Identificacion</label>
-<input type="text" value="{{ em.identificacion }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Direccion</label>
-<input type="text" value="{{ em.direccion }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Representante</label>
-<input type="text" value="{{ em.representante_legal }}" readonly="readonly" class="cajatexto"/>
-</br>
-<div class="lista_empresa_layout">
-<br>
-
-<label class="texto">Telefono</label>
-<input type="text" value="{{ em.telefono }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Fecha creacion</label>
-<input type="text" value="{{ em.fecha_creacion }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Correo</label>
-<input type="text" value="{{ em.correo }}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Estado</label>
-<input type="text" value="{{ em.estado}}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Fecha Ingreso</label>
-<input type="text" value="{{ em.fecha_ingreso}}" readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Usuario Ingreso</label>
-<input type="text" value="{{ em.usuario_ing}}"	readonly="readonly" class="cajatexto"/>
-</br>
-<label class="texto">Terminal</label>
-<input type="text" value="{{ em.terminal_ing}}" readonly="readonly" class="cajatexto"/>
-
-</div>
-
-
-{% endfor %}
-
-</section>
-
-
-
-
+<div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExampl" class="d-block card-header py-3" data-toggle="collapse" role="button"  aria-controls="collapseCardExampl">
+                  <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardExampl" onloadeddata="hide">
+                  <div class="card-body">
+                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                  </div>
+                </div>
+              </div>
 
 {% endblock contenido_principal %}
+
+
+{% block extrajs %}
+
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+    <script>
+    $(document).ready(function (){
+      var table = $('#dataTable').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+    ....
+});
+}
+);
+    </script>
+
+{% endblock extrajs %}
+
+
