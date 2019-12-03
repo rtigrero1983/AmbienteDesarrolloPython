@@ -46,6 +46,7 @@
         </label>
         <input type="text" name="direccion" class="cajatexto"/></br>
 
+<div class="formulario_lado_derecho">
 	    <label class="texto">
             Representante Legal
         </label>
@@ -73,16 +74,15 @@
             {%for est in estados%}
             <option value="{{est.idgenr_general}}">{{est.nombre}}</option>
             {%endfor%}
-
         </select>
-
-        <div class="botones">
+</div>
+        <center>
         </br>
         <input type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary"/>
         <button type="reset" class="btn btn-outline-primary">Resetear</button>
         <a class="btn btn-outline-primary" href="{% url 'Academico:empresas' %}">Cancelar</a>
 
-        </div>
+        </center>
     </form>
 </section>
 

@@ -1,0 +1,122 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+<!-- tabla roles-->
+{% block titulo_cab_menu %}
+
+{%endblock titulo_cab_menu %}
+
+
+ {% block contenido_principal %}
+	<header class="cuadro_titulo">
+	<h4 class="titulo"> Configuracion / Editar Empresa</h4>
+</header>
+<br/>
+<section>
+	<div class="formulario" method="POST">
+
+        {% csrf_token %}
+		<label class="texto">
+            Nombre Empresa
+        </label>
+		<input type="text" name="nombre" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+<br/>
+        <label class="texto">
+             Razon social
+        </label>
+        <input type="text" name="rsocial" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+<br/>
+
+        <label class="texto">
+                Tipo identificacion
+        </label>
+	    <select value="tipo identificacion" name="tip_ident" class="cajatexto">
+            {%for tip in tip_ident %}
+                <option value="{{tip.idgenr_general}}">{{tip.nombre}}</option>
+            {%endfor%}
+        </select>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+
+        <label class="texto">
+            Identificacion
+        </label>
+        <input type="text" name="identificacion" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+
+        <label class="texto">
+            Direccion
+        </label>
+        <input type="text" name="direccion" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        </br>
+
+        <div class="formulario_lado_derecho">
+	    <label class="texto">
+            Representante Legal
+        </label>
+        <input type="text" name="rlegal" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+
+        <label class="texto">
+            Email
+        </label>
+        <input type="email"  id="inputEmail3" placeholder="" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+
+        <label class="texto">
+            Telefono
+        </label>
+        <input type="text" name="telefono" class="cajatexto" required="true" value="texto" readonly="readonly"/>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+        <label class="texto">
+            Fecha de creacion
+        </label>
+        <input type="date" name="f_creacion" class="cajatexto">
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        <br/>
+        <label class="texto">
+            Estado
+        </label>
+        <select  value="estado" name = 'estado' class="cajatexto">
+            {%for est in estados%}
+            <option value="{{est.idgenr_general}}">{{est.nombre}}</option>
+            {%endfor%}
+        </select>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
+        </div>
+    </div>
+        <center>
+        </br>
+        <input type="submit" name="guardar" value="Guardar" class="btn btn-outline-primary"/>
+        <a class="btn btn-outline-primary" href="{% url 'Academico:empresas' %}">Cancelar</a>
+        </center>
+    </form>
+</section>
+
+
+{% endblock contenido_principal %}
