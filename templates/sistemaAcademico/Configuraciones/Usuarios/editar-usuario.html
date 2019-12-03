@@ -12,20 +12,26 @@
             Nombre de Usuario:
         </label>
             <input type="text" class="cajatexto" placeholder="" required="true" name="usuario" value="text" readonly="readonly">
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
         </br>
         <label class="texto">
             Contraseña:
         </label>
             <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true" value="text" readonly="readonly">
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
         </br>
         <label class="texto">
             Confirmar Contraseña:
         </label>
 
             <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true" value="text" readonly="readonly">
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
         </br>
         <label class="texto">
             Persona:
@@ -37,7 +43,9 @@
                     <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
                     {% endfor %}
             </select>
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
 
 
         </br>
@@ -50,7 +58,9 @@
                     <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
                     {% endfor %}
                 </select>
-            <button type="button" class="btn btn-primary"></button>
+            <button type="button" class="btn">
+                <i class="far fa-edit"></i>
+            </button>
         </br>
 
         <div class="formulario_lado_derecho">
@@ -59,7 +69,9 @@
                 <div>
                     <ul class="list-group">
                          <li class="list-group-item tabla_lista_cab">Roles
-                            <button type="button" class="btn btn-info"></button>
+                            <button type="button">
+                                <i class="far fa-edit"></i>
+                            </button>
                          </li>
                             <li class="list-group-item tabla_lista_cont">
                                <input type="checkbox" class="estilo_checkbox">
@@ -87,8 +99,7 @@
         <br>
 
         <center>
-        <button type="submit" class="btn btn-outline-primary">Grabar</button>
-        <button type="reset" class="btn btn-outline-primary">Limpiar</button>
+        <button type="submit" class="btn btn-outline-primary">Guardar</button>
         <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
         </center>
 
