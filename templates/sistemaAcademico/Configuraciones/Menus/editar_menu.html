@@ -1,0 +1,76 @@
+
+
+<div class="modal-dialog modal-lg" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <header class="cuadro_titulo">
+            <h4 class="titulo">Configuracion / Registrar Menu</h4>
+            </header>
+
+            <div class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </div>
+
+        </div>
+        <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
+        <div class="modal-body" >
+
+
+         <div class="contenido">
+            <br>
+
+            <label class="texto">Seleccione un modulo:</label>
+
+            <select name="modulo" class="cajatexto">
+            <option selected value="{{menu_actual.id_modulo}}"> {{menu_actual.id_modulo.nombre}} </option>
+            {% for m in modulos %}
+                <option class="cajatexto" value="{{m.id_modulo}}">{{m.nombre}}</option>
+            {% endfor %}
+            </select>
+            <br/>
+
+            <label class="texto">Nombre del menu:</label>
+                <input type="text" name="nom_menu" value="{{menu_actual.descripcion}}" class="cajatexto">
+            <br/>
+
+             <label class="texto">Seleccione Si es submenu o menu principal:</label>
+
+            <select name="num_padre" class="cajatexto">
+                {% if menu_actual.id_padre == 0 %}
+                <option value="0" selected> Menu principal </option>
+                {% else %}
+                <option value="{{menu_actual.id_padre}}" selected>{{menu_actual.id_modulo.nombre}}</option>
+                {% endif %}
+            {% for m in lista_padre %}
+                <option class="cajatexto" value="{{m.id_menu}}">Sub menu de {{m.descripcion}}</option>
+            {% endfor %}
+            </select>
+             <br>
+
+             <label class="texto">Orden:</label>
+                <input type="number" name="orden" class="cajatexto" value="{{menu_actual.orden}}">
+             <br>
+
+             <label class="texto"> Url: </label>
+                <input type="text" name="url"class="cajatexto" value="{{menu_actual.url}}">
+              <br/>
+
+              <div class="botones">
+             <br/>
+             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+
+             <button type="reset" class="btn btn-outline-primary">Resetear</button>
+
+             <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+             </div>
+
+         </div>
+             </div>
+        </form>
+    </div>
+</div>
+
+

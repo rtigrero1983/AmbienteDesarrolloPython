@@ -19,7 +19,6 @@ class ConfUsuarioAdmin(admin.ModelAdmin):
 admin.site.register(ConfUsuario,ConfUsuarioAdmin)
 
 
-
 class ConfEmpresaAdmin(admin.ModelAdmin):
     search_fields = ['nombre','correo','telefono','identificacion']
     list_display = ('id_empresa','nombre','razon_social','id_genr_tipo_identificacion','identificacion','direccion','representante_legal','correo','telefono','fecha_creacion','id_genr_estado')

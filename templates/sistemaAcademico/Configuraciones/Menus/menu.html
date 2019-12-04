@@ -47,7 +47,7 @@
                             <td><strong>{{m.descripcion}}</strong></td>
                             <td><strong>Menu principal</strong></td>
                             <td>
-                               <a href="#" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                               <a href="{% url 'Academico:editar_menu' m.id_menu %}" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
                                <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></a>
                                <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
                           </td>
@@ -65,7 +65,7 @@
                       <td>{{h.descripcion}}</td>
                       <td>Opcion del menu {{h.id_modulo}}</td>
                       <td>
-                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                          <button onclick="abrir_modal('{% url 'Academico:editar_menu' h.id_menu %}')" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></button>
                          <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
                          <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
                       </td>
@@ -103,6 +103,11 @@
 
 
 <div class="modal fade" id="edicion" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="editar_menu" role="dialog">
 
 
 </div>

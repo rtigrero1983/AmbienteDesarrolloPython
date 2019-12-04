@@ -273,21 +273,40 @@ def nuevo_menu(request):
     contexto = {}
     modulos = ConfModulo.objects.all()
     contexto['modulos'] = modulos
+    lista_padre = ConfMenu.objects.filter(id_padre=0)
+    contexto['lista_padre'] = lista_padre
     if request.method == 'POST':
-        var_menu_padre = None
+        var_menu_padre = request.POST.get('num_padre')
+        var_orden = request.POST.get('orden')
         var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
-        lista_padre = ConfMenu.objects.filter(url='#')
+        estado = GenrGeneral.objects.get(idgenr_general=97)
         var_nombre = request.POST.get('nom_menu')
         var_url = request.POST.get('url')
-        for p in lista_padre:
-            if p.id_modulo == var_modulo.id_modulo:
-                menu = ConfMenu(id_modulo=var_modulo, id_padre=p.id_modulo,orden=3,Descripcion=var_nombre,id_genr_estado=97,url=var_url)
-                menu.save()
-                return redirect('Academico:menu')
-    return render (request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html',contexto)
+        menu = ConfMenu(id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
+        menu.save()
+        return redirect('Academico:menu')
+    return render(request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html',contexto)
 
 
 
 
-def editar_menu(request):
-    return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html')
+def editar_menu(request,id):
+    contexto = {}
+    modulos = ConfModulo.objects.all()
+    lista_padre = ConfMenu.objects.filter(id_padre=0)
+    contexto['lista_padre'] = lista_padre
+    contexto['modulos'] = modulos
+    if request.method == 'GET':
+        menu_actual= ConfMenu.objects.get(id_menu = id)
+        contexto['menu_actual'] = menu_actual
+
+    if request.method == 'POST':
+        var_menu_padre = request.POST.get('num_padre')
+        var_orden = request.POST.get('orden')
+        var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
+        estado = GenrGeneral.objects.get(idgenr_general=97)
+        var_nombre = request.POST.get('nom_menu')
+        var_url = request.POST.get('url')
+        menu = ConfMenu(id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
+        menu.save()
+    return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html',contexto)

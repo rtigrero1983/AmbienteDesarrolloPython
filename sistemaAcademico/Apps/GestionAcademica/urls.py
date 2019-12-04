@@ -27,6 +27,7 @@ urlpatterns = [
     path('editar_empresa/', editar_empresa, name='editar_empresa'),
     path('editar_usuario/', editar_usuario, name='editar_usuario'),
     path('editar_rol/', editar_rol, name='editar_rol'),
+    path('editar_menu/<int:id>',editar_menu, name='editar_menu'),
 
     # -----------------------------------------
 
@@ -36,6 +37,7 @@ urlpatterns = [
     path('consultas/',consultas, name='consultas'),
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
+    path('pruebas/',inicio,name='pruebas'),
     #--------------------------------------
 
     path('salir/',salir,name='logout')

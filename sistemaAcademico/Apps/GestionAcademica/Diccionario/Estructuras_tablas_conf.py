@@ -136,3 +136,6 @@ class Conf_rol_permiso(models.Model):
 
     def __int__(self):
         return self.idconf_rol_permiso
+
+    def __int__(self):
+        return self.id_permiso_rol
