@@ -30,8 +30,10 @@ class ConfEmpresa(models.Model):
         verbose_name_plural = 'Empresas',
         db_table = 'conf_empresa'
 
+
     def __str__(self):
         return self.nombre
+
 
 class ConfModulo(models.Model):
         id_modulo = models.AutoField(primary_key=True)
