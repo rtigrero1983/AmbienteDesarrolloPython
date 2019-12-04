@@ -4,19 +4,13 @@
 
     <div class="modal-content">
 
-        <div class="modal-header">
-
-            <header class="cuadro_titulo">
+          <header class="cuadro_titulo">
             <h4 class="titulo">Configuracion / Registrar Menu</h4>
             </header>
 
-            <div class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </div>
-
-        </div>
-        <form class="formulario" action="{% url 'Academico:editar_menu' %}" method="POST"> {% csrf_token %}
+        <form class="formulario" action="{% url 'Academico:editar_menu' menu_actual.id_menu%}" method="POST"> {% csrf_token %}
         <div class="modal-body" >
+
 
 
          <div class="contenido">

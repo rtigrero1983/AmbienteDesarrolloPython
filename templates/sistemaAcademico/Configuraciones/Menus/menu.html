@@ -12,7 +12,7 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu</h4></header>
 
 <br/><br/>
-     <button onclick="abrir_modal('{% url 'Academico:nuevo_menu' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="crear_modal('{% url 'Academico:nuevo_menu' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
 
@@ -79,19 +79,19 @@
 
         var $ = jQuery.noConflict();
 
-        $('#edicion').load(url, function(){
+        $('#crear').load(url, function(){
             $(this).modal('show');
         });
-
     }
 
-       function editar_modal(url){
+     function editar_modal(url){
+
         var $ = jQuery.noConflict();
+
         $('#editar_menu').load(url, function(){
             $(this).modal('show');
         });
     }
-
 
     </script>
 
@@ -101,7 +101,7 @@
 {% block extrajs %}
 
 
-<div class="modal fade" id="edicion" role="dialog">
+<div class="modal fade" id="crear" role="dialog">
 
 
 </div>
