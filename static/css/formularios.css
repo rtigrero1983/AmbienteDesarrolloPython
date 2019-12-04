@@ -161,6 +161,8 @@ input[type=checkbox] {
         height: 300px;
 }
 
+/* ---------------TITULO DE INICIO--------------- */
+
 svg {
     display: block;
     font: 7.5em 'Montserrat';
@@ -209,4 +211,15 @@ svg {
 
 .back-color{
     background-color: black;
+}
+
+/* ---------------LOGO INICIO--------------- */
+
+.pad-logo{
+    padding-left: 5px;
+    padding-top: 10px;
+}
+
+.fond-logo{
+    padding-top: 10px;
 }
