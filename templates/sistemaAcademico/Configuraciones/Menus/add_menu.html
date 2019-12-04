@@ -2,6 +2,51 @@
 
 	{% block contenido_principal %}
 
+
+<div class="modal-dialog modal-lg" role="document">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <header class="cuadro_titulo">
+            <h4 class="titulo">Configuracion / Registrar Menu</h4>
+            </header>
+
+        </div>
+
+        <div class="modal-body" >
+
+             <form class="formulario">
+         <div class="contenido">
+             <br>
+            <label class="texto">
+                Codigo:
+            </label>
+            <input type="text" class="cajatexto">
+             <br/>
+
+            <label class="texto">
+                Nombre:
+            </label>
+            <input type="text" class="cajatexto">
+             <br/>
+         </div>
+             <div class="botones">
+             <br/>
+             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+             <button type="reset" class="btn btn-outline-primary">Resetear</button>
+             <a class="btn btn-outline-primary" href="{% url 'Academico:menu' %}">Cancelar</a>
+             </div>
+     </form>
+
+        </div>
+
+
+    </div>
+
+</div>
+<!--
 <header class="cuadro_titulo">
     <h4 class="titulo">Configuracion / Registrar Menu</h4>
 </header>
@@ -29,5 +74,9 @@
              </div>
      </form>
 
-
+-->
 {% endblock contenido_principal %}
+
+{%  block extrajs %}
+
+{%  endblock extrajs %}
