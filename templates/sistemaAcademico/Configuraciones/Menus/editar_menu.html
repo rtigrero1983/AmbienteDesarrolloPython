@@ -15,7 +15,7 @@
             </div>
 
         </div>
-        <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
+        <form class="formulario" action="{% url 'Academico:editar_menu' %}" method="POST"> {% csrf_token %}
         <div class="modal-body" >
 
 
@@ -51,7 +51,7 @@
              <br>
 
              <label class="texto">Orden:</label>
-                <input type="number" name="orden" class="cajatexto" value="{{menu_actual.orden}}">
+                <input type="number" name="orden" class="cajatexto" value="{{menu_actual.orden}}" readonly>
              <br>
 
              <label class="texto"> Url: </label>

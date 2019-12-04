@@ -45,12 +45,9 @@ def login(request):
 def usuarios(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        usuarios = ConfUsuario.objects.all()
-        # ---crea la paginacion de las tablas
-        paginator = Paginator(usuarios, 5)
-        page = request.GET.get('page')
-        lista_usuarios = paginator.get_page(page)
-        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'lista_usuarios':lista_usuarios})
+        usuarios = ConfUsuario.objects.filter(id_genr_estado=97)
+
+        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html',{'lista_usuarios':usuarios})
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -331,6 +328,6 @@ def editar_menu(request,id):
         estado = GenrGeneral.objects.get(idgenr_general=97)
         var_nombre = request.POST.get('nom_menu')
         var_url = request.POST.get('url')
-        menu = ConfMenu(id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
+        menu = ConfMenu(id_menu=menu_actual, id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
         menu.save()
     return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html',contexto)

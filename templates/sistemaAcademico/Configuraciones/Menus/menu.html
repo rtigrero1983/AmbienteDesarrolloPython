@@ -12,7 +12,7 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu</h4></header>
 
 <br/><br/>
-     <button onclick="abrir_modal('{% url 'Academico:nuevo_menu' %}')" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="abrir_modal('{% url 'Academico:nuevo_menu' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
 
@@ -28,15 +28,8 @@
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                     <th>Modulo</th>
-                      <th>Estado</th>
-                      <th>Nombre del menu</th>
-                      <th>Tipo</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </tfoot>
+
+
                   <tbody>
 
                   {% for m in menu %}
@@ -65,7 +58,7 @@
                       <td>{{h.descripcion}}</td>
                       <td>Opcion del menu {{h.id_modulo}}</td>
                       <td>
-                          <button onclick="abrir_modal('{% url 'Academico:editar_menu' h.id_menu %}')" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></button>
+                          <button onclick="editar_modal('{% url 'Academico:editar_menu' h.id_menu %}')" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></button>
                          <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
                          <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
                       </td>
@@ -82,7 +75,7 @@
   
     <script type="text/javascript">
 
-     function abrir_modal(url){
+     function crear_modal(url){
 
         var $ = jQuery.noConflict();
 
@@ -92,9 +85,15 @@
 
     }
 
-    </script>
+       function editar_modal(url){
+        var $ = jQuery.noConflict();
+        $('#editar_menu').load(url, function(){
+            $(this).modal('show');
+        });
+    }
 
-    
+
+    </script>
 
 {% endblock contenido_principal %}
 
