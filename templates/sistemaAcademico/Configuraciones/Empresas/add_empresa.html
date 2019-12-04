@@ -55,7 +55,7 @@
         <label class="texto">
             Email
         </label>
-        <input type="email"  id="inputEmail3" placeholder="" class="cajatexto"/><br/>
+        <input type="email"  id="inputEmail3" name="correo" placeholder="" class="cajatexto"/><br/>
 
         <label class="texto">
             Telefono
@@ -67,14 +67,7 @@
         </label>
         <input type="date" name="f_creacion" class="cajatexto">
         <br/>
-        <label class="texto">
-            Estado
-        </label>
-        <select  value="estado" name = 'estado' class="cajatexto">
-            {%for est in estados%}
-            <option value="{{est.idgenr_general}}">{{est.nombre}}</option>
-            {%endfor%}
-        </select>
+
 </div>
         <center>
         </br>

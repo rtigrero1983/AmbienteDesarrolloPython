@@ -1,6 +1,11 @@
+import socket
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
+from django.utils import timezone
+
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
 from django.urls import reverse_lazy
 import hashlib
@@ -192,22 +197,32 @@ def nueva_empresa(request):
         contexto['estados'] = estado
 
         if request.method == 'POST':
-
             var_empresa_nombre = request.POST.get('nombre')
             var_rsocial = request.POST.get('rsocial')
             var_tip_ident = GenrGeneral.objects.get(idgenr_general=(int(request.POST.get('tip_ident'))))
             var_ident = request.POST.get('identificacion')
             direccion = request.POST.get('direccion')
             representante_legal = request.POST.get('rlegal')
-            correo = request.POST.get('inputEmail3')
+            correo = request.POST.get('correo')
             telefono = request.POST.get('telefono')
             fecha_creacion = request.POST.get('f_creacion')
-            var_estado = GenrGeneral.objects.get(idgenr_general=(int(request.POST.get('estado'))))
+            nombre_equipo = socket.gethostname()
+            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            menu = ConfMenu.objects.get(id_menu=23)
+            estado = GenrGeneral.objects.get(idgenr_general=97)
+
             empresa = ConfEmpresa(nombre=var_empresa_nombre, razon_social=var_rsocial,
                                   id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
                                   direccion=direccion, representante_legal=representante_legal, correo=correo,
-                                  telefono=telefono, fecha_creacion=fecha_creacion,id_genr_estado=var_estado)
+                                  telefono=telefono, fecha_creacion=fecha_creacion, id_genr_estado=estado,
+                                  fecha_ingreso=timezone.now(),
+                                  usuario_ing=usuario.usuario, terminal_ing=str(nombre_equipo))
             empresa.save()
+
+            historial = GenrHistorial(modulo="Configuraciones", accion="Crear", usuario_mod=usuario.usuario,
+                                      terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu=menu)
+            historial.save()
+
             return redirect('Academico:empresas')
 
 
@@ -269,7 +284,8 @@ def nuevo_usuario(request):
                 h = hashlib.new("sha1")
                 var_contra = str.encode(var_contra)
                 h.update(var_contra)
-                usuario = ConfUsuario(usuario=var_usuario,clave=h.hexdigest(),id_persona=tipo_persona,id_genr_tipo_usuario=tipo_usuario,id_rol=rol,id_genr_estado=estado)
+                usuario = ConfUsuario(usuario=var_usuario,clave=h.hexdigest(), id_persona=tipo_persona,
+                                      id_genr_tipo_usuario=tipo_usuario, id_rol=rol, id_genr_estado=estado)
                 usuario.save()
                 return redirect('Academico:usuarios')
             else:
@@ -279,8 +295,33 @@ def nuevo_usuario(request):
     else:
         return HttpResponseRedirect('../')
 
+
 def editar_usuario(request):
+    usuario=ConfUsuario.objects.get(id_usuario=id)
+    permiso = GenrGeneral.objects.filter(tipo='TUS')
+    rol = ConfRol.objects.get(id_rol=int(request.POST.get('rol')))
+    contexto = {}
+    usuario.fecha_creacion = usuario.fecha_creacion.strftime('%Y-%m-%d')
+    contexto['empresa'] = usuario
+    contexto['permiso'] = permiso
+    estado = GenrGeneral.objects.get(idgenr_general=97)
+
+    if request.method == 'POST':
+        var_usuario = request.POST.get('usuario')
+        var_contra = request.POST.get('contrasenia')
+        conf_contra = request.POST.get('contrasenia2')
+        tipo_persona = MantPersona.objects.get(id_persona=int(request.POST.get('persona')))
+        tipo_usuario = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('tipousuario')))
+
+
+        usuario = ConfUsuario(usuario=var_usuario, contrasenia=var_contra,
+                              contrasenia2=conf_contra, persona=tipo_persona,
+                              id_genr_tipo_usuario=tipo_usuario, id_rol=rol, id_genr_estado=estado)
+        usuario.save()
+        return redirect('Academico:usuario')
+
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html')
+
 
 def nuevo_rol(request):
     return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
