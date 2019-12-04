@@ -39,21 +39,24 @@
                   </tfoot>
                   <tbody>
 
-                  {% for m in menu_padre %}
-                    <tr>
-                      <td><strong>{{m.id_modulo}}</strong></td>
-                      <td><strong>{{m.id_genr_estado}}</strong></td>
-                      <td><strong>{{m.descripcion}}</strong></td>
-                      <td><strong>Menu principal</strong></td>
-                      <td>
-                         <a href="#" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></a>
-                         <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
-                      </td>
+                  {% for m in menu %}
+                     {% if m.id_padre == 0 %}
+                          <tr>
+                            <td><strong>{{m.id_modulo}}</strong></td>
+                            <td><strong>{{m.id_genr_estado}}</strong></td>
+                            <td><strong>{{m.descripcion}}</strong></td>
+                            <td><strong>Menu principal</strong></td>
+                            <td>
+                               <a href="#" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                               <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></a>
+                               <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
+                          </td>
                     </tr>
+                      {% endif %}
+                    
                   {% endfor %}
 
-                  {% for h in menu_hijo %}
+                  {% for h in menu %}
 
                   {% if h.id_padre != 0 %}
                   <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
@@ -62,12 +65,13 @@
                       <td>{{h.descripcion}}</td>
                       <td>Opcion del menu {{h.id_modulo}}</td>
                       <td>
-                          <a  class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
+                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
                          <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
                          <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
                       </td>
                   </tr>
                   {% endif %}
+
                   {% endfor %}
 
                   </tbody>
@@ -75,6 +79,27 @@
               </div>
             </div>
 
+  
+    <script type="text/javascript">
+
+     function abrir_modal(url){
+
+        var $ = jQuery.noConflict();
+
+        $('#edicion').load(url, function(){
+            $(this).modal('show');
+        });
+
+    }
+
+    </script>
+
+    
+
+{% endblock contenido_principal %}
+
+
+{% block extrajs %}
 
 
 <div class="modal fade" id="edicion" role="dialog">
@@ -82,25 +107,11 @@
 
 </div>
 
-{% endblock contenido_principal %}
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
 
+ 
 
-{% block extrajs %}
-
-    <script type="text/javascript">
-
-    function abrir_modal(url){
-        var $ = Jquery.noConflict();
-        $('#edicion').load(url, function(){
-
-            $(this).modal('show');
-
-        });
-
-    }
-    </script>
-
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+  </script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 

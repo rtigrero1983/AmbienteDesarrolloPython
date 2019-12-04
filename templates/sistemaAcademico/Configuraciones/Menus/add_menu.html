@@ -1,6 +1,3 @@
-{% extends 'sistemaAcademico/inicio.html' %}
-
-	{% block contenido_principal %}
 
 
 <div class="modal-dialog modal-lg" role="document">
@@ -12,71 +9,50 @@
             <header class="cuadro_titulo">
             <h4 class="titulo">Configuracion / Registrar Menu</h4>
             </header>
+            
+            <div class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </div>
 
         </div>
 
         <div class="modal-body" >
 
-             <form class="formulario">
+    <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
          <div class="contenido">
-             <br>
-            <label class="texto">
-                Codigo:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
+            <br>
+            <label for="">Seleccione un modulo:</label>
 
-            <label class="texto">
-                Nombre:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
-         </div>
-             <div class="botones">
+            <select name="modulo" class="cajatexto">
+            <option selected>Elija tipo de Modulo</option>
+            {% for m in modulos %}
+                <option class="cajatexto" value="{{m.id_modulo}}">{{m.nombre}}</option>
+            {% endfor %}
+            </select>
+            <br/>
+
+            <label class="texto">Nombre del menu:</label>
+                <input type="text" id="nom_menu" name="nom_menu" class="cajatexto">
+            <br/>
+
+             <label class="texto">Url:</label>
+                <input type="text" name="url" id="url" class="cajatexto">
+              <br/>
+
+              <div class="botones">
              <br/>
              <button type="submit" class="btn btn-outline-primary">Guardar</button>
+
              <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <a class="btn btn-outline-primary" href="{% url 'Academico:menu' %}">Cancelar</a>
+
+             <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
              </div>
+
+         </div>
      </form>
 
         </div>
-
-
     </div>
-
 </div>
-<!--
-<header class="cuadro_titulo">
-    <h4 class="titulo">Configuracion / Registrar Menu</h4>
-</header>
-     <br/>
-     <form class="formulario">
-         <div class="contenido">
-             <br>
-            <label class="texto">
-                Codigo:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
 
-            <label class="texto">
-                Nombre:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
-         </div>
-             <div class="botones">
-             <br/>
-             <button type="submit" class="btn btn-outline-primary">Guardar</button>
-             <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <a class="btn btn-outline-primary" href="{% url 'Academico:menu' %}">Cancelar</a>
-             </div>
-     </form>
 
--->
-{% endblock contenido_principal %}
-
-{%  block extrajs %}
-
-{%  endblock extrajs %}

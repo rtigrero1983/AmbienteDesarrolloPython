@@ -73,7 +73,7 @@ class ConfMenu(models.Model):
         verbose_name = 'Menu',
         verbose_name_plural = 'Menu',
         db_table = 'conf_menu'
-
+        
 
     def __str__(self):
         return self.descripcion

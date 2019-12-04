@@ -15,10 +15,15 @@
 
             <li class="nav-item">
 
+                    {% if menu_p.id_menu.id_padre == 0  %}
+                    
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
                          <i class="fas fa-fw fa-cog"></i>
-                         <span> {{menu_p.id_menu.descripcion}} </span>
+                         <span> {{menu_p.id_modulo.nombre}} </span>
                     </a>
+
+                    {% endif %}
+                    
 
                 <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
@@ -26,9 +31,9 @@
 
                         <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.id_menu.descripcion}} {% endblock cab_sub_menu%}</h6>
 
-                        {% for menu_h in menu_hijo %}
-                                 {%  if menu_p.id_menu.id_menu == menu_h.id_padre %}
-                                 <a class="collapse-item" href="{% url menu_h.url %}" id="item" >{{menu_h.descripcion}}</a>
+                        {% for menu_h in permisos %}
+                                 {%  if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
+                                      <a class="collapse-item" href="{% url menu_h.id_menu.url %}" id="item" >{{menu_h.id_menu.descripcion}}</a>
                                  {% endif %}
                         {% endfor %}
 
@@ -45,6 +50,12 @@
 
 <!-- Dentro de este bloque ira el contenido principal de la pagina -->
 {% block contenido_principal %}
+
+{% for m in permisos %}
+
+<label>{{m.id_permiso_rol}}</label>
+
+{% endfor %}
 
 <div class="cuadro_titulo_pag_inicio">
     <svg viewBox="0 150 960 300">

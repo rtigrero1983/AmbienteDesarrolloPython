@@ -84,8 +84,12 @@ def perfiles(request):
 
 def menu(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
+    contexto = {}
     if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html')
+
+            menu = ConfMenu.objects.filter(id_genr_estado = 97)
+            contexto['menu'] = menu
+            return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',contexto)
     else:
         return HttpResponseRedirect('../')
     #----------------------------------------------------------------
@@ -248,9 +252,7 @@ def nuevo_usuario(request):
                 usuario.save()
                 return redirect('Academico:usuarios')
             else:
-                contexto['error'] = 'se murio el scannor :"v'
-
-
+                contexto['error'] = 'No se pudo encontrar el usuario'
 
         return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html',contexto)
     else:
@@ -265,8 +267,27 @@ def nuevo_rol(request):
 def editar_rol(request):
     return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html')
 
+
+
 def nuevo_menu(request):
-    return render (request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html')
+    contexto = {}
+    modulos = ConfModulo.objects.all()
+    contexto['modulos'] = modulos
+    if request.method == 'POST':
+        var_menu_padre = None
+        var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
+        lista_padre = ConfMenu.objects.filter(url='#')
+        var_nombre = request.POST.get('nom_menu')
+        var_url = request.POST.get('url')
+        for p in lista_padre:
+            if p.id_modulo == var_modulo.id_modulo:
+                menu = ConfMenu(id_modulo=var_modulo, id_padre=p.id_modulo,orden=3,Descripcion=var_nombre,id_genr_estado=97,url=var_url)
+                menu.save()
+                return redirect('Academico:menu')
+    return render (request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html',contexto)
+
+
+
 
 def editar_menu(request):
     return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html')
