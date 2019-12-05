@@ -171,7 +171,6 @@ def nueva_empresa(request):
         estado = GenrGeneral.objects.filter(tipo='STA')
         contexto['tip_ident'] = tip_ident
         contexto['estados'] = estado
-
         if request.method == 'POST':
             var_empresa_nombre = request.POST.get('nombre')
             var_rsocial = request.POST.get('rsocial')
@@ -200,8 +199,6 @@ def nueva_empresa(request):
             historial.save()
 
             return redirect('Academico:empresas')
-
-
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
     else:
         return HttpResponseRedirect('../')
@@ -228,10 +225,18 @@ def editar_empresa(request,id):
                                       id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
                                       direccion=direccion, representante_legal=representante_legal, correo=correo,
                                       telefono=telefono, fecha_creacion=fecha_creacion,id_genr_estado=estado)
-
                 empresa.save()
                 return redirect('Academico:empresas')
     return render(request, 'sistemaAcademico/Configuraciones/Empresas/Editar_empresa.html',contexto)
+def eliminar_empresa(request,id):
+    empresas = ConfEmpresa.objects.get(id_empresa=id)
+    inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    if request.method == 'POST':
+        empresas.id_genr_estado = inactivo
+        empresas.save()
+        return redirect('Academico:empresas')
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'menu': empresas})
+
 
 def nuevo_usuario(request):
     if 'usuario' in request.session:
@@ -244,9 +249,7 @@ def nuevo_usuario(request):
         contexto['lista_personas'] = persona
         contexto['genr_general'] = permiso
         contexto['estados'] = estado
-
         if request.method == 'POST':
-
             var_usuario = request.POST.get('usuario')
             var_contra = request.POST.get('contrasenia')
             conf_contra = request.POST.get('contrasenia2')
@@ -254,8 +257,6 @@ def nuevo_usuario(request):
             tipo_usuario = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('tipousuario')))
             estado = GenrGeneral.objects.get(idgenr_general=int(request.POST.get('estado')))
             rol = ConfRol.objects.get(id_rol=int(request.POST.get('rol')))
-
-
             if var_contra == conf_contra:
                 h = hashlib.new("sha1")
                 var_contra = str.encode(var_contra)
@@ -317,8 +318,6 @@ def nuevo_rol(request):
 def editar_rol(request):
     return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html')
 
-
-
 def nuevo_menu(request):
     contexto = {}
     modulos = ConfModulo.objects.all()
@@ -336,9 +335,6 @@ def nuevo_menu(request):
         menu.save()
         return redirect('Academico:menu')
     return render(request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html',contexto)
-
-
-
 
 def editar_menu(request,id):
     contexto = {}
