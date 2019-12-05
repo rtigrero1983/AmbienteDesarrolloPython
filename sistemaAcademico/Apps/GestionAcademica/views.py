@@ -1,23 +1,18 @@
 import socket
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.utils import timezone
-
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
-from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
-from django.urls import reverse_lazy
 import hashlib
 from django.core.paginator import Paginator
 
-# Create your views here.
+
 
 def base(request):
     return render(request,'base/base.html')
 
 def inicio(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         return render(request, 'sistemaAcademico/inicio.html', {'usu':request.session.get('usuario')})
     else:
@@ -33,34 +28,31 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
-            # select * from conf_usuario where id_genr_estado = 97 (ESTADO ACTIVO)
             if usu:
-                contexto['usuario_logeado']= usu
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
-
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-                print(h.hexdigest())
-
     return render(request,'base/login.html',contexto)
 
 
-#Vistas del modulo de Configuraciones---------------------
+def salir(request):
+    del request.session['usuario']
+    return HttpResponseRedirect('../')
+
+
+
 def usuarios(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         usuarios = ConfUsuario.objects.filter(id_genr_estado=97)
 
         return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html',{'lista_usuarios':usuarios})
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
 
 
 
 def roles(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         roles= ConfRol.objects.all()
         # ---crea la paginacion de las tablas
@@ -70,16 +62,15 @@ def roles(request):
         return render(request,'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': lista_roles})
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 
 
 def perfiles(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/perfiles.html')
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 
 
 
@@ -98,17 +89,11 @@ def menu(request):
 
 
 def modulo(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        modulos= ConfModulo.objects.all()
-        # ---crea la paginacion de las tablas
-        paginator = Paginator(modulos, 5)
-        page = request.GET.get('page')
-        lista_modulos= paginator.get_page(page)
-        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html', {'lista_modulos': lista_modulos})
+        modulos= ConfModulo.objects.filter(id_genr_estado=97)
+        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html',{'modulos':modulos})
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
 
 
 def acciones(request):
@@ -122,11 +107,7 @@ def acciones(request):
 #Modulo de Mantenimiento -----------------------------------
 def empresas(request):
     if 'usuario' in request.session:
-        empresas= ConfEmpresa.objects.filter(id_genr_estado=97)
-        # ---crea la paginacion de las tablas
-        paginator = Paginator(empresas, 10)
-        page = request.GET.get('page')
-        lista_empresa = paginator.get_page(page)
+        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97)
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('../')
@@ -134,7 +115,7 @@ def empresas(request):
 
 #------------------------Vistas del modulo de Admision--------------------------------------------
 def mantenimientoPersonas(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
+
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/admision_personas.html')
     else:
@@ -143,48 +124,43 @@ def mantenimientoPersonas(request):
 
 
 def movimientos(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
+
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/movimientos.html')
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 
 
 def consultas(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
+
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/consultas.html')
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 
 
 def procesos(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
+
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/procesos.html')
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 
 
 def reportes(request):
-    #-----Valida si la sesion sigue activa sino regresa al login.html
+
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/reportes.html')
     else:
         return HttpResponseRedirect('../')
-    #----------------------------------------------------------------
+
 #-------------------------------------------------------------------------------------------
 
 
 
-#-------------------------Salir de la sesion------------------------------------------------
-def salir(request):
-    del request.session['usuario']
-    return HttpResponseRedirect('../')
-#-------------------------------------------------------------------------------------------
 
 #-------------------------crear y editar ------------------------------------
 
@@ -323,6 +299,18 @@ def editar_usuario(request):
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html')
 
 
+def nuevo_modulo(request):
+    if request.method == 'POST':
+        var_codigo = request.POST.get('Codigo')
+        var_nombre = request.POST.get('nombre')
+        activo = GenrGeneral.objects.get(idgenr_general=97)
+        modulo = ConfModulo(codigo=var_codigo,nombre=var_nombre,id_genr_estado=activo)
+        modulo.save()
+        return redirect('Academico:modulo')
+
+    return render(request,'sistemaAcademico/Configuraciones/Modulos/add_modulo.html')
+    
+
 def nuevo_rol(request):
     return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
 
@@ -358,10 +346,8 @@ def editar_menu(request,id):
     lista_padre = ConfMenu.objects.filter(id_padre=0)
     contexto['lista_padre'] = lista_padre
     contexto['modulos'] = modulos
-
-    if request.method == 'GET':
-        menu_actual= ConfMenu.objects.get(id_menu = id)
-        contexto['menu_actual'] = menu_actual
+    menu_actual= ConfMenu.objects.get(id_menu = id)
+    contexto['menu_actual'] = menu_actual
 
     if request.method == 'POST':
         var_menu_padre = request.POST.get('num_padre')
@@ -369,8 +355,22 @@ def editar_menu(request,id):
         var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
         estado = GenrGeneral.objects.get(idgenr_general=97)
         var_nombre = request.POST.get('nom_menu')
+        var_icono=request.POST.get('icono')
         var_url = request.POST.get('url')
-        menu = ConfMenu(id_menu=menu_actual, id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
+        menu = ConfMenu(id_menu=id,id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url,icono=var_icono)
         menu.save()
+        return redirect('Academico:menu')
 
     return render(request, 'sistemaAcademico/Configuraciones/Menus/editar_menu.html',contexto)
+
+def eliminar_menu(request,id):
+    menu = ConfMenu.objects.get(id_menu = id)
+    inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    if request.method == 'POST':
+        menu.id_genr_estado = inactivo
+        menu.save()
+        return redirect('Academico:menu')
+    return render(request,'sistemaAcademico/Configuraciones/Menus/eliminar_menu.html',{'menu':menu})
+
+
+    

@@ -12,8 +12,8 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
 
 <br/><br/>
-     <a href="{% url 'Academico:nueva_empresa' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
-</a>
+     <button onclick="crear_modal('{% url 'Academico:nueva_empresa' %}')" class="btn btn-outline-primary"><span class="glyphicon glyphicon-plus"></span>nuevo
+</button>
 <br/><br/>
 
 <div class="card-body">
@@ -45,7 +45,7 @@
                         <td><strong>{{em.correo}}</strong></td>
                         <td><strong>{{em.id_genr_estado}}</strong></td>
                       <td>
-                         <a href="{% url 'Academico:editar_empresa' em.id_empresa %}" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
+                         <button  onclick="crear_modal('{% url 'Academico:editar_empresa' em.id_empresa %}')"  class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
                          <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
                       <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
                       </td>
@@ -89,47 +89,59 @@
         {% endif %}
     </span>
 </div>-->
-            </div>
+</div>
 
+
+    
+
+    <script>
+
+     function crear_modal(url){
+
+        var $ = jQuery.noConflict();
+
+        $('#crear_empresa').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+
+     function crear_modal(url){
+
+        var $ = jQuery.noConflict();
+
+        $('#editar_empresa').load(url, function(){
+            $(this).modal('show');
+        });
+    }
+    
+    </script>
+
+  
 
 
 {% endblock contenido_principal %}
 
 
+  
+
 {% block extrajs %}
 
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+  <div class="modal fade" id="crear_empresa" role="dialog">
+    
+  </div>
+
+
+  <div class="modal fade" id="editar_empresa" role="dialog">
+    
+  </div>
+
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
+
+ 
+
+  </script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-
-    <script>
-    $(document).ready(function (){
-      var table = $('#dataTable').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    },
-    ....
-});
-}
-);
-    </script>
 
 {% endblock extrajs %}
 

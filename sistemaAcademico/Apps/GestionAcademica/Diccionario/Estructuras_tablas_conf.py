@@ -70,6 +70,7 @@ class ConfMenu(models.Model):
     descripcion = models.CharField(max_length=45, blank=False, null=False, db_column='descripcion')
     id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,db_column='id_genr_estado')
     url = models.CharField(blank=False,null=False, max_length=60)
+    icono = models.CharField(max_length=50,blank=False,null=False)
 
     class Meta:
         verbose_name = 'Menu',

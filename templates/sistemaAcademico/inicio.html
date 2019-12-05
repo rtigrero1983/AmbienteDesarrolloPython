@@ -18,7 +18,7 @@
                     {% if menu_p.id_menu.id_padre == 0  %}
                     
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
-                         <i class="fas fa-fw fa-cog"></i>
+                         <i class="{{menu_p.id_menu.icono}}"></i>
                          <span> {{menu_p.id_modulo.nombre}} </span>
                     </a>
 
@@ -29,11 +29,14 @@
 
                     <div class="collapse-inner rounded" id="submenu_configuracion">
 
-                        <h6 class="collapse-header">{% block cab_sub_menu %} {{menu_p.id_menu.descripcion}} {% endblock cab_sub_menu%}</h6>
+                        <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.id_menu.descripcion}}{% endblock cab_sub_menu%}</h6>
 
                         {% for menu_h in permisos %}
                                  {%  if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
-                                      <a class="collapse-item" href="{% url menu_h.id_menu.url %}" id="item" >{{menu_h.id_menu.descripcion}}</a>
+                                      
+                                      <a class="collapse-item" href="{% url menu_h.id_menu.url %}" id="item">
+                                      <i class="{{menu_h.id_menu.icono}}"></i>
+                                      {{menu_h.id_menu.descripcion}}</a>
                                  {% endif %}
                         {% endfor %}
 

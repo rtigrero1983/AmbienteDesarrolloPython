@@ -1,33 +1,34 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+                 <form class="formulario" method="POST" action="{% url 'Academico:nuevo_modulo' %}">{% csrf_token %}
+                    <div class="modal-body" >
+                    <header class="cuadro_titulo">
+                    <h4 class="titulo">Configuracion / Registrar Modulo</h4>
+                    </header>
 
-	{% block contenido_principal %}
-
-<header class="cuadro_titulo">
-    <h4 class="titulo">Configuracion / Registrar Modulo</h4>
-</header>
-     <br/>
-     <form class="formulario">
-         <div class="contenido">
-             <br>
-            <label class="texto">
-                Codigo:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
-
-            <label class="texto">
-                Nombre:
-            </label>
-            <input type="text" class="cajatexto">
-             <br/>
-         </div>
-             <div class="botones">
-             <br/>
-             <button type="submit" class="btn btn-outline-primary">Guardar</button>
-             <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <a class="btn btn-outline-primary" href="{% url 'Academico:modulo' %}">Cancelar</a>
-             </div>
-     </form>
+                     <div class="contenido">
+                         <br>
+                        <label class="texto">
+                            Codigo:
+                        </label>
+                        <input type="text" name="Codigo" class="cajatexto">
+                         <br/>
+            
+                        <label class="texto">
+                            Nombre:
+                        </label>
+                        <input type="text" name="nombre" class="cajatexto">
+                         <br/>
+                     </div>
+                         <div class="botones">
+                         <br/>
+                         <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                         <button type="reset" class="btn btn-outline-primary">Resetear</button>
+                         <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                         </div>
+                 </div>
+                 </form>
+    </div>
+</div>
 
 
-{% endblock contenido_principal %}
