@@ -46,49 +46,15 @@
                         <td><strong>{{em.id_genr_estado}}</strong></td>
                       <td>
                          <button  onclick="crear_modal('{% url 'Academico:editar_empresa' em.id_empresa %}')"  class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
+                         <button  onclick="eliminar_modal('{% url 'Academico:eliminar' em.id_empresa %}')"class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></button>
                       <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
                       </td>
                     </tr>
                   {% endfor %}
 
-              <!---    {% for h in menu_hijo %}
-
-                  {% if h.id_padre != 0 %}
-                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
-                      <td>{{h.id_modulo}}</td>
-                      <td>{{h.id_genr_estado}}</td>
-                      <td>{{h.descripcion}}</td>
-                      <td>Opcion del menu {{h.id_modulo}}</td>
-                      <td>
-                          <a href="#" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></a>
-                         <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="fas fa-arrow-right"></i> </a>
-                      </td>
-                  </tr>
-                  {% endif %}
-                  {% endfor %}-->
-
                   </tbody>
                 </table>
               </div>
-    <!--<div class="pagination">
-    <span class="step-links">
-        {% if lista_empresa.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ lista_empresa.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Pagina {{ lista_empresa.number }} de {{ lista_empresa.paginator.num_pages }}.
-        </span>
-
-        {% if lista_empresa.has_next %}
-            <a href="?page={{ lista_empresa.next_page_number }}">next</a>
-            <a href="?page={{ lista_empresa.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>-->
 </div>
 
 
@@ -113,6 +79,14 @@
             $(this).modal('show');
         });
     }
+     function eliminar_modal(url){
+
+        var $ = jQuery.noConflict();
+
+        $('#eliminar_empresa').load(url, function(){
+            $(this).modal('show');
+        });
+    }
     
     </script>
 
@@ -129,7 +103,9 @@
   <div class="modal fade" id="crear_empresa" role="dialog">
     
   </div>
+ <div class="modal fade" id="eliminar_empresa" role="dialog">
 
+  </div>
 
   <div class="modal fade" id="editar_empresa" role="dialog">
     
