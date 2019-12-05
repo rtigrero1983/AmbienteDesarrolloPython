@@ -214,12 +214,18 @@ svg {
 }
 
 /* ---------------LOGO INICIO--------------- */
+.fond-logo{
+    height: 70px;
+    width: 220px;
+
+}
 
 .pad-logo{
-    padding-left: 5px;
+    padding-left: 20px;
     padding-top: 10px;
 }
 
-.fond-logo{
+.pad-texto-logo{
+    padding-left: 5px;
     padding-top: 10px;
 }
