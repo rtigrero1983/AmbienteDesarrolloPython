@@ -37,6 +37,7 @@
               <div class="col-lg-8">
                 <div class="p-5">
                   <div class="text-center">
+                      <img src="static/img/logo-login.png" width="70px" height="70px">
                     <h1 class="h4 text-gray-900 mb-4">{% block Mensaje_login %} Inicio de sesion {% endblock Mensaje_login %}</h1>
                   </div>
 
@@ -64,26 +65,21 @@
 
             <form method="POST" class="user">{% csrf_token %}
                 <div class="form-group">
-                      <input type="text" name="usu" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="ingrese nombre de usuario...">
+                      <input type="text" name="usu" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Usuario">
                     </div>
                     <div class="form-group">
-                      <input type="password" name="pass" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" name="pass" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                     <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        <label class="custom-control-label" for="customCheck">Recordar sesion</label>
                     </div>
                 </div>
                 <input type="submit" class="btn btn-primary btn-user btn-block " value="Ingresar" >
            
                     <hr>
-                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                      <i class="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a>
+
             </form>
 
                   <hr>
