@@ -7,7 +7,7 @@
 </header>
 <br/>
 
-     <a href="" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <a href="{% url 'Academico:add_permiso' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Nuevo
 </a>
 <br/><br/>
 </table>
@@ -15,25 +15,24 @@
 <tr class="success">
 <td>Id</td>
 <td>Menu</td>
-<td>Usuario</td>
 <td>Modulo</td>
 <td>estado</td>
     <td>Acciones</td>
 </tr>
-{% for p in permisos %}
+{% for p in permiso %}
 <tr>
 <td>{{ p.id_permiso }}</td>
-<td>{{ p.id_menu }}</td>
 <td>{{ p.id_modulo }}</td>
+<td>{{ p.id_menu }}</td>
 <td>{{ p.id_genr_estado}}</td>
 
-	<td class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></td>
-		<td class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span></td>
+    <td><a href="{% url 'Academico:editar_permiso' p.id_permiso %}" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
+
+
 </tr>
 {% endfor %}
 </table>
 {% endblock contenido_principal %}
-
 
 
 
