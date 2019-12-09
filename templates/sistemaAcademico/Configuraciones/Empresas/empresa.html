@@ -1,13 +1,18 @@
-{% extends 'sistemaAcademico/inicio.html' %}
 {% load staticfiles %}
+{% extends "sistemaAcademico/inicio.html" %}
 
-  {% block extracss %}
+{% block modulo %}
+  
+{% endblock modulo %}
 
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
+    {% block extracss %}
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
   {% endblock extracss %}
 
-                  {% block contenido_principal %}
+{% block contenido_principal %}
+  
+
 
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
 
@@ -89,16 +94,9 @@
     }
     
     </script>
+  {% endblock contenido_principal %}
 
-  
-
-
-{% endblock contenido_principal %}
-
-
-  
-
-{% block extrajs %}
+  {% block extrajs %}
 
   <div class="modal fade" id="crear_empresa" role="dialog">
     
@@ -112,13 +110,18 @@
   </div>
 
   <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
-
  
 
   </script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+    
+  {% endblock extrajs %}
 
-{% endblock extrajs %}
+  
+
+
+
+
 
 

@@ -64,7 +64,7 @@ class ConfRol(models.Model):
 
 class ConfMenu(models.Model):
     id_menu = models.AutoField(primary_key=True)
-    id_modulo = models.ForeignKey(ConfModulo,on_delete=models.CASCADE, db_column='id_modulo')
+    id_modulo = models.ForeignKey(ConfModulo,on_delete=models.CASCADE, db_column='id_modulo', related_name="fk_menu_modulo")
     id_padre = models.IntegerField(blank=False,null=False)
     orden = models.IntegerField(blank=False, null=False)
     descripcion = models.CharField(max_length=45, blank=False, null=False, db_column='descripcion')

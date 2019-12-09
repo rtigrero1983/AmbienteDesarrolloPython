@@ -8,51 +8,34 @@
         <div class="modal-body" >
 
             <header class="cuadro_titulo">
-            <h4 class="titulo">Configuracion / Registrar Menu</h4>
+            <h4 class="titulo">Configuracion | Registrar Menu</h4>
             </header>
 
-
-   
          <div class="contenido">
-            <br>
-
-            <label class="texto">Seleccione un modulo:</label>
-
-            <select name="modulo" class="cajatexto">
-            <option selected> Elija tipo de Modulo </option>
-            {% for m in modulos %}
-                <option class="cajatexto" value="{{m.id_modulo}}">{{m.nombre}}</option>
-            {% endfor %}
-            </select>
             <br/>
 
-            <label class="texto">Nombre del menu:</label>
-                <input type="text" name="nom_menu" class="cajatexto">
+            <label class="texto">Nombre del menu: </label>
+                <input type="text" name="nom_menu" id="nom_menu" class="cajatexto">
             <br/>
 
-             <label class="texto">Seleccione Si es submenu o menu principal:</label>
+            <label class="texto">Url: </label>
+                <input type="text" name="url" id="url" class="cajatexto">
+            <br/>
 
-            <select name="num_padre" class="cajatexto">
-            <option value="0"> Menu principal </option>
-            {% for m in lista_padre %}
-                <option class="cajatexto" value="{{m.id_menu}}">Sub menu de {{m.descripcion}}</option>
-            {% endfor %}
-            </select>
-             <br>
 
-             <label class="texto">Orden:</label>
-                <input type="number" name="orden" class="cajatexto">
-             <br>
+            <label class="texto">Icono: </label>
+                <input type="text" name="icono" id="icono" class="cajatexto">
+            <br/>
 
-             <label class="texto"> Url: </label>
-                <input type="text" value="#" name="url"class="cajatexto" placeholder="Ejemplo: 'Academico:pruebas' ">
-              <br/>
+            <label class="texto">Path: </label>
+                <input type="text" name="path" id="path" class="cajatexto">
+            <br/>
+
+            
 
         <div class="botones">
              <br/>
              <button type="submit" class="btn btn-outline-primary">Guardar</button>
-
-             <button type="reset" class="btn btn-outline-primary">Resetear</button>
 
              <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
              </div>

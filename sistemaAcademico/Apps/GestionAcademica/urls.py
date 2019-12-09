@@ -1,13 +1,13 @@
 from django.urls import path
 from .views import *
 
+
 urlpatterns = [
 
     path('',login,name='login'),
     path('salir/',salir,name='logout'),
     path('base/',base, name='base'),
     path('inicio/',inicio,name='inicio'),
-    #Opciones del modulo de Configuaciones:
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
@@ -16,7 +16,7 @@ urlpatterns = [
     path('acciones/',acciones,name='acciones'),
     #path('permisos/', permisos, name='permisos'),
     path('empresas/', empresas, name='empresas'),
-    #----------------------------------------
+
 
 
     #Opciones para el modulo de Admision
@@ -32,9 +32,9 @@ urlpatterns = [
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
-    path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
+    path('nuevo_menu/',nuevo_menu, name='nuevo_menu'),
     path('nuevo_modulo/', nuevo_modulo, name='nuevo_modulo'),
-    path('add_permiso/',add_permiso,name='add_permiso'),
+    path('add_permiso/',add_permiso, name='add_permiso'),
     # ---------------------------------
 
     # -------------EDICION---------------------

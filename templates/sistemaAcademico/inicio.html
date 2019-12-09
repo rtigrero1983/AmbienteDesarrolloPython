@@ -15,27 +15,27 @@
 
             <li class="nav-item">
 
-                    {% if menu_p.id_menu.id_padre == 0 %}
+                    {% if menu_p.id_padre == 0 and menu_p.url == '#'%}
                     
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
-                         <i class="{{menu_p.id_menu.icono}}"></i>
-                         <span> {{menu_p.id_modulo.nombre}} </span>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
+                         <i class="{{menu_p.icono}}"></i>
+                         <span> {{menu_p.descripcion}} </span>
                     </a>
 
                     {% endif %}
                     
 
-                <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
                     <div class="collapse-inner rounded" id="submenu_configuracion">
 
-                        <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.id_menu.descripcion}}{% endblock cab_sub_menu%}</h6>
+                        <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>
 
                         {% for menu_h in permisos %}
-                                 {%  if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
-                                      <a class="collapse-item" href="{% url menu_h.id_menu.url %}" id="item">
-                                      <i class="{{menu_h.id_menu.icono}}"></i>
-                                      {{menu_h.id_menu.descripcion}}</a>
+                                 {%  if menu_p.id_menu == menu_h.id_padre %}
+                                      <a class="collapse-item" href="{% url menu_h.url %}" id="item">
+                                      <i class="{{menu_h.icono}}"></i>
+                                      {{menu_h.descripcion}}</a>
                                  {% endif %}
                         {% endfor %}
 
@@ -58,6 +58,13 @@
 <label>{{m.id_permiso_rol}}</label>
 
 {% endfor %}
+  
+
+<div id="contenido">
+  
+
+
+
 
 <div class="cuadro_titulo_pag_inicio">
     <svg viewBox="0 150 960 300">
@@ -107,9 +114,36 @@
   </a>
 </div>
 </div>
+
+</div>
+
+
+  <script type="text/javascript">
+
+    function ver_pagina(direct){
+      var $ = jQuery.noConflict();
+      $.ajax({
+        url: direct,
+        type: 'GET',
+        dataType: 'html',
+        success: function(resp){
+            $('#contenido').html(resp);
+        }
+      });
+    }
+    
+
+    function Cargando(){
+
+      $('#contenido').text('procesando peticion');
+
+    }
+
+    </script>
+
 {% endblock contenido_principal %}
 <!-- ************************************************************** -->
-
+ 
 
 
 {% block pie_de_pagina %}

@@ -1,31 +1,25 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends "sistemaAcademico/inicio.html" %}
 {% load staticfiles %}
 
-  {% block extracss %}
 
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
-  {% endblock extracss %}
 
 {% block contenido_principal %}
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu</h4></header>
+
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu </h4></header>
 
 <br/><br/>
-     <button onclick="crear_modal('{% url 'Academico:nuevo_menu' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="crear_modal('{% url 'Academico:nuevo_menu'  %} ')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
 
 <div class="card-body">
 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' onloadeddata="traducir()">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25'>
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Modulo</th>
-                      <th>Estado</th>
                       <th>Nombre del menu</th>
-                      <th>Tipo</th>
                       <th>Url</th>
                       <th>Icono</th>
                       <th>Acciones</th>
@@ -38,12 +32,8 @@
                   {% for m in menu %}
                      {% if m.id_padre == 0 %}
                           <tr>
-                            <td><strong>{{m.id_menu}}</strong></td>
-                            <td><strong>{{m.id_modulo}}</strong></td>
-                            <td><strong>{{m.id_genr_estado}}</strong></td>
                             <td><strong>{{m.descripcion}}</strong></td>
-                            <td><strong>Menu principal</strong></td>
-                            <td><strong>{{m.url}}</strong></td>
+                            <td><strong>No requerido</strong></td>
                             <td><strong>{{m.icono}}</strong></td>
                             <td>
                                <button onclick="editar_modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
@@ -60,12 +50,9 @@
                   {% for h in menu %}
 
                   {% if h.id_padre != 0 %}
+
                   <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="false">
-                      <td><strong>{{h.id_modulo}}</strong></td>
-                      <td>{{h.id_modulo}}</td>
-                      <td>{{h.id_genr_estado}}</td>
                       <td>{{h.descripcion}}</td>
-                      <td>Opcion del menu {{h.id_modulo}}</td>
                       <td>{{h.url}}</td>
                       <td>{{h.icono}}</td>
                       <td>
@@ -119,11 +106,12 @@
 
     </script>
 
+
+
+  
 {% endblock contenido_principal %}
 
-
 {% block extrajs %}
-
 
 <div class="modal fade" id="crear" role="dialog">
 
@@ -137,19 +125,19 @@
 
 <div class="modal fade" id="eliminar_menu" role="dialog">
 
-
-</div>
-
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
-
- 
-
-  </script>
-  
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 
 
 {% endblock extrajs %}
+
+
+
+
+
+</div>
+
+
 
 

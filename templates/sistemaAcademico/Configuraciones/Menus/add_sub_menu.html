@@ -1,0 +1,11 @@
+{% extends "sistemaAcademico/inicio.html" %}
+
+
+{% block contenido_principal %}
+
+		{% for m in menu  %}
+			<label>{{m.id_menu}}</label>
+			
+		{% endfor %}
+	
+{% endblock contenido_principal %}
