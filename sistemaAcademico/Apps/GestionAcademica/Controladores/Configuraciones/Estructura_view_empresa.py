@@ -5,9 +5,12 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
 
+
+
 def empresas(request):
     if 'usuario' in request.session:
-        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97)
+        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values()
+        print(lista_empresa)
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('../')
