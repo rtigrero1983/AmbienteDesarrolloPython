@@ -9,8 +9,7 @@ import socket
 
 def empresas(request):
     if 'usuario' in request.session:
-        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values()
-        print(lista_empresa)
+        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values('id_empresa','nombre','identificacion','representante_legal','correo','direccion','telefono')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('../')
@@ -18,10 +17,9 @@ def empresas(request):
 def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}
-        tip_ident = GenrGeneral.objects.filter(tipo='TID')
-        estado = GenrGeneral.objects.filter(tipo='STA')
+        tip_ident = GenrGeneral.objects.filter(tipo='TID').values('idgenr_general','nombre')
         contexto['tip_ident'] = tip_ident
-        contexto['estados'] = estado
+
         if request.method == 'POST':
             var_empresa_nombre = request.POST.get('nombre')
             var_rsocial = request.POST.get('rsocial')
@@ -37,17 +35,15 @@ def nueva_empresa(request):
             menu = ConfMenu.objects.get(id_menu=23)
             estado = GenrGeneral.objects.get(idgenr_general=97)
 
-            empresa = ConfEmpresa(nombre=var_empresa_nombre, razon_social=var_rsocial,
+            empresa = ConfEmpresa.objects.create(nombre=var_empresa_nombre, razon_social=var_rsocial,
                                   id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
                                   direccion=direccion, representante_legal=representante_legal, correo=correo,
                                   telefono=telefono, fecha_creacion=fecha_creacion, id_genr_estado=estado,
                                   fecha_ingreso=timezone.now(),
                                   usuario_ing=usuario.usuario, terminal_ing=str(nombre_equipo))
-            empresa.save()
 
-            historial = GenrHistorial(modulo="Configuraciones", accion="Crear", usuario_mod=usuario.usuario,
+            historial = GenrHistorial.objects.create(modulo="Configuraciones", accion="Crear", usuario_mod=usuario.usuario,
                                       terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu=menu)
-            historial.save()
 
             return redirect('Academico:empresas')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
@@ -88,4 +84,4 @@ def eliminar_empresa(request,id):
         empresas.id_genr_estado = inactivo
         empresas.save()
         return redirect('Academico:empresas')
-    return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'menu': empresas})
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'empresa': empresas})

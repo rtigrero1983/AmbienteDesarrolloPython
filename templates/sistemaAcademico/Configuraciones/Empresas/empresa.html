@@ -4,7 +4,7 @@
 
 
 
-    {% block extracss %}
+  {% block extracss %}
     <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
   {% endblock extracss %}
 
@@ -30,7 +30,6 @@
                       <th>Direccion</th>
                       <th>telefono</th>
                       <th>Correo</th>
-                        <th>Estado</th>
                         <th>Acciones</th>
 
                     </tr>
@@ -46,7 +45,6 @@
                       <td><strong>{{em.direccion}}</strong></td>
                         <td><strong>{{em.telefono}}</strong></td>
                         <td><strong>{{em.correo}}</strong></td>
-                        <td><strong>{{em.id_genr_estado}}</strong></td>
                       <td>
                          <button  onclick="crear_modal('{% url 'Academico:editar_empresa' em.id_empresa %}')"  class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
                          <button  onclick="eliminar_modal('{% url 'Academico:eliminar' em.id_empresa %}')"class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></button>
@@ -61,58 +59,27 @@
 </div>
 
 
-    
-
-    <script>
-
-     function crear_modal(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#crear_empresa').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-
-     function crear_modal(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#editar_empresa').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-     function eliminar_modal(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#eliminar_empresa').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-    
-    </script>
   {% endblock contenido_principal %}
 
   {% block extrajs %}
 
-  <div class="modal fade" id="crear_empresa" role="dialog">
+
+  <div class="modal fade" id="modal_crear" role="dialog">
     
   </div>
- <div class="modal fade" id="eliminar_empresa" role="dialog">
+ <div class="modal fade" id="modal_eliminar" role="dialog">
 
   </div>
 
-  <div class="modal fade" id="editar_empresa" role="dialog">
+  <div class="modal fade" id="modal_editar" role="dialog">
     
   </div>
 
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
- 
-
-  </script>
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
+
     
   {% endblock extrajs %}
 
