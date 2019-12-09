@@ -18,8 +18,21 @@ def nuevo_modulo(request):
         var_codigo = request.POST.get('Codigo')
         var_nombre = request.POST.get('nombre')
         activo = GenrGeneral.objects.get(idgenr_general=97)
-        modulo = ConfModulo(codigo=var_codigo,nombre=var_nombre,id_genr_estado=activo)
-        modulo.save()
+        modulo = ConfModulo.objects.create(codigo=var_codigo,nombre=var_nombre,id_genr_estado=activo)
         return redirect('Academico:modulo')
 
     return render(request,'sistemaAcademico/Configuraciones/Modulos/add_modulo.html')
+
+def editar_modulo(request,id):
+    modulo = ConfModulo.objects.get(id_modulo=id);
+    contexto = {}
+    contexto['modulo'] =  modulo
+    if request.method == 'POST':
+        var_codigo = request.POST.get('codigo')
+        var_nombre = request.POST.get('nom_modulo')
+
+
+    return render(request,'sistemaAcademico/Configuraciones/Modulos/editar_modulo.html',contexto)
+
+def eliminar_modulo(request,id):
+    return render(request,'sistemaAcademico/Configuraciones/Modulos/eliminar_modulo.html')

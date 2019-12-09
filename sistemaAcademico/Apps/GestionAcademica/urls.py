@@ -43,6 +43,8 @@ urlpatterns = [
     path('editar_rol/', editar_rol, name='editar_rol'),
     path('editar_menu/<int:id>',editar_menu, name='editar_menu'),
     path('editar_permiso/<int:id>',editar_permiso,name='editar_permiso'),
+    path('editar_modulo/<int:id>',editar_modulo,name='editar_modulo'),
+    path('eliminar_modulo/<int:id>',eliminar_modulo,name='eliminar_modulo'),
     # -----------------------------------------
 
     #------------ELIMINACION----------------------
