@@ -49,8 +49,9 @@ urlpatterns = [
 
     #------------ELIMINACION----------------------
     path('eliminar_registro/<int:id>',eliminar_menu,name='eliminar_menu'),
-    path('eliminar/<int:id>', eliminar_empresa, name='eliminar')
+    path('eliminar/<int:id>', eliminar_empresa, name='eliminar'),
     #---------------------------------------------
+    path('Pantalla_principal/',pantalla_principal,name='pantalla_principal')
     
 
 

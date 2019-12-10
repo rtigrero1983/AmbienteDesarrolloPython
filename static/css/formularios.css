@@ -21,7 +21,19 @@
 }
 
 .contenido{
+ padding-left: 30px;
+ padding-top: 30px;
 
+}
+
+.div_cont{
+    width: auto;
+    height: auto;
+
+
+}
+iframe{
+    overflow: hidden;
 }
 
 .texto{
