@@ -22,7 +22,14 @@ def base(request):
 
 def inicio(request):
     if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/inicio.html', {'usu':request.session.get('usuario')})
+        contexto = {}
+        permiso = ConfMenu.objects.filter(
+            fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).values(
+            'descripcion', 'url', 'id_padre', 'id_menu', 'icono').order_by('orden')
+        usuario = ConfUsuario.objects.get_or_create(id_usuario=request.session.get('usuario'))
+        contexto['permisos'] = permiso
+        contexto['info_usuario'] = usuario
+        return render(request, 'sistemaAcademico/inicio.html', contexto)
     else:
         return HttpResponseRedirect('../')
 
