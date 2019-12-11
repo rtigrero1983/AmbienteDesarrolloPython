@@ -22,6 +22,13 @@
   {% endblock extracss %}
   <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/formularios.css' %}" />
+    <script>
+        function redireccionar(url){
+        var iframe = document.getElementById('iframe');
+        console.log(url);
+        iframe.src = url;
+        }
+    </script>
 </head>
 
 <body id="page-top" >
