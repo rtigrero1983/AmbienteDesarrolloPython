@@ -22,13 +22,7 @@
   {% endblock extracss %}
   <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/formularios.css' %}" />
-    <script>
-        function redireccionar(url){
-        var iframe = document.getElementById('iframe');
-        console.log(url);
-        iframe.src = url;
-        }
-    </script>
+
 </head>
 
 <body id="page-top" >
@@ -378,7 +372,35 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
+
   <script src="{% static 'js/modales.js'%}"></script>
+  <script src="{% static 'js/blockUi.js'%}"></script>
+
+      <script>
+         function mascaraObloqueo(){
+		 $.blockUI({
+		 message:'<strong>Procesando información... <img src="{% static 'img/carga.gif' %}" width="50" height="50"> <strong>',
+		 css: {
+            border: 'none',
+            padding: '15px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .5,
+            color: '#fff'
+        } });
+
+        setTimeout($.unblockUI, 3000);
+	}
+
+
+        function redireccionar(url){
+        mascaraObloqueo();
+        var iframe = document.getElementById('iframe');
+        console.log(url);
+        iframe.src = url;
+        }
+    </script>
 
 {% block extrajs %}
 {% endblock extrajs %}
