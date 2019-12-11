@@ -33,7 +33,7 @@
 
                         {% for menu_h in permisos %}
                                  {%  if menu_p.id_menu == menu_h.id_padre %}
-                                      <a class="collapse-item" onclick="" href="{% url menu_h.url %}" id="item">
+                                      <a class="collapse-item" onclick=""  id="item">
                                       <i class="{{menu_h.icono}}"></i>
                                       {{menu_h.descripcion}}</a>
                                  {% endif %}
@@ -53,12 +53,18 @@
 <!-- Dentro de este bloque ira el contenido principal de la pagina -->
 {% block contenido_principal %}
     <div class="div_cont">
-        <iframe src="{% url 'Academico:pantalla_principal' %}"  frameborder="0" width="100%" height="100%"  scrolling="no"></iframe>
+        <iframe id="iframe" src="{% url 'Academico:pantalla_principal' %}"  frameborder="0" width="100%" height="100%"  scrolling="no"></iframe>
     </div>
 {% endblock contenido_principal %}
 <!-- ************************************************************** -->
- 
 
+<script>
+    function redireccionar(url){
+        var iframe = document.getElementById('iframe');
+        console.log('los datos son: '+url);
+        iframe.src = url;
+    }
+</script>
 
 {% block pie_de_pagina %}
 
