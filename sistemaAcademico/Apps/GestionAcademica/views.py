@@ -40,7 +40,8 @@ def salir(request):
     del request.session['usuario']
     return HttpResponseRedirect('../')
 
-
+def pantalla_principal(request):
+    return render(request,'sistemaAcademico/Pantalla_principal.html')
 
 def usuarios(request):
     if 'usuario' in request.session:

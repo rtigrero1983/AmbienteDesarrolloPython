@@ -12,7 +12,7 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Modulos</h4></header>
 
 <br/><br/>
-     <button onclick="crear_modulo('{% url 'Academico:nuevo_modulo' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="crear_modal('{% url 'Academico:nuevo_modulo' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
 
@@ -37,8 +37,8 @@
                       <td><strong>{{em.nombre}}</strong></td>
                         <td><strong>{{em.id_genr_estado}}</strong></td>
                       <td>
-                         <a href="#" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
+                         <button onclick="editar_modal('{% url 'Academico:editar_modulo' em.id_modulo  %} ')" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
+                         <button onclick="eliminar_modal('{% url 'Academico:eliminar_modulo' em.id_modulo %} ')" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></button>
                       <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
                       </td>
                     </tr>
@@ -53,58 +53,17 @@
             </div>
 
   
-    <script>
-
-
-     function crear_modulo(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#crear-modulo').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-
-     function editar_modal(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#editar_modulo').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-
-     function eliminar_modal(url){
-
-        var $ = jQuery.noConflict();
-
-        $('#eliminar_modulo').load(url, function(){
-            $(this).modal('show');
-        });
-    }
-
-
-    </script>
 
 {% endblock contenido_principal %}
 
 
 {% block extrajs %}
 
-  <div class="modal fade" id="crear-modulo" role="dialog">
 
+<div class="modal fade" id="modal_crear" role="dialog"></div>
+<div class="modal fade" id="modal_eliminar" role="dialog"></div>
+<div class="modal fade" id="modal_editar" role="dialog"></div>
 
-</div>
-
-<div class="modal fade" id="editar_modulo" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="eliminar_modulo" role="dialog">
-
-
-</div>
 
   <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
 
