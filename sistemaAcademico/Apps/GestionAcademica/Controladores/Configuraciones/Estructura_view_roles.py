@@ -48,6 +48,7 @@ def editar_rol(request, id):
 def eliminar_rol(request, id):
     if 'usuario' in request.session:
         roles = ConfRol.objects.get(id_rol=id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
         if request.method == 'POST':
             roles.id_genr_estado = 98
             roles.save()
