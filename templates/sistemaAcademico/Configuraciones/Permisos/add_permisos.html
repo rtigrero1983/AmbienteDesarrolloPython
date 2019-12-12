@@ -1,0 +1,61 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+
+	{% block contenido_principal %}
+
+<header class="cuadro_titulo">
+    <h4 class="titulo">Configuracion / Registrar Permiso</h4>
+</header>
+     <br/>
+     <form class="formulario" method="POST">{% csrf_token %}
+         <div class="contenido">
+
+             <label class="texto">
+                Modulo:
+            </label>
+               <select name="modulo" class="cajatexto">
+                    <option selected>Elija el modulo de este permiso</option>
+                    {% for mod in modulo %}
+                    <option class="cajatexto" value="{{mod.id_modulo}}"> {{mod.nombre}} </option>
+                    {% endfor %}
+            </select>
+             <br/>
+
+
+            <label class="texto">
+                Menu:
+            </label>
+
+             <select name="menu" class="cajatexto">
+                    <option selected>Elija el menu de este permiso</option>
+                    {% for menu in menu %}
+                    <option class="cajatexto" value="{{menu.id_menu}}"> {{menu.descripcion}} </option>
+                    {% endfor %}
+            </select>
+
+
+             <br/>
+
+
+
+             <label class="texto">
+                Estado:
+            </label>
+           <select name="estado" class="cajatexto">
+                    <option value="">Elija un estado</option>
+                    {% for est in estado %}
+                    <option class="cajatexto" value="{{est.idgenr_general}}"> {{est.nombre}} </option>
+                    {% endfor %}
+                </select>
+
+             <br/>
+         </div>
+             <div class="botones">
+             <br/>
+             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+             <button type="reset" class="btn btn-outline-primary">Resetear</button>
+             <a class="btn btn-outline-primary" href="{% url 'Academico:perfiles' %}">Cancelar</a>
+             </div>
+     </form>
+
+
+{% endblock contenido_principal %}

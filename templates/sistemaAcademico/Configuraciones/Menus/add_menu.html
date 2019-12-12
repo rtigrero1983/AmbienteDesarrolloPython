@@ -1,0 +1,49 @@
+
+
+<div class="modal-dialog modal-lg" role="document">
+
+    <div class="modal-content">
+
+        <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
+        <div class="modal-body" >
+
+            <header class="cuadro_titulo">
+            <h4 class="titulo">Configuracion | Registrar Menu</h4>
+            </header>
+
+         <div class="contenido">
+            <br/>
+
+            <label class="texto">Nombre del menu: </label>
+                <input type="text" name="nom_menu" id="nom_menu" class="cajatexto">
+            <br/>
+
+            <label class="texto">Url: </label>
+                <input type="text" name="url" id="url" class="cajatexto">
+            <br/>
+
+
+            <label class="texto">Icono: </label>
+                <input type="text" name="icono" id="icono" class="cajatexto">
+            <br/>
+
+            <label class="texto">Path: </label>
+                <input type="text" name="path" id="path" class="cajatexto">
+            <br/>
+
+            
+
+        <div class="botones">
+             <br/>
+             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+
+             <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+             </div>
+
+         </div>
+             </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,45 @@
+{% extends 'sistemaAcademico/inicio.html' %}
+
+	{% block contenido_principal %}
+
+<header class="cuadro_titulo">
+    <h3>Configuracion / Permisos</h3>
+</header>
+<br/>
+
+     <a href="{% url 'Academico:add_permiso' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Nuevo
+</a>
+<br/><br/>
+</table>
+<table class="table table-striped">
+<tr class="success">
+<td>Id</td>
+<td>Menu</td>
+<td>Modulo</td>
+<td>estado</td>
+    <td>Acciones</td>
+</tr>
+{% for p in permiso %}
+<tr>
+<td>{{ p.id_permiso }}</td>
+<td>{{ p.id_modulo }}</td>
+<td>{{ p.id_menu }}</td>
+<td>{{ p.id_genr_estado}}</td>
+
+    <td><a href="{% url 'Academico:editar_permiso' p.id_permiso %}" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
+
+
+</tr>
+{% endfor %}
+</table>
+{% endblock contenido_principal %}
+
+
+
+
+
+
+
+
+
+

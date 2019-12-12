@@ -1,0 +1,30 @@
+{% extends "sistemaAcademico/inicio.html" %}
+
+
+		
+{% block contenido_principal %}
+	
+	<table>
+		<thead>
+			<th>
+				<td>id_menu</td>
+				<td>descripcion</td>
+				<td>id_permiso</td>
+				<td>estado</td>
+			</th>
+		</thead>
+		<tbody>
+			{% for m in menu %}
+		
+			<tr>
+				<td>{{m.id_menu_id}}</td>
+				<td>{{m.url}}</td>
+				<td>{{m.descripcion}}</td>
+				<td>{{m.icono}}</td>
+				<td>{{m.id_padre}}</td>	
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	
+{% endblock contenido_principal %}
