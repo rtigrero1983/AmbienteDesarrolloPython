@@ -1,6 +1,18 @@
 {% extends 'sistemaAcademico/inicio.html' %}
 {% load staticfiles %}
 
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+{% block modulo %}
+
+{% endblock modulo %}
+
+{% block encabezado %}
+
+{% endblock encabezado %}
+
   {% block extracss %}
 
          <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
@@ -9,10 +21,10 @@
 
                   {% block contenido_principal %}
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Usuario</h4></header>
 
 <br/><br/>
-     <a href="{% url 'Academico:nuevo_rol' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <a href="{% url 'Academico:nuevo_usuario' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </a>
 <br/><br/>
 
@@ -41,8 +53,8 @@
                         <td><strong>{{u.id_genr_estado}}</strong></td>
 
                       <td>
-                         <a href="#" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></a>
+                         <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></a>
                       <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
                       </td>
                     </tr>

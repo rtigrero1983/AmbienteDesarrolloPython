@@ -1,34 +1,22 @@
 {% extends 'sistemaAcademico/inicio.html' %}
 
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+
 {% block contenido_principal %}
 <header class="cuadro_titulo">
 		<h4 class="titulo">Configuracion / Editar Usuario</h4>
 </header>
     <br>
-    <form class="formulario" method="POST" >{% csrf_token %}
+    <form class="formulario" method="POST" action="{% url 'Academico:editar_usuario' usuario.id_usuario %}">{% csrf_token %}
         <br>
 
         <label class="texto">
             Nombre de Usuario:
         </label>
-            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario" value="text" readonly="readonly">
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        </br>
-        <label class="texto">
-            Contraseña:
-        </label>
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true" value="text" readonly="readonly">
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        </br>
-        <label class="texto">
-            Confirmar Contraseña:
-        </label>
-
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true" value="text" readonly="readonly">
+            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario" value="{{usuario.usuario}}">
             <button type="button" class="btn">
                 <i class="far fa-edit"></i>
             </button>
@@ -53,14 +41,17 @@
             Tipo de Usuario:
         </label>
                 <select name="tipousuario" class="cajatexto">
-                    <option selected value="">Elija tipo de usuario</option>
-                    {% for genr in genr_general %}
-                    <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
+                    <option selected value="{{ usuario.id_genr_tipo_usuario }}">{{ usuario.id_genr_tipo_usuario.nombre }}</option>
+                    {% for genr in permiso %}
+                         {% if usuario.id_genr_tipo_usuario.nombre != genr.nombre %}
+                             <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
+                         {% endif %}
                     {% endfor %}
                 </select>
             <button type="button" class="btn">
                 <i class="far fa-edit"></i>
             </button>
+        </br>
         </br>
 
         <div class="formulario_lado_derecho">
@@ -72,23 +63,33 @@
                             <button type="button">
                                 <i class="far fa-edit"></i>
                             </button>
+
                          </li>
+                         {% for r in roles %}
                             <li class="list-group-item tabla_lista_cont">
-                               <input type="checkbox" class="estilo_checkbox">
+                               <input type="checkbox" value="{{r.id_rol}}" class="estilo_checkbox">
                                 <label>
-                                    Prueba
+                                    {{r.id_rol}}
+
                                 </label>
                             </li>
+                         {% endfor %}
+
                     </ul>
                 </div>
                 <div>
                     <ul class="list-group">
                          <li class="list-group-item tabla_lista_cab">Descripcion</li>
+                         {% for rd in roles%}
                             <li class="list-group-item tabla_lista_cont">
+
                                 <center>
-                                    Prueba
+                                    {{ rd.nombre }}
                                 </center>
+
                             </li>
+
+                         {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -100,6 +101,7 @@
 
         <center>
         <button type="submit" class="btn btn-outline-primary">Guardar</button>
+            <button type="reset" class="btn btn-outline-primary">Resetear</button>
         <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
         </center>
 
