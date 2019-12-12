@@ -40,7 +40,7 @@ urlpatterns = [
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
     path('editar_usuario/', editar_usuario, name='editar_usuario'),
-    path('editar_rol/', editar_rol, name='editar_rol'),
+    path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:id>',editar_menu, name='editar_menu'),
     path('editar_permiso/<int:id>',editar_permiso,name='editar_permiso'),
     path('editar_modulo/<int:id>',editar_modulo,name='editar_modulo'),
@@ -50,6 +50,7 @@ urlpatterns = [
     #------------ELIMINACION----------------------
     path('eliminar_registro/<int:id>',eliminar_menu,name='eliminar_menu'),
     path('eliminar/<int:id>', eliminar_empresa, name='eliminar'),
+    path('eliminar_rol/<int:id>', eliminar_rol, name='eliminar_rol'),
     #---------------------------------------------
     path('Pantalla_principal/',pantalla_principal,name='pantalla_principal')
     

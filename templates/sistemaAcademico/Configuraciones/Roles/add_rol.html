@@ -1,31 +1,31 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
 
-	{% block contenido_principal %}
+        <header class="cuadro_titulo">
+            <h4 class="titulo">Configuracion / Registrar Rol</h4>
+        </header>
 
-<header class="cuadro_tirulo">
-<h4 class="titulo">Configuracion / Registrar Rol</h4>
-</header>
+        <br/>
+        <form action="{% url 'Academico:nuevo_rol' %}" class="formulario" method="POST">{% csrf_token %}
+            <div class="modal-body">
+                <label class="texto">
+                    Codigo:
+                </label>
+                <input class="cajatexto" name="codigo" type="text" value="{{ roles.codigo }}">
 
-     <br/>
-     <form class="formulario">
-
-         <label class="texto">
-             Codigo:
-         </label>
-            <input type="text" class="cajatexto">
-         <br/>
-         <label class="texto">
-             Nombre:
-         </label>
-            <input type="text" class="cajatexto">
-         <br/>
-             <div class="botones">
-                <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                <button type="reset" class="btn btn-outline-primary">Resetear</button>
-                <a class="btn btn-outline-primary" href="{% url 'Academico:rol' %}">Cancelar</a>
-             </div>
-
-     </form>
-
-
-{% endblock contenido_principal %}
+                <br/>
+                <label class="texto">
+                    Nombre:
+                </label>
+                <input class="cajatexto" name="nombre" type="text">
+                <br/>
+                <br/>
+                <div class="botones">
+                    <button class="btn btn-outline-primary" type="submit">Guardar</button>
+                    <button class="btn btn-outline-primary" type="reset">Resetear</button>
+                    <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

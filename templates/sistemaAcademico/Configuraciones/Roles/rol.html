@@ -4,93 +4,80 @@
 {% endblock sidebar %}
 {% block encabezado %}
 {% endblock encabezado %}
-  {% block extracss %}
+{% block extracss %}
 
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
-  {% endblock extracss %}
+{% endblock extracss %}
 
-                  {% block contenido_principal %}
+{% block contenido_principal %}
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
+<header class="cuadro_titulo"><h4 class="title"> Configuracion | Roles </h4></header>
 
 <br/><br/>
-     <a href="{% url 'Academico:nuevo_rol' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
-</a>
+<button class="btn btn-outline-primary" id="registrar" onclick="crear_modal('{% url 'Academico:nuevo_rol'  %} ')"><span
+        class="glyphicon glyphicon-plus"></span>nuevo
+</button>
 <br/><br/>
 
 <div class="card-body">
-  <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Codigo</th>
-                      <th>Nombre</th>
-                        <th>Acciones</th>
+    <div class="table-responsive">
+        <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
+            <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
 
-                    </tr>
-                  </thead>
+            </tr>
+            </thead>
 
-                  <tbody>
+            <tbody>
 
-                  {% for em in lista_roles %}
-                    <tr>
-                      <td><strong>{{em.codigo}}</strong></td>
-                      <td><strong>{{em.nombre}}</strong></td>
+            {% for em in lista_roles %}
+            <tr>
+                <td><strong>{{em.codigo}}</strong></td>
+                <td><strong>{{em.nombre}}</strong></td>
 
-                      <td>
-                         <a href="#" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="#" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></a>
-                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
-                      </td>
-                    </tr>
-                  {% endfor %}
+                <td>
+    <button class="btn-info btn-circle"
+            onclick="editar_modal('{% url 'Academico:editar_rol' em.id_rol %}')" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i>
+    </button>
+    <button class="btn btn-danger btn-circle"
+            onclick="eliminar_modal('{% url 'Academico:eliminar_rol' em.id_rol %}')" title="Eliminar {{em.nombre}}"><i
+            class="fas fa-trash"></i></button>
+    <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+                </td>
+            </tr>
+            {% endfor %}
 
-                  </tbody>
-                </table>
-              </div>
+            </tbody>
+        </table>
+    </div>
 
-            </div>
-
+</div>
 
 
 {% endblock contenido_principal %}
 
 
 {% block extrajs %}
+<div class="modal fade" id="modal_crear" role="dialog">
 
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 
-    <script>
-    $(document).ready(function (){
-      var table = $('#dataTable').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-    },
-    ....
-});
-}
-);
-    </script>
+</div>
+
+<div class="modal fade" id="modal_editar" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_eliminar" role="dialog">
+</div>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 
 {% endblock extrajs %}
 

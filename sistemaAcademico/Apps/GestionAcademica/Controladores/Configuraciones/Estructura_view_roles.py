@@ -1,22 +1,57 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render,redirect
-from django.utils import timezone
+from django.shortcuts import render, redirect
+
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
-import socket
 
 
 def roles(request):
     if 'usuario' in request.session:
-        roles= ConfRol.objects.all()
-        return render(request,'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': roles})
+        roles = ConfRol.objects.filter(id_genr_estado=97)
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': roles})
     else:
         return HttpResponseRedirect('../')
 
 
 def nuevo_rol(request):
-    return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
+    if 'usuario' in request.session:
+
+        if request.method == 'POST':
+            codigo = request.POST.get('codigo')
+            nombre = request.POST.get('nombre')
+            ConfRol.objects.create(codigo=codigo, nombre=nombre,id_genr_estado=97 )
+            return redirect('Academico:roles')
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
+    else:
+        return HttpResponseRedirect('../')
 
 
-def editar_rol(request):
-    return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html')
+def editar_rol(request, id):
+    if 'usuario' in request.session:
+        contexto = {}
+        roles = ConfRol.objects.get(id_rol=id)
+
+        contexto['roles'] = roles
+
+        if request.method == 'POST':
+            nombre = request.POST.get('nombre')
+            codigo = request.POST.get('codigo')
+            print(codigo)
+            save = ConfRol(id_rol=id, codigo=codigo, nombre=nombre, id_genr_estado=97)
+            save.save()
+            return redirect('Academico:roles')
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html', contexto)
+    else:
+        return HttpResponseRedirect('../')
+
+
+def eliminar_rol(request, id):
+    if 'usuario' in request.session:
+        roles = ConfRol.objects.get(id_rol=id)
+        if request.method == 'POST':
+            roles.id_genr_estado = 98
+            roles.save()
+            return redirect('Academico:roles')
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/eliminar_rol.html', {'roles': roles})
+    else:
+        return HttpResponseRedirect('../')
