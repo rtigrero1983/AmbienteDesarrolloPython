@@ -53,6 +53,7 @@ class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     codigo = models.CharField(max_length=10, blank=False, null=False)
     nombre = models.CharField(max_length=45, blank=False, null=False)
+    id_genr_estado = models.IntegerField(blank=False, null=False,db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Rol',
