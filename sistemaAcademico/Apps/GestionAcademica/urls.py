@@ -7,6 +7,7 @@ urlpatterns = [
     path('',login,name='login'),
     path('salir/',salir,name='logout'),
     path('base/',base, name='base'),
+
     path('inicio/',inicio,name='inicio'),
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),
@@ -20,12 +21,14 @@ urlpatterns = [
 
 
     #Opciones para el modulo de Admision
-    path('mantenimiento_personas/',mantenimientoPersonas,name='mantenimientoPersonas'),
+    path('mantenimiento_personas/',mantenimientoPersonas,name='Personas'),
     path('movimientos/',movimientos, name='movimientos'),
     path('consultas/',consultas, name='consultas'),
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     #--------------------------------------
+
+
 
 
     # ----------------REGISTROS--------------

@@ -1,6 +1,4 @@
 {% extends "sistemaAcademico/inicio.html" %}
-{% load staticfiles %}
-
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
@@ -17,7 +15,7 @@
 
 <div class="card-body">
 <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25'>
+                <table class="table table-bordered" id="dataTable" width="100%" data-sort="false" cellspacing="0" data-page-length='25'>
                   <thead>
                     <tr>
                       <th>Nombre del menu</th>
@@ -89,9 +87,7 @@
 
 <div class="modal fade" id="modal_eliminar" role="dialog">
 
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
 
 
 {% endblock extrajs %}
