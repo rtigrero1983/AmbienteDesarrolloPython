@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -10,4 +10,4 @@ def acciones(request):
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/acciones.html')
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')

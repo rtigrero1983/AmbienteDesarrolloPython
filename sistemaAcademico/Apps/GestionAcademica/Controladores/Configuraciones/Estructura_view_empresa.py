@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -12,8 +12,7 @@ def empresas(request):
         lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values('id_empresa','nombre','identificacion','representante_legal','correo','direccion','telefono')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
-        return HttpResponseRedirect('../')
-
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}
@@ -48,7 +47,7 @@ def nueva_empresa(request):
             return redirect('Academico:empresas')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 
 def editar_empresa(request,id):

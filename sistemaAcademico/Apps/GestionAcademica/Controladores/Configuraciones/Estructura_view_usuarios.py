@@ -1,5 +1,5 @@
 import socket
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 import hashlib
@@ -12,7 +12,7 @@ def usuarios(request):
         usuarios = ConfUsuario.objects.filter(id_genr_estado=97)
         return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html',{'lista_usuarios':usuarios})
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 
 def editar_usuario(request,id):
@@ -74,4 +74,4 @@ def nuevo_usuario(request):
 
         return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html',contexto)
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')

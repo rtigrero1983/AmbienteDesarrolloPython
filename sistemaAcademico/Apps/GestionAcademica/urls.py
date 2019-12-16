@@ -55,8 +55,12 @@ urlpatterns = [
     path('eliminar/<int:id>', eliminar_empresa, name='eliminar'),
     path('eliminar_rol/<int:id>', eliminar_rol, name='eliminar_rol'),
     #---------------------------------------------
-    path('Pantalla_principal/',pantalla_principal,name='pantalla_principal')
-    
+    path('Pantalla_principal/',pantalla_principal,name='pantalla_principal'),
+#--------------timeout-------
+    path('timeout/', timeout, name='timeout'),
+path('inicio/'+'timeout/', timeout, name='timeout_inicio'),
+
+
 
 
 ]

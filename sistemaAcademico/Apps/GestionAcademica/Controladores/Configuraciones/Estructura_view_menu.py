@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -16,7 +16,7 @@ def menu(request):
             #print(contexto)
             return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',contexto)
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 #--------------------------------
 

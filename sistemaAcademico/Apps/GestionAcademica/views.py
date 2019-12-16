@@ -31,7 +31,7 @@ def inicio(request):
         contexto['info_usuario'] = usuario
         return render(request, 'sistemaAcademico/inicio.html', contexto)
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponseRedirect('timeout/')
 
 
 def login(request):
@@ -59,4 +59,7 @@ def salir(request):
 
 def pantalla_principal(request):
     return render(request,'sistemaAcademico/Pantalla_principal.html')
+
+def timeout(request):
+    return render(request, 'sistemaAcademico/timeout.html')
 

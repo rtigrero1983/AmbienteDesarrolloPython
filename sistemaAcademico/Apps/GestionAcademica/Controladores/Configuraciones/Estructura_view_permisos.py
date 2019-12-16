@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -13,7 +13,7 @@ def perfiles(request):
         permiso=ConfPermiso.objects.filter(id_genr_estado=97).values()
         return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',{'permiso': permiso})
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 
 def add_permiso(request):
@@ -36,7 +36,7 @@ def add_permiso(request):
 
         return render(request, 'sistemaAcademico/Configuraciones/Permisos/add_permisos.html',contexto)
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 
 

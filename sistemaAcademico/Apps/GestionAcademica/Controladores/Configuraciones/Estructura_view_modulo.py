@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -10,7 +10,7 @@ def modulo(request):
         modulos= ConfModulo.objects.filter(id_genr_estado=97)
         return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html',{'modulos':modulos})
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
 
 def nuevo_modulo(request):
