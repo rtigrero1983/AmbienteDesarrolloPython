@@ -42,8 +42,8 @@ admin.site.register(ConfRol,ConfRolAdmin)
 
 
 class ConfMenuAdmin(admin.ModelAdmin):
-    search_fields = ['nombre','codigo','descripcion','id_genr_estado']
-    list_display = ('id_menu','id_modulo','id_padre','orden','descripcion','id_genr_estado','url',)
+    search_fields = ['nombre','codigo','descripcion','id_genr_estado','view']
+    list_display = ('id_menu','id_modulo','id_padre','orden','descripcion','id_genr_estado','url','lazy_name','name','view')
 
 admin.site.register(ConfMenu,ConfMenuAdmin)
 
