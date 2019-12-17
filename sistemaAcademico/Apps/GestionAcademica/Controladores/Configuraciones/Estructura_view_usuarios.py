@@ -65,9 +65,8 @@ def nuevo_usuario(request):
                 h = hashlib.new("sha1")
                 var_contra = str.encode(var_contra)
                 h.update(var_contra)
-                usuario = ConfUsuario(usuario=var_usuario,clave=h.hexdigest(), id_persona=tipo_persona,
+                ConfUsuario.objects.create(usuario=var_usuario,clave=h.hexdigest(), id_persona=tipo_persona,
                                       id_genr_tipo_usuario=tipo_usuario, id_rol=rol, id_genr_estado=estado)
-                usuario.save()
                 return redirect('Academico:usuarios')
             else:
                 contexto['error'] = 'No se pudo encontrar el usuario'

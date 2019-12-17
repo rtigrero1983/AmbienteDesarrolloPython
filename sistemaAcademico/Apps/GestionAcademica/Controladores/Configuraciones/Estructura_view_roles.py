@@ -15,11 +15,10 @@ def roles(request):
 
 def nuevo_rol(request):
     if 'usuario' in request.session:
-
         if request.method == 'POST':
             codigo = request.POST.get('codigo')
             nombre = request.POST.get('nombre')
-            ConfRol.objects.create(codigo=codigo, nombre=nombre,id_genr_estado=97 )
+            ConfRol.objects.create(codigo=codigo, nombre=nombre,id_genr_estado=97)
             return redirect('Academico:roles')
         return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
     else:
@@ -30,9 +29,7 @@ def editar_rol(request, id):
     if 'usuario' in request.session:
         contexto = {}
         roles = ConfRol.objects.get(id_rol=id)
-
         contexto['roles'] = roles
-
         if request.method == 'POST':
             nombre = request.POST.get('nombre')
             codigo = request.POST.get('codigo')

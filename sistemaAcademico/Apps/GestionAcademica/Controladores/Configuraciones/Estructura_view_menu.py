@@ -18,19 +18,6 @@ def menu(request):
     else:
         return HttpResponse('<center><h1>su session ha caducado</h1></center>')
 
-#--------------------------------
-
-def nuevo_menu(request):
-    contexto = {}
-    if request.method == 'POST':
-        estado = GenrGeneral.objects.get(idgenr_general=97)
-        var_nombre = request.POST.get('nom_menu')
-        var_url = request.POST.get('url')
-        var_icono = request.POST.get('icono')
-        menu = ConfMenu(id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url)
-        menu.save()
-        return redirect('Academico:menu')
-    return render(request, 'sistemaAcademico/Configuraciones/Menus/add_menu.html',contexto)
 
 #--------------------------------
 
