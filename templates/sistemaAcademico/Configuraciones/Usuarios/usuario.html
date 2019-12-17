@@ -54,8 +54,8 @@
 
                       <td>
                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
-                         <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></a>
-                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+                         <button onclick="eliminar_modal('{% url 'Academico:eliminar_usuario' u.id_usuario %}')" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></button>
+
                       </td>
                     </tr>
                   {% endfor %}
@@ -66,7 +66,17 @@
 
             </div>
 
+<div class="modal fade" id="modal_crear" role="dialog">
 
+
+</div>
+
+<div class="modal fade" id="modal_editar" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_eliminar" role="dialog">
 
 {% endblock contenido_principal %}
 

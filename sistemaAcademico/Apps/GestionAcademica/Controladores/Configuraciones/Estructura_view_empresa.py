@@ -42,7 +42,7 @@ def nueva_empresa(request):
                                   usuario_ing=usuario.usuario, terminal_ing=str(nombre_equipo))
 
             historial = GenrHistorial.objects.create(modulo="Configuraciones", accion="Crear", usuario_mod=usuario.usuario,
-                                      terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu=menu)
+                                                     terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu=menu)
 
             return redirect('Academico:empresas')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)

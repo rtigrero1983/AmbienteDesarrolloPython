@@ -1,11 +1,6 @@
 
 <div class="modal-dialog modal-lg" role="document">
 
-	<div >
-		
-
-	</div>
-
     <div class="modal-content">
 		
 		      <div class="contenido">
@@ -17,7 +12,6 @@
              			   <h6 class="m-0 font-weight-bold text-danger">Eliminar menu</h6>
              			 </div>
              			 {% if menu.id_padre == 0 %}
-             			 		
 								<div class="card-body">
              			   			Esta seguro que deseas eliminar este menu principal?<br>
              			   			Nombre del menu: <label>{{menu.descripcion}}</label><br>
@@ -30,49 +24,28 @@
 
         						    <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
         						    </div>
-
         						</div>
-
              			 		</div>
-
-
-        						
-
              			 {% endif %}
 
              			 {% if menu.id_padre != 0 %}
-             			 		
              			 		<div class="card-body">
              			   			Esta seguro que deseas eliminar este opcion del modulo {{menu.id_modulo}}?<br>
              			   			Nombre del menu: <label>{{menu.descripcion}}</label><br>
              			   			tipo: <label>Sub menu de {{menu.id_modulo}}</label><br> 
              			   			Url: <label>{{menu.url}}</label><br>
              			 		</div>
-
-
         						<div class="botones">
         						    <br/>
         						    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
 
         						    <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
         						    </div>
-
+                             </form>
         						</div>
-	
-
-
              			 {% endif %}
-             			 
-             			 
              		</div>
-							
-
 				</form>
-				
-
-		      </div>	
-
+		      </div>
 	</div>
-
-
 </div>
