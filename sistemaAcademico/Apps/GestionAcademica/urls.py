@@ -1,13 +1,13 @@
+import pickle
+
 from django.urls import path
 from .views import *
 
 
 urlpatterns = [
-
     path('',login,name='login'),
     path('salir/',salir,name='logout'),
     path('base/',base, name='base'),
-
     path('inicio/',inicio,name='inicio'),
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),
@@ -17,9 +17,6 @@ urlpatterns = [
     path('acciones/',acciones,name='acciones'),
     #path('permisos/', permisos, name='permisos'),
     path('empresas/', empresas, name='empresas'),
-
-
-
     #Opciones para el modulo de Admision
     path('mantenimiento_personas/',mantenimientoPersonas,name='Personas'),
     path('movimientos/',movimientos, name='movimientos'),
@@ -27,10 +24,6 @@ urlpatterns = [
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     #--------------------------------------
-
-
-
-
     # ----------------REGISTROS--------------
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
@@ -58,9 +51,26 @@ urlpatterns = [
     path('Pantalla_principal/',pantalla_principal,name='pantalla_principal'),
 #--------------timeout-------
     path('timeout/', timeout, name='timeout'),
-path('inicio/'+'timeout/', timeout, name='timeout_inicio'),
-
-
+    path('inicio/'+'timeout/', timeout, name='timeout_inicio'),
 
 
 ]
+
+
+
+#import sys
+
+#def concatenador(name_lazy, vista, name):
+#   vist = getattr(sys.modules[__name__], vista)
+#   return path(name_lazy,vist, name=name)
+
+
+
+#menu = ConfMenu.objects.filter()
+#for m in menu:
+#    if m.name != '#':
+      #print(concatenador(str(m.lazy_name), m.view, str(m.name)))
+#     vista = str(m.view)
+#     urlpatterns.append(concatenador(str(m.lazy_name),vista,str(m.name)))
+
+
