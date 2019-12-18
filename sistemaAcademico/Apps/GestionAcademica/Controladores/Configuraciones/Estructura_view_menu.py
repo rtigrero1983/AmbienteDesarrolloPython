@@ -72,9 +72,7 @@ def nuevo_menu(request):
         var_nombre = request.POST.get('nom_menu')
         var_url = request.POST.get('url')
         modulo = ConfModulo.objects.get(id_modulo=id)
-
         menu = ConfMenu.objects.create()
-
         return redirect('Academico:menu')
 
     return render(request,'sistemaAcademico/Configuraciones/Menus/add_menu.html')

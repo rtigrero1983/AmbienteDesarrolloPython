@@ -1,7 +1,13 @@
 import pickle
-
+from django.db import models
 from django.urls import path
 from .views import *
+from .Diccionario.Estructuras_tablas_conf import ConfMenu
+from .Diccionario.Estructuras_tablas_conf import ConfModulo
+
+from .Diccionario.Estructuras_tablas_mant import *
+from .Diccionario.Estructuras_tablas_mov import *
+
 
 
 urlpatterns = [
@@ -13,17 +19,16 @@ urlpatterns = [
     path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
     path('menu/',menu,name='menu'),
-    path('modulo/',modulo,name='modulo'),
-    path('acciones/',acciones,name='acciones'),
+    path('mociones/',acciones,name='acciones'),
     #path('permisos/', permisos, name='permisos'),
-    path('empresas/', empresas, name='empresas'),
+    path('emdulo/',modulo,name='modulo'),
+    path('acpresas/', empresas, name='empresas'),
     #Opciones para el modulo de Admision
     path('mantenimiento_personas/',mantenimientoPersonas,name='Personas'),
     path('movimientos/',movimientos, name='movimientos'),
     path('consultas/',consultas, name='consultas'),
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
-    #--------------------------------------
     # ----------------REGISTROS--------------
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
@@ -31,8 +36,6 @@ urlpatterns = [
     path('nuevo_menu/',nuevo_menu, name='nuevo_menu'),
     path('nuevo_modulo/', nuevo_modulo, name='nuevo_modulo'),
     path('add_permiso/',add_permiso, name='add_permiso'),
-    # ---------------------------------
-
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
     path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
@@ -68,16 +71,15 @@ urlpatterns = [
 #import sys
 
 #def concatenador(name_lazy, vista, name):
-#   vist = getattr(sys.modules[__name__], vista)
-#   return path(name_lazy,vist, name=name)
-
+   #vist = getattr(sys.modules[__name__], vista)
+   #return path(name_lazy,vist,name=name)
 
 
 #menu = ConfMenu.objects.filter()
+
 #for m in menu:
-#    if m.name != '#':
-      #print(concatenador(str(m.lazy_name), m.view, str(m.name)))
-#     vista = str(m.view)
-#     urlpatterns.append(concatenador(str(m.lazy_name),vista,str(m.name)))
+ #   if m.view != '#':
+  #      print(m.view)
+  #      urlpatterns.append(concatenador(str(m.lazy_name),str(m.view),str(m.name)))
 
 

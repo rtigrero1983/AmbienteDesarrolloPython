@@ -85,6 +85,13 @@ class ConfMenu(models.Model):
     def __str__(self):
         return self.descripcion
 
+    def __unicode__(self):
+        return self.view
+    
+    
+    
+
+
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, blank=False, null=False)
