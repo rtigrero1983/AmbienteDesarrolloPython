@@ -12,7 +12,7 @@ def empresas(request):
         lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values('id_empresa','nombre','identificacion','representante_legal','correo','direccion','telefono')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}
@@ -47,7 +47,7 @@ def nueva_empresa(request):
             return redirect('Academico:empresas')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def editar_empresa(request,id):

@@ -10,7 +10,7 @@ def modulo(request):
         modulos= ConfModulo.objects.filter(id_genr_estado=97)
         return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html',{'modulos':modulos})
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def nuevo_modulo(request):

@@ -10,4 +10,5 @@ def acciones(request):
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/acciones.html')
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+
+        return HttpResponseRedirect('timeout/')

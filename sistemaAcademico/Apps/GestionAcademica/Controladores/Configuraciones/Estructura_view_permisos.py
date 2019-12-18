@@ -13,7 +13,7 @@ def perfiles(request):
         permiso=ConfPermiso.objects.filter(id_genr_estado=97).values()
         return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',{'permiso': permiso})
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def add_permiso(request):
@@ -36,7 +36,7 @@ def add_permiso(request):
 
         return render(request, 'sistemaAcademico/Configuraciones/Permisos/add_permisos.html',contexto)
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 

@@ -10,7 +10,7 @@ def roles(request):
         roles = ConfRol.objects.filter(id_genr_estado=97)
         return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': roles})
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def nuevo_rol(request):
@@ -22,7 +22,7 @@ def nuevo_rol(request):
             return redirect('Academico:roles')
         return render(request, 'sistemaAcademico/Configuraciones/Roles/add_rol.html')
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def editar_rol(request, id):
@@ -39,7 +39,7 @@ def editar_rol(request, id):
             return redirect('Academico:roles')
         return render(request, 'sistemaAcademico/Configuraciones/Roles/editar_rol.html', contexto)
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 def eliminar_rol(request, id):
@@ -52,4 +52,4 @@ def eliminar_rol(request, id):
             return redirect('Academico:roles')
         return render(request, 'sistemaAcademico/Configuraciones/Roles/eliminar_rol.html', {'roles': roles})
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')

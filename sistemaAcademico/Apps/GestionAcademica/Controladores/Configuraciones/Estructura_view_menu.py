@@ -16,7 +16,7 @@ def menu(request):
             #print(contexto)
             return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',contexto)
     else:
-        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+        return HttpResponseRedirect('timeout/')
 
 
 #--------------------------------
