@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
 import hashlib
+import os
+
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
@@ -10,9 +12,9 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 def usuarios(request):
     if 'usuario' in request.session:
         usuarios = ConfUsuario.objects.filter(id_genr_estado=97)
-        return render(request,'sistemaAcademico/Configuraciones/Usuarios/usuario.html',{'lista_usuarios':usuarios})
-    else:
-        return HttpResponseRedirect('timeout/')
+
+        return render(request, 'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'lista_usuarios': usuarios})
+
 
 
 def editar_usuario(request,id):
@@ -38,6 +40,8 @@ def editar_usuario(request,id):
                               id_genr_estado=estado)
         usuario.save()
         return redirect('Academico:usuarios')
+
+
 
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html', contexto)
 
@@ -66,23 +70,24 @@ def nuevo_usuario(request):
                 var_contra = str.encode(var_contra)
                 h.update(var_contra)
                 ConfUsuario.objects.create(usuario=var_usuario,clave=h.hexdigest(), id_persona=tipo_persona,
-                                      id_genr_tipo_usuario=tipo_usuario,id_genr_estado=estado)
+                                           id_genr_tipo_usuario=tipo_usuario, id_genr_estado=estado)
                 return redirect('Academico:usuarios')
             else:
                 contexto['error'] = 'No se pudo encontrar el usuario'
 
         return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html', contexto)
+
     else:
-        return HttpResponseRedirect('timeout/')
+        return HttpResponse('<center><h1>su session ha caducado</h1></center>')
+
 
 
 def eliminar_usuario(request,id):
-
-    usuario = ConfUsuario.objects.get(id_usuario=id)
+    usuarios = ConfUsuario.objects.get(id_usuario=id)
     inactivo = GenrGeneral.objects.get(idgenr_general=98)
+
     if request.method == 'POST':
-        print(usuario)
-        usuario.id_genr_general = inactivo
-        usuario.save()
+        usuarios.id_genr_estado = inactivo
+        usuarios.save()
         return redirect('Academico:usuarios')
-    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/eliminar.html', {'usuario': usuario})
+    return render(request, 'sistemaAcademico/Configuraciones/Usuarios/eliminar.html', {'usuario': usuarios})

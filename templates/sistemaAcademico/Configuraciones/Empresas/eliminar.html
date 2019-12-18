@@ -1,7 +1,7 @@
 
 <div class="modal-dialog modal-lg" role="document">
 
-	<div >
+
 		
 
 	</div>
@@ -10,16 +10,16 @@
 		
 		      <div class="contenido">
 
-				<form method="POST" action="{% url 'Academico:eliminar' menu.id_empresa %}"> {% csrf_token %}
+				<form method="POST" action="{% url 'Academico:eliminar' empresa.id_empresa %}"> {% csrf_token %}
 					 <div class="card shadow mb-4">
              			 <div class="card-header py-3">
-             			   <h6 class="m-0 font-weight-bold text-danger">Eliminar menu</h6>
+             			   <h6 class="m-0 font-weight-bold text-danger">Eliminar Empresa</h6>
              			 </div>
 
 								<div class="card-body">
              			   			Esta seguro que deseas eliminar esta empresa?<br>
-             			   			Nombre de la empresa: <label>{{menu.razon_social}}</label><br>
-             			   			Identificacion: <label>{{menu.identificacion}}</label><br>
+             			   			Nombre de la empresa: <label>{{empresa.razon_social}}</label><br>
+             			   			Identificacion: <label>{{empresa.identificacion}}</label><br>
 
              			   			<div class="botones">
         						    <br/>

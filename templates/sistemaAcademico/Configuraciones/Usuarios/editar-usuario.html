@@ -48,49 +48,23 @@
                          {% endif %}
                     {% endfor %}
                 </select>
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-
 
         <div class="formulario_lado_derecho">
-
             <div class="form-row grid tabla_lista">
                 <div>
                     <ul class="list-group">
-                         <li class="list-group-item tabla_lista_cab">Roles
-                            <button type="button">
-                                <i class="far fa-edit"></i>
-                            </button>
-
-                         </li>
+                         <li class="list-group-item tabla_lista_cab">Roles </li>
                          {% for r in roles %}
                             <li class="list-group-item tabla_lista_cont">
-                               <input type="checkbox" value="{{r.id_rol}}" class="estilo_checkbox">
+                               <input type="checkbox" value="{{r.nombre}}" class="estilo_checkbox">
                                 <label>
-                                    {{r.id_rol}}
-
+                                    {{r.nombre}}
                                 </label>
                             </li>
                          {% endfor %}
-
                     </ul>
                 </div>
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item tabla_lista_cab">Descripcion</li>
-                         {% for rd in roles%}
-                            <li class="list-group-item tabla_lista_cont">
 
-                                <center>
-                                    {{ rd.nombre }}
-                                </center>
-
-                            </li>
-
-                         {% endfor %}
-                    </ul>
-                </div>
             </div>
 
         </div>
