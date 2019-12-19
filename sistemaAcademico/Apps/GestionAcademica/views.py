@@ -35,6 +35,7 @@ def inicio(request):
 
 
 def login(request):
+
     contexto = {}
     if request.method == 'POST':
             var_usuario = request.POST.get('usu')
@@ -43,11 +44,14 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
+            print(usu)
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
             else:
                 contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
+                return redirect("Academico:login")
+
     return render(request,'base/login.html',contexto)
 
 

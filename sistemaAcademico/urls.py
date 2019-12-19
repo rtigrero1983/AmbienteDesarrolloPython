@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-
+from sistemaAcademico.Apps.GestionAcademica.api import RolApi
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(('sistemaAcademico.Apps.GestionAcademica.urls','Academico'))),    
+    path('api/1.0/createRol',RolApi.as_view(),name='create_rol')
 ]
