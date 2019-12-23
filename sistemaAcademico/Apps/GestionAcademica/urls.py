@@ -2,9 +2,7 @@ import pickle
 from django.db import models
 from django.urls import path
 from .views import *
-from .Diccionario.Estructuras_tablas_conf import ConfMenu
-from .Diccionario.Estructuras_tablas_conf import ConfModulo
-
+from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 
@@ -19,10 +17,11 @@ urlpatterns = [
     path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
     path('menu/',menu,name='menu'),
-    path('mociones/',acciones,name='acciones'),
+    path('acciones/',acciones,name='acciones'),
     #path('permisos/', permisos, name='permisos'),
-    path('emdulo/',modulo,name='modulo'),
-    path('acpresas/', empresas, name='empresas'),
+    path('api_modulo/',Modulo.as_view(),name='api_modulo'),
+    path('modulo/',modulo,name='modulo'),
+    path('empresas/', empresas, name='empresas'),
     #Opciones para el modulo de Admision
     path('mantenimiento_personas/',mantenimientoPersonas,name='Personas'),
     path('movimientos/',movimientos, name='movimientos'),
@@ -34,7 +33,7 @@ urlpatterns = [
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     path('nuevo_menu/',nuevo_menu, name='nuevo_menu'),
-    path('nuevo_modulo/', nuevo_modulo, name='nuevo_modulo'),
+    path('nuevo_modulo/',nuevo_modulo, name='nuevo_modulo'),
     path('add_permiso/',add_permiso, name='add_permiso'),
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),

@@ -1,14 +1,70 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render,redirect
-from django.utils import timezone
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
+from django.template.loader import get_template
+from django.shortcuts import render, redirect
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from sistemaAcademico.Apps.GestionAcademica.serializers import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfModulo
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
 
+
+class Modulo(APIView):
+
+    error_mensaje = 'Error'
+    def estados(self,estado):
+        var_estado = None
+        if estado == 'activo':
+           var_estado = GenrGeneral.objects.get(idgenr_general=97)
+        if estado == 'inactivo':
+            var_estado = GenrGeneral.objects.get(idgenr_general=98)
+        if estado == 'en proceso':
+            var_estado = GenrGeneral.objects.get(idgenr_general=99)
+        return var_estado
+
+
+    def get_object(self):
+        try:
+            return ConfModulo.objects.filter(id_genr_estado=97)
+        except ConfModulo.DoesNotExist:
+            raise status.HTTP_404_NOT_FOUND
+        
+    def get(self,request):
+        queryset = self.get_object()
+        serializer = moduloSerializers(queryset,many=True)
+        return Response(data=serializer.data,status=status.HTTP_200_OK)    
+
+    def post(self, request):
+        #request.data['id_genr_estado'] = self.estados('activo')
+        serializer = moduloSerializers(data = request.data)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data,status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print(e)
+            return Response(self.error_mensaje,status=status.HTTP_404_NOT_FOUND)
+    
+    def delete(self,request):
+        modulo = ConfModulo.objects.get(id_modulo=request.data['id_modulo'])
+        modulo.id_genr_estado = self.estados('inactivo')
+        modulo.save()
+        return Response("Modulo inactivo",status=status.HTTP_202_ACCEPTED)
+
+    def put(self,request):
+     modulo = ConfModulo.objects.get(id_modulo=request.data['id_modulo'])
+     serializer = moduloSerializers(modulo,data=request.data)
+     if serializer.is_valid():  
+         serializer.save()
+         return Response("Datos actualizados",status=status.HTTP_202_ACCEPTED)
+
+
 def modulo(request):
     if 'usuario' in request.session:
-        modulos= ConfModulo.objects.filter(id_genr_estado=97)
-        return render(request,'sistemaAcademico/Configuraciones/Modulos/modulo.html',{'modulos':modulos})
+        t = get_template('sistemaAcademico/Configuraciones/Modulos/modulo.html')
+        html = t.render()
+        return HttpResponse(html)
     else:
         return HttpResponseRedirect('timeout/')
 

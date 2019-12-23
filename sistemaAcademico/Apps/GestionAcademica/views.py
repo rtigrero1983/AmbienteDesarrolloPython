@@ -10,8 +10,6 @@ from .Controladores.Mantenimiento.Estructura_view_consultas import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
 from .Controladores.Mantenimiento.Estructura_view_movimientos import *
 from .Controladores.Mantenimiento.Estructura_view_procesos import *
-
-
 import hashlib
 
 
@@ -26,7 +24,7 @@ def inicio(request):
         permiso = ConfMenu.objects.filter(
             fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).values(
             'descripcion', 'url', 'id_padre', 'id_menu', 'icono').order_by('orden')
-        usuario = ConfUsuario.objects.get_or_create(id_usuario=request.session.get('usuario'))
+        usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
         return render(request, 'sistemaAcademico/inicio.html', contexto)
@@ -35,7 +33,6 @@ def inicio(request):
 
 
 def login(request):
-
     contexto = {}
     if request.method == 'POST':
             var_usuario = request.POST.get('usu')

@@ -1,78 +1,38 @@
 {% extends 'sistemaAcademico/inicio.html' %}
 {% load staticfiles %}
-
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
   {% block extracss %}
-
          <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-
+         <script src="{% static 'js/Modulo_rest_api.js'%}"></script>
   {% endblock extracss %}
-
                   {% block contenido_principal %}
-
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Modulos</h4></header>
-
 <br/><br/>
-     <button onclick="crear_modal('{% url 'Academico:nuevo_modulo' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="modal('{% url 'Academico:nuevo_modulo' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
-
 <div class="card-body">
   <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table data-url="{% url 'Academico:api_modulo' %}" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Codigo</th>
                       <th>Nombre</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-
+                      <th>Estado</th>
+                      <th>Acciones</th>
                     </tr>
                   </thead>
-
-                  <tbody>
-
-                  {% for em in modulos %}
-                    <tr>
-                        <td><strong>{{em.codigo}}</strong></td>
-                      <td><strong>{{em.nombre}}</strong></td>
-                        <td><strong>{{em.id_genr_estado}}</strong></td>
-                      <td>
-                         <button onclick="editar_modal('{% url 'Academico:editar_modulo' em.id_modulo  %} ')" class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
-                         <button onclick="eliminar_modal('{% url 'Academico:eliminar_modulo' em.id_modulo %} ')" class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></button>
-                      <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
-                      </td>
-                    </tr>
-                  {% endfor %}
-
-
-
+                  <tbody id="cuerpo">
                   </tbody>
                 </table>
               </div>
-
             </div>
-
-  
-
 {% endblock contenido_principal %}
-
-
 {% block extrajs %}
-
-
-<div class="modal fade" id="modal_crear" role="dialog"></div>
-<div class="modal fade" id="modal_eliminar" role="dialog"></div>
-<div class="modal fade" id="modal_editar" role="dialog"></div>
-
-
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}">
-
-  </script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-
-
-
+<div class="modal fade" id="mostrar_modal" role="dialog"></div>
 {% endblock extrajs %}
 
 

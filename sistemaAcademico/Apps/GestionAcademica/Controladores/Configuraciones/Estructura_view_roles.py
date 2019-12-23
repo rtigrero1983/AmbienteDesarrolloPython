@@ -1,6 +1,8 @@
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
@@ -11,6 +13,9 @@ def roles(request):
         return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': roles})
     else:
         return HttpResponseRedirect('timeout/')
+
+
+
 
 
 def nuevo_rol(request):
