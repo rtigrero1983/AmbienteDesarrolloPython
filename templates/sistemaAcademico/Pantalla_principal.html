@@ -1,17 +1,13 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'sistemaAcademico/base.html' %}
 {% load staticfiles %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
-{% block contenido_principal %}
 
 
-<div id="contenido" >
-
-
-
-
+{% block contenido_principal%}
+<div id="contenido">
 
 <div class="cuadro_titulo_pag_inicio">
     <svg viewBox="0 150 960 300">
@@ -64,27 +60,4 @@
 
 </div>
 
-
-  <script type="text/javascript">
-
-    function ver_pagina(direct){
-      var $ = jQuery.noConflict();
-      $.ajax({
-        url: direct,
-        type: 'GET',
-        dataType: 'html',
-        success: function(resp){
-            $('#contenido').html(resp);
-        }
-      });
-    }
-
-
-    function Cargando(){
-
-      $('#contenido').text('procesando peticion');
-
-    }
-
-    </script>
 {% endblock contenido_principal %}

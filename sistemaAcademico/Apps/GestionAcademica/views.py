@@ -14,8 +14,7 @@ import hashlib
 
 
 
-def base(request):
-    return render(request,'base/blank.html')
+
 
 
 def inicio(request):
@@ -27,7 +26,7 @@ def inicio(request):
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
-        return render(request, 'sistemaAcademico/inicio.html', contexto)
+        return render(request, 'sistemaAcademico/base.html', contexto)
     else:
         return HttpResponseRedirect('timeout/')
 

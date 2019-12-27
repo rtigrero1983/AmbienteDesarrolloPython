@@ -1,42 +1,58 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'sistemaAcademico/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
 
-	{% block contenido_principal %}
+{% block contenido_principal %}
 
-<header class="cuadro_titulo">
-    <h3>Configuracion / Permisos</h3>
+
+<header class="cuadro_titulo" class="title">
+    <h4>Configuracion | Permisos</h4>
 </header>
-<br/>
 
+<br/><br>
      <a href="{% url 'Academico:add_permiso' %}" class="btn btn-success"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Nuevo
-</a>
+	 </a>
 <br/><br/>
-</table>
-<table class="table table-striped">
-<tr class="success">
-<td>Id</td>
-<td>Menu</td>
-<td>Modulo</td>
-<td>estado</td>
-    <td>Acciones</td>
+
+
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='5' data-sort= "false" >
+ <thead>
+	<tr class="success">
+	<td>Id</td>
+	<td>Menu</td>
+	<td>Modulo</td>
+	<td>estado</td>
+	<td>Acciones</td>
+</thead>
 </tr>
+<tbody>
 {% for p in permiso %}
 <tr>
 <td>{{ p.id_permiso }}</td>
 <td>{{ p.id_modulo }}</td>
 <td>{{ p.id_menu }}</td>
 <td>{{ p.id_genr_estado}}</td>
-
-    <td><a href="{% url 'Academico:editar_permiso' p.id_permiso %}" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
-
-
+<td><a href="{% url 'Academico:editar_permiso' p.id_permiso %}" class="btn-info btn-circle"><i class="fas fa-info-circle"></i></a>
 </tr>
 {% endfor %}
+</tbody>
 </table>
+</div>
+</div>
 {% endblock contenido_principal %}
+
+{% block footer %}
+	
+{% endblock footer %}
+
+
+{% block scrool %}
+	
+{% endblock scrool %}
 
 
 

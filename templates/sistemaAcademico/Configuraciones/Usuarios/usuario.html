@@ -1,25 +1,14 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'sistemaAcademico/base.html' %}
 {% load staticfiles %}
 
 {% block sidebar %}
-
 {% endblock sidebar %}
-
 {% block modulo %}
-
 {% endblock modulo %}
-
 {% block encabezado %}
-
 {% endblock encabezado %}
 
-  {% block extracss %}
-
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-
-  {% endblock extracss %}
-
-                  {% block contenido_principal %}
+{% block contenido_principal %}
 
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Usuario</h4></header>
 
@@ -79,15 +68,5 @@
 <div class="modal fade" id="modal_eliminar" role="dialog">
 
 {% endblock contenido_principal %}
-
-
-{% block extrajs %}
-
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-
-
-{% endblock extrajs %}
 
 

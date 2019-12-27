@@ -10,7 +10,8 @@ import socket
 def perfiles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        permiso=ConfPermiso.objects.filter(id_genr_estado=97).values()
+        permiso=ConfPermiso.objects.filter(id_genr_estado=97).values('id_permiso','id_menu','id_modulo','id_genr_estado')
+        print(permiso)
         return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',{'permiso': permiso})
     else:
         return HttpResponseRedirect('timeout/')

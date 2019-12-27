@@ -1,11 +1,10 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'sistemaAcademico/base.html' %}
 {% load staticfiles %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
   {% block extracss %}
-         <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
          <script src="{% static 'js/Modulo_rest_api.js'%}"></script>
   {% endblock extracss %}
                   {% block contenido_principal %}

@@ -11,7 +11,6 @@ from .Diccionario.Estructuras_tablas_mov import *
 urlpatterns = [
     path('',login,name='login'),
     path('salir/',salir,name='logout'),
-    path('base/',base, name='base'),
     path('inicio/',inicio,name='inicio'),
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),

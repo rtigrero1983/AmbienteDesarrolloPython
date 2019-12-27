@@ -1,6 +1,4 @@
-{% extends "sistemaAcademico/inicio.html" %}
-{% load staticfiles %}
-
+{% extends 'sistemaAcademico/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
@@ -14,68 +12,6 @@
      <button onclick="crear_modal('{% url 'Academico:nuevo_menu' %} ')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
-   <!--
-<div class="card-body">
-<div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-sort= "false">
-                  <thead>
-                    <tr>
-                      <th>Nombre del menu</th>
-                      <th>Url</th>
-                      <th>Icono</th>
-                      <th>Path</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-
-
-                  <tbody>
- 
-                  {% for m in menu %}
-                     {% if m.id_padre == 0 %}
-                          <tr >
-                            <td><strong>{{m.descripcion}}</strong></td>
-                            <td><strong>No requerido</strong></td>
-                            <td><strong>{{m.icono}}</strong></td>
-                            <td><strong>{{m.path}}</strong></td>
-                            <td>
-                               <button onclick="editar_modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
-
-                               <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></button>
-
-                               <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>
-                          </td>
-                    </tr>
-                      {% endif %}
-                    
-                  {% endfor %}
-
-                  {% for h in menu %}
-
-                  {% if h.id_padre != 0  %}
-
-                  <tr id="opcion_{{h.id_padre}}" class="collapse" aria-expanded="true">
-                      <td>{{h.descripcion}}</td>
-                      <td>{{h.url}}</td>
-                      <td>{{h.icono}}</td>
-                      <td>{{h.path}}</td>
-                      <td>
-                          <button onclick="editar_modal('{% url 'Academico:editar_menu' h.id_menu %}')" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></button>
-
-                         <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' h.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></button>
-
-                         <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="{{h.icono}}"></i> </a>
-                      </td>
-                  </tr>
-                  {% endif %}
-
-                  {% endfor %}
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-      -->
 
 <div class="card-body">
 <div class="table-responsive">
