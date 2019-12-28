@@ -7,3 +7,5 @@ djangorestframework==3.11.0
 Pillow==6.2.1
 pytz==2019.2
 sqlparse==0.3.0
+python3-memcached==1.51
+Jinja2==2.10.3

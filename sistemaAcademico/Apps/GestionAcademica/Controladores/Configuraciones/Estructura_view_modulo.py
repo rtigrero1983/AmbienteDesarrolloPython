@@ -7,6 +7,7 @@ from rest_framework import status
 from sistemaAcademico.Apps.GestionAcademica.serializers import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfModulo
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
+from django.views.decorators.cache import cache_page
 import socket
 
 
@@ -60,6 +61,7 @@ class Modulo(APIView):
          return Response("Datos actualizados",status=status.HTTP_202_ACCEPTED)
 
 
+@cache_page(60 * 10)
 def modulo(request):
     if 'usuario' in request.session:
         t = get_template('sistemaAcademico/Configuraciones/Modulos/modulo.html')
@@ -86,8 +88,6 @@ def editar_modulo(request,id):
     if request.method == 'POST':
         var_codigo = request.POST.get('codigo')
         var_nombre = request.POST.get('nom_modulo')
-
-
     return render(request,'sistemaAcademico/Configuraciones/Modulos/editar_modulo.html',contexto)
 
 def eliminar_modulo(request,id):

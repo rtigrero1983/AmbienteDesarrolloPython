@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import jinja2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,6 +58,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'sistemaAcademico.urls'
 
 TEMPLATES = [
+
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates')],
@@ -77,10 +79,10 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql_cymysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bd_academico_desa',
         'USER': 'python',
         'PASSWORD': 'python.2007',
@@ -92,8 +94,8 @@ DATABASES = {
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql_cymysql',
-        'NAME': 'sistema_academico',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bd_academico_desa',
         'USER': 'root',
         'PASSWORD':'root',
         'HOST': 'localhost',
@@ -101,7 +103,7 @@ DATABASES = {
     }
 }
 
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -136,6 +138,13 @@ USE_L10N = True
 USE_TZ = True
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
@@ -145,6 +154,6 @@ INTERNAL_IPS = {'127.0.0.1',}
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 
-SESSION_COOKIE_AGE = 500
+SESSION_COOKIE_AGE = 8000
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
 SESSION_SAVE_EVERY_REQUEST= True

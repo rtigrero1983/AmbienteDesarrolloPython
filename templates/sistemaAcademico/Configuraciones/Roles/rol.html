@@ -1,4 +1,4 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'base/base.html' %}
 {% load staticfiles %}
 {% block sidebar %}
 {% endblock sidebar %}
@@ -28,17 +28,15 @@
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Acciones</th>
-
             </tr>
             </thead>
 
             <tbody>
 
             {% for em in lista_roles %}
-            <tr>
+                <tr>
                 <td><strong>{{em.codigo}}</strong></td>
                 <td><strong>{{em.nombre}}</strong></td>
-
                 <td>
     <button class="btn-info btn-circle"
             onclick="editar_modal('{% url 'Academico:editar_rol' em.id_rol %}')" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i>

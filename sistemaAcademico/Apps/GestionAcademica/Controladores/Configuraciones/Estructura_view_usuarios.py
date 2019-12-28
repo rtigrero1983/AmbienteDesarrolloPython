@@ -4,11 +4,11 @@ from django.shortcuts import render,redirect
 from django.utils import timezone
 import hashlib
 import os
-
+from django.views.decorators.cache import cache_page
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
-
+@cache_page(60*10)
 def usuarios(request):
     if 'usuario' in request.session:
         usuarios = ConfUsuario.objects.filter(id_genr_estado=97)

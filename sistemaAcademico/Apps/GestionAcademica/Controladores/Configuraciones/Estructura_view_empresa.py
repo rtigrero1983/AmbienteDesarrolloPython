@@ -1,24 +1,26 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
 from django.utils import timezone
+from django.views.generic import ListView
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
+from django.views.decorators.cache import cache_page
 
 
-
+@cache_page(60 * 10)
 def empresas(request):
     if 'usuario' in request.session:
-        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97).values('id_empresa','nombre','identificacion','representante_legal','correo','direccion','telefono')
-        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
+        lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97)
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa} )
     else:
         return HttpResponseRedirect('timeout/')
+        
 def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}
         tip_ident = GenrGeneral.objects.filter(tipo='TID').values('idgenr_general','nombre')
         contexto['tip_ident'] = tip_ident
-
         if request.method == 'POST':
             var_empresa_nombre = request.POST.get('nombre')
             var_rsocial = request.POST.get('rsocial')

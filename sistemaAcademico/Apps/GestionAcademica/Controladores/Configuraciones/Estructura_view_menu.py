@@ -6,8 +6,11 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
 from django.urls import reverse_lazy
 import socket
+from django.views.decorators.cache import cache_page
 
 
+
+@cache_page(60 * 10)
 def menu(request):
     contexto = {}
     if 'usuario' in request.session:

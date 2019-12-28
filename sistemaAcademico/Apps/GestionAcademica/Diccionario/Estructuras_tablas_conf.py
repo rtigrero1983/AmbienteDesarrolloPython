@@ -46,8 +46,13 @@ class ConfModulo(models.Model):
             verbose_name_plural = 'Modulos',
             db_table = 'conf_modulo'
 
-        def __str__(self):
+        def __unicode__(self):
             return self.nombre
+
+        def __unicode__(self):
+            return self.codigo
+        
+
 
 class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)

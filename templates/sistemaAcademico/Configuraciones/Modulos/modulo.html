@@ -1,8 +1,9 @@
-{% extends 'sistemaAcademico/base.html' %}
+{% extends 'base/base.html' %}
 {% load staticfiles %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
+{% block footer %}{% endblock footer %}
 {% endblock sidebar %}
   {% block extracss %}
          <script src="{% static 'js/Modulo_rest_api.js'%}"></script>
@@ -18,13 +19,13 @@
                 <table data-url="{% url 'Academico:api_modulo' %}" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th>ID</th>
                       <th>Codigo</th>
-                      <th>Nombre</th>
-                      <th>Estado</th>
+                      <th>Nombre</th> 
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody id="cuerpo">
+                  <tbody id="cuerpo">  
                   </tbody>
                 </table>
               </div>

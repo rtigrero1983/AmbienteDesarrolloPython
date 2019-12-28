@@ -7,5 +7,5 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 class moduloSerializers(serializers.ModelSerializer):
     class Meta:
         model = ConfModulo
-        fields = '__all__'
+        fields = ['id_modulo','codigo','nombre']
         

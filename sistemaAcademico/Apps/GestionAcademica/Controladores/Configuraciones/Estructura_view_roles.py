@@ -5,8 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
+from django.views.decorators.cache import cache_page
 
-
+@cache_page(60*15)
 def roles(request):
     if 'usuario' in request.session:
         roles = ConfRol.objects.filter(id_genr_estado=97)

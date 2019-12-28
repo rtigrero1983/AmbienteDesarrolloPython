@@ -11,29 +11,33 @@ from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
 from .Controladores.Mantenimiento.Estructura_view_movimientos import *
 from .Controladores.Mantenimiento.Estructura_view_procesos import *
 import hashlib
+from django.template.loader import get_template
+from django.views.decorators.cache import cache_page
 
 
 
 
 
-
+cache_page(60*10)
 def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
         permiso = ConfMenu.objects.filter(
             fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).values(
-            'descripcion', 'url', 'id_padre', 'id_menu', 'icono').order_by('orden')
+            'descripcion','url', 'id_padre', 'id_menu', 'icono').order_by('orden')
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
-        return render(request, 'sistemaAcademico/base.html', contexto)
+        return render(request, 'base/base.html', contexto)
     else:
         return HttpResponseRedirect('timeout/')
 
 
+cache_page(60*10)
 def login(request):
     contexto = {}
-    if request.method == 'POST':
+    try:
+        if request.method == 'POST':
             var_usuario = request.POST.get('usu')
             var_contra = request.POST.get('pass')
             h = hashlib.new("sha1")
@@ -44,11 +48,9 @@ def login(request):
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
-            else:
-                contexto['error']= "Credenciales incorrectas o esta cuenta esta inactiva"
-                return redirect("Academico:login")
-
-    return render(request,'base/login.html',contexto)
+    except Exception as e:
+            return redirect("Academico:login")
+    return render(request,'base/login.html')
 
 
 def salir(request):
@@ -57,8 +59,11 @@ def salir(request):
 
 
 
+cache_page(60*10)
 def pantalla_principal(request):
-    return render(request,'sistemaAcademico/Pantalla_principal.html')
+    t = get_template('sistemaAcademico/Pantalla_principal.html')
+    html = t.render()
+    return HttpResponse(html)
 
 def timeout(request):
     return render(request, 'sistemaAcademico/timeout.html')

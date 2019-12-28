@@ -1,15 +1,14 @@
-{% extends 'sistemaAcademico/base.html' %}
+{% extends 'base/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
+{% block footer %}
+  
+{% endblock footer %}
 
 
 
-
-  {% block extracss %}
-    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
-  {% endblock extracss %}
 
 {% block contenido_principal %}
   
@@ -78,9 +77,6 @@
     
   </div>
 
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
 
 
     
