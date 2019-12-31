@@ -23,8 +23,7 @@ def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
         permiso = ConfMenu.objects.filter(
-            fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).values(
-            'descripcion','url', 'id_padre', 'id_menu', 'icono').order_by('orden')
+            fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
@@ -33,7 +32,7 @@ def inicio(request):
         return HttpResponseRedirect('timeout/')
 
 
-cache_page(60*10)
+#cache_page(60*10)
 def login(request):
     contexto = {}
     try:
@@ -44,8 +43,8 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
-            print(usu)
             if usu:
+                print(usu.id_usuario)
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:

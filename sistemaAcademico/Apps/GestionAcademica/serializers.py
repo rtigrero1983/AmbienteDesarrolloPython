@@ -3,7 +3,6 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 
 
-
 class moduloSerializers(serializers.ModelSerializer):
     class Meta:
         model = ConfModulo

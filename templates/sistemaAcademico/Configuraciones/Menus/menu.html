@@ -16,59 +16,50 @@
 </button>
 <br/><br/>
 
-<div class="card-body">
 <div class="table-responsive">
-    <table class="table table-hover" id="dataTable" width="100%" cellspacing="0" data-page-length='25' data-sort= "false" >
+    <table class="table table-bordered table-hover">
         <thead>
-            <tr><th>ID</th><th>Nombre</th><th>Url</th><th>Icono</th><th>Acciones</th></tr>
+            <tr><th>Modulo</th><th>Nombre</th><th>Url</th><th>Icono</th><th>Acciones</th></tr>
         </thead>
     <tbody>
+    {% if menu %}
       {% for m in menu %}
-          {% if m.id_padre == 0 %}
-            <tr class="clickable" >
-            <td><i class="fa fa-plus">{{m.id_menu}}</i></td>
+          {% if m.id_padre != 0 %}
+            <tr>
+            <td>{{m.id_modulo.nombre}}</td>
             <td>{{m.descripcion}}</td>
-            <td>#</td>  
+            <td>{{m.url}}</td>  
             <td>{{m.icono}}</td>
             <td>
               <button onclick="editar_modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
-                 <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></button>
-                  <a href="#" class="btn btn-success btn-circle clickable" data-toggle="collapse" data-target="#opcion_{{m.id_menu}}" aria-expansion="false" aria-controls="opcion_{{m.id_menu}}" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i> </a>
+              <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></button>
+
             </td>
             </tr>
           {% endif %}
       {% endfor %}
+      {% else %}
+        <h1>No hay Menus disponibles</h1>
+    {% endif %}
+      
         
     </tbody>
-
-    {% for h in menu %}
-        {% if h.menu_padre != 0 and h.url != '#' %}
-
-      <tbody id="opcion_{{h.id_padre}}" class="collapse">
-        <tr>
-            <td>{{h.id_modulo.nombre}}</td>
-            <td>{{h.descripcion}}</td>
-            <td>{{h.url}}</td>  
-            <td>{{h.icono}}</td>
-            <td>
-               <button onclick="editar_modal('{% url 'Academico:editar_menu' h.id_menu %}')" class="btn-info btn-circle" title="Editar {{h.descripcion}}"><i class="fas fa-info-circle"></i></button>
-               <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' h.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{h.descripcion}}"><i class="fas fa-trash"></i></button>
-               <a href="{% url h.url %}" class="btn btn-success btn-circle" title="Ver contenido de {{h.descripcion}}"><i class="{{h.icono}}"></i> </a>
-            </td>
-        </tr>
-          
-        {% endif %}
-
-       
-    </tbody>
-      
-    {% endfor %}
-
     
 
 </table>
+  
+  <div>
+      {% if page_obj.has_previous %}
+         <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+       <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Siguiente</a> 
+      {% endif %}
+
+  </div>
 </div>
-</div>
+
 
 
 {% endblock contenido_principal %}

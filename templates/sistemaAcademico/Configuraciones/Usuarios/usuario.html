@@ -6,7 +6,9 @@
 {% endblock modulo %}
 {% block encabezado %}
 {% endblock encabezado %}
-
+{% block footer %}
+  
+{% endblock footer %}
 {% block contenido_principal %}
 
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Usuario</h4></header>
@@ -25,7 +27,6 @@
                       <th>Usuario</th>
                         <th>Nombre</th>
                         <th>Tipo usuario</th>
-                        <th>Estado</th>
                         <th>Acciones</th>
 
                     </tr>
@@ -38,8 +39,6 @@
                       <td><strong>{{u.usuario}}</strong></td>
                         <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
                         <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
-                        <td><strong>{{u.id_genr_estado}}</strong></td>
-
                       <td>
                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
                          <button onclick="eliminar_modal('{% url 'Academico:eliminar_usuario' u.id_usuario %}')" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></button>

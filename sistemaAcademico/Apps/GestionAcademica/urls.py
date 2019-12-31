@@ -5,6 +5,7 @@ from .views import *
 from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
+from django.views.decorators.cache import cache_page
 
 
 
@@ -15,7 +16,7 @@ urlpatterns = [
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
-    path('menu/',menu,name='menu'),
+    path('menu/',Menu_lista.as_view(),name='menu'),
     path('acciones/',acciones,name='acciones'),
     #path('permisos/', permisos, name='permisos'),
     path('api_modulo/',Modulo.as_view(),name='api_modulo'),

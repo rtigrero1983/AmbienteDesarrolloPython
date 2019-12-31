@@ -7,16 +7,13 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 from django.views.decorators.cache import cache_page
 
-@cache_page(60*15)
+"""@cache_page(60*15)"""
 def roles(request):
     if 'usuario' in request.session:
-        roles = ConfRol.objects.filter(id_genr_estado=97)
-        return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html', {'lista_roles': roles})
+        roles = ConfRol.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html',roles)
     else:
         return HttpResponseRedirect('timeout/')
-
-
-
 
 
 def nuevo_rol(request):

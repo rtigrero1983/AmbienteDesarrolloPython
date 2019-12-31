@@ -10,7 +10,7 @@ from django.views.decorators.cache import cache_page
 
 
 
-@cache_page(60 * 10)
+#@cache_page(60 * 10)
 def menu(request):
     contexto = {}
     if 'usuario' in request.session:
@@ -22,6 +22,22 @@ def menu(request):
         return HttpResponseRedirect('timeout/')
 
 
+
+class Menu_lista(View):
+
+    def get(self,request,*args,**kwargs):
+        if 'usuario' in request.session:
+            model = ConfMenu
+            template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
+            context_object_name = 'menu'
+            paginate_by = 5
+            queryset = ConfMenu.objects.filter(id_genr_estado=97).select_related('id_modulo')
+            return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',{context_object_name : queryset})
+        else:
+            return HttpResponseRedirect('timeout/')
+
+    
+    
 #--------------------------------
 
 def editar_menu(request,id):
