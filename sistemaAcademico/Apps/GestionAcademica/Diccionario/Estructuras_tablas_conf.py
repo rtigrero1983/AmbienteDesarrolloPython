@@ -85,7 +85,7 @@ class ConfMenu(models.Model):
         verbose_name = 'Menu',
         verbose_name_plural = 'Menu',
         db_table = 'conf_menu'
-        ordering = ['-orden']    
+        ordering = ['orden']    
 
     def __str__(self):
         return self.name,self.lazy_name,self.descripcion,self.icono,self.url,self.lazy_name

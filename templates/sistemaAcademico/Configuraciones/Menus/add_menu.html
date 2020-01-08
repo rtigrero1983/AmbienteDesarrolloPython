@@ -3,7 +3,7 @@
 <div class="modal-dialog modal-lg" role="document">
 
     <div class="modal-content">
-
+       
         <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
         <div class="modal-body" >
 
@@ -14,36 +14,55 @@
          <div class="contenido">
             <br/>
 
+            <label class="texto">Modulos:</label>
+                <select  name="menu_padre" class="cajatexto">
+                     <option selected="true" disabled="disabled">
+                            Seleccione un modulo para este menu:
+                        </option>
+                    {%for mp in menu_padre %}
+                        <option value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                    {%endfor%}
+                </select>
+            <br/>
+
+            <label class="texto">Orden:</label>
+                <input type="number" class="cajatexto" name="orden" id="orden" placeholder="Seleccione un orden para este menu">
+            <br/>
+
             <label class="texto">Nombre del menu: </label>
-                <input type="text" name="nom_menu" id="nom_menu" class="cajatexto">
+                <input type="text" name="nom_menu" id="nom_menu" class="cajatexto" placeholder="Ejemplo: Usuarios">
             <br/>
 
             <label class="texto">Url: </label>
-                <input type="text" name="url" id="url" class="cajatexto">
+                <input type="text" name="url" id="url" class="cajatexto" placeholder="Ejemplo: Academico:name">
             <br/>
 
-
-            <label class="texto">Icono: </label>
-                <input type="text" name="icono" id="icono" class="cajatexto">
+            <label class="texto">Lazy name: </label>
+                <input type="text" placeholder="Ejemplo: index/" name="lazyname" id="path" class="cajatexto">
             <br/>
 
-            <label class="texto">Path: </label>
-                <input type="text" name="path" id="path" class="cajatexto">
+             <label class="texto">Name:</label>
+                <input type="text" placeholder="Ejemplo: index" name="name" id="name" class="cajatexto">
             <br/>
 
+             <label class="texto">Nombre del controlador:</label>
+                <input type="text" placeholder="Ejemplo: index_view" name="view" id="view" class="cajatexto">
+             <br/>
             
-
+    
         <div class="botones">
              <br/>
              <button type="submit" class="btn btn-outline-primary">Guardar</button>
 
              <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
              </div>
-
          </div>
+        
              </div>
         </form>
+
     </div>
+
 </div>
 
 

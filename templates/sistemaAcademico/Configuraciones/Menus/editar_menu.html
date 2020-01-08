@@ -9,29 +9,15 @@
             <br>
             <label class="texto">Seleccione un modulo:</label>
             <select name="modulo" class="cajatexto">
-            <option selected value="{{menu_actual.id_modulo.id_modulo}}">{{menu_actual.id_modulo.nombre}} </option>
-            {% for m in modulos %}
-                {% if m.id_modulo != menu_actual.id_modulo.id_modulo %}
-                    <option class="cajatexto" value="{{m.id_modulo}}">{{m.nombre}}</option>
-                {% endif %}
+            <option selected value="{{menu_actual.id_menu}}" disabled="disabled">{{menu_actual.id_modulo.nombre}} </option>
+            {% for m in lista_padre %}
+                    <option class="cajatexto" value="{{m.id_menu}}">{{m.descripcion}}</option>
             {% endfor %}
             </select>
             <br/>
             <label class="texto">Nombre del menu:</label>
                 <input type="text" name="nom_menu" value="{{menu_actual.descripcion}}" class="cajatexto">
             <br/>
-             <label class="texto">Seleccione Si es submenu o menu principal:</label>
-            <select name="num_padre" class="cajatexto">
-                {% if menu_actual.id_padre == 0 %}
-                <option value="0" selected> Menu principal </option>
-                {% else %}
-                <option value="{{menu_actual.id_padre}}" selected>{{menu_actual.id_modulo.nombre}}</option>
-                {% endif %}
-            {% for m in lista_padre %}
-                <option class="cajatexto" value="{{m.id_menu}}">Sub menu de {{m.descripcion}}</option>
-            {% endfor %}
-            </select>
-             <br>
              <label class="texto">Orden:</label>
                 <input type="number" name="orden" class="cajatexto" value="{{menu_actual.orden}}" readonly>
              <br>
@@ -39,9 +25,17 @@
                 <input type="text" name="url"class="cajatexto" value="{{menu_actual.url}}">
               <br/>
             <br>
-             <label class="texto"> Icono: </label>
-                <input type="text" name="icono"class="cajatexto" value="{{menu_actual.icono}}">
-              <br/>
+            <label class="texto">Lazy name: </label>
+                <input type="text"  value="{{menu_actual.lazy_name}}" name="lazyname" id="path" class="cajatexto">
+            <br/>
+
+             <label class="texto">Name:</label>
+                <input type="text" value="{{menu_actual.name}}" name="name" id="name" class="cajatexto">
+            <br/>
+
+             <label class="texto">Nombre del controlador:</label>
+                <input type="text" value="{{menu_actual.view}}" name="view" id="view" class="cajatexto">
+             <br/>
              <div class="botones">
              <br/>
              <button type="submit" class="btn btn-outline-primary">Guardar</button>

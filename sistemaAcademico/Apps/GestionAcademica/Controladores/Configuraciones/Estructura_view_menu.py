@@ -3,10 +3,11 @@ from django.shortcuts import render,redirect
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
-from django.views.generic import View,TemplateView,ListView,UpdateView,CreateView,DeleteView
+from django.views.generic import ListView
 from django.urls import reverse_lazy
 import socket
 from django.views.decorators.cache import cache_page
+from django.core.paginator import Paginator
 
 
 
@@ -14,43 +15,30 @@ from django.views.decorators.cache import cache_page
 def menu(request):
     contexto = {}
     if 'usuario' in request.session:
-            menu = ConfMenu.objects.filter(id_genr_estado=97).values('id_menu','descripcion','id_padre','icono','url')
-            contexto['menu'] = menu
+            queryset = ConfMenu.objects.filter(id_genr_estado=97).select_related('id_modulo')
+            template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
+            paginator = Paginator(queryset,3)
+            page = request.GET.get('page')
+            menu = paginator.get_page(page)
+            contexto['menu'] = queryset
             #print(contexto)
-            return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',contexto)
+            return render(request,template_name,contexto)
     else:
         return HttpResponseRedirect('timeout/')
-
-
-
-class Menu_lista(View):
-
-    def get(self,request,*args,**kwargs):
-        if 'usuario' in request.session:
-            model = ConfMenu
-            template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
-            context_object_name = 'menu'
-            paginate_by = 5
-            queryset = ConfMenu.objects.filter(id_genr_estado=97).select_related('id_modulo')
-            return render(request, 'sistemaAcademico/Configuraciones/Menus/menu.html',{context_object_name : queryset})
-        else:
-            return HttpResponseRedirect('timeout/')
-
-    
     
 #--------------------------------
 
 def editar_menu(request,id):
     contexto = {}
-    modulos = ConfModulo.objects.all()
-    lista_padre = ConfMenu.objects.filter(id_padre=0)
-    contexto['lista_padre'] = lista_padre
-    contexto['modulos'] = modulos
+    mp = ConfMenu.objects.filter(url__contains='#')
+    contexto['lista_padre'] = mp
     menu_actual= ConfMenu.objects.get(id_menu = id)
     contexto['menu_actual'] = menu_actual
 
     if request.method == 'POST':
-        var_menu_padre = request.POST.get('num_padre')
+        var_menu_padre = request.POST.get('modulo')
+        padre = ConfMenu.objects.get(id_menu=var_menu_padre)
+        modulo = ConfModulo.objects.get(id_menu=int(padre.id_modulo.id_modulo))
         var_orden = request.POST.get('orden')
         var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
         estado = GenrGeneral.objects.get(idgenr_general=97)
@@ -85,16 +73,22 @@ class Menu(ListView):
 
 
 def nuevo_menu(request):
-
+    mp = ConfMenu.objects.filter(url__contains='#').select_related('id_modulo')
     if request.method == 'POST':
-        var_path = request.POST.get('path')
+        var_padre = request.POST.get('menu_padre')
+        padre = ConfMenu.objects.get(id_menu=var_padre)
+        var_modulo= ConfModulo.objects.get(id_modulo=int(padre.id_modulo.id_modulo))
+        var_orden= request.POST.get('orden')
         var_nombre = request.POST.get('nom_menu')
+        activo = GenrGeneral.objects.get(idgenr_general=97)
         var_url = request.POST.get('url')
-        modulo = ConfModulo.objects.get(id_modulo=id)
-        menu = ConfMenu.objects.create()
+        var_lazy_name = request.POST.get('lazyname')
+        var_name = request.POST.get('name')
+        var_view = request.POST.get('view')
+        menu = ConfMenu.objects.get(id_menu=var_padre)
+        menu = ConfMenu.objects.create(id_modulo=var_modulo,id_padre=var_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=activo,url=var_url,icono=padre.icono,lazy_name=var_lazy_name,name=var_name,view=var_view)
         return redirect('Academico:menu')
-
-    return render(request,'sistemaAcademico/Configuraciones/Menus/add_menu.html')
+    return render(request,'sistemaAcademico/Configuraciones/Menus/add_menu.html',{'menu_padre':mp})
 
 
 

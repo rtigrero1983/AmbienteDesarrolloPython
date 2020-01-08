@@ -8,6 +8,7 @@ from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
 
 
+     
 
 urlpatterns = [
     path('',login,name='login'),
@@ -16,9 +17,9 @@ urlpatterns = [
     path('usuarios/',usuarios,name='usuarios'),
     path('roles/',roles,name='roles'),
     path('perfiles/',perfiles,name='perfiles'),
-    path('menu/',Menu_lista.as_view(),name='menu'),
+    path('menu/',menu,name='menu'),
     path('acciones/',acciones,name='acciones'),
-    #path('permisos/', permisos, name='permisos'),
+    path('permisos/', perfiles, name='permisos'),
     path('api_modulo/',Modulo.as_view(),name='api_modulo'),
     path('modulo/',modulo,name='modulo'),
     path('empresas/', empresas, name='empresas'),
@@ -29,9 +30,9 @@ urlpatterns = [
     path('procesos/',procesos, name='procesos'),
     path('reportes/',reportes, name='reportes'),
     # ----------------REGISTROS--------------
-    path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
-    path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
-    path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
+    path('nueva_empresa/',nueva_empresa, name='nueva_empresa'),
+    path('nuevo_usuario/',nuevo_usuario, name='nuevo_usuario'),
+    path('nuevo_rol/',nuevo_rol, name='nuevo_rol'),
     path('nuevo_menu/',nuevo_menu, name='nuevo_menu'),
     path('nuevo_modulo/',nuevo_modulo, name='nuevo_modulo'),
     path('add_permiso/',add_permiso, name='add_permiso'),
@@ -67,18 +68,6 @@ urlpatterns = [
 
 
 
-#import sys
 
-#def concatenador(name_lazy, vista, name):
-   #vist = getattr(sys.modules[__name__], vista)
-   #return path(name_lazy,vist,name=name)
-
-
-#menu = ConfMenu.objects.filter()
-
-#for m in menu:
- #   if m.view != '#':
-  #      print(m.view)
-  #      urlpatterns.append(concatenador(str(m.lazy_name),str(m.view),str(m.name)))
 
 

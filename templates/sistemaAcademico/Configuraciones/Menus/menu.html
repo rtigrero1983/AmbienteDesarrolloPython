@@ -12,79 +12,74 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu </h4></header>
 
 <br/><br/>
-     <button onclick="crear_modal('{% url 'Academico:nuevo_menu' %} ')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
+     <button onclick="modal('{% url 'Academico:nuevo_menu' %} ')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
 </button>
 <br/><br/>
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='5'>
+                      <thead>
+                          <tr><th>Modulo</th><th>Nombre</th><th>Url</th><th>Icono</th><th>Acciones</th></tr>
+                      </thead>
+                  <tbody>
+                  {% if menu %}
+                    {% for m in menu %}
+                        {% if m.id_padre != 0 %}
+                          <tr>
+                          <td>{{m.id_modulo.nombre}}</td>
+                          <td>{{m.descripcion}}</td>
+                          <td>{{m.url}}</td>  
+                          <td>{{m.icono}}</td>
+                          <td>
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
+                            <button onclick="modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar{{m.descripcion}}"><i class="fas fa-trash"></i></button>
+                          </td>
+                          </tr>
+                        {% endif %}
+                    {% endfor %}
+                    {% else %}
+                        <center><h4 class="title" >No hay registros disponibles</h4></center>  
+                  {% endif %}
+                  </tbody>
+              </table>
+    </div>
+</div>
+  <!--
+  <div class="pagination">
+      <span class="step-links">
+      {% if menu.has_previous %}
+         <a class="btn btn-primary" href="?page=1">&laquo; Ver primero</a>
+         <a class="btn btn-primary" href="?page={{ menu.previous_page_number }}">Anterior</a>
+      {% endif %}
 
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr><th>Modulo</th><th>Nombre</th><th>Url</th><th>Icono</th><th>Acciones</th></tr>
-        </thead>
-    <tbody>
-    {% if menu %}
-      {% for m in menu %}
-          {% if m.id_padre != 0 %}
-            <tr>
-            <td>{{m.id_modulo.nombre}}</td>
-            <td>{{m.descripcion}}</td>
-            <td>{{m.url}}</td>  
-            <td>{{m.icono}}</td>
-            <td>
-              <button onclick="editar_modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
-              <button onclick="eliminar_modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar {{m.descripcion}}"><i class="fas fa-trash"></i></button>
-
-            </td>
-            </tr>
-          {% endif %}
-      {% endfor %}
-      {% else %}
-        <h1>No hay Menus disponibles</h1>
-    {% endif %}
+      {% if menu.has_next %}
+       <a class="btn btn-primary" href="?page={{ menu.next_page_number }}">Siguiente</a>
+       <a class="btn btn-primary" href="?page={{ menu.paginator.num_pages }}">Ver ultimo &raquo;</a>
+      {% endif %}
       
-        
-    </tbody>
-    
-
-</table>
-  
-  <div>
-      {% if page_obj.has_previous %}
-         <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Anterior</a>
-      {% endif %}
-
-      {% if page_obj.has_next %}
-       <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Siguiente</a> 
-      {% endif %}
-
+      </span>
   </div>
 </div>
-
+  -->
 
 
 {% endblock contenido_principal %}
 
 {% block extrajs %}
 
-<div class="modal fade" id="modal_crear" role="dialog">
+<div class="modal fade" id="mostrar_modal" role="dialog">
 
 
 </div>
 
-<div class="modal fade" id="modal_editar" role="dialog">
 
 
-</div>
 
-<div class="modal fade" id="modal_eliminar" role="dialog">
 
 {% endblock extrajs %}
 
 
 
-
-
-</div>
 
 
 

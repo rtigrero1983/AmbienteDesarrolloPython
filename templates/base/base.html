@@ -68,7 +68,7 @@
                     {% if menu_p.id_padre == 0 %}
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
                          <i class="{{menu_p.icono}}"></i>
-                         <span> {{menu_p.descripcion}} </span>
+                         <span> {{menu_p.id_modulo.nombre}} </span>
                     </a>
                     {% endif %}
                 <div id="menu_{{menu_p.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
