@@ -23,7 +23,7 @@ def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
         permiso = ConfMenu.objects.filter(
-            fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario'))
+            fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         for x in permiso:
             print(x.url)
@@ -50,8 +50,10 @@ def login(request):
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:
-            return redirect("Academico:login")
-    return render(request,'base/login.html')
+            contexto['error'] = 'Claves incorrectas o cuenta inactiva'
+            return render(request,'base/login.html',contexto)
+
+    return render(request,'base/login.html',contexto)
 
 
 def salir(request):

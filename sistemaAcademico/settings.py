@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico_desa',
         'USER': 'python',
         'PASSWORD': 'python.2007',
@@ -94,7 +94,7 @@ DATABASES = {
 """
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico_desa',
         'USER': 'root',
         'PASSWORD':'root',
@@ -102,7 +102,7 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-"""
+
 
 
 # Password validation

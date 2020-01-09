@@ -7,9 +7,6 @@ from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
 
-
-     
-
 urlpatterns = [
     path('',login,name='login'),
     path('salir/',salir,name='logout'),
