@@ -3,7 +3,7 @@
           <header class="cuadro_titulo">
             <h4 class="titulo">Configuracion | Editar Menu</h4>
             </header>
-        <form class="formulario" action="{% url 'Academico:menu' menu_actual.id_menu%}" method="POST">{% csrf_token %}
+        <form class="formulario" action="{% url 'Academico:editar_menu' menu_actual.id_menu %}" method="POST">{% csrf_token %}
         <div class="modal-body" >
          <div class="contenido">
             <br>

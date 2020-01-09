@@ -10,8 +10,6 @@ from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator
 
 
-
-#@cache_page(60 * 10)
 def menu(request):
     contexto = {}
     if 'usuario' in request.session:
@@ -28,9 +26,8 @@ def editar_menu(request,id):
     contexto = {}
     mp = ConfMenu.objects.filter(url__contains='#')
     contexto['lista_padre'] = mp
-    menu_actual= ConfMenu.objects.get(id_menu = id)
+    menu_actual=ConfMenu.objects.get(id_menu=id)
     contexto['menu_actual'] = menu_actual
-
     if request.method == 'POST':
         var_menu_padre = request.POST.get('modulo')
         padre = ConfMenu.objects.get(id_menu=var_menu_padre)
@@ -60,18 +57,9 @@ def eliminar_menu(request,id):
     return render(request,'sistemaAcademico/Configuraciones/Menus/eliminar_menu.html',{'menu':menu})
 
 
-
-class Menu(ListView):
-    model = ConfMenu
-    template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
-    context_object_name = 'menu'
-    queryset =  ConfMenu.objects.filter(id_genr_estado = 97)
-
-
 def nuevo_menu(request):
 
     mp = ConfMenu.objects.filter(url__contains='#').select_related('id_modulo')
-
     if request.method == 'POST':
         var_orden = None
         var_padre = request.POST.get('menu_padre')
@@ -93,6 +81,7 @@ def nuevo_menu(request):
         obj_menu = ConfMenu.objects.get(id_menu=var_padre)
         #--Crea el menu
         menu = ConfMenu.objects.create(id_modulo=obj_modulo,id_padre=var_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=obj_activo,url=var_url,icono=padre.icono,lazy_name=var_lazy_name,name=var_name,view=var_view)
+
         return redirect('Academico:menu')
 
     return render(request,'sistemaAcademico/Configuraciones/Menus/add_menu.html',{'menu_padre':mp})

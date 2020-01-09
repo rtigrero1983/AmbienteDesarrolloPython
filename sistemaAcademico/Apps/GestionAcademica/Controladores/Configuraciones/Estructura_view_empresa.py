@@ -8,7 +8,6 @@ import socket
 from django.views.decorators.cache import cache_page
 
 
-@cache_page(60 * 10)
 def empresas(request):
     if 'usuario' in request.session:
         lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97)
