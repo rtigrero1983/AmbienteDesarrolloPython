@@ -28,17 +28,23 @@ def editar_menu(request,id):
     contexto['lista_padre'] = mp
     menu_actual=ConfMenu.objects.get(id_menu=id)
     contexto['menu_actual'] = menu_actual
+
     if request.method == 'POST':
-        var_menu_padre = request.POST.get('modulo')
-        padre = ConfMenu.objects.get(id_menu=var_menu_padre)
-        modulo = ConfModulo.objects.get(id_menu=int(padre.id_modulo.id_modulo))
-        var_orden = request.POST.get('orden')
-        var_modulo = ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
-        estado = GenrGeneral.objects.get(idgenr_general=97)
         var_nombre = request.POST.get('nom_menu')
-        var_icono=request.POST.get('icono')
         var_url = request.POST.get('url')
-        menu = ConfMenu(id_menu=id,id_modulo=var_modulo,id_padre=var_menu_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=estado,url=var_url,icono=var_icono)
+        var_lazy = request.POST.get('lazyname')
+        estado = GenrGeneral.objects.get(idgenr_general=97)
+
+        menu = ConfMenu(id_menu=id,
+                        id_modulo=menu_actual.id_modulo,
+                        id_padre=menu_actual.id_padre,
+                        orden=menu_actual.orden,
+                        descripcion=var_nombre,
+                        id_genr_estado=estado,
+                        url=var_url,
+                        lazy_name=var_lazy,
+                        icono=menu_actual.icono,
+                        view=request.POST.get('view'))
         menu.save()
         return redirect('Academico:menu')
 
