@@ -25,8 +25,6 @@ def inicio(request):
         permiso = ConfMenu.objects.filter(
             fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-        for x in permiso:
-            print(x.url)
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
         return render(request, 'base/base.html', contexto)
