@@ -20,7 +20,8 @@ class Menu_api(APIView):
                 return Response('no permitido', status=status.HTTP_200_OK)
             else:
                 return Response(serializer.data, status.HTTP_226_IM_USED)
+
         except Exception as e:
-            return Response(self.error_sistema,status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data,status=status.HTTP_404_NOT_FOUND)
 
 
