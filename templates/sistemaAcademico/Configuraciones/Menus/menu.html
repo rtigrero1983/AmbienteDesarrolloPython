@@ -31,15 +31,16 @@
                           <td>{{m.url}}</td>  
                           <td>{{m.icono}}</td>
                           <td>
-                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button>
-                            <button onclick="modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn btn-danger btn-circle" title="Eliminar{{m.descripcion}}"><i class="fas fa-trash"></i></button>
-                          </td>
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button></td>
                           </tr>
                         {% endif %}
                     {% endfor %}
                     {% else %}
+                        <tr>
                         <center><h4 class="title" >No hay registros disponibles</h4></center>  
-                  {% endif %}
+                        </tr>
+                    {% endif %}
+
                   </tbody>
               </table>
     </div>

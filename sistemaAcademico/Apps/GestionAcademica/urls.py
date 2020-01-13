@@ -6,6 +6,7 @@ from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
+from .Api.Configuracion.Api_configuraciones import *
 
 urlpatterns = [
     path('',login,name='login'),
@@ -59,8 +60,7 @@ urlpatterns = [
     path('modulo/'+'timeout/', timeout, name='timeout_modulo'),
     path('usuarios/'+'timeout/', timeout, name='timeout_usuarios'),
     path('empresas/'+'timeout/', timeout, name='timeout_empresas'),
-
-
+    path('api_menu/',Menu_api.as_view(),name='menu_api'),
 ]
 
 

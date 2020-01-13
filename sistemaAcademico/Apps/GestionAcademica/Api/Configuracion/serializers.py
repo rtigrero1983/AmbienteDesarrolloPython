@@ -8,3 +8,8 @@ class moduloSerializers(serializers.ModelSerializer):
         model = ConfModulo
         fields = ['id_modulo','codigo','nombre']
         
+
+class menuSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = ConfMenu
+        fields = ['descripcion']

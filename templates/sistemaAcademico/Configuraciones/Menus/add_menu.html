@@ -24,10 +24,7 @@
                     {%endfor%}
                 </select>
             <br/>
-
-            <label class="texto">Orden:</label>
-                <input type="number" class="cajatexto" name="orden" id="orden" placeholder="Seleccione un orden para este menu">
-            <br/>
+             
 
             <label class="texto">Nombre del menu: </label>
                 <input type="text" name="nom_menu" id="nom_menu" class="cajatexto" placeholder="Ejemplo: Usuarios">
@@ -52,7 +49,7 @@
     
         <div class="botones">
              <br/>
-             <button type="submit" class="btn btn-outline-primary">Guardar</button>
+             <button onclick="validar_usuario()" class="btn btn-outline-primary">Guardar</button>
 
              <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
              </div>
