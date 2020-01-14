@@ -34,6 +34,8 @@ class ConfEmpresa(models.Model):
     def __str__(self):
         return self.nombre
 
+    
+
 
 class ConfModulo(models.Model):
         id_modulo = models.AutoField(primary_key=True)
