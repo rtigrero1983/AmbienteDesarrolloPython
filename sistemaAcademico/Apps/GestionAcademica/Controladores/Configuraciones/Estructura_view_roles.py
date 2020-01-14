@@ -11,7 +11,7 @@ from django.views.decorators.cache import cache_page
 def roles(request):
     if 'usuario' in request.session:
         roles = ConfRol.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
-        return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html',roles)
+        return render(request, 'sistemaAcademico/Configuraciones/Roles/rol.html',{"roles":roles})
     else:
         return HttpResponseRedirect('timeout/')
 

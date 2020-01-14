@@ -1,6 +1,8 @@
 import pickle
 from django.db import models
 from django.urls import path
+
+from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import QuizView
 from .views import *
 from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
@@ -19,6 +21,7 @@ urlpatterns = [
     path('acciones/',acciones,name='acciones'),
     path('permisos/', perfiles, name='permisos'),
     path('api_modulo/',Modulo.as_view(),name='api_modulo'),
+    path('api_empresa/',QuizView.as_view(),name='api_empresa'),
     path('modulo/',modulo,name='modulo'),
     path('empresas/', empresas, name='empresas'),
     #Opciones para el modulo de Admision
