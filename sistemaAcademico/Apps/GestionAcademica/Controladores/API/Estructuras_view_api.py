@@ -14,11 +14,13 @@ class QuizView(APIView):
 
     def get_queryset(self):
         idEmpresa = self.request.query_params.get('id')
-
         queryset = 0
         try:
-            queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
-            print(queryset)
+            if idEmpresa is None:
+                queryset = ConfEmpresa.objects.all()
+            else:
+                queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
+                print(queryset)
         except Exception:
             Response(status= status.HTTP_404_NOT_FOUND)
         return queryset
