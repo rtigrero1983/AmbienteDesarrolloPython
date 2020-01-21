@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block contenido_principal %}
+{%block body%}
+<div class="card-body">
+<form  method="POST">
+    {% csrf_token %}
+
+    <div>
+        <label for="">seleccione el metodo de busqueda</label>
+        <select name="combo" id="">
+            <option value="1" name="id_usuario">id</option>
+            <option value="2" name="user">usuario</option>
+            <option value="3" name="nombre">nombre de la persona</option>
+        </select>
+    </div>
+    <center>
+    <input type="text" name="campo" placeholder="buscar">
+    <button type="submit" > REPORTE EN EXCEL</button>
+    </center>
+</form>
+</div>
+{% endblock body %}
+{% endblock contenido_principal %}
