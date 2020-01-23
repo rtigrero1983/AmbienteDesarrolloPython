@@ -1,4 +1,4 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'base/base.html' %}
 
 
 {% block encabezado %}
@@ -42,45 +42,25 @@
                     <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
                     {% endfor %}
             </select>
-
-
-        </br>
+        <br>
+        <br>
         <label class="texto">
             Tipo de Usuario:
         </label>
-                <select name="tipousuario" class="cajatexto">
-                    <option selected value="">Elija tipo de usuario</option>
-                    {% for genr in genr_general %}
-                    <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
-                    {% endfor %}
-                </select>
+        <div class="form-row grid tabla_lista">
+            <ul class="list-group">
+                {% for genr in genr_general %}
+                    <li class="list-group-item tabla_lista_cont " multiple >
+                        <input type="checkbox" value="{{genr.idgenr_general}}" name="tipousuario">
+                        <label>
+                            {{genr.nombre}}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
         </br>
-
-        <div class="formulario_lado_derecho">
-
-            <div class="form-row grid tabla_lista">
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item tabla_lista_cab">Roles</li>
-                            <li class="list-group-item tabla_lista_cont">
-                               <input type="checkbox" class="estilo_checkbox">
-                                <label>
-                                    Prueba
-                                </label>
-                            </li>
-                    </ul>
-                </div>
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item tabla_lista_cab">Descripcion</li>
-                            <li class="list-group-item tabla_lista_cont">
-                                <center>
-                                    Prueba
-                                </center>
-                            </li>
-                    </ul>
-                </div>
-            </div>
+        </div>
+        </div>
 
         </div>
 

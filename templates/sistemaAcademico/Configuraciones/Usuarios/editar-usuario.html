@@ -1,4 +1,4 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'base/base.html' %}
 
 {% block encabezado %}
 {% endblock encabezado %}
@@ -34,50 +34,37 @@
             <button type="button" class="btn">
                 <i class="far fa-edit"></i>
             </button>
-
-
-        </br>
+        <br>
+        <br>
         <label class="texto">
             Tipo de Usuario:
         </label>
-                <select name="tipousuario" class="cajatexto">
-                    <option selected value="{{ usuario.id_genr_tipo_usuario }}">{{ usuario.id_genr_tipo_usuario.nombre }}</option>
-                    {% for genr in permiso %}
-                         {% if usuario.id_genr_tipo_usuario.nombre != genr.nombre %}
-                             <option class="cajatexto" value="{{genr.idgenr_general}}"> {{genr.nombre}} </option>
-                         {% endif %}
-                    {% endfor %}
-                </select>
-
-        <div class="formulario_lado_derecho">
-            <div class="form-row grid tabla_lista">
-                <div>
-                    <ul class="list-group">
-                         <li class="list-group-item tabla_lista_cab">Roles </li>
-                         {% for r in roles %}
-                            <li class="list-group-item tabla_lista_cont">
-                               <input type="checkbox" value="{{r.nombre}}" class="estilo_checkbox">
-                                <label>
-                                    {{r.nombre}}
-                                </label>
-                            </li>
-                         {% endfor %}
-                    </ul>
-                </div>
-
-            </div>
-
+        <div class="form-row grid tabla_lista">
+            <ul class="list-group">
+                {% for genr in genr_general %}
+                    <li class="list-group-item tabla_lista_cont " multiple >
+                        <input type="checkbox" value="{{genr.idgenr_general}}" name="tipousuario">
+                        <label>
+                            {{genr.nombre}}
+                        </label>
+                    </li>
+                {% endfor %}
+                <button type="button" class="btn">
+                    <i class="far fa-edit"></i>
+                </button>
+            </ul>
+        </br>
+        </div>
         </div>
 
         <br>
         <br>
 
         <center>
-        <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            <button type="reset" class="btn btn-outline-primary">Resetear</button>
+        <button type="submit" class="btn btn-outline-primary">Grabar</button>
+        <button type="reset" class="btn btn-outline-primary">Limpiar</button>
         <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
         </center>
 
     </form>
 {% endblock contenido_principal %}
-
