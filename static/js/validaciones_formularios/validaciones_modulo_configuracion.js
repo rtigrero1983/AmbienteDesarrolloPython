@@ -115,11 +115,10 @@ function guardar_menu(){
 		.then(res => res.json())
 		.then(data => {
 			$.each(data, function(i, item) {
-    				if ($('#descripcion').val() === item.descripion){
-    						$('#descripcion').toggleClass('is-invalid');
-	   						$("#error_nom_menu").css("display","");
-    				}else{
-    					document.getElementById('registrar_menu').submit();
+    				if ($('#descripcion').val() !== item.descripion){
+    					console.log('Nose envia');
+    				}if ($('#descripcion').val()  === item.descripion){
+    					console.log('No Se envia');
     				}
 				});
 		})

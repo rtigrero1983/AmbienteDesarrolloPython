@@ -69,6 +69,7 @@ def nuevo_menu(request):
     if request.method == 'POST':
         var_orden = None
         var_padre = request.POST.get('modulo')
+        print(var_padre)
         padre = ConfMenu.objects.get(id_menu=var_padre)
         obj_modulo= ConfModulo.objects.get(id_modulo=int(padre.id_modulo.id_modulo))
 
