@@ -12,7 +12,7 @@ class moduloSerializers(serializers.ModelSerializer):
 class menuSerializers(serializers.ModelSerializer):
     class Meta:
         model = ConfMenu
-        fields = ['descripcion']
+        fields = "__all__"
 
 
 

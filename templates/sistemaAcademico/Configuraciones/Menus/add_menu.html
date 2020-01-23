@@ -1,65 +1,81 @@
-
-
 <div class="modal-dialog modal-lg" role="document">
-
     <div class="modal-content">
-       
-        <form class="formulario" action="{% url 'Academico:nuevo_menu' %}" method="POST"> {% csrf_token %}
-        <div class="modal-body" >
+            <form class="formulario" id="registrar_menu" name="registrar_menu">{% csrf_token %}
+                    <div class="modal-body" >
+                            <header class="cuadro_titulo">
+                                <h4 class="titulo">Configuracion | Registrar Menu</h4>
+                            </header>
+                     <div class="contenido">
+                        <br/>
+                        <label class="text-dark h6" for="modulo">Modulos:</label>
+                            <select  name="modulo" id="modulo" class="form-control text-dark">
+                                 <option selected="true" class="text-dark" disabled="disabled">
+                                        Seleccione un modulo para este menu:
+                                </option>
+                                {%for mp in menu_padre %}
+                                    <option class="text-success" value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                                {%endfor%}
+                            </select>
 
-            <header class="cuadro_titulo">
-            <h4 class="titulo">Configuracion | Registrar Menu</h4>
-            </header>
+                        <div class="invalid-feedback" style="display: none;" id="error_modulo" name="error_modulo">
+                          <label id="mensaje_modulo" name="mensaje_modulo">Seleccione unos de los modulos disponibles para este menu</label>
+                        </div>
 
-         <div class="contenido">
-            <br/>
+                            <br/>
+                        <label class="text-dark h6" for="descripcion">Nombre del menu: </label>
+                            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Ejemplo: Usuarios" required>
 
-            <label class="texto">Modulos:</label>
-                <select  name="menu_padre" class="cajatexto">
-                     <option selected="true" disabled="disabled">
-                            Seleccione un modulo para este menu:
-                        </option>
-                    {%for mp in menu_padre %}
-                        <option value="{{mp.id_menu}}">{{mp.descripcion}}</option>
-                    {%endfor%}
-                </select>
-            <br/>
-             
+                            <div class="invalid-feedback " id="error_nom_menu" style="display: none;" name="error_nom_menu">
+                                    <label id="mensaje_menu" name="mensaje_menu">Seleccion un modulo valido</label>
+                            </div>
+                        <br/>
+                        
+                        <label class="text-dark h6">Url: </label>
+                            <input type="text" name="url" id="url" class="form-control" placeholder="Ejemplo: Academico:name" required>
+                                <div class="invalid-feedback " id="error_url" style="display: none;" name="error_url">
+                                    <label id="mensaje_url" name="mensaje_url">Url ingresado ya esta en uso, por favor,ingrese otro.</label>
+                            </div>
+                        <br/>
 
-            <label class="texto">Nombre del menu: </label>
-                <input type="text" name="nom_menu" id="nom_menu" class="cajatexto" placeholder="Ejemplo: Usuarios">
-            <br/>
+                        <label class="text-dark text-control h6">Lazy name: </label>
+                            <input type="text" placeholder="Ejemplo: index/" name="lazyname" id="lazyname" class="form-control" required>
+                              <div class="invalid-feedback" style="display: none;" id="error_lazy" name="error_lazy">
+                                <label id="mensaje_lazy" name="mensaje_lazy">Lazy name ingresado ya esta en uso, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
 
-            <label class="texto">Url: </label>
-                <input type="text" name="url" id="url" class="cajatexto" placeholder="Ejemplo: Academico:name">
-            <br/>
+                         <label class="text-dark text-control h6">Name:</label>
+                            <input type="text" placeholder="Ejemplo: index" name="name" id="name" class="form-control" required>
+                            
+                             <div class="invalid-feedback" style="display: none;" id="error_name" name="error_name">
+                                <label id="mensaje_name" name="mensaje_name">Name ingresado ya esta en uso, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
 
-            <label class="texto">Lazy name: </label>
-                <input type="text" placeholder="Ejemplo: index/" name="lazyname" id="path" class="cajatexto">
-            <br/>
+                         <label class="text-dark text-control h6">Nombre del controlador:</label>
+                            <input type="text" placeholder="Ejemplo: index_view" name="view" id="view" class="form-control" required>
+                             <div class="invalid-feedback" style="display: none;" id="error_view" name="error_view">
+                                <label id="mensaje_view" name="mensaje_view">View ya esta siendo utilizado, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
 
-             <label class="texto">Name:</label>
-                <input type="text" placeholder="Ejemplo: index" name="name" id="name" class="cajatexto">
-            <br/>
-
-             <label class="texto">Nombre del controlador:</label>
-                <input type="text" placeholder="Ejemplo: index_view" name="view" id="view" class="cajatexto">
-             <br/>
-            
-    
-        <div class="botones">
-             <br/>
-             <button onclick="validar_usuario()" class="btn btn-outline-primary">Guardar</button>
-
-             <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-             </div>
-         </div>
-        
-             </div>
-        </form>
-
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="button" class="btn btn-outline-primary btn-block" onclick="guardar_menu()" id="btn_guardar_menu" value="Guardar"  name="btn_guardar_menu"/>
+                            </div>
+                        
+                            <div class="form-group col-md-6">
+                                 <button class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+                            </div>
+                          </div> 
+            </form>
     </div>
-
 </div>
 
 
+                              <div class="alert alert-danger alert-dismissible" style="display: none" role="alert">
+                                <button type="button" class="close" data-dismiss = "alert" aria-label = "Close">
+                                  <span aria-hidden = "true">&times;</span>
+                                </button>
+                                <strong>Porfavor llene todos los campos</strong>
+                              </div>

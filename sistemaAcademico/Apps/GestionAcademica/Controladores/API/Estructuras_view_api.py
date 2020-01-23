@@ -30,7 +30,37 @@ class QuizView(APIView):
         queryset = self.get_queryset()
         serializacion = empresaSerializers(queryset,many=True)
         return Response(data=serializacion.data,status= status.HTTP_200_OK)
+        try:
+            if idEmpresa is None:
+                queryset = ConfEmpresa.objects.all()
+                
+            else:
+                queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
+                print(queryset)
+        except Exception:
+            return Response(status= status.HTTP_404_NOT_FOUND) 
 
 
+class Menu_api(APIView): 
+
+    def post(self,request):
+        #palomitas
+        if self.request.data is None:
+            return response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            get_query = self.request.data['descripcion']
+            print(get_query)
+            try:
+                if get_query is None:
+                    return Response(data='No existe',status=status.HTTP_400_BAD_REQUEST)
+                if get_query:
+                    queryset = ConfMenu.objects.filter(descripcion=get_query)
+                    if queryset:
+                        serializacion = menuSerializers(queryset,many=True)
+                        return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
+                    else:
+                        return Response(status=status.HTTP_200_OK)
+            except Exception as e:
+                print(e)      
 
 

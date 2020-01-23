@@ -2,7 +2,7 @@ import pickle
 from django.db import models
 from django.urls import path
 
-from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import QuizView
+from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from .views import *
 from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
@@ -20,8 +20,7 @@ urlpatterns = [
     path('menu/',menu,name='menu'),
     path('acciones/',acciones,name='acciones'),
     path('permisos/', perfiles, name='permisos'),
-    path('api_modulo/',Modulo.as_view(),name='api_modulo'),
-    path('api_empresa/',QuizView.as_view(),name='api_empresa'),
+
     path('modulo/',modulo,name='modulo'),
     path('empresas/', empresas, name='empresas'),
     #Opciones para el modulo de Admision
@@ -63,7 +62,13 @@ urlpatterns = [
     path('modulo/'+'timeout/', timeout, name='timeout_modulo'),
     path('usuarios/'+'timeout/', timeout, name='timeout_usuarios'),
     path('empresas/'+'timeout/', timeout, name='timeout_empresas'),
-    path('api_menu/',Menu_api.as_view(),name='menu_api'),
+
+
+
+    #-----Rest-framework-APIS
+    path('api_menu/',Menu_api.as_view(),name='api_menu'),
+    path('api_modulo/',Modulo.as_view(),name='api_modulo'),
+    path('api_empresa/',QuizView.as_view(),name='api_empresa'),
 ]
 
 

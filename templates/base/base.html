@@ -233,16 +233,17 @@
 
 
 
-
-
-  <script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  
   <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src=" {% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'js/sb-admin-2.min.js' %}"></script>
   <script src="{% static 'js/modales.js'%}"></script>
+  <script type="text/javascript" src="{% static 'js/validaciones_formularios/validaciones_modulo_configuracion.js' %}"></script>
   <script src="{% static 'js/blockUi.js'%}"></script>
   <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
   <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+
 
       <script>
          function mascaraObloqueo(){
@@ -260,12 +261,10 @@
 
         setTimeout($.unblockUI, 1000);
 	}
-
-
         function redireccionar(url){
         mascaraObloqueo();
         var iframe = document.getElementById('iframe');
-        console.log(url);
+        //console.log(url);
         iframe.src = url;
         }
     </script>

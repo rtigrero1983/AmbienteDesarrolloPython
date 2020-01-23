@@ -7,7 +7,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from .serializers import menuSerializers
 from rest_framework import status
 
-class Menu_api(APIView):
+class Menuapi(APIView):
     bandera = 'permitido'
     error_mensaje = 'nombre de menu ya existe por favor ingrese otro'
     error_sistema = 'ocurrio un error interno'
