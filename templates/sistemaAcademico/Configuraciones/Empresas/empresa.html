@@ -7,14 +7,11 @@
   
 {% endblock footer %}
 
-
-
-
 {% block contenido_principal %}
   
 
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Empresa</h4></header>
+<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Unidad Educativa</h4></header>
 
 <br/><br/>
      <button onclick="crear_modal('{% url 'Academico:nueva_empresa' %}')" class="btn btn-outline-primary"><span class="glyphicon glyphicon-plus"></span>nuevo
@@ -48,8 +45,8 @@
                         <td><strong>{{em.telefono}}</strong></td>
                         <td><strong>{{em.correo}}</strong></td>
                       <td>
-                         <button  onclick="crear_modal('{% url 'Academico:editar_empresa' em.id_empresa %}')"  class="btn-info btn-circle" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></button>
-                         <button  onclick="eliminar_modal('{% url 'Academico:eliminar' em.id_empresa %}')"class="btn btn-danger btn-circle" title="Eliminar {{em.nombre}}"><i class="fas fa-trash"></i></button>
+                         <a href="{% url 'Academico:editar_empresa' em.id_empresa %}" class="btn-info btn-circle" title="Editar {{em.empresa}}"><i class="fas fa-info-circle"></i></a>
+                         <a href="{% url 'Academico:eliminar' em.id_empresa %}"  class="btn btn-danger btn-circle" title="Eliminar {{em.empresa}}"><i class="fas fa-info-circle"></i></a>
                       <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
                       </td>
                     </tr>
@@ -78,11 +75,7 @@
   </div>
 
 
-
-    
   {% endblock extrajs %}
-
-  
 
 
 
