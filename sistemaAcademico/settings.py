@@ -79,25 +79,25 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'mysql_cymysql',
-        'NAME': 'bd_academico_desa',
-        'USER': 'python',
-        'PASSWORD': 'python.2007',
-        'HOST': '173.212.207.238',
-        'PORT': 57635,
-    }
-}
-
-"""
+# """
+# # DATABASES = {
+# #     'default': {
+# #         'ENGINE': 'mysql_cymysql',
+# #         'NAME': 'bd_academico_desa',
+# #         'USER': 'python',
+# #         'PASSWORD': 'python.2007',
+# #         'HOST': '173.212.207.238',
+# #         'PORT': 57635,
+# #     }
+# # }
+# #
+# # """
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico_desa',
         'USER': 'root',
-        'PASSWORD':'root',
+        'PASSWORD':'ROOT',
         'HOST': 'localhost',
         'PORT': 3306,
     }
