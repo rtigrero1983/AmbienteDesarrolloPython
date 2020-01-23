@@ -104,14 +104,30 @@ function guardar_menu(){
 			return;
 		}
 
-	formulario_menu = document.getElementById('registrar_menu');
-	var datos = new FormData(formulario_menu); 
-	fetch('/api_menu/',{
-		method = 'POST',
-		body = datos
-	})
-	.then(res => data())
+	var formulario_menu = document.getElementById('registrar_menu');
+	var datos = new FormData(formulario_menu);
 
+
+	fetch('/api_menu/',{
+		method : 'POST',
+		body : datos
+		})
+		.then(res => res.json())
+		.then(data => {
+			$.each(data, function(i, item) {
+    				if ($('#descripcion').val() === item.descripion){
+    						$('#descripcion').toggleClass('is-invalid');
+	   						$("#error_nom_menu").css("display","");
+    				}else{
+    					document.getElementById('registrar_menu').submit();
+    				}
+				});
+		})
+
+
+		.catch(function(err){
+                console.log(err);
+        })
     
 }
 

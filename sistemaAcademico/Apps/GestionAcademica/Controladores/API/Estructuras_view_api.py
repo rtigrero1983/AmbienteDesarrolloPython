@@ -9,6 +9,8 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from sistemaAcademico.Apps.GestionAcademica.Api.Configuracion.serializers import *
 import socket
 from django.views.decorators.cache import cache_page
+from django.http import JsonResponse
+
 
 class QuizView(APIView):
 
@@ -52,6 +54,7 @@ class Menu_api(APIView):
             print(get_query)
             try:
                 if get_query is None:
+
                     return Response(data='No existe',status=status.HTTP_400_BAD_REQUEST)
                 if get_query:
                     queryset = ConfMenu.objects.filter(descripcion=get_query)
@@ -59,7 +62,8 @@ class Menu_api(APIView):
                         serializacion = menuSerializers(queryset,many=True)
                         return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
                     else:
-                        return Response(status=status.HTTP_200_OK)
+                        serializacion = menuSerializers(queryset,many=True)
+                        return Response(data=serializacion.data, status=status.HTTP_200_OK)
             except Exception as e:
                 print(e)      
 

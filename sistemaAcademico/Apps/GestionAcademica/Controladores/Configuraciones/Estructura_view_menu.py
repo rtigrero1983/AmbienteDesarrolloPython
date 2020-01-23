@@ -68,7 +68,7 @@ def nuevo_menu(request):
     mp = ConfMenu.objects.filter(url__contains='#').select_related('id_modulo')
     if request.method == 'POST':
         var_orden = None
-        var_padre = request.POST.get('menu_padre')
+        var_padre = request.POST.get('modulo')
         padre = ConfMenu.objects.get(id_menu=var_padre)
         obj_modulo= ConfModulo.objects.get(id_modulo=int(padre.id_modulo.id_modulo))
 
@@ -78,7 +78,7 @@ def nuevo_menu(request):
             b = int(registro.orden)
             var_orden = b+1
 
-        var_nombre = request.POST.get('nom_menu')
+        var_nombre = request.POST.get('descripcion')
         obj_activo = GenrGeneral.objects.get(idgenr_general=97)
         var_url = request.POST.get('url')
         var_lazy_name = request.POST.get('lazyname')
@@ -86,7 +86,16 @@ def nuevo_menu(request):
         var_view = request.POST.get('view')
         obj_menu = ConfMenu.objects.get(id_menu=var_padre)
         #--Crea el menu
-        menu = ConfMenu.objects.create(id_modulo=obj_modulo,id_padre=var_padre,orden=var_orden,descripcion=var_nombre,id_genr_estado=obj_activo,url=var_url,icono=padre.icono,lazy_name=var_lazy_name,name=var_name,view=var_view)
+        menu = ConfMenu.objects.create(id_modulo=obj_modulo,
+                                       id_padre=var_padre,
+                                       orden=var_orden,
+                                       descripcion=var_nombre,
+                                       id_genr_estado=obj_activo,
+                                       url=var_url,
+                                       icono=padre.icono,
+                                       lazy_name=var_lazy_name,
+                                       name=var_name,
+                                       view=var_view)
 
         return redirect('Academico:menu')
 
