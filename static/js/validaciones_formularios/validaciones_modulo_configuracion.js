@@ -26,8 +26,9 @@ function guardar_menu(){
 		}
 
 	if (descripcion==null
-	   ||descripcion==''
-	   ||descripcion.length==0){
+	   || descripcion==''
+       || /\s/.test(descripcion)
+	   || descripcion.length==0){
 	   		$('#descripcion').toggleClass('is-invalid');
 	   		$("#error_nom_menu").css("display","");
 	   		$("#mensaje_menu").empty();
@@ -42,7 +43,7 @@ function guardar_menu(){
 		}
 
 
-	if (url==null || url=='' || url.length==0 && url.startsWith('Academico:') || url.startsWith('Academico:') === false ){
+	if (url==null || url=='' || url.length==0 || url.startsWith('Academico:') === false || /\s/.test(url)){
 	   		$('#url').toggleClass('is-invalid');
 	   		$("#error_url").css("display","");
 	   		$("#mensaje_url").empty();
@@ -58,7 +59,8 @@ function guardar_menu(){
 
 	if (lazyname==null
 	   ||lazyname==''
-	   ||lazyname.length==0){
+	   ||lazyname.length==0
+	   || /\s/.test(lazyname)){
 	   		$('#lazyname').toggleClass('is-invalid');
 	   		$("#error_lazy").css("display","");
 	   		$("#mensaje_lazy").empty();
@@ -74,7 +76,8 @@ function guardar_menu(){
 
 	if (name==null
 	   ||name==''
-	   ||name.length==0){
+	   ||name.length==0
+	   || /\s/.test(name)){
 	   		$('#name').toggleClass('is-invalid');
 	   		$("#error_name").css("display","");
 	   		$("#mensaje_name").empty();
@@ -90,14 +93,15 @@ function guardar_menu(){
 
 	if (view==null
 	   ||view==''
-	   ||view.length==0){
+	   ||view.length==0
+	   || /\s/.test(view)){
 	   		$('#view').toggleClass('is-invalid');
 	   		$("#error_view").css("display","");
 	   		$("#mensaje_view").empty();
 			$("#mensaje_view").append("Seleccione el view valido para este menu.");
 			$('#btn_guardar_menu').removeAttr("onclick");
 			setTimeout(function(){
-				$("#view").removeClass('is-invalid');
+				$("#view").removeClass('is-warning');
 				$("#error_view").css("display","none");
 				$('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});				
 				},3000);
@@ -113,15 +117,29 @@ function guardar_menu(){
 		body : datos
 		})
 		.then(res => res.json())
-		.then(data => {
-			$.each(data, function(i, item) {
-    				if ($('#descripcion').val() !== item.descripion){
-    					console.log('Nose envia');
-    				}if ($('#descripcion').val()  === item.descripion){
-    					console.log('No Se envia');
-    				}
-				});
-		})
+
+		.then(function(data){
+
+		        if(data==''){
+		            formulario_menu.submit();
+		        }
+
+		        if(data[0].descripcion==descripcion){
+		            $('#descripcion').toggleClass('is-invalid');
+	   		            $("#error_nom_menu").css("display","");
+	   		                $('#btn_guardar_menu').removeAttr("onclick");
+			            setTimeout(function(){
+				            $("#descripcion").removeClass('is-invalid');
+				                $("#error_nom_menu").css("display","none");
+				                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
+				        },3000);
+				        return;
+		        }
+
+		        else{
+		            console.log(data[0].descripcion);
+		        }
+		    })
 
 
 		.catch(function(err){
@@ -129,5 +147,7 @@ function guardar_menu(){
         })
     
 }
+
+
 
 

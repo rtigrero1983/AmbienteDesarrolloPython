@@ -54,7 +54,6 @@ class Menu_api(APIView):
             print(get_query)
             try:
                 if get_query is None:
-
                     return Response(data='No existe',status=status.HTTP_400_BAD_REQUEST)
                 if get_query:
                     queryset = ConfMenu.objects.filter(descripcion=get_query)
