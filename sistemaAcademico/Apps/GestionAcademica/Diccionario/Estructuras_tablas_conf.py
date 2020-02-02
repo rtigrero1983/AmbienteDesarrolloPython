@@ -34,9 +34,6 @@ class ConfEmpresa(models.Model):
     def __str__(self):
         return self.nombre
 
-    
-
-
 class ConfModulo(models.Model):
         id_modulo = models.AutoField(primary_key=True)
         codigo = models.CharField(max_length=20, blank=False, null=False)
@@ -72,7 +69,6 @@ class ConfRol(models.Model):
 
 class ConfMenu(models.Model):
     id_menu = models.AutoField(primary_key=True)
-    id_modulo = models.ForeignKey(ConfModulo,on_delete=models.CASCADE, db_column='id_modulo', related_name="fk_menu_modulo")
     id_padre = models.IntegerField(blank=False,null=False)
     orden = models.IntegerField(blank=False, null=False)
     descripcion = models.CharField(max_length=45, blank=False, null=False, db_column='descripcion')
@@ -99,11 +95,6 @@ class ConfMenu(models.Model):
         return self.view, self.id_genr_estado,self.id_modulo,self.id_menu
 
 
-    
-    
-    
-
-
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, blank=False, null=False)
@@ -122,7 +113,7 @@ class ConfUsuario(models.Model):
 
 
 class ConfUsuario_rol(models.Model):
-    idconf_usuario_rol = models.AutoField(primary_key=True)
+    id_usuario_rol = models.AutoField(primary_key=True)
     id_usuario = models.ForeignKey(ConfUsuario, on_delete=models.CASCADE, related_name="fkusuario_rol", db_column='id_usuario')
     id_rol =models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fkrol_usuario", db_column='id_rol')
 
@@ -134,12 +125,37 @@ class ConfUsuario_rol(models.Model):
     def __int__(self):
         return self.idconf_usuario_rol
 
+class ConfModulo_menu(models.Model):
+    id_modulo_menu = models.AutoField(primary_key=True)
+    id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_modmen_modulo", db_column='id_modulo')
+    id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_modmen_menu", db_column='id_menu')
+
+    class Meta:
+        verbose_name = 'Modulo_Menu'
+        verbose_name_plural = 'Modulos_Menus'
+        db_table = 'conf_modulo_menu'
+
+    def __init__(self):
+        return self.id_modulo_menu
+
+class ConfAccion(models.Model):
+        id_accion = models.AutoField(primary_key=True)
+        descripcion = models.CharField(max_length=20, blank=False, null=False)
+        id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE,related_name="fk_accion_menu", db_column='id_menu')
+        id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,related_name="fk_accion_genr" , db_column='id_genr_estado')
+
+        class Meta:
+            verbose_name = 'Accion'
+            verbose_name_plural = 'Acciones'
+            db_table = 'conf_accion'
+
+        def __init__(self):
+            return self.id_accion
 
 class ConfPermiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
-    id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_permiso_menu", db_column='id_menu')
-    id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_permiso_modulo", db_column='id_modulo')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_permiso_estado", db_column='id_genr_estado')
+    id_modulo_menu = models.ForeignKey(ConfModulo_menu, on_delete=models.CASCADE, related_name="fk_permiso_modmenu", db_column='id_modulo_menu')
+    id_usuario_rol = models.ForeignKey(ConfUsuario_rol, on_delete=models.CASCADE, related_name="fk_permiso_usurol", db_column='id_usuario_rol')
 
     class Meta:
         verbose_name = 'Permiso',
@@ -149,7 +165,7 @@ class ConfPermiso(models.Model):
     def __int__(self):
         return self.id_permiso
 
-
+"""
 class Conf_rol_permiso(models.Model):
     idconf_rol_permiso = models.AutoField(primary_key=True)
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fk_detalle_rol", db_column='id_rol')
@@ -165,3 +181,4 @@ class Conf_rol_permiso(models.Model):
 
     def __int__(self):
         return self.id_permiso_rol
+"""

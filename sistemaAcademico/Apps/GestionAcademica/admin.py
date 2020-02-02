@@ -35,15 +35,15 @@ admin.site.register(ConfModulo,ConfModuloAdmin)
 
 
 class ConfRolAdmin(admin.ModelAdmin):
-    search_fields = ['nombre','codigo']
-    list_display = ('id_rol','codigo','nombre',)
+    search_fields = ['nombre','codigo','id_genr_estado']
+    list_display = ('id_rol','codigo','nombre','id_genr_estado')
 
 admin.site.register(ConfRol,ConfRolAdmin)
 
 
 class ConfMenuAdmin(admin.ModelAdmin):
     search_fields = ['nombre','codigo','descripcion','id_genr_estado','view']
-    list_display = ('id_menu','id_modulo','id_padre','orden','descripcion','id_genr_estado','url','lazy_name','name','view')
+    list_display = ('id_menu','id_padre','orden','descripcion','id_genr_estado','url','lazy_name','name','view')
 
 admin.site.register(ConfMenu,ConfMenuAdmin)
 
@@ -51,17 +51,23 @@ admin.site.register(ConfMenu,ConfMenuAdmin)
 
 class ConfPermisoAdmin(admin.ModelAdmin):
     search_fields = ['id_permiso']
-    list_display = ('id_permiso','id_menu','id_modulo','id_genr_estado',)
+    list_display = ('id_permiso','id_modulo_menu','id_usuario_rol',)
 
 admin.site.register(ConfPermiso,ConfPermisoAdmin)
 
 
-class ConfRolPermisoAdmin(admin.ModelAdmin):
-    search_fields = ['idconf_rol_permiso','id_rol','id_permiso_rol']
-    list_display = ('idconf_rol_permiso','id_rol','id_permiso_rol',)
+class ConfModulo_menuAdmin(admin.ModelAdmin):
+    search_fields = ['id_modulo_menu']
+    list_display = ('id_modulo_menu','id_modulo','id_menu',)
 
-admin.site.register(Conf_rol_permiso,ConfRolPermisoAdmin)
+admin.site.register(ConfModulo_menu,ConfModulo_menuAdmin)
 
+
+class ConfAccionAdmin(admin.ModelAdmin):
+    search_fields = ['id_accion']
+    list_display = ('id_accion','descripcion','id_menu','id_genr_estado',)
+
+admin.site.register(ConfAccion,ConfAccionAdmin)
 
 """"
 class ConfPersonaAdmin(admin.ModelAdmin):
