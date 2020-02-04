@@ -14,9 +14,7 @@ import hashlib
 from django.template.loader import get_template
 from django.views.decorators.cache import cache_page
 
-
-
-
+from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu
 
 cache_page(60*10)
 def inicio(request):
