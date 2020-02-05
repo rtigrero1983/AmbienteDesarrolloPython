@@ -1,10 +1,15 @@
-var $ = jQuery.noConflict();
+
 
 function guardar_menu(){
 
 	var $ = jQuery.noConflict();
 	var descripcion = $('#descripcion').val();
 	var modulo =  $('#modulo').val();
+
+	console.log(modulo);
+	console.log(modulo);
+	console.log(modulo);
+
 	var url =  $('#url').val();
 	var name = $('#name').val();
 	var lazyname = $('#lazyname').val();
@@ -16,12 +21,13 @@ function guardar_menu(){
 	   		$("#mensaje_modulo").empty();
 			$("#mensaje_modulo").append("Este campo no debe estar incompleto. Porfavor seleccione uno de los modulos disponibles.");
 			$('#btn_guardar_menu').removeAttr("onclick");
+
 				setTimeout(function(){
 				$("#modulo").removeClass('is-invalid');
 				$("#error_modulo").css("display","none");
-				$("#error_nom_menu").css("display","none");
 				$('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});	
 				},3000);
+
 			return;
 		}
 
@@ -120,32 +126,76 @@ function guardar_menu(){
 
 		.then(function(data){
 
-		        if(data==''){
-		            formulario_menu.submit();
-		        }
+							if (data[0] === undefined){
 
-		        if(data[0].descripcion==descripcion){
-		            $('#descripcion').toggleClass('is-invalid');
-	   		            $("#error_nom_menu").css("display","");
+								console.log('valores no definidos');
+							}
+
+							else{
+							console.log(data[0]);
+		    				 if(data[0].descripcion == $('#descripcion').val()){
+		    				     $('#descripcion').toggleClass('is-invalid');
+	   						         $("#error_nom_menu").css("display","");
+	   						             $('#btn_guardar_menu').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#descripcion").removeClass('is-invalid');
+							                $("#error_nom_menu").css("display","none");
+							                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
+							        },3000);
+		    				 }
+
+		    				if(data[0].url == $('#url').val()){
+
+		    				 	 console.log(data[0].descripcion);
+		    				     console.log(data[0].url);
+		    				     console.log(data[0].id_modulo);
+		    				     console.log(data[0].lazy_name);
+		    				     console.log(data[0].name);
+		    				     $('#url').toggleClass('is-invalid');
+	   						         $("#error_url").css("display","");
+	   						             $('#btn_guardar_menu').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#url").removeClass('is-invalid');
+							                $("#error_url").css("display","none");
+							                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
+							        },3000);
+							     }
+							if(data[0].name == $('#name').val() ){
+		    				     $('#name').toggleClass('is-invalid');
+	   						         $("#error_name").css("display","");
+	   						             $('#btn_guardar_menu').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#name").removeClass('is-invalid');
+							                $("#error_name").css("display","none");
+							                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
+							        },3000);
+		    				 }
+
+		         if(data[0].lazy_name == $('#lazyname').val() && data[0].lazy_name !== undefined){
+		            $('#lazyname').toggleClass('is-invalid');
+	   		            $("#error_lazyname").css("display","");
 	   		                $('#btn_guardar_menu').removeAttr("onclick");
 			            setTimeout(function(){
-				            $("#descripcion").removeClass('is-invalid');
-				                $("#error_nom_menu").css("display","none");
+				            $("#name").removeClass('is-invalid');
+				                $("#error_lazyname").css("display","none");
 				                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
 				        },3000);
-				        return;
 		        }
 
-		        else{
-		            console.log(data[0].descripcion);
+
+				if(data[0].view == $('#view').val() && data[0].view !== undefined){
+		            $('#view').toggleClass('is-invalid');
+	   		            $("#error_view").css("display","");
+	   		                $('#btn_guardar_menu').removeAttr("onclick");
+			            setTimeout(function(){
+				            $("#view").removeClass('is-invalid');
+				                $("#error_view").css("display","none");
+				                    $('#btn_guardar_menu').attr({onclick: 'guardar_menu()'});
+				        },3000);
 		        }
-		    })
 
-
-		.catch(function(err){
-                console.log(err);
-        })
-    
+		        }
+		    })    
 }
 
 

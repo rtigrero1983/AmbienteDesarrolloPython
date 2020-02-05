@@ -14,15 +14,19 @@ import hashlib
 from django.template.loader import get_template
 from django.views.decorators.cache import cache_page
 
-from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu
+from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu,ConfPermiso
 
-cache_page(60*10)
+
+
+def pruebas(request):
+    roles = ConfRol.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
+    return render(request,'base/pruebas.html',{'r':roles})
 def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
-        permiso = ConfModulo_menu.objects.filter(
-            #fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
-            fk_permiso_modmenu__id_usuario_rol__id_usuario=request.session.get('usuario')).select_related('id_modulo')
+       # permiso = ConfPermiso.objects.filter(
+        #    fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
+        print(permiso)
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario

@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-            <form class="formulario" role="form" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:nuevo_menu' %}">{% csrf_token %}
+            <form class="formulario" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:nuevo_menu' %}">{% csrf_token %}
                     <div class="modal-body" >
                             <header class="cuadro_titulo">
                                 <h4 class="titulo">Configuracion | Registrar Menu</h4>
@@ -20,21 +20,22 @@
                         <div class="invalid-feedback" style="display: none;" id="error_modulo" name="error_modulo">
                           <label id="mensaje_modulo" name="mensaje_modulo">Seleccione unos de los modulos disponibles para este menu</label>
                         </div>
-
-                            <br/>
+                        <br/>
                         <label class="text-dark h6" for="descripcion">Nombre del menu: </label>
                             <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Ejemplo: Usuarios" required>
 
                             <div class="invalid-feedback " id="error_nom_menu" style="display: none;" name="error_nom_menu">
                                     <label id="mensaje_menu" name="mensaje_menu">Nombre del menu ya es uso. porfavor,ingrese otro</label>
                             </div>
+                        
                         <br/>
                         
                         <label class="text-dark h6">Url: </label>
                             <input type="text" name="url" id="url" class="form-control" placeholder="Ejemplo: Academico:name" required>
+
                                 <div class="invalid-feedback " id="error_url" style="display: none;" name="error_url">
                                     <label id="mensaje_url" name="mensaje_url">Url ingresado ya esta en uso, por favor,ingrese otro.</label>
-                            </div>
+                                </div>
                         <br/>
 
                         <label class="text-dark text-control h6">Lazy name: </label>

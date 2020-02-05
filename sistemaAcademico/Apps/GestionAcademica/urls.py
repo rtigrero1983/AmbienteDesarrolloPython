@@ -20,7 +20,7 @@ urlpatterns = [
     path('menu/',menu,name='menu'),
     path('acciones/',acciones,name='acciones'),
     path('permisos/', perfiles, name='permisos'),
-
+    path('pruebas/', pruebas, name='pruebas'),
     path('modulo/',modulo,name='modulo'),
     path('empresas/', empresas, name='empresas'),
     #Opciones para el modulo de Admision
