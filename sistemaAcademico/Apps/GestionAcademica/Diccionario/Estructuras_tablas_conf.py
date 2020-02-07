@@ -45,12 +45,11 @@ class ConfModulo(models.Model):
             verbose_name_plural = 'Modulos',
             db_table = 'conf_modulo'
 
-        def __unicode__(self):
-            return self.nombre
+        def __str__(self):
+            return self.nombre, self.codigo
 
         def __unicode__(self):
-            return self.codigo
-        
+            return self.id_modulo, self.id_genr_estado
 
 
 class ConfRol(models.Model):
@@ -89,10 +88,10 @@ class ConfMenu(models.Model):
         return self.name,self.lazy_name,self.descripcion,self.icono,self.url,self.lazy_name
 
     def __int__(self):
-        return self.orden ,self.id_padre
+        return self.orden, self.id_padre
 
     def __unicode__(self):
-        return self.view, self.id_genr_estado,self.id_modulo,self.id_menu
+        return self.view, self.id_genr_estado, self.id_menu
 
 
 class ConfUsuario(models.Model):
@@ -123,7 +122,7 @@ class ConfUsuario_rol(models.Model):
         db_table = 'conf_usuario_rol'
 
     def __int__(self):
-        return self.idconf_usuario_rol
+        return self.id_usuario_rol
 
 class ConfModulo_menu(models.Model):
     id_modulo_menu = models.AutoField(primary_key=True)
@@ -135,8 +134,8 @@ class ConfModulo_menu(models.Model):
         verbose_name_plural = 'Modulos_Menus'
         db_table = 'conf_modulo_menu'
 
-    def __init__(self):
-        return self.id_modulo_menu
+    def __unicode__(self):
+        return self.id_modulo_menu, self.id_menu, self.id_modulo
 
 class ConfAccion(models.Model):
         id_accion = models.AutoField(primary_key=True)
@@ -149,7 +148,7 @@ class ConfAccion(models.Model):
             verbose_name_plural = 'Acciones'
             db_table = 'conf_accion'
 
-        def __init__(self):
+        def __int__(self):
             return self.id_accion
 
 class ConfPermiso(models.Model):
@@ -163,7 +162,10 @@ class ConfPermiso(models.Model):
         db_table = 'conf_permiso'
 
     def __int__(self):
-        return self.id_permiso
+        return self.id_modulo
+
+    def __unicode__(self):
+        return self.id_usuario_rol
 
 """
 class Conf_rol_permiso(models.Model):

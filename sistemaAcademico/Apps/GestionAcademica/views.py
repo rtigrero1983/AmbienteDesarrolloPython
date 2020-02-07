@@ -19,15 +19,27 @@ from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModu
 
 
 def pruebas(request):
-    roles = ConfRol.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
-    return render(request,'base/pruebas.html',{'r':roles})
+    #permiso = ConfPermiso.objects.filter(id_usuario_rol__id_usuario=8).select_related('id_modulo_menu')
+    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
+    for p in mpss:
+        print(p.id_modulo_menu)
+    return render(request,'base/pruebas.html',{'menus':mpss})
+
+
+
+
+
 def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
-       # permiso = ConfPermiso.objects.filter(
-        #    fk_permiso_menu__fk_permiso_rol__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_modulo')
-        print(permiso)
+
+        permiso = ConfModulo_menu.objects.filter(
+            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related(
+            'id_menu', 'id_modulo')
+        for p in permiso:
+            print(p.id_modulo.nombre)
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
         return render(request, 'base/base.html', contexto)
