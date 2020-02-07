@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{%load staticfiles%}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
@@ -9,19 +10,27 @@
 <form  method="POST">
     {% csrf_token %}
 
-    <div>
-        <label for="">seleccione el metodo de busqueda</label>
+    <div class="label label-info">
+        <label for=""><b>Elegir formato a imprimir:</b></label>
+        <select name="combo2" id="comboR">
+             <option value="1" name="exel">EXCEL</option>
+             <option value="2" name="pdf">PDF</option>
+         </select> &nbsp;     <button type="submit"><img src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
+        <button type="submit"><img src="{%static 'img/pdf1.ico'%}" alt="REPORTE EN PDF" height="30" width="30"></button>
+        <br>
+        <br>
+
+        <label for=""><b>Seleccione el metodo de busqueda:</b></label>
         <select name="combo" id="">
             <option value="1" name="id_usuario">id</option>
             <option value="2" name="user">usuario</option>
-            <option value="3" name="nombre">nombre de la persona</option>
-        </select>
+            <option value="3" name="nombre">nombre</option>
+        </select>&nbsp; <input type="text" name="campo" placeholder="buscar">
     </div>
-    <center>
-    <input type="text" name="campo" placeholder="buscar">
-    <button type="submit" > REPORTE EN EXCEL</button>
-    </center>
+
 </form>
 </div>
 {% endblock body %}
+
 {% endblock contenido_principal %}
+
