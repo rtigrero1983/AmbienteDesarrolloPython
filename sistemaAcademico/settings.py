@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'mysql_cymysql',
-        'NAME':'bd_academico_2020',
+        'NAME':'sa_prueba',
         'USER':'root',
         'PASSWORD':'root',
         'HOST': 'localhost',

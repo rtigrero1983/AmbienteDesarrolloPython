@@ -91,7 +91,7 @@ class ConfMenu(models.Model):
         return self.orden, self.id_padre
 
     def __unicode__(self):
-        return self.view, self.id_genr_estado, self.id_menu
+        return  self.id_genr_estado
 
 
 class ConfUsuario(models.Model):

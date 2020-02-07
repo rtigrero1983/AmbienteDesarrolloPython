@@ -65,6 +65,7 @@
 {% for menu_p in permisos  %}
 
          <li class="nav-item">
+
              {% if menu_p.id_menu.id_padre == 0 %}
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
 

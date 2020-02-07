@@ -34,10 +34,10 @@ def inicio(request):
         contexto = {}
 
         permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related(
-            'id_menu', 'id_modulo')
+            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario'))
+
         for p in permiso:
-            print(p.id_modulo.nombre)
+            print(p.id_menu.descripcion)
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
 
         contexto['permisos'] = permiso
