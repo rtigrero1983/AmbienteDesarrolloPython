@@ -82,7 +82,7 @@
 
                         {% for menu_h in permisos %}
                                 {% if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
-                                      <a class="collapse-item"  id="item">
+                                      <a class="collapse-item" onclick="redireccionar('{% url menu_h.id_menu.url %}')"  id="item">
                                       <i class="{{menu_h.id_menu.icono}}"></i>
                                       {{menu_h.id_menu.descripcion}}</a>
                                 {% endif %}
@@ -204,9 +204,6 @@
               {% block contenido_principal %}
                 <div class="div_cont">
         				<iframe id="iframe" src="{% url 'Academico:pantalla_principal' %}"  frameborder="0" width="100%" height="100%"  scrolling="yes"></iframe>
-    			        {% for p in permisos %}
-                            <a> {{p.id_modulo.nombre}} </a>
-                        {% endfor %}
                 </div>
               {% endblock contenido_principal %}
            <!-- /.container-fluid -->
