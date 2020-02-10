@@ -54,13 +54,14 @@ urlpatterns = [
     path('Pantalla_principal/',pantalla_principal,name='pantalla_principal'),
 #--------------timeout-------
     path('timeout/', timeout, name='timeout'),
-    path('inicio/'+'timeout/', timeout, name='timeout_inicio'),
-    path('acciones/'+'timeout/', timeout, name='timeout_acciones'),
-    path('roles/'+'timeout/', timeout, name='timeout_roles'),
-    path('menu/'+'timeout/', timeout, name='timeout_menu'),
-    path('modulo/'+'timeout/', timeout, name='timeout_modulo'),
-    path('usuarios/'+'timeout/', timeout, name='timeout_usuarios'),
-    path('empresas/'+'timeout/', timeout, name='timeout_empresas'),
+    path('inicio/' + 'timeout/', timeout, name='timeout_inicio'),
+    path('acciones/' + 'timeout/', timeout, name='timeout_acciones'),
+    path('perfiles/' + 'timeout/', timeout, name='timeout_perfiles'),
+    path('roles/' + 'timeout/', timeout, name='timeout_roles'),
+    path('menu/' + 'timeout/', timeout, name='timeout_menu'),
+    path('modulo/' + 'timeout/', timeout, name='timeout_modulo'),
+    path('usuarios/' + 'timeout/', timeout, name='timeout_usuarios'),
+    path('empresas/' + 'timeout/', timeout, name='timeout_empresas'),
 
 
 

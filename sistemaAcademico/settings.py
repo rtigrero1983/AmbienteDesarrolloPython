@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,9 +85,9 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'mysql_cymysql',
-        'NAME':'bd_academico_2020',
+        'NAME':'sa_prueba',
         'USER':'root',
-        'PASSWORD':'root',
+        'PASSWORD':'Anderson10001',
         'HOST': 'localhost',
         'PORT': 3306,
     } 
@@ -153,7 +155,8 @@ INTERNAL_IPS = {'127.0.0.1',}
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
-
-SESSION_COOKIE_AGE = 8000
+SESSION_COOKIE_AGE = 60
+SESSION_EXPIRE_SECONDS = 60
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
 SESSION_SAVE_EVERY_REQUEST= True
