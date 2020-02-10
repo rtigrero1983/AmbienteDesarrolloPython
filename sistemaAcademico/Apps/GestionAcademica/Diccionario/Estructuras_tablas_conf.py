@@ -100,7 +100,7 @@ class ConfUsuario(models.Model):
     clave = models.CharField(max_length=45, blank=False, null=False)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete = models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Usuario',
@@ -128,6 +128,7 @@ class ConfModulo_menu(models.Model):
     id_modulo_menu = models.AutoField(primary_key=True)
     id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_modmen_modulo", db_column='id_modulo')
     id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_modmen_menu", db_column='id_menu')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Modulo_Menu'
@@ -135,7 +136,7 @@ class ConfModulo_menu(models.Model):
         db_table = 'conf_modulo_menu'
 
     def __unicode__(self):
-        return self.id_modulo_menu, self.id_menu, self.id_modulo
+        return self.id_modulo_menu, self.id_menu, self.id_modulo,self.id_genr_estado
 
 class ConfAccion(models.Model):
         id_accion = models.AutoField(primary_key=True)

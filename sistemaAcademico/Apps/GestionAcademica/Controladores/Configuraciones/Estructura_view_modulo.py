@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from sistemaAcademico.Apps.GestionAcademica.Api.Configuracion.serializers import *
+from sistemaAcademico.Apps.GestionAcademica.Serializers.Configuracion.serializers import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfModulo
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 from django.views.decorators.cache import cache_page
@@ -60,7 +60,7 @@ class Modulo(APIView):
          return Response("Datos actualizados",status=status.HTTP_202_ACCEPTED)
 
 
-@cache_page(60 * 10)
+
 def modulo(request):
     if 'usuario' in request.session:
         t = get_template('sistemaAcademico/Configuraciones/Modulos/modulo.html')

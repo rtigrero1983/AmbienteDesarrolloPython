@@ -6,11 +6,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
-from sistemaAcademico.Apps.GestionAcademica.Api.Configuracion.serializers import *
+from sistemaAcademico.Apps.GestionAcademica.Serializers.Configuracion.serializers import *
 import socket
 from django.views.decorators.cache import cache_page
 from django.http import JsonResponse
-
+from django.db.models import Q
 
 class QuizView(APIView):
 
@@ -46,23 +46,31 @@ class QuizView(APIView):
 class Menu_api(APIView): 
 
     def post(self,request):
-        #palomitas
         if self.request.data is None:
             return response(status=status.HTTP_204_NO_CONTENT)
         else:
-            get_query = self.request.data['descripcion']
-            print(get_query)
+            descripcion = self.request.data['descripcion']
+            url = self.request.data['url']
+            lazyname = self.request.data['lazyname']
+            view = self.request.data['view']
+            name = self.request.data['name']
             try:
-                if get_query is None:
-                    return Response(data='No existe',status=status.HTTP_400_BAD_REQUEST)
-                if get_query:
-                    queryset = ConfMenu.objects.filter(descripcion=get_query)
-                    if queryset:
-                        serializacion = menuSerializers(queryset,many=True)
-                        return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
-                    else:
-                        serializacion = menuSerializers(queryset,many=True)
-                        return Response(data=serializacion.data, status=status.HTTP_200_OK)
+                
+                queryset = ConfMenu.objects.filter(
+                    Q(descripcion__contains=descripcion)
+                    |Q(url=url)#or
+                    |Q(view=view)#or
+                    |Q(lazy_name=lazyname)#or
+                    |Q(name=name)#or
+                    & Q(id_genr_estado=97)#and
+                )
+
+                if queryset:  
+                    serializacion = menuSerializers(queryset,many=True)
+                    return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
+                else:
+                    serializacion = menuSerializers(queryset,many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_200_OK)
             except Exception as e:
                 print(e)      
 

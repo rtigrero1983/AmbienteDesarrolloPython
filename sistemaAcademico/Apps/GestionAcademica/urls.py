@@ -8,7 +8,6 @@ from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
-from .Api.Configuracion.Api_configuraciones import *
 
 urlpatterns = [
     path('',login,name='login'),

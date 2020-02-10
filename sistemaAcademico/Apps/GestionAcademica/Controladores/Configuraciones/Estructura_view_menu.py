@@ -30,19 +30,13 @@ def editar_menu(request,id):
     contexto['menu_actual'] = menu_actual
 
     if request.method == 'POST':
-        var_nombre = request.POST.get('nom_menu')
-        var_url = request.POST.get('url')
-        var_lazy = request.POST.get('lazyname')
-        estado = GenrGeneral.objects.get(idgenr_general=97)
-
         menu = ConfMenu(id_menu=id,
-                        id_modulo=menu_actual.id_modulo,
                         id_padre=menu_actual.id_padre,
                         orden=menu_actual.orden,
-                        descripcion=var_nombre,
-                        id_genr_estado=estado,
-                        url=var_url,
-                        lazy_name=var_lazy,
+                        descripcion=request.POST.get('nom_menu'),
+                        id_genr_estado=GenrGeneral.objects.get(idgenr_general=97),
+                        url=request.POST.get('url'),
+                        lazy_name=request.POST.get('lazyname'),
                         icono=menu_actual.icono,
                         view=request.POST.get('view'))
         menu.save()
@@ -68,35 +62,33 @@ def nuevo_menu(request):
         mp = ConfMenu.objects.filter(url__contains='#')
         if request.method == 'POST':
             var_orden = None
-            padre = ConfMenu.objects.get(id_menu=request.POST.get('modulo'))
-            # 
-            obj_modulo= ConfModulo.objects.get(id_modulo=int(padre.id_modulo.id_modulo))
-    
             #--Guarda el ultimo orden guardado y le suma uno para guardar en el nuevo menu
-            lista_orden= ConfMenu.objects.filter(id_padre=var_padre).order_by('-orden')[:1]
+            lista_orden= ConfMenu.objects.filter(id_padre=request.POST.get('modulo')).order_by('-orden')[:1]
+            
             for registro in lista_orden:
                 b = int(registro.orden)
                 var_orden = b+1
-    
+
             var_nombre = request.POST.get('descripcion')
             obj_activo = GenrGeneral.objects.get(idgenr_general=97)
             var_url = request.POST.get('url')
             var_lazy_name = request.POST.get('lazyname')
             var_name = request.POST.get('name')
             var_view = request.POST.get('view')
-            obj_menu = ConfMenu.objects.get(id_menu=var_padre)
+            obj_menu = ConfMenu.objects.get(id_menu=request.POST.get('modulo'))
+            
             #--Crea el menu
             menu = ConfMenu.objects.create(
-                                           id_padre=var_padre,
+                                           id_padre=request.POST.get('modulo'),
                                            orden=var_orden,
                                            descripcion=var_nombre,
                                            id_genr_estado=obj_activo,
                                            url=var_url,
-                                           icono=padre.icono,
+                                           icono=obj_menu.icono,
                                            lazy_name=var_lazy_name,
                                            name=var_name,
-                                           view=var_view)
-    
+                                           view=var_view
+                                           )
             return redirect('Academico:menu')
 
 

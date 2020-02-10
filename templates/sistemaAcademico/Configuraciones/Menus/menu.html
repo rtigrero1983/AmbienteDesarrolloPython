@@ -9,64 +9,78 @@
 
 {% block contenido_principal %}
 
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Menu </h4></header>
+<header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Menu </h4></header>
+
+
 
 <br/><br/>
-     <button onclick="modal('{% url 'Academico:nuevo_menu' %} ')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
-</button>
+<div >
+  
+
+</div>
+      <div class="card shadow mb-8">
+            <div class="btn-group btn-block" role="group" aria-label="Basic example">
+            <button id="registrar" onclick="modal('{% url 'Academico:nuevo_menu' %} ')" type="button" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon      glyphicon-plus"></button>
+            <button type="button" class="btn btn-success">Generar Excel</button>
+            <button type="button" class="btn btn-danger">Gerenar PDF</button>
+      </div>
+
+</div>     
 <br/><br/>
-<div class="card-body">
-  <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" data-page-length='5'>
-                      <thead>
-                          <tr><th>Modulo</th><th>Nombre</th><th>Url</th><th>Icono</th><th>Acciones</th></tr>
-                      </thead>
-                  <tbody>
-                  {% if menu %}
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+
+
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Menus disponibles en el sistema</h6>
+            </div>
+
+            <div class="card-body ">
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-primary">
+                    <tr class="text-light text-center" >
+                      <th>Nombre del menu</th>
+                      <th>Url</th>
+                      <th>Icono</th>
+                      <th>Acciones</th>
+
+                    </tr>
+                  </thead>
+                   <tbody>
                     {% for m in menu %}
-                        {% if m.id_padre != 0 %}
-                          <tr>
-                          <td>{{m.id_modulo.nombre}}</td>
-                          <td>{{m.descripcion}}</td>
+                       {% if m.id_padre != 0 %}
+
+                        <tr class="text-center" style="border-width:3px;">
+                          <td class="text-dark" style="border-width:1px;">{{m.descripcion}}</td>
                           <td>{{m.url}}</td>  
                           <td>{{m.icono}}</td>
+
                           <td>
-                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-circle" title="Editar {{m.descripcion}}"><i class="fas fa-info-circle"></i></button></td>
-                          </tr>
-                        {% endif %}
-                    {% endfor %}
-                    {% else %}
-                        <tr>
-                        <center><h4 class="title" >No hay registros disponibles</h4></center>  
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info" title="Editar {{m.descripcion}}">
+                              <i class="fas fa-info-circle"></i>Editar</button>
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-danger" title="Editar {{m.descripcion}}">
+                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                        </td>
+
                         </tr>
-                    {% endif %}
-
+                      {% endif %}
+                    {% endfor %}
                   </tbody>
-              </table>
-    </div>
-</div>
-  <!--
-  <div class="pagination">
-      <span class="step-links">
-      {% if menu.has_previous %}
-         <a class="btn btn-primary" href="?page=1">&laquo; Ver primero</a>
-         <a class="btn btn-primary" href="?page={{ menu.previous_page_number }}">Anterior</a>
-      {% endif %}
+                </table>
+              </div>
+            </div>
+          </div>
 
-      {% if menu.has_next %}
-       <a class="btn btn-primary" href="?page={{ menu.next_page_number }}">Siguiente</a>
-       <a class="btn btn-primary" href="?page={{ menu.paginator.num_pages }}">Ver ultimo &raquo;</a>
-      {% endif %}
-      
-      </span>
-  </div>
-</div>
-  -->
+        </div>
 
 
 {% endblock contenido_principal %}
 
 {% block extrajs %}
+
+
 
 <div class="modal fade" id="mostrar_modal" role="dialog">
 
@@ -75,7 +89,29 @@
 
 
 
+  <script type="text/javascript">
+ $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+        "searching": true,
+        "ordering": false,
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ por página",
+            "zeroRecords": "Sin datos",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
 
+    $('.dataTables_length').addClass('bs-select');
+});
+  </script>
 
 {% endblock extrajs %}
 
