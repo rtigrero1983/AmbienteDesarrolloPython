@@ -1,42 +1,91 @@
 <div class="modal-dialog modal-lg" role="document">
-
     <div class="modal-content">
+            <input value="editar" id="editar" name="editar" type="text" hidden="true">
+            <form class="formulario" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:nuevo_menu' %}">{% csrf_token %}
+                    <div class="modal-body" >
+                            <header class="cuadro_titulo">
+                                <h4 class="titulo">Configuracion | Registrar Menu</h4>
+                            </header>
+                     <div class="contenido">
+                        <br/>
+                        <label class="text-dark h6 " for="modulo">Modulos:</label>
+                         {% if permisos %}
+                               <div class="alert alert-warning text-center" role="alert">
+                                <strong>
+                                    <i class="fas fa-exclamation-triangle"/>
+                                    Advertencia: Existen movimientos para menu
+                                    <i class="fas fa-exclamation-triangle"/>
+                                </strong>
+                              </div>
+                         {% else %}
+                                <select  name="modulo" id="modulo" class="form-control text-dark ">
+                                 <option selected="true" class="text-dark" disabled="disabled">
+                                        Seleccione un modulo para este menu:
+                                </option>
+                                {%for mp in lista_padre %}
+                                    <option class="text-success" value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                         {% endif %}
 
-        <form class="formulario" action="{% url 'Academico:editar_menu' menu_actual.id_menu %}" method="POST">{% csrf_token %}
-        <div class="modal-body" >
-            <header class="cuadro_titulo">
-            <h4 class="titulo">Configuracion | Editar Menu</h4>
-            </header>
-         <div class="contenido">
 
-            <label class="texto">Nombre del menu:</label>
-                <input type="text" name="nom_menu" value="{{menu_actual.descripcion}}" class="cajatexto">
-            <br/>
 
-             <label class="texto"> Url: </label>
-                <input type="text" name="url"class="cajatexto" value="{{menu_actual.url}}">
-              <br/>
-            <br>
-            <label class="texto">Lazy name: </label>
-                <input type="text"  value="{{menu_actual.lazy_name}}" name="lazyname" id="lazyname" class="cajatexto">
-            <br/>
+                        <div class="invalid-feedback" style="display: none;" id="error_modulo" name="error_modulo">
+                          <label id="mensaje_modulo" name="mensaje_modulo">Seleccione unos de los modulos disponibles para este menu</label>
+                        </div>
+                        <br/>
 
-             <label class="texto">Name:</label>
-                <input type="text" value="{{menu_actual.name}}" name="name" id="name" class="cajatexto">
-            <br/>
+                        <label class="text-dark h6" for="descripcion">Nombre del menu: </label>
+                            <input type="text" name="descripcion" id="descripcion" class="form-control" value="{{menu_actual.descripcion}}" required>
 
-             <label class="texto">Nombre del controlador:</label>
-                <input type="text" value="{{menu_actual.view}}" name="view" id="view" class="cajatexto">
-             <br/>
-             <div class="botones">
-             <br/>
-                <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-             </div>
-         </div>
-             </div>
-        </form>
+                            <div class="invalid-feedback " id="error_nom_menu" style="display: none;" name="error_nom_menu">
+                                    <label id="mensaje_menu" name="mensaje_menu">Nombre del menu ya es uso. porfavor,ingrese otro</label>
+                            </div>
+
+                        <br/>
+
+                        <label class="text-dark h6">Url: </label>
+                            <input type="text" name="url" id="url" class="form-control" value="{{menu_actual.url}}" required>
+
+                                <div class="invalid-feedback " id="error_url" style="display: none;" name="error_url">
+                                    <label id="mensaje_url" name="mensaje_url">Url ingresado ya esta en uso, por favor,ingrese otro.</label>
+                                </div>
+                        <br/>
+
+                        <label class="text-dark text-control h6">Lazy name: </label>
+                            <input type="text" value="{{menu_actual.lazy_name}}" name="lazyname" id="lazyname" class="form-control" required>
+
+                            <div class="invalid-feedback" style="display: none;" id="error_lazy" name="error_lazy">
+                                <label id="mensaje_lazy" name="mensaje_lazy">Lazy name ingresado ya esta en uso, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
+
+                         <label class="text-dark text-control h6">Name:</label>
+                            <input type="text"  value="{{menu_actual.name}}" name="name" id="name" class="form-control" required>
+
+                             <div class="invalid-feedback" style="display: none;" id="error_name" name="error_name">
+                                <label id="mensaje_name" name="mensaje_name">Name ingresado ya esta en uso, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
+
+                         <label class="text-dark text-control h6">Nombre del controlador:</label>
+                            <input type="text" value="{{menu_actual.view}}" name="view" id="view" class="form-control" required>
+
+                         <div class="invalid-feedback" style="display: none;" id="error_view" name="error_view">
+                                <label id="mensaje_view" name="mensaje_view">View ya esta siendo utilizado, por favor,ingrese otro.</label>
+                             </div>
+                            <br/>
+
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="button" class="btn btn-outline-primary btn-block" onclick="guardar_menu()" id="btn_guardar_menu" value="Guardar"  name="btn_guardar_menu"/>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                 <button class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+                            </div>
+                          </div>
+            </form>
     </div>
 </div>
 

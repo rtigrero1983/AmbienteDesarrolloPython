@@ -1,6 +1,8 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
+
             <form class="formulario" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:nuevo_menu' %}">{% csrf_token %}
+
                     <div class="modal-body" >
                             <header class="cuadro_titulo">
                                 <h4 class="titulo">Configuracion | Registrar Menu</h4>
@@ -21,6 +23,7 @@
                           <label id="mensaje_modulo" name="mensaje_modulo">Seleccione unos de los modulos disponibles para este menu</label>
                         </div>
                         <br/>
+
                         <label class="text-dark h6" for="descripcion">Nombre del menu: </label>
                             <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Ejemplo: Usuarios" required>
 

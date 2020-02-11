@@ -57,20 +57,23 @@ class Menu_api(APIView):
             try:
                 
                 queryset = ConfMenu.objects.filter(
-                    Q(descripcion__contains=descripcion)
-                    |Q(url=url)#or
-                    |Q(view=view)#or
-                    |Q(lazy_name=lazyname)#or
-                    |Q(name=name)#or
+
+                     Q(descripcion__contains=descripcion)
+                    | Q(url=url)#or
+                    | Q(view=view)#or
+                    | Q(lazy_name=lazyname)#or
+                    | Q(name=name)#or
                     & Q(id_genr_estado=97)#and
                 )
 
                 if queryset:  
                     serializacion = menuSerializers(queryset,many=True)
                     return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
+
                 else:
                     serializacion = menuSerializers(queryset,many=True)
                     return Response(data=serializacion.data, status=status.HTTP_200_OK)
+
             except Exception as e:
                 print(e)      
 

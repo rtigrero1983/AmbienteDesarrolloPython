@@ -63,8 +63,6 @@ urlpatterns = [
     path('usuarios/' + 'timeout/', timeout, name='timeout_usuarios'),
     path('empresas/' + 'timeout/', timeout, name='timeout_empresas'),
 
-
-
     #-----Rest-framework-APIS
     path('api_menu/',Menu_api.as_view(),name='api_menu'),
     path('api_modulo/',Modulo.as_view(),name='api_modulo'),
