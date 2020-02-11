@@ -10,4 +10,4 @@ def mantenimientoPersonas(request):
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Admision/admision_personas.html')
     else:
-        return HttpResponseRedirect('../')
+        return HttpResponseRedirect('timeout/')
