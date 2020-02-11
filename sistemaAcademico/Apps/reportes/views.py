@@ -21,7 +21,8 @@ def view_reporte(request, *args, **kwargs):
         if request.method == 'POST':
             campo2 = request.POST.get('campo')
             combo = int(request.POST.get('combo'))
-            comboR = int(request.POST.get('combo2'))
+            comboR = int(request.POST.get('comboR'))
+            print('el reporte es: ',comboR)
             if(combo == 1):
                 usuarios = ConfUsuario.objects.filter(id_usuario=campo2)
             elif(combo == 2):

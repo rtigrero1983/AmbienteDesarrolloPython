@@ -6,19 +6,32 @@
 {% endblock sidebar %}
 {% block contenido_principal %}
 {%block body%}
+  <script>
+       function Reportes(numero){
+        var hidden = document.getElementById('comboR').value = numero;
+        var formulario = document.getElementById('myform').submit();
+           console.log(hidden);
+       }
+
+
+    </script>
+
 <div class="card-body">
-<form  method="POST">
+
+<form  method="POST" id="myform">
     {% csrf_token %}
+
 
     <div class="label label-info">
         <label for=""><b>Elegir formato a imprimir:</b></label>
-        <select name="combo2" id="comboR">
-             <option value="1" name="exel">EXCEL</option>
-             <option value="2" name="pdf">PDF</option>
-         </select> &nbsp;     <button type="submit"><img src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
-        <button type="submit"><img src="{%static 'img/pdf1.ico'%}" alt="REPORTE EN PDF" height="30" width="30"></button>
+        <button type="button" id="ex" onclick="Reportes(1)"><img src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
+        <button type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" alt="REPORTE EN PDF" height="30" width="30"></button>
         <br>
         <br>
+
+        <input type="hidden" name="comboR" id="comboR" value="">
+
+
 
         <label for=""><b>Seleccione el metodo de busqueda:</b></label>
         <select name="combo" id="">

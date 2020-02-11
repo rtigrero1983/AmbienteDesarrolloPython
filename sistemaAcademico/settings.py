@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE':'mysql_cymysql',
         'NAME':'sa_prueba',
         'USER':'root',
-        'PASSWORD':'Anderson10001',
+        'PASSWORD':'',
         'HOST': 'localhost',
         'PORT': 3306,
     } 
@@ -155,8 +155,8 @@ INTERNAL_IPS = {'127.0.0.1',}
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
-SESSION_COOKIE_AGE = 60
-SESSION_EXPIRE_SECONDS = 60
+SESSION_COOKIE_AGE = 6000
+SESSION_EXPIRE_SECONDS = 6000
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
 SESSION_SAVE_EVERY_REQUEST= True
