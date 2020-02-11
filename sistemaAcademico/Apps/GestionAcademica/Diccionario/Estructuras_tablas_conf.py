@@ -168,20 +168,20 @@ class ConfPermiso(models.Model):
     def __unicode__(self):
         return self.id_usuario_rol
 
-"""
-class Conf_rol_permiso(models.Model):
-    idconf_rol_permiso = models.AutoField(primary_key=True)
-    id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fk_detalle_rol", db_column='id_rol')
-    id_permiso_rol = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE, related_name="fk_permiso_rol", db_column='id_permiso_rol')
+class ConfDetallePermiso(models.Model):
+    id_detalle_permiso = models.AutoField(primary_key=True)
+    id_permiso = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE, related_name="fk_det_permiso_cab_permiso", db_column='id_permiso')
+    id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_det_permiso_menu", db_column='id_menu')
+    id_accion = models.ForeignKey(ConfAccion, on_delete=models.CASCADE, related_name="fk_det_permiso_accion", db_column='id_accion')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
 
     class Meta:
-        verbose_name = 'Rol Permiso',
-        verbose_name_plural = 'Rol Permisos',
-        db_table = 'conf_rol_permiso'
+        verbose_name = 'Detalle Permiso',
+        verbose_name_plural = 'Detalle Permisos',
+        db_table = 'conf_detalle_permiso'
 
     def __int__(self):
-        return self.idconf_rol_permiso
+        return self.id_detalle_permiso
 
-    def __int__(self):
-        return self.id_permiso_rol
-"""
+    def __unicode__(self):
+        return self.id_menu, self.id_permiso, self.id_accion
