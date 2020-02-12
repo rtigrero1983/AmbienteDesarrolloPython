@@ -11,7 +11,7 @@ from django.views.decorators.cache import cache_page
 def empresas(request):
     if 'usuario' in request.session:
         lista_empresa= ConfEmpresa.objects.filter(id_genr_estado=97)
-        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa} )
+        return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('timeout/')
         
@@ -69,13 +69,13 @@ def editar_empresa(request,id):
                 correo = request.POST.get('inputEmail3')
                 telefono = request.POST.get('telefono')
                 fecha_creacion = request.POST.get('f_creacion')
-                empresa = ConfEmpresa(id_empresa=id,nombre=var_empresa_nombre, razon_social=var_rsocial,
+                empresa = ConfEmpresa(id_empresa=id, nombre=var_empresa_nombre, razon_social=var_rsocial,
                                       id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
                                       direccion=direccion, representante_legal=representante_legal, correo=correo,
-                                      telefono=telefono, fecha_creacion=fecha_creacion,id_genr_estado=estado)
+                                      telefono=telefono, fecha_creacion=fecha_creacion, id_genr_estado=estado)
                 empresa.save()
                 return redirect('Academico:empresas')
-    return render(request, 'sistemaAcademico/Configuraciones/Empresas/Editar_empresa.html',contexto)
+    return render(request, 'sistemaAcademico/Configuraciones/Empresas/Editar_empresa.html', contexto)
 
 def eliminar_empresa(request,id):
     empresas = ConfEmpresa.objects.get(id_empresa=id)

@@ -56,7 +56,7 @@ class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     codigo = models.CharField(max_length=10, blank=False, null=False)
     nombre = models.CharField(max_length=45, blank=False, null=False)
-    id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,blank=False, null=False,db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False,db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Rol',
@@ -100,7 +100,7 @@ class ConfUsuario(models.Model):
     clave = models.CharField(max_length=45, blank=False, null=False)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete = models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Usuario',

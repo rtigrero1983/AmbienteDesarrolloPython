@@ -379,13 +379,91 @@ function guardar_menu(){
 }
 
 function guardar_unidad(){
-    if($('#editar_empresa').val()=='editar_empresa'){
+	var $ = jQuery.noConflict();
+	if($('#editar_empresa').val()=='editar_empresa'){
+		console.log('editar!!!!');
+    var nombre = $('#nombre').val();
+	var razon_social =  $('#razon_social').val();
+	var correo =  $('#correo').val();
+	var identificacion = $('#identificacion').val();
 
-    }else{
+	if (nombre==null){
+	   		$('#nombre').toggleClass('is-invalid');
+	   		$("#error_nombre").css("display","");
+	   		$("#mensaje_nombre").empty();
+			$("#mensaje_nombre").append("Este campo no debe estar incompleto.Por favor ingresar datos 'Dorime'.");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function()
+			{
+			$("#nombre").removeClass('is-invalid');
+			$("#error_nombre").css("display","none");
+			$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+			},3000);
 
+			return;
+    }
+	if (razon_social==null){
+		$('#razon_social').toggleClass('is-invalid');
+	   		$("#error_razon_social").css("display","");
+	   		$("#mensaje_razon_social").empty();
+			$("#mensaje_razon_social").append("Este campo no debe estar incompleto.Por favor no te pases de listo");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function()
+			{
+			$("#razon_social").removeClass('is-invalid');
+			$("#error_razon_social").css("display","none");
+			$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+			},3000);
+
+			return;
+	}
+
+	if (correo ==null){
+		$('#correo').toggleClass('is-invalid');
+	   		$("#error_correo").css("display","");
+	   		$("#mensaje_correo").empty();
+			$("#mensaje_correo").append("Este campo no debe estar incompleto. ya wey estas bien pinchependejo ");
+			$('#btn_correo').removeAttr("onclick");
+			setTimeout(function()
+			{
+			$("#correo").removeClass('is-invalid');
+			$("#error_correo").css("display","none");
+			$('#btn_correo').attr({onclick: 'guardar_unidad()'});
+			},3000);
+
+			return;
+	}
+
+    if (identificacion==null){
+    	$('#identificacion').toggleClass('is-invalid');
+	   		$("#error_identificacion").css("display","");
+	   		$("#mensaje_identificacion").empty();
+			$("#mensaje_identificacion").append("Este campo no debe estar incompleto.wey ya");
+			$('#btn_identificacion').removeAttr("onclick");
+			setTimeout(function()
+			{
+			$("#identificacion").removeClass('is-invalid');
+			$("#error_identificacion").css("display","none");
+			$('#btn_identificacion').attr({onclick: 'guardar_unidad()'});
+			},3000);
+
+			return;
+    }
+    }
+	var formulario_unidad = document.getElementById('registrar_unidad');
+	var datos = new FormData(formulario_unidad);
     }
 
-}
+
+
+
+
+
+
+
+
+
+
 
 
 

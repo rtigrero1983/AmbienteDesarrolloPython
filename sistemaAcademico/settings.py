@@ -85,15 +85,15 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'mysql_cymysql',
-        'NAME':'sa_prueba',
+        'NAME':'bd_academico_2020',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'root',
         'HOST': 'localhost',
         'PORT': 3306,
     } 
 }
-
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
@@ -104,8 +104,8 @@ DATABASES = {
         'PORT': 57635,
     }
 }
-"""
 
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -138,14 +138,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

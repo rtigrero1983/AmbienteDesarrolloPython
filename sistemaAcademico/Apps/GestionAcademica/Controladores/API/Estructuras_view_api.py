@@ -24,30 +24,20 @@ class QuizView(APIView):
                 queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
                 print(queryset)
         except Exception:
-            Response(status= status.HTTP_404_NOT_FOUND)
+            Response(status=status.HTTP_404_NOT_FOUND)
         return queryset
 
 
     def get(self,request):
         queryset = self.get_queryset()
-        serializacion = empresaSerializers(queryset,many=True)
-        return Response(data=serializacion.data,status= status.HTTP_200_OK)
-        try:
-            if idEmpresa is None:
-                queryset = ConfEmpresa.objects.all()
-                
-            else:
-                queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
-                print(queryset)
-        except Exception:
-            return Response(status= status.HTTP_404_NOT_FOUND) 
-
+        serializacion = empresaSerializers(queryset, many=True)
+        return Response(data=serializacion.data, status=status.HTTP_200_OK)
 
 class Menu_api(APIView): 
 
-    def post(self,request):
+    def post(self, request):
         if self.request.data is None:
-            return response(status=status.HTTP_204_NO_CONTENT)
+            return Response(status=status.HTTP_204_NO_CONTENT)
         else:
             descripcion = self.request.data['descripcion']
             url = self.request.data['url']
@@ -67,14 +57,70 @@ class Menu_api(APIView):
                 )
 
                 if queryset:  
-                    serializacion = menuSerializers(queryset,many=True)
-                    return Response(data=serializacion.data,status=status.HTTP_226_IM_USED)
+                    serializacion = menuSerializers(queryset, many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_226_IM_USED)
 
                 else:
-                    serializacion = menuSerializers(queryset,many=True)
+                    serializacion = menuSerializers(queryset, many=True)
                     return Response(data=serializacion.data, status=status.HTTP_200_OK)
 
             except Exception as e:
-                print(e)      
+                print(e)
+
+
+class Unidad_Edu(APIView):
+
+    def post(self, request):
+        if self.request.data is None:
+            return Response(status=status.HTTP_204_NO_CONTENT)#Mensaje_existoso_pero no devuelve_nada
+
+        else:
+            nombre = self.request.data['nombre']
+            razon_social = self.request.data['razon_social']
+            correo = self.request.data['correo']
+            identificacion = self.request.data[' identificacion']
+            try:
+                queryset = ConfEmpresa.objects.filter(
+                     Q(nombre=nombre)
+                    | Q(razon_social=razon_social)
+                    | Q(correo=correo)
+                    & Q(identificacion=identificacion)
+                )
+                if queryset:
+                    serializacion = ConfEmpresa(queryset, many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_226_IM_USED)#mensaje_que esta_en uso
+                else:
+                    serializacion = ConfEmpresa(queryset, many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_200_OK)#mensaje_existoso
+            except Exception as i:
+                print(i)
+
+
+class Usuario(APIView):
+    def post(self, request):
+        if self.request.data is None:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            usuario=self.request.data['usuario']
+
+            try:
+                queryset = ConfUsuario.objects.filter(
+                    Q(usuario=usuario)
+                )
+                if queryset:
+                    serializacion = ConfUsuario(queryset, many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_226_IM_USED)
+                else:
+                    serializacion = ConfUsuario(queryset, many=True)
+                    return Response(data=serializacion.data, status=status.HTTP_200_OK)
+            except Exception as o:
+                print(o)
+
+
+
+
+
+
+
 
 

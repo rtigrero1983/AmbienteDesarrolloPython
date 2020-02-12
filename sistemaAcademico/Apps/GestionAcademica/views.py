@@ -24,7 +24,7 @@ def pruebas(request):
     mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
     for p in mpss:
         print(p.id_modulo_menu)
-    return render(request,'base/pruebas.html',{'menus':mpss})
+    return render(request,'base/pruebas.html', {'menus': mpss})
 
 
 
@@ -63,9 +63,9 @@ def login(request):
                 return redirect("Academico:inicio")
     except Exception as e:
             contexto['error'] = 'Claves incorrectas o cuenta inactiva'
-            return render(request,'base/login.html',contexto)
+            return render(request, 'base/login.html', contexto)
 
-    return render(request,'base/login.html',contexto)
+    return render(request, 'base/login.html', contexto)
 
 
 def salir(request):
