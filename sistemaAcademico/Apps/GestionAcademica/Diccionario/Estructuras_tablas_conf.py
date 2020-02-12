@@ -128,7 +128,7 @@ class ConfModulo_menu(models.Model):
     id_modulo_menu = models.AutoField(primary_key=True)
     id_modulo = models.ForeignKey(ConfModulo, on_delete=models.CASCADE, related_name="fk_modmen_modulo", db_column='id_modulo')
     id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_modmen_menu", db_column='id_menu')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado', default='97')
 
     class Meta:
         verbose_name = 'Modulo_Menu'
@@ -185,3 +185,23 @@ class ConfDetallePermiso(models.Model):
 
     def __unicode__(self):
         return self.id_menu, self.id_permiso, self.id_accion
+
+class ConfCorreosSmpt(models.Model):
+        id_correos_smpt = models.AutoField(primary_key=True)
+        ssl = models.CharField(max_length=30, blank=False, null=False)
+        dominio = models.CharField(max_length=30, blank=False, null=False)
+        puerto = models.CharField(max_length=20, blank=False, null=False)
+        usuario_c = models.CharField(max_length=100, blank=False, null=False)
+        contraseña_c = models.CharField(max_length=100, blank=False, null=False)
+        descripcion = models.CharField(max_length=200, blank=False, null=False)
+
+        class Meta:
+            verbose_name = 'Correos Smpt',
+            verbose_name_plural = 'Correos Smpt',
+            db_table = 'conf_correos_smpt'
+
+        def __int__(self):
+            return self.id_correos_smpt
+
+        def __str__(self):
+            return self.usuario_c, self.contraseña_c
