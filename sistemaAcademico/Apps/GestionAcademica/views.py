@@ -10,6 +10,7 @@ from .Controladores.Mantenimiento.Estructura_view_consultas import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
 from .Controladores.Mantenimiento.Estructura_view_movimientos import *
 from .Controladores.Mantenimiento.Estructura_view_procesos import *
+from .Controladores.Mantenimiento.Estructura_view_registro_persona import *
 import hashlib
 from django.template.loader import get_template
 from django.views.decorators.cache import cache_page

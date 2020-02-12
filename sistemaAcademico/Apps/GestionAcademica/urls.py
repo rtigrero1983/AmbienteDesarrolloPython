@@ -69,6 +69,9 @@ urlpatterns = [
     path('api_menu/',Menu_api.as_view(),name='api_menu'),
     path('api_modulo/',Modulo.as_view(),name='api_modulo'),
     path('api_empresa/',QuizView.as_view(),name='api_empresa'),
+
+    #Opciones para el modulo de Mantenimiento
+    path('registro_estudiante/',registro_estudiante,name='registro_estudiante'),
 ]
 
 
