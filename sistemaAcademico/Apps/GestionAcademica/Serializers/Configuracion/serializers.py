@@ -22,6 +22,6 @@ class empresaSerializers(serializers.ModelSerializer):
 class usuarioSerializers(serializers.ModelSerializer):
     class Meta:
         model = ConfUsuario
-        fields = "__all__"
+        fields = ['idusuario', 'usuario']
 
 
