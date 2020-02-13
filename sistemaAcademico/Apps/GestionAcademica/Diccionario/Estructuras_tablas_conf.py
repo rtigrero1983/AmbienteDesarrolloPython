@@ -192,7 +192,7 @@ class ConfCorreosSmpt(models.Model):
         dominio = models.CharField(max_length=30, blank=False, null=False)
         puerto = models.CharField(max_length=20, blank=False, null=False)
         usuario_c = models.CharField(max_length=100, blank=False, null=False)
-        contraseña_c = models.CharField(max_length=100, blank=False, null=False)
+        contrasenia_c = models.CharField(max_length=100, blank=False, null=False)
         descripcion = models.CharField(max_length=200, blank=False, null=False)
 
         class Meta:
@@ -204,4 +204,4 @@ class ConfCorreosSmpt(models.Model):
             return self.id_correos_smpt
 
         def __str__(self):
-            return self.usuario_c, self.contraseña_c
+            return self.usuario_c, self.contrasenia_c

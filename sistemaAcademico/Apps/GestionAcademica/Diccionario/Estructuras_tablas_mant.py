@@ -68,6 +68,9 @@ class MantPersona(models.Model):
     id_genr_tipo_parentesco = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="tipo_parentesco", db_column='id_genr_tipo_parentesco', default=0)
     rvive_con_usted = models.BooleanField(blank=False, null=True, default=0)
     ridentificacion = models.CharField(unique=True, max_length=13, blank=False, null=True, default='no requerido')
+    rdireccion_trabajo = models.CharField(max_length=200, blank=False, null=True, default='no requerido')
+    rtelefono_trabajo = models.CharField(max_length=20, blank=False, null=True, default='no requerido')
+    rhorario_laboral = models.CharField(max_length=40, blank=False, null=True, default='no requerido')
 
     class Meta:
         verbose_name = 'Persona',
