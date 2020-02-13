@@ -123,13 +123,15 @@ def reporte_excell(usuarios):
 
 def reportePdf(usuarios):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
+
+    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
     buffer = BytesIO()
     c = canvas.Canvas(buffer, pagesize=A4)
     c.setLineWidth(.3)
     c.setFont('Helvetica',22)
     c.drawString(200,760,'Reporte Usuario')
     c.line(90,747,550,747)
+    c.drawImage("static/img/logo-login.png", 50,760, width=50, height=50  )
     #high = 650
     for pdf in usuarios:
         this_U= [{'#':pdf.usuario,'h':pdf.id_persona.nombres + " " + pdf.id_persona.apellidos, 'l':pdf.id_genr_tipo_usuario.nombre}]
@@ -137,12 +139,12 @@ def reportePdf(usuarios):
         #high = high-18
 #tabla cuerpo
     styles = getSampleStyleSheet()
-    sytlesBH = styles["Normal"]
+    sytlesBH = styles["Heading3"]
     sytlesBH.alignment = TA_CENTER
     sytlesBH.fontSinze = 7
 
 
-    usuario = Paragraph('''USUARIO''',sytlesBH)
+    usuario = Paragraph('''USUARIO''', sytlesBH)
     persona = Paragraph('''persona''', sytlesBH)
     tipoU = Paragraph('''tipo_usuario''', sytlesBH)
     data=[]
@@ -159,8 +161,8 @@ def reportePdf(usuarios):
 
     width, height = A4
     table = Table(data, colWidths=[2.9*cm, 8*cm, 8.5*cm])
-    table.setStyle(TableStyle([('INNERGRID',(0,0), (-1,-1), 0.25, colors.black),
-                              ('BOX', (0,0), (-1,-1), 0.25, colors.black), ]))
+    table.setStyle(TableStyle([('INNERGRID',(0,0), (-1,-1), 0.25, colors.green),
+                              ('BOX', (0,0), (-1,-1), 0.25, colors.green), ]))
     table.wrapOn(c, width, height)
     table.drawOn(c, 30, high)
     c.showPage()
