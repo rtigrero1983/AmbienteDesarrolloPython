@@ -388,7 +388,7 @@ function guardar_unidad(){
 	var identificacion = $('#identificacion').val();
 
 	if (nombre==null){
-	   		$('#nombre').toggleClass('is-invalid');
+	   		$('#usuario').toggleClass('is-invalid');
 	   		$("#error_nombre").css("display","");
 	   		$("#mensaje_nombre").empty();
 			$("#mensaje_nombre").append("Este campo no debe estar incompleto.Por favor ingresar datos 'Dorime'.");
@@ -456,7 +456,30 @@ function guardar_unidad(){
 
 
 
+    function guardar_usuario() {
+		var $ = jQuery.noConflict();
+		if ($('#editar_usuario').val() == 'editar_usuario') {
+			console.log('editar!!!!');
+			var usuario = $('#usuario').val();
 
+			if (usuario == null) {
+				$('#nombre').toggleClass('is-invalid');
+				$("#error_usuario").css("display", "");
+				$("#mensaje_usuario").empty();
+				$("#mensaje_usuario").append("Este campo no debe estar incompleto.Por favor ingresar usuario.");
+				$('#btn_guardar_unidad').removeAttr("onclick");
+				setTimeout(function () {
+					$("#usuario").removeClass('is-invalid');
+					$("#error_nombre").css("display", "none");
+					$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+				}, 3000);
+
+				return;
+			}
+		}
+			var formulario_usuario = document.getElementById('registrar_usuario');
+			var datos = new FormData(formulario_usuario);
+		}
 
 
 
