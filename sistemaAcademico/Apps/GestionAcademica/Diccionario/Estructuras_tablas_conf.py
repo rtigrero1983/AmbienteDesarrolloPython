@@ -1,8 +1,7 @@
 from django.db import models
-from django.db.models import AutoField
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantPersona
-
+from sistemaAcademico.Apps.Validaciones import *
 
 class ConfEmpresa(models.Model):
     id_empresa = models.AutoField(primary_key=True)
@@ -36,7 +35,7 @@ class ConfEmpresa(models.Model):
 
 class ConfModulo(models.Model):
         id_modulo = models.AutoField(primary_key=True)
-        codigo = models.CharField(max_length=20, blank=False, null=False)
+        codigo = models.CharField(max_length=20, blank=False, null=False,unique = True)
         nombre = models.CharField(max_length=20,blank=False, null=False)
         id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
 
@@ -188,12 +187,14 @@ class ConfDetallePermiso(models.Model):
 
 class ConfCorreosSmpt(models.Model):
         id_correos_smpt = models.AutoField(primary_key=True)
+
         ssl = models.CharField(max_length=30, blank=False, null=False)
         dominio = models.CharField(max_length=30, blank=False, null=False)
         puerto = models.CharField(max_length=20, blank=False, null=False)
-        usuario_c = models.CharField(max_length=100, blank=False, null=False)
+        usuario_c = models.CharField(max_length=100, blank=False, null=False,unique=True)
         contrasenia_c = models.CharField(max_length=100, blank=False, null=False)
         descripcion = models.CharField(max_length=200, blank=False, null=False)
+
 
         class Meta:
             verbose_name = 'Correos Smpt',
@@ -202,6 +203,7 @@ class ConfCorreosSmpt(models.Model):
 
         def __int__(self):
             return self.id_correos_smpt
+
 
         def __str__(self):
             return self.usuario_c, self.contrasenia_c
