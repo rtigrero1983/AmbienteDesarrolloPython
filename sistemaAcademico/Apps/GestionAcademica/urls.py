@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Diccionario.Estructuras_tablas_conf import *
@@ -39,6 +40,7 @@ urlpatterns = [
     path('nuevo_modulo/', nuevo_modulo, name='nuevo_modulo'),
     path('add_permiso/', add_permiso, name='add_permiso'),
 
+    path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
     path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
