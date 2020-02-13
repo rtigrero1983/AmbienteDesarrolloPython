@@ -388,10 +388,10 @@ function guardar_unidad(){
 	var identificacion = $('#identificacion').val();
 
 	if (nombre==null){
-	   		$('#usuario').toggleClass('is-invalid');
+	   		$('#nombre').toggleClass('is-invalid');
 	   		$("#error_nombre").css("display","");
 	   		$("#mensaje_nombre").empty();
-			$("#mensaje_nombre").append("Este campo no debe estar incompleto.Por favor ingresar datos 'Dorime'.");
+			$("#mensaje_nombre").append("Este campo no debe estar incompleto.ingresar nombre");
 			$('#btn_guardar_unidad').removeAttr("onclick");
 			setTimeout(function()
 			{
@@ -402,11 +402,14 @@ function guardar_unidad(){
 
 			return;
     }
-	if (razon_social==null){
+	if (razon_social==null
+		|| razon_social==''
+		|| /\s/.test(razon_social)
+	    || razon_social.length==0){
 		$('#razon_social').toggleClass('is-invalid');
 	   		$("#error_razon_social").css("display","");
 	   		$("#mensaje_razon_social").empty();
-			$("#mensaje_razon_social").append("Este campo no debe estar incompleto.Por favor no te pases de listo");
+			$("#mensaje_razon_social").append("Este campo no debe estar incompleto");
 			$('#btn_guardar_unidad').removeAttr("onclick");
 			setTimeout(function()
 			{
@@ -418,11 +421,14 @@ function guardar_unidad(){
 			return;
 	}
 
-	if (correo ==null){
+	if (correo ==null
+		|| correo==''
+		|| /\s/.test(correo)
+	    || correo.length==0){
 		$('#correo').toggleClass('is-invalid');
 	   		$("#error_correo").css("display","");
 	   		$("#mensaje_correo").empty();
-			$("#mensaje_correo").append("Este campo no debe estar incompleto. ya wey estas bien pinchependejo ");
+			$("#mensaje_correo").append("Este campo no debe estar incompleto");
 			$('#btn_correo').removeAttr("onclick");
 			setTimeout(function()
 			{
@@ -434,11 +440,14 @@ function guardar_unidad(){
 			return;
 	}
 
-    if (identificacion==null){
+    if (identificacion==null
+		|| identificacion==''
+		|| /\s/.test(identificacion)
+	    || identificacion.length==0){
     	$('#identificacion').toggleClass('is-invalid');
 	   		$("#error_identificacion").css("display","");
 	   		$("#mensaje_identificacion").empty();
-			$("#mensaje_identificacion").append("Este campo no debe estar incompleto.wey ya");
+			$("#mensaje_identificacion").append("Este campo no debe estar incompleto");
 			$('#btn_identificacion').removeAttr("onclick");
 			setTimeout(function()
 			{
@@ -453,25 +462,235 @@ function guardar_unidad(){
 	var formulario_unidad = document.getElementById('registrar_unidad');
 	var datos = new FormData(formulario_unidad);
     }
+    fetch('/api_empresa/',{
+		method : 'POST',
+		body : datos
+		})
+		.then(res => res.json())
+
+		.then(function(data){
+
+							if (data[0] === undefined){
+								formulario_unidad.submit();
+							}
+
+							else{
+							console.log(data[0]);
+		    				 if(data[0].nombre == $('#nombre').val()){
+		    				     $('#nombre').toggleClass('is-invalid');
+	   						         $("#error_nombre").css("display","");
+	   						             $('#btn_guardar_unidad').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#nombre").removeClass('is-invalid');
+							                $("#error_nombre").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+		    				 }
+
+		    				if(data[0].razon_social == $('#razon_social').val()){
+
+		    				     $('#razon_social').toggleClass('is-invalid');
+	   						         $("#error_razon_social").css("display","");
+	   						             $('#btn_razon_social').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#razon_social").removeClass('is-invalid');
+							                $("#error_razon_social").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+							     }
+
+							if(data[0].correo == $('#correo').val() ){
+		    				     $('#correo').toggleClass('is-invalid');
+	   						         $("#error_correo").css("display","");
+	   						             $('#btn_guardar_unidad').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#correo").removeClass('is-invalid');
+							                $("#error_correo").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+		    				 }
+
+		        			 if(data[0].identificacion == $('#identificacion').val()){
+
+		        			    	$('#identificacion').toggleClass('is-invalid');
+	   		    			    	$("#error_identificacion").css("display","");
+	   		    			    	$('#btn_guardar_unidad').removeAttr("onclick");
+
+			    			        setTimeout(function(){
+							            $("#identificacion").removeClass('is-invalid');
+							            $("#error_identificacion").css("display","none");
+							            $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+
+		        			}
+
+		        }
+		    })
+
+    }
+
+    else{
+	var nombre = $('#nombre').val();
+	var razon_social =  $('#razon_social').val();
+	var correo =  $('#correo').val();
+	var identificacion = $('#identificacion').val();
+
+	if (nombre==null){
+	   		$('#nombre').toggleClass('is-invalid');
+	   		$("#error_nombre").css("display","");
+	   		$("#mensaje_nombre").empty();
+			$("#mensaje_nombre").append("Este campo no debe estar incompleto. Porfavor ingrese datos ");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function(){
+			$("#nombre").removeClass('is-invalid');
+			$("#error_nombre").css("display","none");
+			$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+			},3000);
+
+			return;
+		}
+
+	if (razon_social==null
+	   || razon_social==''
+       || /\s/.test(razon_social)
+	   || descripcion.length==0){
+	   		$('#razon_social').toggleClass('is-invalid');
+	   		$("#error_razon_social").css("display","");
+	   		$("#mensaje_razon_social").empty();
+			$("#mensaje_razon_social").append("Este campo no debe estar incompleto");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function(){
+				$("#razon_social").removeClass('is-invalid');
+				$("#error_razon_social").css("display","none");
+				$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+				},3000);
+			return;
+		}
+
+	if (identificacion==null
+	   ||identificacion==''
+	   ||identificacion.length==0
+	   || /\s/.test(lazyname)){
+	   		$('#identificacion').toggleClass('is-invalid');
+	   		$("#error_identificacion").css("display","");
+	   		$("#mensaje_identificacion").empty();
+			$("#mensaje_identificacion").append("Este campo no debe estar incompleto");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function(){
+				$("#identificacion").removeClass('is-invalid');
+				$("#error_identificacion").css("display","none");
+				$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+				},3000);
+			return;
+		}
+
+	if (correo==null
+	   ||correo==''
+	   ||correo.length==0
+	   || /\s/.test(correo)){
+	   		$('#correo').toggleClass('is-invalid');
+	   		$("#error_correo").css("display","");
+	   		$("#mensaje_correo").empty();
+			$("#mensaje_correo").append("Este campo no debe estar incompleto. Porfavor, ingresa algo valido.");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function(){
+				$("#correo").removeClass('is-invalid');
+				$("#error_correo").css("display","none");
+				$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+				},3000);
+			return;
+		}
+    }
+	var formulario_unidad = document.getElementById('registrar_unidad');
+	var datos = new FormData(formulario_unidad);
 
 
+	fetch('/api_menu/',{
+		method : 'POST',
+		body : datos
+		})
+		.then(res => res.json())
 
-    function guardar_usuario() {
-		var $ = jQuery.noConflict();
-		if ($('#editar_usuario').val() == 'editar_usuario') {
-			console.log('editar!!!!');
-			var usuario = $('#usuario').val();
+		.then(function(data){
 
-			if (usuario == null) {
-				$('#nombre').toggleClass('is-invalid');
-				$("#error_usuario").css("display", "");
-				$("#mensaje_usuario").empty();
-				$("#mensaje_usuario").append("Este campo no debe estar incompleto.Por favor ingresar usuario.");
-				$('#btn_guardar_unidad').removeAttr("onclick");
-				setTimeout(function () {
-					$("#usuario").removeClass('is-invalid');
-					$("#error_nombre").css("display", "none");
-					$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							if (data[0] === undefined){
+								formulario_unidad.submit();
+							}
+
+							else{
+							console.log(data[0]);
+		    				 if(data[0].nombre == $('#nombre').val()){
+		    				     $('#nombre').toggleClass('is-invalid');
+	   						         $("#error_nombre").css("display","");
+	   						             $('#btn_guardar_unidad').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#nombre").removeClass('is-invalid');
+							                $("#error_nombre").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+		    				 }
+
+
+							if(data[0].razon_social == $('#razon_social').val() ){
+		    				     $('#razon_social').toggleClass('is-invalid');
+	   						         $("#error_razon_social").css("display","");
+	   						             $('#btn_guardar_unidad').removeAttr("onclick");
+							         setTimeout(function(){
+							            $("#razon_social").removeClass('is-invalid');
+							                $("#error_razon_social").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+		    				 }
+
+		        			 if(data[0].correo == $('#correo').val()){
+
+		        			    	$('#correo').toggleClass('is-invalid');
+	   		    			    	$("#error_correo").css("display","");
+	   		    			    	$('#btn_guardar_unidad').removeAttr("onclick");
+
+			    			        setTimeout(function(){
+							            $("#correo").removeClass('is-invalid');
+							            $("#error_correo").css("display","none");
+							            $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+
+		        			}
+
+
+							if(data[0].identificacion == $('#view').val()){
+		        			    $('#identificacion').toggleClass('is-invalid');
+	   		    			        $("#error_identificacion").css("display","");
+	   		    			            $('#btn_guardar_unidad').removeAttr("onclick");
+			    			        setTimeout(function(){
+							            $("#identificacion").removeClass('is-invalid');
+							                $("#error_identificacion").css("display","none");
+							                    $('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
+							        },3000);
+		        			}
+
+		        }
+		    })
+    }
+
+
+}
+
+
+function guardar_usuario() {
+	var $ = jQuery.noConflict();
+	if ($('#editar_usuario').val() == 'editar_usuario') {
+		console.log('editar!!!!');
+		var usuario = $('#usuario').val();
+		if (usuario == null) {
+			$('#nombre').toggleClass('is-invalid');
+			$("#error_usuario").css("display", "");
+			$("#mensaje_usuario").empty();
+			$("#mensaje_usuario").append("Este campo no debe estar incompleto.Por favor ingresar usuario.");
+			$('#btn_guardar_unidad').removeAttr("onclick");
+			setTimeout(function () {
+				$("#usuario").removeClass('is-invalid');
+				$("#error_nombre").css("display", "none");
+				$('#btn_guardar_unidad').attr({onclick: 'guardar_unidad()'});
 				}, 3000);
 
 				return;
@@ -480,6 +699,10 @@ function guardar_unidad(){
 			var formulario_usuario = document.getElementById('registrar_usuario');
 			var datos = new FormData(formulario_usuario);
 		}
+
+
+
+
 
 
 
