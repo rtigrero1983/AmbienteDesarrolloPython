@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load staticfiles %}
 
 
 {% block encabezado %}
@@ -42,29 +43,41 @@
                     <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
                     {% endfor %}
             </select>
-        <br>
-        <br>
+
+    </br>
         <label class="texto">
-            Tipo de Usuario:
+           Tipo de Usuario:
         </label>
-        <div class="form-row grid tabla_lista">
-            <ul class="list-group">
-                {% for genr in genr_general %}
-                    <li class="list-group-item tabla_lista_cont " multiple >
-                        <input type="checkbox" value="{{genr.idgenr_general}}" name="tipousuario">
-                        <label>
-                            {{genr.nombre}}
-                        </label>
-                    </li>
-                {% endfor %}
-            </ul>
+
+            <select name="permiso" class="cajatexto">
+                    <option selected>Elija tipo de usuario</option>
+                    {% for r in genr_general %}
+                    <option class="cajatexto" value="{{r.idgenr_general}}"> {{r.nombre}} </option>
+                    {% endfor %}
+            </select>
         </br>
+        </br>
+        </br>
+        <div class="row col-lg-9 mx-auto  ">
+            <label class="text">   Tipo de rol: </label>
         </div>
+        <div class="col-4">
+                <select  name="roles" class="selectpicker w-100 "  multiple title="Elija los roles..."
+                         multiple data-selected-text-format="count" data-style="bg-white " multiple="multiple">
+                {% for m in roles %}
+                    <option value="{{m.id_rol}}">{{m.nombre}}</option>
+                {%  endfor %}
+            </select>
         </div>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}">
+        <script type="text/javascript" src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'css/bootstrap.bundle.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'css/bootstrap-select.min.js' %}"></script>
+
 
         </div>
 
-        <br>
         <br>
 
         <center>
