@@ -11,7 +11,7 @@ class SMTPForm(forms.ModelForm):
             "dominio",
             "puerto",
             "usuario_c",
-            "contraseña_c",
+            "contrasenia_c",
             "descripcion",
         ]
         labels = {
@@ -19,7 +19,7 @@ class SMTPForm(forms.ModelForm):
             "dominio":"Servidor",
             "puerto":"Puerto",
             "usuario_c":"Usuario",
-            "contraseña_c":"Clave",
+            "contrasenia_c":"Clave",
             "descripcion":"Descripcion"
         }
         widgets = {
@@ -27,7 +27,7 @@ class SMTPForm(forms.ModelForm):
             "dominio": forms.TextInput(attrs={"class":"form-control",}),
             "puerto": forms.TextInput(attrs={"class":"form-control","type":"number"}),
             "usuario_c": forms.TextInput(attrs={"class":"form-control"}),
-            "contraseña_c": forms.TextInput(attrs={"class":"form-control","type":"password"}),
+            "contrasenia_c": forms.TextInput(attrs={"class":"form-control","type":"password"}),
             "descripcion": forms.TextInput(attrs={"class":"form-control"})
         }
 
