@@ -3,33 +3,15 @@
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
-{% block footer %}
-  
-{% endblock footer %}
 
 {% block contenido_principal %}
-
 <header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Menu </h4></header>
+                          <br/>
 
-<br/><br/>
-<div >
-  
-
-</div>
-
-      <div class="card shadow mb-12">
-            <div class="btn-group btn-block" role="group" aria-label="Basic example">
-            <button id="registrar" onclick="modal('{% url 'Academico:nuevo_menu' %} ')" type="button" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon      glyphicon-plus"></button>
-            <button type="button" class="btn btn-success">Generar Excel</button>
-            <button type="button" class="btn btn-danger">Gerenar PDF</button>
-      </div>
-
-</div>     
-<br/><br/>
-          <!-- DataTales Example -->
+                          <button id="registrar" onclick="modal('{% url 'Academico:nuevo_menu' %} ')" type="button" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon glyphicon-plus"></button>
+                          <br/><br/>
+                          
           <div class="card shadow mb-4">
-
-
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Menus disponibles en el sistema</h6>
             </div>
@@ -57,9 +39,9 @@
                           <td>{{m.icono}}</td>
 
                           <td>
-                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info" title="Editar {{m.descripcion}}">
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn btn-primary" title="Editar {{m.descripcion}}">
                               <i class="fas fa-info-circle"></i>Editar</button>
-                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn-info btn-danger" title="Editar {{m.descripcion}}">
+                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn btn-info btn-danger" title="Editar {{m.descripcion}}">
                               <i class="fas fa-warning-circle"></i>Eliminar</button>
                         </td>
 

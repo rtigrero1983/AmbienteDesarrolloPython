@@ -10,16 +10,11 @@ import socket
 from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator
 
-
-def menu(request):
-    contexto = {}
-    if 'usuario' in request.session:
-            queryset = ConfMenu.objects.filter(id_genr_estado=97)
-            template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
-            contexto['menu'] = queryset
-            return render(request,template_name,contexto)
-    else:
-        return HttpResponseRedirect('timeout/')
+class Menu(ListView):
+    model = ConfMenu
+    template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
+    queryset = ConfMenu.objects.filter(id_genr_estado=97)
+    context_object_name = 'menu'
     
 #--------------------------------
 
@@ -60,9 +55,12 @@ def eliminar_menu(request,id):
     return render(request,'sistemaAcademico/Configuraciones/Menus/eliminar_menu.html',{'menu':menu})
 
 
+
+
+
 def nuevo_menu(request):
     try:
-        mp = ConfMenu.objects.filter(url__contains='#')
+        mp = ConfMenu.objects.filter().values('id_menu','id_padre','descripcion')
         if request.method == 'POST':
             var_orden = 0
             lista_orden= ConfMenu.objects.filter(id_padre=request.POST.get('modulo')).order_by('-orden')[:1]
@@ -70,6 +68,7 @@ def nuevo_menu(request):
                 b = int(registro.orden)
                 var_orden = b+1
             obj_menu = ConfMenu.objects.get(id_menu=request.POST.get('modulo'))
+            
             menu = ConfMenu.objects.create(
                                     id_padre=request.POST.get('modulo'),
                                     orden=var_orden,

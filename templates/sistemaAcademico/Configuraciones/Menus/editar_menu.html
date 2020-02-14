@@ -12,15 +12,19 @@
                          {% if permisos %}
                                <div class="alert alert-warning text-center" role="alert">
                                 <strong>
-                                    <i class="fas fa-exclamation-triangle"/>
-                                    Advertencia: Existen movimientos para menu
+                                    <i class="fas fa-exclamation-triangle" />
+                                       Advertencia: Existen movimientos para menu
                                     <i class="fas fa-exclamation-triangle"/>
                                 </strong>
                               </div>
-                         {% else %}
                                 <select  name="modulo" id="modulo" class="form-control text-dark ">
-                                 <option selected="true" class="text-dark" disabled="disabled">
-                                        Seleccione un modulo para este menu:
+                                 <option selected="true" value="{{menu_actual.id_menu}}" class="text-dark" disabled="disabled">
+                                        {{menu_actual.descripcion}}
+                                </option>
+                         {% else %}
+                            <select  name="modulo" id="modulo" class="form-control text-dark ">
+                                 <option selected="true" value="{{menu_actual.id_menu}}" class="text-dark" disabled="disabled">
+                                        {{menu_actual.descripcion}}
                                 </option>
                                 {%for mp in lista_padre %}
                                     <option class="text-success" value="{{mp.id_menu}}">{{mp.descripcion}}</option>

@@ -1,38 +1,99 @@
 {% extends 'base/base.html' %}
-{% load staticfiles %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
-{% block footer %}{% endblock footer %}
 {% endblock sidebar %}
-  {% block extracss %}
-         <script src="{% static 'js/Modulo_rest_api.js'%}"></script>
-  {% endblock extracss %}
-                  {% block contenido_principal %}
-<header class="cuadro_titulo"> <h4 class="title"> Configuracion | Modulos</h4></header>
-<br/><br/>
-     <button onclick="modal('{% url 'Academico:nuevo_modulo' %}')" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
-</button>
-<br/><br/>
-<div class="card-body">
-  <div class="table-responsive">
-                <table data-url="{% url 'Academico:api_modulo' %}" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
+
+{% block contenido_principal %}
+<header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Menu </h4></header>
+                          <br/>
+                             <a href="{% url 'Academico:nuevo_modulo' %}" type="button" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon glyphicon-plus">Agregar</a>
+                            <button id="registrar" onclick="modal('{% url 'Academico:nuevo_modulo' %} ')" type="button" class="btn btn-primary">Agregar un nuevo modulo<span class="glyphicon      glyphicon-plus"></button>
+                          <br/><br/>
+                          
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Modulos disponibles en el sistema</h6>
+            </div>
+
+            <div class="card-body ">
+
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-primary">
+                    <tr class="text-light text-center" >
+                      <th>#</th>
                       <th>Codigo</th>
-                      <th>Nombre</th> 
+                      <th>Nombre</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody id="cuerpo">  
+                   <tbody>
+                    {% for m in modulo %}
+                        <tr class="text-dark">
+                          <td class="text-dark">{{m.id_modulo}}</td>
+                          <td>{{m.codigo}}</td>  
+                          <td>{{m.nombre}}</td>
+                          <td class="text-center">
+                            <button onclick="modal('{% url 'Academico:editar_modulo' m.id_modulo %}')" class="btn btn-primary" title="Editar {{m.nombre}}">
+                              <i class="fas fa-info-circle"></i>Editar</button>
+                               <button onclick="modal('{% url 'Academico:eliminar_modulo' m.id_modulo %}')" class="btn btn-info btn-danger" title="Eliminar {{m.nombre}}">
+                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                          </td>
+
+                        </tr>
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>
             </div>
+          </div>
+
+        </div>
+
+
 {% endblock contenido_principal %}
+
 {% block extrajs %}
-<div class="modal fade" id="mostrar_modal" role="dialog"></div>
+
+
+
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+
+</div>
+
+
+
+  <script type="text/javascript">
+ $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+        "searching": true,
+        "ordering": false,
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ por página",
+            "zeroRecords": "Sin datos",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
+
+    $('.dataTables_length').addClass('bs-select');
+});
+  </script>
+
 {% endblock extrajs %}
+
+
+
+
+
 
 

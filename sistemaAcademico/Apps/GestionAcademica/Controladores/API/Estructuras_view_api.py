@@ -12,27 +12,6 @@ from django.views.decorators.cache import cache_page
 from django.http import JsonResponse
 from django.db.models import Q
 
-class QuizView(APIView):
-
-    def get_queryset(self):
-        idEmpresa = self.request.query_params.get('id')
-        queryset = 0
-        try:
-            if idEmpresa is None:
-                queryset = ConfEmpresa.objects.all()
-            else:
-                queryset = ConfEmpresa.objects.filter(razon_social=idEmpresa)
-                print(queryset)
-        except Exception:
-            Response(status=status.HTTP_404_NOT_FOUND)
-        return queryset
-
-
-    def get(self,request):
-        queryset = self.get_queryset()
-        serializacion = empresaSerializers(queryset, many=True)
-        return Response(data=serializacion.data, status=status.HTTP_200_OK)
-
 class Menu_api(APIView): 
 
     def post(self, request):
@@ -47,12 +26,11 @@ class Menu_api(APIView):
             try:
                 
                 queryset = ConfMenu.objects.filter(
-
-                     Q(descripcion__contains=descripcion)
-                    | Q(url=url)#or
-                    | Q(view=view)#or
-                    | Q(lazy_name=lazyname)#or
-                    | Q(name=name)#or
+                    Q(descripcion__contains=descripcion)
+                    & Q(url=url)#or
+                    & Q(view=view)#or
+                    & Q(lazy_name=lazyname)#or
+                    & Q(name=name)#or
                     & Q(id_genr_estado=97)#and
                 )
 

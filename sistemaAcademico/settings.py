@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'sistemaAcademico.Apps.GestionAcademica',
     'crispy_forms',
+    'multiselectfield',
+    'dal',
+    'dal_select2',
 ]
 
 MIDDLEWARE = [
@@ -86,7 +89,7 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':'mysql_cymysql',
-        'NAME':'bd_academico',
+        'NAME':'bd_academico_2020',
         'USER':'root',
         'PASSWORD':'root',
         'HOST': 'localhost',
@@ -131,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'es-ec'
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True

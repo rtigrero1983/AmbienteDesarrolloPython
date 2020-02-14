@@ -13,7 +13,6 @@ from .Controladores.Mantenimiento.Estructura_view_procesos import *
 from .Controladores.Mantenimiento.Estructura_view_registro_persona import *
 import hashlib
 from django.template.loader import get_template
-from django.views.decorators.cache import cache_page
 
 from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu,ConfPermiso
 
@@ -35,7 +34,7 @@ def inicio(request):
         contexto = {}
 
         permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario'))
+            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
 
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
 

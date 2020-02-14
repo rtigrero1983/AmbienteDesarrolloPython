@@ -9,14 +9,30 @@
                             </header>
                      <div class="contenido">
                         <br/>
+
                         <label class="text-dark h6 " for="modulo">Modulos:</label>
-                            <select  name="modulo" id="modulo" class="form-control text-dark ">
-                                 <option selected="true" class="text-dark" disabled="disabled">
-                                        Seleccione un modulo para este menu:
+                            <select  name="modulo" id="modulo" class="form-control text-dark">
+                                <option selected="true" class="text-dark" disabled="disabled">
+                                        Seleccione un <strong>Modulo</strong> o un <strong>Menu padre</strong> para este menu:
                                 </option>
-                                {%for mp in menu_padre %}
-                                    <option class="text-success" value="{{mp.id_menu}}">{{mp.descripcion}}</option>
-                                {%endfor%}
+
+                                <optgroup label="Modulos disponibles:">
+                                    {% for mp in menu_padre  %}
+                                            {% if mp.id_padre == 0 %}
+                                                <option class="text-dark" value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                                            {% endif %}
+                                    {% endfor %}
+                                <optgroup/>
+                                
+                                <optgroup label="Menus Disponibles:">
+                                {% for mp in menu_padre %}
+                                            {% if mp.url == '#' %}
+                                                <option class="text-dark " value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                                            {% endif %}
+                                {% endfor %}
+                                <optgroup/>
+
+                                
                             </select>
 
                         <div class="invalid-feedback" style="display: none;" id="error_modulo" name="error_modulo">

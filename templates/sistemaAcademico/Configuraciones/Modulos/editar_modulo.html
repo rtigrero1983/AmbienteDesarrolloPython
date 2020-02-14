@@ -1,31 +1,26 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-          <header class="cuadro_titulo">
-            <h4 class="titulo">Configuracion | Editar Modulo: {{modulo.nombre}} </h4>
-            </header>
+
         <form class="formulario" action="{% url 'Academico:editar_modulo' modulo.id_modulo %}" method="POST">{% csrf_token %}
         <div class="modal-body" >
-         <div class="contenido">
-            <br>
+            <header class="cuadro_titulo text-center">
+            <h4 class="titulo">Configuracion | Editar Modulo: {{modulo.nombre}} </h4>
+          </header>
+            <br><br>
             <label class="texto" for="id_modulo">Id: </label>
-            <input type="text" id="id_modulo" name="id_modulo" value="{{modulo.id_modulo}}" readonly class="cajatexto">
-            <br>
+            <input type="text" id="id_modulo" name="id_modulo" value="{{modulo.id_modulo}}" readonly class="form-control">
+            <br><br>
             <label class="texto">Nombre del modulo:</label>
-            <input type="text" name="nom_modulo" id="nom_modulo" value="{{modulo.nombre}}" class="cajatexto">
+            <input type="text" name="nombre" id="nombre" value="{{modulo.nombre}}" class="form-control">
             <br/>
             <label class="texto">Codigo:</label>
-            <input type="text" class="cajatexto" name="codigo" id="codigo" value="{{modulo.codigo}}">
+            <input type="text" class="form-control" name="codigo" id="codigo" value="{{modulo.codigo}}">
             <br/>
-            <div class="botones">
-            <br/>
-                <center>
-            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-            <button type="reset" class="btn btn-outline-primary">Resetear</button>
-            <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                </center>
-            </div>
-
-         </div>
+            <center>
+                        <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
+                        <button type="reset" class="btn btn-outline-info">Restablecer informacion</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>    
+            </center>
 
              </div>
         </form>

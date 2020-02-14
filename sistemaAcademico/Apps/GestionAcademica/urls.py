@@ -18,11 +18,11 @@ urlpatterns = [
     path('usuarios/', usuarios, name='usuarios'),
     path('roles/', roles, name='roles'),
     path('perfiles/', perfiles, name='perfiles'),
-    path('menu/', menu, name='menu'),
+    path('menu/', Menu.as_view(), name='menu'),
     path('acciones/', acciones, name='acciones'),
     path('permisos/', perfiles, name='permisos'),
     path('pruebas/', pruebas, name='pruebas'),
-    path('modulo/', modulo, name='modulo'),
+    path('modulo/', Modulo.as_view(), name='modulo'),
     path('empresas/', empresas, name='empresas'),
 
     #Opciones para el modulo de Admision
@@ -37,7 +37,7 @@ urlpatterns = [
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
-    path('nuevo_modulo/', nuevo_modulo, name='nuevo_modulo'),
+    path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('add_permiso/', add_permiso, name='add_permiso'),
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
@@ -75,8 +75,6 @@ urlpatterns = [
     #-----Rest-framework-APIS
     path('api_menu/', Menu_api.as_view(), name='api_menu'),
     path('api_modulo/', Modulo.as_view(), name='api_modulo'),
-    path('api_empresa/', QuizView.as_view(), name='api_empresa'),
-    path('api_usuario/', QuizView.as_view(), name='api_usuario'),
 
     #Opciones para el modulo de Mantenimiento
     path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
