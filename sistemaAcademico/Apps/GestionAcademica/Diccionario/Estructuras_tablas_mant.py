@@ -122,7 +122,7 @@ class MantAnioLectivo(models.Model):
     fecha_incio_ciclo = models.DateField(blank=False, null=False)
     fecha_fin_ciclo = models.DateField(blank=False, null=False)
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,
-                                       related_name="fk_aniolectivo_estado", db_column='id_genr_estado')
+                                       related_name="fk_aniolectivo_estado", db_column='id_genr_estado', default=97)
 
     class Meta:
         verbose_name = 'Año lectivo',

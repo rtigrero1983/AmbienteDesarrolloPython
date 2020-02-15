@@ -63,7 +63,7 @@ class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
     codigo = models.CharField(max_length=10, blank=False, null=False)
     nombre = models.CharField(max_length=45, blank=False, null=False)
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False,db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral,default=97, on_delete=models.CASCADE,blank=False, null=False,db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Rol',
@@ -107,7 +107,7 @@ class ConfUsuario(models.Model):
     clave = models.CharField(max_length=45, blank=False, null=False)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral,default=97, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Usuario',
@@ -149,7 +149,7 @@ class ConfAccion(models.Model):
         id_accion = models.AutoField(primary_key=True)
         descripcion = models.CharField(max_length=20, blank=False, null=False)
         id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE,related_name="fk_accion_menu", db_column='id_menu')
-        id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,related_name="fk_accion_genr" , db_column='id_genr_estado')
+        id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,related_name="fk_accion_genr" , db_column='id_genr_estado',default=97)
 
         class Meta:
             verbose_name = 'Accion'
@@ -180,7 +180,7 @@ class ConfDetallePermiso(models.Model):
     id_permiso = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE, related_name="fk_det_permiso_cab_permiso", db_column='id_permiso')
     id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_det_permiso_menu", db_column='id_menu')
     id_accion = models.ForeignKey(ConfAccion, on_delete=models.CASCADE, related_name="fk_det_permiso_accion", db_column='id_accion')
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral,default=97, on_delete=models.CASCADE, db_column='id_genr_estado')
 
     class Meta:
         verbose_name = 'Detalle Permiso',
@@ -201,6 +201,8 @@ class ConfCorreosSmpt(models.Model):
         usuario_c = models.CharField(max_length=100, blank=False, null=False,unique=True)
         contrasenia_c = models.CharField(max_length=100, blank=False, null=False)
         descripcion = models.CharField(max_length=200, blank=False, null=False)
+        id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
+                                           db_column='id_genr_estado')
 
 
         class Meta:
