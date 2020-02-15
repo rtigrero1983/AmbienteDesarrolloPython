@@ -50,3 +50,7 @@ class modulo_form(forms.ModelForm):
             'codigo':forms.TextInput(attrs={"class":"form-control","placeholder":"Ingrese codigo para este nuevo modulo"}),
             'nombre': forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese nombre para este nuevo modulo"}),
         }
+
+        def clean_codigo(self):
+            codigo = self.cleaned_data.get('codigo')
+            return codigo
