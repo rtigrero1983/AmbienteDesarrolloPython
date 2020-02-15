@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block footer %}
+
+{% endblock footer %}
+{% block titulo_cab_menu %}
+
+{%endblock titulo_cab_menu %}
+
+
+ {% block contenido_principal %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        {% if error %}
+         <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss = "alert" aria-label = "Close">
+                                  <span aria-hidden = "true">&times;</span>
+                                </button>
+                                <strong>Advertencia: </strong> {{ error }}
+                              </div>
+        {% endif %}
+        <header class="cuadro_titulo">
+            <h4 class="titulo">Registro / Empleado</h4>
+        </header>
+        <br/>
+        {% load crispy_forms_tags %}
+        <form action="" method="post" id="forma_test" novalidate>
+            {% csrf_token %}
+           <div class="contenido">
+               <label for="id_nombres" class="text-dark h6">{{form.nombres.label }} :</label>
+               {{form.ssl}}<br>
+               <label for="id_apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
+               {{form.puerto}}
+               <label for="id_fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label}}</label>
+               {{form.dominio}}
+               <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label}}</label>
+               {{form.usuario_c}}
+               <label for="id_genr_provincia" class="text-dark h6">{{form.id_genr_provincia.label}}</label>
+               {{form.contraseña_c}}
+               <label for="id_genr_ciudad" class="text-dark h6">{{form.id_genr_ciudad.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_tipo_identificacion" class="text-dark h6">{{form.id_genr_tipo_identificacion.label}}</label>
+                {{form.descripcion}}
+                <label for="id_identificacion" class="text-dark h6">{{form.identificacion.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_estado_civil" class="text-dark h6">{{form.id_genr_estado_civil.label}}</label>
+                {{form.descripcion}}
+               <label for="id_telefono" class="text-dark h6">{{form.telefono.label}}</label>
+                {{form.descripcion}}
+               <label for="id_correo" class="text-dark h6">{{form.correo.label}}</label>
+                {{form.descripcion}}
+               <label for="id_celular" class="text-dark h6">{{form.celular.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_etnia" class="text-dark h6">{{form.id_genr_etnia.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label}}</label>
+                {{form.descripcion}}
+               <label for="id_lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_categoria_migratoria" class="text-dark h6">{{form.id_genr_categoria_migratoria.label}}</label>
+                {{form.descripcion}}
+               <label for="id_discapacidad" class="text-dark h6">{{form.discapacidad.label}}</label>
+                {{form.descripcion}}
+               <label for="id_discapacidad_renal" class="text-dark h6">{{form.id_discapacidad_renal.label}}</label>
+                {{form.descripcion}}
+               <label for="id_discapacidad_neurologica" class="text-dark h6">{{form.discapacidad_neurologica.label}}</label>
+                {{form.descripcion}}
+               <label for="id_enfermedad_alergica" class="text-dark h6">{{form.enfermedad_alergica.label}}</label>
+                {{form.descripcion}}
+               <label for="id_asma" class="text-dark h6">{{form.asma.label}}</label>
+                {{form.descripcion}}
+               <label for="id_epilepsia" class="text-dark h6">{{form.epilepsia.label}}</label>
+                {{form.descripcion}}
+               <label for="id_enfermedad_congenita" class="text-dark h6">{{form.enfermedad_cognitiva.label}}</label>
+                {{form.descripcion}}
+               <label for="id_enfermedad_respiratoria" class="text-dark h6">{{form.enfermedad_respiratoria.label}}</label>
+                {{form.descripcion}}
+               <label for="id_atencion_psicologica" class="text-dark h6">{{form.atencion_psicologica.label}}</label>
+                {{form.descripcion}}
+               <label for="id_bono_solidario" class="text-dark h6">{{form.bono_solidario.label}}</label>
+                {{form.descripcion}}
+               <label for="id_mienbros_hogar" class="text-dark h6">{{form.mienbros_hogar.label}}</label>
+                {{form.descripcion}}
+               <label for="id_genr_estado_laboral" class="text-dark h6">{{form.id_genr_estado_laboral.label}}</label>
+                {{form.descripcion}}
+
+               <label for="id_pnombres" class="text-dark h6">{{form.pnombres.label}}</label>
+                {{form.descripcion}}
+               <label for="id_papellidos" class="text-dark h6">{{form.papellidos.label}}</label>
+                {{form.descripcion}}
+               <label for="id_pidentificacion" class="text-dark h6">{{form.pidentificacion.label}}</label>
+                {{form.descripcion}}
+               <label for="id_pdireccion" class="text-dark h6">{{form.pdireccion.label}}</label>
+                {{form.descripcion}}
+               <label for="id_ptelefono" class="text-dark h6">{{form.ptelefono.label}}</label>
+                {{form.descripcion}}
+
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <input type="submit" class="btn btn-outline-primary btn-block"  id="btn_guardar_menu" value="Guardar"  name="btn_guardar_menu"/>
+                </div>
+                <div class="form-group col-md-6">
+                <button class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+               </div>
+        </form>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+{% endblock contenido_principal %}

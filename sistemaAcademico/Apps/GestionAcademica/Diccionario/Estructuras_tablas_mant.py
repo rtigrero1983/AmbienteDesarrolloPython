@@ -44,7 +44,7 @@ class MantPersona(models.Model):
     enfermedad_respiratoria = models.BooleanField(blank=False, null=False)
     atencion_psicologica = models.BooleanField(blank=False, null=False)
     bono_solidario = models.BooleanField(blank=False, null=False)
-    mienbros_hogar = models.IntegerField(blank=False, null=False)
+    c = models.IntegerField(blank=False, null=False)
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="persona_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp", db_column='id_genr_estado_laboralp')
     
