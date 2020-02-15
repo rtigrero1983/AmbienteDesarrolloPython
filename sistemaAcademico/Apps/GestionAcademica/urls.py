@@ -6,6 +6,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_a
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
+from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
 from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
