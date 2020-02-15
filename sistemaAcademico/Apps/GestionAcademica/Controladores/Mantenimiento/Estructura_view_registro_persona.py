@@ -14,3 +14,9 @@ def registro_estudiante(request):
         return render(request, 'sistemaAcademico/Mantenimiento/form_reg_estudiante.html')
     else:
         return HttpResponseRedirect('timeout/')
+
+def registro_empleado(request):
+    if 'usuario' in request.session:
+        return render(request, 'sistemaAcademico/Mantenimiento/form_reg_empleado.html')
+    else:
+        return HttpResponseRedirect('timeout/')
