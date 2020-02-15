@@ -78,7 +78,6 @@ urlpatterns = [
 
     #Opciones para el modulo de Mantenimiento
     path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
-    path('registro_empleado/', registro_empleado, name='registro_empleado'),
 ]
 
 
