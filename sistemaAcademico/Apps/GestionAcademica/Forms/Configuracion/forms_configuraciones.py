@@ -47,7 +47,7 @@ class modulo_form(forms.ModelForm):
                   }
 
         widgets = {
-            'codigo':forms.TextInput(attrs={"class":"form-control","placeholder":"Ingrese codigo para este nuevo modulo"}),
+            'codigo':forms.TextInput(attrs={"class":"form-control","placeholder":"Ingrese codigo para este nuevo modulo","type":"number"}),
             'nombre': forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese nombre para este nuevo modulo"}),
         }
 

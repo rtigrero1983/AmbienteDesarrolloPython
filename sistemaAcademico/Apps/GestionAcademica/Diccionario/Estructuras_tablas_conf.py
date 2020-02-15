@@ -3,7 +3,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantPersona
 from multiselectfield import MultiSelectField
 
-from sistemaAcademico.Apps.Validaciones import validate_codigo
+from sistemaAcademico.Apps.Validaciones import *
 
 
 class ConfEmpresa(models.Model):
@@ -37,14 +37,9 @@ class ConfEmpresa(models.Model):
         return self.nombre
 
 class ConfModulo(models.Model):
-        activo = GenrGeneral.objects.get(idgenr_general=97)
-        CHOICES_ESTADOS = [
-                            ('{}'.format(activo),'Activo')
-                           ,('inactivo','98')
-                           ]
         id_modulo = models.AutoField(primary_key=True)
-        codigo = models.CharField(max_length=20,validators=[validate_codigo],unique = True)
-        nombre = models.CharField(blank=False, null=False,max_length=25,unique = True)
+        codigo = models.CharField(max_length=20,validators=[validate_codigo], unique = True)
+        nombre = models.CharField(blank=False,validators=[validate_nombre], null=False,max_length=25,unique = True)
         id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE, default=97 ,db_column='id_genr_estado')
 
         class Meta:
