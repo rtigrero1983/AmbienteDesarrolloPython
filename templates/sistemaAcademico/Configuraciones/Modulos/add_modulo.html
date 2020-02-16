@@ -6,7 +6,7 @@
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
 <br><br><br><br><br>
-<form method="POST">
+<form method="POST" action="{% url 'Academico:nuevo_menu' %}">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>

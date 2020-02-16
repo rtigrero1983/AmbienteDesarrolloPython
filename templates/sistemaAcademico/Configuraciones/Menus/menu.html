@@ -7,8 +7,7 @@
 {% block contenido_principal %}
 <header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Menu </h4></header>
                           <br/>
-
-                          <button id="registrar" onclick="modal('{% url 'Academico:nuevo_menu' %} ')" type="button" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon glyphicon-plus"></button>
+                          <a id="registrar" href="{% url 'Academico:nuevo_menu' %}" class="btn btn-primary">Agregar un nuevo menu <span class="glyphicon glyphicon-plus"></a>
                           <br/><br/>
                           
           <div class="card shadow mb-4">

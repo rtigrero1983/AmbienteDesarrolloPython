@@ -68,17 +68,28 @@ class ConfRol(models.Model):
     def __str__(self):
         return self.nombre
 
+
 class ConfMenu(models.Model):
+    ICONO_CHOICES =[
+                        ('fas fa-fw fa-cog','Icono Configuraciones'),
+                        ('fas fa-fw fa-wrench','Icono Reportes Especiales'),
+                        ('fas fa-fw fa-chart-area','Icono Registor Notas'),
+                        ('fas fa-fw fa-table','Icono Matricula'),
+                        ('fas fa-fw fa-folder','Icono Admisiones'),
+                        ('#','Ninguno')
+                    ]
+
+    
     id_menu = models.AutoField(primary_key=True)
     id_padre = models.IntegerField(blank=False,null=False)
     orden = models.IntegerField(blank=False, null=False)
-    descripcion = models.CharField(max_length=45, blank=False, null=False, db_column='descripcion')
-    id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,db_column='id_genr_estado')
-    url = models.CharField(blank=False,null=False, max_length=60)
-    icono = models.CharField(max_length=50,blank=False,null=False,default='#')
-    lazy_name = models.CharField(max_length=60,blank=False,default='example/')
-    name = models.CharField(max_length=60, blank=False,default='example')
-    view =  models.CharField(max_length=45,blank=False,null=False)
+    descripcion = models.CharField(max_length=45, blank=False,validators=[validate_descripcion],unique=True, null=False, db_column='descripcion')
+    id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,default=97,db_column='id_genr_estado')
+    url = models.CharField(blank=False,null=False, unique=True, max_length=60)
+    icono = models.CharField(max_length=50,blank=False,choices=ICONO_CHOICES,null=False)
+    lazy_name = models.CharField(max_length=60,unique=True,blank=False)
+    name = models.CharField(max_length=60,unique=True, blank=False)
+    view =  models.CharField(max_length=45,unique=True,blank=False,null=False)
 
     class Meta:
         verbose_name = 'Menu',
@@ -94,6 +105,7 @@ class ConfMenu(models.Model):
 
     def __unicode__(self):
         return  self.id_genr_estado
+
 
 
 class ConfUsuario(models.Model):

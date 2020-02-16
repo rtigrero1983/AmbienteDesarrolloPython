@@ -47,10 +47,48 @@ class modulo_form(forms.ModelForm):
                   }
 
         widgets = {
-            'codigo':forms.TextInput(attrs={"class":"form-control","placeholder":"Ingrese codigo para este nuevo modulo","type":"number"}),
+            'codigo':forms.TextInput(attrs={"class":"form-control","placeholder":"Ingrese codigo para este nuevo modulo","type":"number "}),
             'nombre': forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese nombre para este nuevo modulo"}),
         }
 
         def clean_codigo(self):
             codigo = self.cleaned_data.get('codigo')
             return codigo
+
+
+class menu_form(forms.ModelForm):
+
+    class Meta:
+        MENU_CHOICES = []
+        model = ConfMenu
+        fields = [ 
+                   'id_padre', 
+                   'descripcion',
+                   'url',
+                   'icono',
+                   'lazy_name',
+                   'name',
+                   'view'
+                   ]
+        labels = {
+                    'descripcion':'Nombre del menu: ',
+                    'id_padre':'Modulo: ',
+                    'url':'Url del menu: ',
+                    'icono':'Icono: ',
+                    'lazy_name':'Lazy name: ',
+                    'name' : 'Name:',
+                    'view' : 'Controlador del menu(View):'
+                 }
+
+        widgets = {
+            'descripcion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para este menu"}),
+            'url': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una url para este  menu"}),
+            'lazy_name': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese lazy name para este menu"}),
+            'name': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese un name para este nuevo menu"}),
+            'view': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre controlador para este menu"}),
+        }
+
+
+    def __init__(self, *args, **kwargs):
+        super(menu_form, self).__init__(*args, **kwargs)
+        self.fields['id_padre'] = forms.ChoiceField(choices=[(m.id_menu,m.descripcion) for m in ConfMenu.objects.filter(id_padre=0)])

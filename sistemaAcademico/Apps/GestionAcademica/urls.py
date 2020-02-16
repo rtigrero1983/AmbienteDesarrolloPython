@@ -37,7 +37,8 @@ urlpatterns = [
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
     path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
-    path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
+    #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
+    path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('add_permiso/', add_permiso, name='add_permiso'),
 
@@ -81,6 +82,8 @@ urlpatterns = [
     #Opciones para el modulo de Mantenimiento
     path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
     path('registro_empleado/', registro_empleado, name='registro_empleado'),
+
+    #---------Django-Autocomplete-Filters----------
 ]
 
 

@@ -17,4 +17,12 @@ def validate_nombre(value):
         raise ValidationError(
         	_('{0} No se puede crear un modulo sin codigo. porfavor ingrese uno'.format(value)))
     return value
+
+
+def validate_descripcion(value):
+    if " " in value or value == "":
+        raise ValidationError(
+        	_('No se puede crear un menu sin un nombre. porfavor ingrese uno'))
+    return value
+ 
     
