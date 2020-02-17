@@ -1,4 +1,12 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
 
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block contenido_principal %}
 
 <div class="modal-dialog modal-lg" role="document">
 
@@ -21,8 +29,7 @@
              			   			<div class="botones">
         						    <br/>
         						    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-
-        						    <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+										<a class="btn btn-outline-primary" href="{% url 'Academico:empresas' %}" >Cancelar</a>
         						    </div>
         						</div>
                      </div>
@@ -30,3 +37,4 @@
 		      </div>
 	</div>
 </div>
+{% endblock contenido_principal %}
