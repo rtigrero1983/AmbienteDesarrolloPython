@@ -61,8 +61,8 @@ class menu_form(forms.ModelForm):
     class Meta:
         MENU_CHOICES = []
         model = ConfMenu
-        fields = [ 
-                   'id_padre', 
+        fields = [
+                   'id_padre',
                    'descripcion',
                    'url',
                    'icono',
@@ -92,3 +92,45 @@ class menu_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(menu_form, self).__init__(*args, **kwargs)
         self.fields['id_padre'] = forms.ChoiceField(choices=[(m.id_menu,m.descripcion) for m in ConfMenu.objects.filter(id_padre=0)])
+
+
+
+
+class unidad_forms(forms.ModelForm):
+
+    class Meta:
+        MENU_CHOICES = []
+        model = ConfEmpresa
+        fields = [
+                   'nombre',
+                   'razon_social',
+                   'identificacion',
+                   'direccion',
+                   'representante_legal',
+                   'correo',
+                   'telefono'
+                   ]
+        labels = {
+                    'nombre':'Nombre de la unidad: ',
+                    'razon_social':'nombre de la razon: ',
+                    'identificacion':'ingrese su ci: ',
+                    'direccion':'nombre de la direccion: ',
+                    'representante_legal':'representante_legal: ',
+                    'correo' : 'correo:',
+                    'telefono' : ' telefono:'
+                 }
+
+        widgets = {
+            'nombre': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
+            'razon_social': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
+            'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion"}),
+            'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
+            'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
+            'correo': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una correo"}),
+            'telefono': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
+        }
+
+
+    def __init__(self, *args, **kwargs):
+        super(unidad_forms, self).__init__(*args, **kwargs)
+        self.fields['id_padre'] = forms.ChoiceField(choices=[(m.id_empresa, m.descripcion) for m in ConfEmpresa.objects.filter(id_padre=0)])
