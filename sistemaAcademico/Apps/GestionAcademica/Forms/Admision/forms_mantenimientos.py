@@ -1,14 +1,20 @@
+from dal import autocomplete
 
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
+import django_filters
+
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
 class CrearEmpleado(forms.ModelForm):
+
     class Meta:
-        model = models.MantPersona
+        model = MantPersona
         fields = [
+
             "nombres",
             "apellidos",
-            "fecha_de_nacimiento",
             "id_genr_genero",
             "id_genr_pais",
             "id_genr_tipo_identificacion",
@@ -46,6 +52,7 @@ class CrearEmpleado(forms.ModelForm):
             "ptelefono",
         ]
         labels = {
+
             "nombres": "Nombres",
             "apellidos":"Apellidos",
             "fecha_de_nacimiento":"Fecha de Nacimiento",
@@ -86,26 +93,27 @@ class CrearEmpleado(forms.ModelForm):
             "ptelefono":"Telefono",
         }
         widgets = {
-            "nombres": forms.TextInput(),
-            "apellidos": forms.TextInput(),
+
+            "nombres": forms.TextInput(attrs={"class":"form-control text-dark","placeholder":"Ingrese sus nombres"}),
+            "apellidos": forms.TextInput(attrs={"class":"form-control text-dark","placeholder":"Ingrese sus apellidos"}),
             "fecha_de_nacimiento": forms.DateField(),
-            "id_genr_genero": forms.CheckboxSelectMultiple(),
-            "id_genr_pais": forms.ChoiceField(choices=models.GenrGeneral.nombre.filter(tipo='TPA')),
-            "id_genr_tipo_identificacion": forms.CheckboxSelectMultiple(),
+            "id_genr_genero": autocomplete.ModelSelect2(url='GEN_autocomplete'),
+            "id_genr_pais": forms.TextInput(),
+            "id_genr_tipo_identificacion": autocomplete.ModelSelect2(url='TID_autocomplete'),
             "identificacion": forms.TextInput(),
-            "id_genr_estado_civil": forms.CheckboxSelectMultiple(),
+            "id_genr_estado_civil": forms.TextInput(),
             "telefono": forms.TextInput(),
             "correo": forms.TextInput(),
             "celular": forms.TextInput(),
-            "id_genr_tipo_sangre": forms.CheckboxSelectMultiple(),
-            "id_genr_etnia": forms.CheckboxSelectMultiple(),
-            "id_genr_jornada": forms.CheckboxSelectMultiple(),
-            "id_genr_indigena": forms.CheckboxSelectMultiple(),
-            "id_genr_idioma_ancestral": forms.CheckboxSelectMultiple(),
+            "id_genr_tipo_sangre": forms.TextInput(),
+            "id_genr_etnia": forms.TextInput(),
+            "id_genr_jornada": forms.TextInput(),
+            "id_genr_indigena": forms.TextInput(),
+            "id_genr_idioma_ancestral": forms.TextInput(),
             "lugar_nacimiento": forms.TextInput(),
-            "id_genr_provincia": forms.CheckboxSelectMultiple(),
-            "id_genr_ciudad": forms.CheckboxSelectMultiple(),
-            "id_genr_categoria_migratoria": forms.CheckboxSelectMultiple(),
+            "id_genr_provincia": forms.TextInput(),
+            "id_genr_ciudad": forms.TextInput(),
+            "id_genr_categoria_migratoria": forms.TextInput(),
             "discapacidad": forms.CheckboxInput(),
             "discapacidad_renal": forms.CheckboxInput(),
             "discapacidad_neurologica": forms.CheckboxInput(),

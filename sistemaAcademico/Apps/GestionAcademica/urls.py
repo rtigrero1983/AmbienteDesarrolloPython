@@ -4,6 +4,7 @@ from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
+from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import *
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
@@ -81,9 +82,12 @@ urlpatterns = [
 
     #Opciones para el modulo de Mantenimiento
     path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
-    path('registro_empleado/', registro_empleado, name='registro_empleado'),
+    path('registro_empleado/', NuevoEmpleado.as_view(), name='registro_empleado'),
+
 
     #---------Django-Autocomplete-Filters----------
+    path('TID_autocomplete', TID_autocomplete, name='TID_autocomplete'),
+    path('GEN_autocomplete', GEN_autocomplete, name='GEN_autocomplete'),
 ]
 
 

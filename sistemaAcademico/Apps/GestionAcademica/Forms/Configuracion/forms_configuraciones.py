@@ -59,7 +59,6 @@ class modulo_form(forms.ModelForm):
 class menu_form(forms.ModelForm):
 
     class Meta:
-        MENU_CHOICES = []
         model = ConfMenu
         fields = [
                    'id_padre',

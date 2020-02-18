@@ -169,7 +169,7 @@ class ConfAccion(models.Model):
 class ConfPermiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
     id_modulo_menu = models.ForeignKey(ConfModulo_menu, on_delete=models.CASCADE, related_name="fk_permiso_modmenu", db_column='id_modulo_menu')
-    id_usuario_rol = models.ForeignKey(ConfUsuario_rol, on_delete=models.CASCADE, related_name="fk_permiso_usurol", db_column='id_usuario_rol')
+    id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE, related_name="fk_permiso_rol", db_column='id_rol', default=1)
 
     class Meta:
         verbose_name = 'Permiso',
@@ -180,7 +180,7 @@ class ConfPermiso(models.Model):
         return self.id_modulo
 
     def __unicode__(self):
-        return self.id_usuario_rol
+        return self.id_rol
 
 class ConfDetallePermiso(models.Model):
     id_detalle_permiso = models.AutoField(primary_key=True)
