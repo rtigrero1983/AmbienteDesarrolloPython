@@ -5,9 +5,9 @@
 {% endblock sidebar %}
 
 {% block contenido_principal %}
-<header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Modulo </h4></header>
+<header class="cuadro_titulo bg-gradient-primary text-center "> <h4 class="title text-light"> Configuracion | Modulo </h4></header>
                           <br/>
-                             <a href="{% url 'Academico:nuevo_modulo' %}" type="button" class="btn btn-primary">Agregar un nuevo modulo <span class="glyphicon glyphicon-plus">Agregar</a>
+                             <a href="{% url 'Academico:nuevo_modulo' %}" type="button" class="btn bg-gradient-primary text-light">Agregar un nuevo modulo <span class="glyphicon glyphicon-plus">Agregar</a>
                           <br/><br/>
                           
           <div class="card shadow mb-4">
@@ -19,7 +19,7 @@
 
               <div class="table-responsive">
                 <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
-                  <thead class="bg-primary">
+                  <thead class="bg-gradient-primary">
                     <tr class="text-light text-center" >
                       <th>#</th>
                       <th>Codigo</th>
@@ -34,9 +34,9 @@
                           <td>{{m.codigo}}</td>  
                           <td>{{m.nombre}}</td>
                           <td class="text-center">
-                            <a href="{% url 'Academico:editar_modulo' m.id_modulo %}" class="btn btn-primary" title="Editar {{m.nombre}}">
+                            <a href="{% url 'Academico:editar_modulo' m.id_modulo %}" class="btn bg-gradient-primary text-light" title="Editar {{m.nombre}}">
                               <i class="fas fa-info-circle"></i>Editar</a>
-                               <button onclick="modal('{% url 'Academico:eliminar_modulo' m.id_modulo %}')" class="btn btn-info btn-danger" title="Eliminar {{m.nombre}}">
+                               <button onclick="modal('{% url 'Academico:eliminar_modulo' m.id_modulo %}')" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombre}}">
                               <i class="fas fa-warning-circle"></i>Eliminar</button>
                           </td>
 

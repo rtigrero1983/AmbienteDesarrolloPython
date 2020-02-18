@@ -19,7 +19,7 @@ from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModu
 
 def pruebas(request):
     #permiso = ConfPermiso.objects.filter(id_usuario_rol__id_usuario=8).select_related('id_modulo_menu')
-    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
+    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__fkrol_usuario__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
     for p in mpss:
         print(p.id_modulo_menu)
     return render(request,'base/pruebas.html', {'menus': mpss})
@@ -33,7 +33,7 @@ def inicio(request):
         contexto = {}
 
         permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_usuario_rol__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
+            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
 
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
 
