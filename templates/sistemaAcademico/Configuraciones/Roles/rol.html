@@ -12,48 +12,48 @@
 
 {% block contenido_principal %}
 
-<header class="cuadro_titulo"><h4 class="title"> Configuracion | Roles </h4></header>
+<header class="cuadro_titulo text-center "> <h4 class="title text-light"> Configuracion | Rol </h4></header>
+                          <br/>
+                          <button id="registrar" onclick="modal('{% url 'Academico:nuevo_rol' %}')" class="btn btn-primary">Agregar un nuevo rol <span class="glyphicon glyphicon-plus"></button>
+                          <br/><br/>
 
-<br/><br/>
-<button class="btn btn-outline-primary" id="registrar" onclick="modal('{% url 'Academico:nuevo_rol'  %} ')"><span
-        class="glyphicon glyphicon-plus"></span>nuevo
-</button>
-<br/><br/>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
+            </div>
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-primary">
+                    <tr class="text-light text-center" >
+                      <th>#</th>
+                      <th>Codigo</th>
+                      <th>Nombre</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    {% for m in roles %}
+                        <tr class="text-center" style="border-width:3px;">
+                          <td class="text-dark" style="border-width:1px;">{{m.id_rol}}</td>
+                          <td>{{m.codigo}}</td>
+                          <td>{{m.nombre}}</td>
+                          <td>
+                            <button onclick="modal('{% url 'Academico:editar_rol' m.id_rol %}')" class="btn btn-primary" title="Editar {{m.descripcion}}">
+                              <i class="fas fa-info-circle"></i>Editar</button>
+                            <button onclick="modal('{% url 'Academico:eliminar_rol' m.id_rol %}')" class="btn btn-info btn-danger" title="Editar {{m.descripcion}}">
+                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-<div class="card-body">
-    <div class="table-responsive">
-        <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
-            <thead>
-            <tr>
-                <th>Codigo</th>
-                <th>Nombre</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
+        </div>
 
-            <tbody>
-
-            {% for em in roles %}
-                <tr>
-                <td><strong>{{em.codigo}}</strong></td>
-                <td><strong>{{em.nombre}}</strong></td>
-                <td>
-    <button class="btn-info btn-circle"
-            onclick="modal('{% url 'Academico:editar_rol' em.id_rol %}')" title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i>
-    </button>
-    <button class="btn btn-danger btn-circle"
-            onclick="modal('{% url 'Academico:eliminar_rol' em.id_rol %}')" title="Eliminar {{em.nombre}}"><i
-            class="fas fa-trash"></i></button>
-    <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
-                </td>
-            </tr>
-            {% endfor %}
-
-            </tbody>
-        </table>
-    </div>
-
-</div>
 
 
 {% endblock contenido_principal %}
@@ -65,7 +65,29 @@
 
 </div>
 
+  <script type="text/javascript">
+ $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+        "searching": true,
+        "ordering": false,
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ por página",
+            "zeroRecords": "Sin datos",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
 
+    $('.dataTables_length').addClass('bs-select');
+});
+  </script>
 
 <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
 <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>

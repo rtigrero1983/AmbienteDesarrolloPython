@@ -78,8 +78,6 @@ class ConfMenu(models.Model):
                         ('fas fa-fw fa-folder','Icono Admisiones'),
                         ('#','Ninguno')
                     ]
-
-    
     id_menu = models.AutoField(primary_key=True)
     id_padre = models.IntegerField(blank=False,null=False)
     orden = models.IntegerField(blank=False, null=False)

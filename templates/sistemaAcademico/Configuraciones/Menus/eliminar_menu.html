@@ -1,7 +1,6 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 				<form method="POST" action="{% url 'Academico:eliminar_menu' menu.id_menu %}"> {% csrf_token %}
-
 					 <div class="card shadow mb-4">
              			 <div class="card-header py-3">
              			   <h6 class="m-0 font-weight-bold text-danger">Eliminar menu</h6>
@@ -18,7 +17,6 @@
         						    </div>
         						</div>
              		 </div>
-
 				</form>
 	</div>
 </div>

@@ -1,31 +1,22 @@
 <div class="modal-dialog modal-lg" role="document">
-
-
-
     <div class="modal-content">
-
-            <form action="{% url 'Academico:eliminar_rol' roles.id_rol %}" method="POST"> {% csrf_token %}
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-danger">Eliminar Rol</h6>
-                    </div>
-
-                    <div class="card-body">
-                        Esta seguro que deseas eliminar este opcion del rol {{roles.nombre}}?<br>
-                        Nombre del Rol: <label>{{roles.nombre}}</label><br>
-                    </div>
-
-
-                    <div class="botones">
-                        <br/>
-                        <button class="btn btn-outline-danger" type="submit">Eliminar</button>
-
-                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </div>
-
-            </form>
-
-    </div>
-    </div>
+				<form method="POST" action="{% url 'Academico:eliminar_rol' roles.id_rol %}"> {% csrf_token %}
+					 <div class="modal-body">
+             			<header class="cuadro_titulo bg-danger">
+                    		<h4 class="titulo">Configuracion | Eliminar Modulo</h4>
+                    	</header>
+								<div class="contenido text-dark">
+             			   			 Esta seguro que deseas eliminar este opcion del rol {{roles.nombre}}?<br>
+             			   			 Nombre del Rol: <label>{{roles.nombre}}</label><br>
+                                    <div class="botones">
+                                        <br/>
+                                        <button class="btn btn-outline-danger" type="submit">Eliminar</button>
+                                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                                    </div>
+        						</div>
+             			 		</div>
+             		</div>
+				</form>
+	</div>
+</div>
 

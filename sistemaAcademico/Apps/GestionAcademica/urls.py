@@ -18,12 +18,11 @@ urlpatterns = [
     path('salir/', salir, name='logout'),
     path('inicio/', inicio, name='inicio'),
     path('usuarios/', usuarios, name='usuarios'),
-    path('roles/', roles, name='roles'),
+    path('roles/', Roles.as_view(), name='roles'),
     path('perfiles/', perfiles, name='perfiles'),
     path('menu/', Menu.as_view(), name='menu'),
     path('acciones/', acciones, name='acciones'),
     path('permisos/', perfiles, name='permisos'),
-    path('pruebas/', pruebas, name='pruebas'),
     path('modulo/', Modulo.as_view(), name='modulo'),
     path('empresas/', empresas, name='empresas'),
 
