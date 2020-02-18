@@ -1,61 +1,61 @@
-{% extends 'sistemaAcademico/inicio.html' %}
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
 
-	{% block contenido_principal %}
+{% block contenido_principal %}
 
-<header class="cuadro_titulo">
-    <h4 class="titulo">Configuracion / Registrar Permiso</h4>
+
+<header class="cuadro_titulo" class="title">
+    <h4>Configuracion | Permisos</h4>
 </header>
-     <br/>
-     <form class="formulario" method="POST">{% csrf_token %}
-         <div class="contenido">
+    <br>
+ <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
+            </div>
 
-             <label class="texto">
-                Modulo:
-            </label>
-               <select name="modulo" class="cajatexto">
-                    <option selected>Elija el modulo de este permiso</option>
-                    {% for mod in modulo %}
-                    <option class="cajatexto" value="{{mod.id_modulo}}"> {{mod.nombre}} </option>
-                    {% endfor %}
-            </select>
-             <br/>
+            <div class="card-body ">
 
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary ">
+                    <tr class="text-light text-center" >
+                      <th>Nombre</th>
+                    </tr>
+                  </thead>
+<tbody>
+{% for rol in rol %}
+<tr>
 
-            <label class="texto">
-                Menu:
-            </label>
+<td><div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#{{ rol.nombre }}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="{{ rol.nombre }}">
+                  <h6 class="m-0 font-weight-bold text-primary">{{ rol.nombre }}</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="{{ rol.nombre }}">
+                  <div class="card-body">
+                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
+                  </div>
+                </div>
+              </div></td>
 
-             <select name="menu" class="cajatexto">
-                    <option selected>Elija el menu de este permiso</option>
-                    {% for menu in menu %}
-                    <option class="cajatexto" value="{{menu.id_menu}}"> {{menu.descripcion}} </option>
-                    {% endfor %}
-            </select>
-
-
-             <br/>
-
-
-
-             <label class="texto">
-                Estado:
-            </label>
-           <select name="estado" class="cajatexto">
-                    <option value="">Elija un estado</option>
-                    {% for est in estado %}
-                    <option class="cajatexto" value="{{est.idgenr_general}}"> {{est.nombre}} </option>
-                    {% endfor %}
-                </select>
-
-             <br/>
-         </div>
-             <div class="botones">
-             <br/>
-             <button type="submit" class="btn btn-outline-primary">Guardar</button>
-             <button type="reset" class="btn btn-outline-primary">Resetear</button>
-             <a class="btn btn-outline-primary" href="{% url 'Academico:perfiles' %}">Cancelar</a>
-             </div>
-     </form>
-
-
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+            </div>
+            </div>
 {% endblock contenido_principal %}
+
+{% block footer %}
+
+{% endblock footer %}
+
+
+{% block scrool %}
+
+{% endblock scrool %}
