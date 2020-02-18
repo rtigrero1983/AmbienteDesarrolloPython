@@ -4,15 +4,15 @@ from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
-from django.views.decorators.cache import cache_page
 
-cache_page(60*15)
+
 def perfiles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
-        permiso=ConfPermiso.objects.filter(id_genr_estado=97).values('id_permiso','id_menu','id_modulo','id_genr_estado')
-        print(permiso)
-        return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',{'permiso': permiso})
+        contexto={}
+        rol=ConfRol.objects.all()
+        contexto['rol']=rol
+        return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',contexto)
     else:
         return HttpResponseRedirect('timeout/')
 
@@ -26,14 +26,6 @@ def add_permiso(request):
         contexto['modulo']=modulo
         contexto['estado'] = estado
         contexto['menu'] = menu
-        if request.method == 'POST':
-            menu=ConfMenu.objects.get(id_menu=int(request.POST.get('menu')))
-            #var_usuario = request.POST.get('usuario')
-            modulo=ConfModulo.objects.get(id_modulo=int(request.POST.get('modulo')))
-            permiso=GenrGeneral.objects.get(idgenr_general=int(request.POST.get('estado')))
-            guardar_pemiso = ConfPermiso(id_menu=menu,id_modulo=modulo,id_genr_estado=permiso)
-            guardar_pemiso.save()
-            return redirect('Academico:perfiles')
 
         return render(request, 'sistemaAcademico/Configuraciones/Permisos/add_permisos.html',contexto)
     else:
@@ -41,7 +33,7 @@ def add_permiso(request):
 
 
 
-def editar_permiso(request,id):
+def editar_permiso(request):
     contexto={}
     modulo = ConfModulo.objects.filter(id_genr_estado=97)
     estado = GenrGeneral.objects.filter(tipo='STA')
