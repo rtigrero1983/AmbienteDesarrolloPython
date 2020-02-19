@@ -91,13 +91,12 @@ DATABASES = {
         'ENGINE':'mysql_cymysql',
         'NAME':'bd_academico_2020',
         'USER':'root',
-        'PASSWORD':'root12345',
+        'PASSWORD':'root',
         'HOST': 'localhost',
         'PORT': 3306,
     } 
 }
 """
-
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',

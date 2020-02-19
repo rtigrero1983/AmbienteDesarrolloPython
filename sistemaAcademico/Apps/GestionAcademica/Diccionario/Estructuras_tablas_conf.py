@@ -53,6 +53,8 @@ class ConfModulo(models.Model):
         def __unicode__(self):
             return self.id_modulo, self.id_genr_estado
 
+        def get_absolute(self):
+            return reversed('modulo-detal',kwargs={'pk':self.id_modulo})
 
 class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)

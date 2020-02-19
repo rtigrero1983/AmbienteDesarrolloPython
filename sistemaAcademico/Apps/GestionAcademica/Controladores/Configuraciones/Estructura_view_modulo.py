@@ -21,11 +21,19 @@ class NuevoModulo(CreateView):
     template_name = 'sistemaAcademico/Configuraciones/Modulos/add_modulo.html'
     success_url = reverse_lazy('Academico:modulo')
 
+
+
 class UpdateModulo(UpdateView):
     model = ConfModulo
+    template_name = 'sistemaAcademico/Configuraciones/Modulos/editar_modulo.html'
     form_class = modulo_form
-    template_name = 'sistemaAcademico/Configuraciones/Modulos/add_modulo.html'
     success_url = reverse_lazy('Academico:modulo')
+    context_object_name = 'm'
+
+
+
+
+
 
 def editar_modulo(request,id):
     try:

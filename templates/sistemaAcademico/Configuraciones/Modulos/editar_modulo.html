@@ -1,27 +1,33 @@
-<div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <form class="formulario" action="{% url 'Academico:editar_modulo' modulo.id_modulo %}" method="POST">{% csrf_token %}
-        <div class="modal-body" >
-            <header class="cuadro_titulo text-center">
-            <h4 class="titulo">Configuracion | Editar Modulo: {{modulo.nombre}} </h4>
-          </header>
-            <br><br>
-            <label class="texto" for="id_modulo">Id: </label>
-            <input type="text" id="id_modulo" name="id_modulo" value="{{modulo.id_modulo}}" readonly class="form-control">
-            <br><br>
-            <label class="texto">Nombre del modulo:</label>
-            <input type="text" name="nombre" id="nombre" value="{{modulo.nombre}}" class="form-control">
-            <br/>
-            <label class="texto">Codigo:</label>
-            <input type="text" class="form-control" name="codigo" id="codigo" value="{{modulo.codigo}}">
-            <br/>
-            <center>
-                        <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
-                        <button type="reset" class="btn btn-outline-info">Restablecer informacion</button>
-                        <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>    
-            </center>
-
-             </div>
-        </form>
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% load crispy_forms_tags %}
+{% block contenido_principal %}
+<br><br><br><br><br>
+<form method="POST" action="{% url 'Academico:editar_modulo' m.id_modulo  %}">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+    <div class="card">
+        <div class="card-header">
+                <header class="cuadro_titulo">
+                    <h4 class="titulo">Configuracion | Registrar Modulo</h4>
+                </header>
+        </div>
+        <div class="card-body card-block">
+            <form action="#" enctype="multipart/form-data" class="form-horizontal">
+                {{form|crispy}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar modulo</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:modulo' %}">Cancelar registro</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
+</form>
+    {% endif %}
+{% endblock contenido_principal %}
