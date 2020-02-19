@@ -53,6 +53,8 @@ class ConfModulo(models.Model):
         def __unicode__(self):
             return self.id_modulo, self.id_genr_estado
 
+        def get_absolute(self):
+            return reversed('modulo-detal',kwargs={'pk':self.id_modulo})
 
 class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
@@ -113,6 +115,7 @@ class ConfUsuario(models.Model):
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral,default=97, on_delete=models.CASCADE, related_name="fk_usuario_estado", db_column='id_genr_estado')
+    fecha_limite = models.DateField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'Usuario',

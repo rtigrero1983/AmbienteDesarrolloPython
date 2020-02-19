@@ -45,7 +45,8 @@ urlpatterns = [
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
-    path('editar_modulo/<int:pk>/', UpdateModulo.as_view(),name='editar_modulo'),
+
+    path('editar_modulo/<int:pk>/',UpdateModulo.as_view(),name='editar_modulo'),
     path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:id>', editar_menu, name='editar_menu'),
