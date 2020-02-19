@@ -11,7 +11,72 @@
 {% block footer %}
 {% endblock footer %}
 {% block contenido_principal%}
+{% load crispy_forms_tags %}
+<form>
+            <br>
+            <br>
+            <div class="container">
+            <div class="row">
+            <div class="col">
+                {% if error %}
+            <h2>{{ error }}</h2>
+                {% else %}
+                {% endif %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Configuracion | Registrar Estudiante</h4>
+                </header>
+                <br><br>
+                    <form action="#" enctype="multipart/form-data" class="form-horizontal" method="POST">
+                        <div class="col-sm-6">
+                        {% csrf_token %}
+                            <!-- <div class="contenido">
+               <label for="id_ssl" class="text-dark h6">{{form.nombres.label }} :</label>
+               {{form.nombres}}<br>
+                                 <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
+               {{form.apellidos}}<br>
+                                 <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
+               {{form.fecha_de_nacimiento}}<br>
+                                 <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
+               {{form.id_genr_genero}}<br>
+                                 <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
+               {{form.id_genr_pais}}<br>
+                                 <label for="id_genr_tipo_identificacion" class="text-dark h6">{{form.id_genr_tipo_identificacion.label }} :</label>
+               {{form.id_genr_tipo_identificacion}}<br>
+                                 <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
+               {{form.identificacion}}<br>
+                                 <label for="id_genr_estado_civil" class="text-dark h6">{{form.id_genr_estado_civil.label }} :</label>
+               {{form.id_genr_estado_civil}}<br>
+                                 <label for="correo" class="text-dark h6">{{form.correo.label }} :</label>
+               {{form.correo}}<br>
+                                 <label for="celular" class="text-dark h6">{{form.celular.label }} :</label>
+               {{form.celular}}<br>
+                                 <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
+               {{form.id_genr_tipo_sangre}}<br>
+                                 <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
+               {{form.id_genr_jornada}}<br>
+                                 <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
+               {{form.id_genr_indigena}}<br>
+                                 <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
+               {{form.id_genr_idioma_ancestral}}<br>-->
+                            {{ form| crispy }}
 
 
+
+
+                        </div>
+
+
+
+
+			            <div class="text-center">
+                            <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                            <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                                <a class="btn btn-outline-danger" href="#">Cancelar</a>
+                        </div>
+  			        </form>
+            </div>
+            </div>
+            </div>
+        </form>
 
 {% endblock contenido_principal%}

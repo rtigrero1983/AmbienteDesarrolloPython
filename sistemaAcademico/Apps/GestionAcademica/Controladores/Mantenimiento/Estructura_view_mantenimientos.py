@@ -28,10 +28,18 @@ def mantenimientoPersonas(request):
 
 
 def registro_estudiante(request):
-    if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html')
+    error = None
+    if (request.method == "POST"):
+        form = EstudianteForm(request.POST)
+        if (form.is_valid()):
+            form.save()
+            return redirect("Academico:menu")
+        else:
+            error = "No se pudo Guardar el formulario"
     else:
-        return HttpResponseRedirect('timeout/')
+        form = EstudianteForm()
+    return render(request, "sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html", {"form": form, "error": error })
+
 
 class NuevoEmpleado(CreateView):
     model = MantPersona
