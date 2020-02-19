@@ -133,3 +133,30 @@ class unidad_forms(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(unidad_forms, self).__init__(*args, **kwargs)
         self.fields['id_padre'] = forms.ChoiceField(choices=[(m.id_empresa, m.descripcion) for m in ConfEmpresa.objects.filter(id_padre=0)])
+
+
+class UsuarioForm(forms.ModelForm):
+    class Meta:
+        model = ConfUsuario
+        fields = [
+            "usuario",
+            "clave",
+            "id_persona",
+            "id_genr_tipo_usuario",
+
+        ]
+        labels = {
+            "usuario":"Nombre de usuario :",
+            "clave":"Clave :",
+            "id_persona":" Tipo de persona :",
+            "id_genr_tipo_usuario":" Tipo de Usuario ",
+        }
+        widgets = {
+            "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
+            "clave": forms.TextInput(attrs={"class":"form-control","type":"password","placeholder": "Ingrese la clave del usuario"}),
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UsuarioForm, self).__init__(*args, **kwargs)
+        self.fields['id_genr_tipo_usuario'] = forms.ChoiceField(choices=[(r.idgenr_general, r.nombre) for r in GenrGeneral.objects.filter(tipo='TUS')])
