@@ -31,42 +31,13 @@ class CreateUsuario(CreateView):
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html'
     success_url= reverse_lazy('Academico:usuarios')
 
-    def get_context_data(self, **kwargs):
-        context=super(CreateUsuario,self).get_context_data(**kwargs)
-        pk=self.kwargs.get('id_usuario',0)
-        context['id_usuario'] = pk
-        return context
 
+class UpdateModulo(UpdateView):
+    model = ConfModulo
+    form_class = UsuarioForm
+    template_name = 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html'
+    success_url = reverse_lazy('Academico:usuarios')
 
-    def post(self,request,*args,**kargs):
-        self.object =self.get_object
-        form = self.form_class(request.POST)
-        if form.is_valid():
-           c=form.save()
-           lista_orden= self.model.objects.filter(tipo=c.tipo).order_by('-orden')[:1]
-           for registro in lista_orden:
-               b = int(registro.orden)
-               var_orden = b+1
-           c.orden = var_orden
-           c.save(commit=False)
-           return redirect(self.get_success_url())
-        else:
-           return self.render_to_response(self.get_context_data(form=form))
-
-
-
-def nuevo_usuario(request):
-	error = None
-	if(request.method == "POST"):
-		form = forms.UsuarioForm(request.POST)
-		if(form.is_valid()):
-			form.save()
-			return redirect("Academico:usuarios")
-		else:
-			error = "No se pudo Guardar el formulario"
-	else:
-		form = forms.UsuarioForm()
-	return render(request, 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html', {"form":form , "error":error})
 
 def editar_usuario(request,id):
     usuario = ConfUsuario.objects.get(id_usuario=id)
