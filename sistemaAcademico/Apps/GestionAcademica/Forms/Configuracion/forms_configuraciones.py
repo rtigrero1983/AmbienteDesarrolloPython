@@ -143,7 +143,6 @@ class UsuarioForm(forms.ModelForm):
             "clave",
             "id_persona",
             "id_genr_tipo_usuario",
-
         ]
         labels = {
             "usuario":"Nombre de usuario :",
@@ -157,6 +156,10 @@ class UsuarioForm(forms.ModelForm):
 
         }
 
+
     def __init__(self, *args, **kwargs):
         super(UsuarioForm, self).__init__(*args, **kwargs)
-        self.fields['id_genr_tipo_usuario'] = forms.ChoiceField(choices=[(r.idgenr_general, r.nombre) for r in GenrGeneral.objects.filter(tipo='TUS')])
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
+
+
+
