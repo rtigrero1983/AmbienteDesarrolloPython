@@ -14,8 +14,7 @@
 <header class="cuadro_titulo"> <h4 class="title"> Configuracion | Usuario</h4></header>
 
 <br/><br/>
-     <a href="{% url 'Academico:nuevo_usuario' %}" class="btn btn-outline-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>nuevo
-</a>
+     <a href="{% url 'Academico:nuevo_usuario' %}" class="btn btn-primary"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Agregar nuevo usuario</a>
 <br/><br/>
 
 <div class="card-body">
@@ -40,8 +39,8 @@
                         <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
                         <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
                       <td>
-                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn-info btn-circle" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
-                          <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn btn-danger btn-circle" title="Eliminar {{u.usuario}}"><i class="fas fa-trash"></i></a>
+                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn btn-primary" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i>Editar</a>
+                          <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn btn-info btn-danger" title="Eliminar {{u.usuario}}"><i class="fas fa-warning-circle"></i>Eliminar</a>
 
                       </td>
                     </tr>

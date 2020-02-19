@@ -6,86 +6,30 @@
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
+{% load crispy_forms_tags %}
 
 {% block contenido_principal %}
-<header class="cuadro_titulo">
-		<h4 class="titulo">Configuracion / Registrar Usuario</h4>
-</header>
-    <br>
-    <form class="formulario" method="POST" >{% csrf_token %}
-        <br>
-        {% if error %}
-        <label ><strong>{{error}}</strong></label>
-        {% endif %}
-        <label class="texto">
-            Nombre de Usuario:
-        </label>
-            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario">
-        </br>
-        <label class="texto">
-            Contraseña:
-        </label>
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia" required="true">
-        </br>
-        <label class="texto">
-            Confirmar Contraseña:
-        </label>
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Configuracion | Registrar Usuario</h4>
+                </header>
+                <br><br>
+            <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
+			    {{form|crispy}}
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar usuario</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:usuarios' %}">Cancelar</a>
+            </div>
+  			</form>
 
-            <input type="password" class="cajatexto" pattern=".{6,}" name="contrasenia2" required="true">
-        </br>
-        <label class="texto">
-            Persona:
-        </label>
-
-            <select name="persona" class="cajatexto">
-                    <option selected>Elija tipo de persona</option>
-                    {% for per in lista_personas %}
-                    <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
-                    {% endfor %}
-            </select>
-
-    </br>
-        <label class="texto">
-           Tipo de Usuario:
-        </label>
-
-            <select name="permiso" class="cajatexto">
-                    <option selected>Elija tipo de usuario</option>
-                    {% for r in genr_general %}
-                    <option class="cajatexto" value="{{r.idgenr_general}}"> {{r.nombre}} </option>
-                    {% endfor %}
-            </select>
-        </br>
-        </br>
-        </br>
-        <div class="row col-lg-9 mx-auto  ">
-            <label class="text">   Tipo de rol: </label>
-        </div>
-        <div class="col-4">
-                <select  name="roles" class="selectpicker w-100 "  multiple title="Elija los roles..."
-                         multiple data-selected-text-format="count" data-style="bg-white " multiple="multiple">
-                {% for m in roles %}
-                    <option value="{{m.id_rol}}">{{m.nombre}}</option>
-                {%  endfor %}
-            </select>
-        </div>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}">
-        <script type="text/javascript" src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'css/bootstrap.bundle.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'css/bootstrap-select.min.js' %}"></script>
-
-
-        </div>
-
-        <br>
-
-        <center>
-        <button type="submit" class="btn btn-outline-primary">Grabar</button>
-        <button type="reset" class="btn btn-outline-primary">Limpiar</button>
-        <a class="btn btn-outline-primary" href="{% url 'Academico:usuarios' %}">Cancelar</a>
-        </center>
-
-    </form>
+   </form>
+    {% endif %}
 {% endblock contenido_principal %}
 
+{% block footer %}
+{% endblock footer %}
