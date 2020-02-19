@@ -13,69 +13,30 @@
     <br>
     <form class="formulario" method="POST" action="{% url 'Academico:editar_usuario' usuario.id_usuario %}">{% csrf_token %}
         <br>
+<label class="text-dark h6 " for="modulo">Modulos:</label>
+                         {% if permisos %}
+                               <div class="alert alert-warning text-center" role="alert">
+                                <strong>
+                                    <i class="fas fa-exclamation-triangle" />
+                                       Advertencia: Existen movimientos para menu
+                                    <i class="fas fa-exclamation-triangle"/>
+                                </strong>
+                              </div>
+                                <select  name="modulo" id="modulo" class="form-control text-dark ">
+                                 <option selected="true" value="{{menu_actual.id_menu}}" class="text-dark" disabled="disabled">
+                                        {{menu_actual.descripcion}}
+                                </option>
+                         {% else %}
+                            <select  name="modulo" id="modulo" class="form-control text-dark ">
+                                 <option selected="true" value="{{menu_actual.id_menu}}" class="text-dark" disabled="disabled">
+                                        {{menu_actual.descripcion}}
+                                </option>
+                                {%for mp in lista_padre %}
+                                    <option class="text-success" value="{{mp.id_menu}}">{{mp.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                         {% endif %}
 
-        <label class="texto">
-            Nombre de Usuario:
-        </label>
-            <input type="text" class="cajatexto" placeholder="" required="true" name="usuario" value="{{usuario.usuario}}">
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        </br>
-        <label class="texto">
-            Persona:
-        </label>
-
-            <select name="persona" class="cajatexto">
-                    <option selected>Elija tipo de persona</option>
-                    {% for per in lista_personas %}
-                    <option class="cajatexto" value="{{per.id_persona}}"> {{per.nombres}} </option>
-                    {% endfor %}
-            </select>
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        </br>
-        <label class="texto">
-           Tipo de Usuario:
-        </label>
-
-            <select name="permiso" class="cajatexto">
-                    <option selected>Elija tipo de usuario</option>
-                    {% for r in permiso %}
-                    <option class="cajatexto" value="{{r.idgenr_general}}"> {{r.nombre}} </option>
-                    {% endfor %}
-            </select>
-                <button type="button" class="btn">
-                    <i class="far fa-edit"></i>
-                </button>
-        </br>
-        </br>
-        <div class="row col-lg-9 mx-auto  ">
-            <label class="text">   Tipo de rol: </label>
-        </div>
-        <div class="col-4">
-                <select  name="roles" class="selectpicker w-100 "  multiple title="Elija los roles..."
-                         multiple data-selected-text-format="count" data-style="bg-white " multiple="multiple">
-                {% for m in roles %}
-                    <option value="{{m.id_rol}}">{{m.nombre}}</option>
-                {%  endfor %}
-            </select>
-        </div>
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.min.css' %}">
-        <script type="text/javascript" src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'css/bootstrap.bundle.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'css/bootstrap-select.min.js' %}"></script>
-
-
-        </div>
-
-
-
-
-        <br>
-        <br>
 
         <center>
         <button type="submit" class="btn btn-outline-primary">Grabar</button>
@@ -85,3 +46,5 @@
 
     </form>
 {% endblock contenido_principal %}
+
+
