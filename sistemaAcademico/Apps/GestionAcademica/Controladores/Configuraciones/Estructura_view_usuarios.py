@@ -59,16 +59,17 @@ def editar_usuario(request,id):
         usuario=ConfUsuario(id_usuario=id, usuario=var_usuario, clave=usuario.clave,id_persona=tipo_persona,
                                     id_genr_tipo_usuario=tipo_usuario,id_genr_estado=estado)
         usuario.save()
+        #AQUI EMPIEZA EL CODIGO DE NELIO
+        #enviar_correo_usuario()
 
 
+
+
+        #AQUI FINALIZA
         rol=ConfUsuario_rol(id_usuario=usuario, id_rol=roles)
-
         rol.save()
-
         return redirect('Academico:usuarios')
     return render(request, 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html', contexto)
-
-
 
 def eliminar_usuario(request,id):
     usuarios = ConfUsuario.objects.get(id_usuario=id)
