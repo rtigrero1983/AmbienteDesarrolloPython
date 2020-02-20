@@ -1,135 +1,33 @@
-<!-- tabla roles-->
 {% extends 'base/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
-{% block footer %}
-
-{% endblock footer %}
-{% block titulo_cab_menu %}
-
-{%endblock titulo_cab_menu %}
-
- {% block contenido_principal %}
-
-<div class="modal-dialog modal-lg" role="document">
-
-<div class="modal-content">
-
-    <header class="cuadro_titulo">
-    <h4 class="titulo"> Configuracion / Editar Unidad</h4>
-    </header>
-<br/>
-    <section>
-    <form method="POST" class="formulario" action="{% url 'Academico:editar_empresa' empresa.id_empresa %}">{% csrf_token %}
-    <div class="contenido"> 
-        <label class="texto">
-            Nombre Empresa
-        </label>
-        <input type="text" name="nombre" class="cajatexto" required="true" value="{{empresa.nombre}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-<br/>
-        <label class="texto">
-             Razon social
-        </label>
-        <input type="text" name="rsocial" class="cajatexto" required="true" value="{{empresa.razon_social}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-<br/>
-
-        <label class="texto">
-                Tipo identificacion
-        </label>
-        <select value="tipo identificacion" name="tip_ident" class="cajatexto">
-            {%for tip in ident %}
-                <option value="{{tip.idgenr_general}}">{{tip.nombre}}</option>
-            {%endfor%}
-        </select>
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
-
-        <label class="texto">
-            Identificacion
-        </label>
-        <input type="text" name="identificacion" class="cajatexto" required="true" value="{{empresa.identificacion}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
-
-        <label class="texto">
-            Direccion
-        </label>
-        <input type="text" name="direccion" class="cajatexto" required="true" value="{{empresa.direccion}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        </br>
-
-        <label class="texto">
-            Representante Legal
-        </label>
-        <input type="text" name="rlegal" class="cajatexto" required="true" value="{{empresa.representante_legal}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
-
-        <label class="texto">
-            Email
-        </label>
-        <input type="email" name="inputEmail3" placeholder="" class="cajatexto" required="true" value="{{empresa.correo}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
-
-        <label class="texto">
-            Telefono
-        </label>
-        <input type="text" name="telefono" class="cajatexto" required="true" value="{{empresa.telefono}}" />
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
-        <label class="texto">
-            Fecha de creacion
-        </label>
-
-        <input type="date" name="f_creacion" class="cajatexto" value="{{empresa.fecha_creacion}}" required>
-            <button type="button" class="btn">
-                <i class="far fa-edit"></i>
-            </button>
-        <br/>
- 
-            <div class="botones">
-                 <br/>
-                 <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                 <button type="reset" class="btn btn-outline-primary">Resetear</button>
-                  <a class="btn btn-outline-primary" href="{% url 'Academico:empresas' %}">Cancelar</a>
-            </div>
-    
-             </div>
+{% load crispy_forms_tags %}
+{% block contenido_principal %}
+<br><br><br><br><br>
+<form class="formulario" method="POST" action="{% url 'Academico:editar_empresa' empresa.id_empresa %}">{% csrf_token %}
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+    <div class="card">
+        <div class="card-header">
+                <header class="cuadro_titulo">
+                    <h4 class="titulo">Configuracion | Editar Unidad</h4>
+                </header>
         </div>
-    </div>  
-    </form>
-</section>
-  
-        
+        <div class="card-body card-block">
+            <form action="#" enctype="multipart/form-data" class="form-horizontal">
+                {{form|crispy}}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar unidad</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar registro</a>
+                </div>
+            </form>
+        </div>
     </div>
-
-</div>
-
-
-
-
-
-
-
+</form>
+    {% endif %}
 {% endblock contenido_principal %}
