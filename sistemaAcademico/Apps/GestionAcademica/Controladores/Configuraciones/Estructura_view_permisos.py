@@ -16,6 +16,14 @@ def perfiles(request):
     else:
         return HttpResponseRedirect('timeout/')
 
+def editar_permisos(request,id):
+    rol = ConfRol.objects.get(id_rol=id)
+    rol_menu = ConfModulo_menu.objects.filter(fk_permiso_modmenu__id_rol=id).select_related('id_menu','id_modulo')
+    menu_padre = ConfMenu.objects.filter(id_genr_estado=97,id_padre=0)
+    return render(request,'sistemaAcademico/Configuraciones/Permisos/asignar_permisos.html',{'rol':rol,'menu':menu_padre,'rol_menu':rol_menu})
+
+
+
 
 def add_permiso(request,id):
     if 'usuario' in request.session:
@@ -33,7 +41,7 @@ def add_permiso(request,id):
         if request.method=='POST':
             pass
 
-        return render(request, 'sistemaAcademico/Configuraciones/Permisos/add_permisos.html',contexto)
+        return render(request, 'sistemaAcademico/Configuraciones/Permisos/asignar_permisos.html',contexto)
     else:
         return HttpResponseRedirect('timeout/')
 

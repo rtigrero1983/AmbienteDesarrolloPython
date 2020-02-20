@@ -7,14 +7,16 @@
 {% block contenido_principal %}
 
 
+
     <header class="cuadro_titulo" class="title">
         <h4>Configuracion | Permisos</h4>
     </header>
     <br>
 
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Rol {{rol.nombre}}</h6>
         </div>
 
         <div class="card-body ">
@@ -43,15 +45,16 @@
 
                                                 <ul class="nivel-01">
                                                     <li>{% for mo in modulo %}
-                                                    <input type="checkbox" class="mostrar-menu text-primary " id="menu01" value="{{ mo.id_modulo }}" name="modulo" >{{ mo.nombre }}<br>
-                                                        <ul class="nivel-02"><li>{% for me in menu %}
+                                                    <input type="checkbox" class="mostrar-menu text-primary " id="menu01" value="{{ mo.id_modulo }}" name="modulo" >  {{ mo.nombre }}<br>
+                                                        <ul class="nivel-02"><li>
+                                                            {% for me in menu %}
                                                         <input type="checkbox" class="mostrar-menu" id="menu011" value="{{ me.id_menu }}" name="menu" > {{ me.descripcion }}<br>
                                                                 <ul class="nivel-03" ><li>{% for ac in accion %}
                                                                     <input type="checkbox" class="mostrar-menu" id="menu0111" name="accion" value="{{ ac.id_accion }}"> {{ ac.descripcion }}<br>
                                                                 {% endfor %}
                                                                 </li></ul>
                                                         {% endfor %}</li></ul>
-                                                        
+
                                                     {% endfor %}</li>
                                                 </ul>
                                             </li>
@@ -64,13 +67,6 @@
 
 
             <!-- Pruebas de otra manera
-
-
-
-
-
-
-
                                 <nav>
                                         <ul class="menu-arbol">
                                             <li>
@@ -99,16 +95,6 @@
                                     </nav>
 
 -->
-
-
-
-
-
-
-
-
-
-
                                 </form>
                             </td>
 

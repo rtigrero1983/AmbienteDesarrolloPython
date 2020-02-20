@@ -41,7 +41,7 @@ urlpatterns = [
     path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('nueva_accion/', add_acciones, name='nueva_accion'),
-    path('add_permiso/<int:id>', add_permiso, name='add_permiso'),
+    path('add_permiso/<int:id>', editar_permisos,name='add_permiso'),
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
@@ -52,7 +52,7 @@ urlpatterns = [
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
     #path('editar_menu/<int:id>', editar_menu, name='editar_menu'),
-    path('editar_permiso/<int:id>', editar_permiso, name='editar_permiso'),
+    path('editar_permiso/<int:id>', editar_permisos, name='editar_permiso'),
     #path('editar_modulo/<int:id>', editar_modulo, name='editar_modulo'),
     path('eliminar_modulo/<int:id>', eliminar_modulo, name='eliminar_modulo'),
     # -----------------------------------------
