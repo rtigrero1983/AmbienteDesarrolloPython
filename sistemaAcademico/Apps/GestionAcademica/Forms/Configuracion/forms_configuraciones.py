@@ -2,7 +2,8 @@ from dal import autocomplete
 
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
-
+from django.forms import ModelForm
+from betterforms.multiform import MultiModelForm
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import ModelSelect2MultipleWidget
@@ -111,7 +112,8 @@ class unidad_form(forms.ModelForm):
                    'representante_legal',
                    'correo',
                    'telefono',
-                   'fecha_creacion'
+                   'fecha_creacion',
+
 
                    ]
         labels = {
@@ -124,6 +126,8 @@ class unidad_form(forms.ModelForm):
                     'correo': 'correo:',
                     'telefono': 'ingrese su telefono:',
                     'fecha_creacion': 'fecha de creacion',
+                    'usuario_ing':'',
+                    'terminal_ing':''
 
                  }
 
@@ -144,7 +148,8 @@ class unidad_form(forms.ModelForm):
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
 
 
-class UsuarioForm(forms.ModelForm):
+
+class UsuarioModelForm(ModelForm):
     class Meta:
         model = ConfUsuario
         fields = [
@@ -164,12 +169,25 @@ class UsuarioForm(forms.ModelForm):
             "clave": forms.TextInput(attrs={"class":"form-control","type":"password","placeholder": "Ingrese la clave del usuario"}),
 
         }
-
-
     def __init__(self, *args, **kwargs):
-        super(UsuarioForm, self).__init__(*args, **kwargs)
+        super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
 
+class UsuarioRolModelForm(ModelForm):
+    class Meta:
+        model = ConfUsuario_rol
+        fields = [
+            "id_rol"
+        ]
+        labels = {
+            "id_rol":"Tipo de rol :",
+        }
+
+class UsuarioUsuarioRolModelForm(MultiModelForm):
+    form_classes = {
+        'usuario': UsuarioModelForm,
+        'usuario_rol': UsuarioRolModelForm,
+    }
 
 
 class AccionesForm(forms.Form):

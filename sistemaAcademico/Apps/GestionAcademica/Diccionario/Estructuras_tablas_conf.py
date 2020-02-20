@@ -200,7 +200,6 @@ class ConfDetallePermiso(models.Model):
 
     def __unicode__(self):
         return self.id_menu, self.id_permiso, self.id_accion
-
 class ConfCorreosSmpt(models.Model):
         id_correos_smpt = models.AutoField(primary_key=True)
         ssl = models.CharField(max_length=30, blank=False, null=False)

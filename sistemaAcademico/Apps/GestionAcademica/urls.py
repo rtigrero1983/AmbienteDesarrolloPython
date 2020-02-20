@@ -3,7 +3,8 @@ from django.db import models
 from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
-from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view, \
+    smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
@@ -33,7 +34,7 @@ urlpatterns = [
     path('consultas/', consultas, name='consultas'),
     path('procesos/', procesos, name='procesos'),
     path('reportes/', reportes, name='reportes'),
-
+    path('editar_smtp/<int:pk>',smtp_edit.as_view(),name='edit_smtp'),
     # ----------------REGISTROS--------------
     path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
 
@@ -49,10 +50,10 @@ urlpatterns = [
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
-
     path('editar_modulo/<int:pk>/', UpdateModulo.as_view(), name='editar_modulo'),
     path('editar_empresa/<int:pk>/', UpdateEmpre.as_view(), name='editar_empresa'),
-    path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
+    path('editar_usuario/<int:pk>/',UpdateUsuario.as_view(), name='editar_usuario'),
+    #path('editar_usuario/(?P<pk>[0-9]+)\\/$',UpdateUsuario.as_view(), name='editar_usuario'),
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
     #path('editar_menu/<int:id>', editar_menu, name='editar_menu'),

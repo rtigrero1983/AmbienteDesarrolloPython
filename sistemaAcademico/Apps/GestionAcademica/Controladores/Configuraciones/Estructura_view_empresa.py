@@ -21,6 +21,7 @@ class NuevaEmpre(CreateView):
 class UpdateEmpre(UpdateView):
     model = ConfEmpresa
     form_class = unidad_form
+    context_object_name = 'm'
     template_name = 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html'
     success_url = reverse_lazy('Academico:empresas')
 
@@ -61,7 +62,7 @@ def nueva_empresa(request):
                                   usuario_ing=usuario.usuario, terminal_ing=str(nombre_equipo))
 
             historial = GenrHistorial.objects.create(modulo="Configuraciones", accion="Crear", usuario_mod=usuario.usuario,
-                                                     terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu= menu)
+                                                     terminal_mod=str(nombre_equipo), fecha_mod=timezone.now(), id_menu = menu)
 
             return redirect('Academico:empresas')
         return render(request,'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
@@ -90,7 +91,7 @@ def editar_empresa(request,id):
                 empresa = ConfEmpresa(id_empresa=id, nombre=var_empresa_nombre, razon_social=var_rsocial,
                                       id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
                                       direccion=direccion, representante_legal=representante_legal, correo=correo,
-                                      telefono=telefono, fecha_creacion=fecha_creacion,fecha_ingreso=timezone.now(),
+                                      telefono=telefono, fecha_creacion=fecha_creacion,
                                       id_genr_estado=estado)
                 empresa.save()
                 return redirect('Academico:empresas')

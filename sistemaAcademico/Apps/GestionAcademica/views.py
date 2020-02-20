@@ -49,12 +49,14 @@ def login(request):
             h = hashlib.new("sha1")
             var_contra = str.encode(var_contra)
             h.update(var_contra)
+            print(h.hexdigest())
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
+
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:
-            contexto['error'] = 'Claves incorrectas o cuenta inactiva'
+            contexto['error'] = e
             return render(request, 'base/login.html', contexto)
 
     return render(request, 'base/login.html', contexto)
