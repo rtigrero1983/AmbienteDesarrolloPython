@@ -40,6 +40,7 @@ class CreateUsuario(CreateView):
 class UpdateUsuario(UpdateView):
     model = ConfUsuario
     form_class = UsuarioModelForm
+    context_object_name = 'm'
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')
 
