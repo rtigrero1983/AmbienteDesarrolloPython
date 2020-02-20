@@ -4,7 +4,7 @@ from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
-from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import *
+from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
@@ -12,6 +12,8 @@ from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
+
+from ..Filters import TID_autocomplete
 
 urlpatterns = [
     path('',login, name='login'),
@@ -47,7 +49,8 @@ urlpatterns = [
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
 
-    path('editar_modulo/<int:pk>/',UpdateModulo.as_view(),name='editar_modulo'),
+    path('editar_modulo/<int:pk>/', UpdateModulo.as_view(), name='editar_modulo'),
+    path('editar_empresa/<int:pk>/', UpdateEmpre.as_view(), name='editar_empresa'),
     path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
@@ -92,7 +95,7 @@ urlpatterns = [
     #Eliminar
 
     #---------Django-Autocomplete-Filters----------
-    path('TID_autocomplete/', TID_autocomplete, name='TID_autocomplete'),
+    path('TID_autocomplete/', TID_autocomplete.as_view(), name='TID_autocomplete'),
     path('GEN_autocomplete/', GEN_autocomplete, name='GEN_autocomplete'),
 ]
 
