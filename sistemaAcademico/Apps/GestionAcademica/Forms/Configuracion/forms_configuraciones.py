@@ -112,7 +112,8 @@ class unidad_form(forms.ModelForm):
                    'representante_legal',
                    'correo',
                    'telefono',
-                   'fecha_creacion'
+                   'fecha_creacion',
+
 
                    ]
         labels = {
@@ -125,6 +126,8 @@ class unidad_form(forms.ModelForm):
                     'correo': 'correo:',
                     'telefono': 'ingrese su telefono:',
                     'fecha_creacion': 'fecha de creacion',
+                    'usuario_ing':'',
+                    'terminal_ing':''
 
                  }
 

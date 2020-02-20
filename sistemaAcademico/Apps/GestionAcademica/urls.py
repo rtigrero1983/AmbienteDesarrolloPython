@@ -50,7 +50,6 @@ urlpatterns = [
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
     path('editar_empresa/<int:id>', editar_empresa, name='editar_empresa'),
-
     path('editar_modulo/<int:pk>/', UpdateModulo.as_view(), name='editar_modulo'),
     path('editar_empresa/<int:pk>/', UpdateEmpre.as_view(), name='editar_empresa'),
     path('editar_usuario/<int:pk>/',UpdateUsuario.as_view(), name='editar_usuario'),

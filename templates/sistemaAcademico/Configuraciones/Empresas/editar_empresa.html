@@ -6,7 +6,7 @@
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
 <br><br><br><br><br>
-<form class="formulario" method="POST" action="{% url 'Academico:editar_empresa' empresa.id_empresa %}">{% csrf_token %}
+<form method="POST" action="{% url 'Academico:editar_empresa' m.id_empresa  %}">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
