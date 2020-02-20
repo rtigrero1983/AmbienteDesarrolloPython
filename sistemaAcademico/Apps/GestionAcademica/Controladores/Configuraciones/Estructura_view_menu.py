@@ -89,6 +89,10 @@ class CreateMenu(CreateView):
                var_orden = b+1
            c.orden = var_orden
            c.save()
+           menu = ConfMenu.objects.get(descripcion=c.descripcion)
+           menu_padre = ConfMenu.objects.get(id_menu=c.id_padre)
+           modulo = ConfModulo.objects.get(nombre=menu_padre.descripcion)
+           ConfModulo_menu.objects.create(id_modulo=modulo,id_menu=menu)
            return redirect(self.get_success_url())
 
         else:

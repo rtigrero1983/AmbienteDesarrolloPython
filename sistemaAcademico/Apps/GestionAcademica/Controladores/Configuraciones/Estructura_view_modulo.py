@@ -21,6 +21,38 @@ class NuevoModulo(CreateView):
     template_name = 'sistemaAcademico/Configuraciones/Modulos/add_modulo.html'
     success_url = reverse_lazy('Academico:modulo')
 
+    def get_context_data(self, **kwargs):
+        context = super(NuevoModulo, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('id_modulo', 0)
+        context['id_modulo'] = pk
+        return context
+
+    def post(self, request, *args, **kargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            var_orden = 0
+            c = form.save()
+            lista_orden = ConfMenu.objects.filter(id_padre=0).order_by('-orden')[:1]
+            for registro in lista_orden:
+                b = int(registro.orden)
+                var_orden = b + 1
+            ConfMenu.objects.create(
+                                    id_padre=0,
+                                    orden=var_orden,
+                                    descripcion=c.nombre,
+                                    url='#',
+                                    lazy_name='#',
+                                    name='#',
+                                    view='#',
+                                    icono='#'
+                                    )
+            c.save()
+            return redirect(self.get_success_url())
+
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
 
 
 class UpdateModulo(UpdateView):
