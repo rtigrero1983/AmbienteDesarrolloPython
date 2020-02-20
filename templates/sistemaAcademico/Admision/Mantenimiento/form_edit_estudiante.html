@@ -18,9 +18,71 @@
                     <h4 class="titulo">Mantenimiento | Editar Estudiante</h4>
                 </header>
         </div>
-        <div class="card-body card-block">
-            <form action="#" enctype="multipart/form-data" class="form-horizontal">
-                {{form|crispy}}
+        <div class="card-body card-block container">
+            <form action="#" enctype="multipart/form-data" class="form-horizontal ">
+                <div class="row">
+                    <div class="col-6">
+                    <label for="nombres" class="text-dark h6">{{form.nombres.label }} :</label>
+               {{form.nombres| crispy}}<br>
+                        <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
+               {{form.apellidos| crispy}}<br>
+                        <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
+               {{form.fecha_de_nacimiento| crispy}}<br>
+                        <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
+               {{form.id_genr_genero| crispy}}<br>
+                        <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
+               {{form.id_genr_pais| crispy}}<br>
+                        <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>
+               {{form.lugar_nacimiento| crispy}}<br>
+                        <label for="id_genr_provincia" class="text-dark h6">{{form.id_genr_provincia.label }} :</label>
+               {{form.id_genr_provincia| crispy}}<br>
+                        <label for="id_genr_ciudad" class="text-dark h6">{{form.id_genr_ciudad.label }} :</label>
+               {{form.id_genr_ciudad| crispy}}<br>
+                        <label for="id_genr_categoria_migratoria" class="text-dark h6">{{form.id_genr_categoria_migratoria.label }} :</label>
+               {{form.id_genr_categoria_migratoria| crispy}}<br>
+
+                </div>
+
+
+                    <div class="col-6">
+                        <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
+               {{form.identificacion| crispy}}<br>
+                        <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
+               {{form.id_genr_tipo_sangre| crispy}}<br>
+                        <label for="id_genr_etnia" class="text-dark h6">{{form.id_genr_etnia.label }} :</label>
+               {{form.id_genr_etnia| crispy}}<br>
+                        <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
+               {{form.id_genr_jornada| crispy}}<br>
+                        <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
+               {{form.id_genr_indigena| crispy}}<br>
+                        <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
+               {{form.id_genr_idioma_ancestral| crispy}}<br>
+
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="discapacidad" class="text-dark h6">{{form.discapacidad.label }} :</label>
+               {{form.discapacidad| crispy}}<br>
+                            <label for="discapacidad_renal" class="text-dark h6">{{form.discapacidad_renal.label }} :</label>
+               {{form.discapacidad_renal| crispy}}<br>
+                            <label for="discapacidad_neurologica" class="text-dark h6">{{form.discapacidad_neurologica.label }} :</label>
+               {{form.discapacidad_neurologica| crispy}}<br>
+                            <label for="enfermedad_alergica" class="text-dark h6">{{form.enfermedad_alergica.label }} :</label>
+               {{form.enfermedad_alergica| crispy}}<br>
+                            <label for="asma" class="text-dark h6">{{form.asma.label }} :</label>
+               {{form.asma| crispy}}<br>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
