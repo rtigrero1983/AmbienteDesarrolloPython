@@ -4,7 +4,7 @@ from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view
-from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete
+from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
@@ -13,7 +13,6 @@ from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
 
-from ..Filters import TID_autocomplete
 
 urlpatterns = [
     path('',login, name='login'),

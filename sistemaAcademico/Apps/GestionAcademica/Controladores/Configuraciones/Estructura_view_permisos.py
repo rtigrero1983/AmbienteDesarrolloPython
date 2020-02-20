@@ -30,9 +30,9 @@ def add_permiso(request,id):
     queryset = ConfModulo_menu.objects.filter()
     if 'usuario' in request.session:
         if request.method=='POST':
-            c = ConfModulo_menu.objects.get(id_menu=request.post.get('menu'))
-            ConfPermiso.objects.create(id_mod_menu=c,id_rol=queryset_rol)
-            return redirect('Academico:perfiles')
+            c = ConfModulo_menu.objects.get(id_menu=request.POST.get('menu'))
+            ConfPermiso.objects.create(id_modulo_menu=c,id_rol=queryset_rol)
+            return redirect('Academico:permisos')
 
         return render(request, 'sistemaAcademico/Configuraciones/Permisos/permisos_nuevo.html',{'rol':queryset_rol,'mod_menu':queryset})
     else:
