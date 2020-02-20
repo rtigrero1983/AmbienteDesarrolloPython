@@ -30,7 +30,7 @@
 <div id="wrapper">
 	{% block sidebar %}
  		   <!-- Sidebar -->
-    <ul class="navbar-nav color_t sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
       <div class="fond-logo">
 
@@ -57,7 +57,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
       <!-- Heading -->
-      <div class="sidebar-heading">
+      <div class="sidebar-heading text-light">
         {% block titulo_menu %}
             Modulos
         {% endblock titulo_menu %}
@@ -69,21 +69,16 @@
 
              {% if menu_p.id_menu.id_padre == 0 %}
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}" aria-expanded="true" aria-controls="collapseTwo">
-
                          <i class="{{menu_p.id_menu.icono}}"></i>
-
-                         <span> {{menu_p.id_menu.descripcion}} </span>
+                         <span> {{menu_p.id_modulo.nombre}} </span>
                     </a>
              {% endif %}
-                <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-
-                    <div class="collapse-inner rounded" id="submenu_configuracion">
-
-                        <h6 class="collapse-header">{% block cab_sub_menu %}{{menu_p.id_menu.descripcion}}{% endblock cab_sub_menu%}</h6>
-
+                <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="collapse-inner rounded bg-gradient-primary" id="submenu_configuracion">
+                        <h6 class="collapse-header text-light">{% block cab_sub_menu %}{{menu_p.id_menu.descripcion}}{% endblock cab_sub_menu%}</h6>
                         {% for menu_h in permisos %}
                                 {% if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
-                                      <a class="collapse-item" onclick="redireccionar('{% url menu_h.id_menu.url %}')"  id="item">
+                                      <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.id_menu.url %}')"  id="item">
                                       <i class="{{menu_h.id_menu.icono}}"></i>
                                       {{menu_h.id_menu.descripcion}}</a>
                                 {% endif %}
@@ -111,7 +106,7 @@
 
 	<div id="content">
   		{% block encabezado %}
-  			 <nav class="navbar navbar-expand navbar-light color_t topbar mb-4 static-top shadow">
+  			 <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
           <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>

@@ -7,7 +7,7 @@
 {% block contenido_principal %}
 <header class="cuadro_titulo bg-gradient-primary text-center "> <h4 class="title text-light"> Configuracion | Modulo </h4></header>
                           <br/>
-                             <a href="{% url 'Academico:nuevo_modulo' %}" type="button" class="btn bg-gradient-primary text-light">Agregar un nuevo modulo <span class="glyphicon glyphicon-plus">Agregar</a>
+                             <a href="{% url 'Academico:nuevo_modulo' %}"  class="btn bg-gradient-primary text-light">Agregar un nuevo modulo</a>
                           <br/><br/>
                           
           <div class="card shadow mb-4">
@@ -35,9 +35,9 @@
                           <td>{{m.nombre}}</td>
                           <td class="text-center">
                             <a href="{% url 'Academico:editar_modulo' m.id_modulo %}" class="btn bg-gradient-primary text-light" title="Editar {{m.nombre}}">
-                              <i class="fas fa-info-circle"></i>Editar</a>
+                              <i class="fas fa-info-circle"></i> Editar <i class="fas fa-info-circle"></i> </a>
                                <button onclick="modal('{% url 'Academico:eliminar_modulo' m.id_modulo %}')" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombre}}">
-                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                              <i class="fas fa-exclamation-triangle"></i> Eliminar <i class="fas fa-exclamation-triangle"></i></button>
                           </td>
 
                         </tr>
