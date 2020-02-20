@@ -35,7 +35,7 @@ urlpatterns = [
 
     # ----------------REGISTROS--------------
     path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
-    path('nuevo_usuario/', nuevo_usuario, name='nuevo_usuario'),
+    path('nuevo_usuario/', CreateUsuario.as_view(), name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
     path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
