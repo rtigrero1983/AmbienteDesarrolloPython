@@ -7,6 +7,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import ModelSelect2MultipleWidget
 
+
 class SMTPForm(forms.ModelForm):
     class Meta:
         model = ConfCorreosSmpt
@@ -104,21 +105,25 @@ class unidad_form(forms.ModelForm):
         fields = [
                    'nombre',
                    'razon_social',
+                   'id_genr_tipo_identificacion',
                    'identificacion',
                    'direccion',
                    'representante_legal',
                    'correo',
-                   'telefono'
+                   'telefono',
+                   'fecha_creacion'
 
                    ]
         labels = {
                     'nombre': 'Nombre de la unidad: ',
                     'razon_social': 'nombre de la razon: ',
+                    'id_genr_tipo_identificacion':'Tipo de identificacion',
                     'identificacion': 'ingrese su identificacion: ',
                     'direccion': 'nombre de la direccion: ',
                     'representante_legal': 'representante_legal: ',
                     'correo': 'correo:',
                     'telefono': 'ingrese su telefono:',
+                    'fecha_creacion': 'fecha de creacion',
 
                  }
 
@@ -128,11 +133,15 @@ class unidad_form(forms.ModelForm):
             'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
-            'correo': forms.TextInput(attrs={"class": "form-control text-dark","type":"email", "placeholder": "Ingrese una correo"}),
+            'correo': forms.TextInput(attrs={"class": "form-control text-dark", "type":"email", "placeholder": "Ingrese una correo"}),
             'telefono': forms.NumberInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
+            'fecha_creacion':  forms.DateTimeInput(attrs={"class": "form-control text-dark", "type":"date"}),
+
         }
 
-
+    def __init__(self, *args, **kwargs):
+        super(unidad_form, self).__init__(*args, **kwargs)
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
 
 
 class UsuarioForm(forms.ModelForm):
