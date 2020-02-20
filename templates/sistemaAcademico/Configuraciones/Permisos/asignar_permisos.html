@@ -9,21 +9,23 @@
     <div class="card shadow mb-4">
                 <div class="card-header bg-gradient-primary py-3">
                   <h6 class="m-0 font-weight-bold text-light" >Rol {{rol.nombre}}</h6>
+                    <a href="{% url 'Academico:agregar_per' rol.id_rol  %}" class="btn btn-gradient-primary">Agregar Permiso</a>
                 </div>
                     <div class="row darkwhite-bg py-2">
                         <div class="col-12">
                             <div class="form-row">
+                                
                     {% for rp in rol_menu %}
                     {% if rp.id_menu.id_padre == 0 %}
                                 <div class=" col-4 col-md-4 mb-0">
                                     <div class="card shadow mb-2">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary"> <input type="checkbox" value="{{rp.id_menu.id_menu}}" checked>  {{rp.id_menu.descripcion}}</h6>
+                                            <h6 class="m-0 font-weight-bold text-primary"> <input type="checkbox" value="{{rp.id_menu.id_menu}}" checked readonly>  {{rp.id_menu.descripcion}}</h6>
                                         </div>
                                         <div class="card-body">
                                             {% for rp2 in rol_menu %}
                                                 {% if rp.id_menu.id_menu == rp2.id_menu.id_padre %}
-                                                    <input type="checkbox" id="menu" name="menu" checked value="{{rp2.id_menu.id_menu}}"> <label
+                                                    <input type="checkbox" id="menu" name="menu" readonly checked value="{{rp2.id_menu.id_menu}}"> <label
                                                     for="menu">{{rp2.id_menu.descripcion}}</label>
                                                 {% endif %}
                                             {% endfor %}

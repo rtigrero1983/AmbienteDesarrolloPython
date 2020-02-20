@@ -177,4 +177,21 @@ class AccionesForm(forms.Form):
 
 
 
-    
+class Permisosform(forms.ModelForm):
+    class Meta:
+        model = ConfPermiso
+        fields = [
+            "id_modulo_menu",
+            "id_rol",
+        ]
+        labels = {
+            "id_modulo_menu": "Modulo Menu",
+            "id_rol": "Rol",
+        }
+        widgets = {
+            "id_modulo_menu": forms.TextInput(
+                attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
+            "id_rol": forms.TextInput(
+                attrs={"class": "form-control"}),
+        }
+

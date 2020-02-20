@@ -37,6 +37,7 @@ urlpatterns = [
 
     # ----------------REGISTROS--------------
     path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
+
     path('nuevo_usuario/', CreateUsuario.as_view(), name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('nueva_accion/', add_acciones, name='nueva_accion'),
     path('add_permiso/<int:id>', editar_permisos,name='add_permiso'),
+    path('agregar_permisos/<int:id>',add_permiso,name='agregar_per'),
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------

@@ -26,22 +26,15 @@ def editar_permisos(request,id):
 
 
 def add_permiso(request,id):
+    queryset_rol = ConfRol.objects.get(id_rol=id)
+    queryset = ConfModulo_menu.objects.filter()
     if 'usuario' in request.session:
-        contexto={}
-        rol=ConfRol.objects.filter(id_rol=id)
-        accion=ConfAccion.objects.filter(id_menu=33)
-        menu=ConfMenu.objects.filter(id_genr_estado=97, id_padre=23)
-        menu2=ConfMenu.objects.filter(id_genr_estado=97,id_padre=27)
-        modulo = ConfModulo.objects.filter(id_genr_estado=97)
-        contexto['modulo'] = modulo
-        contexto['menu'] = menu
-        contexto['accion']= accion
-        contexto['rol']=rol
-        contexto['menu2']=menu2
         if request.method=='POST':
-            pass
+            c = ConfModulo_menu.objects.get(id_menu=request.post.get('menu'))
+            ConfPermiso.objects.create(id_mod_menu=c,id_rol=queryset_rol)
+            return redirect('Academico:perfiles')
 
-        return render(request, 'sistemaAcademico/Configuraciones/Permisos/asignar_permisos.html',contexto)
+        return render(request, 'sistemaAcademico/Configuraciones/Permisos/permisos_nuevo.html',{'rol':queryset_rol,'mod_menu':queryset})
     else:
         return HttpResponseRedirect('timeout/')
 

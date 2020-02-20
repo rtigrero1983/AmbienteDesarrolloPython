@@ -16,7 +16,6 @@ def acciones(request):
     if 'usuario' in request.session:
         return render(request,'sistemaAcademico/Configuraciones/Acciones/acciones.html')
     else:
-
         return HttpResponseRedirect('timeout/')
 
 def add_acciones(request):
