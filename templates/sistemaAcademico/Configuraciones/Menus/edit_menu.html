@@ -6,7 +6,7 @@
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
 
-    <form method="POST" action="#">
+    <form method="POST" action="{% url 'Academico:editar_menu' m.id_menu %}">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
@@ -14,7 +14,7 @@
 
          <div class="card shadow mb-4">
             <div class="card-header py-3 bg-gradient-primary">
-                <h6 class="m-0 font-weight-bold text-light text-center">Registrar un menu</h6>
+                <h6 class="m-0 font-weight-bold text-light text-center">Editar el menu <strong>{{m.descripcion}}</strong></h6>
             </div>
 
              <div class="card-body ">

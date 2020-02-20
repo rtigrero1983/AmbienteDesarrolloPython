@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect,render_to_response
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
-from django.views.generic import ListView,CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 import socket
 from django.views.decorators.cache import cache_page
@@ -20,6 +20,13 @@ class Menu(ListView):
     context_object_name = 'menu'
     
 #--------------------------------
+
+class UpdateMenu(UpdateView):
+    model = ConfMenu
+    template_name = 'sistemaAcademico/Configuraciones/Menus/edit_menu.html'
+    form_class = menu_form
+    success_url = reverse_lazy('Academico:menu')
+    context_object_name = 'm'
 
 def editar_menu(request,id):
     contexto = {}

@@ -38,8 +38,8 @@
                           <td>{{m.icono}}</td>
 
                           <td>
-                            <button onclick="modal('{% url 'Academico:editar_menu' m.id_menu %}')" class="btn bg-gradient-primary text-light" title="Editar {{m.descripcion}}">
-                              <i class="fas fa-info-circle"></i> Editar <i class="fas fa-info-circle"></i></button>
+                            <a href="{% url 'Academico:editar_menu' m.id_menu %}" class="btn bg-gradient-primary text-light" title="Editar {{m.descripcion}}">
+                              <i class="fas fa-info-circle"></i> Editar <i class="fas fa-info-circle"></i></a>
                             <button onclick="modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" class="btn bg-gradient-danger text-light" title="Eliminar {{m.descripcion}}">
                               <i class="fas fa-exclamation-triangle"></i> Eliminar <i class="fas fa-exclamation-triangle"></i></button>
                         </td>

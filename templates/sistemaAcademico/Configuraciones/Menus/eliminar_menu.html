@@ -1,22 +1,29 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
 				<form method="POST" action="{% url 'Academico:eliminar_menu' menu.id_menu %}"> {% csrf_token %}
-					 <div class="card shadow mb-4">
-             			 <div class="card-header py-3">
-             			   <h6 class="m-0 font-weight-bold text-danger">Eliminar menu</h6>
-             			 </div>
-								<div class="card-body">
-             			   			Esta seguro que deseas eliminar este Menu?<br>
+					 <div class="modal-body">
+             			<header class="cuadro_titulo bg-danger">
+                    		<h4 class="titulo">Configuracion | Eliminar Menu</h4>
+                    	</header>
+								<div class="contenido text-dark">
+             			   			Esta seguro que deseas eliminar este menu?<br>
              			   			Nombre del menu: <label>{{menu.descripcion}}</label><br>
-             			   			tipo: <label>Menu Principal</label><br>
              			   			Url: <label>{{menu.url}}</label><br>
-             			   			<div class="botones">
-        						    <br/>
-        						    <button type="submit" class="btn btn-outline-danger">Eliminar</button>
-        						    <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-        						    </div>
+									Controlador: <label>{{menu.view}}</label><br>
+									<div class="row darkwhite-bg py-2">
+                   					 <div class="col-12">
+                   					 	  <div class="form-row">
+                   					 	    <div class=" col-5 col-md-6 mb-0">
+                   					 	     	<button type="submit" class="btn btn-outline-danger btn-block">Eliminar</button>
+                   					 	    </div>
+											 <div class=" col-5 col-md-6 mb-0">
+                   					 	     	<button class="btn btn-outline-primary btn-block" data-dismiss="modal">Cancelar</button>
+                   					 	    </div>
+									 	  </div>
+									   </div>
+									</div>
         						</div>
-             		 </div>
-				</form>
+					    </div>
+             	</form>
 	</div>
 </div>

@@ -32,7 +32,7 @@ def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
         permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
+            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario'),id_menu__id_genr_estado=97).select_related('id_menu','id_modulo')
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
