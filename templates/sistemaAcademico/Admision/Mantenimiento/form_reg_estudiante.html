@@ -25,55 +25,208 @@
                 <header class="cuadro_titulo">
                     <h4 class="titulo text-center">Configuracion | Registrar Estudiante</h4>
                 </header>
+
                 <br><br>
-                    <form action="#" enctype="multipart/form-data" class="form-horizontal" method="POST">
-                        <div class="col-sm-6">
-                        {% csrf_token %}
-                            <!-- <div class="contenido">
-               <label for="id_ssl" class="text-dark h6">{{form.nombres.label }} :</label>
+
+                <div action="#" enctype="multipart/form-data" class="form-horizontal ">
+
+                <div class="row">
+
+                    <div class="col-6">
+                    <label for="nombres" class="text-dark h6">{{form.nombres.label }} :</label>
                {{form.nombres}}<br>
-                                 <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
+                        <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
                {{form.apellidos}}<br>
-                                 <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
+                        <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
                {{form.fecha_de_nacimiento}}<br>
-                                 <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
+                        <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
                {{form.id_genr_genero}}<br>
-                                 <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
+                        <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
                {{form.id_genr_pais}}<br>
-                                 <label for="id_genr_tipo_identificacion" class="text-dark h6">{{form.id_genr_tipo_identificacion.label }} :</label>
-               {{form.id_genr_tipo_identificacion}}<br>
-                                 <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
+                        <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>
+               {{form.lugar_nacimiento}}<br>
+                        <label for="id_genr_provincia" class="text-dark h6">{{form.id_genr_provincia.label }} :</label>
+               {{form.id_genr_provincia}}<br>
+
+                        <label for="id_genr_categoria_migratoria" class="text-dark h6">{{form.id_genr_categoria_migratoria.label }} :</label>
+               {{form.id_genr_categoria_migratoria}}<br>
+
+                </div>
+
+
+                    <div class="col-6">
+                        <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
                {{form.identificacion}}<br>
-                                 <label for="id_genr_estado_civil" class="text-dark h6">{{form.id_genr_estado_civil.label }} :</label>
-               {{form.id_genr_estado_civil}}<br>
-                                 <label for="correo" class="text-dark h6">{{form.correo.label }} :</label>
-               {{form.correo}}<br>
-                                 <label for="celular" class="text-dark h6">{{form.celular.label }} :</label>
-               {{form.celular}}<br>
-                                 <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
+                        <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
                {{form.id_genr_tipo_sangre}}<br>
-                                 <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
+                        <label for="id_genr_etnia" class="text-dark h6">{{form.id_genr_etnia.label }} :</label>
+               {{form.id_genr_etnia}}<br>
+                        <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
                {{form.id_genr_jornada}}<br>
-                                 <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
+                        <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
                {{form.id_genr_indigena}}<br>
-                                 <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
-               {{form.id_genr_idioma_ancestral}}<br>-->
-                            {{ form| crispy }}
+                        <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
+               {{form.id_genr_idioma_ancestral}}<br>
+                        <label for="id_genr_ciudad" class="text-dark h6">{{form.id_genr_ciudad.label }} :</label>
+               {{form.id_genr_ciudad}}<br>
 
 
+
+
+                    </div>
+                </div>
+
+                    </div>
+                    <div class="cuadro_titulo row">
+                     <h3 class="titulo text-center ">EN CASO DE EMERGENCIA</h3>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <label for="discapacidad" class="text-dark h6">{{form.discapacidad.label }} :</label>
+               {{form.discapacidad}}<br>
+                            <label for="discapacidad_renal" class="text-dark h6">{{form.discapacidad_renal.label }} :</label>
+               {{form.discapacidad_renal}}<br>
+                            <label for="discapacidad_neurologica" class="text-dark h6">{{form.discapacidad_neurologica.label }} :</label>
+               {{form.discapacidad_neurologica}}<br>
+                            <label for="enfermedad_alergica" class="text-dark h6">{{form.enfermedad_alergica.label }} :</label>
+               {{form.enfermedad_alergica}}<br>
+                            <label for="asma" class="text-dark h6">{{form.asma.label }} :</label>
+               {{form.asma}}<br>
 
 
                         </div>
 
-
-
-
-			            <div class="text-center">
-                            <button type="submit" class="btn btn-outline-primary">Registrar</button>
-                            <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                                <a class="btn btn-outline-danger" href="{% url 'Academico:mantenimiento' %}">Cancelar</a>
+                        <div class="col">
+                            <br>
+                            <label for="epilepsia" class="text-dark h6">{{form.epilepsia.label }} :</label>
+               {{form.epilepsia}}<br>
+                            <label for="enfermedad_congenita" class="text-dark h6">{{form.enfermedad_congenita.label }} :</label>
+               {{form.enfermedad_congenita}}<br>
+                            <label for="enfermedad_respiratoria" class="text-dark h6">{{form.enfermedad_respiratoria.label }} :</label>
+               {{form.enfermedad_respiratoria}}<br>
+                            <label for="atencion_psicologica" class="text-dark h6">{{form.atencion_psicologica.label }} :</label>
+               {{form.atencion_psicologica}}<br>
                         </div>
-  			        </form>
+
+                    </div>
+                    <br>
+                    <div class="cuadro_titulo row">
+                     <h3 class="titulo text-center ">OTROS</h3>
+
+                    </div>
+                <div class="row">
+                    <div class="col">
+                        <br><br>
+                         <label for="bono_solidario" class="text-dark h6">{{form.bono_solidario.label }} :</label>
+               {{form.bono_solidario}}<br>
+                    </div>
+                    <div class="col">
+                        <br>
+                        <label for="mienbros_hogar" class="text-dark h6">{{form.mienbros_hogar.label }} :</label>
+               {{form.mienbros_hogar}}<br>
+                    </div>
+
+                </div>
+                <div class="row">
+                     <div class="col">
+                        <br>
+
+
+                         <label for="mvive_con_usted" class="text-dark h6">{{form.mvive_con_usted.label }} :</label>
+               {{form.mvive_con_usted}}<br>
+                         <label for="mnombres" class="text-dark h6">{{form.mnombres.label }} :</label>
+               {{form.mnombres}}<br>
+                         <label for="mapellidos" class="text-dark h6">{{form.mapellidos.label }} :</label>
+               {{form.mnombres}}<br>
+                         <label for="midentificacion" class="text-dark h6">{{form.midentificacion.label }} :</label>
+               {{form.midentificacion}}<br>
+                         <label for="mdireccion" class="text-dark h6">{{form.mdireccion.label }} :</label>
+               {{form.mdireccion}}<br>
+                         <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
+               {{form.mtelefono}}<br>
+
+                        </div>
+
+
+                    <div class="col">
+                        <br>
+                        <label for="pvive_con_usted" class="text-dark h6">{{form.pvive_con_usted.label }} :</label>
+               {{form.pvive_con_usted}}<br>
+                        <label for="pnombres" class="text-dark h6">{{form.pnombres.label }} :</label>
+               {{form.pnombres}}<br>
+                        <label for="papellidos" class="text-dark h6">{{form.papellidos.label }} :</label>
+               {{form.papellidos}}<br>
+                        <label for="pidentificacion" class="text-dark h6">{{form.pidentificacion.label }} :</label>
+               {{form.pidentificacion}}<br>
+                        <label for="pdireccion" class="text-dark h6">{{form.pdireccion.label }} :</label>
+               {{form.pdireccion}}<br>
+                        <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
+               {{form.mtelefono}}<br>
+                        </div>
+
+
+
+                </div>
+            <div class="cuadro_titulo row">
+                     <h3 class="titulo text-center ">DATOS DEL REPRESENTANTE</h3>
+
+
+                    </div>
+
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <label for="rvive_con_usted" class="text-dark h6">{{form.rvive_con_usted.label }} :</label>
+               {{form.rvive_con_usted}}<br>
+                        <label for="rnombres" class="text-dark h6">{{form.rnombres.label }} :</label>
+               {{form.rnombres}}<br>
+                        <label for="rapellidos" class="text-dark h6">{{form.rapellidos.label }} :</label>
+               {{form.rapellidos}}<br>
+                        <label for="ridentificacion" class="text-dark h6">{{form.ridentificacion.label }} :</label>
+               {{form.ridentificacion}}<br>
+                        <label for="rtelefono" class="text-dark h6">{{form.rtelefono.label }} :</label>
+               {{form.ridentificacion}}<br>
+
+
+                        <label for="rdireccion_trabajo" class="text-dark h6">{{form.rdireccion_trabajo.label }} :</label>
+               {{form.rdireccion_trabajo}}<br>
+                        <label for="rhorario_laboral" class="text-dark h6">{{form.rhorario_laboral.label }} :</label>
+               {{form.rhorario_laboral}}<br>
+                        <label for="rtelefono_trabajo" class="text-dark h6">{{form.rtelefono_trabajo.label }} :</label>
+               {{form.rtelefono_trabajo}}<br>
+                         </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+</div>
+                    </div>
+
+
+
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:mantenimiento' %}">Cancelar edicion</a>
+                </div>
+</form>
             </div>
             </div>
             </div>
