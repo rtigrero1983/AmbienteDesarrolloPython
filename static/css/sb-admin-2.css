@@ -10,6 +10,22 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+
+.menu-arbol .mostrar-menu:not(:checked) ~ ul
+{
+  opacity:0.5;
+  height: 0.5px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.menu-arbol .mostrar-menu:checked ~ ul
+{
+  opacity:1;
+  height: auto;
+  overflow: hidden;
+}
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;

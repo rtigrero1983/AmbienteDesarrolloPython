@@ -41,7 +41,7 @@ urlpatterns = [
     path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('nueva_accion/', add_acciones, name='nueva_accion'),
-    path('add_permiso/', add_permiso, name='add_permiso'),
+    path('add_permiso/<int:id>', add_permiso, name='add_permiso'),
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------

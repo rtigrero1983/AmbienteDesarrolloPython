@@ -7,48 +7,119 @@
 {% block contenido_principal %}
 
 
-<header class="cuadro_titulo" class="title">
-    <h4>Configuracion | Permisos</h4>
-</header>
+    <header class="cuadro_titulo" class="title">
+        <h4>Configuracion | Permisos</h4>
+    </header>
     <br>
- <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
-            </div>
 
-            <div class="card-body ">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
+        </div>
 
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
-                  <thead class="bg-gradient-primary ">
-                    <tr class="text-light text-center" >
-                      <th>Nombre</th>
+        <div class="card-body ">
+
+            <div class="table-responsive">
+                <table cellspacing="0" class="table table-bordered table-hover" data-page-length='5' data-sort='false'
+                       id="dtBasicExample" width="100%">
+                    <thead class="bg-gradient-primary ">
+                    <tr class="text-light text-center">
+                        <th>Nombre</th>
                     </tr>
-                  </thead>
-<tbody>
-{% for rol in rol %}
-<tr>
+                    </thead>
+                    <tbody>
+                    {% for rol in rol %}
+                        <tr>
 
-<td><div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#{{ rol.nombre }}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="{{ rol.nombre }}">
-                  <h6 class="m-0 font-weight-bold text-primary">{{ rol.nombre }}</h6>
-                </a>
-                <!-- Card Content - Collapse -->
-                <div class="collapse show" id="{{ rol.nombre }}">
-                  <div class="card-body">
-                    This is a collapsable card example using Bootstrap's built in collapse functionality. <strong>Click on the card header</strong> to see the card body collapse and expand!
-                  </div>
-                </div>
-              </div></td>
+                            <td>
+                                <form action="{% url 'Academico:add_permiso' rol.id_rol %}" class="formulario"
+                                      method="POST">
+                                    {% csrf_token %}
+                                    <nav>
+                                        <ul class="menu-arbol">
+                                            <li>
+                                                <input type="checkbox" name="rol" class="mostrar-menu" id="menu1" value="rol.id_rol">
+                                                <label for="menu1" class="ampliar ">  <h5 class="text-success text-center "> {{  rol.nombre }}</h5></label>
 
-</tr>
-{% endfor %}
-</tbody>
-</table>
-</div>
+                                                <ul class="nivel-01">
+                                                    <li>{% for mo in modulo %}
+                                                    <input type="checkbox" class="mostrar-menu text-primary " id="menu01" value="{{ mo.id_modulo }}" name="modulo" >{{ mo.nombre }}<br>
+                                                        <ul class="nivel-02"><li>{% for me in menu %}
+                                                        <input type="checkbox" class="mostrar-menu" id="menu011" value="{{ me.id_menu }}" name="menu" > {{ me.descripcion }}<br>
+                                                                <ul class="nivel-03" ><li>{% for ac in accion %}
+                                                                    <input type="checkbox" class="mostrar-menu" id="menu0111" name="accion" value="{{ ac.id_accion }}"> {{ ac.descripcion }}<br>
+                                                                {% endfor %}
+                                                                </li></ul>
+                                                        {% endfor %}</li></ul>
+                                                        
+                                                    {% endfor %}</li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+
+
+
+
+
+
+            <!-- Pruebas de otra manera
+
+
+
+
+
+
+
+                                <nav>
+                                        <ul class="menu-arbol">
+                                            <li>
+                                                <input type="checkbox" name="rol" class="mostrar-menu" id="menu1" value="rol.id_rol">
+                                                <label for="menu1" class="ampliar">{{ rol.nombre }}</label>
+
+                                                <ul class="nivel-01">
+
+                                                <li><input type="checkbox" >Admision <br>{% for me in menu2 %}<input type="checkbox" class="mostrar-menu" id="menu011" value="{{ me.id_menu }}" name="menu" > {{ me.descripcion }}<br>{% endfor %}
+                                                <li><input type="checkbox">Matricula</li><br>
+                                                <li><input type="checkbox">Registro de notas</li><br>
+                                                <li><input type="checkbox">Reportes especiales</li><br>
+                                                <li class="nivel-01"><input type="checkbox" class="mostrar-menu" id="menu1">Configuracion </li>
+                                                    <ul class="nivel-02"><li>{% for me in menu %}
+                                                        <input type="checkbox" class="mostrar-menu" id="menu011" value="{{ me.id_menu }}" name="menu" > {{ me.descripcion }}<br>
+                                                                <ul class="nivel-03" ><li>{% for ac in accion %}
+                                                                    <input type="checkbox" class="mostrar-menu" id="menu0111" name="accion" value="{{ ac.id_accion }}"> {{ ac.descripcion }}<br>
+                                                                {% endfor %}
+                                                                </li></ul>
+                                                        {% endfor %}</li></ul>
+
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </nav>
+
+-->
+
+
+
+
+
+
+
+
+
+
+                                </form>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
-            </div>
+        </div>
+    </div>
+
 {% endblock contenido_principal %}
 
 {% block footer %}

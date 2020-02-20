@@ -34,8 +34,11 @@
 <td>{{ rol.nombre }}</td>
 
     <td>
-    <button  class="btn bg-gradient-success text-light " title="Asignar permiso a {{rol.nombre}}">
-        <i class="fas fa-info-circle"></i> Asignar Permiso</button>
+
+
+    <a href="{% url 'Academico:add_permiso' rol.id_rol %}" class="btn bg-gradient-success text-light" title="Asignar permiso a {{rol.nombre}}">
+                              <i class=" btn bg-gradient-success text-light "></i>Asignar permiso</a>
+
    <td></td>
 </tr>
 {% endfor %}

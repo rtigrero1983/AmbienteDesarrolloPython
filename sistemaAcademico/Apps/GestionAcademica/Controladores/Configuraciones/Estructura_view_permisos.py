@@ -10,22 +10,28 @@ def perfiles(request):
     #-----Valida si la sesion sigue activa sino regresa al login.html
     if 'usuario' in request.session:
         contexto={}
-        rol=ConfRol.objects.all()
+        rol=ConfRol.objects.filter(id_genr_estado=97)
         contexto['rol']=rol
         return render(request,'sistemaAcademico/Configuraciones/Permisos/permisos.html',contexto)
     else:
         return HttpResponseRedirect('timeout/')
 
 
-def add_permiso(request):
+def add_permiso(request,id):
     if 'usuario' in request.session:
         contexto={}
-        menu=ConfMenu.objects.filter(id_genr_estado=97)
-        modulo=ConfModulo.objects.filter(id_genr_estado=97)
-        estado = GenrGeneral.objects.filter(tipo='STA')
-        contexto['modulo']=modulo
-        contexto['estado'] = estado
+        rol=ConfRol.objects.filter(id_rol=id)
+        accion=ConfAccion.objects.filter(id_menu=33)
+        menu=ConfMenu.objects.filter(id_genr_estado=97, id_padre=23)
+        menu2=ConfMenu.objects.filter(id_genr_estado=97,id_padre=27)
+        modulo = ConfModulo.objects.filter(id_genr_estado=97)
+        contexto['modulo'] = modulo
         contexto['menu'] = menu
+        contexto['accion']= accion
+        contexto['rol']=rol
+        contexto['menu2']=menu2
+        if request.method=='POST':
+            pass
 
         return render(request, 'sistemaAcademico/Configuraciones/Permisos/add_permisos.html',contexto)
     else:
@@ -33,7 +39,7 @@ def add_permiso(request):
 
 
 
-def editar_permiso(request):
+def editar_permiso(request,id):
     contexto={}
     modulo = ConfModulo.objects.filter(id_genr_estado=97)
     estado = GenrGeneral.objects.filter(tipo='STA')
