@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
             <input value="editar" id="editar" name="editar" type="text" hidden="true">
-            <form class="formulario" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:nuevo_menu' %}">{% csrf_token %}
+            <form class="formulario" id="registrar_menu" name="registrar_menu" method="POST" action="{% url 'Academico:editar_menu' menu_actual.id_menu %}">{% csrf_token %}
                     <div class="modal-body" >
                             <header class="cuadro_titulo">
                                 <h4 class="titulo">Configuracion | Registrar Menu</h4>

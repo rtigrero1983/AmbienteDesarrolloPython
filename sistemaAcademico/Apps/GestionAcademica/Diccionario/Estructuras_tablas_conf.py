@@ -58,7 +58,7 @@ class ConfModulo(models.Model):
 
 class ConfRol(models.Model):
     id_rol = models.AutoField(primary_key=True)
-    codigo = models.CharField(max_length=10, blank=False, null=False)
+    codigo = models.CharField(max_length=50, blank=False, null=False)
     nombre = models.CharField(max_length=45, blank=False, null=False)
     id_genr_estado = models.ForeignKey(GenrGeneral,default=97, on_delete=models.CASCADE,blank=False, null=False,db_column='id_genr_estado')
 
@@ -82,14 +82,14 @@ class ConfMenu(models.Model):
                     ]
     id_menu = models.AutoField(primary_key=True)
     id_padre = models.IntegerField(blank=False,null=False)
-    orden = models.IntegerField(blank=False, null=False)
+    orden = models.IntegerField(blank=True,default=0)
     descripcion = models.CharField(max_length=45, blank=False,validators=[validate_descripcion],unique=True, null=False, db_column='descripcion')
     id_genr_estado = models.ForeignKey(GenrGeneral,on_delete=models.CASCADE,default=97,db_column='id_genr_estado')
-    url = models.CharField(blank=False,null=False, unique=True, max_length=60)
+    url = models.CharField(blank=False,null=False, max_length=60)
     icono = models.CharField(max_length=50,blank=False,choices=ICONO_CHOICES,null=False)
-    lazy_name = models.CharField(max_length=60,unique=True,blank=False)
-    name = models.CharField(max_length=60,unique=True, blank=False)
-    view =  models.CharField(max_length=45,unique=True,blank=False,null=False)
+    lazy_name = models.CharField(max_length=60,blank=False)
+    name = models.CharField(max_length=60, blank=False)
+    view =  models.CharField(max_length=45,blank=False,null=False)
 
     class Meta:
         verbose_name = 'Menu',
@@ -156,7 +156,7 @@ class ConfModulo_menu(models.Model):
 class ConfAccion(models.Model):
         id_accion = models.AutoField(primary_key=True)
         descripcion = models.CharField(max_length=20, blank=False, null=False)
-        id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE,related_name="fk_accion_menu", db_column='id_menu')
+        id_menu = models.ForeignKey(ConfMenu, on_delete=models.CASCADE, related_name="fk_accion_menu", db_column='id_menu')
         id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,related_name="fk_accion_genr" , db_column='id_genr_estado',default=97)
 
         class Meta:

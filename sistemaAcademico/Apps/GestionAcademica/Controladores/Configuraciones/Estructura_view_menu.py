@@ -80,9 +80,10 @@ class CreateMenu(CreateView):
            for registro in lista_orden:
                b = int(registro.orden)
                var_orden = b+1
-           c.orden = var_orden 
-           c.save(commit=False)
+           c.orden = var_orden
+           c.save()
            return redirect(self.get_success_url())
+
         else:
            return self.render_to_response(self.get_context_data(form=form))
 

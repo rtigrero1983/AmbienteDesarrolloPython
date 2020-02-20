@@ -34,3 +34,16 @@ class GEN_autocomplete(autocomplete.Select2QuerySetView):
 
     def has_add_permission(self, request):
         return True
+
+class MenuAutocomplete(autocomplete.Select2QuerySetView):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def get_queryset(self):
+        qs = GenrGeneral.objects.filter(tipo='TID').order_by("nombre")
+        if self.q:
+            qs = qs.filter(Q(nombre__icontains=self.q))
+        return qs
+
+    def has_add_permission(self, request):
+        return True

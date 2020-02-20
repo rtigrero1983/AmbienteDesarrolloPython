@@ -21,7 +21,7 @@ urlpatterns = [
     path('roles/', Roles.as_view(), name='roles'),
     path('perfiles/', perfiles, name='perfiles'),
     path('menu/', Menu.as_view(), name='menu'),
-    path('acciones/', acciones, name='acciones'),
+    path('acciones/', Acciones.as_view(), name='acciones'),
     path('permisos/', perfiles, name='permisos'),
     path('modulo/', Modulo.as_view(), name='modulo'),
     path('empresas/', empresas, name='empresas'),
@@ -40,6 +40,7 @@ urlpatterns = [
     #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
     path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
+    path('nueva_accion/', Nueva_Accion.as_view(), name='nueva_accion'),
     path('add_permiso/', add_permiso, name='add_permiso'),
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
