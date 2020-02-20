@@ -5,25 +5,29 @@
 {% endblock sidebar %}
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
-<form method="POST" action="#">
+
+    <form method="POST" action="#">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
      {% else %}
-                <header class="cuadro_titulo">
-                    <h4 class="titulo text-center">Configuracion | Registrar Menu</h4>
-                </header>
+        <div class="card">
+            <div class="card-header bg-gradient-primary">
+                    <h4 class="cuadro-titulo text-center text-light">Configuracion | Registrar Menu</h4>
+            </div>
                 <br><br>
             <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
 			    {{form|crispy}}
 			<div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Registrar menu</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:menu' %}">Cancelar</a>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:menu' %}">Cancelar registro</a>
             </div>
   			</form>
-  		
+  		</div>
    </form>
+
+
     {% endif %}
 {% endblock contenido_principal %}
 
