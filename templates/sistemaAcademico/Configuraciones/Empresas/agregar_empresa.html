@@ -1,0 +1,63 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block footer %}
+
+{% endblock footer %}
+
+
+ {% block contenido_principal %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        {% if error %}
+         <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss = "alert" aria-label = "Close">
+                                  <span aria-hidden = "true">&times;</span>
+                                </button>
+                                <strong>Advertencia: </strong> {{ error }}
+                              </div>
+        {% endif %}
+        <header class="cuadro_titulo">
+            <h4 class="titulo">Configuracion / Unidad</h4>
+        </header>
+        <br/>
+        <form action="" method="post" id="forma_test" novalidate>
+            {% csrf_token %}
+           <div class="contenido">
+               <label for="id_empresa" class="text-dark h6">{{form.ssl.label }} :</label>
+               {{form.ssl}}<br>
+               <label for="nombre" class="text-dark h6">{{form.nombre.label }} :</label>
+               {{form.puerto}}
+               <label for="identificacion" class="text-dark h6">{{form.identificacion.label}}</label>
+               {{form.dominio}}
+               <label for="direccion" class="text-dark h6">{{form.direccion.label}}</label>
+               {{form.usuario_c}}
+               <label for="correo" class="text-dark h6">{{form.correo.label}}</label>
+               {{form.contraseña_c}}
+               <label for="telefono" class="text-dark h6">{{form.telefono.label}}</label>
+                {{form.descripcion}}
+
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                <input type="submit" class="btn btn-outline-primary btn-block"  id="btn_guardar_unidad" value="Guardar"  name="btn_guardar_unidad"/>
+                </div>
+                <div class="form-group col-md-6">
+                <button class="btn btn-outline-danger btn-block" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+               </div>
+        </form>
+
+
+
+
+
+
+
+    </div>
+</div>
+
+{% endblock contenido_principal %}

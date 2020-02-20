@@ -8,19 +8,19 @@ from sistemaAcademico.Apps.Validaciones import *
 
 class ConfEmpresa(models.Model):
     id_empresa = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=50, blank=False, null=False)
-    razon_social = models.CharField(max_length=200, blank=False, null=False)
+    nombre = models.CharField(max_length=50, blank=False, null=False,validators=[validate_nombre])
+    razon_social = models.CharField(max_length=200, blank=False, null=False, validators=[validate_descripcion])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
-    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False)
-    direccion = models.CharField(max_length=50, blank=False, null=False)
-    representante_legal = models.CharField(max_length=50, blank=False, null=False)
+    identificacion = models.CharField(unique=True, max_length=50,validators=[validate_cedula], blank=False, null=False)
+    direccion = models.CharField(max_length=50, blank=False, null=False, validators=[validate_descripcion])
+    representante_legal = models.CharField(max_length=50, blank=False, null=False, validators=[validate_letras])
     correo = models.CharField(max_length=100, blank=False, null=False)
-    telefono = models.CharField(max_length=10, blank=False, null=False)
+    telefono = models.CharField(max_length=10, blank=False, null=False, validators=[validate_celular])
     fecha_creacion = models.DateField(blank=False, null=False)
 
     #related_name='estado El atributo related_name especifica el nombre de la relación inversa del modelo de usuario a su modelo.
     # si hay mas de dos claves foraneas que referencian a la misma tabla se debe usar related_name'
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name='estado_empresa', db_column='estado')
+    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, default=97, related_name='estado_empresa', db_column='estado')
     #------------------------------------------------------------------------------------------------------------------------
 
     fecha_ingreso = models.DateField(blank=False, null=False, )

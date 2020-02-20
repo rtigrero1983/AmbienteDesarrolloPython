@@ -95,10 +95,9 @@ class menu_form(forms.ModelForm):
 
 
 
-class unidad_forms(forms.ModelForm):
+class unidad_form(forms.ModelForm):
 
     class Meta:
-        MENU_CHOICES = []
         model = ConfEmpresa
         fields = [
                    'nombre',
@@ -108,31 +107,30 @@ class unidad_forms(forms.ModelForm):
                    'representante_legal',
                    'correo',
                    'telefono'
+
                    ]
         labels = {
-                    'nombre':'Nombre de la unidad: ',
-                    'razon_social':'nombre de la razon: ',
-                    'identificacion':'ingrese su ci: ',
-                    'direccion':'nombre de la direccion: ',
-                    'representante_legal':'representante_legal: ',
-                    'correo' : 'correo:',
-                    'telefono' : ' telefono:'
+                    'nombre': 'Nombre de la unidad: ',
+                    'razon_social': 'nombre de la razon: ',
+                    'identificacion': 'ingrese su identificacion: ',
+                    'direccion': 'nombre de la direccion: ',
+                    'representante_legal': 'representante_legal: ',
+                    'correo': 'correo:',
+                    'telefono': 'ingrese su telefono:',
+
                  }
 
         widgets = {
             'nombre': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
             'razon_social': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
-            'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion"}),
+            'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
-            'correo': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una correo"}),
-            'telefono': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
+            'correo': forms.TextInput(attrs={"class": "form-control text-dark","type":"email", "placeholder": "Ingrese una correo"}),
+            'telefono': forms.NumberInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
         }
 
 
-    def __init__(self, *args, **kwargs):
-        super(unidad_forms, self).__init__(*args, **kwargs)
-        self.fields['id_padre'] = forms.ChoiceField(choices=[(m.id_empresa, m.descripcion) for m in ConfEmpresa.objects.filter(id_padre=0)])
 
 
 class UsuarioForm(forms.ModelForm):

@@ -1,11 +1,27 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render,redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, UpdateView
+from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import unidad_form
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
 from django.views.decorators.cache import cache_page
+
+
+class NuevaEmpre(CreateView):
+    model = ConfEmpresa
+    template_name = 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html'
+    form_class = unidad_form
+    success_url = reverse_lazy('Academico:empresas')
+
+
+class UpdateEmpre(UpdateView):
+    model = ConfEmpresa
+    form_class = unidad_form
+    template_name = 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html'
+    success_url = reverse_lazy('Academico:empresas')
 
 
 def empresas(request):
@@ -14,7 +30,8 @@ def empresas(request):
         return render(request,'sistemaAcademico/Configuraciones/Empresas/empresa.html', {'lista_empresa': lista_empresa})
     else:
         return HttpResponseRedirect('timeout/')
-        
+
+
 def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}

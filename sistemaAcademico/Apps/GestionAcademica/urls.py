@@ -34,7 +34,7 @@ urlpatterns = [
     path('reportes/', reportes, name='reportes'),
 
     # ----------------REGISTROS--------------
-    path('nueva_empresa/', nueva_empresa, name='nueva_empresa'),
+    path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
     path('nuevo_usuario/', CreateUsuario.as_view(), name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),
