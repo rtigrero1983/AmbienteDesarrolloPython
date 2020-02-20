@@ -15,7 +15,7 @@ def validate_codigo(value):
 def validate_nombre(value):
     if " " in value or value == "":
         raise ValidationError(
-        	_('{0} No se puede crear un modulo sin codigo. porfavor ingrese uno'.format(value)))
+        	_('{0} No se puede crear un nombre repetido. Ingrese uno real '.format(value)))
     return value
 
 
