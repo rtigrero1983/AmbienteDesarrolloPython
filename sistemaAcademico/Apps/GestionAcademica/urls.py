@@ -27,7 +27,7 @@ urlpatterns = [
     path('empresas/', empresas, name='empresas'),
 
     #Opciones para el modulo de Admision
-    path('mantenimiento_personas/', mantenimientoPersonas,name='Personas'),
+    path('mantenimiento/', Mantenimiento.as_view(), name='mantenimiento'),
     path('movimientos/', movimientos, name='movimientos'),
     path('consultas/', consultas, name='consultas'),
     path('procesos/', procesos, name='procesos'),
@@ -76,21 +76,24 @@ urlpatterns = [
     path('modulo/' + 'timeout/', timeout, name='timeout_modulo'),
     path('usuarios/' + 'timeout/', timeout, name='timeout_usuarios'),
     path('empresas/' + 'timeout/', timeout, name='timeout_empresas'),
-    path('movimientos/' + 'timeout/', timeout, name='timeout_empresas'),
-    path('mantenimiento_personas/' + 'timeout/', timeout, name='timeout_empresas'),
+    path('movimientos/' + 'timeout/', timeout, name='timeout_movimientos'),
+    path('mantenimiento/' + 'timeout/', timeout, name='timeout_mantenimiento'),
 
     #-----Rest-framework-APIS
     path('api_menu/', Menu_api.as_view(), name='api_menu'),
     path('api_modulo/', Modulo.as_view(), name='api_modulo'),
 
     #Opciones para el modulo de Mantenimiento
+    #Crear
     path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
     path('registro_empleado/', NuevoEmpleado.as_view(), name='registro_empleado'),
-
+    #Editar
+    path('editar_empleado/', UpdateEmpleado.as_view(), name='editar_empleado'),
+    #Eliminar
 
     #---------Django-Autocomplete-Filters----------
-    path('TID_autocomplete', TID_autocomplete, name='TID_autocomplete'),
-    path('GEN_autocomplete', GEN_autocomplete, name='GEN_autocomplete'),
+    path('TID_autocomplete/', TID_autocomplete, name='TID_autocomplete'),
+    path('GEN_autocomplete/', GEN_autocomplete, name='GEN_autocomplete'),
 ]
 
 

@@ -5,8 +5,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
 
-
-#TIPO DE IDENTIFICACION
+# TIPO DE IDENTIFICACION
 class TID_autocomplete(autocomplete.Select2QuerySetView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,7 +20,7 @@ class TID_autocomplete(autocomplete.Select2QuerySetView):
         return True
 
 
-#TIPO DE GENERO
+# TIPO DE GENERO
 class GEN_autocomplete(autocomplete.Select2QuerySetView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -34,6 +33,7 @@ class GEN_autocomplete(autocomplete.Select2QuerySetView):
 
     def has_add_permission(self, request):
         return True
+
 
 class MenuAutocomplete(autocomplete.Select2QuerySetView):
     def __init__(self, *args, **kwargs):

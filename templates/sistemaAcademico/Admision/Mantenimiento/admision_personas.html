@@ -8,4 +8,116 @@
 {% endblock footer %}
 
 {% block contenido_principal %}
+
+<header class="cuadro_titulo bg-gradient-primary text-center"> <h4 class="title text-light"> Admision | Mantenimiento </h4></header>
+    <br>
+    <div align="center">
+  <button class="btn bg-gradient-primary text-light col-md-5" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample2"> Tipo Estudiante</button>
+  <button class="btn bg-gradient-primary text-light col-md-5" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Tipo Empleado</button>
+    </div>
+<br>
+<div class="collapse multi-collapse" id="multiCollapseExample1">
+    <div class="card card-body">
+        <br>
+        <br>
+<a href="{% url 'Academico:registro_estudiante' %}" type="button" class="btn bg-gradient-primary text-light"> + Agregar nuevo estudiante<span class="glyphicon glyphicon-plus"></span></a>
+                            <br/>
+                            <br/>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Registro de estudiantes</h6>
+            </div>
+
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center" >
+                      <th>#</th>
+                      <th>Nombres</th>
+                      <th>Apellidos</th>
+                      <th>Identificacion</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    {% for m in mantenimiento %}
+                        <tr class="text-dark">
+                            <td class="text-dark">{{m.id_persona}}</td>
+                            <td>{{m.nombres}}</td>
+                            <td>{{m.apellidos}}</td>
+                            <td>{{m.identificacion}}</td>
+                          <td class="text-center">
+                            <a href="#" class="btn bg-gradient-primary text-light" title="Consultar">
+                              <i class="fas fa-info-circle"></i>Consultar</a>
+                               <button onclick="#" class="btn bg-gradient-warning text-light" title="Editar {{m.nombres}}">
+                              <i class="fas fa-success-circle"></i>Editar</button>
+                               <button onclick="#" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}">
+                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                          </td>
+
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="collapse multi-collapse" id="multiCollapseExample2">
+    <div class="card card-body">
+                                    <br/>
+<a href="{% url 'Academico:registro_empleado' %}" type="button" class="btn bg-gradient-primary text-light"> + Agregar nuevo empleado<span class="glyphicon glyphicon-plus"></span></a>
+                            <br/>
+                            <br/>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Registro de empleados</h6>
+            </div>
+
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center" >
+                      <th>#</th>
+                      <th>Nombres</th>
+                      <th>Apellidos</th>
+                      <th>Identificacion</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    {% for m in mantenimiento %}
+                        <tr class="text-dark">
+                            <td class="text-dark">{{m.id_persona}}</td>
+                            <td>{{m.nombres}}</td>
+                            <td>{{m.apellidos}}</td>
+                            <td>{{m.identificacion}}</td>
+                          <td class="text-center">
+                            <a href="#" class="btn bg-gradient-primary text-light" title="Consultar">
+                              <i class="fas fa-info-circle"></i>Consultar</a>
+                               <button onclick="#" class="btn bg-gradient-warning text-light" title="Editar {{m.nombres}}">
+                              <i class="fas fa-success-circle"></i>Editar</button>
+                              <button onclick="#" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}">
+                              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                          </td>
+
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
 {% endblock contenido_principal %}

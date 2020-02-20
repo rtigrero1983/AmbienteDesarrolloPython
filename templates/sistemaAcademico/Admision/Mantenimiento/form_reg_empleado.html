@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block encabezado %}
+    <title>Registrar Empleado</title>
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
@@ -12,6 +13,7 @@
 {% load crispy_forms_tags %}
 
  {% block contenido_principal %}
+    {% csrf_token %}
         <form>
             <br>
             <br>
@@ -27,13 +29,12 @@
                 <br><br>
                     <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
                         <div class="col-sm-6">
-                        {% csrf_token %}
                         {{form|crispy}}
                         </div>
 			            <div class="text-center">
                             <button type="submit" class="btn btn-outline-primary">Registrar</button>
                             <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                                <a class="btn btn-outline-danger" href="#">Cancelar</a>
+                                <a class="btn btn-outline-danger" href="{% url 'Academico:mantenimiento' %}">Cancelar</a>
                         </div>
   			        </form>
             </div>

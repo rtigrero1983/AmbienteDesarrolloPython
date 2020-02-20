@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView
 
 from sistemaAcademico.Apps.GestionAcademica import forms
 from django.utils import timezone
@@ -15,17 +15,9 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Admision.forms_mantenimientos 
 
 class Mantenimiento(ListView):
     model= MantPersona
-    queryset = model.objects.filter(estado=97).select_related('id_genr_tipo_usuario').values('identificacion','nombres','apellidos','id_genr_tipo_usuario')
+    queryset = model.objects.filter(estado=97).select_related('id_genr_tipo_usuario').values('id_persona','nombres','apellidos','identificacion')
     context_object_name='mantenimiento'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
-
-def mantenimientoPersonas(request):
-
-    if 'usuario' in request.session:
-        return render(request,'sistemaAcademico/Admision/Mantenimiento/admision_personas.html')
-    else:
-        return HttpResponseRedirect('timeout/')
-
 
 def registro_estudiante(request):
     error = None
@@ -43,13 +35,29 @@ def registro_estudiante(request):
 
 class NuevoEmpleado(CreateView):
     model = MantPersona
-    form_class = CrearEmpleado
+    form_class = EmpleadoForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_empleado.html'
-    success_url = reverse_lazy('Academico:registrar_empleado')
+    success_url = reverse_lazy('Academico:registro_empleado')
 
 
-def registro_empleado(request):
-    if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_reg_empleado.html')
-    else:
-        return HttpResponseRedirect('timeout/')
+class UpdateEmpleado(UpdateView):
+    model = MantPersona
+    form_class = EmpleadoForm
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_empleado.html'
+    success_url = reverse_lazy('Academico:editar_empleado')
+    context_object_name = 'm'
+
+
+class NuevoEstudiante(CreateView):
+    model = MantPersona
+    form_class = EstudianteForm
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html'
+    success_url = reverse_lazy('Academico:registro_estudiante')
+
+
+class UpdateEstudiante(UpdateView):
+    model = MantPersona
+    form_class = EstudianteForm
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_estudiante.html'
+    success_url = reverse_lazy('Academico:editar_estudiante')
+    context_object_name = 'm'
