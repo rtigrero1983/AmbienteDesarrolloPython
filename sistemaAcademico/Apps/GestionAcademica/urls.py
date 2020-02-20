@@ -53,7 +53,8 @@ urlpatterns = [
 
     path('editar_modulo/<int:pk>/', UpdateModulo.as_view(), name='editar_modulo'),
     path('editar_empresa/<int:pk>/', UpdateEmpre.as_view(), name='editar_empresa'),
-    path('editar_usuario/<int:id>', editar_usuario, name='editar_usuario'),
+    path('editar_usuario/<int:pk>/',UpdateUsuario.as_view(), name='editar_usuario'),
+    #path('editar_usuario/(?P<pk>[0-9]+)\\/$',UpdateUsuario.as_view(), name='editar_usuario'),
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
     #path('editar_menu/<int:id>', editar_menu, name='editar_menu'),

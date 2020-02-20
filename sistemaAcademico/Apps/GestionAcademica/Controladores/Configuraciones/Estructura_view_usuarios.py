@@ -10,7 +10,8 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from sistemaAcademico.Apps.GestionAcademica import forms
 from django.views.generic import ListView,CreateView,UpdateView
 from django.urls import reverse_lazy
-from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import UsuarioForm
+from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import UsuarioModelForm,UsuarioUsuarioRolModelForm
+from django.urls import reverse
 
 
 class Usuarios(ListView):
@@ -26,15 +27,19 @@ def usuarios(request):
 
 
 class CreateUsuario(CreateView):
-    model = ConfUsuario
-    form_class = UsuarioForm
+    form_class = UsuarioUsuarioRolModelForm
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html'
-    success_url= reverse_lazy('Academico:usuarios')
 
+    def form_valid(self, form):
+        usuario = form['usuario'].save()
+        usuario_rol = form['usuario_rol'].save(commit=False)
+        usuario.usuario_rol= usuario
+        usuario_rol.save()
+        return HttpResponseRedirect(reverse('Academico:usuarios'))
 
-class UpdateModulo(UpdateView):
-    model = ConfModulo
-    form_class = UsuarioForm
+class UpdateUsuario(UpdateView):
+    model = ConfUsuario
+    form_class = UsuarioModelForm
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')
 
