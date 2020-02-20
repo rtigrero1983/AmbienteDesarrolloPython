@@ -19,7 +19,18 @@
         </div>
         <div class="card-body card-block">
             <form action="#" enctype="multipart/form-data" class="form-horizontal">
-                {{form|crispy}}
+                <br>
+                <label for="descripcion">Accion:</label>
+                <br>
+                <input type="text" placeholder="Ingrese un nombre para esta accion" class="form-control" required name="descripcion" id="descripcion"/>
+                <br><br>
+                <label for="menu">Menu: </label>
+                <select id="menu" name="menu" class="form-control js-example-basic-single" >
+                    {% for m in a %}
+                        <option value="{{m.id_menu}}">{{m.descripcion}}</option>
+                    {% endfor %}
+                </select>
+                <br><br>
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Registrar modulo</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
@@ -30,4 +41,14 @@
     </div>
 </form>
     {% endif %}
+
+
 {% endblock contenido_principal %}
+{% block extrajs %}
+        <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+        });
+    </script>
+{% endblock extrajs %}

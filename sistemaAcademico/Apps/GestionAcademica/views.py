@@ -50,11 +50,13 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
+            print(usu)
             if usu:
                 print(usu.id_usuario)
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:
+            print(e)
             contexto['error'] = 'Claves incorrectas o cuenta inactiva'
             return render(request, 'base/login.html', contexto)
 
@@ -67,7 +69,6 @@ def salir(request):
 
 
 
-cache_page(60*10)
 def pantalla_principal(request):
     t = get_template('sistemaAcademico/Pantalla_principal.html')
     html = t.render()

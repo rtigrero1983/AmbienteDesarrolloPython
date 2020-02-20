@@ -19,11 +19,31 @@ def acciones(request):
 
         return HttpResponseRedirect('timeout/')
 
+def add_acciones(request):
+    queryset = ConfMenu.objects.filter(url__icontains='Academico:')
+    if request.method=='POST':
+       descripcion = request.POST.get('descripcion')
+       menu = request.POST.get('menu')
+       ConfAccion.objects.create(descripcion=descripcion,id_menu=ConfMenu.objects.get(id_menu=menu))
+       return redirect('Academico:acciones')
+    return render(request,'sistemaAcademico/Configuraciones/Acciones/add_acciones.html',{'a':queryset})
+
 class Acciones(ListView):
     model = ConfAccion
-    queryset = ConfAccion.objects.filter(id_genr_estado=97)
+    queryset = ConfAccion.objects.filter(id_genr_estado=97).select_related('id_menu')
     template_name = 'sistemaAcademico/Configuraciones/Acciones/acciones.html'
     context_object_name = 'a'
+
+def eliminar_accion(request,id):
+    try:
+        a = ConfAccion.objects.get(id_accion=id)
+        if request.method=='POST':
+            a.id_genr_estado = GenrGeneral.objects.get(idgenr_general=98)
+            a.save()
+            return redirect('Academico:acciones')
+        return render(request,'sistemaAcademico/Configuraciones/Acciones/delete_acciones.html',{'a':a})
+    except Exception as e:
+        raise e
 
 
 

@@ -4,7 +4,8 @@ from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
-
+from django_select2.forms import Select2MultipleWidget
+from django_select2.forms import ModelSelect2MultipleWidget
 
 class SMTPForm(forms.ModelForm):
     class Meta:
@@ -161,3 +162,9 @@ class UsuarioForm(forms.ModelForm):
 
 
 
+class AccionesForm(forms.Form):
+   menu = ModelSelect2MultipleWidget(queryset=ConfMenu.objects.filter(url__icontains='Academico:'), widget=Select2MultipleWidget)
+
+
+
+    

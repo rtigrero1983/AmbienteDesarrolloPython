@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+                <form method="POST" action="{% url 'Academico:eliminar_accion' a.id_accion %}"> {% csrf_token %}
+                     <div class="modal-body">
+                        <header class="cuadro_titulo bg-danger">
+                            <h4 class="titulo">Configuracion | Eliminar accion</h4>
+                        </header>
+                                <div class="contenido text-dark">
+                                    Esta seguro que deseas eliminar esta accion?<br>
+                                    Nombre del menu: <label>{{a.id_menu.descripcion}}</label><br> 
+                                    Accion a eliminar: <label>{{a.descripcion}}</label><br>
+                                    <div class="botones">
+                                    <br/>
+                                    <button type="submit" class="btn btn-outline-danger btn-user">Eliminar</button>
+                                    <button class="btn btn-outline-primary btn-user" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                                </div>
+                    </div>
+                </form>
+    </div>
+</div>

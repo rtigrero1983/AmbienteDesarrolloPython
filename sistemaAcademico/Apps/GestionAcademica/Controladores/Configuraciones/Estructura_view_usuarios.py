@@ -14,10 +14,10 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configurac
 
 
 class Usuarios(ListView):
-    model = ConfMenu
+    model = ConfUsuario
     template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
-    queryset = ConfMenu.objects.filter(id_genr_estado=97)
-    context_object_name = 'menu'
+    queryset = ConfUsuario.objects.filter(id_genr_estado=97).select_related('id_persona','id_genr_tipo_usuario')
+    context_object_name = 'lista_usuarios'
 
 def usuarios(request):
     if 'usuario' in request.session:
