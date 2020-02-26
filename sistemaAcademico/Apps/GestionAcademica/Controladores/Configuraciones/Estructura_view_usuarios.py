@@ -50,7 +50,7 @@ class CreateUsuario(CreateView):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usuario.clave = h.hexdigest()
-            usuario.save()
+            usuario.save
             usuario_rol = form['usuario_rol'].save(commit=False)
             usuario_rol.id_usuario = usuario
             #usuario.usuario_rol= usuario

@@ -114,8 +114,9 @@ class unidad_form(forms.ModelForm):
                    'correo',
                    'telefono',
                    'fecha_creacion',
-
-
+                   'fecha_ingreso',
+                   'usuario_ing',
+                   'terminal_ing',
                    ]
         labels = {
                     'nombre': 'Nombre de la unidad: ',

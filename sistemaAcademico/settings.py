@@ -67,7 +67,7 @@ TEMPLATES = [
 
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,13 +88,13 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':'mysql_cymysql',
-        'NAME':'bd_academico_2020',
-        'USER':'root',
-        'PASSWORD':'root12345',
+        'ENGINE': 'mysql_cymysql',
+        'NAME': 'bd_academico_2020',
+        'USER': 'root',
+        'PASSWORD': 'root12345',
         'HOST': 'localhost',
         'PORT': 3306,
-    } 
+    }
 }
 """
 DATABASES = {
@@ -146,12 +146,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-INTERNAL_IPS = {'127.0.0.1',}
+INTERNAL_IPS = {'127.0.0.1', }
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 SESSION_COOKIE_AGE = 6000
 SESSION_EXPIRE_SECONDS = 6000
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
-SESSION_SAVE_EVERY_REQUEST= True
+SESSION_SAVE_EVERY_REQUEST = True

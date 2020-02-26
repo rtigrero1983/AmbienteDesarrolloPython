@@ -32,8 +32,8 @@ class ConfEmpresa(models.Model):
     # ------------------------------------------------------------------------------------------------------------------------
 
     fecha_ingreso = models.DateField(blank=True, null=True, )
-    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
-    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+    usuario_ing = models.CharField(max_length=45, blank=True, null=True)
+    terminal_ing = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Empresa',

@@ -7,24 +7,32 @@
 {% block contenido_principal %}
 <form method="POST" action="#">
     {% csrf_token %}
-      {% if error %}
-        <h2>{{ error }}</h2>
-     {% else %}
-                <header class="cuadro_titulo">
-                    <h4 class="titulo text-center">Configuracion | Registrar Unidad</h4>
-                </header>
-                <br><br>
-            <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
-			    {{form|crispy}}
-			<div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">Registrar Unidad</button>
-                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar</a>
-            </div>
-  			</form>
+    {% if error %}
+    <h2>{{ error }}</h2>
+    {% else %}
+    <header class="cuadro_titulo">
+        <h4 class="titulo text-center">Configuracion | Registrar Unidad</h4>
+    </header>
+    <br><br>
+    <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
+        {{form.nombre|as_crispy_field}}
+        {{form.razon_social|as_crispy_field}}
+        {{form.id_genr_tipo_identificacion|as_crispy_field}}
+        {{form.identificacion|as_crispy_field}}
+        {{form.direccion|as_crispy_field}}
+        {{form.representante_legal|as_crispy_field}}
+        {{form.correo|as_crispy_field}}
+        {{form.telefono|as_crispy_field}}
+        {{form.fecha_creacion|as_crispy_field}}
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-primary">Registrar Unidad</button>
+            <button type="reset" class="btn btn-outline-info">Restablecer</button>
+            <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar</a>
+        </div>
+    </form>
 
-   </form>
-    {% endif %}
+</form>
+{% endif %}
 {% endblock contenido_principal %}
 
 {% block footer %}

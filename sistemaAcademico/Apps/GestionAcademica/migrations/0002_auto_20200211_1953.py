@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ConfCorreosSmpt',
             fields=[
-                ('id_correos_smpt', models.AutoField(primary_key=True, serialize=False)),
+                ('id_correos_smpt', models.AutoField(
+                    primary_key=True, serialize=False)),
                 ('ssl', models.CharField(max_length=30)),
                 ('dominio', models.CharField(max_length=30)),
                 ('puerto', models.CharField(max_length=20)),
@@ -31,16 +32,22 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='confmodulo_menu',
             name='id_genr_estado',
-            field=models.ForeignKey(db_column='id_genr_estado', default='97', on_delete=django.db.models.deletion.CASCADE, to='GestionAcademica.GenrGeneral'),
+            field=models.ForeignKey(db_column='id_genr_estado', default='97',
+                                    on_delete=django.db.models.deletion.CASCADE, to='GestionAcademica.GenrGeneral'),
         ),
         migrations.CreateModel(
             name='ConfDetallePermiso',
             fields=[
-                ('id_detalle_permiso', models.AutoField(primary_key=True, serialize=False)),
-                ('id_accion', models.ForeignKey(db_column='id_accion', on_delete=django.db.models.deletion.CASCADE, related_name='fk_det_permiso_accion', to='GestionAcademica.ConfAccion')),
-                ('id_genr_estado', models.ForeignKey(db_column='id_genr_estado', on_delete=django.db.models.deletion.CASCADE, to='GestionAcademica.GenrGeneral')),
-                ('id_menu', models.ForeignKey(db_column='id_menu', on_delete=django.db.models.deletion.CASCADE, related_name='fk_det_permiso_menu', to='GestionAcademica.ConfMenu')),
-                ('id_permiso', models.ForeignKey(db_column='id_permiso', on_delete=django.db.models.deletion.CASCADE, related_name='fk_det_permiso_cab_permiso', to='GestionAcademica.ConfPermiso')),
+                ('id_detalle_permiso', models.AutoField(
+                    primary_key=True, serialize=False)),
+                ('id_accion', models.ForeignKey(db_column='id_accion', on_delete=django.db.models.deletion.CASCADE,
+                                                related_name='fk_det_permiso_accion', to='GestionAcademica.ConfAccion')),
+                ('id_genr_estado', models.ForeignKey(db_column='id_genr_estado',
+                                                     on_delete=django.db.models.deletion.CASCADE, to='GestionAcademica.GenrGeneral')),
+                ('id_menu', models.ForeignKey(db_column='id_menu', on_delete=django.db.models.deletion.CASCADE,
+                                              related_name='fk_det_permiso_menu', to='GestionAcademica.ConfMenu')),
+                ('id_permiso', models.ForeignKey(db_column='id_permiso', on_delete=django.db.models.deletion.CASCADE,
+                                                 related_name='fk_det_permiso_cab_permiso', to='GestionAcademica.ConfPermiso')),
             ],
             options={
                 'verbose_name': ('Detalle Permiso',),
