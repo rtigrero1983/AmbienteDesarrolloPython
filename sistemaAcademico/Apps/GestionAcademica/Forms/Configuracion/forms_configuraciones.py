@@ -7,6 +7,7 @@ from betterforms.multiform import MultiModelForm
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import ModelSelect2MultipleWidget
+from collections import OrderedDict
 
 
 class SMTPForm(forms.ModelForm):
@@ -169,6 +170,7 @@ class UsuarioModelForm(ModelForm):
             "clave": forms.TextInput(attrs={"class":"form-control","type":"password","placeholder": "Ingrese la clave del usuario"}),
 
         }
+
     def __init__(self, *args, **kwargs):
         super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
@@ -177,17 +179,18 @@ class UsuarioRolModelForm(ModelForm):
     class Meta:
         model = ConfUsuario_rol
         fields = [
-            "id_rol"
+            "id_rol",
         ]
         labels = {
-            "id_rol":"Tipo de rol :",
+            "id_rol": "Tipo de rol :",
         }
 
 class UsuarioUsuarioRolModelForm(MultiModelForm):
-    form_classes = {
-        'usuario': UsuarioModelForm,
-        'usuario_rol': UsuarioRolModelForm,
-    }
+    form_classes = OrderedDict((
+        ('usuario', UsuarioModelForm),
+        ('usuario_rol', UsuarioRolModelForm),
+     ))
+
 
 
 class AccionesForm(forms.Form):

@@ -125,8 +125,8 @@ class ConfMenu(models.Model):
 
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
-    usuario = models.CharField(max_length=45, blank=False, null=False)
-    clave = models.CharField(max_length=45, blank=False, null=False)
+    usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[validate_nombre,longitud,alfanumerico])
+    clave = models.CharField(max_length=45, blank=False, null=False,validators=[longitudPassword,minuscula,mayuscula,numero,espacios,alfanumericoPassword])
     id_persona = models.ForeignKey(
         MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(

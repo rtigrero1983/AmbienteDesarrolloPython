@@ -12,13 +12,87 @@ def validate_codigo(value):
 
 
 
+def longitud(value):
+	if len(value) < 6:
+		raise ValidationError('El nombre de usuario debe contener al menos 6 caracteres')
+		return value
+	elif len(value) > 12:
+		raise ValidationError('El nombre de usuario debe contener maximo 12 caracteres')
+		return value
+
+	else:
+		return value
+def alfanumerico(value):
+	if value.isalnum() == False:
+		raise ValidationError('El nombre de usuario puede contener solo letras y numeros')
+		return value
+	else:
+		return value
+
 def validate_nombre(value):
     if " " in value or value == "":
         raise ValidationError(
         	_('{0} No se puede crear un nombre repetido. Ingrese uno real '.format(value)))
     return value
 
+def longitudPassword(value):
+	if len(value) < 8:
+		raise ValidationError('La contraseña debe tener al menos 8 caracteres')
+		return value
+	elif len(value) > 15:
+		raise ValidationError('La contraseña debe tener maximo 15 caracteres')
+		return value
 
+	else:
+		return value
+
+
+def minuscula(value):
+        letras_minuscula=False
+        for carac in value:
+            if carac.islower()==True:
+                letras_minuscula=True
+        if not letras_minuscula:
+            raise ValidationError('La contraseña debe tener al menos una minuscula')
+            return value
+        else:
+            return value
+
+def mayuscula(value):
+        letras_mayuscula=False
+        for carac in value:
+            if carac.isupper()==True:
+                letras_mayuscula=True
+        if not letras_mayuscula:
+            raise ValidationError('La contraseña debe tener al menos una mayuscula')
+            return value
+        else:
+            return value
+
+def numero(value):
+        num=False
+        for carac in value:
+            if carac.isdigit()== True:
+                num=True
+
+        if not num:
+            raise ValidationError('La contraseña debe tener al menos un numero')
+            return value
+        else:
+            return value
+
+def espacios(value):
+        if value.count(" ")> 0:
+            raise ValidationError('La contraseña no puede contener espacios en blanco')
+            return value
+        else:
+            return value
+def alfanumericoPassword(value):
+	if value.isalnum() == False:
+		raise ValidationError('La contraseña puede contener solo letras y numeros')
+		return value
+	else:
+		return value
 def validate_descripcion(value):
     if " " in value or value == "":
         raise ValidationError(
@@ -146,3 +220,30 @@ def validate_positive(value):
 			code="invalid",
             params={'value': value},
 		)
+
+
+class usuario_validar():
+	errors = []
+
+	def longitud(self, username):
+		if len(username) < 6:
+			self.errors.append('El nombre de usuario debe contener al menos 6 caracteres')
+			return False
+
+		elif len(username) > 12:
+			self.errors.append('El nombre de usuario debe contener maximo 12 caracteres')
+			return False
+
+		else:
+			return True
+
+	def alfanumerico(self, username):
+		if username.isalnum() == False:
+			self.errors.append('El nombre de usuario puede contener solo letras y numeros')
+			return False
+		else:
+			return True
+
+	def validar_usuario(self, username):
+		valido = self.longitud(username) and self.alfanumerico(username)
+		return valido
