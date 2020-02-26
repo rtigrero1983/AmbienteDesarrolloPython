@@ -4,105 +4,105 @@
 {% block sidebar %}
 {% endblock sidebar %}
 {% block footer %}
-  
+
 {% endblock footer %}
 
 {% block contenido_principal %}
-  
 
 
-<header class="cuadro_titulo bg-gradient-primary text-center "> <h4 class="title text-light"> Configuracion | Unidad Educativa </h4></header>
-                          <br/>
-                             <a href="{% url 'Academico:nueva_empresa' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar unidad educativa
-                            </a>
-                          <br><br>
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Unidades educativas disponibles en el sistema</h6>
-        </div>
-         <div class="card-body">
-             <div class="table-responsive">
-                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-page-length='5'>
-                  <thead class="bg-gradient-primary text-light">
-                        <tr class="text-center" >
-                            <th>Nombre</th>
-                            <th>Representante</th>
-                            <th>Identificacion</th>
-                            <th>Direccion</th>
-                            <th>Telefono</th>
-                            <th>Correo</th>
-                            <th>Acciones</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                           {% for em in lista_empresa %}
-                             <tr>
-                               <td class="text-center"><strong>{{em.nombre}}</strong></td>
-                               <td class="text-center"><strong>{{em.representante_legal}}</strong></td>
-                               <td class="text-center"><strong>{{em.identificacion}}</strong></td>
-                               <td class="text-center"><strong>{{em.direccion}}</strong></td>
-                                 <td class="text-center"><strong>{{em.telefono}}</strong></td>
-                                 <td class="text-center"><strong>{{em.correo}}</strong></td>
-                               <td class="text-center">
-                                  <a href="{% url 'Academico:editar_empresa' em.id_empresa %}" class="btn bg-gradient-info text-light" title="Editar {{em.empresa}}"><i class="fas fa-info-circle"></i> Editar <i class="fas fa-info-circle"></i></a>
-                                  <a href="{% url 'Academico:eliminar' em.id_empresa %}"  class="btn bg-gradient-danger text-light" title="Eliminar {{em.empresa}}"><i class="fas fa-exclamation-triangle"></i> Eliminar <i class="fas fa-exclamation-triangle"></i></a>
-                               <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
-                               </td>
-                             </tr>
-                           {% endfor %}
-                  </tbody>
-                </table>
-             </div>
-         </div>
+
+<header class="cuadro_titulo bg-gradient-primary text-center ">
+  <h4 class="title text-light"> Configuracion | Unidad Educativa </h4>
+</header>
+<br />
+<a href="{% url 'Academico:nueva_empresa' %}" class="btn bg-gradient-primary text-light" id="registrar">Agregar unidad
+  educativa
+</a>
+<br><br>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Unidades educativas disponibles en el sistema</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0"
+        data-page-length='5'>
+        <thead class="bg-gradient-primary text-light">
+          <tr class="text-center">
+            <th>Nombre</th>
+            <th>Representante</th>
+            <th>Identificacion</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for em in lista_empresa %}
+          <tr>
+            <td class="text-center"><strong>{{em.nombre}}</strong></td>
+            <td class="text-center"><strong>{{em.representante_legal}}</strong></td>
+            <td class="text-center"><strong>{{em.identificacion}}</strong></td>
+            <td class="text-center"><strong>{{em.direccion}}</strong></td>
+            <td class="text-center"><strong>{{em.telefono}}</strong></td>
+            <td class="text-center"><strong>{{em.correo}}</strong></td>
+            <td class="text-center">
+              <a href="{% url 'Academico:editar_empresa' em.id_empresa %}" class="btn bg-gradient-primary text-light"
+                title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
+              <a href="{% url 'Academico:eliminar' em.id_empresa %}" class="btn bg-gradient-danger text-light"
+                title="Eliminar {{em.nombre}}"><i class="fas fa-exclamation-triangle"></i></a>
+              <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>
 
 
 
-  {% endblock contenido_principal %}
+{% endblock contenido_principal %}
 
-  {% block extrajs %}
+{% block extrajs %}
 
 
-  <script type="text/javascript">
- $(document).ready(function () {
+<script type="text/javascript">
+  $(document).ready(function () {
     $('#dtBasicExample').DataTable({
-        "searching": true,
-        "ordering": false,
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ por página",
-            "zeroRecords": "Sin datos",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "",
-            "search": "Buscar:",
-            "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-            },
-        }
+      "searching": true,
+      "ordering": false,
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ por página",
+        "zeroRecords": "Sin datos",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "",
+        "search": "Buscar:",
+        "paginate": {
+          "first": "Primero",
+          "last": "Último",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        },
+      }
     });
 
     $('.dataTables_length').addClass('bs-select');
-});
-  </script>
+  });
+</script>
 
-  <div class="modal fade" id="modal_crear" role="dialog">
-    
-  </div>
- <div class="modal fade" id="modal_eliminar" role="dialog">
+<div class="modal fade" id="modal_crear" role="dialog">
 
-  </div>
+</div>
+<div class="modal fade" id="modal_eliminar" role="dialog">
 
-  <div class="modal fade" id="modal_editar" role="dialog">
-    
-  </div>
+</div>
 
+<div class="modal fade" id="modal_editar" role="dialog">
 
-  {% endblock extrajs %}
+</div>
 
 
-
-
-
-
+{% endblock extrajs %}

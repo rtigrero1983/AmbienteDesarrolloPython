@@ -78,7 +78,7 @@ class CreateMenu(CreateView):
 
 
     def post(self,request,*args,**kargs):
-        self.object =self.get_object
+        self.object = self.get_object
         form = self.form_class(request.POST)
         if form.is_valid():
            var_orden = 0
