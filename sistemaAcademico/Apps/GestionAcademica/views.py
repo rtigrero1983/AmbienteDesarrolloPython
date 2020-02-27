@@ -13,32 +13,31 @@ from .Controladores.Mantenimiento.Estructura_view_procesos import *
 import hashlib
 from django.template.loader import get_template
 
-from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu,ConfPermiso
-
+from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu, ConfPermiso
 
 
 def pruebas(request):
     #permiso = ConfPermiso.objects.filter(id_usuario_rol__id_usuario=8).select_related('id_modulo_menu')
-    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__fkrol_usuario__id_usuario__id_usuario=request.session.get('usuario')).select_related('id_menu','id_modulo')
+    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__fkrol_usuario__id_usuario__id_usuario=request.session.get(
+        'usuario')).select_related('id_menu', 'id_modulo')
     for p in mpss:
         print(p.id_modulo_menu)
-    return render(request,'base/pruebas.html', {'menus': mpss})
-
-
-
+    return render(request, 'base/pruebas.html', {'menus': mpss})
 
 
 def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
         permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario'),id_menu__id_genr_estado=97).select_related('id_menu','id_modulo')
-        usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario'), id_menu__id_genr_estado=97).select_related('id_menu', 'id_modulo')
+        usuario = ConfUsuario.objects.get(
+            id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
         contexto['info_usuario'] = usuario
         return render(request, 'base/base.html', contexto)
     else:
         return HttpResponseRedirect('timeout/')
+
 
 def login(request):
     contexto = {}
@@ -50,14 +49,15 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             print(h.hexdigest())
-            usu = ConfUsuario.objects.get(usuario=var_usuario,clave=h.hexdigest(),id_genr_estado=97)
+            usu = ConfUsuario.objects.get(
+                usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97)
 
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:
-            contexto['error'] = e
-            return render(request, 'base/login.html', contexto)
+        contexto['error'] = e
+        return render(request, 'base/login.html', contexto)
 
     return render(request, 'base/login.html', contexto)
 
@@ -67,12 +67,11 @@ def salir(request):
     return HttpResponseRedirect('../')
 
 
-
 def pantalla_principal(request):
     t = get_template('sistemaAcademico/Pantalla_principal.html')
     html = t.render()
     return HttpResponse(html)
 
+
 def timeout(request):
     return render(request, 'sistemaAcademico/timeout.html')
-

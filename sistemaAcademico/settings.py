@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import jinja2
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico_2020',
         'USER': 'root',
-        'PASSWORD': 'root12345',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': 3306,
     }

@@ -4,6 +4,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant 
 from multiselectfield import MultiSelectField
 
 from sistemaAcademico.Apps.Validaciones import *
+from django.utils import timezone
 
 
 class ConfEmpresa(models.Model):
@@ -126,15 +127,16 @@ class ConfMenu(models.Model):
 
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
-    usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[validate_nombre,longitud,alfanumerico])
-    clave = models.CharField(max_length=45, blank=False, null=False,validators=[longitudPassword,minuscula,mayuscula,numero,espacios,alfanumericoPassword])
+    usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[
+                               validate_nombre, longitud, alfanumerico])
+    clave = models.CharField(max_length=45, blank=False, null=False, validators=[
+                             longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
     id_persona = models.ForeignKey(
         MantPersona, on_delete=models.CASCADE, db_column='id_persona')
     id_genr_tipo_usuario = models.ForeignKey(
         GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                        related_name="fk_usuario_estado", db_column='id_genr_estado')
-    #fecha_limite = models.DateField(blank=True, null=True)
 
     class Meta:
         verbose_name = 'Usuario',
@@ -195,6 +197,29 @@ class ConfAccion(models.Model):
 
     def __int__(self):
         return self.id_accion
+
+
+class UsuarioTemp(models.Model):
+    id_usuario_temp = models.AutoField(primary_key=True)
+    usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[
+                               validate_nombre, longitud, alfanumerico])
+    clave = models.CharField(max_length=45, blank=False, null=False, validators=[
+                             longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
+    fecha_limite = models.DateField(blank=True, null=True)
+    fecha_creacion = models.DateField(
+        blank=True, null=True, default=timezone.now())
+    correo = models.EmailField(max_length=254, blank=False, null=False)
+
+    class Meta:
+        verbose_name = 'Usuario_temp'
+        verbose_name_plural = 'Usuarios_temps'
+        db_table = 'conf_usuarios_temp'
+
+    def __str__(self):
+        return self.usuario, self.correo
+
+    def __unicode__(self):
+        return self.id_usuario_temp
 
 
 class ConfPermiso(models.Model):

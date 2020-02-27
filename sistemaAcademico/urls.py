@@ -20,10 +20,10 @@ import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('__debug__',include(debug_toolbar.urls)),
-    path('',include(('sistemaAcademico.Apps.GestionAcademica.urls','Academico'))),
-    path('',include(('sistemaAcademico.Apps.reportes.urls','Reporte'))),
-    path('',include(('sistemaAcademico.Apps.reportes.urls', 'Reporte')))
-    
-    
+    path('__debug__', include(debug_toolbar.urls)),
+    path('', include(('sistemaAcademico.Apps.GestionAcademica.urls', 'Academico'))),
+    #path('', include(('sistemaAcademico.Apps.reportes.urls', 'Reporte'))),
+    path('', include(('sistemaAcademico.Apps.reportes.urls', 'Reporte')))
+
+
 ]
