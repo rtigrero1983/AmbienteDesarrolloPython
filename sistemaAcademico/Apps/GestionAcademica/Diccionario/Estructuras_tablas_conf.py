@@ -123,6 +123,7 @@ class ConfMenu(models.Model):
         return self.id_genr_estado
 
 
+
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[validate_nombre,longitud,alfanumerico])
@@ -181,15 +182,16 @@ class ConfModulo_menu(models.Model):
 class ConfAccion(models.Model):
     id_accion = models.AutoField(primary_key=True)
     descripcion = models.CharField(max_length=20, blank=False, null=False)
-    id_menu = models.ForeignKey(
-        ConfMenu, on_delete=models.CASCADE, blank=True, db_column="id_menu")
+    id_menu = models.ManyToManyField(
+        ConfMenu, blank=True, db_table="conf_detalle_accion" )
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                        related_name="fk_accion_genr", db_column='id_genr_estado', default=97)
 
     class Meta:
         verbose_name = 'Accion'
         verbose_name_plural = 'Acciones'
-        db_table = 'conf_accion'
+        db_table = 'conf_acciones'
+        
 
     def __int__(self):
         return self.id_accion

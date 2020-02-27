@@ -75,16 +75,17 @@ admin.site.register(ConfModulo_menu, ConfModulo_menuAdmin)
 
 admin.site.register(ConfAccion)
 
-""""
-class ConfPersonaAdmin(admin.ModelAdmin):
-    search_fields = ['id_persona','nombres','apellidos','identificacion']
 
-    list_display = ('id_persona','nombres','apellidos','fecha_de_nacimiento','estado','foto','id_genr_genero',
-                    'id_genr_pais','id_genr_tipo_identificacion','id_genr_estado_civil','identificacion','telefono',
-                    'correo','fecha_ingreso','usuario_ing','terminal_ing','id_genr_tipo_sangre','id_genr_etnia','direccion','id_genr_jornada','id_genr_indigena',
-                     'id_genr_idioma_ancestral','celular','lugar_nacimiento','id_genr_provincia','id_genr_ciudad','id_genr_categoria_migratoria','discapacidad','discapacidad_renal',
-                    'discapacidad_neurologica','enfermedad_alergica','asma','epilepsia','enfermedad_congenita','enfermedad_respiratoria','atencion_psicologica','bono_solidario','mienbros_hogar',
-                     'id_genr_tipo_usuario','id_genr_estado_laboralp','pnombres','papellidos','pidentificacion','pdireccion','ptelefono','pvive_con_usted','id_genr_estado_laboralm','mnombres','mapellidos',
-                    'mdireccion','mtelefono','midentificacion','mvive_con_usted','rnombres','rapellidos','rapellidos','rtelefono','id_genr_tipo_parentesco','rvive_con_usted','ridentificacion',)
-"""
+class ConfPersonaAdmin(admin.ModelAdmin):
+    search_fields = ['id_persona', 'nombres', 'apellidos', 'identificacion']
+
+    list_display = ('id_persona', 'nombres', 'apellidos', 'fecha_de_nacimiento', 'estado', 'foto', 'id_genr_genero',
+                    'id_genr_pais', 'id_genr_tipo_identificacion', 'id_genr_estado_civil', 'identificacion', 'telefono',
+                    'correo', 'fecha_ingreso', 'usuario_ing', 'terminal_ing', 'id_genr_tipo_sangre', 'id_genr_etnia', 'direccion', 'id_genr_jornada', 'id_genr_indigena',
+                    'id_genr_idioma_ancestral', 'celular', 'lugar_nacimiento', 'id_genr_provincia', 'id_genr_ciudad', 'id_genr_categoria_migratoria', 'discapacidad', 'discapacidad_renal',
+                    'discapacidad_neurologica', 'enfermedad_alergica', 'asma', 'epilepsia', 'enfermedad_congenita', 'enfermedad_respiratoria', 'atencion_psicologica', 'bono_solidario', 'mienbros_hogar',
+                    'id_genr_tipo_usuario', 'id_genr_estado_laboralp', 'pnombres', 'papellidos', 'pidentificacion', 'pdireccion', 'ptelefono', 'pvive_con_usted', 'id_genr_estado_laboralm', 'mnombres', 'mapellidos',
+                    'mdireccion', 'mtelefono', 'midentificacion', 'mvive_con_usted', 'rnombres', 'rapellidos', 'rapellidos', 'rtelefono', 'id_genr_tipo_parentesco', 'rvive_con_usted', 'ridentificacion',)
+
+
 admin.site.register(MantPersona)
