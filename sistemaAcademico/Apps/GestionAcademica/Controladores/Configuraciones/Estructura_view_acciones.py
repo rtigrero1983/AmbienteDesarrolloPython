@@ -34,8 +34,8 @@ class Acciones(ListView):
     model = ConfAccion
     query = ConfAccion.objects.filter(id_genr_estado=97)
     for m in query:
-        print(m.id_menu.descripcion)
-    template_name = 'sistemaAcademico/Configuraciones/Acciones/acciones.html'
+        #print(m.id_menu.descripcion)
+     template_name = 'sistemaAcademico/Configuraciones/Acciones/acciones.html'
     context_object_name = 'a'
 
 

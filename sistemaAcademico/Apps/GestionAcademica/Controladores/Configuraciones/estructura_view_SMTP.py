@@ -65,24 +65,21 @@ def enviar_correo_usuario(nombre_usuario,password,url_template,usuario):
 	message.send()
 
 def view_temporal(request):
-	error = None
-	if(request.method == "POST"):
+	error= None
+	if(request.method== "POST"):
 		form = forms.SMTPForm(request.POST)
 		if(form.is_valid()):
-		form.save()
-		return redirect("Academico:menu")
+			form.save()
+			return redirect("Academico:menu")
 		else:
-		error = "No se pudo Guardar el formulario"
-		else:
-		campo = ConfCorreosSmpt.objects.all().exists()
-		if campo is True:
+			error="no se pudo guardar el formulario"
+	else:
+		campo=ConfCorreosSmpt.objects.all().exists()
+	if campo is True:
 		return redirect("Academico:edit_smtp", 1)
 	else:
-		form = forms.SMTPForm()
-		return render(request, "sistemaAcademico/Configuraciones/SMTP/Ingresar_SMTP.html", {"form": form, "error": error})
+		form=forms.SMTPForm()
 
-
-
-
+	return render(request, "sistemaAcademico/Configuraciones/SMTP/Ingresar_SMTP.html", {"form": form, "error": error})
 
 

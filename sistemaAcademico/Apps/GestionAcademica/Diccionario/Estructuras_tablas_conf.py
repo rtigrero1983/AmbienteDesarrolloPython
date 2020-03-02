@@ -192,7 +192,7 @@ class ConfAccion(models.Model):
     class Meta:
         verbose_name = 'Accion'
         verbose_name_plural = 'Acciones'
-        db_table = 'conf_acciones'
+        db_table = 'conf_accion'
         
 
     def __int__(self):
