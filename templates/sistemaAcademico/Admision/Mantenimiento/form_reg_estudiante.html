@@ -12,7 +12,8 @@
 {% endblock footer %}
 {% block contenido_principal%}
 {% load crispy_forms_tags %}
-<form>
+<form method="POST" action="#">
+{% csrf_token %}
             <br>
             <br>
             <div class="container">
@@ -40,7 +41,7 @@
                         <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
                {{form.fecha_de_nacimiento}}<br>
                         <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
-               {{form.id_genr_genero}}<br>
+               {{form.id_genr_genero|as_crispy_field}}<br>
                         <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
                {{form.id_genr_pais}}<br>
                         <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>

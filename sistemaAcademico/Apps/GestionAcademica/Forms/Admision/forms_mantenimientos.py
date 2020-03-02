@@ -1,5 +1,5 @@
 from dal import autocomplete
-from django.forms import CharField, ChoiceField
+from django.forms import CharField, ChoiceField, ModelForm
 from django.db.models import Q
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
@@ -184,7 +184,7 @@ class EmpleadoForm(forms.ModelForm):
         }
 
 
-class EstudianteForm(forms.ModelForm):
+class EstudianteForm(ModelForm):
     class Meta:
         model = MantPersona
         fields = [
@@ -301,22 +301,22 @@ class EstudianteForm(forms.ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
-            "id_genr_genero": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_pais": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_genero": forms.TextInput(attrs={"class": "form-control"}),
+           # "id_genr_pais": forms.TextInput(attrs={"class": "form-control"}),
             "id_genr_tipo_identificacion": forms.TextInput(attrs={"class": "form-control"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_estado_civil": forms.TextInput(attrs={"class": "form-control"}),
+            #"id_genr_estado_civil": forms.TextInput(attrs={"class": "form-control"}),
             "correo": forms.TextInput(attrs={"class": "form-control"}),
             "celular": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_tipo_sangre": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_etnia": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_jornada": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_indigena": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_idioma_ancestral": forms.TextInput(attrs={"class": "form-control"}),
+            #"id_genr_tipo_sangre": forms.TextInput(attrs={"class": "form-control"}),
+            #"id_genr_etnia": forms.TextInput(attrs={"class": "form-control"}),
+           #"id_genr_jornada": forms.TextInput(attrs={"class": "form-control"}),
+            #"id_genr_indigena": forms.TextInput(attrs={"class": "form-control"}),
+           # "id_genr_idioma_ancestral": forms.TextInput(attrs={"class": "form-control"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_provincia": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_ciudad": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_categoria_migratoria": forms.TextInput(attrs={"class": "form-control"}),
+           # "id_genr_provincia": forms.TextInput(attrs={"class": "form-control"}),
+            #"id_genr_ciudad": forms.TextInput(attrs={"class": "form-control"}),
+           # "id_genr_categoria_migratoria": forms.TextInput(attrs={"class": "form-control"}),
             "discapacidad": forms.CheckboxInput(),
             "discapacidad_renal": forms.CheckboxInput(),
             "discapacidad_neurologica": forms.CheckboxInput(),
@@ -328,8 +328,8 @@ class EstudianteForm(forms.ModelForm):
             "atencion_psicologica": forms.CheckboxInput(),
             "bono_solidario": forms.CheckboxInput(),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control"}),
-            "id_genr_estado_laboralp": forms.TextInput(attrs={"class": "form-control"}),#representante
-            "pvive_con_usted":forms.Select(attrs={"class": "form-control"}, choices=[(1,'si'),(2,'no')]),
+           # "id_genr_estado_laboralp": forms.TextInput(attrs={"class": "form-control"}),  # representante
+            "pvive_con_usted": forms.Select(attrs={"class": "form-control"}, choices=[(1, 'si'), (2, 'no')]),
             "pnombres": forms.TextInput(attrs={"class": "form-control"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control"}),
             "pidentificacion": forms.TextInput(attrs={"class": "form-control"}),
@@ -352,3 +352,20 @@ class EstudianteForm(forms.ModelForm):
             "rhorario_laboral": forms.TextInput(attrs={"class": "form-control"}),
             "rtelefono_trabajo": forms.TextInput(attrs={"class": "form-control"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(EstudianteForm, self).__init__(*args, **kwargs)
+
+        self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
+            tipo='GEN')
+        self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
+        #self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+        self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
+        self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
+        self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
+        self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
+        self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
+        self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
+

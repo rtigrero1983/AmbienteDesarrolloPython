@@ -209,14 +209,14 @@ class Usuario_tempForm(forms.ModelForm):
             "correo": "Correo electronico",
         }
         widgets = {
-            "usuario": forms.TextInput(attr={
+            "usuario": forms.TextInput(attrs={
                 "class": "form-control", "placeholder": "Usuario", "required": "true"}),
-            "clave": forms.TextInput(attr={
+            "clave": forms.TextInput(attrs={
                 "class": "form-control", "type": "password", "required": "true"}),
-            "fecha_limite": forms.DateTimeInput(attr={
+            "fecha_limite": forms.DateTimeInput(attrs={
                 "class": "form-control text-dark", "required": "true", "type": "date"}),
 
-            "correo": forms.TextInput(attr={"class": "form-control text-dark", "type": "Email"}),
+            "correo": forms.TextInput(attrs={"class": "form-control text-dark", "type": "Email"}),
         }
 
 
