@@ -90,7 +90,7 @@ urlpatterns = [
 
     #Opciones para el modulo de Mantenimiento
     #Crear
-    path('registro_estudiante/', registro_estudiante, name='registro_estudiante'),
+    path('registro_estudiante/', NuevoEstudiante.as_view(), name='registro_estudiante'),
     path('registro_empleado/', NuevoEmpleado.as_view(), name='registro_empleado'),
     #Editar
     path('editar_empleado/', UpdateEmpleado.as_view(), name='editar_empleado'),

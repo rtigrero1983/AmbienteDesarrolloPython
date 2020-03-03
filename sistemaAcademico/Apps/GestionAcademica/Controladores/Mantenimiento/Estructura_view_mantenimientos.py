@@ -19,18 +19,6 @@ class Mantenimiento(ListView):
     context_object_name='mantenimiento'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
 
-def registro_estudiante(request):
-    error = None
-    if (request.method == "POST"):
-        form = EstudianteForm(request.POST)
-        if (form.is_valid()):
-            form.save()
-            return redirect("Academico:menu")
-        else:
-            error = "No se pudo Guardar el formulario"
-    else:
-        form = EstudianteForm()
-    return render(request, "sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html", {"form": form, "error": error })
 
 
 class NuevoEmpleado(CreateView):
@@ -51,8 +39,33 @@ class UpdateEmpleado(UpdateView):
 class NuevoEstudiante(CreateView):
     model = MantPersona
     form_class = EstudianteForm
+
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html'
     success_url = reverse_lazy('Academico:registro_estudiante')
+
+    def get_context_data(self, **kwargs):
+        context = super(NuevoEstudiante, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('id_persona', 0)
+        context['id_persona'] = pk
+        return context
+
+
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        if (form.is_valid()):
+            usuario = 'anderson'
+            form.estado=97
+            form.fecha_ingreso = '2020-02-02'
+            form.usuario_ing = usuario
+            form.terminal_ing = socket.gethostname()
+            form.save()
+            return redirect(self.get_success_url())
+        else:
+            print("error")
+            return self.render_to_response(self.get_context_data(form=form))
+
 
 
 class UpdateEstudiante(UpdateView):

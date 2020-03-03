@@ -191,6 +191,7 @@ class EstudianteForm(ModelForm):
             "nombres",
             "apellidos",
             "fecha_de_nacimiento",
+            "estado",
             "id_genr_genero",
             "id_genr_pais",
             "identificacion",
