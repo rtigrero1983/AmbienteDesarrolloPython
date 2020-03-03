@@ -10,7 +10,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from sistemaAcademico.Apps.GestionAcademica import forms
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import UsuarioModelForm, UsuarioUsuarioRolModelForm
+from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import UsuarioModelForm,UsuarioeditModelForm
 from django.urls import reverse
 
 
@@ -30,7 +30,8 @@ def usuarios(request):
 
 
 class CreateUsuario(CreateView):
-    form_class = UsuarioUsuarioRolModelForm
+    model=ConfUsuario
+    form_class = UsuarioModelForm
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')
 
@@ -44,21 +45,18 @@ class CreateUsuario(CreateView):
         self.object = self.get_object
         form = self.form_class(request.POST)
         if form.is_valid():
-            usuario = form['usuario'].save()
+            usuario = form.save()
             var_contra = usuario.clave
             h = hashlib.new("sha1")
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             usuario.clave = h.hexdigest()
-            usuario.save
-            usuario_rol = form['usuario_rol'].save(commit=False)
-            usuario_rol.id_usuario = usuario
-            #usuario.usuario_rol= usuario
-            usuario_rol.save()
+            usuario.save()
             return redirect(self.get_success_url())
 
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
     """
     def form_valid(self, form):
         usuario = form['usuario'].save()
@@ -72,8 +70,8 @@ class CreateUsuario(CreateView):
 
 class UpdateUsuario(UpdateView):
     model = ConfUsuario
-    form_class = UsuarioModelForm
-    context_object_name = 'm'
+    form_class = UsuarioeditModelForm
+    context_object_name = 'n'
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')
 

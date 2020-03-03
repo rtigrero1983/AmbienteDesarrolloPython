@@ -156,12 +156,14 @@ class UsuarioModelForm(ModelForm):
             "clave",
             "id_persona",
             "id_genr_tipo_usuario",
+            "id_rol",
         ]
         labels = {
             "usuario": "Nombre de usuario :",
             "clave": "Clave :",
             "id_persona": " Tipo de persona :",
             "id_genr_tipo_usuario": " Tipo de Usuario ",
+            "id_rol": "Tipo de Rol "
         }
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
@@ -173,24 +175,31 @@ class UsuarioModelForm(ModelForm):
         super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
             tipo='TUS')
-
-
-class UsuarioRolModelForm(ModelForm):
+class UsuarioeditModelForm(ModelForm):
     class Meta:
-        model = ConfUsuario_rol
+        model = ConfUsuario
         fields = [
+            "usuario",
+            "id_persona",
+            "id_genr_tipo_usuario",
             "id_rol",
         ]
         labels = {
-            "id_rol": "Tipo de rol :",
+            "usuario": "Nombre de usuario :",
+            "id_persona": " Tipo de persona :",
+            "id_genr_tipo_usuario": " Tipo de Usuario ",
+            "id_rol": "Tipo de Rol "
+        }
+        widgets = {
+            "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
+            "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(UsuarioeditModelForm, self).__init__(*args, **kwargs)
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
+            tipo='TUS')
 
-class UsuarioUsuarioRolModelForm(MultiModelForm):
-    form_classes = OrderedDict((
-        ('usuario', UsuarioModelForm),
-        ('usuario_rol', UsuarioRolModelForm),
-    ))
 
 
 class AccionesForm(forms.Form):

@@ -137,6 +137,7 @@ class ConfUsuario(models.Model):
         GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                        related_name="fk_usuario_estado", db_column='id_genr_estado')
+    id_rol= models.ManyToManyField(ConfRol)
 
     class Meta:
         verbose_name = 'Usuario',
@@ -145,22 +146,6 @@ class ConfUsuario(models.Model):
 
     def __str__(self):
         return self.usuario
-
-
-class ConfUsuario_rol(models.Model):
-    id_usuario_rol = models.AutoField(primary_key=True)
-    id_usuario = models.ForeignKey(
-        ConfUsuario, on_delete=models.CASCADE, related_name="fkusuario_rol", db_column='id_usuario')
-    id_rol = models.ForeignKey(
-        ConfRol, on_delete=models.CASCADE, related_name="fkrol_usuario", db_column='id_rol')
-
-    class Meta:
-        verbose_name = 'Rol de usuario',
-        verbose_name_plural = 'Roles de usuarios',
-        db_table = 'conf_usuario_rol'
-
-    def __int__(self):
-        return self.id_usuario_rol
 
 
 class ConfModulo_menu(models.Model):
