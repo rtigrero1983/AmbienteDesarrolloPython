@@ -1,20 +1,19 @@
 {% extends 'base/base.html' %}
-{% block encabezado %}
-    <title>Registrar Empleado</title>
-{% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+
+    <title>Registro Empleado</title>
+
+{% endblock encabezado %}
 {% block footer %}
-
 {% endblock footer %}
-{% block titulo_cab_menu %}
-
-{%endblock titulo_cab_menu %}
+{% block contenido_principal%}
 {% load crispy_forms_tags %}
-
- {% block contenido_principal %}
-    {% load crispy_forms_tags %}
-<form>
+<form method="POST" action="#">
+{% csrf_token %}
             <br>
             <br>
             <div class="container">
@@ -25,7 +24,7 @@
                 {% else %}
                 {% endif %}
                 <header class="cuadro_titulo">
-                    <h4 class="titulo text-center">Configuracion | Registrar Empleado</h4>
+                    <h4 class="titulo text-center">Mantenimiento | Registrar Empleado</h4>
                 </header>
 
                 <br><br>
@@ -35,42 +34,41 @@
                 <div class="row">
 
                     <div class="col-6">
-                    <label for="nombres" class="text-dark h6">{{form.nombres.label }} :</label>
+                    <label for="nombres">{{form.nombres.label }} :</label>
                {{form.nombres}}<br>
-                        <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
+                        <label for="apellidos">{{form.apellidos.label }} :</label>
                {{form.apellidos}}<br>
-                        <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
+                        <label for="fecha_de_nacimiento">{{form.fecha_de_nacimiento.label }}</label>
                {{form.fecha_de_nacimiento}}<br>
-                        <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
-               {{form.id_genr_genero}}<br>
-                        <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
-               {{form.id_genr_pais}}<br>
-                        <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>
-               {{form.lugar_nacimiento}}<br>
-                        <label for="id_genr_provincia" class="text-dark h6">{{form.id_genr_provincia.label }} :</label>
-               {{form.id_genr_provincia}}<br>
 
-                        <label for="id_genr_categoria_migratoria" class="text-dark h6">{{form.id_genr_categoria_migratoria.label }} :</label>
-               {{form.id_genr_categoria_migratoria}}<br>
+               {{form.id_genr_genero|as_crispy_field}}<br>
+
+               {{form.id_genr_pais|as_crispy_field}}<br>
+                        <label for="lugar_nacimiento">{{form.lugar_nacimiento.label }} :</label>
+               {{form.lugar_nacimiento}}<br>
+
+               {{form.id_genr_provincia|as_crispy_field}}<br>
+
+               {{form.id_genr_categoria_migratoria|as_crispy_field}}<br>
 
                 </div>
 
 
                     <div class="col-6">
-                        <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
+                        <label for="identificacion">{{form.identificacion.label }} :</label>
                {{form.identificacion}}<br>
-                        <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
-               {{form.id_genr_tipo_sangre}}<br>
-                        <label for="id_genr_etnia" class="text-dark h6">{{form.id_genr_etnia.label }} :</label>
-               {{form.id_genr_etnia}}<br>
-                        <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
-               {{form.id_genr_jornada}}<br>
-                        <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
-               {{form.id_genr_indigena}}<br>
-                        <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
-               {{form.id_genr_idioma_ancestral}}<br>
-                        <label for="id_genr_ciudad" class="text-dark h6">{{form.id_genr_ciudad.label }} :</label>
-               {{form.id_genr_ciudad}}<br>
+
+               {{form.id_genr_tipo_sangre|as_crispy_field}}<br>
+
+               {{form.id_genr_etnia|as_crispy_field}}<br>
+
+               {{form.id_genr_jornada|as_crispy_field}}<br>
+
+               {{form.id_genr_indigena|as_crispy_field}}<br>
+
+               {{form.id_genr_idioma_ancestral|as_crispy_field}}<br>
+
+               {{form.id_genr_ciudad|as_crispy_field}}<br>
 
 
 
@@ -131,100 +129,34 @@
                     </div>
 
                 </div>
+
+            <div class="cuadro_titulo row">
+                     <h3 class="titulo text-center ">DATOS DEL FAMILIAR</h3>
+            </div>
+
                 <div class="row">
-                     <div class="col">
-                        <br>
-
-
-                         <label for="mvive_con_usted" class="text-dark h6">{{form.mvive_con_usted.label }} :</label>
-               {{form.mvive_con_usted}}<br>
-                         <label for="mnombres" class="text-dark h6">{{form.mnombres.label }} :</label>
-               {{form.mnombres}}<br>
-                         <label for="mapellidos" class="text-dark h6">{{form.mapellidos.label }} :</label>
-               {{form.mnombres}}<br>
-                         <label for="midentificacion" class="text-dark h6">{{form.midentificacion.label }} :</label>
-               {{form.midentificacion}}<br>
-                         <label for="mdireccion" class="text-dark h6">{{form.mdireccion.label }} :</label>
-               {{form.mdireccion}}<br>
-                         <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
-               {{form.mtelefono}}<br>
-
-                        </div>
-
-
                     <div class="col">
                         <br>
                         <label for="pvive_con_usted" class="text-dark h6">{{form.pvive_con_usted.label }} :</label>
-               {{form.pvive_con_usted}}<br>
+                        {{form.pvive_con_usted}}<br>
                         <label for="pnombres" class="text-dark h6">{{form.pnombres.label }} :</label>
-               {{form.pnombres}}<br>
+                        {{form.pnombres}}<br>
                         <label for="papellidos" class="text-dark h6">{{form.papellidos.label }} :</label>
-               {{form.papellidos}}<br>
+                        {{form.papellidos}}<br>
                         <label for="pidentificacion" class="text-dark h6">{{form.pidentificacion.label }} :</label>
-               {{form.pidentificacion}}<br>
+                        {{form.pidentificacion}}<br>
                         <label for="pdireccion" class="text-dark h6">{{form.pdireccion.label }} :</label>
-               {{form.pdireccion}}<br>
-                        <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
-               {{form.mtelefono}}<br>
-                        </div>
-
-
-
+                        {{form.pdireccion}}<br>
+                        <label for="ptelefono" class="text-dark h6">{{form.ptelefono.label }} :</label>
+                        {{form.ptelefono}}<br>
+                    </div>
                 </div>
-            <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">DATOS DEL FAMILIAR</h3>
-
-
-                    </div>
-
-                <div class="row">
-                    <div class="col">
-                        <br>
-                        <label for="rvive_con_usted" class="text-dark h6">{{form.rvive_con_usted.label }} :</label>
-               {{form.rvive_con_usted}}<br>
-                        <label for="rnombres" class="text-dark h6">{{form.rnombres.label }} :</label>
-               {{form.rnombres}}<br>
-                        <label for="rapellidos" class="text-dark h6">{{form.rapellidos.label }} :</label>
-               {{form.rapellidos}}<br>
-                        <label for="ridentificacion" class="text-dark h6">{{form.ridentificacion.label }} :</label>
-               {{form.ridentificacion}}<br>
-                        <label for="rtelefono" class="text-dark h6">{{form.rtelefono.label }} :</label>
-               {{form.ridentificacion}}<br>
-
-
-                        <label for="rdireccion_trabajo" class="text-dark h6">{{form.rdireccion_trabajo.label }} :</label>
-               {{form.rdireccion_trabajo}}<br>
-                        <label for="rhorario_laboral" class="text-dark h6">{{form.rhorario_laboral.label }} :</label>
-               {{form.rhorario_laboral}}<br>
-                        <label for="rtelefono_trabajo" class="text-dark h6">{{form.rtelefono_trabajo.label }} :</label>
-               {{form.rtelefono_trabajo}}<br>
-                         </div>
-
-
-
-
-
-                    </div>
-
-
-
-
-
-                </div>
-
-
-
-
-
-</div>
-                    </div>
-
-
-
-
+            </div>
+            </div>
+            </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
+                    <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
                     <a class="btn btn-outline-danger" href="{% url 'Academico:mantenimiento' %}">Cancelar edicion</a>
                 </div>
@@ -234,4 +166,4 @@
             </div>
         </form>
 
-{% endblock contenido_principal %}
+{% endblock contenido_principal%}
