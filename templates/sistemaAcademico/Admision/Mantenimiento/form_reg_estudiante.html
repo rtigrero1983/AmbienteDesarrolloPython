@@ -38,19 +38,18 @@
                {{form.nombres}}<br>
                         <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
                {{form.apellidos}}<br>
-                        <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
+                       <!--- <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>-->
                {{form.fecha_de_nacimiento}}<br>
-                        <label for="id_genr_genero" class="text-dark h6">{{form.id_genr_genero.label }} :</label>
+
                {{form.id_genr_genero|as_crispy_field}}<br>
-                        <label for="id_genr_pais" class="text-dark h6">{{form.id_genr_pais.label }} :</label>
-               {{form.id_genr_pais}}<br>
+
+               {{form.id_genr_pais|as_crispy_field}}<br>
                         <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>
                {{form.lugar_nacimiento}}<br>
-                        <label for="id_genr_provincia" class="text-dark h6">{{form.id_genr_provincia.label }} :</label>
-               {{form.id_genr_provincia}}<br>
 
-                        <label for="id_genr_categoria_migratoria" class="text-dark h6">{{form.id_genr_categoria_migratoria.label }} :</label>
-               {{form.id_genr_categoria_migratoria}}<br>
+               {{form.id_genr_provincia|as_crispy_field}}<br>
+
+               {{form.id_genr_categoria_migratoria|as_crispy_field}}<br>
 
                 </div>
 
@@ -58,18 +57,18 @@
                     <div class="col-6">
                         <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
                {{form.identificacion}}<br>
-                        <label for="id_genr_tipo_sangre" class="text-dark h6">{{form.id_genr_tipo_sangre.label }} :</label>
-               {{form.id_genr_tipo_sangre}}<br>
-                        <label for="id_genr_etnia" class="text-dark h6">{{form.id_genr_etnia.label }} :</label>
-               {{form.id_genr_etnia}}<br>
-                        <label for="id_genr_jornada" class="text-dark h6">{{form.id_genr_jornada.label }} :</label>
-               {{form.id_genr_jornada}}<br>
-                        <label for="id_genr_indigena" class="text-dark h6">{{form.id_genr_indigena.label }} :</label>
-               {{form.id_genr_indigena}}<br>
-                        <label for="id_genr_idioma_ancestral" class="text-dark h6">{{form.id_genr_idioma_ancestral.label }} :</label>
-               {{form.id_genr_idioma_ancestral}}<br>
-                        <label for="id_genr_ciudad" class="text-dark h6">{{form.id_genr_ciudad.label }} :</label>
-               {{form.id_genr_ciudad}}<br>
+
+               {{form.id_genr_tipo_sangre|as_crispy_field}}<br>
+
+               {{form.id_genr_etnia|as_crispy_field}}<br>
+
+               {{form.id_genr_jornada|as_crispy_field}}<br>
+
+               {{form.id_genr_indigena|as_crispy_field}}<br>
+
+               {{form.id_genr_idioma_ancestral|as_crispy_field}}<br>
+
+               {{form.id_genr_ciudad|as_crispy_field}}<br>
 
 
 
