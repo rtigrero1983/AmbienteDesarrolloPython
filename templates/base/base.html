@@ -68,22 +68,22 @@
 
       <li class="nav-item">
 
-        {% if menu_p.id_menu.id_padre == 0 %}
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.id_menu.id_menu}}"
+        {% if menu_p.menu.id_padre == 0 %}
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#menu_{{menu_p.menu.id_menu}}"
           aria-expanded="true" aria-controls="collapseTwo">
           <i class="{{menu_p.id_menu.icono}}"></i>
-          <span> {{menu_p.id_modulo.nombre}} </span>
+          <span> {{menu_p.menu.descripcion}} </span>
         </a>
         {% endif %}
-        <div id="menu_{{menu_p.id_menu.id_menu}}" class="collapse " aria-labelledby="headingTwo"
+        <div id="menu_{{menu_p.menu.id_menu}}" class="collapse " aria-labelledby="headingTwo"
           data-parent="#accordionSidebar">
           <div class="collapse-inner rounded bg-gradient-primary" id="submenu_configuracion">
             <h6 class="collapse-header text-light">
-              {% block cab_sub_menu %}{{menu_p.id_menu.descripcion}}{% endblock cab_sub_menu%}</h6>
+              {% block cab_sub_menu %}{{menu_p.menu.descripcion}}{% endblock cab_sub_menu%}</h6>
             {% for menu_h in permisos %}
-            {% if menu_p.id_menu.id_menu == menu_h.id_menu.id_padre %}
-            <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.id_menu.url %}')" id="item">
-              <i class="{{menu_h.id_menu.icono}}"></i>
+            {% if menu_p.menu.id_menu == menu_h.menu.id_padre %}
+            <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.menu.url %}')" id="item">
+              <i class="{{menu_h.menu.icono}}"></i>
               {{menu_h.id_menu.descripcion}}</a>
             {% endif %}
             {% endfor %}

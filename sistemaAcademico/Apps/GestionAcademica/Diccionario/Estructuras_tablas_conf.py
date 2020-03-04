@@ -83,6 +83,9 @@ class ConfRol(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    def __unicode__(self):
+        return self.id_rol
 
 
 class ConfMenu(models.Model):
@@ -115,13 +118,14 @@ class ConfMenu(models.Model):
         ordering = ['orden']
 
     def __str__(self):
-        return self.name, self.lazy_name, self.descripcion, self.icono, self.url, self.lazy_name
+        return self.descripcion 
 
     def __int__(self):
         return self.orden, self.id_padre
-
+    
     def __unicode__(self):
-        return self.id_genr_estado
+        return self.id_menu
+
 
 
 
@@ -137,7 +141,7 @@ class ConfUsuario(models.Model):
         GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                        related_name="fk_usuario_estado", db_column='id_genr_estado')
-    id_rol= models.ManyToManyField(ConfRol)
+    id_rol= models.ManyToManyField(ConfRol, db_table="conf_usuario_rol",related_name="fk_rol",)
 
     class Meta:
         verbose_name = 'Usuario',
@@ -168,9 +172,7 @@ class ConfModulo_menu(models.Model):
 
 class ConfAccion(models.Model):
     id_accion = models.AutoField(primary_key=True)
-    descripcion = models.CharField(max_length=20, blank=False, null=False)
-    id_menu = models.ManyToManyField(
-        ConfMenu, blank=True, db_table="conf_detalle_accion" )
+    descripcion = models.CharField(max_length=50,blank=False,null=False,unique=True)
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                        related_name="fk_accion_genr", db_column='id_genr_estado', default=97)
 
@@ -179,9 +181,9 @@ class ConfAccion(models.Model):
         verbose_name_plural = 'Acciones'
         db_table = 'conf_accion'
         
-
-    def __int__(self):
-        return self.id_accion
+    
+    def __str__(self):
+        return self.descripcion
 
 
 class UsuarioTemp(models.Model):
@@ -209,23 +211,24 @@ class UsuarioTemp(models.Model):
 
 class ConfPermiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
-    id_modulo_menu = models.ForeignKey(
-        ConfModulo_menu, on_delete=models.CASCADE, related_name="fk_permiso_modmenu", db_column='id_modulo_menu')
+    menu = models.ManyToManyField(
+        ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
-                               related_name="fk_permiso_rol", db_column='id_rol', default=1)
+                               related_name="fk_permiso_rol", db_column='id_rol', unique=True)
+    acciones = models.ManyToManyField(ConfAccion,db_table="Conf_permiso_accion", related_name="fk_permiso_accion")
+
 
     class Meta:
         verbose_name = 'Permiso',
         verbose_name_plural = 'Permisos',
         db_table = 'conf_permiso'
-
-    def __int__(self):
-        return self.id_modulo
+    
 
     def __unicode__(self):
-        return self.id_rol
+        return self.id_rol,self.acciones
+        
 
-
+"""
 class ConfDetallePermiso(models.Model):
     id_detalle_permiso = models.AutoField(primary_key=True)
     id_permiso = models.ForeignKey(ConfPermiso, on_delete=models.CASCADE,
@@ -248,7 +251,7 @@ class ConfDetallePermiso(models.Model):
     def __unicode__(self):
         return self.id_menu, self.id_permiso, self.id_accion
 
-
+"""
 class ConfCorreosSmpt(models.Model):
     id_correos_smpt = models.AutoField(primary_key=True)
     ssl = models.CharField(max_length=30, blank=False, null=False)

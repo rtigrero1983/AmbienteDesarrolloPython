@@ -1,68 +1,75 @@
-{% extends 'base/base.html' %}
-{% block encabezado %}
-{% endblock encabezado %}
-{% block sidebar %}
-{% endblock sidebar %}
-
-{% block contenido_principal %}
-
+{% extends 'base/base.html' %} {% block encabezado %} {% endblock encabezado %}
+{% block sidebar %} {% endblock sidebar %} {% block contenido_principal %}
 
 <header class="cuadro_titulo" class="title">
-    <h4>Configuracion | Permisos</h4>
+  <h4>Configuracion | Permisos</h4>
 </header>
-    <br>
- <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Roles disponibles en el sistema</h6>
-            </div>
+<br />
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary float-left">
+      Roles disponibles en el sistema
+    </h6>
 
-            <div class="card-body ">
+    <a
+      class="btn bg-gradient-primary text-light float-right"
+      href="{% url 'Academico:agregar_per' %}"
+      ><i class="fas fa-plus"></i> Agregar nuevo</a
+    >
+  </div>
 
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
-                  <thead class="bg-gradient-primary ">
-                    <tr class="text-light text-center" >
-                        <th>Codigo</th>
-                      <th>Nombre</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-<tbody>
-{% for rol in rol %}
-<tr>
-<td>{{ rol.codigo }}</td>
-<td>{{ rol.nombre }}</td>
-
-    <td>
-
-
-    <a href="{% url 'Academico:add_permiso' rol.id_rol %}" class="btn bg-gradient-success text-light" title="Asignar permiso a {{rol.nombre}}">
-                              <i class=" btn bg-gradient-success text-light "></i>Asignar permiso</a>
-
-   <td></td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+  <div class="card-body ">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered table-hover"
+        id="dtBasicExample"
+        width="100%"
+        cellspacing="0"
+        data-sort="false"
+        data-page-length="5"
+      >
+        <thead class="bg-gradient-primary ">
+          <tr class="text-light text-center">
+            <th>Codigo rol</th>
+            <th>Menus disponibles para el rol</th>
+            <th>Acciones ejecutables</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for rol in p %}
+          <tr>
+            <td>{{ rol.id_rol.nombre }}</td>
+            <td class="text-dark">
+              {% for m in rol.menu.all %}
+              <!---->
+              {{ m }},
+              <!-- -->
+              {% endfor %}
+            </td>
+            <td>
+              {% for a in rol.acciones.all %}
+              <!---->
+              {{ a }},
+              <!-- -->
+              {% endfor %}
+            </td>
+            <td class="text-center">
+              <a
+                href="{% url 'Academico:editar_permiso' rol.id_permiso %}"
+                class="btn bg-gradient-success text-light"
+                title="Asignar permiso a {{rol.nombre}}"
+              >
+                Editar permisos</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endblock contenido_principal %} {% block footer %} {% endblock footer %}
+  <!-- -->
+  {% block scrool %} {% endblock scrool %}
 </div>
-</div>
-{% endblock contenido_principal %}
-
-{% block footer %}
-	
-{% endblock footer %}
-
-
-{% block scrool %}
-	
-{% endblock scrool %}
-
-
-
-
-
-
-
-
-
-

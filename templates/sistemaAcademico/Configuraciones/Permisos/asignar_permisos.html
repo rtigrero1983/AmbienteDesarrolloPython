@@ -1,58 +1,68 @@
-{% extends 'base/base.html' %}
-{% block encabezado %}
-{% endblock encabezado %}
-{% block sidebar %}
-{% endblock sidebar %}
-
+{% extends 'base/base.html' %} {% block encabezado %} {% endblock encabezado %}
+{% block sidebar %} {% endblock sidebar %} {% load crispy_forms_tags %}
+<!-- -->
 {% block contenido_principal %}
 
-    <div class="card shadow mb-4">
-                <div class="card-header bg-gradient-primary py-3">
-                  <h6 class="m-0 font-weight-bold text-light" >Rol {{rol.nombre}}</h6>
-                    <a href="{% url 'Academico:agregar_per' rol.id_rol  %}" class="btn btn-gradient-primary">Agregar Permiso</a>
-                </div>
-                    <div class="row darkwhite-bg py-2">
-                        <div class="col-12">
-                            <div class="form-row">
-                                
-                    {% for rp in rol_menu %}
-                    {% if rp.id_menu.id_padre == 0 %}
-                                <div class=" col-4 col-md-4 mb-0">
-                                    <div class="card shadow mb-2">
-                                        <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary"> <input type="checkbox" value="{{rp.id_menu.id_menu}}" checked readonly>  {{rp.id_menu.descripcion}}</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            {% for rp2 in rol_menu %}
-                                                {% if rp.id_menu.id_menu == rp2.id_menu.id_padre %}
-                                                    <input type="checkbox" id="menu" name="menu" readonly checked value="{{rp2.id_menu.id_menu}}"> <label
-                                                    for="menu">{{rp2.id_menu.descripcion}}</label>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                        </div>
-                                </div>
-                    {% endif %}
-                    {% endfor %}
-                            </div>
-                        </div>
-                    </div>
+<form method="POST" action="{% url 'Academico:editar_permiso' p.id_permiso %}">
+  {% csrf_token %} {% if error %}
+  <h2>{{ error }}</h2>
+  {% else %}
 
-
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 bg-gradient-primary">
+      <h6 class="m-0 font-weight-bold text-light text-center">
+        Asignar Permisos al rol {{p.id_rol.nombre}}
+      </h6>
     </div>
-{% endblock contenido_principal %}
 
-{% block extrajs %}
-    <script>
-            $(document).ready(function (){
-                $('')
-            });
-    </script>
+    <div class="card-body ">
+      <form enctype="multipart/form-data" class="form-horizontal" method="post">
+        <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+            <div class="form-row">
+              <div class=" col-0 col-md-9 mb-0">
+                {{ form.id_rol | as_crispy_field }}
+              </div>
+
+              <div class=" col-0 col-md-9 mb-0">
+                {{ form.menu | as_crispy_field }}
+              </div>
+
+              <div class=" col-0 col-md-9 mb-0">
+                {{ form.acciones|as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-outline-primary">
+            Registrar menu
+          </button>
+          <button type="reset" class="btn btn-outline-info">Restablecer</button>
+          <a
+            class="btn btn-outline-danger"
+            href="{% url 'Academico:permisos' %}"
+            >Cancelar registro</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</form>
+
+{% endif %} {% endblock contenido_principal %} {% block footer %}
+<!-- -->
+{% endblock footer %} {% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_menu").toggleClass("js-example-basic-multiple");
+    $("#id_acciones").toggleClass("js-example-basic-multiple");
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Selecciona una opcion "
+    });
+  });
+</script>
 {% endblock extrajs %}
-
-{% block footer %}
-{% endblock footer %}
-
-
-{% block scrool %}
-{% endblock scrool %}

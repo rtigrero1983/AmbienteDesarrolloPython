@@ -21,10 +21,8 @@ urlpatterns = [
     path('inicio/', inicio, name='inicio'),
     path('usuarios/', usuarios, name='usuarios'),
     path('roles/', Roles.as_view(), name='roles'),
-    path('perfiles/', perfiles, name='perfiles'),
     path('menu/', Menu.as_view(), name='menu'),
     path('acciones/', Acciones.as_view(), name='acciones'),
-    path('permisos/', perfiles, name='permisos'),
     path('modulo/', Modulo.as_view(), name='modulo'),
     path('empresas/', empresas, name='empresas'),
 
@@ -44,8 +42,14 @@ urlpatterns = [
     path('nuevo_menu/', CreateMenu.as_view(), name='nuevo_menu'),
     path('nuevo_modulo/', NuevoModulo.as_view(), name='nuevo_modulo'),
     path('nueva_accion/', add_acciones, name='nueva_accion'),
-    path('add_permiso/<int:id>', editar_permisos,name='add_permiso'),
-    path('agregar_permisos/<int:id>',add_permiso,name='agregar_per'),
+    path('agregar_permisos/<int:id>',CreatePermiso.as_view() ,name='agregar_per'),
+
+
+    #------- Url de permisos 
+    path('agregar_permisos/',CreatePermiso.as_view() ,name='agregar_per'),
+    path('editar_permiso/<int:pk>', UpdatePermisos.as_view(), name='editar_permiso'),
+    path('permisos/', ListPermisos.as_view(), name='permisos'),
+
 
     path('agregar_smtp/',smtp_view,name='agregar_smtp'),
     # -------------EDICION---------------------
@@ -57,7 +61,7 @@ urlpatterns = [
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
     #path('editar_menu/<int:id>', editar_menu, name='editar_menu'),
-    path('editar_permiso/<int:id>', editar_permisos, name='editar_permiso'),
+    
     #path('editar_modulo/<int:id>', editar_modulo, name='editar_modulo'),
     path('eliminar_modulo/<int:id>', eliminar_modulo, name='eliminar_modulo'),
     # -----------------------------------------

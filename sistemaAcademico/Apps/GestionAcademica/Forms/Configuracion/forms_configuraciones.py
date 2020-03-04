@@ -175,6 +175,7 @@ class UsuarioModelForm(ModelForm):
         super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
             tipo='TUS')
+
 class UsuarioeditModelForm(ModelForm):
     class Meta:
         model = ConfUsuario
@@ -233,16 +234,12 @@ class Permisosform(forms.ModelForm):
     class Meta:
         model = ConfPermiso
         fields = [
-            "id_modulo_menu",
+            "menu",
             "id_rol",
+            "acciones",
         ]
         labels = {
-            "id_modulo_menu": "Modulo Menu",
+            "menu": "Menus disponibles",
             "id_rol": "Rol",
-        }
-        widgets = {
-            "id_modulo_menu": forms.TextInput(
-                attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
-            "id_rol": forms.TextInput(
-                attrs={"class": "form-control"}),
+            "acciones": "Acciones disponibles",
         }
