@@ -201,44 +201,32 @@ def piePagina(c,usuario):
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#def view_Rol(request, *args, **kwargs):
-#    if 'usuario' in request.session:
-#        if request.method == 'POST':
-#            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-#            print(usuario)
- #         campoChk = request.POST.get('check1')
- #         campo2 = request.POST.get('campo')
- #         combo = int(request.POST.get('combo'))
- #         comboR = int(request.POST.get('comboR'))
- #         print('el reporte es: ',comboR)
- #         if(combo == 1):
- #             usuarios = ConfUsuario.objects.filter(id_usuario=campo2)
- #         elif(combo == 2):
- #             usuarios = ConfUsuario.objects.filter(usuario=campo2)
- #         elif(combo == 3):
- #             persona = MantPersona.objects.get(nombres=campo2)
- #             usuarios = ConfUsuario.objects.filter(id_persona=persona.id_persona)
- #         if(comboR == 1):
- #             return reporte_excell(usuarios)
- #         elif(comboR == 2):
- #             return reportePdf(usuarios,campoChk,usuario)
- #     return render(request, 'sistemaAcademico/reportes/reportes.html')
- # else:
- #     return HttpResponseRedirect('timeout/')
+def view_Rol(request, *args, **kwargs):
+    rol = ConfUsuario_rol.objects.all()
+    if 'usuario' in request.session:
+        if request.method == 'POST':
+            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            print(usuario)
+            campoChk = request.POST.get('check1')
+            campo2 = request.POST.get('campo')
+            admi = ConfRol.objects.filter(nombre=campo2)
+            print('kjkjkjkj',campo2)
+            comboR = int(request.POST.get('comboR'))
+            print('el reporte es: ',comboR)
+            if(comboR == 1):
+                return reporte_excel_rol(rol,admi)
+            elif(comboR == 2):
+                return reportePdf(usuarios,campoChk,usuario)
+        return render(request, 'sistemaAcademico/reportes/reporterol.html')
+    else:
+       return HttpResponseRedirect('timeout/')
 
 
 
 
 
+def reporte_excel_rol(rol,admi):
 
-
-
-
-
-
-
-
-def reporte_excel_rol(request):
     wb = Workbook()
     ws = wb.active
     ws.title = 'Hoja' + str()
@@ -282,23 +270,24 @@ def reporte_excel_rol(request):
 
     controlador = 4
 
+    for confRol in rol:
+        ws.cell(row=controlador, column=1).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=1).border = Border(left=Side(border_style="thin"),
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=1).font = Font(name='Calibri', size=8)
+        ws.cell(row=controlador, column=1).value = confRol.id_rol.nombre
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        ws.cell(row=controlador, column=2).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=2).border = Border(left=Side(border_style="thin"),
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=2).font = Font(name='Calibri', size=8)
+        ws.cell(row=controlador,
+                column=2).value = confRol.id_usuario.usuario
+        controlador += 1
 
 
 
