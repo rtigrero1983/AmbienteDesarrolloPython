@@ -146,8 +146,6 @@ class unidad_form(forms.ModelForm):
         super(unidad_form, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
             tipo='TID')
-
-
 class UsuarioModelForm(ModelForm):
     class Meta:
         model = ConfUsuario
@@ -168,7 +166,6 @@ class UsuarioModelForm(ModelForm):
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
             "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
-
         }
 
     def __init__(self, *args, **kwargs):
@@ -194,8 +191,8 @@ class UsuarioeditModelForm(ModelForm):
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
             "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
+            "id_rol": forms.CheckboxSelectMultiple
         }
-
     def __init__(self, *args, **kwargs):
         super(UsuarioeditModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(

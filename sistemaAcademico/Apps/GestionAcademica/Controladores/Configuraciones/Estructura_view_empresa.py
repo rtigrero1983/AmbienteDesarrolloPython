@@ -10,7 +10,6 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 import socket
 from django.views.decorators.cache import cache_page
 
-
 class NuevaEmpre(CreateView):
     model = ConfEmpresa
     template_name = 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html'
@@ -21,31 +20,37 @@ class NuevaEmpre(CreateView):
         context = super(NuevaEmpre, self).get_context_data(**kwargs)
         pk = self.kwargs.get('id_empresa', 0)
         context['id_empresa'] = pk
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
         return context
 
-    def post(self, request, *args, **kargs):
+    def post(self, request, *args, **kwargs):
         self.object = self.get_object
         form = self.form_class(request.POST)
         if form.is_valid():
-            usuario = ConfUsuario.objects.get(
-                id_usuario=request.session.get('usuario'))
-            form.fecha_ingreso = timezone.now()
-            form.usuario_ing = usuario.usuario
-            form.terminal_ing = socket.gethostname()
+            unidad = form.save()
+            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            unidad.fecha_ingreso = timezone.now()
+            unidad.usuario_ing = usuario.usuario
+            unidad.terminal_ing = socket.gethostname()
             form.save()
-            return redirect(self.get_success_url())
+            return HttpResponseRedirect(self.get_success_url())
         else:
-            print("error")
             return self.render_to_response(self.get_context_data(form=form))
-    """
-    def form_valid(self, form):
-        usuario = form['usuario'].save()
-        usuario_rol = form['usuario_rol'].save(commit=False)
-        usuario_rol.id_usuario = usuario
-        #usuario.usuario_rol= usuario
-        usuario_rol.save()
-        return HttpResponseRedirect(reverse('Academico:usuarios'))
-    """
+
+# def post(self,request,*args,**kwargs):
+#     self.object=self.get_object
+#     form=self.form_class(request.POST)
+#     if form.is_valid():
+#         unidad=form.save()
+#         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+#         unidad.fecha_ingreso=timezone.now(), [form.fecha_ingreso.save_form_data()]
+#         unidad.usuario_ing=usuario.usuario, [form.usuario_ing.save_form_data()]
+#         unidad.terminal_ing=socket.gethostname(), [form.terminal_ing.save_form_data()]
+#         form.save()
+#         return HttpResponseRedirect(self.get.succes.url())
+#     else:
+#         return self.render_to_response(self.get_context_data(form=form))
 
 
 class UpdateEmpre(UpdateView):
@@ -54,6 +59,28 @@ class UpdateEmpre(UpdateView):
     context_object_name = 'm'
     template_name = 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html'
     success_url = reverse_lazy('Academico:empresas')
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateEmpre,self).get_context_data(**kwargs)
+        pk = self.kwargs.get('id_empresa', 0)
+        context['id_empresa'] = pk
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            unidad = form.save()
+            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            unidad.fecha_ingreso = timezone.now()
+            unidad.usuario_ing = usuario.usuario
+            unidad.terminal_ing = socket.gethostname()
+            form.save()
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
 
 
 def empresas(request):
