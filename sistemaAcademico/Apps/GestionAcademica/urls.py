@@ -4,7 +4,7 @@ from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view, \
-    smtp_edit
+    smtp_edit, smtp_reenviar
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
@@ -25,7 +25,7 @@ urlpatterns = [
     path('acciones/', Acciones.as_view(), name='acciones'),
     path('modulo/', Modulo.as_view(), name='modulo'),
     path('empresas/', empresas, name='empresas'),
-
+    path('usuario_temp/',smtp_reenviar,name='usuario_temp'),
     #Opciones para el modulo de Admision
     path('mantenimiento/', Mantenimiento.as_view(), name='mantenimiento'),
     path('movimientos/', movimientos, name='movimientos'),

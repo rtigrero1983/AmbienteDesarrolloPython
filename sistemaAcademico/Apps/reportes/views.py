@@ -202,19 +202,22 @@ def piePagina(c,usuario):
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 def view_Rol(request, *args, **kwargs):
-    rol = ConfUsuario_rol.objects.all()
     if 'usuario' in request.session:
+        rol = None
         if request.method == 'POST':
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
             print(usuario)
             campoChk = request.POST.get('check1')
             campo2 = request.POST.get('campo')
-            admi = ConfRol.objects.filter(nombre=campo2)
+            if campo2:
+                rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
+            else:
+                rol = ConfUsuario.objects.all()
             print('kjkjkjkj',campo2)
             comboR = int(request.POST.get('comboR'))
             print('el reporte es: ',comboR)
             if(comboR == 1):
-                return reporte_excel_rol(rol,admi)
+                return reporte_excel_rol(rol)
             elif(comboR == 2):
                 return reportePdf(usuarios,campoChk,usuario)
         return render(request, 'sistemaAcademico/reportes/reporterol.html')
@@ -225,7 +228,7 @@ def view_Rol(request, *args, **kwargs):
 
 
 
-def reporte_excel_rol(rol,admi):
+def reporte_excel_rol(rol):
 
     wb = Workbook()
     ws = wb.active
@@ -266,29 +269,46 @@ def reporte_excel_rol(rol,admi):
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C3'].fill = PatternFill(start_color='0066CC', end_color='0066CC', fill_type="solid")
     ws['C3'].font = Font(name='Calibri', size=12, bold=True)
-    ws['C3'] = '#'
+    ws['C3'] = 'Nombre'
 
     controlador = 4
-
+    cont = 0
     for confRol in rol:
-        ws.cell(row=controlador, column=1).alignment = Alignment(horizontal="center")
-        ws.cell(row=controlador, column=1).border = Border(left=Side(border_style="thin"),
-                                                           right=Side(border_style="thin"),
-                                                           top=Side(border_style="thin"),
-                                                           bottom=Side(border_style="thin"))
-        ws.cell(row=controlador, column=1).font = Font(name='Calibri', size=8)
-        ws.cell(row=controlador, column=1).value = confRol.id_rol.nombre
 
-        ws.cell(row=controlador, column=2).alignment = Alignment(horizontal="center")
-        ws.cell(row=controlador, column=2).border = Border(left=Side(border_style="thin"),
-                                                           right=Side(border_style="thin"),
-                                                           top=Side(border_style="thin"),
-                                                           bottom=Side(border_style="thin"))
-        ws.cell(row=controlador, column=2).font = Font(name='Calibri', size=8)
-        ws.cell(row=controlador,
-                column=2).value = confRol.id_usuario.usuario
-        controlador += 1
+         ws.cell(row=controlador, column=1).alignment = Alignment(horizontal="center")
+         ws.cell(row=controlador, column=1).border = Border(left=Side(border_style="thin"),
+                                                            right=Side(border_style="thin"),
+                                                            top=Side(border_style="thin"),
+                                                            bottom=Side(border_style="thin"))
+         ws.cell(row=controlador, column=1).font = Font(name='Calibri', size=8)
+         rol_r = [c.nombre for c in confRol.id_rol.all()]
+         ws.cell(row=controlador, column=1).value = ', '.join(rol_r)
 
+         ws.cell(row=controlador, column=2).alignment = Alignment(horizontal="center")
+         ws.cell(row=controlador, column=2).border = Border(left=Side(border_style="thin"),
+                                                            right=Side(border_style="thin"),
+                                                            top=Side(border_style="thin"),
+                                                            bottom=Side(border_style="thin"))
+         ws.cell(row=controlador, column=2).font = Font(name='Calibri', size=8)
+         ws.cell(row=controlador,
+                 column=2).value = confRol.usuario
+
+         ws.cell(row=controlador, column=3).alignment = Alignment(horizontal="center")
+         ws.cell(row=controlador, column=3).border = Border(left=Side(border_style="thin"),
+                                                            right=Side(border_style="thin"),
+                                                            top=Side(border_style="thin"),
+                                                            bottom=Side(border_style="thin"))
+         ws.cell(row=controlador, column=3).font = Font(name='Calibri', size=8)
+         ws.cell(row=controlador,
+                 column=3).value = confRol.id_persona.nombres
+
+
+
+
+
+
+         controlador += 1
+         cont += 1
 
 
     nombre_archivo = "Reporte-Roles.xlsx"
