@@ -134,9 +134,6 @@ def reportePdf(usuarios,campoChk=None,usuarioph=None):
     buffer = BytesIO()
     high = 650
 
-
-
-
     styles = getSampleStyleSheet()
     sytlesBH = styles["Heading3"]
     sytlesBH.alignment = TA_CENTER
@@ -157,13 +154,13 @@ def reportePdf(usuarios,campoChk=None,usuarioph=None):
     for pdf in usuarios:
         this_U= [{'#':pdf.usuario,'h':pdf.id_persona.nombres + " " + pdf.id_persona.apellidos, 'l':pdf.id_genr_tipo_usuario.nombre}]
         #data.append(this_usuario)
-        #high = high-18
+        high = high-18
 
 
     for students in this_U:
-        u = [students['#'], students['h'], students['l']]
-        data.append(u)
-        high = high-18
+         u = [students['#'], students['h'], students['l']]
+         data.append(u)
+
     c = canvas.Canvas(buffer, pagesize=A4)
     cabecerapdf(high,data,width,height,buffer,c)
     if campoChk != None:
@@ -207,7 +204,7 @@ def view_Rol(request, *args, **kwargs):
         if request.method == 'POST':
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
             print(usuario)
-            campoChk = request.POST.get('check1')
+            campoChk2 = request.POST.get('check2')
             campo2 = request.POST.get('campo')
             if campo2:
                 rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
@@ -219,7 +216,7 @@ def view_Rol(request, *args, **kwargs):
             if(comboR == 1):
                 return reporte_excel_rol(rol)
             elif(comboR == 2):
-                return reportePdf(usuarios,campoChk,usuario)
+                return reportePdf_Rol(rol,campoChk2,usuario)
         return render(request, 'sistemaAcademico/reportes/reporterol.html')
     else:
        return HttpResponseRedirect('timeout/')
@@ -318,3 +315,84 @@ def reporte_excel_rol(rol):
     response["Content-Disposition"] = contenido
     wb.save(response)
     return response
+
+
+def reportePdf_Rol(rol,campoChk2=None,usuarioph=None):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=Reporte_Rol.pdf'
+    buffer = BytesIO()
+
+
+
+
+
+    styles = getSampleStyleSheet()
+    sytlesBH = styles["Heading3"]
+    sytlesBH.alignment = TA_CENTER
+    sytlesBH.fontSinze = 7
+
+    # styles = getSampleStyleSheet()
+    styleN = styles["BodyText"]
+    styleN.alignment = TA_CENTER
+    styleN.fontSize = 7
+    width, height = A4
+
+    roles = Paragraph('''Nombre del Rol''', sytlesBH)
+    usu = Paragraph('''Usuario''', sytlesBH)
+    nomb = Paragraph('''Nombre''', sytlesBH)
+    data = []
+    data.append([roles, usu , nomb])
+
+    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
+    #contro = 2
+    for pdfrol in rol:
+        pdrol = [r.nombre for r in pdfrol.id_rol.all()]
+        this_rol =[{'R':','.join(pdrol) ,'U': pdfrol.usuario, 'N': pdfrol.id_persona.nombres }]
+
+    this_rol += this_rol
+    high = 650
+    for Rrol in this_rol:
+        u = [Rrol['R'], Rrol['U'], Rrol['N']]
+        data.append(u)
+        high = high - 18
+
+    c = canvas.Canvas(buffer, pagesize=A4)
+    cabecerapdf(high,data,width,height,buffer,c)
+    if campoChk2 != None:
+        piePagina(c,usuarioph)
+
+    c.showPage()
+    c.save()
+    pd = buffer.getvalue()
+    buffer.close()
+    response.write(pd)
+    return response
+def cabecerapdf(high,data,width, height,buffer,c):
+    c.setLineWidth(.3)
+    c.setFont('Helvetica', 22)
+    c.drawString(200, 760, 'REPORTE ROL')
+
+    fecha = datetime.datetime.now().date()
+    hora = time.strftime("%H:%M")
+    c.setFont('Helvetica',10)
+    c.drawString(300, 50, 'Fecha en que se genero el reporte: {0}'.format(fecha)+' '+'  hora:{0}'.format(hora))
+
+    c.line(90, 747, 550, 747)
+    c.drawImage("static/img/logo-login.png", 50, 760, width=50, height=50)
+
+
+
+    table = Table(data, colWidths=[8 * cm, 5 * cm, 5 * cm])
+    table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+                               ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
+    table.wrapOn(c, width, height)
+    table.drawOn(c, 30, high)
+
+
+
+def piePagina(c,usuario):
+    print(usuario)
+    c.setFont('Helvetica',10)
+    c.drawString(100, 50, 'Reporte generador por: {0}'.format(usuario))
+#--------------------------------------------------------------------------------------------------------------------------###
+

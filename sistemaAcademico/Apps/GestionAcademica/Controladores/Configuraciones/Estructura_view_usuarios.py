@@ -16,17 +16,10 @@ from django.urls import reverse
 
 class Usuarios(ListView):
     model = ConfUsuario
-    template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
+    template_name = 'sistemaAcademico/Configuraciones/Usuarios/usuario.html'
     queryset = ConfUsuario.objects.filter(id_genr_estado=97).select_related(
         'id_persona', 'id_genr_tipo_usuario')
     context_object_name = 'lista_usuarios'
-
-
-def usuarios(request):
-    if 'usuario' in request.session:
-        usuarios = ConfUsuario.objects.filter(id_genr_estado=97).select_related(
-            'id_persona', 'id_genr_tipo_usuario')
-        return render(request, 'sistemaAcademico/Configuraciones/Usuarios/usuario.html', {'lista_usuarios': usuarios})
 
 
 class CreateUsuario(CreateView):
@@ -55,17 +48,6 @@ class CreateUsuario(CreateView):
             return redirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
-
-    """
-    def form_valid(self, form):
-        usuario = form['usuario'].save()
-        usuario_rol = form['usuario_rol'].save(commit=False)
-        usuario_rol.id_usuario = usuario
-        #usuario.usuario_rol= usuario
-        usuario_rol.save()
-        return HttpResponseRedirect(reverse('Academico:usuarios'))
-    """
-
 
 class UpdateUsuario(UpdateView):
     model = ConfUsuario
