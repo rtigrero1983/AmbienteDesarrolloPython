@@ -11,6 +11,7 @@ from sistemaAcademico import settings
 from sistemaAcademico.Apps.GestionAcademica import forms
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from django.core.mail import EmailMultiAlternatives
+
 def smtp_view(request):
 	error = None
 	if(request.method == "POST"):
@@ -34,7 +35,6 @@ class smtp_edit(UpdateView):
 	template_name = "sistemaAcademico/Configuraciones/SMTP/Ingresar_SMTP.html"
 	form_class = forms.SMTPForm
 	context_object_name = "form"
-
 	success_url = reverse_lazy("Academico:usuarios")
 
 

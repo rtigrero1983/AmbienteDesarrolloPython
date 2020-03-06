@@ -14,7 +14,7 @@ class ConfEmpresa(models.Model):
     razon_social = models.CharField(
         max_length=200, blank=False, null=False, validators=[validate_descripcion])
     id_genr_tipo_identificacion = models.ForeignKey(
-        GenrGeneral, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
+        GenrGeneral, blank=False,null=False, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
     identificacion = models.CharField(unique=True, max_length=50, validators=[
                                       validate_cedula], blank=False, null=False)
     direccion = models.CharField(
@@ -174,7 +174,7 @@ class ConfAccion(models.Model):
     id_accion = models.AutoField(primary_key=True)
     descripcion = models.CharField(max_length=50,blank=False,null=False,unique=True)
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
-                                       related_name="fk_accion_genr", db_column='id_genr_estado', default=97)
+                                       related_name="fk_accion_genr",blank=True, db_column='id_genr_estado', default=97)
 
     class Meta:
         verbose_name = 'Accion'
@@ -194,7 +194,7 @@ class UsuarioTemp(models.Model):
                              longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
     fecha_limite = models.DateField(blank=True, null=True)
     fecha_creacion = models.DateField(
-        blank=True, null=True, default=timezone.now())
+        blank=True, null=True, auto_now=True)
     correo = models.EmailField(max_length=254, blank=False, null=False)
 
     class Meta:
@@ -214,7 +214,7 @@ class ConfPermiso(models.Model):
     menu = models.ManyToManyField(
         ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
-                               related_name="fk_permiso_rol", db_column='id_rol', unique=True)
+                               related_name="fk_permiso_rol", db_column='id_rol',blank=False, null=False)
     acciones = models.ManyToManyField(ConfAccion,db_table="Conf_permiso_accion", related_name="fk_permiso_accion")
 
 
@@ -226,7 +226,8 @@ class ConfPermiso(models.Model):
 
     def __unicode__(self):
         return self.id_rol,self.acciones
-        
+
+         
 
 """
 class ConfDetallePermiso(models.Model):

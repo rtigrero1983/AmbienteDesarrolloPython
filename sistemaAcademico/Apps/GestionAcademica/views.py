@@ -18,12 +18,16 @@ from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModu
 
 def inicio(request):
     if 'usuario' in request.session:
+        menu_padre = []
         contexto = {}
-        permiso = ConfPermiso.objects.filter(
-            id_rol__fk_rol__id_usuario=request.session.get('usuario'), menu__id_genr_estado=97).select_related('id_rol')
-        print(permiso)
-        for p in permiso:
-            print(p.menu.descripcion)
+        permiso = ConfMenu.objects.filter(
+            fk_permiso_modmenu__id_rol__fk_rol__id_usuario=request.session.get('usuario'), id_genr_estado=97)
+        """for p  in permiso:
+            for m in p.menu.all():
+                menu_padre.append(m)
+        """
+        contexto['menu_padre'] = menu_padre
+
         usuario = ConfUsuario.objects.get(
             id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
@@ -45,12 +49,11 @@ def login(request):
             print(h.hexdigest())
             usu = ConfUsuario.objects.get(
                 usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97)
-
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
     except Exception as e:
-        contexto['error'] = e
+        contexto['error'] = "Usuario o contraseña incorrectos"
         return render(request, 'base/login.html', contexto)
 
     return render(request, 'base/login.html', contexto)
