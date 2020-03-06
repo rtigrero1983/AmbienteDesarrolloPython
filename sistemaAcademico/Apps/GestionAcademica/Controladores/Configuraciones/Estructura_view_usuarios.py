@@ -32,13 +32,13 @@ def usuarios(request):
 class CreateUsuario(CreateView):
     model=ConfUsuario
     form_class = UsuarioModelForm
+    context_object_name = 'm'
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/crear-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')
 
     def get_context_data(self, **kwargs):
         context = super(CreateUsuario, self).get_context_data(**kwargs)
-        pk = self.kwargs.get('id_usuario', 0)
-        context['id_usuario'] = pk
+        context['rol'] = ConfRol.objects.all()
         return context
 
     def post(self, request, *args, **kargs):
@@ -53,7 +53,6 @@ class CreateUsuario(CreateView):
             usuario.clave = h.hexdigest()
             usuario.save()
             return redirect(self.get_success_url())
-
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
@@ -70,7 +69,7 @@ class CreateUsuario(CreateView):
 
 class UpdateUsuario(UpdateView):
     model = ConfUsuario
-    form_class = UsuarioeditModelForm
+    form_class = UsuarioModelForm
     context_object_name = 'n'
     template_name = 'sistemaAcademico/Configuraciones/Usuarios/editar-usuario.html'
     success_url = reverse_lazy('Academico:usuarios')

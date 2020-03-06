@@ -59,10 +59,10 @@ admin.site.register(ConfMenu, ConfMenuAdmin)
 
 class ConfPermisoAdmin(admin.ModelAdmin):
     search_fields = ['id_permiso']
-    list_display = ('id_permiso', 'id_modulo_menu', 'id_rol',)
+    list_display = ('id_permiso','menu', 'id_rol','acciones',)
 
 
-admin.site.register(ConfPermiso, ConfPermisoAdmin)
+admin.site.register(ConfPermiso)
 
 
 class ConfModulo_menuAdmin(admin.ModelAdmin):

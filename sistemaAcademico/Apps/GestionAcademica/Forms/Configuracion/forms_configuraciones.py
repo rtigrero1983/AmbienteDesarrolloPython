@@ -146,8 +146,6 @@ class unidad_form(forms.ModelForm):
         super(unidad_form, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
             tipo='TID')
-
-
 class UsuarioModelForm(ModelForm):
     class Meta:
         model = ConfUsuario
@@ -168,13 +166,13 @@ class UsuarioModelForm(ModelForm):
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
             "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
-
         }
 
     def __init__(self, *args, **kwargs):
         super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
             tipo='TUS')
+
 class UsuarioeditModelForm(ModelForm):
     class Meta:
         model = ConfUsuario
@@ -193,8 +191,8 @@ class UsuarioeditModelForm(ModelForm):
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
             "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
+            "id_rol": forms.CheckboxSelectMultiple
         }
-
     def __init__(self, *args, **kwargs):
         super(UsuarioeditModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
@@ -233,16 +231,12 @@ class Permisosform(forms.ModelForm):
     class Meta:
         model = ConfPermiso
         fields = [
-            "id_modulo_menu",
+            "menu",
             "id_rol",
+            "acciones",
         ]
         labels = {
-            "id_modulo_menu": "Modulo Menu",
+            "menu": "Menus disponibles",
             "id_rol": "Rol",
-        }
-        widgets = {
-            "id_modulo_menu": forms.TextInput(
-                attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
-            "id_rol": forms.TextInput(
-                attrs={"class": "form-control"}),
+            "acciones": "Acciones disponibles",
         }

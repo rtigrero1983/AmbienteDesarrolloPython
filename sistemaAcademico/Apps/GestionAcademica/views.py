@@ -16,20 +16,14 @@ from django.template.loader import get_template
 from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu, ConfPermiso
 
 
-def pruebas(request):
-    #permiso = ConfPermiso.objects.filter(id_usuario_rol__id_usuario=8).select_related('id_modulo_menu')
-    mpss = ConfModulo_menu.objects.filter(fk_permiso_modmenu__fkrol_usuario__id_usuario__id_usuario=request.session.get(
-        'usuario')).select_related('id_menu', 'id_modulo')
-    for p in mpss:
-        print(p.id_modulo_menu)
-    return render(request, 'base/pruebas.html', {'menus': mpss})
-
-
 def inicio(request):
     if 'usuario' in request.session:
         contexto = {}
-        permiso = ConfModulo_menu.objects.filter(
-            fk_permiso_modmenu__id_rol__fkrol_usuario__id_usuario=request.session.get('usuario'), id_menu__id_genr_estado=97).select_related('id_menu', 'id_modulo')
+        permiso = ConfPermiso.objects.filter(
+            id_rol__fk_rol__id_usuario=request.session.get('usuario'), menu__id_genr_estado=97).select_related('id_rol')
+        print(permiso)
+        for p in permiso:
+            print(p.menu.descripcion)
         usuario = ConfUsuario.objects.get(
             id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
