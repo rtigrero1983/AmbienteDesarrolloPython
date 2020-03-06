@@ -141,7 +141,7 @@ class ConfUsuario(models.Model):
         GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                        related_name="fk_usuario_estado", db_column='id_genr_estado')
-    id_rol= models.ManyToManyField(ConfRol, db_table="conf_usuario_rol",related_name="fk_rol",)
+    id_rol= models.ManyToManyField(ConfRol, db_table="conf_usuario_roles",related_name="fk_rol",)
 
     class Meta:
         verbose_name = 'Usuario',
