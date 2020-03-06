@@ -233,10 +233,8 @@ class Permisosform(forms.ModelForm):
         fields = [
             "menu",
             "id_rol",
-            "acciones",
         ]
         labels = {
-            "menu": "Menus disponibles",
-            "id_rol": "Rol",
-            "acciones": "Acciones disponibles",
+            "menu": "Menus disponibles: ",
+            "id_rol": "Seleccione un rol: ",
         }

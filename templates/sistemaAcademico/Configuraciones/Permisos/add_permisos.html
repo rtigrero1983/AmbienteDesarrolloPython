@@ -27,10 +27,6 @@
               <div class=" col-0 col-md-9 mb-0">
                 {{ form.menu | as_crispy_field }}
               </div>
-
-              <div class=" col-0 col-md-9 mb-0">
-                {{ form.acciones|as_crispy_field }}
-              </div>
             </div>
           </div>
         </div>
@@ -40,11 +36,7 @@
             Registrar menu
           </button>
           <button type="reset" class="btn btn-outline-info">Restablecer</button>
-          <a
-            class="btn btn-outline-danger"
-            href="{% url 'Academico:permisos' %}"
-            >Cancelar registro</a
-          >
+          <a class="btn btn-outline-danger" href="{% url 'Academico:permisos' %}">Cancelar registro</a>
         </div>
       </form>
     </div>
@@ -56,7 +48,7 @@
 {% endblock footer %} {% block extrajs %}
 <script type="text/javascript">
   var $ = jQuery.noConflict();
-  $(document).ready(function() {
+  $(document).ready(function () {
     $("#id_menu").toggleClass("js-example-basic-multiple");
     $("#id_acciones").toggleClass("js-example-basic-multiple");
     $(".js-example-basic-multiple").select2({
