@@ -141,7 +141,7 @@ class ConfUsuario(models.Model):
         GenrGeneral, on_delete=models.CASCADE, related_name="fk_usuario_tipo_usuario", db_column='id_genr_tipo_usuario')
     id_genr_estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                        related_name="fk_usuario_estado", db_column='id_genr_estado')
-    id_rol= models.ManyToManyField(ConfRol, db_table="conf_usuario_rol",related_name="fk_rol",)
+    id_rol= models.ManyToManyField(ConfRol, db_table="conf_usuario_roles",related_name="fk_rol",)
 
     class Meta:
         verbose_name = 'Usuario',
@@ -173,6 +173,7 @@ class ConfModulo_menu(models.Model):
 class ConfAccion(models.Model):
     id_accion = models.AutoField(primary_key=True)
     descripcion = models.CharField(max_length=50,blank=False,null=False,unique=True)
+    id_rol = models.ForeignKey(ConfRol,unique=True,on_delete=models.CASCADE,db_column='rol')
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                        related_name="fk_accion_genr",blank=True, db_column='id_genr_estado', default=97)
 
@@ -215,8 +216,6 @@ class ConfPermiso(models.Model):
         ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
                                related_name="fk_permiso_rol", db_column='id_rol',blank=False, null=False)
-    acciones = models.ManyToManyField(ConfAccion,db_table="Conf_permiso_accion", related_name="fk_permiso_accion")
-
 
     class Meta:
         verbose_name = 'Permiso',
