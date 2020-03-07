@@ -11,19 +11,29 @@
       Roles disponibles en el sistema
     </h6>
 
-    <a class="btn bg-gradient-primary text-light float-right" href="{% url 'Academico:agregar_per' %}"><i
-        class="fas fa-plus"></i> Agregar nuevo</a>
+    <a
+      class="btn bg-gradient-primary text-light float-right"
+      href="{% url 'Academico:agregar_per' %}"
+      ><i class="fas fa-plus"></i> Agregar nuevo</a
+    >
   </div>
 
   <div class="card-body ">
     <div class="table-responsive">
-      <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0" data-sort="false"
-        data-page-length="5">
+      <table
+        class="table table-bordered table-hover"
+        id="dtBasicExample"
+        width="100%"
+        cellspacing="0"
+        data-sort="false"
+        data-page-length="5"
+      >
         <thead class="bg-gradient-primary ">
           <tr class="text-light text-center">
             <th>Codigo rol</th>
             <th>Menus disponibles para el rol</th>
             <th>Acciones ejecutables</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -37,10 +47,21 @@
               <!-- -->
               {% endfor %}
             </td>
+            <td>
+              {% for a in rol.acciones.all %}
+              <!---->
+              {{ a }},
+              <!-- -->
+              {% endfor %}
+            </td>
             <td class="text-center">
-              <a href="{% url 'Academico:editar_permiso' rol.id_permiso %}" class="btn bg-gradient-success text-light"
-                title="Asignar permiso a {{rol.nombre}}">
-                Editar permisos</a>
+              <a
+                href="{% url 'Academico:editar_permiso' rol.id_permiso %}"
+                class="btn bg-gradient-success text-light"
+                title="Asignar permiso a {{rol.nombre}}"
+              >
+                Editar permisos</a
+              >
             </td>
           </tr>
           {% endfor %}

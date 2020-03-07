@@ -159,7 +159,7 @@ class UsuarioModelForm(ModelForm):
         labels = {
             "usuario": "Nombre de usuario :",
             "clave": "Clave :",
-            "id_persona": " Persona :",
+            "id_persona": " Tipo de persona :",
             "id_genr_tipo_usuario": " Tipo de Usuario ",
             "id_rol": "Tipo de Rol "
         }
@@ -184,13 +184,14 @@ class UsuarioeditModelForm(ModelForm):
         ]
         labels = {
             "usuario": "Nombre de usuario :",
-            "id_persona": " Persona :",
+            "id_persona": " Tipo de persona :",
             "id_genr_tipo_usuario": " Tipo de Usuario ",
             "id_rol": "Tipo de Rol "
         }
         widgets = {
             "usuario": forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el nombre del usuario"}),
             "clave": forms.TextInput(attrs={"class": "form-control", "type": "password", "placeholder": "Ingrese la clave del usuario"}),
+            "id_rol": forms.CheckboxSelectMultiple
         }
     def __init__(self, *args, **kwargs):
         super(UsuarioeditModelForm, self).__init__(*args, **kwargs)
@@ -232,8 +233,10 @@ class Permisosform(forms.ModelForm):
         fields = [
             "menu",
             "id_rol",
+            "acciones",
         ]
         labels = {
-            "menu": "Menus disponibles: ",
-            "id_rol": "Seleccione un rol: ",
+            "menu": "Menus disponibles",
+            "id_rol": "Rol",
+            "acciones": "Acciones disponibles",
         }
