@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'bd_academico_desa',
+        'NAME': 'sa_prueba2',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'verde21000',
         'HOST': 'localhost',
         'PORT': 3306,
     }

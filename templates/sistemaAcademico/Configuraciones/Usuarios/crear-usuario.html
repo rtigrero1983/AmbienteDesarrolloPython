@@ -16,46 +16,8 @@
                 </header>
                 <div class="card-body ">
                         <form enctype="multipart/form-data" class="form-horizontal" method="post">
-                <div class="row darkwhite-bg py-2">
-                    <div class="col-12">
-                      <div class="form-row">
-                        <div class=" col-0 col-md-9 mb-0">
-                          {{ form.usuario|as_crispy_field }}
-                        </div>
-
-                        <div class=" col-0 col-md-9 mb-0">
-                          {{ form.clave|as_crispy_field }}
-                        </div>
-
-                        <div class=" col-0 col-md-9 mb-0">
-                          {{ form.id_persona|as_crispy_field }}
-                        </div>
-
-                        <div class=" col-0 col-md-9 mb-0">
-                          {{ form.id_genr_tipo_usuario|as_crispy_field }}
-                        </div>
-
-                        <div class=" col-0 col-md-9 mb-0">
-                         <div id="div_id_id_rol" class="form-group">
-                             <label for="id_id_rol" class=" requiredField">
-                                 Tipo de Rol <span class="asteriskField">*</span>
-                             </label>
-                             <div class="">
-                                 <select name="id_rol" class="selectmultiple form-control js-example-basic-single" required="" id="id_id_rol" multiple="multiple">
-                                     <option value="3">Administrativo</option>
-                                     <option value="5">Profesor</option>
-                                     <option value="6">Estudiantes</option>
-                                     <option value="7">Representante</option>
-                                 </select>
-                             </div>
-                         </div>
-                      </div>
-                    </div>
-                </div>
-                    <br><br>
-                    <br><br>
-                    <br><br>
-			<div class="text-center">
+                            {{form|crispy}}
+                            <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Registrar usuario</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
                     <a class="btn btn-outline-danger" href="{% url 'Academico:usuarios' %}">Cancelar</a>
@@ -68,15 +30,15 @@
 
 {% block extrajs %}
     <script type="text/javascript">
-        var $ = jQuery.noConflict();
-        $(document).ready(function() {
-        $("#id_rol").toggleClass("js-example-basic-multiple");
-        $('.js-example-basic-single').select2({
-            width: "resolve", // need o arrived the changed default
-            placeholder: " selecciona un Rol..."
-        });
-        });
-    </script>
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_id_rol").toggleClass("js-example-basic-multiple");
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Selecciona una opcion "
+    });
+  });
+</script>
 {% endblock extrajs %}
 
 
