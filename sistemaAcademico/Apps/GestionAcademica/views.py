@@ -21,7 +21,7 @@ def inicio(request):
         menu_padre = []
         contexto = {}
         permiso = ConfMenu.objects.filter(
-            fk_permiso_modmenu__id_rol__fk_rol__id_usuario=request.session.get('usuario'), id_genr_estado=97)
+            fk_permiso_modmenu__id_rol__fk_rol__id_usuario=request.session.get('usuario'), id_genr_estado=97).values()
         """for p  in permiso:
             for m in p.menu.all():
                 menu_padre.append(m)
