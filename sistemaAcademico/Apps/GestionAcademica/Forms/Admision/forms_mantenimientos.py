@@ -330,7 +330,7 @@ class EstudianteForm(ModelForm):
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
-        self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+      #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
         self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
         self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')

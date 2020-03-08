@@ -9,21 +9,25 @@
 
 {% block contenido_principal %}
 
-<header class="cuadro_titulo bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Profesores </h4></header>
-<br/>
-                            <br/>
-<a href="{% url 'Academico:registro_empleado' %}" type="button" class="btn bg-gradient-primary text-light"> + Agregar nuevo empleado<span class="glyphicon glyphicon-plus"></span></a>
+<header class="cuadro_titulo bg-gradient-primary text-center"> <h4 class="title text-light"> Admision | Estudiantes </h4></header>
+    <br>
+
+<br>
+    <div class="card card-body">
+        <br>
+        <br>
+<a href="{% url 'Academico:registro_estudiante' %}" type="button" class="btn bg-gradient-primary text-light"> + Agregar nuevo estudiante<span class="glyphicon glyphicon-plus"></span></a>
                             <br/>
                             <br/>
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Registro de empleados</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Registro de estudiantes</h6>
             </div>
 
             <div class="card-body ">
               <div class="table-responsive">
-                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                <table class="table table-bordered table-hover"  id="dtBasicExample" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
                   <thead class="bg-gradient-primary">
                     <tr class="text-light text-center" >
                       <th>#</th>
@@ -45,7 +49,7 @@
                               <i class="fas fa-info-circle"></i>Consultar</a>
                                <button onclick="#" class="btn bg-gradient-warning text-light" title="Editar {{m.nombres}}">
                               <i class="fas fa-success-circle"></i>Editar</button>
-                              <button onclick="#" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}">
+                               <button onclick="#" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}">
                               <i class="fas fa-warning-circle"></i>Eliminar</button>
                           </td>
 
@@ -56,6 +60,8 @@
               </div>
             </div>
           </div>
+
+        </div>
 
 
 {% endblock contenido_principal %}

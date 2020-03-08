@@ -13,13 +13,19 @@ from django.views.decorators.cache import cache_page
 
 from sistemaAcademico.Apps.GestionAcademica.Forms.Admision.forms_mantenimientos import *
 
-class Mantenimiento(ListView):
+class Empleado(ListView):
     model= MantPersona
     queryset = model.objects.filter(estado=97).select_related('id_genr_tipo_usuario').values('id_persona','nombres','apellidos','identificacion')
     context_object_name='mantenimiento'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
 
-
+class Estudiante(ListView):
+    model = MantPersona
+    queryset = model.objects.filter(estado=97).select_related('id_genr_tipo_usuario').values('id_persona', 'nombres',
+                                                                                             'apellidos',
+                                                                                             'identificacion')
+    context_object_name = 'mantenimiento'
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/Estudiante.html'
 
 class NuevoEmpleado(CreateView):
     model = MantPersona
