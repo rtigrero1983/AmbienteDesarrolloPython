@@ -26,7 +26,8 @@ urlpatterns = [
     path('empresas/', empresas, name='empresas'),
 
     #Opciones para el modulo de Admision
-    path('mantenimiento/', Mantenimiento.as_view(), name='mantenimiento'),
+    path('empleado/', Empleado.as_view(), name='empleado'),
+    path('estudiante/', Estudiante.as_view(), name='estudiante'),
     path('movimientos/', movimientos, name='movimientos'),
     path('consultas/', consultas, name='consultas'),
     path('procesos/', procesos, name='procesos'),

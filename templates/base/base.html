@@ -77,40 +77,58 @@
             </a>
             {% endif %}
 
-              
+
             
         <div id="menu_{{menu_p.id_menu}}" class="collapse " aria-labelledby="headingTwo"
           data-parent="#accordionSidebar">
           <div class="collapse-inner rounded bg-gradient-primary" id="submenu_configuracion">
             <h6 class="collapse-header text-light">{% block cab_sub_menu %}{{menu_p.descripcion}}{% endblock cab_sub_menu%}</h6>
             {% for menu_h in permisos %}
-             {% ifchanged menu_h  %}
-                {% if menu_p.id_menu == menu_h.id_padre %}
-                <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.url %}')" id="item">
-                <i class="{{menu_h.icono}}"></i>
-                {{menu_h.descripcion}}</a>
               <!--------submenu---->
+
                 {% for submenu in permisos %}
 
-                      {% if submenu.id_padre == menu_h.id_menu %}
-                <div id="submenu_{{submenu.id_menu}}" class="collapse ">
+                      {% if menu_p.id_menu == menu_h.id_padre and submenu.id_padre == menu_h.id_menu and menu_h.url == "#" %}
+                        {% ifchanged menu_h %}
 
-                <h5>{{ submenu.descripcion }}</h5>
+                          <a class="collapse-item text-light" data-toggle="collapse" href="#submenu_{{submenu.id_padre}}" role="button"
+                               aria-expanded="false" aria-controls="submenu_{{ submenu.id_menu }}" id="menu_{{ menu_h.id_menu }}">
+                            <i class="{{menu_h.icono}}"></i>
+                            {{menu_h.descripcion}}
+                             </a>
+                            {% endifchanged %}
 
 
-                </div>
+
+                          <div id="submenu_{{submenu.id_padre}}" class="collapse ">
+
+                            <a class="collapse-item text-light" onclick="redireccionar('{% url submenu.url %}')" id="item">
+                                <i class="{{submenu.icono}}"></i>
+                                {{submenu.descripcion}}</a>
+
+
+                            </div>
                     {% endif %}
 
                 {% endfor %}
 
+             {% ifchanged menu_h  %}
+                {% if menu_p.id_menu == menu_h.id_padre and menu_h.url != "#"%}
+                <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.url %}')" id="menu_{{ menu_h.id_menu }}">
+                <i class="{{menu_h.icono}}"></i>
+                {{menu_h.descripcion}}</a>
                 {% endif %}
             {% endifchanged %}
+
+
+
             {% endfor %}
+          {% endifchanged %}
+      {% endfor %}
           </div>
         </div>
       </li>
-      {% endifchanged %}
-      {% endfor %}
+
       
             <!-- Nav Item - Utilities Collapse Menu -->
       <!-- Divider -->
