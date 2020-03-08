@@ -172,9 +172,9 @@ class ConfModulo_menu(models.Model):
 
 class ConfAccion(models.Model):
     id_accion = models.AutoField(primary_key=True)
+    id_rol = models.ForeignKey(ConfRol,on_delete=models.CASCADE,db_column='rol',unique=True)
     descripcion = models.CharField(max_length=50,blank=False,null=False,unique=True)
-    id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
-                                       related_name="fk_accion_genr",blank=True, db_column='id_genr_estado', default=97)
+    id_menu = models.ManyToManyField(ConfMenu,db_table='conf_accion_menu')
 
     class Meta:
         verbose_name = 'Accion'
@@ -184,6 +184,7 @@ class ConfAccion(models.Model):
     
     def __str__(self):
         return self.descripcion
+
 
 
 class UsuarioTemp(models.Model):
@@ -215,9 +216,6 @@ class ConfPermiso(models.Model):
         ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
                                related_name="fk_permiso_rol", db_column='id_rol',blank=False, null=False)
-    acciones = models.ManyToManyField(ConfAccion,db_table="Conf_permiso_accion", related_name="fk_permiso_accion")
-
-
     class Meta:
         verbose_name = 'Permiso',
         verbose_name_plural = 'Permisos',

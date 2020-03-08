@@ -200,11 +200,6 @@ class UsuarioeditModelForm(ModelForm):
 
 
 
-class AccionesForm(forms.Form):
-    menu = ModelSelect2MultipleWidget(queryset=ConfMenu.objects.filter(
-        url__icontains='Academico:'), widget=Select2MultipleWidget)
-
-
 class Usuario_tempForm(forms.ModelForm):
     class Meta:
         model = UsuarioTemp
@@ -227,16 +222,34 @@ class Usuario_tempForm(forms.ModelForm):
         }
 
 
+class AccionesForm(forms.ModelForm):
+    class Meta:
+        model = ConfAccion
+        fields =[
+            "id_rol",
+            "id_menu",
+            "descripcion",
+        ]
+        labels = {
+            "id_rol": "Rol",
+            "descripcion": "Accion",
+            "id_menu": "Menus disponibles",
+        }
+        widgets = {
+            "descripcion": forms.TextInput(attrs={
+                "class": "form-control", "placeholder": "Selecione el nombre de la accion", "required": "true"}),
+        }
+
+
+
 class Permisosform(forms.ModelForm):
     class Meta:
         model = ConfPermiso
         fields = [
             "menu",
             "id_rol",
-            "acciones",
         ]
         labels = {
             "menu": "Menus disponibles",
             "id_rol": "Rol",
-            "acciones": "Acciones disponibles",
         }

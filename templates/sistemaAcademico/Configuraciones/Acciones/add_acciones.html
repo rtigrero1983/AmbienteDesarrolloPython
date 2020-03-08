@@ -5,48 +5,77 @@
 {% endblock sidebar %}
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
-<br><br><br><br><br>
-<form method="POST" action="{% url 'Academico:nueva_accion' %}">
+
+    <form method="POST" action="#">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
      {% else %}
-    <div class="card">
-        <div class="card-header bg-primary">
-                    <h4 class="cuadro-titulo text-center text-light">Configuracion | Registrar Accion</h4>
-        </div>
-        <div class="card-body">
-            <form action="#" enctype="multipart/form-data" class="form-horizontal">
-                <br>
-                <label for="descripcion">Accion:</label>
-                <br>
-                <input type="text" placeholder="Ingrese un nombre para esta accion" class="form-control" required name="descripcion" id="descripcion"/>
-                <br><br>
-                <label for="menu">Menu: </label>
-                <select id="menu" name="menu" class="form-control js-example-basic-single" >
-                    {% for m in a %}
-                        <option value="{{m.id_menu}}">{{m.descripcion}}</option>
-                    {% endfor %}
-                </select>
-                <br><br>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">Registrar modulo</button>
-                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:modulo' %}">Cancelar registro</a>
+
+         <div class="card shadow mb-4">
+            <div class="card-header py-3 bg-gradient-primary">
+                <h5 class="m-0 font-weight-bold text-light text-center">Formulario de acciones</h5>
+            </div>
+
+             <div class="card-body ">
+                        <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="row darkwhite-bg py-2">
+                    <div class="col-12">
+                      <div class="form-row">
+
+
+                        <div class=" col-12 col-md-12 mb-0">
+                          {{ form.descripcion|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-12 col-md-12 mb-0">
+                          {{ form.id_rol|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-12 col-md-12 mb-0 ">
+                          {{ form.id_menu|as_crispy_field }}
+                        </div>
+
+                        <div class=" col-8 col-md-4 mb-0">
+                                <button type="submit" class="btn btn-outline-primary btn-block">Guardar registro</button>
+                        </div>
+
+                         <div class=" col-8 col-md-4 mb-0">
+                             <button type="reset" class="btn btn-outline-info btn-block ">Restablecer registro</button>
+                         </div>
+
+                         <div class=" col-8 col-md-4 mb-0">
+                             <a class="btn btn-outline-danger btn-block" href="{% url 'Academico:acciones' %}">Cancelar registro</a>
+                         </div>
+
+                      </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-    </div>
-</form>
+  			</form>
+             </div>
+         </div>
+   </form>
+
+
     {% endif %}
-
-
 {% endblock contenido_principal %}
-{% block extrajs %}
-        <script type="text/javascript">
-        var $ = jQuery.noConflict();
-        $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-        });
-    </script>
+
+ {% block footer %}
+<!-- -->
+{% endblock footer %} {% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_id_menu").toggleClass("js-example-basic-multiple");
+    $("#id_id_rol").toggleClass("js-example-basic-single");
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Selecciona un menu disponible"
+    });
+    $(".js-example-basic-single").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Seleccione un rol disponible"
+    });
+  });
+</script>
 {% endblock extrajs %}

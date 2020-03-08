@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView,View
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
@@ -12,31 +12,41 @@ from django.views.decorators.cache import cache_page
 from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import AccionesForm
 
 
-def acciones(request):
-    if 'usuario' in request.session:
-        return render(request, 'sistemaAcademico/Configuraciones/Acciones/acciones.html')
-    else:
-        return HttpResponseRedirect('timeout/')
-
-
-def add_acciones(request):
-    queryset = ConfMenu.objects.filter(url__icontains='Academico:')
-    if request.method == 'POST':
-        descripcion = request.POST.get('descripcion')
-        menu = request.POST.get('menu')
-        ConfAccion.objects.create(
-            descripcion=descripcion, id_menu=ConfMenu.objects.get(id_menu=menu))
-        return redirect('Academico:acciones')
-    return render(request, 'sistemaAcademico/Configuraciones/Acciones/add_acciones.html', {'a': queryset})
-
-
-class Acciones(ListView):
+class Add_Accion(CreateView):
     model = ConfAccion
-    query = ConfAccion.objects.filter(id_genr_estado=97)
-    for m in query:
-        #print(m.id_menu.descripcion)
-     template_name = 'sistemaAcademico/Configuraciones/Acciones/acciones.html'
-    context_object_name = 'a'
+    template_name = 'sistemaAcademico/Configuraciones/Acciones/add_acciones.html'
+    form_class = AccionesForm
+    success_url = reverse_lazy('Academico:acciones')
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['form'] = self.form_class()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request,self.template_name,self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
+
+
+class Acciones(View):
+    model = ConfAccion
+    template_name = 'sistemaAcademico/Configuraciones/Acciones/acciones.html'
+
+    def get_queryset(self):
+        return self.model.objects.all().select_related('id_rol')
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['a'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 
 def eliminar_accion(request, id):

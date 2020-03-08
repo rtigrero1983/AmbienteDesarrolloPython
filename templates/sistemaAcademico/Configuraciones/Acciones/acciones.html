@@ -9,8 +9,8 @@
   <h4 class="title text-light"> Configuracion | Acciones </h4>
 </header>
 <br />
-<a href="{% url 'Academico:nueva_accion' %}" type="button" class="btn bg-gradient-primary text-light">Agregar acciones
-  <span class="glyphicon glyphicon-plus">Agregar</a>
+<a href="{% url 'Academico:nueva_accion' %}" type="button" class="btn bg-gradient-success float-right text-light ">
+  <span class="glyphicon glyphicon-plus">Agregar accion </a><i class="fas fa-plus"></i>
 <br /><br />
 
 
@@ -22,8 +22,9 @@
       <thead class="bg-gradient-primary">
         <tr class="text-light text-center">
           <th>#</th>
-          <th>Descripcion</th>
+          <th>Roles</th>
           <th>Menu</th>
+          <th>Descripcion</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -31,12 +32,17 @@
         {% for m in a %}
         <tr class="text-dark">
           <td class="text-dark">{{m.id_accion}}</td>
+          <td>{{m.id_rol.nombre}}</td>
           <td>{{m.descripcion}}</td>
-          <td>{{m.id_menu.descripcion}}</td>
+          <td>
+            {% for menu in m.id_menu.all %}
+                {{menu.descripcion}}
+            {% endfor %}
+          </td>
           <td class="text-center">
-            <button onclick="modal('{% url 'Academico:eliminar_accion' m.id_accion %}')"
-              class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombre}}">
-              <i class="fas fa-warning-circle"></i>Eliminar</button>
+                <a href="{% url 'Academico:editar_accion' m.id_accion %}" class="btn bg-gradient-primary text-light"
+                title="Editar {{m.descripcion}}">
+                <i class="fas fa-info-circle"></i>Editar accion</a>
           </td>
 
         </tr>
