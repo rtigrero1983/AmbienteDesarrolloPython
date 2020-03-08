@@ -89,8 +89,22 @@
                 <a class="collapse-item text-light" onclick="redireccionar('{% url menu_h.url %}')" id="item">
                 <i class="{{menu_h.icono}}"></i>
                 {{menu_h.descripcion}}</a>
-              {% endif %}
-            {% endifchanged %} 
+              <!--------submenu---->
+                {% for submenu in permisos %}
+
+                      {% if submenu.id_padre == menu_h.id_menu %}
+                <div id="submenu_{{submenu.id_menu}}" class="collapse ">
+
+                <h5>{{ submenu.descripcion }}</h5>
+
+
+                </div>
+                    {% endif %}
+
+                {% endfor %}
+
+                {% endif %}
+            {% endifchanged %}
             {% endfor %}
           </div>
         </div>
