@@ -215,7 +215,7 @@ class ConfPermiso(models.Model):
     menu = models.ManyToManyField(
         ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
-                               related_name="fk_permiso_rol", db_column='id_rol',blank=False, null=False)
+                               related_name="fk_permiso_rol", db_column='id_rol',unique=True,blank=False, null=False)
     class Meta:
         verbose_name = 'Permiso',
         verbose_name_plural = 'Permisos',
