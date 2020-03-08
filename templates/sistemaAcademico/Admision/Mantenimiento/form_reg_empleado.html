@@ -23,147 +23,130 @@
             <h2>{{ error }}</h2>
                 {% else %}
                 {% endif %}
-                <header class="cuadro_titulo">
+                <header class="cuadro_titulo rounded">
                     <h4 class="titulo text-center">Mantenimiento | Registrar Empleado</h4>
                 </header>
-
-                <br><br>
-
-                <div action="#" enctype="multipart/form-data" class="form-horizontal ">
-
-                <div class="row">
-
-                    <div class="col-6">
-                    <label for="nombres">{{form.nombres.label }} :</label>
-               {{form.nombres}}<br>
-                        <label for="apellidos">{{form.apellidos.label }} :</label>
-               {{form.apellidos}}<br>
-                        <label for="fecha_de_nacimiento">{{form.fecha_de_nacimiento.label }}</label>
-               {{form.fecha_de_nacimiento}}<br>
-
-               {{form.id_genr_genero|as_crispy_field}}<br>
-
-               {{form.id_genr_pais|as_crispy_field}}<br>
-                        <label for="lugar_nacimiento">{{form.lugar_nacimiento.label }} :</label>
-               {{form.lugar_nacimiento}}<br>
-
-               {{form.id_genr_provincia|as_crispy_field}}<br>
-
-               {{form.id_genr_categoria_migratoria|as_crispy_field}}<br>
-
-                </div>
-
-
-                    <div class="col-6">
-                        <label for="identificacion">{{form.identificacion.label }} :</label>
-               {{form.identificacion}}<br>
-
-               {{form.id_genr_tipo_sangre|as_crispy_field}}<br>
-
-               {{form.id_genr_etnia|as_crispy_field}}<br>
-
-               {{form.id_genr_jornada|as_crispy_field}}<br>
-
-               {{form.id_genr_indigena|as_crispy_field}}<br>
-
-               {{form.id_genr_idioma_ancestral|as_crispy_field}}<br>
-
-               {{form.id_genr_ciudad|as_crispy_field}}<br>
-
-
-
-
-                    </div>
-                </div>
-
-                    </div>
-                    <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">EN CASO DE EMERGENCIA</h3>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <br>
-                            <label for="discapacidad" class="text-dark h6">{{form.discapacidad.label }} :</label>
-               {{form.discapacidad}}<br>
-                            <label for="discapacidad_renal" class="text-dark h6">{{form.discapacidad_renal.label }} :</label>
-               {{form.discapacidad_renal}}<br>
-                            <label for="discapacidad_neurologica" class="text-dark h6">{{form.discapacidad_neurologica.label }} :</label>
-               {{form.discapacidad_neurologica}}<br>
-                            <label for="enfermedad_alergica" class="text-dark h6">{{form.enfermedad_alergica.label }} :</label>
-               {{form.enfermedad_alergica}}<br>
-                            <label for="asma" class="text-dark h6">{{form.asma.label }} :</label>
-               {{form.asma}}<br>
-
-
+                <br>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-info1-tab" data-toggle="pill" href="#pills-info1" role="tab" aria-controls="pills-info1" aria-selected="true">Informacion Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info2-tab" data-toggle="pill" href="#pills-info2" role="tab" aria-controls="pills-info2" aria-selected="false">Salud</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info3-tab" data-toggle="pill" href="#pills-info3" role="tab" aria-controls="pills-info3" aria-selected="false">Datos Familiar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info4-tab" data-toggle="pill" href="#pills-info4" role="tab" aria-controls="pills-info4" aria-selected="false">Otros</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-info1" role="tabpanel" aria-labelledby="pills-info1-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.nombres|as_crispy_field}}
+                                {{form.apellidos|as_crispy_field}}
+                                {{form.fecha_de_nacimiento|as_crispy_field}}
+                                {{form.lugar_nacimiento|as_crispy_field}}
+                                {{form.id_genr_genero|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.id_genr_tipo_identificacion|as_crispy_field}}
+                                {{form.id_genr_pais|as_crispy_field}}
+                                {{form.id_genr_provincia|as_crispy_field}}
+                                {{form.id_genr_ciudad|as_crispy_field}}
+                                {{form.id_genr_tipo_sangre|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.identificacion|as_crispy_field}}
+                                {{form.id_genr_etnia|as_crispy_field}}
+                                {{form.id_genr_jornada|as_crispy_field}}
+                                {{form.id_genr_indigena|as_crispy_field}}
+                                {{form.id_genr_idioma_ancestral|as_crispy_field}}
+                            </div>
                         </div>
-
-                        <div class="col">
-                            <br>
-                            <label for="epilepsia" class="text-dark h6">{{form.epilepsia.label }} :</label>
-               {{form.epilepsia}}<br>
-                            <label for="enfermedad_congenita" class="text-dark h6">{{form.enfermedad_congenita.label }} :</label>
-               {{form.enfermedad_congenita}}<br>
-                            <label for="enfermedad_respiratoria" class="text-dark h6">{{form.enfermedad_respiratoria.label }} :</label>
-               {{form.enfermedad_respiratoria}}<br>
-                            <label for="atencion_psicologica" class="text-dark h6">{{form.atencion_psicologica.label }} :</label>
-               {{form.atencion_psicologica}}<br>
+                        <div align="center">
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
                         </div>
-
                     </div>
-                    <br>
-                    <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">OTROS</h3>
-
+                    <div class="tab-pane fade" id="pills-info2" role="tabpanel" aria-labelledby="pills-info2-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                <br>
+                                {{form.discapacidad|as_crispy_field}}<br>
+                                {{form.discapacidad_renal|as_crispy_field}}<br>
+                                {{form.discapacidad_neurologica|as_crispy_field}}<br>
+                            </div>
+                            <div class="col-4">
+                                <br>
+                                {{form.enfermedad_alergica|as_crispy_field}}<br>
+                                {{form.asma|as_crispy_field}}<br>
+                                {{form.epilepsia|as_crispy_field}}<br>
+                            </div>
+                            <div class="col-4">
+                                <br>
+                                {{form.enfermedad_congenita|as_crispy_field}}<br>
+                                {{form.enfermedad_respiratoria|as_crispy_field}}<br>
+                                {{form.atencion_psicologica|as_crispy_field}}<br>
+                            </div>
+                        </div>
+                        <div align="center">
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
+                        </div>
                     </div>
-                <div class="row">
-                    <div class="col">
-                        <br><br>
-                         <label for="bono_solidario" class="text-dark h6">{{form.bono_solidario.label }} :</label>
-               {{form.bono_solidario}}<br>
+                    <div class="tab-pane fade" id="pills-info3" role="tabpanel" aria-labelledby="pills-info3-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.pvive_con_usted|as_crispy_field}}<br>
+                                {{form.pnombres|as_crispy_field}}<br>
+                            </div>
+                            <div class="col-4">
+                                {{form.papellidos|as_crispy_field}}<br>
+                                {{form.pidentificacion|as_crispy_field}}<br>
+                            </div>
+                            <div class="col-4">
+                                {{form.pdireccion|as_crispy_field}}<br>
+                                {{form.ptelefono|as_crispy_field}}<br>
+                            </div>
+                        </div>
+                        <div>
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
+                        </div>
                     </div>
-                    <div class="col">
-                        <br>
-                        <label for="mienbros_hogar" class="text-dark h6">{{form.mienbros_hogar.label }} :</label>
-               {{form.mienbros_hogar}}<br>
+                    <div class="tab-pane fade" id="pills-info4" role="tabpanel" aria-labelledby="pills-info4-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                <br>
+                                {{form.bono_solidario|as_crispy_field}}<br>
+                            </div>
+                            <div class="col-4">
+                                {{form.id_genr_categoria_migratoria|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                <br>
+                                {{form.mienbros_hogar|as_crispy_field}}<br>
+                            </div>
+                        </div>
+                        <div>
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                                <a class="btn btn-outline-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
                     </div>
-
                 </div>
-
-            <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">DATOS DEL FAMILIAR</h3>
-            </div>
-
-                <div class="row">
-                    <div class="col">
-                        <br>
-                        <label for="pvive_con_usted" class="text-dark h6">{{form.pvive_con_usted.label }} :</label>
-                        {{form.pvive_con_usted}}<br>
-                        <label for="pnombres" class="text-dark h6">{{form.pnombres.label }} :</label>
-                        {{form.pnombres}}<br>
-                        <label for="papellidos" class="text-dark h6">{{form.papellidos.label }} :</label>
-                        {{form.papellidos}}<br>
-                        <label for="pidentificacion" class="text-dark h6">{{form.pidentificacion.label }} :</label>
-                        {{form.pidentificacion}}<br>
-                        <label for="pdireccion" class="text-dark h6">{{form.pdireccion.label }} :</label>
-                        {{form.pdireccion}}<br>
-                        <label for="ptelefono" class="text-dark h6">{{form.ptelefono.label }} :</label>
-                        {{form.ptelefono}}<br>
-                    </div>
-                </div>
             </div>
             </div>
             </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">Guardar Cambios</button>
-                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:empleado' %}">Cancelar edicion</a>
-                </div>
 </form>
-            </div>
-            </div>
-            </div>
-        </form>
 
 {% endblock contenido_principal%}
