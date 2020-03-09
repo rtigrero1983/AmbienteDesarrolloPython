@@ -16,6 +16,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `auth_group`
 --
 
@@ -25,6 +40,25 @@ LOCK TABLES `auth_group` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `auth_group_permissions`
 --
 
@@ -32,6 +66,24 @@ LOCK TABLES `auth_group_permissions` WRITE;
 /*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `auth_permission`
@@ -44,6 +96,30 @@ INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `auth_user`
 --
 
@@ -52,6 +128,25 @@ LOCK TABLES `auth_user` WRITE;
 INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$150000$gVDAiFdujXsD$XfVqFkZpxav5FYM03sKN+bnp1qFVa0jWicGWncrDeww=','2020-03-05 21:28:25.630149',1,'root','','','',1,1,'2020-03-05 21:25:29.474365');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `auth_user_groups`
@@ -63,6 +158,25 @@ LOCK TABLES `auth_user_groups` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `auth_user_user_permissions`
 --
 
@@ -72,14 +186,84 @@ LOCK TABLES `auth_user_user_permissions` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_accion`
+--
+
+DROP TABLE IF EXISTS `conf_accion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_accion` (
+  `id_accion` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
+  `rol` int(11) NOT NULL,
+  PRIMARY KEY (`id_accion`),
+  UNIQUE KEY `descripcion` (`descripcion`),
+  KEY `conf_accion_rol_d7718683_fk_conf_rol_id_rol` (`rol`),
+  CONSTRAINT `conf_accion_rol_d7718683_fk_conf_rol_id_rol` FOREIGN KEY (`rol`) REFERENCES `conf_rol` (`id_rol`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_accion`
 --
 
 LOCK TABLES `conf_accion` WRITE;
 /*!40000 ALTER TABLE `conf_accion` DISABLE KEYS */;
-INSERT INTO `conf_accion` VALUES (1,'Agregar',97);
+INSERT INTO `conf_accion` VALUES (2,'Agregar',3),(3,'Editar',3),(4,'Imprimir',3),(5,'Eliminar',3);
 /*!40000 ALTER TABLE `conf_accion` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_accion_menu`
+--
+
+DROP TABLE IF EXISTS `conf_accion_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_accion_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `confaccion_id` int(11) NOT NULL,
+  `confmenu_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `conf_accion_menu_confaccion_id_confmenu_id_a67c15a8_uniq` (`confaccion_id`,`confmenu_id`),
+  KEY `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` (`confmenu_id`),
+  CONSTRAINT `conf_accion_menu_confaccion_id_57e43ae7_fk_conf_accion_id_accion` FOREIGN KEY (`confaccion_id`) REFERENCES `conf_accion` (`id_accion`),
+  CONSTRAINT `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `conf_accion_menu`
+--
+
+LOCK TABLES `conf_accion_menu` WRITE;
+/*!40000 ALTER TABLE `conf_accion_menu` DISABLE KEYS */;
+INSERT INTO `conf_accion_menu` VALUES (14,2,25),(22,2,33),(9,2,34),(18,2,35),(15,2,36),(20,2,38),(10,3,34),(19,3,35),(2,3,36),(21,3,38),(7,4,23),(5,4,36),(6,4,37),(12,5,26),(13,5,34),(16,5,36),(17,5,37);
+/*!40000 ALTER TABLE `conf_accion_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_correos_smpt`
+--
+
+DROP TABLE IF EXISTS `conf_correos_smpt`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_correos_smpt` (
+  `id_correos_smpt` int(11) NOT NULL AUTO_INCREMENT,
+  `ssl` varchar(30) NOT NULL,
+  `dominio` varchar(30) NOT NULL,
+  `puerto` varchar(20) NOT NULL,
+  `usuario_c` varchar(100) NOT NULL,
+  `contrasenia_c` varchar(100) NOT NULL,
+  `descripcion` varchar(200) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_correos_smpt`),
+  UNIQUE KEY `usuario_c` (`usuario_c`),
+  KEY `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` (`id_genr_estado`),
+  CONSTRAINT `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_correos_smpt`
@@ -91,6 +275,38 @@ LOCK TABLES `conf_correos_smpt` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_empresa`
+--
+
+DROP TABLE IF EXISTS `conf_empresa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_empresa` (
+  `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `razon_social` varchar(200) NOT NULL,
+  `identificacion` varchar(50) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `representante_legal` varchar(50) NOT NULL,
+  `correo` varchar(100) NOT NULL,
+  `telefono` varchar(10) NOT NULL,
+  `fecha_creacion` date DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `usuario_ing` varchar(45) DEFAULT NULL,
+  `terminal_ing` varchar(45) DEFAULT NULL,
+  `estado` int(11) NOT NULL,
+  `id_genr_tipo_identificacion` int(11) NOT NULL,
+  PRIMARY KEY (`id_empresa`),
+  UNIQUE KEY `nombre` (`nombre`),
+  UNIQUE KEY `identificacion` (`identificacion`),
+  KEY `conf_empresa_estado_88988ab2_fk_genr_general_idgenr_general` (`estado`),
+  KEY `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` (`id_genr_tipo_identificacion`),
+  CONSTRAINT `conf_empresa_estado_88988ab2_fk_genr_general_idgenr_general` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_identificacion`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_empresa`
 --
 
@@ -100,14 +316,59 @@ LOCK TABLES `conf_empresa` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_menu`
+--
+
+DROP TABLE IF EXISTS `conf_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_menu` (
+  `id_menu` int(11) NOT NULL AUTO_INCREMENT,
+  `id_padre` int(11) NOT NULL,
+  `orden` int(11) NOT NULL,
+  `descripcion` varchar(45) NOT NULL,
+  `url` varchar(60) NOT NULL,
+  `icono` varchar(50) NOT NULL,
+  `lazy_name` varchar(60) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `view` varchar(45) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_menu`),
+  UNIQUE KEY `descripcion` (`descripcion`),
+  KEY `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` (`id_genr_estado`),
+  CONSTRAINT `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_menu`
 --
 
 LOCK TABLES `conf_menu` WRITE;
 /*!40000 ALTER TABLE `conf_menu` DISABLE KEYS */;
-INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matricula','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','Academico:mantenimiento','fas fa-fw fa-folder','mantenimiento_personas/','Personas','mantenimientoPersonas',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'Reportes','Academico:reportes','fas fa-fw fa-folder','reportes/','reportes','reportes',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,27,3,'Roles','Academico:roles','fas fa-fw fa-folder','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97);
+INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matricula','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','#','fas fa-fw fa-folder','#','#','#',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'Reportes','Academico:reportes','fas fa-fw fa-folder','reportes/','reportes','reportes',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,23,3,'Roles','Academico:roles','fas fa-fw fa-cog','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97),(41,27,1,'Prueba','#','fas fa-fw fa-folder','#','#','#',97),(42,41,2,'pruebasubMenu','Academico:empresas','fas fa-fw fa-folder','#','#','#',97),(43,23,9,'Prueba_menu','#','fas fa-fw fa-cog','#','#','#',97),(44,43,10,'sub_menu_3','Academico:usuarios','fas fa-fw fa-cog','#','#','#',97),(45,28,1,'Estudiantes','Academico:estudiante','fas fa-fw fa-folder','estudiante/','estudiante','Estudiante',97),(46,28,2,'Profesores','Academico:empleado','fas fa-fw fa-folder','empleado/','empleado','Empleado',97);
 /*!40000 ALTER TABLE `conf_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_modulo`
+--
+
+DROP TABLE IF EXISTS `conf_modulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_modulo` (
+  `id_modulo` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(20) NOT NULL,
+  `nombre` varchar(25) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_modulo`),
+  UNIQUE KEY `codigo` (`codigo`),
+  UNIQUE KEY `nombre` (`nombre`),
+  KEY `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` (`id_genr_estado`),
+  CONSTRAINT `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_modulo`
@@ -120,14 +381,52 @@ INSERT INTO `conf_modulo` VALUES (6,'001','Admisiones',97),(7,'002','Matriculaci
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_modulo_menu`
+--
+
+DROP TABLE IF EXISTS `conf_modulo_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_modulo_menu` (
+  `id_modulo_menu` int(11) NOT NULL AUTO_INCREMENT,
+  `id_menu` int(11) NOT NULL,
+  `id_modulo` int(11) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_modulo_menu`),
+  KEY `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` (`id_genr_estado`),
+  KEY `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` (`id_menu`),
+  KEY `conf_modulo_menu_id_modulo_0d359a15_fk_conf_modulo_id_modulo` (`id_modulo`),
+  CONSTRAINT `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`),
+  CONSTRAINT `conf_modulo_menu_id_modulo_0d359a15_fk_conf_modulo_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `conf_modulo` (`id_modulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_modulo_menu`
 --
 
 LOCK TABLES `conf_modulo_menu` WRITE;
 /*!40000 ALTER TABLE `conf_modulo_menu` DISABLE KEYS */;
-INSERT INTO `conf_modulo_menu` VALUES (15,23,10,97),(16,24,9,97),(17,25,8,97),(18,26,7,97),(19,27,6,97),(20,28,6,97),(21,29,6,97),(22,30,6,97),(23,31,6,97),(24,32,6,97),(25,33,10,97),(26,34,10,97),(27,35,10,97),(28,36,10,97),(29,37,10,97),(30,38,10,97),(31,40,10,97);
+INSERT INTO `conf_modulo_menu` VALUES (15,23,10,97),(16,24,9,97),(17,25,8,97),(18,26,7,97),(19,27,6,97),(20,28,6,97),(21,29,6,97),(22,30,6,97),(23,31,6,97),(24,32,6,97),(25,33,10,97),(26,34,10,97),(27,35,10,97),(28,36,10,97),(29,37,10,97),(30,38,10,97),(31,40,10,97),(32,43,10,97),(33,44,10,97);
 /*!40000 ALTER TABLE `conf_modulo_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_permiso`
+--
+
+DROP TABLE IF EXISTS `conf_permiso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_permiso` (
+  `id_permiso` int(11) NOT NULL AUTO_INCREMENT,
+  `id_rol` int(11) NOT NULL,
+  PRIMARY KEY (`id_permiso`),
+  UNIQUE KEY `conf_permiso_id_rol_b839125a_uniq` (`id_rol`),
+  CONSTRAINT `conf_permiso_id_rol_b839125a_fk_conf_rol_id_rol` FOREIGN KEY (`id_rol`) REFERENCES `conf_rol` (`id_rol`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_permiso`
@@ -140,14 +439,23 @@ INSERT INTO `conf_permiso` VALUES (1,3);
 UNLOCK TABLES;
 
 --
--- Dumping data for table `conf_permiso_accion`
+-- Table structure for table `conf_permiso_menu`
 --
 
-LOCK TABLES `conf_permiso_accion` WRITE;
-/*!40000 ALTER TABLE `conf_permiso_accion` DISABLE KEYS */;
-INSERT INTO `conf_permiso_accion` VALUES (1,1,1);
-/*!40000 ALTER TABLE `conf_permiso_accion` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `conf_permiso_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_permiso_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `confpermiso_id` int(11) NOT NULL,
+  `confmenu_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `conf_permiso_menu_confpermiso_id_confmenu_id_15507891_uniq` (`confpermiso_id`,`confmenu_id`),
+  KEY `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` (`confmenu_id`),
+  CONSTRAINT `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`),
+  CONSTRAINT `conf_permiso_menu_confpermiso_id_62c12aa1_fk_conf_perm` FOREIGN KEY (`confpermiso_id`) REFERENCES `conf_permiso` (`id_permiso`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_permiso_menu`
@@ -155,9 +463,27 @@ UNLOCK TABLES;
 
 LOCK TABLES `conf_permiso_menu` WRITE;
 /*!40000 ALTER TABLE `conf_permiso_menu` DISABLE KEYS */;
-INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(15,1,29),(16,1,30),(17,1,31),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(4,1,36),(7,1,37),(8,1,38),(9,1,40);
+INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(15,1,29),(16,1,30),(17,1,31),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(22,1,36),(7,1,37),(8,1,38),(9,1,40),(18,1,41),(19,1,42),(20,1,43),(21,1,44),(23,1,45),(24,1,46);
 /*!40000 ALTER TABLE `conf_permiso_menu` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_rol`
+--
+
+DROP TABLE IF EXISTS `conf_rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_rol` (
+  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_rol`),
+  KEY `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` (`id_genr_estado`),
+  CONSTRAINT `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_rol`
@@ -165,9 +491,34 @@ UNLOCK TABLES;
 
 LOCK TABLES `conf_rol` WRITE;
 /*!40000 ALTER TABLE `conf_rol` DISABLE KEYS */;
-INSERT INTO `conf_rol` VALUES (3,'001','Administrativo',97),(5,'002','Profesor',97),(6,'003','Estudiantes',97),(7,'004','Representante',97);
+INSERT INTO `conf_rol` VALUES (3,'001','Administrativo',97),(5,'002','Profesor',97),(6,'003','Estudiantes',97),(7,'004','Representante',97),(8,' ',' ',98);
 /*!40000 ALTER TABLE `conf_rol` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `conf_usuario`
+--
+
+DROP TABLE IF EXISTS `conf_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `clave` varchar(45) NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  `id_genr_tipo_usuario` int(11) NOT NULL,
+  `id_persona` int(11) NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `usuario` (`usuario`),
+  KEY `conf_usuario_id_genr_estado_b989846a_fk_genr_gene` (`id_genr_estado`),
+  KEY `conf_usuario_id_genr_tipo_usuario_cd3441b2_fk_genr_gene` (`id_genr_tipo_usuario`),
+  KEY `conf_usuario_id_persona_a923aec6_fk_mant_persona_id_persona` (`id_persona`),
+  CONSTRAINT `conf_usuario_id_genr_estado_b989846a_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `conf_usuario_id_genr_tipo_usuario_cd3441b2_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `conf_usuario_id_persona_a923aec6_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `conf_usuario`
@@ -180,6 +531,25 @@ INSERT INTO `conf_usuario` VALUES (1,'luisillo21','a41801fb6bc6eca2e22271ae04da2
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_usuario_rol`
+--
+
+DROP TABLE IF EXISTS `conf_usuario_rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_usuario_rol` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `confusuario_id` int(11) NOT NULL,
+  `confrol_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `conf_usuario_rol_confusuario_id_confrol_id_e79f5226_uniq` (`confusuario_id`,`confrol_id`),
+  KEY `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` (`confrol_id`),
+  CONSTRAINT `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` FOREIGN KEY (`confrol_id`) REFERENCES `conf_rol` (`id_rol`),
+  CONSTRAINT `conf_usuario_rol_confusuario_id_eff85f64_fk_conf_usua` FOREIGN KEY (`confusuario_id`) REFERENCES `conf_usuario` (`id_usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_usuario_rol`
 --
 
@@ -190,6 +560,25 @@ INSERT INTO `conf_usuario_rol` VALUES (1,1,3);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `conf_usuarios_temp`
+--
+
+DROP TABLE IF EXISTS `conf_usuarios_temp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `conf_usuarios_temp` (
+  `id_usuario_temp` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(45) NOT NULL,
+  `clave` varchar(45) NOT NULL,
+  `fecha_limite` date DEFAULT NULL,
+  `fecha_creacion` date DEFAULT NULL,
+  `correo` varchar(254) NOT NULL,
+  PRIMARY KEY (`id_usuario_temp`),
+  UNIQUE KEY `usuario` (`usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `conf_usuarios_temp`
 --
 
@@ -197,6 +586,30 @@ LOCK TABLES `conf_usuarios_temp` WRITE;
 /*!40000 ALTER TABLE `conf_usuarios_temp` DISABLE KEYS */;
 /*!40000 ALTER TABLE `conf_usuarios_temp` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `django_admin_log`
@@ -209,6 +622,22 @@ INSERT INTO `django_admin_log` VALUES (1,'2020-03-05 22:26:04.946216','3','Luis 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `django_content_type`
 --
 
@@ -219,14 +648,46 @@ INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group
 UNLOCK TABLES;
 
 --
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `django_migrations`
 --
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'GestionAcademica','0001_initial','2020-03-05 21:22:01.256060'),(2,'contenttypes','0001_initial','2020-03-05 21:23:50.582723'),(3,'auth','0001_initial','2020-03-05 21:23:53.779311'),(4,'admin','0001_initial','2020-03-05 21:24:05.196398'),(5,'admin','0002_logentry_remove_auto_add','2020-03-05 21:24:07.383128'),(6,'admin','0003_logentry_add_action_flag_choices','2020-03-05 21:24:07.459200'),(7,'contenttypes','0002_remove_content_type_name','2020-03-05 21:24:09.567095'),(8,'auth','0002_alter_permission_name_max_length','2020-03-05 21:24:09.744003'),(9,'auth','0003_alter_user_email_max_length','2020-03-05 21:24:10.104285'),(10,'auth','0004_alter_user_username_opts','2020-03-05 21:24:10.228503'),(11,'auth','0005_alter_user_last_login_null','2020-03-05 21:24:11.059115'),(12,'auth','0006_require_contenttypes_0002','2020-03-05 21:24:11.094883'),(13,'auth','0007_alter_validators_add_error_messages','2020-03-05 21:24:11.248961'),(14,'auth','0008_alter_user_username_max_length','2020-03-05 21:24:11.381116'),(15,'auth','0009_alter_user_last_name_max_length','2020-03-05 21:24:11.589277'),(16,'auth','0010_alter_group_name_max_length','2020-03-05 21:24:11.803083'),(17,'auth','0011_update_proxy_permissions','2020-03-05 21:24:11.979988'),(18,'sessions','0001_initial','2020-03-05 21:24:12.427996');
+INSERT INTO `django_migrations` VALUES (1,'GestionAcademica','0001_initial','2020-03-05 21:22:01.256060'),(2,'contenttypes','0001_initial','2020-03-05 21:23:50.582723'),(3,'auth','0001_initial','2020-03-05 21:23:53.779311'),(4,'admin','0001_initial','2020-03-05 21:24:05.196398'),(5,'admin','0002_logentry_remove_auto_add','2020-03-05 21:24:07.383128'),(6,'admin','0003_logentry_add_action_flag_choices','2020-03-05 21:24:07.459200'),(7,'contenttypes','0002_remove_content_type_name','2020-03-05 21:24:09.567095'),(8,'auth','0002_alter_permission_name_max_length','2020-03-05 21:24:09.744003'),(9,'auth','0003_alter_user_email_max_length','2020-03-05 21:24:10.104285'),(10,'auth','0004_alter_user_username_opts','2020-03-05 21:24:10.228503'),(11,'auth','0005_alter_user_last_login_null','2020-03-05 21:24:11.059115'),(12,'auth','0006_require_contenttypes_0002','2020-03-05 21:24:11.094883'),(13,'auth','0007_alter_validators_add_error_messages','2020-03-05 21:24:11.248961'),(14,'auth','0008_alter_user_username_max_length','2020-03-05 21:24:11.381116'),(15,'auth','0009_alter_user_last_name_max_length','2020-03-05 21:24:11.589277'),(16,'auth','0010_alter_group_name_max_length','2020-03-05 21:24:11.803083'),(17,'auth','0011_update_proxy_permissions','2020-03-05 21:24:11.979988'),(18,'sessions','0001_initial','2020-03-05 21:24:12.427996'),(19,'GestionAcademica','0002_auto_20200307_1905','2020-03-07 19:05:45.255879'),(20,'GestionAcademica','0003_auto_20200307_1909','2020-03-07 19:09:24.406440'),(21,'GestionAcademica','0004_auto_20200308_0003','2020-03-08 00:04:17.998484');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `django_session`
@@ -234,9 +695,25 @@ UNLOCK TABLES;
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZDQzZmM4NjgyNzg5ZjFlYTgwMTY1Y2FjZjU3MWQ5YzU5NGQxNmYwMzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIiwidXN1YXJpbyI6MX0=','2020-03-06 00:18:27.661587');
+INSERT INTO `django_session` VALUES ('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `genr_general`
+--
+
+DROP TABLE IF EXISTS `genr_general`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `genr_general` (
+  `idgenr_general` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(50) NOT NULL,
+  `codigo` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`idgenr_general`)
+) ENGINE=InnoDB AUTO_INCREMENT=1750 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `genr_general`
@@ -249,6 +726,27 @@ INSERT INTO `genr_general` VALUES (1,'TIP','GEN','Genero'),(2,'TIP','EST','Estad
 UNLOCK TABLES;
 
 --
+-- Table structure for table `genr_historial`
+--
+
+DROP TABLE IF EXISTS `genr_historial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `genr_historial` (
+  `id_historial` int(11) NOT NULL AUTO_INCREMENT,
+  `modulo` varchar(50) NOT NULL,
+  `accion` varchar(50) NOT NULL,
+  `usuario_mod` varchar(50) NOT NULL,
+  `terminal_mod` varchar(50) NOT NULL,
+  `fecha_mod` date NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  PRIMARY KEY (`id_historial`),
+  KEY `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` (`id_menu`),
+  CONSTRAINT `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `genr_historial`
 --
 
@@ -256,6 +754,26 @@ LOCK TABLES `genr_historial` WRITE;
 /*!40000 ALTER TABLE `genr_historial` DISABLE KEYS */;
 /*!40000 ALTER TABLE `genr_historial` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mant_anio_lectivo`
+--
+
+DROP TABLE IF EXISTS `mant_anio_lectivo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mant_anio_lectivo` (
+  `id_anio_lectivo` int(11) NOT NULL AUTO_INCREMENT,
+  `anio` int(11) NOT NULL,
+  `ciclo` int(11) NOT NULL,
+  `fecha_incio_ciclo` date NOT NULL,
+  `fecha_fin_ciclo` date NOT NULL,
+  `id_genr_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_anio_lectivo`),
+  KEY `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` (`id_genr_estado`),
+  CONSTRAINT `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mant_anio_lectivo`
@@ -267,6 +785,34 @@ LOCK TABLES `mant_anio_lectivo` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mant_empleado`
+--
+
+DROP TABLE IF EXISTS `mant_empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mant_empleado` (
+  `id_empleado` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha_ingreso` datetime(6) NOT NULL,
+  `usuario_ing` varchar(45) NOT NULL,
+  `terminal_ing` varchar(45) NOT NULL,
+  `id_anio_lectivo` int(11) NOT NULL,
+  `id_detalle_empleado` int(11) NOT NULL,
+  `id_persona` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  PRIMARY KEY (`id_empleado`),
+  KEY `mant_empleado_id_anio_lectivo_8e86b683_fk_mant_anio` (`id_anio_lectivo`),
+  KEY `mant_empleado_id_detalle_empleado_a72575b4_fk_mov_detal` (`id_detalle_empleado`),
+  KEY `mant_empleado_id_persona_b0b32e94_fk_mant_persona_id_persona` (`id_persona`),
+  KEY `mant_empleado_id_usuario_2929f7e1_fk_conf_usuario_id_usuario` (`id_usuario`),
+  CONSTRAINT `mant_empleado_id_anio_lectivo_8e86b683_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
+  CONSTRAINT `mant_empleado_id_detalle_empleado_a72575b4_fk_mov_detal` FOREIGN KEY (`id_detalle_empleado`) REFERENCES `mov_detalle_empleado` (`id_detalle_empleado`),
+  CONSTRAINT `mant_empleado_id_persona_b0b32e94_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`),
+  CONSTRAINT `mant_empleado_id_usuario_2929f7e1_fk_conf_usuario_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `conf_usuario` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mant_empleado`
 --
 
@@ -276,6 +822,26 @@ LOCK TABLES `mant_empleado` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mant_estudiante`
+--
+
+DROP TABLE IF EXISTS `mant_estudiante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mant_estudiante` (
+  `id_estudiante` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_estudiante` varchar(45) NOT NULL,
+  `fecha_ingreso` datetime(6) NOT NULL,
+  `usuario_ing` varchar(45) NOT NULL,
+  `terminal_ing` varchar(45) NOT NULL,
+  `id_persona` int(11) NOT NULL,
+  PRIMARY KEY (`id_estudiante`),
+  KEY `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` (`id_persona`),
+  CONSTRAINT `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mant_estudiante`
 --
 
@@ -283,6 +849,117 @@ LOCK TABLES `mant_estudiante` WRITE;
 /*!40000 ALTER TABLE `mant_estudiante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mant_estudiante` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mant_persona`
+--
+
+DROP TABLE IF EXISTS `mant_persona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mant_persona` (
+  `id_persona` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `fecha_de_nacimiento` date NOT NULL,
+  `estado` int(11) NOT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `identificacion` varchar(50) NOT NULL,
+  `telefono` varchar(15) DEFAULT NULL,
+  `correo` varchar(50) NOT NULL,
+  `fecha_ingreso` datetime(6) NOT NULL,
+  `usuario_ing` varchar(60) NOT NULL,
+  `terminal_ing` varchar(60) NOT NULL,
+  `direccion` varchar(150) NOT NULL,
+  `celular` varchar(15) DEFAULT NULL,
+  `lugar_nacimiento` varchar(45) NOT NULL,
+  `discapacidad` tinyint(1) DEFAULT NULL,
+  `discapacidad_renal` tinyint(1) DEFAULT NULL,
+  `discapacidad_neurologica` tinyint(1) DEFAULT NULL,
+  `enfermedad_alergica` tinyint(1) DEFAULT NULL,
+  `asma` tinyint(1) DEFAULT NULL,
+  `epilepsia` tinyint(1) DEFAULT NULL,
+  `enfermedad_congenita` tinyint(1) DEFAULT NULL,
+  `enfermedad_respiratoria` tinyint(1) DEFAULT NULL,
+  `atencion_psicologica` tinyint(1) DEFAULT NULL,
+  `bono_solidario` tinyint(1) DEFAULT NULL,
+  `mienbros_hogar` int(11) DEFAULT NULL,
+  `pnombres` varchar(45) DEFAULT NULL,
+  `papellidos` varchar(45) DEFAULT NULL,
+  `pidentificacion` varchar(15) DEFAULT NULL,
+  `pdireccion` varchar(45) DEFAULT NULL,
+  `ptelefono` varchar(45) DEFAULT NULL,
+  `pvive_con_usted` tinyint(1) DEFAULT NULL,
+  `mnombres` varchar(45) DEFAULT NULL,
+  `mapellidos` varchar(45) DEFAULT NULL,
+  `mdireccion` varchar(45) DEFAULT NULL,
+  `mtelefono` varchar(45) DEFAULT NULL,
+  `midentificacion` varchar(15) DEFAULT NULL,
+  `mvive_con_usted` tinyint(1) DEFAULT NULL,
+  `rnombres` varchar(45) DEFAULT NULL,
+  `rapellidos` varchar(45) DEFAULT NULL,
+  `rtelefono` varchar(45) DEFAULT NULL,
+  `rvive_con_usted` tinyint(1) DEFAULT NULL,
+  `ridentificacion` varchar(13) DEFAULT NULL,
+  `rdireccion_trabajo` varchar(200) DEFAULT NULL,
+  `rtelefono_trabajo` varchar(20) DEFAULT NULL,
+  `rhorario_laboral` varchar(40) DEFAULT NULL,
+  `id_genr_categoria_migratoria` int(11) NOT NULL,
+  `id_genr_ciudad` int(11) NOT NULL,
+  `id_genr_estado_civil` int(11) NOT NULL,
+  `id_genr_estado_laboralm` int(11) NOT NULL,
+  `id_genr_estado_laboralp` int(11) NOT NULL,
+  `id_genr_etnia` int(11) NOT NULL,
+  `id_genr_genero` int(11) NOT NULL,
+  `id_genr_idioma_ancestral` int(11) NOT NULL,
+  `id_genr_indigena` int(11) NOT NULL,
+  `id_genr_jornada` int(11) NOT NULL,
+  `id_genr_pais` int(11) NOT NULL,
+  `id_genr_provincia` int(11) NOT NULL,
+  `id_genr_tipo_identificacion` int(11) NOT NULL,
+  `id_genr_tipo_parentesco` int(11) NOT NULL,
+  `id_genr_tipo_sangre` int(11) NOT NULL,
+  `id_genr_tipo_usuario` int(11) NOT NULL,
+  PRIMARY KEY (`id_persona`),
+  UNIQUE KEY `nombres` (`nombres`),
+  UNIQUE KEY `identificacion` (`identificacion`),
+  UNIQUE KEY `pidentificacion` (`pidentificacion`),
+  UNIQUE KEY `midentificacion` (`midentificacion`),
+  UNIQUE KEY `ridentificacion` (`ridentificacion`),
+  KEY `mant_persona_id_genr_categoria_mi_4922626f_fk_genr_gene` (`id_genr_categoria_migratoria`),
+  KEY `mant_persona_id_genr_ciudad_9749b7b1_fk_genr_gene` (`id_genr_ciudad`),
+  KEY `mant_persona_id_genr_estado_civil_51eac68f_fk_genr_gene` (`id_genr_estado_civil`),
+  KEY `mant_persona_id_genr_estado_labor_a9fbeff5_fk_genr_gene` (`id_genr_estado_laboralm`),
+  KEY `mant_persona_id_genr_estado_labor_72eac056_fk_genr_gene` (`id_genr_estado_laboralp`),
+  KEY `mant_persona_id_genr_etnia_ac16f1d3_fk_genr_gene` (`id_genr_etnia`),
+  KEY `mant_persona_id_genr_genero_c43145ca_fk_genr_gene` (`id_genr_genero`),
+  KEY `mant_persona_id_genr_idioma_ances_b5f2a186_fk_genr_gene` (`id_genr_idioma_ancestral`),
+  KEY `mant_persona_id_genr_indigena_fc05b8f1_fk_genr_gene` (`id_genr_indigena`),
+  KEY `mant_persona_id_genr_jornada_aa6dc71f_fk_genr_gene` (`id_genr_jornada`),
+  KEY `mant_persona_id_genr_pais_ad6a9277_fk_genr_gene` (`id_genr_pais`),
+  KEY `mant_persona_id_genr_provincia_72e9ed88_fk_genr_gene` (`id_genr_provincia`),
+  KEY `mant_persona_id_genr_tipo_identif_70f41b35_fk_genr_gene` (`id_genr_tipo_identificacion`),
+  KEY `mant_persona_id_genr_tipo_parente_156bc50d_fk_genr_gene` (`id_genr_tipo_parentesco`),
+  KEY `mant_persona_id_genr_tipo_sangre_ba558316_fk_genr_gene` (`id_genr_tipo_sangre`),
+  KEY `mant_persona_id_genr_tipo_usuario_9a359f1a_fk_genr_gene` (`id_genr_tipo_usuario`),
+  CONSTRAINT `mant_persona_id_genr_categoria_mi_4922626f_fk_genr_gene` FOREIGN KEY (`id_genr_categoria_migratoria`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_ciudad_9749b7b1_fk_genr_gene` FOREIGN KEY (`id_genr_ciudad`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_estado_civil_51eac68f_fk_genr_gene` FOREIGN KEY (`id_genr_estado_civil`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_estado_labor_72eac056_fk_genr_gene` FOREIGN KEY (`id_genr_estado_laboralp`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_estado_labor_a9fbeff5_fk_genr_gene` FOREIGN KEY (`id_genr_estado_laboralm`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_etnia_ac16f1d3_fk_genr_gene` FOREIGN KEY (`id_genr_etnia`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_genero_c43145ca_fk_genr_gene` FOREIGN KEY (`id_genr_genero`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_idioma_ances_b5f2a186_fk_genr_gene` FOREIGN KEY (`id_genr_idioma_ancestral`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_indigena_fc05b8f1_fk_genr_gene` FOREIGN KEY (`id_genr_indigena`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_jornada_aa6dc71f_fk_genr_gene` FOREIGN KEY (`id_genr_jornada`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_pais_ad6a9277_fk_genr_gene` FOREIGN KEY (`id_genr_pais`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_provincia_72e9ed88_fk_genr_gene` FOREIGN KEY (`id_genr_provincia`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_tipo_identif_70f41b35_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_identificacion`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_tipo_parente_156bc50d_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_parentesco`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_tipo_sangre_ba558316_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_sangre`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_persona_id_genr_tipo_usuario_9a359f1a_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mant_persona`
@@ -295,6 +972,30 @@ INSERT INTO `mant_persona` VALUES (3,'Luis Eduardo','Ardila Macias','1998-04-06'
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mant_representante`
+--
+
+DROP TABLE IF EXISTS `mant_representante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mant_representante` (
+  `id_representante` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario_ing` varchar(45) NOT NULL,
+  `fecha_ingreso` datetime(6) NOT NULL,
+  `terminal_ing` varchar(45) NOT NULL,
+  `ingresos_totales` double NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_genr_nivel_formacion` int(11) NOT NULL,
+  `id_persona` int(11) NOT NULL,
+  PRIMARY KEY (`id_representante`),
+  KEY `mant_representante_id_genr_nivel_formac_84cba28b_fk_genr_gene` (`id_genr_nivel_formacion`),
+  KEY `mant_representante_id_persona_f06c7605_fk_mant_pers` (`id_persona`),
+  CONSTRAINT `mant_representante_id_genr_nivel_formac_84cba28b_fk_genr_gene` FOREIGN KEY (`id_genr_nivel_formacion`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mant_representante_id_persona_f06c7605_fk_mant_pers` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mant_representante`
 --
 
@@ -302,6 +1003,24 @@ LOCK TABLES `mant_representante` WRITE;
 /*!40000 ALTER TABLE `mant_representante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mant_representante` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mov_admision`
+--
+
+DROP TABLE IF EXISTS `mov_admision`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_admision` (
+  `id_admision` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo_documento` varchar(45) NOT NULL,
+  `documento` varchar(45) NOT NULL,
+  `id_estudiante` int(11) NOT NULL,
+  PRIMARY KEY (`id_admision`),
+  KEY `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` (`id_estudiante`),
+  CONSTRAINT `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mov_admision`
@@ -313,6 +1032,38 @@ LOCK TABLES `mov_admision` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mov_cab_curso`
+--
+
+DROP TABLE IF EXISTS `mov_cab_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_cab_curso` (
+  `id_curso` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(10) NOT NULL,
+  `nombre` varchar(10) NOT NULL,
+  `cupo` int(11) NOT NULL,
+  `id_anio_lectivo` int(11) NOT NULL,
+  `id_genr_curso` int(11) NOT NULL,
+  `id_genr_formacion` int(11) NOT NULL,
+  `id_genr_jornada` int(11) NOT NULL,
+  `id_genr_paralelo` int(11) NOT NULL,
+  PRIMARY KEY (`id_curso`),
+  UNIQUE KEY `codigo` (`codigo`),
+  KEY `mov_cab_curso_id_anio_lectivo_1044a1f2_fk_mant_anio` (`id_anio_lectivo`),
+  KEY `mov_cab_curso_id_genr_curso_5faf9c55_fk_genr_gene` (`id_genr_curso`),
+  KEY `mov_cab_curso_id_genr_formacion_cfb255f5_fk_genr_gene` (`id_genr_formacion`),
+  KEY `mov_cab_curso_id_genr_jornada_af275278_fk_genr_gene` (`id_genr_jornada`),
+  KEY `mov_cab_curso_id_genr_paralelo_402a7101_fk_genr_gene` (`id_genr_paralelo`),
+  CONSTRAINT `mov_cab_curso_id_anio_lectivo_1044a1f2_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
+  CONSTRAINT `mov_cab_curso_id_genr_curso_5faf9c55_fk_genr_gene` FOREIGN KEY (`id_genr_curso`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_cab_curso_id_genr_formacion_cfb255f5_fk_genr_gene` FOREIGN KEY (`id_genr_formacion`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_cab_curso_id_genr_jornada_af275278_fk_genr_gene` FOREIGN KEY (`id_genr_jornada`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_cab_curso_id_genr_paralelo_402a7101_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mov_cab_curso`
 --
 
@@ -320,6 +1071,34 @@ LOCK TABLES `mov_cab_curso` WRITE;
 /*!40000 ALTER TABLE `mov_cab_curso` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mov_cab_curso` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mov_cab_registro_notas`
+--
+
+DROP TABLE IF EXISTS `mov_cab_registro_notas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_cab_registro_notas` (
+  `id_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
+  `promedio_curso_1q` double NOT NULL,
+  `promedio_curso_2q` double NOT NULL,
+  `promedio_curso_general` double NOT NULL,
+  `id_anio_lectivo` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
+  `id_genr_materia` int(11) NOT NULL,
+  PRIMARY KEY (`id_registro_notas`),
+  KEY `mov_cab_registro_not_id_anio_lectivo_70edd485_fk_mant_anio` (`id_anio_lectivo`),
+  KEY `mov_cab_registro_not_id_curso_f98f0d91_fk_mov_cab_c` (`id_curso`),
+  KEY `mov_cab_registro_not_id_empleado_b3a71bdb_fk_mant_empl` (`id_empleado`),
+  KEY `mov_cab_registro_not_id_genr_materia_2b3b7084_fk_genr_gene` (`id_genr_materia`),
+  CONSTRAINT `mov_cab_registro_not_id_anio_lectivo_70edd485_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
+  CONSTRAINT `mov_cab_registro_not_id_curso_f98f0d91_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
+  CONSTRAINT `mov_cab_registro_not_id_empleado_b3a71bdb_fk_mant_empl` FOREIGN KEY (`id_empleado`) REFERENCES `mant_empleado` (`id_empleado`),
+  CONSTRAINT `mov_cab_registro_not_id_genr_materia_2b3b7084_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mov_cab_registro_notas`
@@ -331,6 +1110,31 @@ LOCK TABLES `mov_cab_registro_notas` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mov_detalle_empleado`
+--
+
+DROP TABLE IF EXISTS `mov_detalle_empleado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_detalle_empleado` (
+  `id_detalle_empleado` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anio_lectivo` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_genr_materia` int(11) NOT NULL,
+  `id_genr_paralelo` int(11) NOT NULL,
+  PRIMARY KEY (`id_detalle_empleado`),
+  KEY `mov_detalle_empleado_id_anio_lectivo_66f29d45_fk_genr_gene` (`id_anio_lectivo`),
+  KEY `mov_detalle_empleado_id_curso_af0c86b2_fk_mov_cab_curso_id_curso` (`id_curso`),
+  KEY `mov_detalle_empleado_id_genr_materia_2f227137_fk_genr_gene` (`id_genr_materia`),
+  KEY `mov_detalle_empleado_id_genr_paralelo_672cb28b_fk_genr_gene` (`id_genr_paralelo`),
+  CONSTRAINT `mov_detalle_empleado_id_anio_lectivo_66f29d45_fk_genr_gene` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_detalle_empleado_id_curso_af0c86b2_fk_mov_cab_curso_id_curso` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
+  CONSTRAINT `mov_detalle_empleado_id_genr_materia_2f227137_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_detalle_empleado_id_genr_paralelo_672cb28b_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mov_detalle_empleado`
 --
 
@@ -338,6 +1142,29 @@ LOCK TABLES `mov_detalle_empleado` WRITE;
 /*!40000 ALTER TABLE `mov_detalle_empleado` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mov_detalle_empleado` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mov_detalle_materia_curso`
+--
+
+DROP TABLE IF EXISTS `mov_detalle_materia_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_detalle_materia_curso` (
+  `id_detalle_curso` int(11) NOT NULL AUTO_INCREMENT,
+  `anio` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_genr_materias` int(11) NOT NULL,
+  PRIMARY KEY (`id_detalle_curso`),
+  KEY `mov_detalle_materia__estado_dd6018f2_fk_genr_gene` (`estado`),
+  KEY `mov_detalle_materia__id_curso_170afc3d_fk_mov_cab_c` (`id_curso`),
+  KEY `mov_detalle_materia__id_genr_materias_089c4fd0_fk_genr_gene` (`id_genr_materias`),
+  CONSTRAINT `mov_detalle_materia__estado_dd6018f2_fk_genr_gene` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
+  CONSTRAINT `mov_detalle_materia__id_curso_170afc3d_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
+  CONSTRAINT `mov_detalle_materia__id_genr_materias_089c4fd0_fk_genr_gene` FOREIGN KEY (`id_genr_materias`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mov_detalle_materia_curso`
@@ -349,6 +1176,31 @@ LOCK TABLES `mov_detalle_materia_curso` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mov_detalle_registro_notas`
+--
+
+DROP TABLE IF EXISTS `mov_detalle_registro_notas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_detalle_registro_notas` (
+  `id_detalle_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
+  `primer_parcial` double NOT NULL,
+  `segundo_parcial` double NOT NULL,
+  `tercer_parcial` double NOT NULL,
+  `examen` double NOT NULL,
+  `promedio` double NOT NULL,
+  `total_promedio_general` double NOT NULL,
+  `id_estudiante` int(11) NOT NULL,
+  `id_general_quimestre` int(11) NOT NULL,
+  PRIMARY KEY (`id_detalle_registro_notas`),
+  KEY `mov_detalle_registro_id_estudiante_3ae5821d_fk_mant_estu` (`id_estudiante`),
+  KEY `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` (`id_general_quimestre`),
+  CONSTRAINT `mov_detalle_registro_id_estudiante_3ae5821d_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`),
+  CONSTRAINT `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` FOREIGN KEY (`id_general_quimestre`) REFERENCES `genr_general` (`idgenr_general`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mov_detalle_registro_notas`
 --
 
@@ -358,6 +1210,28 @@ LOCK TABLES `mov_detalle_registro_notas` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mov_estudiante_asignacion_curso`
+--
+
+DROP TABLE IF EXISTS `mov_estudiante_asignacion_curso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_estudiante_asignacion_curso` (
+  `id_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha_ingreso` datetime(6) NOT NULL,
+  `usuario_ing` varchar(45) NOT NULL,
+  `terminal_ing` varchar(45) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_estudiante` int(11) NOT NULL,
+  PRIMARY KEY (`id_estudiante_curso`),
+  KEY `mov_estudiante_asign_id_curso_276599f5_fk_mov_cab_c` (`id_curso`),
+  KEY `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` (`id_estudiante`),
+  CONSTRAINT `mov_estudiante_asign_id_curso_276599f5_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
+  CONSTRAINT `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `mov_estudiante_asignacion_curso`
 --
 
@@ -365,6 +1239,28 @@ LOCK TABLES `mov_estudiante_asignacion_curso` WRITE;
 /*!40000 ALTER TABLE `mov_estudiante_asignacion_curso` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mov_estudiante_asignacion_curso` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `mov_matriculacion_estudiante`
+--
+
+DROP TABLE IF EXISTS `mov_matriculacion_estudiante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mov_matriculacion_estudiante` (
+  `id_matriculacion_estudiante` int(11) NOT NULL AUTO_INCREMENT,
+  `id_anio_lectivo` int(11) NOT NULL,
+  `id_curso` int(11) NOT NULL,
+  `id_estudiante` int(11) NOT NULL,
+  PRIMARY KEY (`id_matriculacion_estudiante`),
+  KEY `mov_matriculacion_es_id_anio_lectivo_67a84072_fk_mant_anio` (`id_anio_lectivo`),
+  KEY `mov_matriculacion_es_id_curso_4025598b_fk_mov_cab_c` (`id_curso`),
+  KEY `mov_matriculacion_es_id_estudiante_919bb5ca_fk_mant_estu` (`id_estudiante`),
+  CONSTRAINT `mov_matriculacion_es_id_anio_lectivo_67a84072_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
+  CONSTRAINT `mov_matriculacion_es_id_curso_4025598b_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
+  CONSTRAINT `mov_matriculacion_es_id_estudiante_919bb5ca_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `mov_matriculacion_estudiante`
@@ -392,4 +1288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-05 22:44:41
+-- Dump completed on 2020-03-08 22:11:36
