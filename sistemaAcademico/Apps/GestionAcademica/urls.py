@@ -3,6 +3,7 @@ from django.db import models
 from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from .views import *
@@ -105,9 +106,16 @@ urlpatterns = [
     path('editar_empleado/', UpdateEmpleado.as_view(), name='editar_empleado'),
     #Eliminar
 
+
+    #------------Reportes de Configuraciones---------------
+    path('reporte_usuarios/', reporte_usuarios, name='reporte_usuarios'),
+    path('reporte_roles/', reporte_roles, name='reporte_roles'),
+
+
     #---------Django-Autocomplete-Filters----------
     path('TID_autocomplete/', TID_autocomplete.as_view(), name='TID_autocomplete'),
     path('GEN_autocomplete/', GEN_autocomplete, name='GEN_autocomplete'),
+
 ]
 
 

@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{%load staticfiles%}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block contenido_principal %}
+{%block body%}
+  <script>
+       function Reportes(numero){
+        var hidden = document.getElementById('comboR').value = numero;
+        var formulario = document.getElementById('myform').submit();
+           console.log(hidden);
+       }
+
+
+    </script>
+
+<div class="card-body">
+
+<form  method="POST" id="myform">
+    {% csrf_token %}
+    <center><font face=" Bevan" size="15" color="99CCFF">Reporte Rol</font></center>
+    <br>
+
+    <div class="label label-info">
+         <center><input type="text" name="campo" placeholder="buscar">
+             </center>
+        <br>
+        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check2" name="check2">
+        <br>
+        <label for=""><b>Elegir formato a imprimir:</b></label>
+        <button type="button" id="ex" onclick="Reportes(1)"><img src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
+        <button type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" alt="REPORTE EN PDF" height="30" width="30"></button>
+
+
+        <input type="hidden" name="comboR" id="comboR" value="">
+
+
+
+
+    </div>
+
+</form>
+</div>
+{% endblock body %}
+
+{% endblock contenido_principal %}
+

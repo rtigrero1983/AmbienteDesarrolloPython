@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{%load staticfiles%}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block contenido_principal %}
+{%block body%}
+  <script>
+       function Reportes(numero){
+        var hidden = document.getElementById('comboR').value = numero;
+        var formulario = document.getElementById('myform').submit();
+           console.log(hidden);
+       }
+    </script>
+
+
+<div class="card shadow mb-45">
+  <div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte de Usuarios</h4>
+  </div>
+
+  <div class="card-body ">
+
+
+<form  method="POST" id="myform">
+    {% csrf_token %}
+    <div class="label label-info">
+        <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
+        <select name="combo" id="combo" class="form-control" required>
+            <option selected="" disabled="">--------------------</option>
+            <option value="1" name="id_usuario">id</option>
+            <option value="2" name="user">usuario</option>
+            <option value="3" name="nombre">nombre</option>
+        </select>&nbsp; <input type="text" class="form-control" name="campo" placeholder="buscar">
+        <br>
+        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check1" name="check1" required>
+        <br>
+        <label class="text-dark h6"><b>Elegir formato a imprimir:</b></label>
+        <br>
+
+         <div class="row darkwhite-bg py-2 text-center">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class=" col-6 col-md-4 mb-0">
+                          <button class="btn btn-success btn-block text-light" type="button" id="ex" onclick="Reportes(1)" ><img class="img-thumbnail" src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"> Generar reporte en EXCEL</button> &nbsp;
+                        </div>
+                        <div class=" col-6 col-md-4 mb-0">
+                          <button class="btn btn-danger btn-block" type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" class="img-thumbnail"  alt="REPORTE EN PDF" height="30" width="30"> Generar reporte en PDF</button>
+                        </div>
+                    </div> 
+                </div>
+        </div>  
+        <br>
+        <input type="hidden" name="comboR" id="comboR" value="">
+    </div>
+
+</form>
+</div>
+</div>
+{% endblock body %}
+
+{% endblock contenido_principal %}
+
