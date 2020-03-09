@@ -59,7 +59,7 @@ class CreateMenu(CreateView):
         form = self.form_class(request.POST)
         if form.is_valid():
            var_orden = 0
-           c=form.save()
+           c = form.save()
            lista_orden= self.model.objects.filter(id_padre=c.id_padre).order_by('-orden')[:1]
            for registro in lista_orden:
                b = int(registro.orden)
@@ -67,11 +67,17 @@ class CreateMenu(CreateView):
            c.orden = var_orden
            c.save()
            menu = ConfMenu.objects.get(descripcion=c.descripcion)
-           menu_padre = ConfMenu.objects.get(id_menu=c.id_padre)
-           modulo = ConfModulo.objects.get(nombre=menu_padre.descripcion)
-           ConfModulo_menu.objects.create(id_modulo=modulo,id_menu=menu)
-           return redirect(self.get_success_url())
+           menu_padre = ConfMenu.objects.get(id_menu=c.id_padre)    
+           try:
+              modulo = ConfModulo.objects.get(nombre=menu_padre.descripcion)
+           except ConfModulo_menu.DoesNotExist:
+              modulo = None
 
+           if modulo == None:
+              return redirect(self.get_success_url())
+           else:
+              modulo = ConfModulo_menu.objects.create(id_modulo=modulo,id_menu=menu)
+              return redirect(self.get_success_url()) 
         else:
            return self.render_to_response(self.get_context_data(form=form))
 

@@ -100,7 +100,7 @@ class ConfMenu(models.Model):
     id_menu = models.AutoField(primary_key=True)
     id_padre = models.IntegerField(blank=False, null=False)
     orden = models.IntegerField(blank=True, default=0)
-    descripcion = models.CharField(max_length=45, blank=False, validators=[
+    descripcion = models.CharField(max_length=45, blank=True, validators=[
                                    validate_descripcion], unique=True, null=False, db_column='descripcion')
     id_genr_estado = models.ForeignKey(
         GenrGeneral, on_delete=models.CASCADE, default=97, db_column='id_genr_estado')
