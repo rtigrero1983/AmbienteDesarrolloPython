@@ -44,6 +44,7 @@
                     <div class="tab-pane fade show active" id="pills-info1" role="tabpanel" aria-labelledby="pills-info1-tab">
                         <div class="row">
                             <div class="col-4">
+                                <br>
                                 {{form.nombres|as_crispy_field}}
                                 {{form.apellidos|as_crispy_field}}
                                 {{form.fecha_de_nacimiento|as_crispy_field}}
@@ -51,6 +52,7 @@
                                 {{form.id_genr_genero|as_crispy_field}}
                             </div>
                             <div class="col-4">
+                                <br>
                                 {{form.id_genr_tipo_identificacion|as_crispy_field}}
                                 {{form.id_genr_pais|as_crispy_field}}
                                 {{form.id_genr_provincia|as_crispy_field}}
@@ -58,6 +60,7 @@
                                 {{form.id_genr_tipo_sangre|as_crispy_field}}
                             </div>
                             <div class="col-4">
+                                <br>
                                 {{form.identificacion|as_crispy_field}}
                                 {{form.id_genr_etnia|as_crispy_field}}
                                 {{form.id_genr_jornada|as_crispy_field}}
@@ -66,6 +69,7 @@
                             </div>
                         </div>
                         <div align="center">
+                                <br>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
                                 <a class="btn btn-primary" href="#">>>></a>
@@ -75,24 +79,25 @@
                         <div class="row">
                             <div class="col-4">
                                 <br>
-                                {{form.discapacidad|as_crispy_field}}<br>
-                                {{form.discapacidad_renal|as_crispy_field}}<br>
-                                {{form.discapacidad_neurologica|as_crispy_field}}<br>
+                                {{form.discapacidad|as_crispy_field}}
+                                {{form.discapacidad_renal|as_crispy_field}}
+                                {{form.discapacidad_neurologica|as_crispy_field}}
                             </div>
                             <div class="col-4">
                                 <br>
-                                {{form.enfermedad_alergica|as_crispy_field}}<br>
-                                {{form.asma|as_crispy_field}}<br>
-                                {{form.epilepsia|as_crispy_field}}<br>
+                                {{form.enfermedad_alergica|as_crispy_field}}
+                                {{form.asma|as_crispy_field}}
+                                {{form.epilepsia|as_crispy_field}}
                             </div>
                             <div class="col-4">
                                 <br>
-                                {{form.enfermedad_congenita|as_crispy_field}}<br>
-                                {{form.enfermedad_respiratoria|as_crispy_field}}<br>
-                                {{form.atencion_psicologica|as_crispy_field}}<br>
+                                {{form.enfermedad_congenita|as_crispy_field}}
+                                {{form.enfermedad_respiratoria|as_crispy_field}}
+                                {{form.atencion_psicologica|as_crispy_field}}
                             </div>
                         </div>
                         <div align="center">
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
@@ -102,19 +107,23 @@
                     <div class="tab-pane fade" id="pills-info3" role="tabpanel" aria-labelledby="pills-info3-tab">
                         <div class="row">
                             <div class="col-4">
-                                {{form.pvive_con_usted|as_crispy_field}}<br>
-                                {{form.pnombres|as_crispy_field}}<br>
+                                <br>
+                                {{form.pvive_con_usted|as_crispy_field}}
+                                {{form.pnombres|as_crispy_field}}
                             </div>
                             <div class="col-4">
-                                {{form.papellidos|as_crispy_field}}<br>
-                                {{form.pidentificacion|as_crispy_field}}<br>
+                                <br>
+                                {{form.papellidos|as_crispy_field}}
+                                {{form.pidentificacion|as_crispy_field}}
                             </div>
                             <div class="col-4">
-                                {{form.pdireccion|as_crispy_field}}<br>
-                                {{form.ptelefono|as_crispy_field}}<br>
+                                <br>
+                                {{form.pdireccion|as_crispy_field}}
+                                {{form.ptelefono|as_crispy_field}}
                             </div>
                         </div>
                         <div>
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
@@ -128,17 +137,19 @@
                                 {{form.bono_solidario|as_crispy_field}}<br>
                             </div>
                             <div class="col-4">
+                                <br>
                                 {{form.id_genr_categoria_migratoria|as_crispy_field}}
                             </div>
                             <div class="col-4">
                                 <br>
-                                {{form.mienbros_hogar|as_crispy_field}}<br>
+                                {{form.mienbros_hogar|as_crispy_field}}
                             </div>
                         </div>
-                        <div>
+                        <div align="center">
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
-                                <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                                <a class="btn btn-outline-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
                                 <button type="submit" class="btn btn-primary">Registrar</button>
                         </div>
                     </div>

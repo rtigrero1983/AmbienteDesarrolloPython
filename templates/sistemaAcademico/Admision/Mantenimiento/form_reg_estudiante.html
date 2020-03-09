@@ -29,16 +29,16 @@
 
                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="pills-info1-tab" data-toggle="pill" href="#pills-info1" role="tab" aria-controls="pills-info1" aria-selected="true">Home</a>
+                        <a class="nav-link active" id="pills-info1-tab" data-toggle="pill" href="#pills-info1" role="tab" aria-controls="pills-info1" aria-selected="true">Informacion Personal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-info2-tab" data-toggle="pill" href="#pills-info2" role="tab" aria-controls="pills-info2" aria-selected="false">Profile</a>
+                        <a class="nav-link" id="pills-info2-tab" data-toggle="pill" href="#pills-info2" role="tab" aria-controls="pills-info2" aria-selected="false">Salud</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-info3-tab" data-toggle="pill" href="#pills-info3" role="tab" aria-controls="pills-info3" aria-selected="false">Contact</a>
+                        <a class="nav-link" id="pills-info3-tab" data-toggle="pill" href="#pills-info3" role="tab" aria-controls="pills-info3" aria-selected="false">Informacion Familiares</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-info4-tab" data-toggle="pill" href="#pills-info4" role="tab" aria-controls="pills-info4" aria-selected="false">Contact</a>
+                        <a class="nav-link" id="pills-info4-tab" data-toggle="pill" href="#pills-info4" role="tab" aria-controls="pills-info4" aria-selected="false">Informacion Representante</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
@@ -67,6 +67,7 @@
                             </div>
                         </div>
                         <div align="center">
+                                <br>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
                                 <a class="btn btn-primary" href="#">>>></a>
@@ -91,6 +92,7 @@
                             </div>
                         </div>
                         <div align="center">
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
@@ -118,7 +120,8 @@
                                 {{form.pidentificacion|as_crispy_field}}
                             </div>
                         </div>
-                         <div>
+                         <div align="center">
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
                                 <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
@@ -144,10 +147,11 @@
                                 {{form.bono_solidario|as_crispy_field}}
                             </div>
                         </div>
-                        <div>
+                        <div align="center">
+                                <br>
                                 <a class="btn btn-primary" href="#"><<<</a>
-                                <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                                <a class="btn btn-outline-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
                                 <button type="submit" class="btn btn-primary">Registrar</button>
                         </div>
                     </div>
