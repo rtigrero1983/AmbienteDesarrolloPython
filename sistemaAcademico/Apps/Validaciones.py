@@ -247,3 +247,14 @@ class usuario_validar():
 	def validar_usuario(self, username):
 		valido = self.longitud(username) and self.alfanumerico(username)
 		return valido
+
+def identificar(value):
+	if value == validate_cedula:
+		return validate_cedula
+	else:
+		return validate_ruc
+
+
+
+
+

@@ -45,14 +45,16 @@ class UpdateEmpleado(UpdateView):
 class NuevoEstudiante(CreateView):
     model = MantPersona
     form_class = EstudianteForm
-
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html'
     success_url = reverse_lazy('Academico:registro_estudiante')
+
 
     def get_context_data(self, **kwargs):
         context = super(NuevoEstudiante, self).get_context_data(**kwargs)
         pk = self.kwargs.get('id_persona', 0)
         context['id_persona'] = pk
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
         return context
 
 
@@ -61,12 +63,12 @@ class NuevoEstudiante(CreateView):
         self.object = self.get_object
         form = self.form_class(request.POST)
         if (form.is_valid()):
-            usuario = 'anderson'
-            form.estado=97
-            form.fecha_ingreso = '2020-02-02'
-            form.usuario_ing = usuario
-            form.terminal_ing = socket.gethostname()
-            form.save()
+            estudiante = form.save()
+            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            estudiante.estado=97
+            estudiante.usuario_ing = usuario.usuario
+            estudiante.terminal_ing = socket.gethostname()
+            estudiante.save()
             return redirect(self.get_success_url())
         else:
             print("error")

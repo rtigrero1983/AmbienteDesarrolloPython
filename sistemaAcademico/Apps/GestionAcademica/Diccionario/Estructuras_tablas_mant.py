@@ -4,6 +4,7 @@ from multiselectfield import MultiSelectField
 #from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 #from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleEmpleado
+from sistemaAcademico.Apps.Validaciones import validate_cedula
 
 
 class MantPersona(models.Model):
@@ -17,7 +18,7 @@ class MantPersona(models.Model):
     id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, db_column='id_genr_pais')
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')
     id_genr_estado_civil = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="estado_civil", db_column='id_genr_estado_civil')
-    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False)
+    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[validate_cedula])
     telefono = models.CharField(max_length=15, blank=True, null=True)
     correo = models.EmailField(max_length=50, blank=False, null=False)
     fecha_ingreso = models.DateTimeField(null=False,blank=False)
