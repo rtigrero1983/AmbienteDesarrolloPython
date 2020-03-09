@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'academico',
+        'NAME': 'bd_aacademico_desa',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
