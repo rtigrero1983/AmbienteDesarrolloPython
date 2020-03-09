@@ -17,17 +17,17 @@
 
 --
 -- Table structure for table `auth_group`
---
+
 
 DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_group_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_group_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=125 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_user_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user_user_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `auth_user_user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +191,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_accion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_accion` (
   `id_accion` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
@@ -199,7 +199,7 @@ CREATE TABLE `conf_accion` (
   PRIMARY KEY (`id_accion`),
   KEY `conf_accion_rol_d7718683_fk_conf_rol_id_rol` (`rol`),
   CONSTRAINT `conf_accion_rol_d7718683_fk_conf_rol_id_rol` FOREIGN KEY (`rol`) REFERENCES `conf_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +218,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_accion_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_accion_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confaccion_id` int(11) NOT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE `conf_accion_menu` (
   KEY `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` (`confmenu_id`),
   CONSTRAINT `conf_accion_menu_confaccion_id_57e43ae7_fk_conf_accion_id_accion` FOREIGN KEY (`confaccion_id`) REFERENCES `conf_accion` (`id_accion`),
   CONSTRAINT `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_correos_smpt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_correos_smpt` (
   `id_correos_smpt` int(11) NOT NULL AUTO_INCREMENT,
   `ssl` varchar(30) NOT NULL,
@@ -261,7 +261,7 @@ CREATE TABLE `conf_correos_smpt` (
   UNIQUE KEY `usuario_c` (`usuario_c`),
   KEY `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +279,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_empresa` (
   `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
@@ -302,7 +302,7 @@ CREATE TABLE `conf_empresa` (
   KEY `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` (`id_genr_tipo_identificacion`),
   CONSTRAINT `conf_empresa_estado_88988ab2_fk_genr_general_idgenr_general` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_identificacion`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +320,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_menu` (
   `id_menu` int(11) NOT NULL AUTO_INCREMENT,
   `id_padre` int(11) NOT NULL,
@@ -336,7 +336,7 @@ CREATE TABLE `conf_menu` (
   UNIQUE KEY `descripcion` (`descripcion`),
   KEY `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` (`id_genr_estado`),
   CONSTRAINT `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -355,7 +355,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_modulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_modulo` (
   `id_modulo` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(20) NOT NULL,
@@ -366,7 +366,7 @@ CREATE TABLE `conf_modulo` (
   UNIQUE KEY `nombre` (`nombre`),
   KEY `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -385,7 +385,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_modulo_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_modulo_menu` (
   `id_modulo_menu` int(11) NOT NULL AUTO_INCREMENT,
   `id_genr_estado` int(11) NOT NULL,
@@ -398,7 +398,7 @@ CREATE TABLE `conf_modulo_menu` (
   CONSTRAINT `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_modulo_menu_id_modulo_0d359a15_fk_conf_modulo_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `conf_modulo` (`id_modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,14 +417,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_permiso` (
   `id_permiso` int(11) NOT NULL AUTO_INCREMENT,
   `id_rol` int(11) NOT NULL,
   PRIMARY KEY (`id_permiso`),
   UNIQUE KEY `id_rol` (`id_rol`),
   CONSTRAINT `conf_permiso_id_rol_b839125a_fk_conf_rol_id_rol` FOREIGN KEY (`id_rol`) REFERENCES `conf_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -443,7 +443,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_permiso_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_permiso_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confpermiso_id` int(11) NOT NULL,
@@ -453,7 +453,7 @@ CREATE TABLE `conf_permiso_menu` (
   KEY `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` (`confmenu_id`),
   CONSTRAINT `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_permiso_menu_confpermiso_id_62c12aa1_fk_conf_perm` FOREIGN KEY (`confpermiso_id`) REFERENCES `conf_permiso` (`id_permiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,7 +472,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_rol` (
   `id_rol` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) NOT NULL,
@@ -481,7 +481,7 @@ CREATE TABLE `conf_rol` (
   PRIMARY KEY (`id_rol`),
   KEY `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` (`id_genr_estado`),
   CONSTRAINT `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +500,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
@@ -516,7 +516,7 @@ CREATE TABLE `conf_usuario` (
   CONSTRAINT `conf_usuario_id_genr_estado_b989846a_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_genr_tipo_usuario_cd3441b2_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_persona_a923aec6_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -535,7 +535,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuario_rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_usuario_rol` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confusuario_id` int(11) NOT NULL,
@@ -545,7 +545,7 @@ CREATE TABLE `conf_usuario_rol` (
   KEY `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` (`confrol_id`),
   CONSTRAINT `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` FOREIGN KEY (`confrol_id`) REFERENCES `conf_rol` (`id_rol`),
   CONSTRAINT `conf_usuario_rol_confusuario_id_eff85f64_fk_conf_usua` FOREIGN KEY (`confusuario_id`) REFERENCES `conf_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -564,7 +564,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuarios_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `conf_usuarios_temp` (
   `id_usuario_temp` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
@@ -574,7 +574,7 @@ CREATE TABLE `conf_usuarios_temp` (
   `correo` varchar(254) NOT NULL,
   PRIMARY KEY (`id_usuario_temp`),
   UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -592,7 +592,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_admin_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
@@ -607,7 +607,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -626,14 +626,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) NOT NULL,
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -652,14 +652,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -678,14 +678,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -704,14 +704,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genr_general`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `genr_general` (
   `idgenr_general` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(50) NOT NULL,
   `codigo` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=1750 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1750 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -730,7 +730,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genr_historial`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `genr_historial` (
   `id_historial` int(11) NOT NULL AUTO_INCREMENT,
   `modulo` varchar(50) NOT NULL,
@@ -742,7 +742,7 @@ CREATE TABLE `genr_historial` (
   PRIMARY KEY (`id_historial`),
   KEY `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` (`id_menu`),
   CONSTRAINT `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -760,7 +760,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_anio_lectivo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mant_anio_lectivo` (
   `id_anio_lectivo` int(11) NOT NULL AUTO_INCREMENT,
   `anio` int(11) NOT NULL,
@@ -771,7 +771,7 @@ CREATE TABLE `mant_anio_lectivo` (
   PRIMARY KEY (`id_anio_lectivo`),
   KEY `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -789,7 +789,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mant_empleado` (
   `id_empleado` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_ingreso` datetime(6) NOT NULL,
@@ -808,7 +808,7 @@ CREATE TABLE `mant_empleado` (
   CONSTRAINT `mant_empleado_id_detalle_empleado_a72575b4_fk_mov_detal` FOREIGN KEY (`id_detalle_empleado`) REFERENCES `mov_detalle_empleado` (`id_detalle_empleado`),
   CONSTRAINT `mant_empleado_id_persona_b0b32e94_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`),
   CONSTRAINT `mant_empleado_id_usuario_2929f7e1_fk_conf_usuario_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `conf_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -826,7 +826,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_estudiante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mant_estudiante` (
   `id_estudiante` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_estudiante` varchar(45) NOT NULL,
@@ -837,7 +837,7 @@ CREATE TABLE `mant_estudiante` (
   PRIMARY KEY (`id_estudiante`),
   KEY `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` (`id_persona`),
   CONSTRAINT `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -855,7 +855,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_persona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mant_persona` (
   `id_persona` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) NOT NULL,
@@ -957,7 +957,7 @@ CREATE TABLE `mant_persona` (
   CONSTRAINT `mant_persona_id_genr_tipo_parente_156bc50d_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_parentesco`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_sangre_ba558316_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_sangre`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_usuario_9a359f1a_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -976,7 +976,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_representante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mant_representante` (
   `id_representante` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_ing` varchar(45) NOT NULL,
@@ -991,7 +991,7 @@ CREATE TABLE `mant_representante` (
   KEY `mant_representante_id_persona_f06c7605_fk_mant_pers` (`id_persona`),
   CONSTRAINT `mant_representante_id_genr_nivel_formac_84cba28b_fk_genr_gene` FOREIGN KEY (`id_genr_nivel_formacion`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_representante_id_persona_f06c7605_fk_mant_pers` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1009,7 +1009,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_admision`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_admision` (
   `id_admision` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_documento` varchar(45) NOT NULL,
@@ -1018,7 +1018,7 @@ CREATE TABLE `mov_admision` (
   PRIMARY KEY (`id_admision`),
   KEY `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` (`id_estudiante`),
   CONSTRAINT `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1036,7 +1036,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_cab_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_cab_curso` (
   `id_curso` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(10) NOT NULL,
@@ -1059,7 +1059,7 @@ CREATE TABLE `mov_cab_curso` (
   CONSTRAINT `mov_cab_curso_id_genr_formacion_cfb255f5_fk_genr_gene` FOREIGN KEY (`id_genr_formacion`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_cab_curso_id_genr_jornada_af275278_fk_genr_gene` FOREIGN KEY (`id_genr_jornada`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_cab_curso_id_genr_paralelo_402a7101_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1077,7 +1077,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_cab_registro_notas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_cab_registro_notas` (
   `id_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
   `promedio_curso_1q` double NOT NULL,
@@ -1096,7 +1096,7 @@ CREATE TABLE `mov_cab_registro_notas` (
   CONSTRAINT `mov_cab_registro_not_id_curso_f98f0d91_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_cab_registro_not_id_empleado_b3a71bdb_fk_mant_empl` FOREIGN KEY (`id_empleado`) REFERENCES `mant_empleado` (`id_empleado`),
   CONSTRAINT `mov_cab_registro_not_id_genr_materia_2b3b7084_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1114,7 +1114,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_detalle_empleado` (
   `id_detalle_empleado` int(11) NOT NULL AUTO_INCREMENT,
   `id_anio_lectivo` int(11) NOT NULL,
@@ -1130,7 +1130,7 @@ CREATE TABLE `mov_detalle_empleado` (
   CONSTRAINT `mov_detalle_empleado_id_curso_af0c86b2_fk_mov_cab_curso_id_curso` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_detalle_empleado_id_genr_materia_2f227137_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_detalle_empleado_id_genr_paralelo_672cb28b_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1148,7 +1148,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_materia_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_detalle_materia_curso` (
   `id_detalle_curso` int(11) NOT NULL AUTO_INCREMENT,
   `anio` int(11) NOT NULL,
@@ -1162,7 +1162,7 @@ CREATE TABLE `mov_detalle_materia_curso` (
   CONSTRAINT `mov_detalle_materia__estado_dd6018f2_fk_genr_gene` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_detalle_materia__id_curso_170afc3d_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_detalle_materia__id_genr_materias_089c4fd0_fk_genr_gene` FOREIGN KEY (`id_genr_materias`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1180,7 +1180,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_registro_notas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_detalle_registro_notas` (
   `id_detalle_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
   `primer_parcial` double NOT NULL,
@@ -1196,7 +1196,7 @@ CREATE TABLE `mov_detalle_registro_notas` (
   KEY `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` (`id_general_quimestre`),
   CONSTRAINT `mov_detalle_registro_id_estudiante_3ae5821d_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`),
   CONSTRAINT `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` FOREIGN KEY (`id_general_quimestre`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1214,7 +1214,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_estudiante_asignacion_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_estudiante_asignacion_curso` (
   `id_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_ingreso` datetime(6) NOT NULL,
@@ -1227,7 +1227,7 @@ CREATE TABLE `mov_estudiante_asignacion_curso` (
   KEY `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` (`id_estudiante`),
   CONSTRAINT `mov_estudiante_asign_id_curso_276599f5_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1245,7 +1245,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_matriculacion_estudiante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+
 CREATE TABLE `mov_matriculacion_estudiante` (
   `id_matriculacion_estudiante` int(11) NOT NULL AUTO_INCREMENT,
   `id_anio_lectivo` int(11) NOT NULL,
@@ -1258,7 +1258,7 @@ CREATE TABLE `mov_matriculacion_estudiante` (
   CONSTRAINT `mov_matriculacion_es_id_anio_lectivo_67a84072_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
   CONSTRAINT `mov_matriculacion_es_id_curso_4025598b_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_matriculacion_es_id_estudiante_919bb5ca_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
