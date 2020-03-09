@@ -21,6 +21,6 @@ def reporte_usuarios(request):
 def reporte_roles(request):
 
     if 'usuario' in request.session:
-        return render(request,'sistemaAcademico//Configuraciones/Reportes/reporte_usuario.html')
+        return render(request,'sistemaAcademico//Configuraciones/Reportes/reporte_rol.html')
     else:
         return HttpResponseRedirect('../')
