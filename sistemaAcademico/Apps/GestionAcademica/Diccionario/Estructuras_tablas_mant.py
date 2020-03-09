@@ -12,7 +12,7 @@ class MantPersona(models.Model):
     apellidos = models.CharField(max_length=50, blank=False, null=False)
     fecha_de_nacimiento = models.DateField(blank=False, null=False)
     estado = models.IntegerField(blank=False, null=False)
-    imagen = models.ImageField(upload_to='static/usuarios/',blank=False, null=False,default='static/img/user_default_image.svg')
+    imagen = models.ImageField(upload_to='static/usuarios/',blank=False, null=False,default='../../../static/img/texto-menu.pnguser_default_image.svg')
     id_genr_genero = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="genero", db_column='id_genr_genero')
     id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, db_column='id_genr_pais')
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')

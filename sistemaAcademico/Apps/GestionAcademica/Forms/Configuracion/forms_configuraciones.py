@@ -8,6 +8,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from django_select2.forms import Select2MultipleWidget
 from django_select2.forms import ModelSelect2MultipleWidget
 from collections import OrderedDict
+from django.db.models import Q
 
 
 class SMTPForm(forms.ModelForm):
@@ -94,7 +95,7 @@ class menu_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(menu_form, self).__init__(*args, **kwargs)
         self.fields['id_padre'] = forms.ChoiceField(choices=[(
-            m.id_menu, m.descripcion) for m in ConfMenu.objects.filter(id_padre=0)], widget={})
+            m.id_menu, m.descripcion) for m in ConfMenu.objects.filter(Q(id_padre=0) | Q(url__contains='#'))], widget={})
 
 
 class unidad_form(forms.ModelForm):
@@ -229,14 +230,11 @@ class AccionesForm(forms.ModelForm):
             "id_menu",
             "descripcion",
         ]
+
         labels = {
             "id_rol": "Rol",
-            "descripcion": "Accion",
+            "descripcion": "Acciones disponibles en el sistema",
             "id_menu": "Menus disponibles",
-        }
-        widgets = {
-            "descripcion": forms.TextInput(attrs={
-                "class": "form-control", "placeholder": "Selecione el nombre de la accion", "required": "true"}),
         }
 
 

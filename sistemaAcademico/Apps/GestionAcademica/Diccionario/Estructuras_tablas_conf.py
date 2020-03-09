@@ -171,9 +171,16 @@ class ConfModulo_menu(models.Model):
 
 
 class ConfAccion(models.Model):
+    ACCIONES_CHOICES = [
+        ('Agregar', 'Agregar Registros'),
+        ('Editar', 'Editar Registros'),
+        ('Eliminar', 'Eliminar Registros'),
+        ('Imprimir', 'Imprimir Registros'),
+    ]
+
     id_accion = models.AutoField(primary_key=True)
-    id_rol = models.ForeignKey(ConfRol,on_delete=models.CASCADE,db_column='rol',unique=True)
-    descripcion = models.CharField(max_length=50,blank=False,null=False,unique=True)
+    id_rol = models.ForeignKey(ConfRol,on_delete=models.CASCADE,db_column='rol')
+    descripcion = models.CharField(max_length=50,choices=ACCIONES_CHOICES,blank=False,null=False)
     id_menu = models.ManyToManyField(ConfMenu,db_table='conf_accion_menu')
 
     class Meta:

@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sistemaAcademico.Apps.GestionAcademica.context_processors.acciones',
             ],
         },
     },
@@ -89,9 +90,9 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'sa_prueba2',
+        'NAME': 'bd_academico_desa',
         'USER': 'root',
-        'PASSWORD': 'verde21000',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': 3306,
     }

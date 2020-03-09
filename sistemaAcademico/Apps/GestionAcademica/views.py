@@ -18,16 +18,9 @@ from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModu
 
 def inicio(request):
     if 'usuario' in request.session:
-        menu_padre = []
         contexto = {}
         permiso = ConfMenu.objects.filter(
             fk_permiso_modmenu__id_rol__fk_rol__id_usuario=request.session.get('usuario'), id_genr_estado=97).values()
-        """for p  in permiso:
-            for m in p.menu.all():
-                menu_padre.append(m)
-        """
-        contexto['menu_padre'] = menu_padre
-
         usuario = ConfUsuario.objects.get(
             id_usuario=request.session.get('usuario'))
         contexto['permisos'] = permiso
@@ -55,8 +48,7 @@ def login(request):
     except Exception as e:
         contexto['error'] = "Usuario o contraseña incorrectos"
         return render(request, 'base/login.html', contexto)
-
-    return render(request, 'base/login.html', contexto)
+    return render(request,'base/login.html',contexto)
 
 
 def salir(request):
