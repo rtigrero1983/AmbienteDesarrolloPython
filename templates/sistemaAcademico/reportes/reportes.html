@@ -12,40 +12,42 @@
         var formulario = document.getElementById('myform').submit();
            console.log(hidden);
        }
-
-
     </script>
 
-<div class="card-body">
+
+<div class="card shadow mb-45">
+  <div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte de Usuarios</h6>
+  </div>
+
+  <div class="card-body ">
+
 
 <form  method="POST" id="myform">
     {% csrf_token %}
-    <center><font face=" Bevan" size="15" color="99CCFF">Reporte de Usuarios</font></center>
-    <br>
-
     <div class="label label-info">
-        <label for="combo"><b>Seleccione el metodo de busqueda:</b></label>
-        <select name="combo" id="combo">
+        <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
+        <select name="combo" id="combo" class="form-control" required>
+            <option selected="" disabled="">--------------------</option>
             <option value="1" name="id_usuario">id</option>
             <option value="2" name="user">usuario</option>
             <option value="3" name="nombre">nombre</option>
-        </select>&nbsp; <input type="text" name="campo" placeholder="buscar">
+        </select>&nbsp; <input type="text" class="form-control" name="campo" placeholder="buscar">
         <br>
-        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check1" name="check1">
+        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check1" name="check1" required>
         <br>
-        <label for=""><b>Elegir formato a imprimir:</b></label>
-        <button type="button" id="ex" onclick="Reportes(1)"><img src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
-        <button type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" alt="REPORTE EN PDF" height="30" width="30"></button>
+        <label class="text-dark h6"><b>Elegir formato a imprimir:</b></label>
+        <br>
+        <button class="btn btn-success btn-block" type="button" id="ex" onclick="Reportes(1)" ><img class="img-thumbnail" src="{%static 'img/excel1.png'%}" alt="REPORTE EN EXCEL" height="30" width="30"></button> &nbsp;
+        <br>
+        <button class="btn btn-danger btn-block" type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" class="img-thumbnail"  alt="REPORTE EN PDF" height="30" width="30"></button>
 
 
         <input type="hidden" name="comboR" id="comboR" value="">
-
-
-
-
     </div>
 
 </form>
+</div>
 </div>
 {% endblock body %}
 
