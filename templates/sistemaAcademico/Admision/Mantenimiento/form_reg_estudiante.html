@@ -15,7 +15,6 @@
 <form method="POST" action="#">
 {% csrf_token %}
             <br>
-            <br>
             <div class="container">
             <div class="row">
             <div class="col">
@@ -23,213 +22,138 @@
             <h2>{{ error }}</h2>
                 {% else %}
                 {% endif %}
-                <header class="cuadro_titulo">
+                <header class="cuadro_titulo rounded">
                     <h4 class="titulo text-center">Mantenimiento | Registrar Estudiante</h4>
                 </header>
+                <br>
 
-                <br><br>
-
-                <div action="#" enctype="multipart/form-data" class="form-horizontal ">
-
-                <div class="row">
-
-                    <div class="col-6">
-                    <label for="nombres" class="text-dark h6">{{form.nombres.label }} :</label>
-               {{form.nombres}}<br>
-                        <label for="apellidos" class="text-dark h6">{{form.apellidos.label }} :</label>
-               {{form.apellidos}}<br>
-                       <label for="fecha_de_nacimiento" class="text-dark h6">{{form.fecha_de_nacimiento.label }} :</label>
-               {{form.fecha_de_nacimiento}}<br>
-
-               {{form.id_genr_genero|as_crispy_field}}<br>
-
-               {{form.id_genr_pais|as_crispy_field}}<br>
-                        <label for="lugar_nacimiento" class="text-dark h6">{{form.lugar_nacimiento.label }} :</label>
-               {{form.lugar_nacimiento}}<br>
-
-               {{form.id_genr_provincia|as_crispy_field}}<br>
-
-               {{form.id_genr_categoria_migratoria|as_crispy_field}}<br>
-
-                </div>
-
-
-                    <div class="col-6">
-                        <label for="identificacion" class="text-dark h6">{{form.identificacion.label }} :</label>
-               {{form.identificacion}}<br>
-
-               {{form.id_genr_tipo_sangre|as_crispy_field}}<br>
-
-               {{form.id_genr_etnia|as_crispy_field}}<br>
-
-               {{form.id_genr_jornada|as_crispy_field}}<br>
-
-               {{form.id_genr_indigena|as_crispy_field}}<br>
-
-               {{form.id_genr_idioma_ancestral|as_crispy_field}}<br>
-
-               {{form.id_genr_ciudad|as_crispy_field}}<br>
-
-
-
-
-                    </div>
-                </div>
-
-                    </div>
-                    <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">EN CASO DE EMERGENCIA</h3>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <br>
-                            <label for="discapacidad" class="text-dark h6">{{form.discapacidad.label }} :</label>
-               {{form.discapacidad}}<br>
-                            <label for="discapacidad_renal" class="text-dark h6">{{form.discapacidad_renal.label }} :</label>
-               {{form.discapacidad_renal}}<br>
-                            <label for="discapacidad_neurologica" class="text-dark h6">{{form.discapacidad_neurologica.label }} :</label>
-               {{form.discapacidad_neurologica}}<br>
-                            <label for="enfermedad_alergica" class="text-dark h6">{{form.enfermedad_alergica.label }} :</label>
-               {{form.enfermedad_alergica}}<br>
-                            <label for="asma" class="text-dark h6">{{form.asma.label }} :</label>
-               {{form.asma}}<br>
-
-
+                <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-info1-tab" data-toggle="pill" href="#pills-info1" role="tab" aria-controls="pills-info1" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info2-tab" data-toggle="pill" href="#pills-info2" role="tab" aria-controls="pills-info2" aria-selected="false">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info3-tab" data-toggle="pill" href="#pills-info3" role="tab" aria-controls="pills-info3" aria-selected="false">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-info4-tab" data-toggle="pill" href="#pills-info4" role="tab" aria-controls="pills-info4" aria-selected="false">Contact</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-info1" role="tabpanel" aria-labelledby="pills-info1-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.nombres|as_crispy_field}}
+                                {{form.apellidos|as_crispy_field}}
+                                {{form.fecha_de_nacimiento|as_crispy_field}}
+                                {{form.lugar_nacimiento|as_crispy_field}}
+                                {{form.id_genr_genero|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.id_genr_pais|as_crispy_field}}
+                                {{form.id_genr_provincia|as_crispy_field}}
+                                {{form.id_genr_ciudad|as_crispy_field}}
+                                {{form.id_genr_categoria_migratoria|as_crispy_field}}
+                                {{form.id_genr_jornada|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.identificacion|as_crispy_field}}
+                                {{form.id_genr_tipo_sangre|as_crispy_field}}
+                                {{form.id_genr_etnia|as_crispy_field}}
+                                {{form.id_genr_indigena|as_crispy_field}}
+                                {{form.id_genr_idioma_ancestral|as_crispy_field}}
+                            </div>
                         </div>
-
-                        <div class="col">
-                            <br>
-                            <label for="epilepsia" class="text-dark h6">{{form.epilepsia.label }} :</label>
-               {{form.epilepsia}}<br>
-                            <label for="enfermedad_congenita" class="text-dark h6">{{form.enfermedad_congenita.label }} :</label>
-               {{form.enfermedad_congenita}}<br>
-                            <label for="enfermedad_respiratoria" class="text-dark h6">{{form.enfermedad_respiratoria.label }} :</label>
-               {{form.enfermedad_respiratoria}}<br>
-                            <label for="atencion_psicologica" class="text-dark h6">{{form.atencion_psicologica.label }} :</label>
-               {{form.atencion_psicologica}}<br>
+                        <div align="center">
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
                         </div>
-
                     </div>
-                    <br>
-                    <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">OTROS</h3>
-
-                    </div>
-                <div class="row">
-                    <div class="col">
-                        <br><br>
-                         <label for="bono_solidario" class="text-dark h6">{{form.bono_solidario.label }} :</label>
-               {{form.bono_solidario}}<br>
-                    </div>
-                    <div class="col">
-                        <br>
-                        <label for="mienbros_hogar" class="text-dark h6">{{form.mienbros_hogar.label }} :</label>
-               {{form.mienbros_hogar}}<br>
-                    </div>
-
-                </div>
-                <div class="row">
-                     <div class="col">
-                        <br>
-
-
-                         <label for="mvive_con_usted" class="text-dark h6">{{form.mvive_con_usted.label }} :</label>
-               {{form.mvive_con_usted}}<br>
-                         <label for="mnombres" class="text-dark h6">{{form.mnombres.label }} :</label>
-               {{form.mnombres}}<br>
-                         <label for="mapellidos" class="text-dark h6">{{form.mapellidos.label }} :</label>
-               {{form.mnombres}}<br>
-                         <label for="midentificacion" class="text-dark h6">{{form.midentificacion.label }} :</label>
-               {{form.midentificacion}}<br>
-                         <label for="mdireccion" class="text-dark h6">{{form.mdireccion.label }} :</label>
-               {{form.mdireccion}}<br>
-                         <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
-               {{form.mtelefono}}<br>
-
+                    <div class="tab-pane fade" id="pills-info2" role="tabpanel" aria-labelledby="pills-info2-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.discapacidad|as_crispy_field}}
+                                {{form.discapacidad_renal|as_crispy_field}}
+                                {{form.discapacidad_neurologica|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.enfermedad_alergica|as_crispy_field}}
+                                {{form.asma|as_crispy_field}}
+                                {{form.epilepsia|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.enfermedad_congenita|as_crispy_field}}
+                                {{form.enfermedad_respiratoria|as_crispy_field}}
+                                {{form.atencion_psicologica|as_crispy_field}}
+                            </div>
                         </div>
-
-
-                    <div class="col">
-                        <br>
-                        <label for="pvive_con_usted" class="text-dark h6">{{form.pvive_con_usted.label }} :</label>
-               {{form.pvive_con_usted}}<br>
-                        <label for="pnombres" class="text-dark h6">{{form.pnombres.label }} :</label>
-               {{form.pnombres}}<br>
-                        <label for="papellidos" class="text-dark h6">{{form.papellidos.label }} :</label>
-               {{form.papellidos}}<br>
-                        <label for="pidentificacion" class="text-dark h6">{{form.pidentificacion.label }} :</label>
-               {{form.pidentificacion}}<br>
-                        <label for="pdireccion" class="text-dark h6">{{form.pdireccion.label }} :</label>
-               {{form.pdireccion}}<br>
-                        <label for="mtelefono" class="text-dark h6">{{form.mtelefono.label }} :</label>
-               {{form.mtelefono}}<br>
+                        <div align="center">
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
                         </div>
-
-
-
-                </div>
-            <div class="cuadro_titulo row">
-                     <h3 class="titulo text-center ">DATOS DEL REPRESENTANTE</h3>
-
-
                     </div>
-
-                <div class="row">
-                    <div class="col">
-                        <br>
-                        <label for="rvive_con_usted" class="text-dark h6">{{form.rvive_con_usted.label }} :</label>
-               {{form.rvive_con_usted}}<br>
-                        <label for="rnombres" class="text-dark h6">{{form.rnombres.label }} :</label>
-               {{form.rnombres}}<br>
-                        <label for="rapellidos" class="text-dark h6">{{form.rapellidos.label }} :</label>
-               {{form.rapellidos}}<br>
-                        <label for="ridentificacion" class="text-dark h6">{{form.ridentificacion.label }} :</label>
-               {{form.ridentificacion}}<br>
-                        <label for="rtelefono" class="text-dark h6">{{form.rtelefono.label }} :</label>
-               {{form.ridentificacion}}<br>
-
-
-                        <label for="rdireccion_trabajo" class="text-dark h6">{{form.rdireccion_trabajo.label }} :</label>
-               {{form.rdireccion_trabajo}}<br>
-                        <label for="rhorario_laboral" class="text-dark h6">{{form.rhorario_laboral.label }} :</label>
-               {{form.rhorario_laboral}}<br>
-                        <label for="rtelefono_trabajo" class="text-dark h6">{{form.rtelefono_trabajo.label }} :</label>
-               {{form.rtelefono_trabajo}}<br>
-                         </div>
-
-
-
-
-
+                    <div class="tab-pane fade" id="pills-info3" role="tabpanel" aria-labelledby="pills-info3-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.mvive_con_usted|as_crispy_field}}
+                                {{form.mnombres|as_crispy_field}}
+                                {{form.mnombres|as_crispy_field}}
+                                {{form.midentificacion|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.mdireccion|as_crispy_field}}
+                                {{form.mtelefono|as_crispy_field}}
+                                {{form.pdireccion|as_crispy_field}}
+                                {{form.mtelefono|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.pvive_con_usted|as_crispy_field}}
+                                {{form.pnombres|as_crispy_field}}
+                                {{form.papellidos|as_crispy_field}}
+                                {{form.pidentificacion|as_crispy_field}}
+                            </div>
+                        </div>
+                         <div>
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-info">Restablecer</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                                <a class="btn btn-primary" href="#">>>></a>
+                        </div>
                     </div>
-
-
-
-
-
-                </div>
-
-
-
-
-
-</div>
+                    <div class="tab-pane fade" id="pills-info4" role="tabpanel" aria-labelledby="pills-info4-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.rvive_con_usted|as_crispy_field}}
+                                {{form.rnombres|as_crispy_field}}
+                                {{form.rapellidos|as_crispy_field}}
+                                {{form.ridentificacion|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.rdireccion_trabajo|as_crispy_field}}
+                                {{form.rhorario_laboral|as_crispy_field}}
+                                {{form.rtelefono_trabajo|as_crispy_field}}
+                                {{form.mienbros_hogar|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                <br>
+                                {{form.bono_solidario|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div>
+                                <a class="btn btn-primary" href="#"><<<</a>
+                                <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                                <a class="btn btn-outline-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
                     </div>
-
-
-
-
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-primary">Guardar cambios</button>
-                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:estudiante' %}">Cancelar edicion</a>
                 </div>
+            </div>
+            </div>
+            </div>
 </form>
-            </div>
-            </div>
-            </div>
-        </form>
-
 {% endblock contenido_principal%}
