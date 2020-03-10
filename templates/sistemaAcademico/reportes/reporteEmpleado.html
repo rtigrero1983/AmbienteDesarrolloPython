@@ -17,7 +17,7 @@
 
 <div class="card shadow mb-45">
   <div class="card-header py-3">
-    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte Rol</h6>
+    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte Empleado</h6>
   </div>
 
   <div class="card-body ">
@@ -26,9 +26,14 @@
 <form  method="POST" id="myform">
     {% csrf_token %}
     <div class="label label-info">
-        </select>&nbsp; <input type="text" class="form-control" name="campo" placeholder="buscar">
+        <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
+        <select name="combo" id="combo" class="form-control" required>
+            <option selected="" disabled="" >--------------------</option>
+            <option value="1" name="">Nombre</option>
+            <option value="3" > usuario</option>
+        </select>&nbsp; <input type="text" class="form-control" name="campoEmpleado" placeholder="buscar">
         <br>
-        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check2" name="check2" required>
+        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check1" name="check1" required>
         <br>
         <label class="text-dark h6"><b>Elegir formato a imprimir:</b></label>
         <br>
@@ -55,8 +60,4 @@
 {% endblock body %}
 
 {% endblock contenido_principal %}
-
-
-
-
 
