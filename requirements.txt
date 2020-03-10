@@ -30,6 +30,7 @@ Pillow==6.2.1
 python-decouple==3.3
 pytz==2019.2
 PyYAML==5.3
+reportlab==3.5.34
 requests==2.22.0
 shellescape==3.4.1
 six==1.14.0

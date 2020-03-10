@@ -167,3 +167,4 @@ def eliminar_empresa(request, id):
         empresas.save()
         return redirect('Academico:empresas')
     return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'empresa': empresas})
+

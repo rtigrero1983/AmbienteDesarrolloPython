@@ -17,13 +17,13 @@
 
 <div class="card shadow mb-45">
   <div class="card-header py-3">
-    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte de Usuarios</h4>
+    <h4 class="m-0 font-weight-bold text-primary text-center">Reporte de Usuarios</h6>
   </div>
 
   <div class="card-body ">
 
 
-<form  method="POST" id="myform">
+<form  method="POST" id="myform" action="{% url 'Reporte:reporte' %}">
     {% csrf_token %}
     <div class="label label-info">
         <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
