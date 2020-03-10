@@ -248,11 +248,35 @@ class usuario_validar():
 		valido = self.longitud(username) and self.alfanumerico(username)
 		return valido
 
-def identificar(value):
-	if value == validate_cedula:
-		return validate_cedula
+def pasaporte(value):
+	if value.isalnum()== True:
+		return True
 	else:
-		return validate_ruc
+		raise ValidationError(
+			_('%(values)s no es un pasaporte correcto'),
+			code="invalid",
+			params={'value': value},
+		)
+
+""""
+def identificar(id,value):
+	if id==8:
+		validate_cedula(value)
+	elif id==9:
+		validate_ruc(value)
+	elif id==10:
+		pasaporte(value)
+	else:
+		raise ValidationError(
+			_('%(values)s no es una identificacion'),
+			code="invalid",
+			params={'value': value},
+		)
+		"""""
+
+
+
+
 
 
 

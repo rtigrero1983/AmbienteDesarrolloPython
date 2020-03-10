@@ -28,11 +28,11 @@
                 {{form.telefono|as_crispy_field}}
                 {{form.fecha_creacion|as_crispy_field}}
                 {{form.identificacion|as_crispy_field }}
-{#                <div class="text-center">#}
-{#                    <button type="submit" class="btn btn-outline-primary">Registrar unidad</button>#}
-{#                    <button type="reset" class="btn btn-outline-info">Restablecer</button>#}
-{#                    <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar registro</a>#}
-{#                </div>#}
+               <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar unidad</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                 <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar registro</a>
+           </div>
 {#                    <label class="text-dark h6 " for="identificacion">identificacion:</label>#}
 {#                <select  name="identificacion" id="identificacion" class="form-control text-dark">#}
 {#                    <option selected="true" class="text-dark" disabled="disabled">#}
@@ -54,7 +54,7 @@
 {#                          <label id="mensaje_m" name="mensaje_identificacion">Seleccione una identificacion para este campo</label>#}
 {#                        </div>#}
 {#                        <br/>   #}
-{#            </form>}
+            </form>}
         </div>
     </div>
 </form>

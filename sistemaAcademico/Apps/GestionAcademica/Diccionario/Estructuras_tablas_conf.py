@@ -1,3 +1,4 @@
+import self as self
 from django.db import models
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantPersona
@@ -15,7 +16,7 @@ class ConfEmpresa(models.Model):
         max_length=200, blank=False, null=False, validators=[validate_descripcion])
     id_genr_tipo_identificacion = models.ForeignKey(
         GenrGeneral, blank=False,null=False, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
-    identificacion = models.CharField(unique=True, max_length=50, validators=[identificar], blank=False, null=False)
+    identificacion = models.CharField(unique=True, max_length=50, validators=[validate_ruc], blank=False, null=False)
     direccion = models.CharField(
         max_length=50, blank=False, null=False, validators=[validate_descripcion])
     representante_legal = models.CharField(
