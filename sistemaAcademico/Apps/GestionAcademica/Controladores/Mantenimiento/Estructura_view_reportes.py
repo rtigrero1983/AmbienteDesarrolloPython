@@ -131,7 +131,7 @@ def reporte_excell(usuarios):
 
 def reportePdf(usuarios,campoChk=None,usuarioph=None):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=ReportePdf.pdf'
+    #response['Content-Disposition'] = 'attachment; filename=ReportePdf.pdf'
     buffer = BytesIO()
     high = 650
     this_U = None

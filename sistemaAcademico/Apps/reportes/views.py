@@ -19,7 +19,14 @@ from reportlab.lib import colors
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 
-#from trunk.sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfRol
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template import Context
+from .utils import link_callback
 
 
 def view_reporte(request, *args, **kwargs):
@@ -798,3 +805,19 @@ def piePagina(c,usuario):
     c.setFont('Helvetica',10)
     c.drawString(100, 50, 'Usuario: {0}'.format(usuario))
 
+def eventos_ejecutados(request):
+    template_path = '../templates/sistemaAcademico/reportes/ejemplo.html'
+    design = ConfUsuario.objects.filter()
+    context = {'design':design}
+
+
+
+    response = HttpResponse(content_type='application/pdf')
+    #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(
+       html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
