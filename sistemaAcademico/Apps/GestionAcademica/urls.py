@@ -6,6 +6,8 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_a
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
+
+from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
@@ -110,6 +112,10 @@ urlpatterns = [
     #------------Reportes de Configuraciones---------------
     path('reporte_usuarios/', reporte_usuarios, name='reporte_usuarios'),
     path('reporte_roles/', reporte_roles, name='reporte_roles'),
+
+    # ------------Reportes de Mantenimiento---------------
+    path('reporte_estudiante/',reporte_estudiante, name='reporte_estudiante'),
+    path('reporte_empleado/', reporte_empleado, name='reporte_empleado'),
 
 
     #---------Django-Autocomplete-Filters----------
