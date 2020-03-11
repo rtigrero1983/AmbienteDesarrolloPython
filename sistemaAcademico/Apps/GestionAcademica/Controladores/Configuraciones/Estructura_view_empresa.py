@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import ListView, CreateView, UpdateView
-from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import unidad_form
+from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configuraciones import unidad_form,EditarU_form
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
@@ -55,32 +55,12 @@ class NuevaEmpre(CreateView):
 
 class UpdateEmpre(UpdateView):
     model = ConfEmpresa
-    form_class = unidad_form
+    form_class = EditarU_form
     context_object_name = 'm'
     template_name = 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html'
     success_url = reverse_lazy('Academico:empresas')
 
-    def get_context_data(self, **kwargs):
-        context = super(UpdateEmpre,self).get_context_data(**kwargs)
-        pk = self.kwargs.get('id_empresa', 0)
-        context['id_empresa'] = pk
-        if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
-        return context
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            unidad = form.save()
-            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            unidad.fecha_ingreso = timezone.now()
-            unidad.usuario_ing = usuario.usuario
-            unidad.terminal_ing = socket.gethostname()
-            form.save()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
 
 
 def empresas(request):
