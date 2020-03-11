@@ -20,7 +20,7 @@ class ConfEmpresa(models.Model):
     direccion = models.CharField(
         max_length=50, blank=False, null=False)
     representante_legal = models.CharField(
-        max_length=50, blank=False, null=False, validators=[validate_letras])
+        max_length=50, blank=False, null=False)
     correo = models.CharField(max_length=100, blank=False, null=False)
     telefono = models.CharField(
         max_length=10, blank=False, null=False, validators=[validate_celular])

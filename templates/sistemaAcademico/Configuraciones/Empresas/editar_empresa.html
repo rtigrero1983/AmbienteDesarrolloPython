@@ -22,6 +22,7 @@
                 {{form.nombre|as_crispy_field}}
                 {{form.razon_social|as_crispy_field}}
                 {{form.id_genr_tipo_identificacion|as_crispy_field}}
+                {{form.identificacion| as_crispy_field}}
                 {{form.direccion|as_crispy_field}}
                 {{form.representante_legal|as_crispy_field}}
                 {{form.correo|as_crispy_field}}
@@ -33,27 +34,6 @@
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
                  <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar registro</a>
            </div>
-{#                    <label class="text-dark h6 " for="identificacion">identificacion:</label>#}
-{#                <select  name="identificacion" id="identificacion" class="form-control text-dark">#}
-{#                    <option selected="true" class="text-dark" disabled="disabled">#}
-{#                        Seleccione una <strong>cedula</strong> o un <strong>ruc<strong/> o un <strong>pasaporte</strong> para esta identificacion:#}
-{#                    </option>#}
-{#                    {% if m.cedula == !=10 %}#}
-{#                    <option class="text-dark" value="{{m.identificacion}}">{{m.identificacion}}</option>#}
-{#                    {%else%}#}
-{#                           {% if m.ruc == !=13%}#}
-{#                               <option class="text-dark" value ="{{m.identificacion}}">{{m.identificacion}}</option>#}
-{#                           {%else%}#}
-{#                               #}
-{#                           {% if m.pasaporte == ""}#}
-{#                                   <option class="text-dark" value ="{{m.pasaporte}}">{{m.pasaporte}}</option>#}
-{#                           {% endif %}#}
-{##}
-{#                            </select>#}
-{#        <div class="invalid-feedback" style="display: none;" id="error_identificacion" name="error_identificacion">#}
-{#                          <label id="mensaje_m" name="mensaje_identificacion">Seleccione una identificacion para este campo</label>#}
-{#                        </div>#}
-{#                        <br/>   #}
             </form>}
         </div>
     </div>
