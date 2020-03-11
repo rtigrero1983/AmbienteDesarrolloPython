@@ -5,6 +5,7 @@ from django.urls import path
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 
