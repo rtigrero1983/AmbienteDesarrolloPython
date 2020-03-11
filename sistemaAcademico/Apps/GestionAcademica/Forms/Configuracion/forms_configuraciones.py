@@ -146,7 +146,7 @@ class unidad_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(unidad_form, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
-            codigo='R')
+            Q(codigo='R') | Q(codigo='C'))
 
 class EditarU_form(forms.ModelForm):
     class Meta:

@@ -393,3 +393,10 @@ def piePagina(c,usuario):
     print(usuario)
     c.setFont('Helvetica',10)
     c.drawString(100, 50, 'Reporte generador por: {0}'.format(usuario))
+
+
+def reporte_estudiante(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Reportes/reporte_estudiante.html')
+
+def reporte_empleado(request):
+    return render(request, 'sistemaAcademico/Configuraciones/Reportes/reporte_usuario.html')

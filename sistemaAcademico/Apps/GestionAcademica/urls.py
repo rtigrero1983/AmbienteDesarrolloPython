@@ -7,7 +7,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estruc
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 
-from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
+
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
