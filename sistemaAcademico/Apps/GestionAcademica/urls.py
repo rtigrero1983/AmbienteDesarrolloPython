@@ -6,6 +6,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_a
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 
 
 from .views import *
@@ -122,6 +123,11 @@ urlpatterns = [
     path('TID_autocomplete/', TID_autocomplete.as_view(), name='TID_autocomplete'),
     path('GEN_autocomplete/', GEN_autocomplete, name='GEN_autocomplete'),
 
+#--------------Matriculacion-------------------
+    path('Aniolectivo/', List_AnioLectivo.as_view(), name='Aniolectivo'),
+    path('Editar_Aniolectivo/<int:pk>', UpdateAniolectivo.as_view(), name='editarAniolectivo'),
+    path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
+    path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo')
 ]
 
 

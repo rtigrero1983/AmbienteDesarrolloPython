@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% load crispy_forms_tags %}
+
+{% block contenido_principal %}
+<form method="POST" action="{% url 'Academico:editarAniolectivo' A.id_anio_lectivo  %}">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculacion | Registrar Año lectivo</h4>
+                </header>
+        <div class="card-body card-block">
+            <form action="#" enctype="multipart/form-data" class="form-horizontal">
+                {{form|crispy}}
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar Año Lectivo</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:Aniolectivo' %}">Cancelar</a>
+            </div>
+  			</form>
+    {% endif %}
+
+{% endblock contenido_principal %} {% block footer %}
+{% endblock %}
