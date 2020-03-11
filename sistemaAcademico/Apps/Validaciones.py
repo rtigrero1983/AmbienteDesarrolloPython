@@ -258,14 +258,14 @@ def pasaporte(value):
 			params={'value': value},
 		)
 
+
 def identificar(value):
-	if len(value) == 10:
-		validate_cedula(value)
-	elif len(value)==13:
+	if len(value)==13:
 		validate_ruc(value)
+
 	else:
 		raise ValidationError(
-			_('%(values)s no es una identificacion valida'),
+			_('%(values)s no es una identificacion'),
 			code="invalid",
 			params={'value': value},
 		)

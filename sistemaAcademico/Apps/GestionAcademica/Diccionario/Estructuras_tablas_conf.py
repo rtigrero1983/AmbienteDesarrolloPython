@@ -16,9 +16,9 @@ class ConfEmpresa(models.Model):
         max_length=200, blank=False, null=False, validators=[validate_descripcion])
     id_genr_tipo_identificacion = models.ForeignKey(
         GenrGeneral, blank=False,null=False, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
-    identificacion = models.CharField(unique=True, max_length=50, validators=[identificar], blank=False, null=False)
+    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[validate_ruc])
     direccion = models.CharField(
-        max_length=50, blank=False, null=False, validators=[validate_descripcion])
+        max_length=50, blank=False, null=False)
     representante_legal = models.CharField(
         max_length=50, blank=False, null=False, validators=[validate_letras])
     correo = models.CharField(max_length=100, blank=False, null=False)

@@ -146,7 +146,11 @@ class unidad_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(unidad_form, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
-            Q(codigo='R') | Q(codigo='C'))
+            codigo='R')
+
+
+
+
 
 class EditarU_form(forms.ModelForm):
     class Meta:
@@ -195,7 +199,8 @@ class EditarU_form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EditarU_form, self).__init__(*args, **kwargs)
-        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(codigo='TID')
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(codigo='R')
+        self.fields['fecha_creacion'].queryset = ConfEmpresa.objects.filter()
 
 
 class UsuarioModelForm(ModelForm):
