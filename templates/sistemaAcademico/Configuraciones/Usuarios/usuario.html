@@ -52,8 +52,8 @@
                         <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
                         <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
                       <td>
-                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn bg-gradient-primary text-light" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i>Editar</a>
-                          <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn bg-gradient-danger text-light" title="Eliminar {{u.usuario}}"><i class="fas fa-warning-circle"></i>Eliminar</a>
+                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn bg-gradient-primary text-light" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
+                          <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn bg-gradient-danger text-light" title="Eliminar {{u.usuario}}"><i class="fas fa-exclamation-triangle"></i></a>
 
                       </td>
                     </tr>

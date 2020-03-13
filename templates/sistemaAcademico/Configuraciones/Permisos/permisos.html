@@ -50,9 +50,9 @@
                 {% for m in permisos %}
                 {% for acciones in editar %}
                     {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
-                        <a href="{% url 'Academico:editar_permiso' rol.id_permiso %}" class="btn bg-gradient-success text-light"
+                        <a href="{% url 'Academico:editar_permiso' rol.id_permiso %}" class="btn bg-gradient-primary text-light"
                         title="Asignar permiso a {{rol.nombre}}">
-                        Editar permisos</a>
+                        <i class="fas fa-info-circle"></i></a>
                     {% endif %}
                 {% endfor %}    
                 {% endfor %}

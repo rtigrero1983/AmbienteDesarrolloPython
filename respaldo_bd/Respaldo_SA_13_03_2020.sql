@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `sistema_academico_2020` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `sistema_academico_2020`;
+-- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: bd_academico_desa
+-- Host: localhost    Database: sistema_academico_2020
 -- ------------------------------------------------------
--- Server version	5.7.27-log
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +29,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -55,7 +57,7 @@ CREATE TABLE `auth_group_permissions` (
   KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +84,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +93,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add Accion',7,'add_confaccion'),(26,'Can change Accion',7,'change_confaccion'),(27,'Can delete Accion',7,'delete_confaccion'),(28,'Can view Accion',7,'view_confaccion'),(29,'Can add (\'Menu\',)',8,'add_confmenu'),(30,'Can change (\'Menu\',)',8,'change_confmenu'),(31,'Can delete (\'Menu\',)',8,'delete_confmenu'),(32,'Can view (\'Menu\',)',8,'view_confmenu'),(33,'Can add (\'Modulo\',)',9,'add_confmodulo'),(34,'Can change (\'Modulo\',)',9,'change_confmodulo'),(35,'Can delete (\'Modulo\',)',9,'delete_confmodulo'),(36,'Can view (\'Modulo\',)',9,'view_confmodulo'),(37,'Can add (\'Rol\',)',10,'add_confrol'),(38,'Can change (\'Rol\',)',10,'change_confrol'),(39,'Can delete (\'Rol\',)',10,'delete_confrol'),(40,'Can view (\'Rol\',)',10,'view_confrol'),(41,'Can add (\'Usuario\',)',11,'add_confusuario'),(42,'Can change (\'Usuario\',)',11,'change_confusuario'),(43,'Can delete (\'Usuario\',)',11,'delete_confusuario'),(44,'Can view (\'Usuario\',)',11,'view_confusuario'),(45,'Can add (\'Lista\',)',12,'add_genrgeneral'),(46,'Can change (\'Lista\',)',12,'change_genrgeneral'),(47,'Can delete (\'Lista\',)',12,'delete_genrgeneral'),(48,'Can view (\'Lista\',)',12,'view_genrgeneral'),(49,'Can add (\'Año lectivo\',)',13,'add_mantaniolectivo'),(50,'Can change (\'Año lectivo\',)',13,'change_mantaniolectivo'),(51,'Can delete (\'Año lectivo\',)',13,'delete_mantaniolectivo'),(52,'Can view (\'Año lectivo\',)',13,'view_mantaniolectivo'),(53,'Can add (\'Empleado\',)',14,'add_mantempleado'),(54,'Can change (\'Empleado\',)',14,'change_mantempleado'),(55,'Can delete (\'Empleado\',)',14,'delete_mantempleado'),(56,'Can view (\'Empleado\',)',14,'view_mantempleado'),(57,'Can add (\'Estudiante\',)',15,'add_mantestudiante'),(58,'Can change (\'Estudiante\',)',15,'change_mantestudiante'),(59,'Can delete (\'Estudiante\',)',15,'delete_mantestudiante'),(60,'Can view (\'Estudiante\',)',15,'view_mantestudiante'),(61,'Can add (\'Persona\',)',16,'add_mantpersona'),(62,'Can change (\'Persona\',)',16,'change_mantpersona'),(63,'Can delete (\'Persona\',)',16,'delete_mantpersona'),(64,'Can view (\'Persona\',)',16,'view_mantpersona'),(65,'Can add Curso',17,'add_movcabcurso'),(66,'Can change Curso',17,'change_movcabcurso'),(67,'Can delete Curso',17,'delete_movcabcurso'),(68,'Can view Curso',17,'view_movcabcurso'),(69,'Can add Usuario_temp',18,'add_usuariotemp'),(70,'Can change Usuario_temp',18,'change_usuariotemp'),(71,'Can delete Usuario_temp',18,'delete_usuariotemp'),(72,'Can view Usuario_temp',18,'view_usuariotemp'),(73,'Can add Matriculacion estudiante',19,'add_movmatriculacionestudiante'),(74,'Can change Matriculacion estudiante',19,'change_movmatriculacionestudiante'),(75,'Can delete Matriculacion estudiante',19,'delete_movmatriculacionestudiante'),(76,'Can view Matriculacion estudiante',19,'view_movmatriculacionestudiante'),(77,'Can add Asignacion de curso',20,'add_movestudianteasignacioncurso'),(78,'Can change Asignacion de curso',20,'change_movestudianteasignacioncurso'),(79,'Can delete Asignacion de curso',20,'delete_movestudianteasignacioncurso'),(80,'Can view Asignacion de curso',20,'view_movestudianteasignacioncurso'),(81,'Can add Detalle Registro de Curso',21,'add_movdetalleregistronotas'),(82,'Can change Detalle Registro de Curso',21,'change_movdetalleregistronotas'),(83,'Can delete Detalle Registro de Curso',21,'delete_movdetalleregistronotas'),(84,'Can view Detalle Registro de Curso',21,'view_movdetalleregistronotas'),(85,'Can add Detalle Materia Curso',22,'add_movdetallemateriacurso'),(86,'Can change Detalle Materia Curso',22,'change_movdetallemateriacurso'),(87,'Can delete Detalle Materia Curso',22,'delete_movdetallemateriacurso'),(88,'Can view Detalle Materia Curso',22,'view_movdetallemateriacurso'),(89,'Can add Detalle Empleado',23,'add_movdetalleempleado'),(90,'Can change Detalle Empleado',23,'change_movdetalleempleado'),(91,'Can delete Detalle Empleado',23,'delete_movdetalleempleado'),(92,'Can view Detalle Empleado',23,'view_movdetalleempleado'),(93,'Can add Registro Notas',24,'add_movcabregistronotas'),(94,'Can change Registro Notas',24,'change_movcabregistronotas'),(95,'Can delete Registro Notas',24,'delete_movcabregistronotas'),(96,'Can view Registro Notas',24,'view_movcabregistronotas'),(97,'Can add Admision',25,'add_movadmision'),(98,'Can change Admision',25,'change_movadmision'),(99,'Can delete Admision',25,'delete_movadmision'),(100,'Can view Admision',25,'view_movadmision'),(101,'Can add (\'Representante\',)',26,'add_mantrepresentante'),(102,'Can change (\'Representante\',)',26,'change_mantrepresentante'),(103,'Can delete (\'Representante\',)',26,'delete_mantrepresentante'),(104,'Can view (\'Representante\',)',26,'view_mantrepresentante'),(105,'Can add (\'Lista\',)',27,'add_genrhistorial'),(106,'Can change (\'Lista\',)',27,'change_genrhistorial'),(107,'Can delete (\'Lista\',)',27,'delete_genrhistorial'),(108,'Can view (\'Lista\',)',27,'view_genrhistorial'),(109,'Can add (\'Permiso\',)',28,'add_confpermiso'),(110,'Can change (\'Permiso\',)',28,'change_confpermiso'),(111,'Can delete (\'Permiso\',)',28,'delete_confpermiso'),(112,'Can view (\'Permiso\',)',28,'view_confpermiso'),(113,'Can add Modulo_Menu',29,'add_confmodulo_menu'),(114,'Can change Modulo_Menu',29,'change_confmodulo_menu'),(115,'Can delete Modulo_Menu',29,'delete_confmodulo_menu'),(116,'Can view Modulo_Menu',29,'view_confmodulo_menu'),(117,'Can add (\'Empresa\',)',30,'add_confempresa'),(118,'Can change (\'Empresa\',)',30,'change_confempresa'),(119,'Can delete (\'Empresa\',)',30,'delete_confempresa'),(120,'Can view (\'Empresa\',)',30,'view_confempresa'),(121,'Can add (\'Correos Smpt\',)',31,'add_confcorreossmpt'),(122,'Can change (\'Correos Smpt\',)',31,'change_confcorreossmpt'),(123,'Can delete (\'Correos Smpt\',)',31,'delete_confcorreossmpt'),(124,'Can view (\'Correos Smpt\',)',31,'view_confcorreossmpt');
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add (\'Menu\',)',7,'add_confmenu'),(26,'Can change (\'Menu\',)',7,'change_confmenu'),(27,'Can delete (\'Menu\',)',7,'delete_confmenu'),(28,'Can view (\'Menu\',)',7,'view_confmenu'),(29,'Can add (\'Modulo\',)',8,'add_confmodulo'),(30,'Can change (\'Modulo\',)',8,'change_confmodulo'),(31,'Can delete (\'Modulo\',)',8,'delete_confmodulo'),(32,'Can view (\'Modulo\',)',8,'view_confmodulo'),(33,'Can add (\'Rol\',)',9,'add_confrol'),(34,'Can change (\'Rol\',)',9,'change_confrol'),(35,'Can delete (\'Rol\',)',9,'delete_confrol'),(36,'Can view (\'Rol\',)',9,'view_confrol'),(37,'Can add (\'Usuario\',)',10,'add_confusuario'),(38,'Can change (\'Usuario\',)',10,'change_confusuario'),(39,'Can delete (\'Usuario\',)',10,'delete_confusuario'),(40,'Can view (\'Usuario\',)',10,'view_confusuario'),(41,'Can add (\'Lista\',)',11,'add_genrgeneral'),(42,'Can change (\'Lista\',)',11,'change_genrgeneral'),(43,'Can delete (\'Lista\',)',11,'delete_genrgeneral'),(44,'Can view (\'Lista\',)',11,'view_genrgeneral'),(45,'Can add (\'Año lectivo\',)',12,'add_mantaniolectivo'),(46,'Can change (\'Año lectivo\',)',12,'change_mantaniolectivo'),(47,'Can delete (\'Año lectivo\',)',12,'delete_mantaniolectivo'),(48,'Can view (\'Año lectivo\',)',12,'view_mantaniolectivo'),(49,'Can add (\'Empleado\',)',13,'add_mantempleado'),(50,'Can change (\'Empleado\',)',13,'change_mantempleado'),(51,'Can delete (\'Empleado\',)',13,'delete_mantempleado'),(52,'Can view (\'Empleado\',)',13,'view_mantempleado'),(53,'Can add (\'Estudiante\',)',14,'add_mantestudiante'),(54,'Can change (\'Estudiante\',)',14,'change_mantestudiante'),(55,'Can delete (\'Estudiante\',)',14,'delete_mantestudiante'),(56,'Can view (\'Estudiante\',)',14,'view_mantestudiante'),(57,'Can add (\'Persona\',)',15,'add_mantpersona'),(58,'Can change (\'Persona\',)',15,'change_mantpersona'),(59,'Can delete (\'Persona\',)',15,'delete_mantpersona'),(60,'Can view (\'Persona\',)',15,'view_mantpersona'),(61,'Can add Curso',16,'add_movcabcurso'),(62,'Can change Curso',16,'change_movcabcurso'),(63,'Can delete Curso',16,'delete_movcabcurso'),(64,'Can view Curso',16,'view_movcabcurso'),(65,'Can add Usuario_temp',17,'add_usuariotemp'),(66,'Can change Usuario_temp',17,'change_usuariotemp'),(67,'Can delete Usuario_temp',17,'delete_usuariotemp'),(68,'Can view Usuario_temp',17,'view_usuariotemp'),(69,'Can add Matriculacion estudiante',18,'add_movmatriculacionestudiante'),(70,'Can change Matriculacion estudiante',18,'change_movmatriculacionestudiante'),(71,'Can delete Matriculacion estudiante',18,'delete_movmatriculacionestudiante'),(72,'Can view Matriculacion estudiante',18,'view_movmatriculacionestudiante'),(73,'Can add Asignacion de curso',19,'add_movestudianteasignacioncurso'),(74,'Can change Asignacion de curso',19,'change_movestudianteasignacioncurso'),(75,'Can delete Asignacion de curso',19,'delete_movestudianteasignacioncurso'),(76,'Can view Asignacion de curso',19,'view_movestudianteasignacioncurso'),(77,'Can add Detalle Registro de Curso',20,'add_movdetalleregistronotas'),(78,'Can change Detalle Registro de Curso',20,'change_movdetalleregistronotas'),(79,'Can delete Detalle Registro de Curso',20,'delete_movdetalleregistronotas'),(80,'Can view Detalle Registro de Curso',20,'view_movdetalleregistronotas'),(81,'Can add Detalle Materia Curso',21,'add_movdetallemateriacurso'),(82,'Can change Detalle Materia Curso',21,'change_movdetallemateriacurso'),(83,'Can delete Detalle Materia Curso',21,'delete_movdetallemateriacurso'),(84,'Can view Detalle Materia Curso',21,'view_movdetallemateriacurso'),(85,'Can add Detalle Empleado',22,'add_movdetalleempleado'),(86,'Can change Detalle Empleado',22,'change_movdetalleempleado'),(87,'Can delete Detalle Empleado',22,'delete_movdetalleempleado'),(88,'Can view Detalle Empleado',22,'view_movdetalleempleado'),(89,'Can add Registro Notas',23,'add_movcabregistronotas'),(90,'Can change Registro Notas',23,'change_movcabregistronotas'),(91,'Can delete Registro Notas',23,'delete_movcabregistronotas'),(92,'Can view Registro Notas',23,'view_movcabregistronotas'),(93,'Can add Admision',24,'add_movadmision'),(94,'Can change Admision',24,'change_movadmision'),(95,'Can delete Admision',24,'delete_movadmision'),(96,'Can view Admision',24,'view_movadmision'),(97,'Can add (\'Representante\',)',25,'add_mantrepresentante'),(98,'Can change (\'Representante\',)',25,'change_mantrepresentante'),(99,'Can delete (\'Representante\',)',25,'delete_mantrepresentante'),(100,'Can view (\'Representante\',)',25,'view_mantrepresentante'),(101,'Can add (\'Lista\',)',26,'add_genrhistorial'),(102,'Can change (\'Lista\',)',26,'change_genrhistorial'),(103,'Can delete (\'Lista\',)',26,'delete_genrhistorial'),(104,'Can view (\'Lista\',)',26,'view_genrhistorial'),(105,'Can add (\'Permiso\',)',27,'add_confpermiso'),(106,'Can change (\'Permiso\',)',27,'change_confpermiso'),(107,'Can delete (\'Permiso\',)',27,'delete_confpermiso'),(108,'Can view (\'Permiso\',)',27,'view_confpermiso'),(109,'Can add Modulo_Menu',28,'add_confmodulo_menu'),(110,'Can change Modulo_Menu',28,'change_confmodulo_menu'),(111,'Can delete Modulo_Menu',28,'delete_confmodulo_menu'),(112,'Can view Modulo_Menu',28,'view_confmodulo_menu'),(113,'Can add (\'Empresa\',)',29,'add_confempresa'),(114,'Can change (\'Empresa\',)',29,'change_confempresa'),(115,'Can delete (\'Empresa\',)',29,'delete_confempresa'),(116,'Can view (\'Empresa\',)',29,'view_confempresa'),(117,'Can add (\'Correos Smpt\',)',30,'add_confcorreossmpt'),(118,'Can change (\'Correos Smpt\',)',30,'change_confcorreossmpt'),(119,'Can delete (\'Correos Smpt\',)',30,'delete_confcorreossmpt'),(120,'Can view (\'Correos Smpt\',)',30,'view_confcorreossmpt'),(121,'Can add Accion',31,'add_confaccion'),(122,'Can change Accion',31,'change_confaccion'),(123,'Can delete Accion',31,'delete_confaccion'),(124,'Can view Accion',31,'view_confaccion');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +118,7 @@ CREATE TABLE `auth_user` (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +147,7 @@ CREATE TABLE `auth_user_groups` (
   KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +175,7 @@ CREATE TABLE `auth_user_user_permissions` (
   KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,10 +199,9 @@ CREATE TABLE `conf_accion` (
   `descripcion` varchar(50) NOT NULL,
   `rol` int(11) NOT NULL,
   PRIMARY KEY (`id_accion`),
-  UNIQUE KEY `descripcion` (`descripcion`),
   KEY `conf_accion_rol_d7718683_fk_conf_rol_id_rol` (`rol`),
   CONSTRAINT `conf_accion_rol_d7718683_fk_conf_rol_id_rol` FOREIGN KEY (`rol`) REFERENCES `conf_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +230,7 @@ CREATE TABLE `conf_accion_menu` (
   KEY `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` (`confmenu_id`),
   CONSTRAINT `conf_accion_menu_confaccion_id_57e43ae7_fk_conf_accion_id_accion` FOREIGN KEY (`confaccion_id`) REFERENCES `conf_accion` (`id_accion`),
   CONSTRAINT `conf_accion_menu_confmenu_id_88cd0db1_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,7 +263,7 @@ CREATE TABLE `conf_correos_smpt` (
   UNIQUE KEY `usuario_c` (`usuario_c`),
   KEY `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `conf_correos_smpt_id_genr_estado_0164f920_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +304,7 @@ CREATE TABLE `conf_empresa` (
   KEY `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` (`id_genr_tipo_identificacion`),
   CONSTRAINT `conf_empresa_estado_88988ab2_fk_genr_general_idgenr_general` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_empresa_id_genr_tipo_identif_24d6ebf1_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_identificacion`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -334,10 +335,9 @@ CREATE TABLE `conf_menu` (
   `view` varchar(45) NOT NULL,
   `id_genr_estado` int(11) NOT NULL,
   PRIMARY KEY (`id_menu`),
-  UNIQUE KEY `descripcion` (`descripcion`),
   KEY `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` (`id_genr_estado`),
   CONSTRAINT `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +346,7 @@ CREATE TABLE `conf_menu` (
 
 LOCK TABLES `conf_menu` WRITE;
 /*!40000 ALTER TABLE `conf_menu` DISABLE KEYS */;
-INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matricula','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','#','fas fa-fw fa-folder','#','#','#',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'Reportes','Academico:reportes','fas fa-fw fa-folder','reportes/','reportes','reportes',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,23,3,'Roles','Academico:roles','fas fa-fw fa-cog','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97),(41,27,1,'Prueba','#','fas fa-fw fa-folder','#','#','#',97),(42,41,2,'pruebasubMenu','Academico:empresas','fas fa-fw fa-folder','#','#','#',97),(43,23,9,'Prueba_menu','#','fas fa-fw fa-cog','#','#','#',97),(44,43,10,'sub_menu_3','Academico:usuarios','fas fa-fw fa-cog','#','#','#',97),(45,28,1,'Estudiantes','Academico:estudiante','fas fa-fw fa-folder','estudiante/','estudiante','Estudiante',97),(46,28,2,'Profesores','Academico:empleado','fas fa-fw fa-folder','empleado/','empleado','Empleado',97);
+INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matricula','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','#','fas fa-fw fa-folder','#','#','#',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'Reportes','#','fas fa-fw fa-folder','#','reportes_mant','#',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,23,3,'Roles','Academico:roles','fas fa-fw fa-cog','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97),(45,28,1,'Estudiantes','Academico:estudiante','fas fa-fw fa-folder','estudiante/','estudiante','Estudiante',97),(46,28,2,'Empleados','Academico:empleado','fas fa-fw fa-folder','empleado/','empleado','Empleado',97),(47,23,10,'Reportes','#','fas fa-fw fa-cog','#','reportes_conf','#',97),(48,47,1,'Reporte Usuario','Academico:reporte_usuarios','fas fa-fw fa-cog','reporte_usuarios/','reporte_usuarios','reporte_usuarios',97),(49,47,2,'Reporte Rol','Academico:reporte_roles','fas fa-fw fa-cog','reporte_roles/','reporte_roles','reporte_roles',97),(50,26,1,'Año Lectivo','Academico:anio_lectivo','fas fa-fw fa-table','anio_lectivo/','anio_lectivo','anio_lectivo',97),(51,32,1,'Empleados','Academico:reporte_empleado','fas fa-fw fa-folder','reporte_empleado/','reporte_empleado','reporte_empleado',97),(52,32,2,'Estudiantes','Academico:reporte_estudiante','fas fa-fw fa-folder','reporte_estudiante/','reporte_estudiante','reporte_estudiante',97);
 /*!40000 ALTER TABLE `conf_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +367,7 @@ CREATE TABLE `conf_modulo` (
   UNIQUE KEY `nombre` (`nombre`),
   KEY `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `conf_modulo_id_genr_estado_7ac01822_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -389,9 +389,9 @@ DROP TABLE IF EXISTS `conf_modulo_menu`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `conf_modulo_menu` (
   `id_modulo_menu` int(11) NOT NULL AUTO_INCREMENT,
+  `id_genr_estado` int(11) NOT NULL,
   `id_menu` int(11) NOT NULL,
   `id_modulo` int(11) NOT NULL,
-  `id_genr_estado` int(11) NOT NULL,
   PRIMARY KEY (`id_modulo_menu`),
   KEY `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` (`id_genr_estado`),
   KEY `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` (`id_menu`),
@@ -399,7 +399,7 @@ CREATE TABLE `conf_modulo_menu` (
   CONSTRAINT `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_modulo_menu_id_modulo_0d359a15_fk_conf_modulo_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `conf_modulo` (`id_modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,7 +408,7 @@ CREATE TABLE `conf_modulo_menu` (
 
 LOCK TABLES `conf_modulo_menu` WRITE;
 /*!40000 ALTER TABLE `conf_modulo_menu` DISABLE KEYS */;
-INSERT INTO `conf_modulo_menu` VALUES (15,23,10,97),(16,24,9,97),(17,25,8,97),(18,26,7,97),(19,27,6,97),(20,28,6,97),(21,29,6,97),(22,30,6,97),(23,31,6,97),(24,32,6,97),(25,33,10,97),(26,34,10,97),(27,35,10,97),(28,36,10,97),(29,37,10,97),(30,38,10,97),(31,40,10,97),(32,43,10,97),(33,44,10,97);
+INSERT INTO `conf_modulo_menu` VALUES (15,97,23,10),(16,97,24,9),(17,97,25,8),(18,97,26,7),(19,97,27,6),(20,97,28,6),(21,97,29,6),(22,97,30,6),(23,97,31,6),(24,97,32,6),(25,97,33,10),(26,97,34,10),(27,97,35,10),(28,97,36,10),(29,97,37,10),(30,97,38,10),(31,97,40,10),(34,97,47,6),(35,97,48,6),(36,97,49,6);
 /*!40000 ALTER TABLE `conf_modulo_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,9 +423,9 @@ CREATE TABLE `conf_permiso` (
   `id_permiso` int(11) NOT NULL AUTO_INCREMENT,
   `id_rol` int(11) NOT NULL,
   PRIMARY KEY (`id_permiso`),
-  UNIQUE KEY `conf_permiso_id_rol_b839125a_uniq` (`id_rol`),
+  UNIQUE KEY `id_rol` (`id_rol`),
   CONSTRAINT `conf_permiso_id_rol_b839125a_fk_conf_rol_id_rol` FOREIGN KEY (`id_rol`) REFERENCES `conf_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,7 +454,7 @@ CREATE TABLE `conf_permiso_menu` (
   KEY `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` (`confmenu_id`),
   CONSTRAINT `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_permiso_menu_confpermiso_id_62c12aa1_fk_conf_perm` FOREIGN KEY (`confpermiso_id`) REFERENCES `conf_permiso` (`id_permiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +463,7 @@ CREATE TABLE `conf_permiso_menu` (
 
 LOCK TABLES `conf_permiso_menu` WRITE;
 /*!40000 ALTER TABLE `conf_permiso_menu` DISABLE KEYS */;
-INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(15,1,29),(16,1,30),(17,1,31),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(22,1,36),(7,1,37),(8,1,38),(9,1,40),(18,1,41),(19,1,42),(20,1,43),(21,1,44),(23,1,45),(24,1,46);
+INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(22,1,36),(7,1,37),(8,1,38),(9,1,40),(23,1,45),(24,1,46),(25,1,47),(26,1,48),(27,1,49),(28,1,50),(29,1,51),(30,1,52);
 /*!40000 ALTER TABLE `conf_permiso_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -482,7 +482,7 @@ CREATE TABLE `conf_rol` (
   PRIMARY KEY (`id_rol`),
   KEY `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` (`id_genr_estado`),
   CONSTRAINT `conf_rol_id_genr_estado_73f22c71_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -517,7 +517,7 @@ CREATE TABLE `conf_usuario` (
   CONSTRAINT `conf_usuario_id_genr_estado_b989846a_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_genr_tipo_usuario_cd3441b2_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_persona_a923aec6_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -526,7 +526,7 @@ CREATE TABLE `conf_usuario` (
 
 LOCK TABLES `conf_usuario` WRITE;
 /*!40000 ALTER TABLE `conf_usuario` DISABLE KEYS */;
-INSERT INTO `conf_usuario` VALUES (1,'luisillo21','a41801fb6bc6eca2e22271ae04da2adfb19cdefa',97,21,3);
+INSERT INTO `conf_usuario` VALUES (1,'luisillo21','a41801fb6bc6eca2e22271ae04da2adfb19cdefa',97,21,3),(2,'cristof','021af8a6c1322becec0dca0ecf4037a85b6a126a',97,21,3),(3,'Anderson','fe91def129307e6cba5a41792d4d77aaab6f7c6d',97,21,3);
 /*!40000 ALTER TABLE `conf_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +546,7 @@ CREATE TABLE `conf_usuario_rol` (
   KEY `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` (`confrol_id`),
   CONSTRAINT `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` FOREIGN KEY (`confrol_id`) REFERENCES `conf_rol` (`id_rol`),
   CONSTRAINT `conf_usuario_rol_confusuario_id_eff85f64_fk_conf_usua` FOREIGN KEY (`confusuario_id`) REFERENCES `conf_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -555,7 +555,7 @@ CREATE TABLE `conf_usuario_rol` (
 
 LOCK TABLES `conf_usuario_rol` WRITE;
 /*!40000 ALTER TABLE `conf_usuario_rol` DISABLE KEYS */;
-INSERT INTO `conf_usuario_rol` VALUES (1,1,3);
+INSERT INTO `conf_usuario_rol` VALUES (1,1,3),(2,2,3),(3,3,3);
 /*!40000 ALTER TABLE `conf_usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,7 +575,7 @@ CREATE TABLE `conf_usuarios_temp` (
   `correo` varchar(254) NOT NULL,
   PRIMARY KEY (`id_usuario_temp`),
   UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -608,7 +608,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -634,7 +634,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -643,7 +643,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(7,'GestionAcademica','confaccion'),(31,'GestionAcademica','confcorreossmpt'),(30,'GestionAcademica','confempresa'),(8,'GestionAcademica','confmenu'),(9,'GestionAcademica','confmodulo'),(29,'GestionAcademica','confmodulo_menu'),(28,'GestionAcademica','confpermiso'),(10,'GestionAcademica','confrol'),(11,'GestionAcademica','confusuario'),(12,'GestionAcademica','genrgeneral'),(27,'GestionAcademica','genrhistorial'),(13,'GestionAcademica','mantaniolectivo'),(14,'GestionAcademica','mantempleado'),(15,'GestionAcademica','mantestudiante'),(16,'GestionAcademica','mantpersona'),(26,'GestionAcademica','mantrepresentante'),(25,'GestionAcademica','movadmision'),(17,'GestionAcademica','movcabcurso'),(24,'GestionAcademica','movcabregistronotas'),(23,'GestionAcademica','movdetalleempleado'),(22,'GestionAcademica','movdetallemateriacurso'),(21,'GestionAcademica','movdetalleregistronotas'),(20,'GestionAcademica','movestudianteasignacioncurso'),(19,'GestionAcademica','movmatriculacionestudiante'),(18,'GestionAcademica','usuariotemp'),(6,'sessions','session');
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(31,'GestionAcademica','confaccion'),(30,'GestionAcademica','confcorreossmpt'),(29,'GestionAcademica','confempresa'),(7,'GestionAcademica','confmenu'),(8,'GestionAcademica','confmodulo'),(28,'GestionAcademica','confmodulo_menu'),(27,'GestionAcademica','confpermiso'),(9,'GestionAcademica','confrol'),(10,'GestionAcademica','confusuario'),(11,'GestionAcademica','genrgeneral'),(26,'GestionAcademica','genrhistorial'),(12,'GestionAcademica','mantaniolectivo'),(13,'GestionAcademica','mantempleado'),(14,'GestionAcademica','mantestudiante'),(15,'GestionAcademica','mantpersona'),(25,'GestionAcademica','mantrepresentante'),(24,'GestionAcademica','movadmision'),(16,'GestionAcademica','movcabcurso'),(23,'GestionAcademica','movcabregistronotas'),(22,'GestionAcademica','movdetalleempleado'),(21,'GestionAcademica','movdetallemateriacurso'),(20,'GestionAcademica','movdetalleregistronotas'),(19,'GestionAcademica','movestudianteasignacioncurso'),(18,'GestionAcademica','movmatriculacionestudiante'),(17,'GestionAcademica','usuariotemp'),(6,'sessions','session');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -660,7 +660,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -669,7 +669,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'GestionAcademica','0001_initial','2020-03-05 21:22:01.256060'),(2,'contenttypes','0001_initial','2020-03-05 21:23:50.582723'),(3,'auth','0001_initial','2020-03-05 21:23:53.779311'),(4,'admin','0001_initial','2020-03-05 21:24:05.196398'),(5,'admin','0002_logentry_remove_auto_add','2020-03-05 21:24:07.383128'),(6,'admin','0003_logentry_add_action_flag_choices','2020-03-05 21:24:07.459200'),(7,'contenttypes','0002_remove_content_type_name','2020-03-05 21:24:09.567095'),(8,'auth','0002_alter_permission_name_max_length','2020-03-05 21:24:09.744003'),(9,'auth','0003_alter_user_email_max_length','2020-03-05 21:24:10.104285'),(10,'auth','0004_alter_user_username_opts','2020-03-05 21:24:10.228503'),(11,'auth','0005_alter_user_last_login_null','2020-03-05 21:24:11.059115'),(12,'auth','0006_require_contenttypes_0002','2020-03-05 21:24:11.094883'),(13,'auth','0007_alter_validators_add_error_messages','2020-03-05 21:24:11.248961'),(14,'auth','0008_alter_user_username_max_length','2020-03-05 21:24:11.381116'),(15,'auth','0009_alter_user_last_name_max_length','2020-03-05 21:24:11.589277'),(16,'auth','0010_alter_group_name_max_length','2020-03-05 21:24:11.803083'),(17,'auth','0011_update_proxy_permissions','2020-03-05 21:24:11.979988'),(18,'sessions','0001_initial','2020-03-05 21:24:12.427996'),(19,'GestionAcademica','0002_auto_20200307_1905','2020-03-07 19:05:45.255879'),(20,'GestionAcademica','0003_auto_20200307_1909','2020-03-07 19:09:24.406440'),(21,'GestionAcademica','0004_auto_20200308_0003','2020-03-08 00:04:17.998484');
+INSERT INTO `django_migrations` VALUES (1,'GestionAcademica','0001_initial','2020-03-09 03:04:50.729920'),(2,'contenttypes','0001_initial','2020-03-09 03:10:02.197121'),(3,'auth','0001_initial','2020-03-09 03:10:08.296882'),(4,'admin','0001_initial','2020-03-09 03:10:41.661212'),(5,'admin','0002_logentry_remove_auto_add','2020-03-09 03:10:48.397228'),(6,'admin','0003_logentry_add_action_flag_choices','2020-03-09 03:10:48.680638'),(7,'contenttypes','0002_remove_content_type_name','2020-03-09 03:10:55.767319'),(8,'auth','0002_alter_permission_name_max_length','2020-03-09 03:10:58.657201'),(9,'auth','0003_alter_user_email_max_length','2020-03-09 03:10:59.439201'),(10,'auth','0004_alter_user_username_opts','2020-03-09 03:10:59.543924'),(11,'auth','0005_alter_user_last_login_null','2020-03-09 03:11:01.534714'),(12,'auth','0006_require_contenttypes_0002','2020-03-09 03:11:01.652159'),(13,'auth','0007_alter_validators_add_error_messages','2020-03-09 03:11:01.949331'),(14,'auth','0008_alter_user_username_max_length','2020-03-09 03:11:04.840910'),(15,'auth','0009_alter_user_last_name_max_length','2020-03-09 03:11:10.687778'),(16,'auth','0010_alter_group_name_max_length','2020-03-09 03:11:11.424887'),(17,'auth','0011_update_proxy_permissions','2020-03-09 03:11:11.654862'),(18,'sessions','0001_initial','2020-03-09 03:11:13.276704');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -686,7 +686,7 @@ CREATE TABLE `django_session` (
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`),
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -695,7 +695,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866');
+INSERT INTO `django_session` VALUES ('42g1stwu53kfohpb73pxj8uvj32myeld','NGQ2NTAwN2RkOGVkYjlkZGFmNGI3MjhlNGZlMDE0ZTRkNWI4ZTc4Njp7InVzdWFyaW8iOjN9','2020-03-13 21:50:55.570526'),('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('7w2ns5wx1maf2ojpznj771unka65uwl1','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-09 06:03:57.995894'),('cnfmu1kjw258qkisgzttselkz6bno89u','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-10 00:07:01.378916'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -712,7 +712,7 @@ CREATE TABLE `genr_general` (
   `codigo` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   PRIMARY KEY (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=1750 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1750 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -743,7 +743,7 @@ CREATE TABLE `genr_historial` (
   PRIMARY KEY (`id_historial`),
   KEY `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` (`id_menu`),
   CONSTRAINT `genr_historial_id_menu_32224d38_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -772,7 +772,7 @@ CREATE TABLE `mant_anio_lectivo` (
   PRIMARY KEY (`id_anio_lectivo`),
   KEY `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -809,7 +809,7 @@ CREATE TABLE `mant_empleado` (
   CONSTRAINT `mant_empleado_id_detalle_empleado_a72575b4_fk_mov_detal` FOREIGN KEY (`id_detalle_empleado`) REFERENCES `mov_detalle_empleado` (`id_detalle_empleado`),
   CONSTRAINT `mant_empleado_id_persona_b0b32e94_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`),
   CONSTRAINT `mant_empleado_id_usuario_2929f7e1_fk_conf_usuario_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `conf_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -838,7 +838,7 @@ CREATE TABLE `mant_estudiante` (
   PRIMARY KEY (`id_estudiante`),
   KEY `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` (`id_persona`),
   CONSTRAINT `mant_estudiante_id_persona_876bb4bc_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -958,7 +958,7 @@ CREATE TABLE `mant_persona` (
   CONSTRAINT `mant_persona_id_genr_tipo_parente_156bc50d_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_parentesco`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_sangre_ba558316_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_sangre`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_usuario_9a359f1a_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -992,7 +992,7 @@ CREATE TABLE `mant_representante` (
   KEY `mant_representante_id_persona_f06c7605_fk_mant_pers` (`id_persona`),
   CONSTRAINT `mant_representante_id_genr_nivel_formac_84cba28b_fk_genr_gene` FOREIGN KEY (`id_genr_nivel_formacion`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_representante_id_persona_f06c7605_fk_mant_pers` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1019,7 +1019,7 @@ CREATE TABLE `mov_admision` (
   PRIMARY KEY (`id_admision`),
   KEY `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` (`id_estudiante`),
   CONSTRAINT `mov_admision_id_estudiante_a4dd1e55_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1060,7 +1060,7 @@ CREATE TABLE `mov_cab_curso` (
   CONSTRAINT `mov_cab_curso_id_genr_formacion_cfb255f5_fk_genr_gene` FOREIGN KEY (`id_genr_formacion`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_cab_curso_id_genr_jornada_af275278_fk_genr_gene` FOREIGN KEY (`id_genr_jornada`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_cab_curso_id_genr_paralelo_402a7101_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1097,7 +1097,7 @@ CREATE TABLE `mov_cab_registro_notas` (
   CONSTRAINT `mov_cab_registro_not_id_curso_f98f0d91_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_cab_registro_not_id_empleado_b3a71bdb_fk_mant_empl` FOREIGN KEY (`id_empleado`) REFERENCES `mant_empleado` (`id_empleado`),
   CONSTRAINT `mov_cab_registro_not_id_genr_materia_2b3b7084_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1131,7 +1131,7 @@ CREATE TABLE `mov_detalle_empleado` (
   CONSTRAINT `mov_detalle_empleado_id_curso_af0c86b2_fk_mov_cab_curso_id_curso` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_detalle_empleado_id_genr_materia_2f227137_fk_genr_gene` FOREIGN KEY (`id_genr_materia`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_detalle_empleado_id_genr_paralelo_672cb28b_fk_genr_gene` FOREIGN KEY (`id_genr_paralelo`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1163,7 +1163,7 @@ CREATE TABLE `mov_detalle_materia_curso` (
   CONSTRAINT `mov_detalle_materia__estado_dd6018f2_fk_genr_gene` FOREIGN KEY (`estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mov_detalle_materia__id_curso_170afc3d_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_detalle_materia__id_genr_materias_089c4fd0_fk_genr_gene` FOREIGN KEY (`id_genr_materias`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1197,7 +1197,7 @@ CREATE TABLE `mov_detalle_registro_notas` (
   KEY `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` (`id_general_quimestre`),
   CONSTRAINT `mov_detalle_registro_id_estudiante_3ae5821d_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`),
   CONSTRAINT `mov_detalle_registro_id_general_quimestre_50304210_fk_genr_gene` FOREIGN KEY (`id_general_quimestre`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1228,7 +1228,7 @@ CREATE TABLE `mov_estudiante_asignacion_curso` (
   KEY `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` (`id_estudiante`),
   CONSTRAINT `mov_estudiante_asign_id_curso_276599f5_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_estudiante_asign_id_estudiante_f09035df_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1259,7 +1259,7 @@ CREATE TABLE `mov_matriculacion_estudiante` (
   CONSTRAINT `mov_matriculacion_es_id_anio_lectivo_67a84072_fk_mant_anio` FOREIGN KEY (`id_anio_lectivo`) REFERENCES `mant_anio_lectivo` (`id_anio_lectivo`),
   CONSTRAINT `mov_matriculacion_es_id_curso_4025598b_fk_mov_cab_c` FOREIGN KEY (`id_curso`) REFERENCES `mov_cab_curso` (`id_curso`),
   CONSTRAINT `mov_matriculacion_es_id_estudiante_919bb5ca_fk_mant_estu` FOREIGN KEY (`id_estudiante`) REFERENCES `mant_estudiante` (`id_estudiante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1272,11 +1272,11 @@ LOCK TABLES `mov_matriculacion_estudiante` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'bd_academico_desa'
+-- Dumping events for database 'sistema_academico_2020'
 --
 
 --
--- Dumping routines for database 'bd_academico_desa'
+-- Dumping routines for database 'sistema_academico_2020'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1288,4 +1288,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-08 22:11:36
+-- Dump completed on 2020-03-13 15:17:41

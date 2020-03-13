@@ -36,7 +36,7 @@ urlpatterns = [
     path('movimientos/', movimientos, name='movimientos'),
     path('consultas/', consultas, name='consultas'),
     path('procesos/', procesos, name='procesos'),
-    path('reportes/', reportes, name='reportes'),
+    #path('reportes/', reportes, name='reportes'),
     path('editar_smtp/<int:pk>',smtp_edit.as_view(),name='edit_smtp'),
     # ----------------REGISTROS--------------
     path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
@@ -125,7 +125,7 @@ urlpatterns = [
     path('GEN_autocomplete/', GEN_autocomplete, name='GEN_autocomplete'),
 
 #--------------Matriculacion-------------------
-    path('Aniolectivo/', List_AnioLectivo.as_view(), name='Aniolectivo'),
+    path('anio_lectivo/', List_AnioLectivo.as_view(), name='anio_lectivo'),
     path('Editar_Aniolectivo/<int:pk>', UpdateAniolectivo.as_view(), name='editarAniolectivo'),
     path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
     path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo')
