@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+    <header class="cuadro_titulo"><h4 class="title"> Matriculacion | Asignación Curso | Año Electivo <br></h4></header>
+
+    <br/><br/>
+    <a href="{% url 'Academico:crear_asig_curso' %}" class="btn btn-primary" id="registrar"><span
+            class="glyphicon glyphicon-plus"></span>Asignar un curso</a>
+    <br/><br/>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class="text-center">Año Electivo</th>
+                    <th class="text-center">Curso</th>
+                    <th class="text-center">Paralelo</th>
+                    <th class="text-center"> Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr>
+                    <td><strong></strong></td>
+                    <td><strong></strong></td>
+                    <td><strong></strong></td>
+                    <td>
+                        <div class="text-center">
+                            <a onclick="modal('{% url 'Academico:editar_asig_curso' %}')"
+                               class="btn text-light bg-gradient-primary" title="Editar"><i
+                                    class="fas fa-info-circle"></i></a>
+                            <a onclick="modal('{% url 'Academico:eliminar_asig_curso' %}')"
+                               class="btn text-light bg-gradient-danger" title="Eliminar"><i
+                                    class="fas fa-exclamation-triangle"></i></a>
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    {% block extrajs %}
+        <div class="modal fade" id="mostrar_modal" role="dialog">
+        </div>
+    {% endblock extrajs %}
+
+{% endblock contenido_principal %}

@@ -1,0 +1,26 @@
+<div class="modal-dialog modal-mg-8" role="document">
+    <div class="modal-content ">
+        <form method="POST" action="{% url 'Academico:eliminar_asig_curso' %}"> {% csrf_token %}
+
+            <div class="modal-body ">
+
+                <header class="cuadro_titulo bg-danger ">
+                    <h4 class="titulo">Configuracion | Eliminar Asignación Curso</h4>
+                </header>
+                <div class="contenido text-dark">
+                    Esta seguro que deseas eliminar esta Asignación?<br>
+                    Año Electivo: <label>2020-2021</label><br>
+                    Curso: <label>Decimo</label><br>
+                    Paralelo: <label>A</label><br>
+                    <div class="text-center">
+                        <br/>
+                        <button type="submit" class="btn btn-outline-danger btn-user">Eliminar</button>
+                        <button class="btn btn-outline-primary btn-user" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>

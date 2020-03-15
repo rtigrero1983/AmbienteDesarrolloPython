@@ -8,6 +8,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estruc
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
 
 
 from .views import *
@@ -128,7 +129,12 @@ urlpatterns = [
     path('anio_lectivo/', List_AnioLectivo.as_view(), name='anio_lectivo'),
     path('Editar_Aniolectivo/<int:pk>', UpdateAniolectivo.as_view(), name='editarAniolectivo'),
     path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
-    path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo')
+    path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo'),
+    #------Matriculacion - Asignacion de curso a año electivo-----------
+    path('crear/asignacion/curso/',crear_asig_curso,name='crear_asig_curso'),
+    path('eliminar/asignacion/curso/',eliminar_asig_curso,name='eliminar_asig_curso'),
+    path('editar/asignacion/curso/',edit_asig_curso,name='editar_asig_curso'),
+    path('listar/asignacion/curso',listar_asig_curso,name='listar_asig_curso'),
 ]
 
 
