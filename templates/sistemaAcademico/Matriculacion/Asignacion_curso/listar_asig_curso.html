@@ -10,18 +10,30 @@
 
 {% endblock footer %}
 {% block contenido_principal %}
-    <header class="cuadro_titulo"><h4 class="title"> Matriculacion | Asignación Curso | Año Electivo <br></h4></header>
-
-    <br/><br/>
-    <a href="{% url 'Academico:crear_asig_curso' %}" class="btn btn-primary" id="registrar"><span
-            class="glyphicon glyphicon-plus"></span>Asignar un curso</a>
-    <br/><br/>
+    <header class="cuadro_titulo text-center bg-gradient-primary"><h4 class="title"> Matriculacion | Asignación Curso | Año Electivo <br></h4></header>
+    <br>
+    {% for m in permisos %}
+    {% for acciones in agregar %}
+        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
+            <a id="registrar" href="{% url 'Academico:crear_asig_curso' %}" class="text-light btn bg-gradient-primary">
+              Agregar
+            </a>
+        {% endif %}
+    {% endfor %}
+  {% endfor %}
+    <br>
+    <br>
+    <div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Asignaciones disponibles en el sistema</h6>
+  </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                <tr>
+            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0"
+            data-page-length='5'>
+                <thead class="bg-gradient-primary">
+                <tr  class="text-light text-center">
                     <th class="text-center">Año Electivo</th>
                     <th class="text-center">Curso</th>
                     <th class="text-center">Paralelo</th>
@@ -50,7 +62,7 @@
                 </tbody>
             </table>
         </div>
-
+        </div>
     </div>
     {% block extrajs %}
         <div class="modal fade" id="mostrar_modal" role="dialog">
