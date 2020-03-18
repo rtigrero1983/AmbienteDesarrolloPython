@@ -45,6 +45,12 @@ def login(request):
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
+            else:
+                usu = UsuarioTemp.objects.get(usuario=var_usuario,clave=h.hexdigest())
+                if usu:
+                    request.session['usuario'] = usu.id_usuario
+                    return redirect("Academico:inicio")
+
     except Exception as e:
         contexto['error'] = "Usuario o contraseña incorrectos"
         return render(request, 'base/login.html', contexto)

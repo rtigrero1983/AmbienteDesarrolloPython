@@ -204,6 +204,8 @@ class UsuarioTemp(models.Model):
     fecha_creacion = models.DateField(
         blank=True, null=True, auto_now=True)
     correo = models.EmailField(max_length=254, blank=False, null=False)
+    id_rol= models.ForeignKey(ConfRol,db_column='id_rol',related_name="fk_usuario_temp",default=8,on_delete=models.CASCADE)
+
 
     class Meta:
         verbose_name = 'Usuario_temp'

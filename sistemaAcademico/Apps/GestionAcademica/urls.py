@@ -3,8 +3,9 @@ from django.db import models
 from django.urls import path
 
 from sistemaAcademico.Apps.GestionAcademica.Controladores.API.Estructuras_view_api import *
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view, \
+    smtp_edit, smtp_reenviar
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.Estructura_view_reportes import *
-from sistemaAcademico.Apps.GestionAcademica.Controladores.Configuraciones.estructura_view_SMTP import smtp_view,smtp_edit
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Estructura_view_reportes import *
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
@@ -41,7 +42,7 @@ urlpatterns = [
     path('editar_smtp/<int:pk>',smtp_edit.as_view(),name='edit_smtp'),
     # ----------------REGISTROS--------------
     path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
-
+    path('usuario_temp/',smtp_reenviar,name='usuario_temp'),
     path('nuevo_usuario/', CreateUsuario.as_view(), name='nuevo_usuario'),
     path('nuevo_rol/', nuevo_rol, name='nuevo_rol'),
     #path('nuevo_menu/', nuevo_menu, name='nuevo_menu'),

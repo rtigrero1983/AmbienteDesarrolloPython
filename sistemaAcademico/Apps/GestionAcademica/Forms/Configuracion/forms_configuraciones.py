@@ -11,6 +11,7 @@ from collections import OrderedDict
 from django.db.models import Q
 
 
+
 class SMTPForm(forms.ModelForm):
     class Meta:
         model = ConfCorreosSmpt
@@ -256,25 +257,21 @@ class UsuarioeditModelForm(ModelForm):
 
 
 
-class Usuario_tempForm(forms.ModelForm):
+class UsuarioTempForm(forms.ModelForm):
     class Meta:
         model = UsuarioTemp
-        fields = "__all__"
+        exclude = ('fecha_creacion','id_rol')
         labels = {
-            "usuario": "Nombre Usuario",
-            "clave": "Contraseña",
-            "fecha_limite": "Fecha de Caducidad",
-            "correo": "Correo electronico",
+            "Usuario Temporal:":"usuario",
+            "Clave Temporal:":"clave",
+            "Fecha de Expiracion:":"fecha_limite",
+            "Correo del Usuario Temporal:":"correo",
         }
         widgets = {
-            "usuario": forms.TextInput(attrs={
-                "class": "form-control", "placeholder": "Usuario", "required": "true"}),
-            "clave": forms.TextInput(attrs={
-                "class": "form-control", "type": "password", "required": "true"}),
-            "fecha_limite": forms.DateTimeInput(attrs={
-                "class": "form-control text-dark", "required": "true", "type": "date"}),
-
-            "correo": forms.TextInput(attrs={"class": "form-control text-dark", "type": "Email"}),
+            "usuario": forms.TextInput(attrs={"class":"form-control"}),
+            "clave":forms.TextInput(attrs={"class":"form-control","type":"password"}),
+            "fecha_limite":forms.TextInput(attrs={"class":"form-control","type":"date"}),
+            "correo":forms.TextInput(attrs={"class":"form-control","type":"email"}),
         }
 
 
