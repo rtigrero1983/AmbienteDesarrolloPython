@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.froms_tabla_referencial_cursos import *
 from django.shortcuts import render, redirect
 from django.shortcuts import render
-class general(ListView):
+class General(ListView):
     model = GenrGeneral
     template_name = 'sistemaAcademico/Matriculacion/tabla_referencial_cursos/Listar_general.html'
     queryset = model.objects.filter(tipo='TIP')
