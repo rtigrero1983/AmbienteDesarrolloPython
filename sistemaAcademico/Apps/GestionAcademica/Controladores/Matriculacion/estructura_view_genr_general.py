@@ -16,6 +16,7 @@ class CreateGeneral (CreateView):
     template_name = 'sistemaAcademico/Matriculacion/tabla_referencial_cursos/Agregar_general.html'
     form_class = GenrGeneral_1
     success_url = reverse_lazy('Academico:general')
+    queryset = model.objects.filter(tipo='TIP')
 
 class UpdateGeneral (UpdateView):
     model = GenrGeneral
