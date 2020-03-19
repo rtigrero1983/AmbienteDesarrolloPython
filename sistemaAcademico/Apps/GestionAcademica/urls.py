@@ -10,6 +10,8 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Es
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
+from .Controladores.Matriculacion.estructura_view_genr_general import *
+
 
 
 from .views import *
@@ -136,6 +138,10 @@ urlpatterns = [
     path('eliminar/asignacion/curso/',eliminar_asig_curso,name='eliminar_asig_curso'),
     path('editar/asignacion/curso/',edit_asig_curso,name='editar_asig_curso'),
     path('listar/asignacion/curso',listar_asig_curso,name='listar_asig_curso'),
+    # ------Matriculacion - Tabla referencial de curso-----------
+    path('general/', general.as_view(), name='general'),
+    path('crear_general', CreateGeneral.as_view(), name='crear_general'),
+    path('editar_general/<int:pk>', UpdateGeneral.as_view(), name='editar_general')
 ]
 
 
