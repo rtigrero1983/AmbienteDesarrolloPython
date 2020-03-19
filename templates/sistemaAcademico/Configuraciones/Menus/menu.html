@@ -14,7 +14,7 @@
     {% for acciones in agregar %}
         {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
             <a id="registrar" href="{% url 'Academico:nuevo_menu' %}" class="text-light btn bg-gradient-primary">
-              Agregar un nuevo menu
+              Agregar
             </a>
         {% endif %}
     {% endfor %}    

@@ -20,7 +20,7 @@
   {% for m in permisos %}
     {% for acciones in agregar %}
         {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:roles' %}
-            <button id="registrar" onclick="modal('{% url 'Academico:nuevo_rol' %}')" class="text-light btn bg-gradient-primary">Agregar un nuevo rol
+            <button id="registrar" onclick="modal('{% url 'Academico:nuevo_rol' %}')" class="text-light btn bg-gradient-primary">Agregar
             <span class="glyphicon glyphicon-plus"></button>
             <br /><br/>
         {% endif %}

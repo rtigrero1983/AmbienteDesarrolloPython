@@ -5,20 +5,20 @@
   <h4>Configuracion | Permisos</h4>
 </header>
 <br />
+     {% for m in permisos %}
+    {% for acciones in agregar %}
+        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
+            <a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a>
+        {% endif %}
+    {% endfor %}
+  {% endfor %}
 <div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary float-left">
       Roles disponibles en el sistema
     </h6>
 
-  {% for m in permisos %}
-    {% for acciones in agregar %}
-        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
-            <a class="btn bg-gradient-primary text-light float-right" href="{% url 'Academico:agregar_per' %}"><i
-            class="fas fa-plus"></i> Agregar nuevo</a>
-        {% endif %}
-    {% endfor %}    
-  {% endfor %}
+
 
         
   </div>

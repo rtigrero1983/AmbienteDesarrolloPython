@@ -17,7 +17,7 @@
     {% for m in permisos %}
     {% for acciones in agregar %}
         {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:usuarios' %}
-            <a href="{% url 'Academico:nuevo_usuario' %}" class="btn bg-gradient-primary text-light"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Agregar nuevo usuario</a>
+            <a href="{% url 'Academico:nuevo_usuario' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar</a>
         {% endif %}
     {% endfor %}    
   {% endfor %}

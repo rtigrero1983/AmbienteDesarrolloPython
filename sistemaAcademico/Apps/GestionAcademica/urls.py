@@ -134,10 +134,10 @@ urlpatterns = [
     path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
     path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo'),
     #------Matriculacion - Asignacion de curso a año electivo-----------
-    path('crear/asignacion/curso/',crear_asig_curso,name='crear_asig_curso'),
-    path('eliminar/asignacion/curso/',eliminar_asig_curso,name='eliminar_asig_curso'),
-    path('editar/asignacion/curso/',edit_asig_curso,name='editar_asig_curso'),
-    path('listar/asignacion/curso',listar_asig_curso,name='listar_asig_curso'),
+    path('crear_asignacion_curso/', crear_asig_curso, name='crear_asig_curso'),
+    path('eliminar_asignacion_curso/', eliminar_asig_curso, name='eliminar_asig_curso'),
+    path('editar_asignacion_curso/', edit_asig_curso, name='editar_asig_curso'),
+    path('asignacion_curso/', asig_curso, name='asig_curso'),
     # ------Matriculacion - Tabla referencial de curso-----------
     path('general/', General.as_view(), name='general'),
     path('crear_general', CreateGeneral.as_view(), name='crear_general'),

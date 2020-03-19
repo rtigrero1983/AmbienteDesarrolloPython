@@ -12,7 +12,7 @@
   {% for m in permisos %}
     {% for acciones in agregar %}
         {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:modulo' %}
-            <a href="{% url 'Academico:nuevo_modulo' %}" class="btn bg-gradient-primary text-light">Agregar un nuevo modulo</a>
+            <a href="{% url 'Academico:nuevo_modulo' %}" class="btn bg-gradient-primary text-light">Agregar </a>
         {% endif %}
     {% endfor %}    
   {% endfor %}
