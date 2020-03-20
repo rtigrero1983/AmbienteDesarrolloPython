@@ -47,6 +47,7 @@ class EmpleadoForm(forms.ModelForm):
             "bono_solidario",
             "mienbros_hogar",
             "id_genr_estado_laboralp",
+            "id_genr_tipo_usuario",
 
             "pvive_con_usted",
             "pnombres",
@@ -89,6 +90,7 @@ class EmpleadoForm(forms.ModelForm):
             "bono_solidario": "Bono solidario",
             "mienbros_hogar": "Miembros del hogar",
             "id_genr_estado_laboralp": "Estado laboral",
+            "id_genr_tipo_usuario": "Cargo",
 
             "pvive_con_usted": "Su familiar vive con usted?",
             "pnombres": "Nombres del Familiar",
@@ -141,6 +143,7 @@ class EmpleadoForm(forms.ModelForm):
         super(EmpleadoForm, self).__init__(*args, **kwargs)
 
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
