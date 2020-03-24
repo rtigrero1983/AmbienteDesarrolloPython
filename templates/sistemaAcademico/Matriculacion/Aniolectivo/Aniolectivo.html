@@ -11,17 +11,22 @@
 {% endblock footer %}
 {% block contenido_principal %}
 
-<header class="cuadro_titulo bg-gradient-primary"> <h4 class="title"> Matriculacion | Año Lectivo</h4></header>
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Año Lectivo </h4></header>
 
-<br/><br/>
+<br/>
      <a href="{% url 'Academico:crearAniolectivo' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar </a>
-<br/><br/>
+<br/>
+<br/>
 
+<div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Registros de Años Lectivos</h6>
+            </div>
 <div class="card-body">
   <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
+                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
                       <th>Año</th>
                       <th>Ciclo</th>
                         <th>Inicio del ciclo</th>
@@ -32,14 +37,14 @@
                   <tbody>
 
                   {% for Aniolectivo in object_list %}
-                    <tr>
-                      <td><strong>{{Aniolectivo.anio}}</strong></td>
-                      <td><strong>{{Aniolectivo.ciclo}}</strong></td>
-                        <td><strong>{{Aniolectivo.fecha_incio_ciclo}}</strong></td>
-                        <td><strong>{{Aniolectivo.fecha_fin_ciclo}}</strong></td>
-                      <td>
-                          <a href="{% url 'Academico:editarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn btn-primary" title="Editar"><i class="fas fa-info-circle"></i></a>
-                          <a href="{% url 'Academico:eliminarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn btn-info btn-danger" title="Eliminar"><i class="fas fa-warning-circle"></i></a>
+                    <tr class="text-dark">
+                      <td>{{Aniolectivo.anio}}</td>
+                      <td>{{Aniolectivo.ciclo}}</td>
+                        <td>{{Aniolectivo.fecha_incio_ciclo}}</td>
+                        <td>{{Aniolectivo.fecha_fin_ciclo}}</td>
+                      <td align="center">
+                          <a href="{% url 'Academico:editarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn bg-gradient-primary text-light" title="Editar"><i class="fas fa-info-circle"></i></a>
+                          <a href="{% url 'Academico:eliminarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
 
                       </td>
                     </tr>
@@ -50,6 +55,7 @@
               </div>
 
             </div>
+</div>
 
 <div class="modal fade" id="modal_crear" role="dialog">
 
@@ -62,6 +68,6 @@
 </div>
 
 <div class="modal fade" id="modal_eliminar" role="dialog">
-
+</div>
 {% endblock contenido_principal %}
 

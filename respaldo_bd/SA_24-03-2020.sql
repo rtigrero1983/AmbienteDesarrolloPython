@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `sistema_academico_2020` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `sistema_academico_2020`;
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: localhost    Database: sistema_academico_2020
+-- Host: 127.0.0.1    Database: sa_prueba
 -- ------------------------------------------------------
 -- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +21,7 @@ USE `sistema_academico_2020`;
 
 DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
@@ -47,7 +45,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_group_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_group_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) NOT NULL,
@@ -75,7 +73,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_permission` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -103,7 +101,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
@@ -137,7 +135,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user_groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_user_groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -165,7 +163,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auth_user_user_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `auth_user_user_permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -193,7 +191,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_accion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_accion` (
   `id_accion` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
@@ -220,7 +218,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_accion_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_accion_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confaccion_id` int(11) NOT NULL,
@@ -249,7 +247,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_correos_smpt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_correos_smpt` (
   `id_correos_smpt` int(11) NOT NULL AUTO_INCREMENT,
   `ssl` varchar(30) NOT NULL,
@@ -281,7 +279,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_empresa` (
   `id_empresa` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
@@ -322,7 +320,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_menu` (
   `id_menu` int(11) NOT NULL AUTO_INCREMENT,
   `id_padre` int(11) NOT NULL,
@@ -335,9 +333,10 @@ CREATE TABLE `conf_menu` (
   `view` varchar(45) NOT NULL,
   `id_genr_estado` int(11) NOT NULL,
   PRIMARY KEY (`id_menu`),
+  UNIQUE KEY `descripcion` (`descripcion`),
   KEY `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` (`id_genr_estado`),
   CONSTRAINT `conf_menu_id_genr_estado_5c3ac300_fk_genr_general_idgenr_general` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +345,7 @@ CREATE TABLE `conf_menu` (
 
 LOCK TABLES `conf_menu` WRITE;
 /*!40000 ALTER TABLE `conf_menu` DISABLE KEYS */;
-INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matricula','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','#','fas fa-fw fa-folder','#','#','#',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'Reportes','#','fas fa-fw fa-folder','#','reportes_mant','#',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,23,3,'Roles','Academico:roles','fas fa-fw fa-cog','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97),(45,28,1,'Estudiantes','Academico:estudiante','fas fa-fw fa-folder','estudiante/','estudiante','Estudiante',97),(46,28,2,'Empleados','Academico:empleado','fas fa-fw fa-folder','empleado/','empleado','Empleado',97),(47,23,10,'Reportes','#','fas fa-fw fa-cog','#','reportes_conf','#',97),(48,47,1,'Reporte Usuario','Academico:reporte_usuarios','fas fa-fw fa-cog','reporte_usuarios/','reporte_usuarios','reporte_usuarios',97),(49,47,2,'Reporte Rol','Academico:reporte_roles','fas fa-fw fa-cog','reporte_roles/','reporte_roles','reporte_roles',97),(50,26,1,'Año Lectivo','Academico:anio_lectivo','fas fa-fw fa-table','anio_lectivo/','anio_lectivo','anio_lectivo',97),(51,32,1,'Empleados','Academico:reporte_empleado','fas fa-fw fa-folder','reporte_empleado/','reporte_empleado','reporte_empleado',97),(52,32,2,'Estudiantes','Academico:reporte_estudiante','fas fa-fw fa-folder','reporte_estudiante/','reporte_estudiante','reporte_estudiante',97);
+INSERT INTO `conf_menu` VALUES (23,0,5,'Configuraciones','#','fas fa-fw fa-cog','#','#','#',97),(24,0,4,'Reportes Especiales','#','fas fa-fw fa-wrench','#','#','#',97),(25,0,3,'Registro Notas','#','fas fa-fw fa-chart-area','#','#','#',97),(26,0,2,'Matriculacion','#','fas fa-fw fa-table','#','#','#',97),(27,0,1,'Admision','#','fas fa-fw fa-folder','#','#','#',97),(28,27,13,'Mantenimiento','#','fas fa-fw fa-folder','#','#','#',97),(29,27,14,'Movimientos','Academico:movimientos','fas fa-fw fa-folder','movimientos/','movimientos','movimientos',97),(30,27,15,'Consultas','Academico:consultas','fas fa-fw fa-folder','consultas/','consultas','consultas',97),(31,27,16,'Procesos','Academico:procesos','fas fa-fw fa-folder','procesos/','procesos','procesos',97),(32,27,17,'ReporteMant','#','fas fa-fw fa-folder','#','#','#',97),(33,23,2,'Usuarios','Academico:usuarios','fas fa-fw fa-cog','usuarios/','usuarios','usuarios',97),(34,23,3,'Roles','Academico:roles','fas fa-fw fa-cog','roles/','roles','roles',97),(35,23,4,'Permisos','Academico:permisos','fas fa-fw fa-cog','perfiles/','permisos','perfiles',97),(36,23,5,'Menu','Academico:menu','fas fa-fw fa-cog','menu/','menu','menu',97),(37,23,6,'Modulo','Academico:modulo','fas fa-fw fa-cog','modulo/','modulo','modulo',97),(38,23,7,'Acciones','Academico:acciones','fas fa-fw fa-cog','acciones/','acciones','acciones',97),(40,23,8,'Unidad','Academico:empresas','fas fa-fw fa-cog','empresas/','empresas','empresas',97),(45,28,1,'Estudiantes','Academico:estudiante','fas fa-fw fa-folder','estudiante/','estudiante','Estudiante',97),(46,28,2,'Empleados','Academico:empleado','fas fa-fw fa-folder','empleado/','empleado','Empleado',97),(47,23,10,'Reporte Conf','#','fas fa-fw fa-cog','#','#','#',97),(48,47,1,'Reporte Usuario','Academico:reporte_usuarios','fas fa-fw fa-cog','reporte_usuarios/','reporte_usuarios','reporte_usuarios',97),(49,47,2,'Reporte Rol','Academico:reporte_roles','fas fa-fw fa-cog','reporte_roles/','reporte_roles','reporte_roles',97),(50,32,1,'ReporteEst','Academico:reporte_estudiante','fas fa-fw fa-folder','reporte_estudiante/','reporte_estudiante','reporte_estudiante',97),(51,32,2,'ReporteEmp','Academico:reporte_empleado','fas fa-fw fa-folder','reporte_empleado/','reporte_empleado','reporte_empleado',97),(52,26,1,'M Mantenimientos','#','fas fa-fw fa-table','#','#','#',97),(53,52,1,'Año Lectivo','Academico:anio_lectivo','fas fa-fw fa-table','anio_lectivo/','anio_lectivo','anio_lectivo',97),(54,26,2,'M Movimientos','#','fas fa-fw fa-table','#','#','#',97),(55,26,3,'M Procesos','#','fas fa-fw fa-table','#','#','#',97),(56,26,4,'M Reportes','#','fas fa-fw fa-table','#','#','#',97),(57,54,1,'AñoLectivo/Curso','Academico:asignacion_curso','fas fa-fw fa-table','asignacion_curso/','asignacion_curso','asignacion_curso',97),(58,52,2,'General','Academico:general','fas fa-fw fa-table','general/','general','general',97),(60,23,11,'SMTP','Academico:agregar_smtp','fas fa-fw fa-cog','agregar_smtp/','agregar_smtp','agregar_smtp',97);
 /*!40000 ALTER TABLE `conf_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +355,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_modulo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_modulo` (
   `id_modulo` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(20) NOT NULL,
@@ -386,7 +385,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_modulo_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_modulo_menu` (
   `id_modulo_menu` int(11) NOT NULL AUTO_INCREMENT,
   `id_genr_estado` int(11) NOT NULL,
@@ -399,7 +398,7 @@ CREATE TABLE `conf_modulo_menu` (
   CONSTRAINT `conf_modulo_menu_id_genr_estado_210b4a0c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_modulo_menu_id_menu_5439ef13_fk_conf_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_modulo_menu_id_modulo_0d359a15_fk_conf_modulo_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `conf_modulo` (`id_modulo`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -408,7 +407,7 @@ CREATE TABLE `conf_modulo_menu` (
 
 LOCK TABLES `conf_modulo_menu` WRITE;
 /*!40000 ALTER TABLE `conf_modulo_menu` DISABLE KEYS */;
-INSERT INTO `conf_modulo_menu` VALUES (15,97,23,10),(16,97,24,9),(17,97,25,8),(18,97,26,7),(19,97,27,6),(20,97,28,6),(21,97,29,6),(22,97,30,6),(23,97,31,6),(24,97,32,6),(25,97,33,10),(26,97,34,10),(27,97,35,10),(28,97,36,10),(29,97,37,10),(30,97,38,10),(31,97,40,10),(34,97,47,6),(35,97,48,6),(36,97,49,6);
+INSERT INTO `conf_modulo_menu` VALUES (15,97,23,10),(16,97,24,9),(17,97,25,8),(18,97,26,7),(19,97,27,6),(20,97,28,6),(21,97,29,6),(22,97,30,6),(23,97,31,6),(24,97,32,6),(25,97,33,10),(26,97,34,10),(27,97,35,10),(28,97,36,10),(29,97,37,10),(30,97,38,10),(31,97,40,10),(34,97,47,6),(35,97,48,6),(36,97,49,6),(37,97,60,10);
 /*!40000 ALTER TABLE `conf_modulo_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,7 +417,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_permiso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_permiso` (
   `id_permiso` int(11) NOT NULL AUTO_INCREMENT,
   `id_rol` int(11) NOT NULL,
@@ -444,7 +443,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_permiso_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_permiso_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confpermiso_id` int(11) NOT NULL,
@@ -454,7 +453,7 @@ CREATE TABLE `conf_permiso_menu` (
   KEY `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` (`confmenu_id`),
   CONSTRAINT `conf_permiso_menu_confmenu_id_d211447b_fk_conf_menu_id_menu` FOREIGN KEY (`confmenu_id`) REFERENCES `conf_menu` (`id_menu`),
   CONSTRAINT `conf_permiso_menu_confpermiso_id_62c12aa1_fk_conf_perm` FOREIGN KEY (`confpermiso_id`) REFERENCES `conf_permiso` (`id_permiso`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +462,7 @@ CREATE TABLE `conf_permiso_menu` (
 
 LOCK TABLES `conf_permiso_menu` WRITE;
 /*!40000 ALTER TABLE `conf_permiso_menu` DISABLE KEYS */;
-INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(22,1,36),(7,1,37),(8,1,38),(9,1,40),(23,1,45),(24,1,46),(25,1,47),(26,1,48),(27,1,49),(28,1,50),(29,1,51),(30,1,52);
+INSERT INTO `conf_permiso_menu` VALUES (2,1,23),(10,1,24),(11,1,25),(12,1,26),(13,1,27),(14,1,28),(15,1,29),(16,1,30),(17,1,31),(5,1,32),(3,1,33),(6,1,34),(1,1,35),(22,1,36),(7,1,37),(8,1,38),(9,1,40),(23,1,45),(24,1,46),(25,1,47),(26,1,48),(27,1,49),(28,1,50),(29,1,51),(30,1,52),(31,1,53),(33,1,54),(34,1,55),(32,1,56),(36,1,57),(35,1,58),(38,1,60);
 /*!40000 ALTER TABLE `conf_permiso_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -473,7 +472,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_rol` (
   `id_rol` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(50) NOT NULL,
@@ -501,7 +500,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_usuario` (
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
@@ -517,7 +516,7 @@ CREATE TABLE `conf_usuario` (
   CONSTRAINT `conf_usuario_id_genr_estado_b989846a_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_genr_tipo_usuario_cd3441b2_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `conf_usuario_id_persona_a923aec6_fk_mant_persona_id_persona` FOREIGN KEY (`id_persona`) REFERENCES `mant_persona` (`id_persona`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -526,7 +525,7 @@ CREATE TABLE `conf_usuario` (
 
 LOCK TABLES `conf_usuario` WRITE;
 /*!40000 ALTER TABLE `conf_usuario` DISABLE KEYS */;
-INSERT INTO `conf_usuario` VALUES (1,'luisillo21','a41801fb6bc6eca2e22271ae04da2adfb19cdefa',97,21,3),(2,'cristof','021af8a6c1322becec0dca0ecf4037a85b6a126a',97,21,3),(3,'Anderson','fe91def129307e6cba5a41792d4d77aaab6f7c6d',97,21,3);
+INSERT INTO `conf_usuario` VALUES (1,'luisillo21','a41801fb6bc6eca2e22271ae04da2adfb19cdefa',97,21,3),(2,'cristof','021af8a6c1322becec0dca0ecf4037a85b6a126a',97,21,3);
 /*!40000 ALTER TABLE `conf_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,7 +535,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuario_rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_usuario_rol` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `confusuario_id` int(11) NOT NULL,
@@ -546,7 +545,7 @@ CREATE TABLE `conf_usuario_rol` (
   KEY `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` (`confrol_id`),
   CONSTRAINT `conf_usuario_rol_confrol_id_dfb3f537_fk_conf_rol_id_rol` FOREIGN KEY (`confrol_id`) REFERENCES `conf_rol` (`id_rol`),
   CONSTRAINT `conf_usuario_rol_confusuario_id_eff85f64_fk_conf_usua` FOREIGN KEY (`confusuario_id`) REFERENCES `conf_usuario` (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -555,7 +554,7 @@ CREATE TABLE `conf_usuario_rol` (
 
 LOCK TABLES `conf_usuario_rol` WRITE;
 /*!40000 ALTER TABLE `conf_usuario_rol` DISABLE KEYS */;
-INSERT INTO `conf_usuario_rol` VALUES (1,1,3),(2,2,3),(3,3,3);
+INSERT INTO `conf_usuario_rol` VALUES (1,1,3),(2,2,3);
 /*!40000 ALTER TABLE `conf_usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -565,7 +564,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `conf_usuarios_temp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `conf_usuarios_temp` (
   `id_usuario_temp` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) NOT NULL,
@@ -593,7 +592,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_admin_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `django_admin_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
@@ -627,7 +626,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `django_content_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app_label` varchar(100) NOT NULL,
@@ -653,7 +652,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `django_migrations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `app` varchar(255) NOT NULL,
@@ -679,7 +678,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `django_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
@@ -695,7 +694,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('42g1stwu53kfohpb73pxj8uvj32myeld','NGQ2NTAwN2RkOGVkYjlkZGFmNGI3MjhlNGZlMDE0ZTRkNWI4ZTc4Njp7InVzdWFyaW8iOjN9','2020-03-13 21:50:55.570526'),('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('7w2ns5wx1maf2ojpznj771unka65uwl1','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-09 06:03:57.995894'),('cnfmu1kjw258qkisgzttselkz6bno89u','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-10 00:07:01.378916'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866');
+INSERT INTO `django_session` VALUES ('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('5tf3zwi62685btf94bpxoouispdx1roa','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-24 22:27:49.086145'),('7w2ns5wx1maf2ojpznj771unka65uwl1','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-09 06:03:57.995894'),('cnfmu1kjw258qkisgzttselkz6bno89u','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-10 00:18:26.623546'),('f6my1utxsrd8deil57gwf0xgeiag57m9','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-20 23:59:45.960582'),('hy5d64xdoc23af8wc5qsxkq8310e2624','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-18 23:56:06.221553'),('ohjf1iu63gsci2npesj8q2nqyopxs8jl','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-11 00:49:07.844732'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866'),('udlv2nsbjxh43h956yflfb6rod2pcn8z','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-20 03:41:17.382298'),('z869s1mekx72gouo3u3qyyhuihm22v6f','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-12 00:27:47.158646');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -705,7 +704,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genr_general`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `genr_general` (
   `idgenr_general` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(50) NOT NULL,
@@ -731,7 +730,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `genr_historial`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `genr_historial` (
   `id_historial` int(11) NOT NULL AUTO_INCREMENT,
   `modulo` varchar(50) NOT NULL,
@@ -761,7 +760,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_anio_lectivo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mant_anio_lectivo` (
   `id_anio_lectivo` int(11) NOT NULL AUTO_INCREMENT,
   `anio` int(11) NOT NULL,
@@ -772,7 +771,7 @@ CREATE TABLE `mant_anio_lectivo` (
   PRIMARY KEY (`id_anio_lectivo`),
   KEY `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` (`id_genr_estado`),
   CONSTRAINT `mant_anio_lectivo_id_genr_estado_cec5b50c_fk_genr_gene` FOREIGN KEY (`id_genr_estado`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -781,6 +780,7 @@ CREATE TABLE `mant_anio_lectivo` (
 
 LOCK TABLES `mant_anio_lectivo` WRITE;
 /*!40000 ALTER TABLE `mant_anio_lectivo` DISABLE KEYS */;
+INSERT INTO `mant_anio_lectivo` VALUES (1,2019,1,'2000-12-12','2001-12-12',97),(2,2020,1,'2013-12-12','2014-12-12',97);
 /*!40000 ALTER TABLE `mant_anio_lectivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -790,7 +790,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mant_empleado` (
   `id_empleado` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_ingreso` datetime(6) NOT NULL,
@@ -827,7 +827,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_estudiante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mant_estudiante` (
   `id_estudiante` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_estudiante` varchar(45) NOT NULL,
@@ -856,7 +856,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_persona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mant_persona` (
   `id_persona` int(11) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(50) NOT NULL,
@@ -958,7 +958,7 @@ CREATE TABLE `mant_persona` (
   CONSTRAINT `mant_persona_id_genr_tipo_parente_156bc50d_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_parentesco`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_sangre_ba558316_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_sangre`) REFERENCES `genr_general` (`idgenr_general`),
   CONSTRAINT `mant_persona_id_genr_tipo_usuario_9a359f1a_fk_genr_gene` FOREIGN KEY (`id_genr_tipo_usuario`) REFERENCES `genr_general` (`idgenr_general`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -967,7 +967,7 @@ CREATE TABLE `mant_persona` (
 
 LOCK TABLES `mant_persona` WRITE;
 /*!40000 ALTER TABLE `mant_persona` DISABLE KEYS */;
-INSERT INTO `mant_persona` VALUES (3,'Luis Eduardo','Ardila Macias','1998-04-06',2,'static/img/user_default_image.svg','0950596353','0963779728','luisardilamacias@gmail.com','2020-03-05 22:18:57.000000','Admin','Admin','Duran','0979382621','Duran',0,0,0,0,0,0,0,0,0,0,8,'no requerido','no requerido','no requerido','no requerido','no requerido',0,'no requerido','no requerido','no requerido','no requerido','no requerido',1,'no requerido','no requerido','no requerido',1,'no requerido','no requerido','no requerido','no requerido',59,35,6,59,59,49,97,59,59,59,14,33,8,59,90,1749);
+INSERT INTO `mant_persona` VALUES (3,'Luis Eduardo','Ardila Macias','1998-04-06',97,'static/img/user_default_image.svg','0950596353','0963779728','luisardilamacias@gmail.com','2020-03-05 22:18:57.000000','Admin','Admin','Duran','0979382621','Duran',0,0,0,0,0,0,0,0,0,0,8,'no requerido','no requerido','no requerido','no requerido','no requerido',0,'no requerido','no requerido','no requerido','no requerido','no requerido',1,'no requerido','no requerido','no requerido',1,'no requerido','no requerido','no requerido','no requerido',59,35,6,59,59,49,33,59,59,59,14,33,8,59,90,21),(5,'Cristhofer Bryan','Peralta Montero','2000-10-02',97,'static/img/user_default_image.svg','0948775694','0979364073','asdasd','0000-00-00 00:00:00.000000','','','',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,33,NULL,NULL,NULL,NULL,NULL,33,NULL,NULL,NULL,33,NULL,NULL,NULL,'',33,33,33,33,33,33,33,59,59,59,14,33,8,59,90,20),(6,'Anderson','Sinaluisa','2000-00-00',97,'static/img/user_default_image.svg','0912312312','1231213233','asdgdfdfg','0000-00-00 00:00:00.000000','','','',NULL,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,33,NULL,NULL,NULL,NULL,NULL,33,NULL,NULL,NULL,33,NULL,NULL,NULL,NULL,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,19);
 /*!40000 ALTER TABLE `mant_persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -977,7 +977,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mant_representante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mant_representante` (
   `id_representante` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_ing` varchar(45) NOT NULL,
@@ -1010,7 +1010,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_admision`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_admision` (
   `id_admision` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_documento` varchar(45) NOT NULL,
@@ -1037,7 +1037,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_cab_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_cab_curso` (
   `id_curso` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(10) NOT NULL,
@@ -1078,7 +1078,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_cab_registro_notas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_cab_registro_notas` (
   `id_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
   `promedio_curso_1q` double NOT NULL,
@@ -1115,7 +1115,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_empleado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_detalle_empleado` (
   `id_detalle_empleado` int(11) NOT NULL AUTO_INCREMENT,
   `id_anio_lectivo` int(11) NOT NULL,
@@ -1149,7 +1149,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_materia_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_detalle_materia_curso` (
   `id_detalle_curso` int(11) NOT NULL AUTO_INCREMENT,
   `anio` int(11) NOT NULL,
@@ -1181,7 +1181,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_detalle_registro_notas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_detalle_registro_notas` (
   `id_detalle_registro_notas` int(11) NOT NULL AUTO_INCREMENT,
   `primer_parcial` double NOT NULL,
@@ -1215,7 +1215,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_estudiante_asignacion_curso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_estudiante_asignacion_curso` (
   `id_estudiante_curso` int(11) NOT NULL AUTO_INCREMENT,
   `fecha_ingreso` datetime(6) NOT NULL,
@@ -1246,7 +1246,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mov_matriculacion_estudiante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `mov_matriculacion_estudiante` (
   `id_matriculacion_estudiante` int(11) NOT NULL AUTO_INCREMENT,
   `id_anio_lectivo` int(11) NOT NULL,
@@ -1272,11 +1272,7 @@ LOCK TABLES `mov_matriculacion_estudiante` WRITE;
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'sistema_academico_2020'
---
-
---
--- Dumping routines for database 'sistema_academico_2020'
+-- Dumping events for database 'sa_prueba'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1288,4 +1284,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-13 15:17:41
+-- Dump completed on 2020-03-24 16:00:39
