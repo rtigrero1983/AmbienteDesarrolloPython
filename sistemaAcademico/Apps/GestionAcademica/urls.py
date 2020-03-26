@@ -137,7 +137,7 @@ urlpatterns = [
     path('eliminar_asignacion_curso/', eliminar_asig_curso, name='eliminar_asig_curso'),
     path('editar_asignacion_curso/', edit_asig_curso, name='editar_asig_curso'),
     path('asignacion_curso/', asig_curso, name='asignacion_curso'),
-    # ------Matriculacion - Tabla referencial de curso-----------
+    # ------Matriculacion - Tabla general-----------
     path('general/', General.as_view(), name='general'),
     path('crear_general', CreateGeneral.as_view(), name='crear_general'),
     path('editar_general/<int:pk>', UpdateGeneral.as_view(), name='editar_general')
