@@ -11,8 +11,7 @@ from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
 from .Controladores.Matriculacion.estructura_view_genr_general import *
-
-
+from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
 
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
@@ -40,7 +39,7 @@ urlpatterns = [
     path('movimientos/', movimientos, name='movimientos'),
     path('consultas/', consultas, name='consultas'),
     path('procesos/', procesos, name='procesos'),
-    #path('reportes/', reportes, name='reportes'),
+    path('reportes/', reportes, name='reportes'),
     path('editar_smtp/<int:pk>',smtp_edit.as_view(),name='edit_smtp'),
     # ----------------REGISTROS--------------
     path('nueva_empresa/', NuevaEmpre.as_view(), name='nueva_empresa'),
@@ -134,7 +133,7 @@ urlpatterns = [
     path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
     path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo'),
     #------Matriculacion - Asignacion de curso a año electivo-----------
-    path('crear_asignacion_curso/', crear_asig_curso, name='crear_asig_curso'),
+    path('asignacion_curso/', crear_asig_curso, name='asignacion_curso'),
     path('eliminar_asignacion_curso/', eliminar_asig_curso, name='eliminar_asig_curso'),
     path('editar_asignacion_curso/', edit_asig_curso, name='editar_asig_curso'),
     path('asignacion_curso/', asig_curso, name='asignacion_curso'),
