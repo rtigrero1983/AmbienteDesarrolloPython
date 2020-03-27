@@ -8,7 +8,7 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configurac
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 import socket
-from django.views.decorators.cache import cache_page
+
 
 class NuevaEmpre(CreateView):
     model = ConfEmpresa
