@@ -1,11 +1,7 @@
-
 from django.db import models
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantPersona
-from multiselectfield import MultiSelectField
-
 from sistemaAcademico.Apps.Validaciones import *
-from django.utils import timezone
 
 
 class ConfEmpresa(models.Model):
@@ -13,14 +9,17 @@ class ConfEmpresa(models.Model):
     nombre = models.CharField(max_length=50, blank=False,
                               unique=True, null=False, validators=[validate_nombre])
     razon_social = models.CharField(
-        max_length=200, blank=False, null=False, validators=[validate_descripcion])
+        max_length=200, blank=False, null=False, validators=[validar_espacios])
     id_genr_tipo_identificacion = models.ForeignKey(
         GenrGeneral, blank=False,null=False, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion')
-    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[validate_ruc])
+    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[identificar])
+    #cedula=models.CharField(max_length=10)
+    #ruc=models.CharField(max_length=10)
+    #pasaporte=models.CharField(max_length=32)
     direccion = models.CharField(
-        max_length=50, blank=False, null=False)
+        max_length=50, blank=False, null=False,validators=[validar_espacios])
     representante_legal = models.CharField(
-        max_length=50, blank=False, null=False)
+        max_length=50, blank=False, null=False,validators=[validar_espacios])
     correo = models.CharField(max_length=100, blank=False, null=False)
     telefono = models.CharField(
         max_length=10, blank=False, null=False, validators=[validate_celular])
