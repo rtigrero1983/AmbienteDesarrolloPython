@@ -1,4 +1,3 @@
-from dal import autocomplete
 
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
@@ -140,14 +139,14 @@ class unidad_form(forms.ModelForm):
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
             'correo': forms.TextInput(attrs={"class": "form-control text-dark", "type": "email", "placeholder": "Ingrese una correo"}),
             'telefono': forms.NumberInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
-            'fecha_creacion':  forms.DateTimeInput(attrs={"class": "form-control text-dark", "type": "date"}),
+            'fecha_creacion': forms.DateInput(attrs={"class": "form-control text-dark", "type": "date"}),
 
         }
 
     def __init__(self, *args, **kwargs):
         super(unidad_form, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
-            codigo='R')
+            tipo='TID')
 
 
 
@@ -184,6 +183,7 @@ class EditarU_form(forms.ModelForm):
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
             'razon_social': forms.TextInput(
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
+
             'identificacion': forms.TextInput(
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(
@@ -193,15 +193,17 @@ class EditarU_form(forms.ModelForm):
             'correo': forms.TextInput(
                 attrs={"class": "form-control text-dark", "type": "email", "placeholder": "Ingrese una correo"}),
             'telefono': forms.NumberInput(
-                attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
-            'fecha_creacion': forms.DateTimeInput(attrs={"class": "form-control text-dark", "type": "date"}),
+                attrs={"class": "form-control text-dark","placeholder": "Ingrese una telefono"}),
+            'fecha_creacion': forms.DateInput(attrs={"class": "form-control text-dark"}),
 
         }
 
     def __init__(self, *args, **kwargs):
         super(EditarU_form, self).__init__(*args, **kwargs)
-        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(codigo='R')
-        self.fields['fecha_creacion'].queryset = ConfEmpresa.objects.filter()
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
+            tipo='TID')
+
+
 
 
 class UsuarioModelForm(ModelForm):
