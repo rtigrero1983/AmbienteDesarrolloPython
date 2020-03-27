@@ -19,22 +19,48 @@
         </div>
         <div class="card-body card-block">
             <form action="#" enctype="multipart/form-data" class="form-horizontal">
-                {{form.nombre|as_crispy_field}}
-                {{form.razon_social|as_crispy_field}}
-                {{form.id_genr_tipo_identificacion|as_crispy_field}}
-                {{form.identificacion| as_crispy_field}}
-                {{form.direccion|as_crispy_field}}
-                {{form.representante_legal|as_crispy_field}}
-                {{form.correo|as_crispy_field}}
-                {{form.telefono|as_crispy_field}}
-                {{form.fecha_creacion|as_crispy_field}}
-                {{form.identificacion|as_crispy_field }}
+                <div class=" col-6 col-md-4 mb-0" id="div_1">
+                    {{form.nombre|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.razon_social|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.id_genr_tipo_identificacion|as_crispy_field}}
+
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.identificacion|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.direccion|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.representante_legal|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.correo|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.telefono|as_crispy_field}}
+                </div>
+
+                <div class=" col-6 col-md-4 mb-0">
+                    {{form.fecha_creacion|as_crispy_field}}
+                </div>
                <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Guardar</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
                  <a class="btn btn-outline-danger" href="{% url 'Academico:empresas' %}">Cancelar</a>
            </div>
-            </form>}
+            </form>
         </div>
     </div>
 </form>
