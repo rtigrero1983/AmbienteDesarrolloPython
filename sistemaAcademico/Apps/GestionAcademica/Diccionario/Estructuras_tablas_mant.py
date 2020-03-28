@@ -30,11 +30,13 @@ class MantPersona(models.Model):
 
     ####
     estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,related_name="fk_persona_estado", db_column='estado')
-    imagen = models.ImageField(upload_to='media/usuarios/',blank=False, null=False,default='media/usuarios/avatar.png')
+    imagen = models.ImageField(upload_to='static/usuarios/',blank=False, null=False,default='../../../static/img/texto-menu.pnguser_default_image.svg')
     id_genr_estado_civil = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=True, null=True, related_name="estado_civil", db_column='id_genr_estado_civil')
-    fecha_ingreso = models.DateTimeField(null=False,blank=False)
+    fecha_ingreso = models.DateTimeField(null=True,blank=True)
     usuario_ing = models.CharField(max_length=60, blank=False, null=False)
     terminal_ing = models.CharField(max_length=60, blank=False, null=False)
+
+
 
     discapacidad = models.BooleanField(blank=True, null=True)
     discapacidad_renal = models.BooleanField(blank=True, null=True)
@@ -45,6 +47,7 @@ class MantPersona(models.Model):
     enfermedad_congenita = models.BooleanField(blank=True, null=True)
     enfermedad_respiratoria = models.BooleanField(blank=True, null=True)
     atencion_psicologica = models.BooleanField(blank=True, null=True)
+
     ##
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,default=19, related_name="persona_tipo_usuario", db_column='id_genr_tipo_usuario')
 
@@ -71,7 +74,7 @@ class MantPersona(models.Model):
     rtelefono = models.CharField(max_length=45, blank=True, null=True )
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')
     ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True)
-    tipo_parentesco = models.CharField(max_length=200, blank=True, null=True)
+    tipo_parentesco = models.CharField(max_length=200, blank=True, null=True )
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True )
     rtelefono_trabajo = models.CharField(max_length=20, blank=True, null=True )
@@ -161,5 +164,4 @@ class MantEmpleado(models.Model):
 
     def __str__(self):
         return self.usuario_ing
-
 
