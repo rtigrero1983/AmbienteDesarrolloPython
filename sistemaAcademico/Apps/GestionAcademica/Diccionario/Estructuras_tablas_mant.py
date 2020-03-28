@@ -28,7 +28,7 @@ class MantPersona(models.Model):
     id_genr_idioma_ancestral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="acestral",db_column='id_genr_idioma_ancestral')
     id_genr_categoria_migratoria = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="categoria_migratoria", db_column='id_genr_categoria_migratoria')
 
-    ####
+        ####
     estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,related_name="fk_persona_estado", db_column='estado')
     imagen = models.ImageField(upload_to='static/usuarios/',blank=False, null=False,default='../../../static/img/texto-menu.pnguser_default_image.svg')
     id_genr_estado_civil = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=True, null=True, related_name="estado_civil", db_column='id_genr_estado_civil')
@@ -56,14 +56,14 @@ class MantPersona(models.Model):
     pidentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True )
     pdireccion = models.CharField(max_length=45, blank=True, null=True )
     ptelefono = models.CharField(max_length=45,blank=True, null=True)
-    pvive_con_usted = models.BooleanField(blank=True, null=True, default=False)
+    pvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp", db_column='id_genr_estado_laboralp', blank=False, null=False)
     mnombres = models.CharField(max_length=45, blank=True, null=True)
     mapellidos = models.CharField(max_length=45, blank=True, null=True )
     midentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True )
     mdireccion = models.CharField(max_length=45, blank=True, null=True )
     mtelefono = models.CharField(max_length=45, blank=True, null=True)
-    mvive_con_usted = models.BooleanField(blank=True, null=True, default=True)
+    mvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralm = models.ForeignKey(GenrGeneral,blank=False, null=False, on_delete=models.CASCADE, related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
 
