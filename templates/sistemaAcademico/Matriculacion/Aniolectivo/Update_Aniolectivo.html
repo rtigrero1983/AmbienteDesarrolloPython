@@ -6,13 +6,13 @@
 {% load crispy_forms_tags %}
 
 {% block contenido_principal %}
-<form method="POST" action="{% url 'Academico:editarAniolectivo' A.id_anio_lectivo  %}">
+<form method="POST" action="{% url 'Academico:editarAniolectivo' a.id_anio_lectivo  %}">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
      {% else %}
                 <header class="cuadro_titulo">
-                    <h4 class="titulo text-center">Matriculacion | Registrar Año lectivo</h4>
+                    <h4 class="titulo text-center">Matriculacion | Editar Año lectivo</h4>
                 </header>
         <div class="card-body card-block">
             <form action="#" enctype="multipart/form-data" class="form-horizontal">
@@ -20,7 +20,7 @@
 			<div class="text-center">
                     <button type="submit" class="btn btn-outline-primary">Guardar </button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                    <a class="btn btn-outline-danger" href="{% url 'Academico:Aniolectivo' %}">Cancelar</a>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:anio_lectivo' %}">Cancelar</a>
             </div>
   			</form>
     {% endif %}
