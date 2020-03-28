@@ -22,6 +22,8 @@ from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
 
 
+
+
 urlpatterns = [
     path('',login, name='login'),
     path('salir/', salir, name='logout'),
@@ -53,7 +55,7 @@ urlpatterns = [
     path('agregar_permisos/<int:id>',CreatePermiso.as_view() ,name='agregar_per'),
 
 
-    #------- Url de permisos 
+    #------- Url de permisos
     path('agregar_permisos/',CreatePermiso.as_view() ,name='agregar_per'),
     path('editar_permiso/<int:pk>', UpdatePermisos.as_view(), name='editar_permiso'),
     path('permisos/', ListPermisos.as_view(), name='permisos'),
@@ -74,7 +76,7 @@ urlpatterns = [
     path('editar_rol/<int:id>', editar_rol, name='editar_rol'),
     path('editar_menu/<int:pk>', UpdateMenu.as_view(), name='editar_menu'),
     #path('editar_menu/<int:id>', editar_menu, name='editar_menu'),
-    
+
     #path('editar_modulo/<int:id>', editar_modulo, name='editar_modulo'),
     path('eliminar_modulo/<int:id>', eliminar_modulo, name='eliminar_modulo'),
     # -----------------------------------------
@@ -111,8 +113,10 @@ urlpatterns = [
     path('registro_empleado/', NuevoEmpleado.as_view(), name='registro_empleado'),
     #Editar
     path('editar_empleado/', UpdateEmpleado.as_view(), name='editar_empleado'),
+    path('editar_estudiante/<int:pk>/', UpdateEstudiante.as_view(), name='editar_estudiante'),
+    path('consultar_estudiante/<int:pk>/', ConsultarEstudiante.as_view(), name='consultar_estudiante'),
     #Eliminar
-
+    path('eliminar_estudiante/<int:id>', eliminar_estudiante, name='eliminar_estudiante'),
 
     #------------Reportes de Configuraciones---------------
     path('reporte_usuarios/', reporte_usuarios, name='reporte_usuarios'),

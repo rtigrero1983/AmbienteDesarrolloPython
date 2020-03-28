@@ -78,7 +78,7 @@ class NuevoEstudiante(CreateView):
     model = MantPersona
     form_class = EstudianteForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_estudiante.html'
-    success_url = reverse_lazy('Academico:registro_estudiante')
+    success_url = reverse_lazy('Academico:estudiante')
 
     def get_context_data(self, **kwargs):
         context = super(NuevoEstudiante, self).get_context_data(**kwargs)
@@ -91,22 +91,39 @@ class NuevoEstudiante(CreateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         form = self.form_class(request.POST)
-        if (form.is_valid()):
+        if form.is_valid():
             estudiante = form.save()
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            estudiante.estado = 97
+            estudiante.fecha_ingreso = timezone.now()
             estudiante.usuario_ing = usuario.usuario
             estudiante.terminal_ing = socket.gethostname()
-            estudiante.save()
-            return redirect(self.get_success_url())
+            form.save()
+            return HttpResponseRedirect(self.get_success_url())
         else:
-            print("error")
             return self.render_to_response(self.get_context_data(form=form))
+
+class ConsultarEstudiante(UpdateView):
+    model = MantPersona
+    form_class = ConsultarEstudianteForm
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/form_consultar_estudiante.html'
+    context_object_name = 'm'
 
 
 class UpdateEstudiante(UpdateView):
     model = MantPersona
-    form_class = EstudianteForm
+    form_class = EstudianteEditForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_estudiante.html'
-    success_url = reverse_lazy('Academico:editar_estudiante')
+    success_url = reverse_lazy('Academico:estudiante')
     context_object_name = 'm'
+
+def eliminar_estudiante(request, id):
+    estudiantes = MantPersona.objects.get(id_persona=id)
+    inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    if request.method == 'POST':
+        estudiantes.estado = inactivo
+        estudiantes.save()
+        return redirect('Academico:estudiante')
+    return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_estudiante.html', {'estudiante': estudiantes})
+
+
+

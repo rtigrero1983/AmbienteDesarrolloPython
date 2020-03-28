@@ -12,7 +12,7 @@
 <header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Estudiantes </h4></header>
 <br/>
                             <br/>
-<a href="{% url 'Academico:registro_estudiante' %}" type="button" class="btn bg-gradient-primary text-light"> Agregar <span class="glyphicon glyphicon-plus"></span></a>
+<a href="{% url 'Academico:registro_estudiante' %}" type="button" class="btn bg-gradient-primary text-light"> + Agregar nuevo estudiante<span class="glyphicon glyphicon-plus"></span></a>
                             <br/>
                             <br/>
 
@@ -41,12 +41,10 @@
                             <td>{{m.apellidos}}</td>
                             <td>{{m.identificacion}}</td>
                           <td class="text-center">
-                            <a href="#" class="btn bg-gradient-success text-light" title="Consultar">
-                              <i class="fas fa-info-circle"></i></a>
-                              <a href="#" class="btn bg-gradient-primary text-light" title="Editar"><i class="fas fa-info-circle"></i></a>
-                              <a href="#" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
+                              <a href="{% url 'Academico:consultar_estudiante' m.id_persona %}" class="btn bg-gradient-primary text-light" title="Consultar {{m.nombres}}"><i class="fas fa-info-circle"></i></a>
+                              <a href="{% url 'Academico:editar_estudiante' m.id_persona %}" class="btn bg-gradient-primary text-light" title="Editar {{m.nombres}}"><i class="fas fa-info-circle"></i></a>
+                              <a href="{% url 'Academico:eliminar_estudiante' m.id_persona %}" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}"><i class="fas fa-exclamation-triangle"></i></a>
                           </td>
-
                         </tr>
                     {% endfor %}
                   </tbody>
@@ -55,3 +53,9 @@
             </div>
           </div>
 {% endblock contenido_principal %}
+
+
+
+
+
+
