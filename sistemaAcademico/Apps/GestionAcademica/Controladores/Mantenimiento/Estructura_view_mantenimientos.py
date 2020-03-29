@@ -53,22 +53,21 @@ class NuevoEmpleado(CreateView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         form = self.form_class(request.POST)
-        if (form.is_valid()):
+        if form.is_valid():
             empleado = form.save()
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
             empleado.estado = 97
             empleado.usuario_ing = usuario.usuario
             empleado.terminal_ing = socket.gethostname()
             empleado.save()
-            return redirect(self.get_success_url())
+            return HttpResponseRedirect(self.get_success_url())
         else:
-            print("error")
             return self.render_to_response(self.get_context_data(form=form))
 
 
 class UpdateEmpleado(UpdateView):
     model = MantPersona
-    form_class = EmpleadoForm
+    form_class = EmpleadoUform
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_empleado.html'
     success_url = reverse_lazy('Academico:editar_empleado')
     context_object_name = 'e'
