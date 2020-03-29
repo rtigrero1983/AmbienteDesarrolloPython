@@ -14,7 +14,141 @@ GEN = [('MASCULINO', 'FEMENINO')]
 TSA = ['O-', 'O+', 'A+', 'A-', 'B-', 'B+']
 
 
-class EmpleadoForm(forms.ModelForm):
+class EmpleadoForm(ModelForm):
+    class Meta:
+        model = MantPersona
+        fields = [
+            "nombres",
+            "apellidos",
+            "fecha_de_nacimiento",
+            "id_genr_genero",
+            "id_genr_pais",
+            "id_genr_tipo_identificacion",
+            "identificacion",
+            "id_genr_estado_civil",
+            "id_genr_tipo_sangre",
+            "id_genr_etnia",
+            "id_genr_jornada",
+            "id_genr_indigena",
+            "id_genr_idioma_ancestral",
+            "lugar_nacimiento",
+            "id_genr_provincia",
+            "id_genr_ciudad",
+            "id_genr_categoria_migratoria",
+            "discapacidad",
+            "discapacidad_renal",
+            "discapacidad_neurologica",
+            "enfermedad_alergica",
+            "asma",
+            "epilepsia",
+            "enfermedad_congenita",
+            "enfermedad_respiratoria",
+            "atencion_psicologica",
+            "bono_solidario",
+            "mienbros_hogar",
+            "id_genr_estado_laboralp",
+            "id_genr_tipo_usuario",
+
+            "pvive_con_usted",
+            "pnombres",
+            "papellidos",
+            "pidentificacion",
+            "pdireccion",
+            "ptelefono",
+        ]
+
+        labels = {
+            "nombres": "Nombres ",
+            "apellidos": "Apellidos",
+            "fecha_de_nacimiento": "Fecha de Nacimiento",
+            "id_genr_genero": "Genero",
+            "id_genr_pais": "Pais",
+            "id_genr_tipo_identificacion": "Tipo de Identificacion",
+            "identificacion": "Identificacion",
+            "id_genr_estado_civil": "Estado Civil",
+
+            "correo": "Email",
+            "celular": "Numero de Celular",
+            "id_genr_tipo_sangre": "Tipo de sangre",
+            "id_genr_etnia": "Etnia",
+            "id_genr_jornada": "Jornada",
+            "id_genr_indigena": "Raza indigena",
+            "id_genr_idioma_ancestral": "Idioma Ancestral",
+            "lugar_nacimiento": "Lugar de Nacimiento",
+            "id_genr_provincia": "Provincia",
+            "id_genr_ciudad": "Ciudad",
+            "id_genr_categoria_migratoria": "Categoria Migratoria",
+            "discapacidad": "Discapacidad",
+            "discapacidad_renal": "Discapacidad renal",
+            "discapacidad_neurologica": "Discapacidad neurologica",
+            "enfermedad_alergica": "Enfermedad alergica",
+            "asma": "Asma",
+            "epilepsia": "Epilepsia",
+            "enfermedad_congenita": "Enfermedad congenitiva",
+            "enfermedad_respiratoria": "Enfermedad respiratoria",
+            "atencion_psicologica": "Atencion psicologica",
+            "bono_solidario": "Bono solidario",
+            "mienbros_hogar": "Miembros del hogar",
+            "id_genr_estado_laboralp": "Estado laboral",
+            "id_genr_tipo_usuario": "Cargo",
+
+            "pvive_con_usted": "Su familiar vive con usted?",
+            "pnombres": "Nombres del Familiar",
+            "papellidos": "Apellidos del Familiar",
+            "pidentificacion": "Identificacion (Familiar)",
+            "pdireccion": "Direccion del Familiar",
+            "ptelefono": "Telefono",
+        }
+        widgets = {
+            "nombres": forms.TextInput(attrs={"class": "form-control"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control","type": "date"}),
+            "identificacion": forms.TextInput(attrs={"class": "form-control"}),
+            "correo": forms.TextInput(attrs={"class": "form-control","type": "email"}),
+            "celular": forms.NumberInput(attrs={"class": "form-control"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "type": "date"}),
+
+            "discapacidad": forms.CheckboxInput(),
+            "discapacidad_renal": forms.CheckboxInput(),
+            "discapacidad_neurologica": forms.CheckboxInput(),
+            "enfermedad_alergica": forms.CheckboxInput(),
+            "asma": forms.CheckboxInput(),
+            "epilepsia": forms.CheckboxInput(),
+            "enfermedad_congenita": forms.CheckboxInput(),
+            "enfermedad_respiratoria": forms.CheckboxInput(),
+            "atencion_psicologica": forms.CheckboxInput(),
+            "bono_solidario": forms.CheckboxInput(),
+            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control"}),
+
+            "pvive_con_usted": forms.Select(attrs={"class": "form-control"}, choices=[(1, 'si'), (2, 'no')]),
+            "pnombres": forms.TextInput(attrs={"class": "form-control"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control"}),
+            "ptelefono": forms.NumberInput(attrs={"class": "form-control"}),
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(EmpleadoForm, self).__init__(*args, **kwargs)
+
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
+        self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
+            tipo='GEN')
+        self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
+        self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+        self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
+        self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
+        self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
+        self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
+        self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
+        self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
+
+
+class EmpleadoUform(ModelForm):
     class Meta:
         model = MantPersona
         fields = [
@@ -103,22 +237,22 @@ class EmpleadoForm(forms.ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
-            #"id_genr_genero": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_pais": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_tipo_identificacion": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_genero": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_pais": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_tipo_identificacion": forms.TextInput(attrs={"class": "form-control"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_estado_civil": forms.TextInput(attrs={"class": "form-control"}),
-            "correo": forms.TextInput(attrs={"class": "form-control"}),
-            "celular": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_tipo_sangre": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_etnia": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_jornada": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_indigena": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_idioma_ancestral": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_estado_civil": forms.TextInput(attrs={"class": "form-control"}),
+            "correo": forms.TextInput(attrs={"class": "form-control", "type": "email"}),
+            "celular": forms.NumberInput(attrs={"class": "form-control"}),
+            # "id_genr_tipo_sangre": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_etnia": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_jornada": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_indigena": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_idioma_ancestral": forms.TextInput(attrs={"class": "form-control"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_provincia": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_ciudad": forms.TextInput(attrs={"class": "form-control"}),
-            #"id_genr_categoria_migratoria": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_provincia": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_ciudad": forms.TextInput(attrs={"class": "form-control"}),
+            # "id_genr_categoria_migratoria": forms.TextInput(attrs={"class": "form-control"}),
             "discapacidad": forms.CheckboxInput(),
             "discapacidad_renal": forms.CheckboxInput(),
             "discapacidad_neurologica": forms.CheckboxInput(),
@@ -136,12 +270,12 @@ class EmpleadoForm(forms.ModelForm):
             "papellidos": forms.TextInput(attrs={"class": "form-control"}),
             "pidentificacion": forms.TextInput(attrs={"class": "form-control"}),
             "pdireccion": forms.TextInput(attrs={"class": "form-control"}),
-            "ptelefono": forms.TextInput(attrs={"class": "form-control"}),
+            "ptelefono": forms.NumberInput(attrs={"class": "form-control"}),
 
         }
 
     def __init__(self, *args, **kwargs):
-        super(EmpleadoForm, self).__init__(*args, **kwargs)
+        super(EmpleadoUform, self).__init__(*args, **kwargs)
 
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(tipo='TUS')
@@ -155,8 +289,9 @@ class EmpleadoForm(forms.ModelForm):
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
+
 
 class EstudianteForm(ModelForm):
     class Meta:
@@ -283,11 +418,11 @@ class EstudianteForm(ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control" ,"type": "date"}),
-            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
+            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control","type": "date"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento", "type":"date"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
-            "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
+            "celular": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Celular"}),
 
             "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
