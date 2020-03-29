@@ -4,7 +4,7 @@ from multiselectfield import MultiSelectField
 #from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 #from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleEmpleado
-from sistemaAcademico.Apps.Validaciones import validate_cedula
+from sistemaAcademico.Apps.Validaciones import *
 
 
 class MantPersona(models.Model):
@@ -16,7 +16,7 @@ class MantPersona(models.Model):
     lugar_nacimiento = models.CharField(max_length=45, blank=False, null=False)
     direccion = models.CharField(max_length=150, blank=False, null=False)
     telefono = models.CharField(max_length=15, blank=True, null=True)
-    celular = models.CharField(max_length=15, blank=True, null=True)
+    celular = models.CharField(max_length=15, blank=True, null=True,validators=[validate_celular])
     id_genr_genero = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="genero", db_column='id_genr_genero')
     id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, db_column='id_genr_pais')
     id_genr_provincia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="provincia", db_column='id_genr_provincia')
@@ -53,16 +53,16 @@ class MantPersona(models.Model):
 
     pnombres = models.CharField(max_length=45, blank=True, null=True )
     papellidos = models.CharField(max_length=45, blank=True, null=True )
-    pidentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True )
-    pdireccion = models.CharField(max_length=45, blank=True, null=True )
+    pidentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True,validators=[validate_cedula])
+    pdireccion = models.CharField(max_length=45, blank=True, null=True,validators=[validate_celular])
     ptelefono = models.CharField(max_length=45,blank=True, null=True)
     pvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp", db_column='id_genr_estado_laboralp', blank=False, null=False)
     mnombres = models.CharField(max_length=45, blank=True, null=True)
-    mapellidos = models.CharField(max_length=45, blank=True, null=True )
-    midentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True )
-    mdireccion = models.CharField(max_length=45, blank=True, null=True )
-    mtelefono = models.CharField(max_length=45, blank=True, null=True)
+    mapellidos = models.CharField(max_length=45, blank=True, null=True)
+    midentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True ,validators=[validate_cedula])
+    mdireccion = models.CharField(max_length=45, blank=True, null=True)
+    mtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     mvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralm = models.ForeignKey(GenrGeneral,blank=False, null=False, on_delete=models.CASCADE, related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
@@ -71,15 +71,15 @@ class MantPersona(models.Model):
 
     rnombres = models.CharField(max_length=45,blank=True, null=True )
     rapellidos = models.CharField(max_length=45, blank=True, null=True )
-    rtelefono = models.CharField(max_length=45, blank=True, null=True )
+    rtelefono = models.CharField(max_length=45, blank=True, null=True ,validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')
-    ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True)
+    ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True,validators=[validate_cedula])
     tipo_parentesco = models.CharField(max_length=200, blank=True, null=True )
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True )
     rtelefono_trabajo = models.CharField(max_length=20, blank=True, null=True )
     rcorreo = models.EmailField(max_length=50, blank=False, null=False)
-    rhorario_laboral = models.CharField(max_length=40, blank=True, null=True )
+    rhorario_laboral = models.CharField(max_length=40, blank=True, null=True)
     mienbros_hogar = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -127,8 +127,8 @@ class MantEstudiante(models.Model):
 
 class MantAnioLectivo(models.Model):
     id_anio_lectivo = models.AutoField(primary_key=True)
-    anio = models.IntegerField(blank=False, null=False)
-    ciclo = models.IntegerField(blank=False, null=False)
+    anio = models.IntegerField(blank=False, null=False,validators=[validar_anio])
+    ciclo = models.IntegerField(blank=False, null=False,validators=[validar_ciclo])
     fecha_incio_ciclo = models.DateField(blank=False, null=False)
     fecha_fin_ciclo = models.DateField(blank=False, null=False)
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,
