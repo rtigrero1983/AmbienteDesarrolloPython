@@ -419,10 +419,10 @@ class EstudianteForm(ModelForm):
             "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control","type": "date"}),
-            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento", "type":"date"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
-            "celular": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Celular"}),
+            "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
 
             "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
@@ -619,7 +619,6 @@ class EstudianteEditForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EstudianteEditForm, self).__init__(*args, **kwargs)
-
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
