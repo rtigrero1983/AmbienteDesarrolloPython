@@ -1,13 +1,8 @@
 from datetime import time
 from django.utils.translation import ugettext_lazy as _
-from rest_framework.exceptions import ValidationError
-
+from rest_framework.exceptions import *
 
 def validateDateEs(date):
-    """
-    Funcion para validar una fecha en formato:
-        dd/mm/yyyy, dd/mm/yy, d/m/yy, dd/mm/yyyy hh:mm:ss, dd/mm/yy hh:mm:ss, d/m/yy h:m:s
-    """
     for format in ['%d/%m/%Y', '%d/%m/%y', '%d/%m/%Y %H:%M:%S', '%d/%m/%y %H:%M:%S']:
         try:
             result = time.strptime(date, format)
@@ -133,10 +128,10 @@ def validate_descripcion(value):
 
 def validate_cedula(value):
     if(len(value)!=10 or not value.isdigit()):
-        raise ValidationError(
+        raise Exception(
             _('%(value)s no es una cédula válida'),
             code="invalid",
-            params={'': ''},
+            params={'value': 'value'},
         )
     else:
         impares = int(value[1]) + int(value[3]) + int(value[5]) + int(value[7])
@@ -209,7 +204,10 @@ def ruc_publica(value):
     return int(value[0:2])>=1 and int(value[0:2])<=24 and int(value[2])==6 and int(value[8])==dig_validador and int(value[9:13])>=1
 
 def validate_ruc(value):
-    if (not value.isdigit() or not len(value)==13 or not(ruc_natural(value) or ruc_juridica(value) or ruc_publica(value))):
+    if value == 13:
+        return value
+
+    elif (not value.isdigit() or not len(value)==13 or not(ruc_natural(value) or ruc_juridica(value) or ruc_publica(value))):
         raise ValidationError(
             _('%(value)s no es un RUC válido'),
             code="invalid",
@@ -243,7 +241,6 @@ def validate_celular(value):
 
 
 def validate_positive(value):
-    print(value)
     if(value<0):
         raise ValidationError(
             _('%(values)s no es un numero positivo'),
@@ -280,14 +277,13 @@ class usuario_validar():
 
 
 def pasaporte(value):
-    if value.isalnum()== True:
+    if value.isalnum() == True:
         return True
     else:
         raise ValidationError(
             _('%(values)s no es un pasaporte correcto'),
             code="invalid",
-            params={'value': value},
-        )
+            params={'value': value},)
 
 
 def identificar(value):
@@ -299,39 +295,52 @@ def identificar(value):
 
     elif value.count == " ":
         pasaporte(value)
-        raise ValidationError(('No es una Identificacion Correcta '),
-        code="invalid",
-        params={'value': value},)
-    return value
+
+    return True
 
 
 def validar_anio(value):
-    if len(value) == "":
-        raise ValidationError(('No se puede crear otro año lectivo comenzado'),
+    if value >= "2020":
+        raise ValidationError(_('%(values) No se puede crear otro año lectivo repetido'),
                               code="invalid",
-                              params={'value': value}, )
-    elif "" == True:
-        return value
+                              params={'value': value},
+                              )
 
+    elif 2020 == 2020:
+        raise Exception(_('%(values) No se puede crear otro año lectivo comenzado '))
 
 
 def validar_ciclo(value):
-    if len(value) == "":
-        raise ValidationError(('No se puede crear otro ciclo...no ha terminado aun :) '),
+    if "" == "":
+        raise ValidationError(_('%(values) No se puede crear otro ciclo repetido'),
                               code="invalid",
-                              params={'value': value}, )
-    elif 1 == 1:
-        raise ValidationError(('No se puede crear otro ciclo... :) '),
-                              code="invalid",
-                              params={'value': value}, )
+                              params={'value': value},
+                              )
 
+    elif "" == False:
+        raise Exception(_('%(values)sNo se puede crear otro ciclo... :) '))
     return value
 
 
 def validate_vacios(value):
     if "" in value or value == "":
-        raise ValidationError(_('No puede dejar campos vacios'))
+        return True
+
+    elif value == "":
+        raise Exception(_('No puede dejar campos vacios'))
+
     return value
 
 
+def validar_select(value):
+    if "opcion" == "CEDULA":
+        value(validate_cedula(value))
+
+    elif "opcion" == "RUC":
+        value(validate_ruc(value))
+
+    elif "opcion" == "PASAPORTE":
+        value(pasaporte(value))
+        raise Exception(_('%(values) identificacion incorrecta'))
+    return value
 
