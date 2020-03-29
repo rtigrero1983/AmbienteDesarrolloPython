@@ -31,5 +31,5 @@ class UpAniolectivo (forms.ModelForm):
                   'fecha_fin_ciclo': 'Fin del ciclo'}
         widgets = {'anio': forms.NumberInput(attrs={"class": "form-control"}),
                    'ciclo': forms.NumberInput(attrs={"class": "form-control"}),
-                   'fecha_incio_ciclo': forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
-                   'fecha_fin_ciclo': forms.DateTimeInput(attrs={"class": "form-control text-dark"})}
+                   'fecha_incio_ciclo': forms.DateInput(attrs={"class": "form-control text-dark"}),
+                   'fecha_fin_ciclo': forms.DateInput(attrs={"class": "form-control text-dark"})}
