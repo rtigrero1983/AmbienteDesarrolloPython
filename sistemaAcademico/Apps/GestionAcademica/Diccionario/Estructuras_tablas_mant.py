@@ -73,8 +73,8 @@ class MantPersona(models.Model):
     rapellidos = models.CharField(max_length=45, blank=True, null=True )
     rtelefono = models.CharField(max_length=45, blank=True, null=True ,validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')
-    ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True,validators=[validate_cedula])
-    tipo_parentesco = models.CharField(max_length=200, blank=True, null=True )
+    ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True, validators=[validate_cedula])
+    tipo_parentesco = models.CharField(max_length=200, blank=True, null=True)
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True )
     rtelefono_trabajo = models.CharField(max_length=20, blank=True, null=True )
@@ -127,8 +127,8 @@ class MantEstudiante(models.Model):
 
 class MantAnioLectivo(models.Model):
     id_anio_lectivo = models.AutoField(primary_key=True)
-    anio = models.IntegerField(blank=False, null=False,validators=[validar_anio])
-    ciclo = models.IntegerField(blank=False, null=False,validators=[validar_ciclo])
+    anio = models.IntegerField(blank=False, null=False,unique=True)
+    ciclo = models.IntegerField(blank=False, null=False,unique=True)
     fecha_incio_ciclo = models.DateField(blank=False, null=False)
     fecha_fin_ciclo = models.DateField(blank=False, null=False)
     id_genr_estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,
