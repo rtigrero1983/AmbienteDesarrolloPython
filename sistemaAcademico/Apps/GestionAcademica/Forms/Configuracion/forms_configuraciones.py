@@ -96,7 +96,8 @@ class menu_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(menu_form, self).__init__(*args, **kwargs)
         self.fields['id_padre'] = forms.ChoiceField(choices=[(
-            m.id_menu, m.descripcion) for m in ConfMenu.objects.filter(Q(id_padre=0) | Q(url__contains='#'))], widget={})
+            m.id_menu, m.descripcion) for m in ConfMenu.objects.filter(Q(id_padre=0) | Q(url__contains
+    ='#'))], widget={})
 
 
 class unidad_form(forms.ModelForm):
