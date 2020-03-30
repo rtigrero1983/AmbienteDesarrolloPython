@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block sidebar %}
 {% endblock sidebar %}
 {% block modulo %}
@@ -10,47 +10,39 @@
 
 {% endblock footer %}
 {% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculacion | Registrar Año lectivo</h4>
+                </header>
+        <div class="card-body card-block">
+            <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
+               <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+            <div class="form-row">
+              <div class=" col-0 col-md-9 mb-0">
+                {{ form.id_anio_electivo| as_crispy_field  }}
+              </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-gradient-primary">
-            <h6 class="m-0 font-weight-bold text-light text-center">Nueva Asignación
-                <strong>{{ m.descripcion }}</strong>
-            </h6>
+              <div class=" col-0 col-md-9 mb-0">
+                {{ form.id_curso | as_crispy_field }}
+              </div>
+                <div class=" col-0 col-md-9 mb-0">
+                {{ form.id_genr_paralelo | as_crispy_field}}
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="card-body ">
-            <form enctype="multipart/form-data" class="form-horizontal" method="post">
-                <div class="row darkwhite-bg py-2">
-                    <div style="left: 12cm" class="col-4 text-center  ">
-                        <div class="form-row text-center">
-                            <div class=" col-6 col-md-12 mb-3">
-                                <p>
-                                    Seleciona un año electivo
-                                    <select class="form-control" name="deporte">
-                                        <option class="text-success">2020-2021</option>
-                                    </select></p>
-
-
-                                <div class=" col-6 col-md-12 mb-3">
-                                    <input type="text" class="form-control" placeholder="Ingresa el curso">
-                                </div>
-                                <div class=" col-6 col-md-12 mb-3 ">
-                                    <input type="text" class="form-control " placeholder="Ingresa el paralelo">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                            <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                            <a class="btn btn-outline-danger"
-                               href="{% url 'Academico:asig_curso' %}">Cancelar</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:asignacion_curso' %}">Cancelar</a>
+            </div>
+  			</form>
         </div>
-    </div>
-
-
-{% endblock %}
-
+</form>
+    {% endif %}
+{% endblock contenido_principal %}

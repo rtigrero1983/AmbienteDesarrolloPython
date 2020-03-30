@@ -1,21 +1,14 @@
+{% load crispy_forms_tags %}
 <div class="modal-dialog modal-lg-8" role="document">
     <div class="modal-content">
-        <form class="formulario" action="{% url 'Academico:editar_asig_curso' %}" method="POST">{% csrf_token %}
+        <form class="formulario" action="{% url 'Academico:editar_esignacion_curso' anio.id_mov_anioelectivo_curso %}" method="POST">
+            {% csrf_token %}
             <div class="modal-body">
                 <h4 class="titulo">Configuracion | Editar Asignacion curso: </h4>
                 <br>
-                <p>
-                    Seleciona un año electivo
-                    <select class="form-control" name="deporte">
-                        <option class="text-success">2020-2021</option>
-                    </select></p>
-                <br>
-                <label class="texto">Curso:</label>
-                <input type="text" name="nombre" id="nombre" value="" required class="form-control">
-                <br/>
-                <label class="texto">Paralelo</label>
-                <input type="text" class="form-control" name="codigo" id="codigo" value="">
-                <br/>
+                    {{ form.id_anio_electivo| as_crispy_field }}
+                    {{ form.id_curso| as_crispy_field }}
+                    {{ form.id_genr_paralelo| as_crispy_field }}
                 <center>
                     <button type="submit" class="btn btn-outline-primary">Guardar</button>
                     <button type="reset" class="btn btn-outline-info">Restablecer</button>

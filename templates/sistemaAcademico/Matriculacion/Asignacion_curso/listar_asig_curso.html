@@ -1,72 +1,81 @@
 {% extends 'base/base.html' %}
-
-{% block sidebar %}
-{% endblock sidebar %}
-{% block modulo %}
-{% endblock modulo %}
 {% block encabezado %}
 {% endblock encabezado %}
-{% block footer %}
+{% block sidebar %}
+{% endblock sidebar %}
 
-{% endblock footer %}
 {% block contenido_principal %}
-    <header class="cuadro_titulo text-center bg-gradient-primary"><h4 class="title"> Matriculacion | Asignación Año Lectivo <br></h4></header>
-    <br>
-    {% for m in permisos %}
-    {% for acciones in agregar %}
-        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
-            <a id="registrar" href="{% url 'Academico:crear_asig_curso' %}" class="text-light btn bg-gradient-primary">
+<header class="cuadro_titulo text-center bg-gradient-primary">
+  <h4 class="title text-light"> Mantenimiento| Asignacion | Curso</h4>
+</header>
+<br />
+
+
+            <a id="registrar" href="{% url 'Academico:crear_asigancion_curso' %}" class="text-light btn bg-gradient-primary">
               Agregar
             </a>
-        {% endif %}
-    {% endfor %}
-  {% endfor %}
-    <br>
-    <br>
-    <div class="card shadow mb-4">
+ <br /><br />
+
+<div class="card shadow mb-4">
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Asignaciones disponibles en el sistema</h6>
   </div>
 
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0"
-            data-page-length='5'>
-                <thead class="bg-gradient-primary">
-                <tr  class="text-light text-center">
-                    <th class="text-center">Año Electivo</th>
-                    <th class="text-center">Curso</th>
-                    <th class="text-center">Paralelo</th>
-                    <th class="text-center"> Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
+  <div class="card-body ">
 
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0" data-sort='false'
+        data-page-length='5'>
+        <thead class="bg-gradient-primary">
+          <tr class="text-light text-center">
+            <th>Año Electivo</th>
+            <th>Curso</th>
+            <th style="width: 2cm">Paralelo</th>
+            <th>Acciones</th>
 
-                <tr>
-                    <td><strong></strong></td>
-                    <td><strong></strong></td>
-                    <td><strong></strong></td>
-                    <td>
-                        <div class="text-center">
-                            <a onclick="modal('{% url 'Academico:editar_asig_curso' %}')"
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in anio %}
+              <tbody>
+              <tr class="text-center" style="border-width:3px;">
+              <td>{{ a.id_anio_electivo }}</td>
+              <td>{{ a.id_curso }}</td>
+              <td >{% for i in a.id_genr_paralelo.all %}
+                  <label style="font-family: serif" for="">{{ i }},</label>
+              {% endfor %}</td>
+              <td>
+                  <div class="text-center">
+                            <a onclick="modal('{% url 'Academico:editar_esignacion_curso' a.id_mov_anioelectivo_curso %}')"
                                class="btn text-light bg-gradient-primary" title="Editar"><i
                                     class="fas fa-info-circle"></i></a>
-                            <a onclick="modal('{% url 'Academico:eliminar_asig_curso' %}')"
+                            <a onclick="modal('{% url 'Academico:eliminar_asig_curso' a.id_mov_anioelectivo_curso %}')"
                                class="btn text-light bg-gradient-danger" title="Eliminar"><i
                                     class="fas fa-exclamation-triangle"></i></a>
-                        </div>
-                    </td>
-                </tr>
+                  </div>
+              </td>
+            </tr>
+              </tbody>
 
-                </tbody>
-            </table>
-        </div>
-        </div>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-    {% block extrajs %}
-        <div class="modal fade" id="mostrar_modal" role="dialog">
-        </div>
-    {% endblock extrajs %}
+  </div>
+</div>
+
+</div>
+
 
 {% endblock contenido_principal %}
+
+{% block extrajs %}
+
+
+
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+
+
+{% endblock extrajs %}
