@@ -1,3 +1,4 @@
+import kwargs as kwargs
 
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
@@ -117,14 +118,14 @@ class unidad_form(forms.ModelForm):
             'terminal_ing',
         ]
         labels = {
-            'nombre': 'Nombre de la unidad: ',
-            'razon_social': 'nombre de la razon: ',
-            'id_genr_tipo_identificacion': 'Tipo de identificacion',
-            'identificacion': 'ingrese su identificacion: ',
-            'direccion': 'nombre de la direccion: ',
-            'representante_legal': 'representante_legal: ',
-            'correo': 'correo:',
-            'telefono': 'ingrese su telefono:',
+            'nombre': 'Nombre de la Unidad: ',
+            'razon_social': 'Mombre de la Razon: ',
+            'id_genr_tipo_identificacion': 'Tipo de Identificacion',
+            'identificacion': 'Identificacion: ',
+            'direccion': 'Nombre de la Direccion: ',
+            'representante_legal': 'Representante Legal: ',
+            'correo': 'Correo:',
+            'telefono': 'Telefono:',
             'fecha_creacion': 'fecha de creacion',
             'usuario_ing': '',
             'terminal_ing': ''
@@ -134,11 +135,12 @@ class unidad_form(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
             'razon_social': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
-            'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion no duplicada"}),
+            'id_genr_tipo_identificacion':forms.Select(attrs={"class": "form-control text-dark"}),
+            'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", 'minlength':'10','maxlength':'20', "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
             'correo': forms.TextInput(attrs={"class": "form-control text-dark", "type": "email", "placeholder": "Ingrese una correo"}),
-            'telefono': forms.NumberInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una telefono"}),
+            'telefono': forms.TextInput(attrs={"class": "form-control text-dark", "type": "number", "placeholder": "Ingrese una telefono"}),
             'fecha_creacion': forms.DateInput(attrs={"class": "form-control text-dark", "type": "date"}),
 
         }
@@ -148,8 +150,16 @@ class unidad_form(forms.ModelForm):
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(
             tipo='TID')
 
-
-
+    def clean_cedula(self):
+        ced = self.cleaned_data['cedula']
+        msg = "La Cédula introducida no es válida"
+        valores = [int(ced[x]) * (2 - x % 2) for x in range(9)]
+        suma = sum(map(lambda x: x > 9 and x - 9 or x, valores))
+        veri = 10 - (suma - (10 * (suma / 10)))
+        if int(ced[9]) == int(str(veri)[-1:]):
+            return ced
+        else:
+            raise forms.ValidationError(msg)
 
 
 class EditarU_form(forms.ModelForm):
@@ -183,9 +193,8 @@ class EditarU_form(forms.ModelForm):
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
             'razon_social': forms.TextInput(
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
-
             'identificacion': forms.TextInput(
-                attrs={"class": "form-control text-dark", "placeholder": "Ingrese identificacion no duplicada"}),
+                attrs={"class": "form-control text-dark",'minlength':'10','maxlength':'20', "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(
                 attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(
@@ -193,7 +202,7 @@ class EditarU_form(forms.ModelForm):
             'correo': forms.TextInput(
                 attrs={"class": "form-control text-dark", "type": "email", "placeholder": "Ingrese una correo"}),
             'telefono': forms.NumberInput(
-                attrs={"class": "form-control text-dark","placeholder": "Ingrese una telefono"}),
+                attrs={"class": "form-control text-dark",'minlength':'10',"placeholder": "Ingrese una telefono"}),
             'fecha_creacion': forms.DateInput(attrs={"class": "form-control text-dark"}),
 
         }
