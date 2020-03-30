@@ -140,7 +140,7 @@ class MantAnioLectivo(models.Model):
         db_table = 'mant_anio_lectivo'
 
     def __str__(self):
-        return self.ciclo, self.anio
+        return  str(self.anio)
 
 
 class MantEmpleado(models.Model):

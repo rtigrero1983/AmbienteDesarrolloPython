@@ -23,8 +23,8 @@ class MovCabCurso(models.Model):
     codigo = models.CharField(unique=True, max_length=10)
     nombre = models.CharField(max_length=10)
     id_genr_formacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_formacion",db_column='id_genr_formacion')
-    id_genr_curso = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_curso",db_column='id_genr_curso')
-    id_genr_paralelo = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_paralelo",db_column='id_genr_paralelo')
+    #id_genr_curso = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_curso",db_column='id_genr_curso')#silenciar
+    id_genr_paralelo = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_asignacion_paralelo",db_column='id_genr_paralelo')
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_jornada",db_column='id_genr_jornada')
     cupo = models.IntegerField()
     id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_aniolectivo",db_column='id_anio_lectivo')
@@ -36,6 +36,8 @@ class MovCabCurso(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
 
 class MovCabRegistroNotas(models.Model):
     id_registro_notas = models.AutoField(primary_key=True)
@@ -133,3 +135,16 @@ class MovMatriculacionEstudiante(models.Model):
 
     def __int__(self):
         return self.id_matriculacion_estudiante
+
+class Mov_Aniolectivo_curso(models.Model):
+    id_mov_anioelectivo_curso=models.AutoField(primary_key=True)
+    id_anio_electivo=models.ForeignKey(MantAnioLectivo,on_delete=models.CASCADE)
+    id_curso=models.ForeignKey(MovCabCurso,on_delete=models.CASCADE,blank=False, null=False,db_column='id_curso')
+    id_genr_paralelo=models.ManyToManyField(GenrGeneral,blank=False, related_name="fk_cabcurso_paralelo", db_column='id_genr_paralelo')
+    id_estado_gnral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,default=97, db_column='estado')
+    class Meta:
+        verbose_name = 'Ani_electivo_curso'
+        db_table = 'Mov_anioelectivo_curso'
+        constraints = [
+            models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso'], name='Unicos')
+        ]
