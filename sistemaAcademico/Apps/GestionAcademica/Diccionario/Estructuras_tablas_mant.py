@@ -9,9 +9,9 @@ from sistemaAcademico.Apps.Validaciones import *
 
 class MantPersona(models.Model):
     id_persona = models.AutoField(primary_key=True)
-    nombres = models.CharField(max_length=50, blank=False,unique=True, null=False)
+    nombres = models.CharField(max_length=50, blank=False, null=False)
     apellidos = models.CharField(max_length=50, blank=False, null=False)
-    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[validate_cedula])
+    identificacion = models.CharField(max_length=50, blank=False, null=False, validators=[validate_cedula])
     fecha_de_nacimiento = models.DateField(blank=False, null=False)
     lugar_nacimiento = models.CharField(max_length=45, blank=False, null=False)
     direccion = models.CharField(max_length=150, blank=False, null=False,validators=[validar_espacios])
@@ -28,15 +28,12 @@ class MantPersona(models.Model):
     id_genr_idioma_ancestral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="acestral",db_column='id_genr_idioma_ancestral')
     id_genr_categoria_migratoria = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="categoria_migratoria", db_column='id_genr_categoria_migratoria')
 
-        ####
     estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,related_name="fk_persona_estado", db_column='estado')
     imagen = models.ImageField(upload_to='static/usuarios/',blank=False, null=False,default='../../../static/img/texto-menu.pnguser_default_image.svg')
     id_genr_estado_civil = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=True, null=True, related_name="estado_civil", db_column='id_genr_estado_civil')
     fecha_ingreso = models.DateTimeField(null=True,blank=True)
     usuario_ing = models.CharField(max_length=60, blank=False, null=False)
     terminal_ing = models.CharField(max_length=60, blank=False, null=False)
-
-
 
     discapacidad = models.BooleanField(blank=True, null=True)
     discapacidad_renal = models.BooleanField(blank=True, null=True)
@@ -47,20 +44,18 @@ class MantPersona(models.Model):
     enfermedad_congenita = models.BooleanField(blank=True, null=True)
     enfermedad_respiratoria = models.BooleanField(blank=True, null=True)
     atencion_psicologica = models.BooleanField(blank=True, null=True)
-
-    ##
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,default=19, related_name="persona_tipo_usuario", db_column='id_genr_tipo_usuario')
 
     pnombres = models.CharField(max_length=45, blank=True, null=True )
     papellidos = models.CharField(max_length=45, blank=True, null=True )
-    pidentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True,validators=[validate_cedula])
+    pidentificacion = models.CharField(max_length=15, blank=True, null=True,validators=[validate_cedula])
     pdireccion = models.CharField(max_length=45, blank=True, null=True,validators=[validar_espacios])
     ptelefono = models.CharField(max_length=45,blank=True, null=True)
     pvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp", db_column='id_genr_estado_laboralp', blank=False, null=False)
     mnombres = models.CharField(max_length=45, blank=True, null=True)
     mapellidos = models.CharField(max_length=45, blank=True, null=True)
-    midentificacion = models.CharField(max_length=15,unique=True, blank=True, null=True,validators=[validate_cedula])
+    midentificacion = models.CharField(max_length=15, blank=True, null=True,validators=[validate_cedula])
     mdireccion = models.CharField(max_length=45, blank=True, null=True)
     mtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     mvive_con_usted = models.BooleanField(blank=True, null=True)
@@ -68,12 +63,11 @@ class MantPersona(models.Model):
     bono_solidario = models.BooleanField(blank=True, null=True)
 
 
-
     rnombres = models.CharField(max_length=45,blank=True, null=True )
     rapellidos = models.CharField(max_length=45, blank=True, null=True )
     rtelefono = models.CharField(max_length=45, blank=True, null=True ,validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="identificacion", db_column='id_genr_tipo_identificacion')
-    ridentificacion = models.CharField(unique=True, max_length=13, blank=True, null=True, validators=[validate_cedula])
+    ridentificacion = models.CharField(max_length=13, blank=True, null=True, validators=[identificar])
     tipo_parentesco = models.CharField(max_length=200, blank=True, null=True)
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True )
@@ -113,7 +107,7 @@ class MantEstudiante(models.Model):
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, blank=False, null=False,
                                    related_name="fk_estudiante_persona", db_column='id_persona')
     tipo_estudiante = models.CharField(max_length=45, blank=False, null=False)
-    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    fecha_ingreso = models.DateTimeField(blank=False, null=True)
     usuario_ing = models.CharField(max_length=45, blank=False, null=False)
     terminal_ing = models.CharField(max_length=45, blank=False, null=False)
 
@@ -153,7 +147,7 @@ class MantEmpleado(models.Model):
                                         related_name="fk_empleado_anio_lectivo", db_column='id_anio_lectivo')
     id_usuario = models.ForeignKey('ConfUsuario', on_delete=models.CASCADE, blank=False, null=False,
                                    related_name="fk_empleado_usuario", db_column='id_usuario')
-    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    fecha_ingreso = models.DateTimeField(blank=False, null=True)
     usuario_ing = models.CharField(max_length=45, blank=False, null=False)
     terminal_ing = models.CharField(max_length=45, blank=False, null=False)
 
