@@ -1,5 +1,3 @@
-import kwargs as kwargs
-
 from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
 from django.forms import ModelForm
@@ -141,7 +139,7 @@ class unidad_form(forms.ModelForm):
             'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
             'correo': forms.TextInput(attrs={"class": "form-control text-dark", "type": "email", "placeholder": "Ingrese una correo"}),
-            'telefono': forms.TextInput(attrs={"class": "form-control text-dark", "type": "number", "placeholder": "Ingrese una telefono"}),
+            'telefono': forms.TextInput(attrs={"class": "form-control text-dark", "type": "number",'minleCCCCngth':'10', "placeholder": "Ingrese un telefono"}),
             'fecha_creacion': forms.DateInput(attrs={"class": "form-control text-dark", "type": "date"}),
 
         }
@@ -242,6 +240,7 @@ class UsuarioModelForm(ModelForm):
         super(UsuarioModelForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
             tipo='TUS')
+
 
 class UsuarioeditModelForm(ModelForm):
     class Meta:
