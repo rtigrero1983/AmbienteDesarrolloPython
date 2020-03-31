@@ -19,9 +19,7 @@ class Empleado(ListView):
     queryset = model.objects.filter(Q(estado=97),
                                     Q(id_genr_tipo_usuario=20) |
                                     Q(id_genr_tipo_usuario=21)
-                                    ).select_related('id_genr_tipo_usuario').values('id_persona', 'nombres',
-                                                                                    'apellidos', 'identificacion',
-                                                                                    'id_genr_tipo_usuario')
+                                    ).select_related('id_genr_tipo_usuario')
     context_object_name = 'empleado'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
 
@@ -40,7 +38,7 @@ class NuevoEmpleado(CreateView):
     model = MantPersona
     form_class = EmpleadoForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_reg_empleado.html'
-    success_url = reverse_lazy('Academico:registro_empleado')
+    success_url = reverse_lazy('Academico:empleado')
 
     def get_context_data(self, **kwargs):
         context = super(NuevoEmpleado, self).get_context_data(**kwargs)
@@ -56,10 +54,10 @@ class NuevoEmpleado(CreateView):
         if form.is_valid():
             empleado = form.save()
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            empleado.estado = 97
+            empleado.fecha_ingreso = timezone.now()
             empleado.usuario_ing = usuario.usuario
             empleado.terminal_ing = socket.gethostname()
-            empleado.save()
+            form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
@@ -67,10 +65,26 @@ class NuevoEmpleado(CreateView):
 
 class UpdateEmpleado(UpdateView):
     model = MantPersona
-    form_class = EmpleadoUform
+    form_class = EmpleadoForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_empleado.html'
-    success_url = reverse_lazy('Academico:editar_empleado')
+    success_url = reverse_lazy('Academico:empleado')
     context_object_name = 'e'
+
+
+class ConsultarEmpleado(UpdateView):
+    model = MantPersona
+    form_class = ConsultarEmpleadoForm
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/form_consultar_empleado.html'
+    context_object_name = 'm'
+
+def eliminar_empleado(request, id):
+    empleados = MantPersona.objects.get(id_persona=id)
+    inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    if request.method == 'POST':
+        empleados.estado = inactivo
+        empleados.save()
+        return redirect('Academico:empleado')
+    return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_empleado.html', {'empleado': empleados})
 
 
 class NuevoEstudiante(CreateView):

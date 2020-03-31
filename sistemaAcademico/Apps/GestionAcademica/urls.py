@@ -112,11 +112,14 @@ urlpatterns = [
     path('registro_estudiante/', NuevoEstudiante.as_view(), name='registro_estudiante'),
     path('registro_empleado/', NuevoEmpleado.as_view(), name='registro_empleado'),
     #Editar
-    path('editar_empleado/', UpdateEmpleado.as_view(), name='editar_empleado'),
+    path('editar_empleado/<int:pk>/', UpdateEmpleado.as_view(), name='editar_empleado'),
     path('editar_estudiante/<int:pk>/', UpdateEstudiante.as_view(), name='editar_estudiante'),
     path('consultar_estudiante/<int:pk>/', ConsultarEstudiante.as_view(), name='consultar_estudiante'),
+    path('consultar_empleado/<int:pk>/', ConsultarEmpleado.as_view(), name='consultar_empleado'),
+
     #Eliminar
     path('eliminar_estudiante/<int:id>', eliminar_estudiante, name='eliminar_estudiante'),
+    path('eliminar_empleado/<int:id>', eliminar_empleado, name='eliminar_empleado'),
 
     #------------Reportes de Configuraciones---------------
     path('reporte_usuarios/', reporte_usuarios, name='reporte_usuarios'),
