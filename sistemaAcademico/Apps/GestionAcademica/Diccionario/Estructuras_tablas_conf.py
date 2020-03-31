@@ -130,7 +130,7 @@ class ConfMenu(models.Model):
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[
-                               validate_nombre, longitud, alfanumerico,espaciosusu])
+                               validate_nombre, longitud, alfanumerico, espaciosusu])
     clave = models.CharField(max_length=45, blank=False, null=False, validators=[
                              longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
     id_persona = models.ForeignKey(
