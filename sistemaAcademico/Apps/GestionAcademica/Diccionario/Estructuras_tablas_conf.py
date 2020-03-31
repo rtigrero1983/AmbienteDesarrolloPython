@@ -12,7 +12,7 @@ class ConfEmpresa(models.Model):
         max_length=200, blank=False, null=False, validators=[validar_espacios])
     id_genr_tipo_identificacion = models.ForeignKey(
         GenrGeneral, blank=False,null=False, on_delete=models.CASCADE, db_column='id_genr_tipo_identificacion', validators=[validar_select])
-    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False, validators=[identificar])
+    identificacion = models.CharField(unique=True, max_length=50, blank=False, null=False,validators=[identificar,espacios])
     direccion = models.CharField(
         max_length=50, blank=False, null=False,validators=[validar_espacios])
     representante_legal = models.CharField(
@@ -32,10 +32,12 @@ class ConfEmpresa(models.Model):
     usuario_ing = models.CharField(max_length=45, blank=True, null=True)
     terminal_ing = models.CharField(max_length=45, blank=True, null=True)
 
+
     class Meta:
         verbose_name = 'Empresa',
         verbose_name_plural = 'Empresas',
         db_table = 'conf_empresa'
+
 
     def __str__(self):
         return self.nombre
@@ -128,7 +130,7 @@ class ConfMenu(models.Model):
 class ConfUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[
-                               validate_nombre, longitud, alfanumerico])
+                               validate_nombre, longitud, alfanumerico, validar_tecla])
     clave = models.CharField(max_length=45, blank=False, null=False, validators=[
                              longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
     id_persona = models.ForeignKey(
