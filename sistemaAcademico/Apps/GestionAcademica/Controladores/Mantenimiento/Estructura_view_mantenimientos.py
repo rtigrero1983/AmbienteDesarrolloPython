@@ -65,7 +65,7 @@ class NuevoEmpleado(CreateView):
 
 class UpdateEmpleado(UpdateView):
     model = MantPersona
-    form_class = EmpleadoForm
+    form_class = EditarEmpleadoForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_empleado.html'
     success_url = reverse_lazy('Academico:empleado')
     context_object_name = 'e'
