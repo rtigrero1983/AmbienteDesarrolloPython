@@ -24,28 +24,14 @@ class ListaAnioElectivoCurso(ListView):
     queryset = Mov_Aniolectivo_curso.objects.filter(id_estado_gnral=97)
     template_name = 'sistemaAcademico/Matriculacion/Asignacion_curso/listar_asig_curso.html'
 def eliminar_Asignacion_Curso(request, id):
+    dic={  }
     anio = Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id)
+    lis_anio = Mov_Aniolectivo_curso.objects.filter(id_mov_anioelectivo_curso=id)
     inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    dic['anio']=anio
+    dic['lis_anio']=lis_anio
     if request.method == 'POST':
         anio.id_estado_gnral = inactivo
         anio.save()
         return redirect('Academico:asignacion_curso')
-    return render(request, 'sistemaAcademico/Matriculacion/Asignacion_curso/eliminar_asig_curso.html', {'anio': anio})
-class Eliminar_Asignacion_Curso(DeleteView):
-    model = Mov_Aniolectivo_curso
-    context_object_name = 'anio'
-    queryset = Mov_Aniolectivo_curso.objects.filter(id_estado_gnral=97)
-    template_name = 'sistemaAcademico/Matriculacion/Asignacion_curso/listar_asig_curso.html'
-
-
-
-
-
-def crear_asig_curso(request):
-    return render(request,'sistemaAcademico/Matriculacion/Asignacion_curso/crear_asig_curso.html')
-def edit_asig_curso(request):
-    return render(request,'sistemaAcademico/Matriculacion/Asignacion_curso/edit_asig_curso.html')
-def eliminar_asig_curso(request):
-    return render(request,'sistemaAcademico/Matriculacion/Asignacion_curso/eliminar_asig_curso.html')
-def asig_curso(request):
-    return render(request,'sistemaAcademico/Matriculacion/Asignacion_curso/listar_asig_curso.html')
+    return render(request, 'sistemaAcademico/Matriculacion/Asignacion_curso/eliminar_asig_curso.html', dic)
