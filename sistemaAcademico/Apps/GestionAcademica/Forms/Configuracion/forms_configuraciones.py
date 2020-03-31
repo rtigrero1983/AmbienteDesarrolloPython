@@ -118,7 +118,7 @@ class unidad_form(forms.ModelForm):
         ]
         labels = {
             'nombre': 'Nombre de la Unidad: ',
-            'razon_social': 'Mombre de la Razon: ',
+            'razon_social': 'Nombre de la Razon: ',
             'id_genr_tipo_identificacion': 'Tipo de Identificacion',
             'identificacion': 'Identificacion: ',
             'direccion': 'Nombre de la Direccion: ',
@@ -134,7 +134,6 @@ class unidad_form(forms.ModelForm):
         widgets = {
             'nombre': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para esta unidad"}),
             'razon_social': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una razon para esta unidad"}),
-            'id_genr_tipo_identificacion':forms.Select(attrs={"class": "form-control text-dark"}),
             'identificacion': forms.TextInput(attrs={"class": "form-control text-dark", 'minlength':'10','maxlength':'20', "placeholder": "Ingrese identificacion no duplicada"}),
             'direccion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una direccion"}),
             'representante_legal': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese el representante_legal"}),
