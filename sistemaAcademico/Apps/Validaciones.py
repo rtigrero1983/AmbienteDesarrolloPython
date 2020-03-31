@@ -10,7 +10,6 @@ def validate_codigo(value):
     return value
 
 
-
 def longitud(value):
     if len(value) < 6:
         raise ValidationError('El nombre de usuario debe contener al menos 6 caracteres')
@@ -290,7 +289,12 @@ def pasaporte(value):
 
 
 def identificar(value):
-    if len(value) == 10:
+    if len(value) == 11 and len(value) == 12 and len(value) == 14:
+        return ValidationError(('%(value)s no es una identificacion correcta'),
+                               code="invalid",
+                               params={'value': value}, )
+
+    elif len(value) == 10:
         validate_cedula(value)
 
     elif len(value) == 13:
@@ -298,6 +302,7 @@ def identificar(value):
 
     elif value.isalnum()==True:
         pasaporte(value)
+
 
     return ValidationError(('%(value)s no es una identificacion correcta'),
                           code="invalid",
@@ -338,13 +343,24 @@ def validate_vacios(value):
 
 
 def validar_select(value):
-    if "TID" == "CEDULA":
-        value(validate_cedula(value))
+    CED = [('CEDULA')]
+    RUC = [('RUC')]
+    PAS = [( 'PASAPORTE')]
 
-    elif "TID" == "RUC":
-        value(validate_ruc(value))
 
-    elif "TID" == "PASAPORTE":
+    if 10 == CED:
+        raise ValidationError(
+            _('%(value)s no es una eleccion correcta'),
+            code="invalid",
+            params={'value': value}, )
+
+    elif 13 == RUC:
+        raise ValidationError(
+            _('%(value)s no es una eleccion correcta'),
+            code="invalid",
+            params={'value': value}, )
+
+    elif " " == PAS:
         value(pasaporte(value))
         raise ValidationError(_('%(value) identificacion incorrecta'))
     return value
