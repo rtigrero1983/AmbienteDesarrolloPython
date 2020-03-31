@@ -1,16 +1,6 @@
-from datetime import time
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import *
-
-def validateDateEs(date):
-    for format in ['%d/%m/%Y', '%d/%m/%y', '%d/%m/%Y %H:%M:%S', '%d/%m/%y %H:%M:%S']:
-        try:
-            result = time.strptime(date, format)
-            return True
-        except:
-            pass
-    return result
-
+from django.core.exceptions import ValidationError
 
 
 def validate_codigo(value):
@@ -24,28 +14,28 @@ def validate_codigo(value):
 def longitud(value):
     if len(value) < 6:
         raise ValidationError('El nombre de usuario debe contener al menos 6 caracteres')
-        return value
+
     elif len(value) > 12:
         raise ValidationError('El nombre de usuario debe contener maximo 12 caracteres')
-        return value
 
     else:
         return value
+
 def alfanumerico(value):
     if value.isalnum() == True:
         raise ValidationError('El nombre de usuario puede contener solo letras y numeros')
-        return value
     else:
         return value
 
 def validate_nombre(value):
     if len(value) == " ":
+        return True
+
+    elif " " == True :
         raise ValidationError(
-            _('%(values)s Ya esta creada esta Unidad'),
+            _('%(value)s Ya esta creada esta Unidad'),
             code="invalid",
-            params={'value': value},)
-    elif " " == True:
-        return value
+            params={'value': value}, )
     else:
         return value
 
@@ -62,10 +52,9 @@ def validar_espacios(value):
 def longitudPassword(value):
     if len(value) < 8:
         raise ValidationError('La contraseña debe tener al menos 8 caracteres')
-        return value
+
     elif len(value) > 15:
         raise ValidationError('La contraseña debe tener maximo 15 caracteres')
-        return value
 
     else:
         return value
@@ -78,7 +67,6 @@ def minuscula(value):
                 letras_minuscula=True
         if not letras_minuscula:
             raise ValidationError('La contraseña debe tener al menos una minuscula')
-            return value
         else:
             return value
 
@@ -89,7 +77,6 @@ def mayuscula(value):
                 letras_mayuscula=True
         if not letras_mayuscula:
             raise ValidationError('La contraseña debe tener al menos una mayuscula')
-            return value
         else:
             return value
 
@@ -101,38 +88,37 @@ def numero(value):
 
         if not num:
             raise ValidationError('La contraseña debe tener al menos un numero')
-            return value
         else:
             return value
 
 def espacios(value):
-        if value.count(" ")> 0:
-            raise ValidationError('La contraseña no puede contener espacios en blanco')
-            return value
+        if value.count(" ") > 0:
+            raise ValidationError('La identificacion no puede contener espacios')
         else:
             return value
 
 def alfanumericoPassword(value):
     if value.isalnum() == False:
-        raise ValidationError('La contraseña puede contener solo letras y numeros')
-        return value
+        raise ValidationError('La contraseña puede contener solo letras y numeros',
+                              code="invalid",
+                              params={'value': 'value'}, )
     else:
         return value
 
 def validate_descripcion(value):
     if " " in value or value == "":
         raise ValidationError(
-            _('No se puede crear un menu sin un nombre. porfavor ingrese uno'))
+            _('No se puede crear un menu sin un nombre. porfavor ingrese uno',
+              code="invalid",
+              params={'value': 'value'}, ))
     return value
 
 
 def validate_cedula(value):
     if(len(value)!=10 or not value.isdigit()):
-        raise Exception(
-            _('%(value)s no es una cédula válida'),
-            code="invalid",
-            params={'value': 'value'},
-        )
+        raise ValidationError(_('%(value)s no es una cédula válida'),
+                              code="invalid",
+                              params={'value': 'value'}, )
     else:
         impares = int(value[1]) + int(value[3]) + int(value[5]) + int(value[7])
         pares = 0
@@ -147,11 +133,9 @@ def validate_cedula(value):
         if(dig_validador==10):
             dig_validador = 0
         if (not(int(value[0:2])>=1 and int(value[0:2])<=24 and int(value[-1])==dig_validador)):
-            raise ValidationError(
-                _('%(value)s no es una cédula válida'),
-                code="invalid",
-                params={'value': value},
-            )
+            raise ValidationError(_('%(value)s no es una cédula válida'),
+                                  code="invalid",
+                                  params={'value': 'value'}, )
 
 def ruc_natural(value):
     impares = int(value[1]) + int(value[3]) + int(value[5]) + int(value[7])
@@ -192,11 +176,11 @@ def ruc_publica(value):
     d2 = int(value[1])*2
     d3 = int(value[2])*7
     d4 = int(value[3])*6
-    d5 = int(value[4])*5
     d6 = int(value[5])*4
     d7 = int(value[6])*3
     d8 = int(value[7])*2
-    total = d1+d2+d3+d4+d5+d6+d7+d8
+    total = d1+d2+d3+d4+d6+d7+d8
+    d5 = int(value[4])*5
     dig_validador = 0
     residuo = total%11
     if(residuo!=0):
@@ -208,11 +192,9 @@ def validate_ruc(value):
         return value
 
     elif (not value.isdigit() or not len(value)==13 or not(ruc_natural(value) or ruc_juridica(value) or ruc_publica(value))):
-        raise ValidationError(
-            _('%(value)s no es un RUC válido'),
-            code="invalid",
-            params={'value': value},
-        )
+        raise ValidationError(_('%(value)s no es un RUC válido'),
+                              code="invalid",
+                              params={'value': value},)
 
 def validate_letras(value):
     if (not value.isalpha()):
@@ -238,15 +220,23 @@ def validate_celular(value):
             params={'value': value},
         )
 
+def validar_tecla(value):
+    if (not value.isdigi() and value.isalnum() == True):
+        raise ValidationError(
+            _('%(value)s por favor deje insitir,no se puede'),
+            code="invalid",
+            params={'value': value},
+        )
 
 
 def validate_positive(value):
     if(value<0):
         raise ValidationError(
-            _('%(values)s no es un numero positivo'),
+            _('%(value)s no es un numero positivo'),
             code="invalid",
             params={'value': value},
         )
+
 
 
 class usuario_validar():
@@ -281,7 +271,7 @@ def pasaporte(value):
         return True
     else:
         raise ValidationError(
-            _('%(values)s no es un pasaporte correcto'),
+            _('%(value)s no es un pasaporte correcto'),
             code="invalid",
             params={'value': value},)
 
@@ -293,33 +283,32 @@ def identificar(value):
     elif len(value) == 13:
         validate_ruc(value)
 
-    elif value.count == " ":
+    elif value.isalnum()==True:
         pasaporte(value)
 
-    return True
-
+    return ValidationError(('%(value)s no es una identificacion correcta'),
+                          code="invalid",
+                          params={'value': value},)
 
 def validar_anio(value):
-    if value >= "2020":
-        raise ValidationError(_('%(values) No se puede crear otro año lectivo repetido'),
-                              code="invalid",
-                              params={'value': value},
-                              )
-
-    elif 2020 == 2020:
-        raise Exception(_('%(values) No se puede crear otro año lectivo comenzado '))
-
+    if value == 2020:
+        raise ValidationError(
+            _('%(value)s no es un pasaporte correcto'),
+            code="invalid",
+            params={'value': value}, )
+    elif 2020 == True:
+        return value
 
 def validar_ciclo(value):
-    if "" == "":
-        raise ValidationError(_('%(values) No se puede crear otro ciclo repetido'),
-                              code="invalid",
-                              params={'value': value},
-                              )
-
-    elif "" == False:
-        raise Exception(_('%(values)sNo se puede crear otro ciclo... :) '))
-    return value
+    if value == 1:
+        raise ValidationError(
+            _('%(value)s no es un pasaporte correcto'),
+            code="invalid",
+            params={'value': value},)
+    elif 1 == True:
+        return value
+    else:
+        return value
 
 
 def validate_vacios(value):
@@ -327,20 +316,49 @@ def validate_vacios(value):
         return True
 
     elif value == "":
-        raise Exception(_('No puede dejar campos vacios'))
+        raise ValidationError(
+            _('%(value)s no es un pasaporte correcto'),
+            code="invalid",
+            params={'value': value},)
 
     return value
 
 
 def validar_select(value):
-    if "opcion" == "CEDULA":
+    if "TID" == "CEDULA":
         value(validate_cedula(value))
 
-    elif "opcion" == "RUC":
+    elif "TID" == "RUC":
         value(validate_ruc(value))
 
-    elif "opcion" == "PASAPORTE":
+    elif "TID" == "PASAPORTE":
         value(pasaporte(value))
-        raise Exception(_('%(values) identificacion incorrecta'))
+        raise ValidationError(_('%(value) identificacion incorrecta'))
     return value
+
+
+def validar_ced_ruc(nro,tipo):
+    total = 0
+    if tipo == 0: # cedula y r.u.c persona natural
+        base = 10
+        d_ver = int(nro[9])# digito verificador
+        multip = (2, 1, 2, 1, 2, 1, 2, 1, 2)
+    elif tipo == 1: # r.u.c. publicos
+        base = 11
+        d_ver = int(nro[8])
+        multip = (3, 2, 7, 6, 5, 4, 3, 2 )
+    elif tipo == 2: # r.u.c. juridicos y extranjeros sin cedula
+        base = 11
+        d_ver = int(nro[9])
+        multip = (4, 3, 2, 7, 6, 5, 4, 3, 2)
+    for i in range(0,len(multip)):
+        p = int(nro[i]) * multip[i]
+        if tipo == 0:
+            total+=p if p < 10 else int(str(p)[0])+int(str(p)[1])
+        else:
+            total+=p
+    mod = total % base
+    val = base - mod if mod != 0 else 0
+    return val == d_ver
+
 
