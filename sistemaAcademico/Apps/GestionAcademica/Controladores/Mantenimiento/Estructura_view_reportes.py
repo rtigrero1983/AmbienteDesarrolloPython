@@ -466,7 +466,7 @@ def mant_empleado(empleado,campoChk=None, usuarioph=None):
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=2).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=2).value = empe.id_persona_nombres
+        ws.cell(row=controlador, column=2).value = empe.id_persona.nombres
 
         ws.cell(row=controlador, column=3).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=3).border = Border(left=Side(border_style="thin"),
