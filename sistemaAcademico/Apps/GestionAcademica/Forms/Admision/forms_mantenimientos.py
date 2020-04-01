@@ -370,7 +370,7 @@ class ConsultarEmpleadoForm(ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Empleado"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Empleado"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Numero de Cedula"}),
-            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control","placeholder": "Lugar de Nacimiento"}),
 
             "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Familiar"}),
@@ -738,7 +738,7 @@ class EstudianteEditForm(ModelForm):
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark", "type": "date"}),
+            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
@@ -910,7 +910,7 @@ class ConsultarEstudianteForm(ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark", "type": "date"}),
+            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
