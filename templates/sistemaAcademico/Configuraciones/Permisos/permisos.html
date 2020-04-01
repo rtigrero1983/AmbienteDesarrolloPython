@@ -9,6 +9,7 @@
     {% for acciones in agregar %}
         {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
             <a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a>
+            <br>
         {% endif %}
     {% endfor %}
   {% endfor %}
@@ -31,7 +32,7 @@
           <tr class="text-light text-center">
             <th>Codigo rol</th>
             <th>Menus disponibles para el rol</th>
-            <th>Acciones ejecutables</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>

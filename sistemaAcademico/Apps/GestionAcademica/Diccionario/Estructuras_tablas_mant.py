@@ -59,7 +59,7 @@ class MantPersona(models.Model):
     mdireccion = models.CharField(max_length=45, blank=True, null=True)
     mtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     mvive_con_usted = models.BooleanField(blank=True, null=True)
-    id_genr_estado_laboralm = models.ForeignKey(GenrGeneral,blank=False, null=False, on_delete=models.CASCADE, related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
+    id_genr_estado_laboralm = models.ForeignKey(GenrGeneral,blank=True, null=True, on_delete=models.CASCADE, related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
 
 

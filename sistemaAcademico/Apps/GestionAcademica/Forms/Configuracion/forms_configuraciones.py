@@ -118,14 +118,14 @@ class unidad_form(forms.ModelForm):
         ]
         labels = {
             'nombre': 'Nombre de la Unidad: ',
-            'razon_social': 'Nombre de la Razon: ',
+            'razon_social': 'Razon Social: ',
             'id_genr_tipo_identificacion': 'Tipo de Identificacion',
             'identificacion': 'Identificacion: ',
-            'direccion': 'Nombre de la Direccion: ',
+            'direccion': 'Direccion: ',
             'representante_legal': 'Representante Legal: ',
             'correo': 'Correo:',
             'telefono': 'Telefono:',
-            'fecha_creacion': 'fecha de creacion',
+            'fecha_creacion': 'Fecha de creacion',
             'usuario_ing': '',
             'terminal_ing': ''
 
