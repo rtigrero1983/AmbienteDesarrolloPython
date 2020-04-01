@@ -200,7 +200,7 @@ def usur(ws, usuario):
 
 def reportePdf(usuarios,campoChk=None,usuarioph=None):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=ReportePdf.pdf'
+    response['Content-Disposition'] = 'attachment; filename=Reporte_Usuario.pdf'
     buffer = BytesIO()
     high = 650
     this_U = None
@@ -440,7 +440,7 @@ def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
 
 
     # establecer el nombre de mi archivo
-    nombre_archivo = "ReportePersonalizadoExcel.xlsx"
+    nombre_archivo = "ReporteRolExcel.xlsx"
     # Definir tipo de respuesta que va a dar
     response = HttpResponse(content_type="application/ms-excel")
     contenido = "attachment; filename = {0}".format(nombre_archivo)
