@@ -9,6 +9,7 @@
 
 
  {% block contenido_principal %}
+ 
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         {% if error %}
@@ -23,6 +24,9 @@
             <h4 class="titulo">Configuracion / Unidad</h4>
         </header>
         <br/>
+
+        
+
         <form action="" method="post" id="forma_test" novalidate>
             {% csrf_token %}
            <div class="contenido">
