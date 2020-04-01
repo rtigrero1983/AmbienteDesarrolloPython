@@ -16,6 +16,7 @@ class NuevaEmpre(CreateView):
     form_class = unidad_form
     success_url = reverse_lazy('Academico:empresas')
 
+
     def get_context_data(self, **kwargs):
         context = super(NuevaEmpre, self).get_context_data(**kwargs)
         pk = self.kwargs.get('id_empresa', 0)
@@ -23,6 +24,8 @@ class NuevaEmpre(CreateView):
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         return context
+
+
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object

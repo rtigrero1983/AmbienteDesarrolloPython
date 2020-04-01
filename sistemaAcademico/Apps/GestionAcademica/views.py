@@ -10,10 +10,12 @@ from .Controladores.Mantenimiento.Estructura_view_consultas import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
 from .Controladores.Mantenimiento.Estructura_view_movimientos import *
 from .Controladores.Mantenimiento.Estructura_view_procesos import *
+
 import hashlib
 from django.template.loader import get_template
 
 from .Diccionario.Estructuras_tablas_conf import ConfMenu, ConfUsuario, ConfModulo_menu, ConfPermiso
+from .Diccionario.Estructuras_tablas_mant import *
 
 
 def inicio(request):
@@ -63,9 +65,12 @@ def salir(request):
 
 
 def pantalla_principal(request):
-    t = get_template('sistemaAcademico/Pantalla_principal.html')
-    html = t.render()
-    return HttpResponse(html)
+    usuarios = ConfUsuario.objects.filter(id_genr_estado=97).count()
+    personas = MantPersona.objects.filter().count()
+    alumnos = MantEstudiante.objects.filter().count()
+    empleados =  MantEmpleado.objects.filter().count()
+
+    return render(request,'sistemaAcademico/Pantalla_principal.html',{'usuarios':usuarios,'personas':personas,'alumnos':alumnos,'empleados':empleados})
 
 
 def timeout(request):
