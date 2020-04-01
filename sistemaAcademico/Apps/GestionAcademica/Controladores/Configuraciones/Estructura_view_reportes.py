@@ -40,6 +40,7 @@ def reporte_usuarios(request, *args, **kwargs):
             elif(combo==3):
                 usuarios = ConfUsuario.objects.all()
 
+
             if(comboR == 1):
                 return reporte_excell(usuarios,campoChk,usuario)
             elif(comboR == 2):
@@ -88,13 +89,14 @@ def reporte_excell(usuarios,campoChk=None,usuarioph=None):
     ws['B4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['B4'].font = Font(name='times new roman', size=11, bold=True)
-    ws['B4'] = 'Usuario: '
 
     ws['C4'].alignment = Alignment(horizontal="center", vertical="center")
     ws['C4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C4'].font = Font(name='times new roman', size=11)
-    ws['C4'] = ' {0}'.format(usuarioph)
+
+    if campoChk != None:
+        usur(ws, usuarioph)
 
     ws['D2'].alignment = Alignment(horizontal="center", vertical="center")
     ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -175,12 +177,10 @@ def reporte_excell(usuarios,campoChk=None,usuarioph=None):
         ws.cell(row=controlador, column=4).font = Font(name='times new roman', size=11)
         ws.cell(row=controlador, column=4).value = confusuario.id_genr_tipo_usuario.nombre
         controlador += 1
-    # cont += 1
-    if campoChk != None:
-            usuarioph
+
 
     # establecer el nombre de mi archivo
-    nombre_archivo = "ReportePersonalizadoExcel.xlsx"
+    nombre_archivo = "ReporteUsuarioExcel.xlsx"
     # Definir tipo de respuesta que va a dar
     response = HttpResponse(content_type="application/ms-excel")
     contenido = "attachment; filename = {0}".format(nombre_archivo)
@@ -190,6 +190,11 @@ def reporte_excell(usuarios,campoChk=None,usuarioph=None):
     wb.save('logo-login.xlsx')
     wb.save(response)
     return response
+def usur(ws, usuario):
+    print(usuario)
+    ws['B4'] = 'Usuario: '
+    ws['C4'] = ' {0}'.format(usuario)
+
 
 
 
@@ -211,9 +216,9 @@ def reportePdf(usuarios,campoChk=None,usuarioph=None):
     styleN.fontSize = 7
     width, height = A4
 
-    usuario = Paragraph('''USUARIO''', sytlesBH)
-    persona = Paragraph('''persona''', sytlesBH)
-    tipoU = Paragraph('''tipo_usuario''', sytlesBH)
+    usuario = Paragraph('''Usuario''', sytlesBH)
+    persona = Paragraph('''Nombre''', sytlesBH)
+    tipoU = Paragraph('''Tipo Usuario''', sytlesBH)
     data = []
     data.append([usuario, persona, tipoU])
     this_U = []
@@ -277,10 +282,14 @@ def reporte_roles(request, *args, **kwargs):
             print(usuario)
             campoChk2 = request.POST.get('check2')
             campo2 = request.POST.get('campo')
-            if campo2:
-                rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
-            else:
+            combo = int(request.POST.get('combo'))
+            if(combo == 1):
                 rol = ConfUsuario.objects.all()
+            elif(combo ==2):
+                rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
+
+
+
             print('kjkjkjkj',campo2)
             comboR = int(request.POST.get('comboR'))
             print('el reporte es: ',comboR)
@@ -334,13 +343,15 @@ def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
     ws['B4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['B4'].font = Font(name='times new roman', size=11, bold=True)
-    ws['B4'] = 'Usuario: '
+
 
     ws['C4'].alignment = Alignment(horizontal="center", vertical="center")
     ws['C4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C4'].font = Font(name='times new roman', size=11)
-    ws['C4'] = ' {0}'.format(usuarioph)
+
+    if campoChk2 != None:
+        usur(ws,usuarioph)
 
     ws['D2'].alignment = Alignment(horizontal="center", vertical="center")
     ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -426,9 +437,7 @@ def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
         cont += 1
 
     controlador += 1
-    # cont += 1
-    if campoChk2 != None:
-        usuarioph
+
 
     # establecer el nombre de mi archivo
     nombre_archivo = "ReportePersonalizadoExcel.xlsx"
@@ -441,8 +450,10 @@ def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
     wb.save('logo-login.xlsx')
     wb.save(response)
     return response
-
-
+def usur(ws, usuario):
+    print(usuario)
+    ws['B4'] = 'Usuario: '
+    ws['C4'] = ' {0}'.format(usuario)
 
 
 
@@ -520,5 +531,5 @@ def cabecerapdfrol(high,data,width, height,buffer,c):
 
 def piePagina(c,usuario):
     print(usuario)
-    c.setFont('Helvetica',10)
+    c.setFont('Helvetica-Bold',10)
     c.drawString(100, 50, 'Usuario: {0}'.format(usuario))

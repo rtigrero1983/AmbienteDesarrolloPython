@@ -26,6 +26,14 @@
 <form  method="POST" id="myform">
     {% csrf_token %}
     <div class="label label-info">
+          <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
+        <select name="combo" id="combo" class="form-control" required>
+              <option selected="" disabled="" value="3">--------------------</option>
+            <option  value="1">Mostrar todos los Roles</option>
+            <option value="2" name="user">Filtrar por nombre del rol</option>
+        </select>
+
+
         </select>&nbsp; <input type="text" class="form-control" name="campo" placeholder="buscar">
         <br>
         <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check2" name="check2" required>

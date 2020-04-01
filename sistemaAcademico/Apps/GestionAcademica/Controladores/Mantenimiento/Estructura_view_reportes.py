@@ -29,17 +29,15 @@ def reporte_estudiante(request):
             print(usuario)
             campoChk = request.POST.get('check1')
             campoP = request.POST.get('campoPersona')
-            combo = request.POST.get('combo')
+            combo = int(request.POST.get('combo'))
             comboR = int(request.POST.get('comboR'))
             print('el reporte es: ',comboR)
             if(combo == 1):
                 persona = MantEstudiante.objects.filter(id_persona__nombres=campoP)
             elif(combo == 2):
-                persona = MantEstudiante.objects.filter(tipo_estudiante=campoP)
+                persona = MantEstudiante.objects.all()
             elif (combo == 3):
                 persona = MantEstudiante.objects.filter(usuario_ing=campoP)
-            else:
-                persona = MantEstudiante.objects.all()
 
             if(comboR == 1):
                 return mant_estudiante(persona,campoChk,usuario)
@@ -51,7 +49,7 @@ def reporte_estudiante(request):
 
 
 
-def mant_estudiante(persona,campoChk=None,usuarioph=None):
+def mant_estudiante(persona,campoChk3=None,usuariophh=None):
     wb = Workbook()
     ws = wb.active
     ws.title = 'Hoja' + str()
@@ -66,11 +64,11 @@ def mant_estudiante(persona,campoChk=None,usuarioph=None):
     ws['B2'].font = Font(name='times new roman', size=11, bold=True)
     ws['B2'] = 'Fecha:'
 
-    ws['C2'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['C2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+    ws['D2'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
-    ws['C2'].font = Font(name='times new roman', size=11)
-    ws['C2'] = datetime.datetime.now().date()
+    ws['D2'].font = Font(name='times new roman', size=11)
+    ws['D2'] = datetime.datetime.now().date()
 
     ws['B3'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -78,44 +76,29 @@ def mant_estudiante(persona,campoChk=None,usuarioph=None):
     ws['B3'].font = Font(name='times new roman', size=11, bold=True)
     ws['B3'] = 'Hora: '
 
-    ws['C3'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['C3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+    ws['D3'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['D3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
-    ws['C3'].font = Font(name='times new roman', size=11)
-    ws['C3'] = time.strftime("%H:%M")
+    ws['D3'].font = Font(name='times new roman', size=11)
+    ws['D3'] = time.strftime("%H:%M")
 
     ws['B4'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['B4'].font = Font(name='times new roman', size=11, bold=True)
-    ws['B4'] = 'Usuario: '
-
-    ws['C4'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['C4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
-                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
-    ws['C4'].font = Font(name='times new roman', size=11)
-    ws['C4'] = ' {0}'.format(usuarioph)
-
-    ws['D2'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
-                             top=Side(border_style="thin"))
-
-    ws['D3'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['D3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"))
 
     ws['D4'].alignment = Alignment(horizontal="center", vertical="center")
     ws['D4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
-                             bottom=Side(border_style="thin"))
+                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
+    ws['D4'].font = Font(name='times new roman', size=11)
+    if campoChk3 != None:
+        usur2(ws,usuariophh)
 
-    ws['E2'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['E2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
-                             top=Side(border_style="thin"))
 
-    ws['E3'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['E3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"))
-
-    ws['E4'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['E4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+    ws['F2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+                            top=Side(border_style="thin"))
+    ws['F3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"))
+    ws['F4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              bottom=Side(border_style="thin"))
 
     ws['B5'].alignment = Alignment(horizontal="center", vertical="center")
@@ -126,16 +109,21 @@ def mant_estudiante(persona,campoChk=None,usuarioph=None):
     ws['B5'].font = Font(name='times new roman', size=12, bold=True)
     ws['B5'] = 'REPORTE DE ESTUDIANTE'
     # ---------------------------------------cambiar caracteristicas de las celdas--------------------------------------
-    ws.merge_cells('B5:E5')
-    ws.merge_cells('C2:D2')
-    ws.merge_cells('C3:D3')
-    ws.merge_cells('C4:D4')
+    ws.merge_cells('B5:F5')
+
+    ws.merge_cells('B2:C2')
+    ws.merge_cells('B3:C3')
+    ws.merge_cells('B4:C4')
+    ws.merge_cells('D2:E2')
+    ws.merge_cells('D3:E3')
+    ws.merge_cells('D4:E4')
 
     ws.row_dimensions[3].height = 25
     ws.column_dimensions['B'].width = 25
     ws.column_dimensions['C'].width = 25
     ws.column_dimensions['D'].width = 25
     ws.column_dimensions['E'].width = 25
+    ws.column_dimensions['F'].width = 25
 
     # ws.column_dimensions['D'].width = 20
     # ----------------------------------------------------darle diseño a mi cabecera------------------------------------
@@ -167,6 +155,14 @@ def mant_estudiante(persona,campoChk=None,usuarioph=None):
     ws['E6'].fill = PatternFill(start_color='3380FF', end_color='3380FF', fill_type="solid")
     ws['E6'].font = Font(name='times new roman', size=12, bold=True)
     ws['E6'] = 'Usuario'
+
+    ws['F6'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['F6'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
+    ws['F6'].fill = PatternFill(start_color='3380FF', end_color='3380FF', fill_type="solid")
+    ws['F6'].font = Font(name='times new roman', size=12, bold=True)
+    ws['F6'] = 'Dirección '
+
 
     # ---------------------------pintar datos en excel y EXPORTAR DATOS DE LA BD---------------------------------------------------------
     controlador = 7
@@ -203,26 +199,34 @@ def mant_estudiante(persona,campoChk=None,usuarioph=None):
         ws.cell(row=controlador, column=5).font = Font(name='times new roman', size=11)
         ws.cell(row=controlador, column=5).value = mant.usuario_ing
 
+        ws.cell(row=controlador, column=6).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=6).border = Border(left=Side(border_style="thin"),
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=6).font = Font(name='times new roman', size=11)
+        ws.cell(row=controlador, column=6).value = mant.id_persona.direccion
+
         controlador += 1
         cont += 1
 
-    if campoChk != None:
-        usuarioph
 
     # establecer el nombre de mi archivo
-    nombre_archivo = "ReportePersonalizadoExcel.xlsx"
+    nombre_archivo = "ReporteEstudianteExcel.xlsx"
     # Definir tipo de respuesta que va a dar
     response = HttpResponse(content_type="application/ms-excel")
     contenido = "attachment; filename = {0}".format(nombre_archivo)
     response["Content-Disposition"] = contenido
 
-    ws.add_image(img, 'E2')
+    ws.add_image(img, 'F2')
     wb.save('logo-login.xlsx')
     wb.save(response)
     return response
 
-
-
+def usur2(ws, usuario):
+    print(usuario)
+    ws['B4'] = 'Usuario: '
+    ws['D4'] = ' {0}'.format(usuario)
 
 def reportePdf_estudiante(persona,campoChk2=None,usuarioph=None):
     response = HttpResponse(content_type='application/pdf')
@@ -244,19 +248,20 @@ def reportePdf_estudiante(persona,campoChk2=None,usuarioph=None):
     testud = Paragraph('''Tipo Estudiante''', sytlesBH)
     datee = Paragraph('''Fecha de ingreso''', sytlesBH)
     usuario = Paragraph('''Usuario''', sytlesBH)
+    telefono = Paragraph('''Dirección ''',sytlesBH)
     data = []
-    data.append([estu, testud,datee,usuario])
+    data.append([estu, testud,datee,usuario, telefono])
 
     #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
     #contro = 2
     this_estudiante = []
     for pdfes in persona:
-        this_estudiante += [{'E': pdfes.id_persona.nombres,'S': pdfes.tipo_estudiante, 'T': pdfes.fecha_ingreso, 'U': pdfes.usuario_ing}]
+        this_estudiante += [{'E': pdfes.id_persona.nombres,'S': pdfes.tipo_estudiante, 'T': pdfes.fecha_ingreso, 'U': pdfes.usuario_ing, 'C':pdfes.id_persona.direccion}]
         #this_rol += this_rol
 
     high = 650
     for estudent in this_estudiante:
-        u = [estudent['E'], estudent['S'], estudent['T'], estudent['U']]
+        u = [estudent['E'], estudent['S'], estudent['T'], estudent['U'],estudent['C']]
         data.append(u)
         high = high - 18
 
@@ -286,7 +291,7 @@ def cabecerapdf(high,data,width, height,buffer,c):
 
 
 
-    table = Table(data, colWidths=[5 * cm, 5 * cm, 5 * cm, 5 * cm])
+    table = Table(data, colWidths=[4 * cm, 4 * cm, 5 * cm, 4 * cm, 3*cm])
     table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
                                ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
     table.wrapOn(c, width, height)
@@ -310,14 +315,14 @@ def reporte_empleado(request):
             print(usuario)
             campoChk = request.POST.get('check1')
             campoP = request.POST.get('campoEmpleado')
-            combo = request.POST.get('combo')
+            combo = int(request.POST.get('combo'))
             comboR = int(request.POST.get('comboR'))
             print('el reporte es: ',comboR)
             if(combo == 1):
                 empleado = MantEmpleado.objects.filter(id_persona__nombres=campoP)
             elif(combo == 3):
                 empleado = MantEmpleado.objects.filter(id_usuario__usuario=campoP)
-            else:
+            elif(combo == 2):
                 empleado = MantEmpleado.objects.all()
 
             if(comboR == 1):
@@ -368,13 +373,14 @@ def mant_empleado(empleado,campoChk=None, usuarioph=None):
     ws['B4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['B4'].font = Font(name='times new roman', size=11, bold=True)
-    ws['B4'] = 'Usuario: '
 
     ws['C4'].alignment = Alignment(horizontal="center", vertical="center")
     ws['C4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C4'].font = Font(name='times new roman', size=11)
-    ws['C4'] = ' {0}'.format(usuarioph)
+
+    if campoChk != None:
+        usur(ws, usuarioph)
 
     ws['D2'].alignment = Alignment(horizontal="center", vertical="center")
     ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -488,12 +494,8 @@ def mant_empleado(empleado,campoChk=None, usuarioph=None):
         controlador += 1
         cont += 1
 
-
-    if campoChk != None:
-        usuarioph
-
     # establecer el nombre de mi archivo
-    nombre_archivo = "ReportePersonalizadoExcel.xlsx"
+    nombre_archivo = "ReporteEmpleadoExcel.xlsx"
     # Definir tipo de respuesta que va a dar
     response = HttpResponse(content_type="application/ms-excel")
     contenido = "attachment; filename = {0}".format(nombre_archivo)
@@ -503,7 +505,10 @@ def mant_empleado(empleado,campoChk=None, usuarioph=None):
     wb.save('logo-login.xlsx')
     wb.save(response)
     return response
-
+def usur(ws, usuario):
+    print(usuario)
+    ws['B4'] = 'Usuario: '
+    ws['C4'] = ' {0}'.format(usuario)
 
 
 def reportePdf_empleado(empleado,campoChk2=None,usuarioph=None):
