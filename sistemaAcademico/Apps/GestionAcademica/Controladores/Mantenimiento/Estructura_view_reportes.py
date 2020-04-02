@@ -22,30 +22,35 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant 
 
 
 def reporte_estudiante(request):
-    if 'usuario' in request.session:
-        persona = None
-        if request.method == 'POST':
-            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            print(usuario)
-            campoChk = request.POST.get('check1')
-            campoP = request.POST.get('campoPersona')
-            combo = int(request.POST.get('combo'))
-            comboR = int(request.POST.get('comboR'))
-            print('el reporte es: ',comboR)
-            if(combo == 1):
-                persona = MantEstudiante.objects.filter(id_persona__nombres=campoP)
-            elif(combo == 2):
-                persona = MantEstudiante.objects.all()
-            elif (combo == 3):
-                persona = MantEstudiante.objects.filter(usuario_ing=campoP)
+    try:
+        if 'usuario' in request.session:
+            persona = None
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                print(usuario)
+                campoChk = request.POST.get('check1')
+                campoP = request.POST.get('campoPersona')
+                combo = int(request.POST.get('combo'))
+                comboR = int(request.POST.get('comboR'))
+                print('el reporte es: ', comboR)
+                if (combo == 1):
+                    persona = MantEstudiante.objects.filter(id_persona__nombres=campoP)
+                elif (combo == 2):
+                    persona = MantEstudiante.objects.all()
+                elif (combo == 3):
+                    persona = MantEstudiante.objects.filter(usuario_ing=campoP)
 
-            if(comboR == 1):
-                return mant_estudiante(persona,campoChk,usuario)
-            elif(comboR == 2):
-                return reportePdf_estudiante(persona,campoChk,usuario)
+                if (comboR == 1):
+                    return mant_estudiante(persona, campoChk, usuario)
+                elif (comboR == 2):
+                    return reportePdf_estudiante(persona, campoChk, usuario)
+            return render(request, 'sistemaAcademico/reportes/reportePersona.html')
+        else:
+            return HttpResponseRedirect('timeout/')
+    except Exception:
         return render(request, 'sistemaAcademico/reportes/reportePersona.html')
-    else:
-        return HttpResponseRedirect('timeout/')
+
+
 
 
 
@@ -308,30 +313,34 @@ def piePagina(c,usuario):
 ##############################################################################################################################################
 
 def reporte_empleado(request):
-    if 'usuario' in request.session:
-        empleado = None
-        if request.method == 'POST':
-            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            print(usuario)
-            campoChk = request.POST.get('check1')
-            campoP = request.POST.get('campoEmpleado')
-            combo = int(request.POST.get('combo'))
-            comboR = int(request.POST.get('comboR'))
-            print('el reporte es: ',comboR)
-            if(combo == 1):
-                empleado = MantEmpleado.objects.filter(id_persona__nombres=campoP)
-            elif(combo == 3):
-                empleado = MantEmpleado.objects.filter(id_usuario__usuario=campoP)
-            elif(combo == 2):
-                empleado = MantEmpleado.objects.all()
+    try:
 
-            if(comboR == 1):
-                return mant_empleado(empleado,campoChk,usuario)
-            elif(comboR == 2):
-                return reportePdf_empleado(empleado,campoChk,usuario)
-        return render(request, 'sistemaAcademico/reportes/reporteEmpleado.html')
-    else:
-        return HttpResponseRedirect('timeout/')
+        if 'usuario' in request.session:
+            empleado = None
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                print(usuario)
+                campoChk = request.POST.get('check1')
+                campoP = request.POST.get('campoEmpleado')
+                combo = int(request.POST.get('combo'))
+                comboR = int(request.POST.get('comboR'))
+                print('el reporte es: ', comboR)
+                if (combo == 1):
+                    empleado = MantEmpleado.objects.filter(id_persona__nombres=campoP)
+                elif (combo == 3):
+                    empleado = MantEmpleado.objects.filter(id_usuario__usuario=campoP)
+                elif (combo == 2):
+                    empleado = MantEmpleado.objects.all()
+
+                if (comboR == 1):
+                    return mant_empleado(empleado, campoChk, usuario)
+                elif (comboR == 2):
+                    return reportePdf_empleado(empleado, campoChk, usuario)
+            return render(request, 'sistemaAcademico/reportes/reporteEmpleado.html')
+        else:
+            return HttpResponseRedirect('timeout/')
+    except Exception:
+        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
 
 

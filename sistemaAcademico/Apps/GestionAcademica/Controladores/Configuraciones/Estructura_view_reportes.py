@@ -22,32 +22,36 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant 
 
 
 def reporte_usuarios(request, *args, **kwargs):
-    if 'usuario' in request.session:
-        usuarios = None
-        if request.method == 'POST':
-            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            print(usuario)
-            campoChk = request.POST.get('check1')
-            campo2 = request.POST.get('campo')
-            combo = int(request.POST.get('combo'))
-            comboR = int(request.POST.get('comboR'))
-            print('el reporte es: ',comboR)
+    try:
+        if 'usuario' in request.session:
+            usuarios = None
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                print(usuario)
+                campoChk = request.POST.get('check1')
+                campo2 = request.POST.get('campo')
+                combo = int(request.POST.get('combo'))
+                comboR = int(request.POST.get('comboR'))
+                print('el reporte es: ', comboR)
 
-            if(combo == 1):
-                usuarios = ConfUsuario.objects.filter(usuario=campo2)
-            elif(combo == 2):
-                usuarios = ConfUsuario.objects.filter(id_persona__nombres=campo2)
-            elif(combo==3):
-                usuarios = ConfUsuario.objects.all()
+                if (combo == 1):
+                    usuarios = ConfUsuario.objects.filter(usuario=campo2)
+                elif (combo == 2):
+                    usuarios = ConfUsuario.objects.filter(id_persona__nombres=campo2)
+                elif (combo == 3):
+                    usuarios = ConfUsuario.objects.all()
+
+                if (comboR == 1):
+                    return reporte_excell(usuarios, campoChk, usuario)
+                elif (comboR == 2):
+                    return reportePdf(usuarios, campoChk, usuario)
+            return render(request, 'sistemaAcademico/reportes/reportes.html')
+        else:
+            return HttpResponseRedirect('timeout/')
+    except Exception:
+        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
 
-            if(comboR == 1):
-                return reporte_excell(usuarios,campoChk,usuario)
-            elif(comboR == 2):
-                return reportePdf(usuarios,campoChk,usuario)
-        return render(request, 'sistemaAcademico/reportes/reportes.html')
-    else:
-        return HttpResponseRedirect('timeout/')
 
 def reporte_excell(usuarios,campoChk=None,usuarioph=None):
     wb = Workbook()
@@ -275,32 +279,33 @@ def piePagina(c,usuario):
 
 
 def reporte_roles(request, *args, **kwargs):
-    if 'usuario' in request.session:
-        rol = None
-        if request.method == 'POST':
-            usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
-            print(usuario)
-            campoChk2 = request.POST.get('check2')
-            campo2 = request.POST.get('campo')
-            combo = int(request.POST.get('combo'))
-            if(combo == 1):
-                rol = ConfUsuario.objects.all()
-            elif(combo ==2):
-                rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
+    try:
+        if 'usuario' in request.session:
+            rol = None
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                print(usuario)
+                campoChk2 = request.POST.get('check2')
+                campo2 = request.POST.get('campo')
+                combo = int(request.POST.get('combo'))
+                if (combo == 1):
+                    rol = ConfUsuario.objects.all()
+                elif (combo == 2):
+                    rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
 
+                print('kjkjkjkj', campo2)
+                comboR = int(request.POST.get('comboR'))
+                print('el reporte es: ', comboR)
+                if (comboR == 1):
+                    return reporte_excel_rol(rol, campoChk2, usuario)
+                elif (comboR == 2):
+                    return reportePdf_Rol(rol, campoChk2, usuario)
+            return render(request, 'sistemaAcademico/reportes/reporterol.html')
+        else:
+            return HttpResponseRedirect('timeout/')
 
-
-            print('kjkjkjkj',campo2)
-            comboR = int(request.POST.get('comboR'))
-            print('el reporte es: ',comboR)
-            if(comboR == 1):
-                return reporte_excel_rol(rol,campoChk2,usuario)
-            elif(comboR == 2):
-                return reportePdf_Rol(rol,campoChk2,usuario)
-        return render(request, 'sistemaAcademico/reportes/reporterol.html')
-    else:
-       return HttpResponseRedirect('timeout/')
-
+    except Exception:
+        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
 
 def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
