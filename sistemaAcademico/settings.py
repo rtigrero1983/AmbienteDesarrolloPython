@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'sa_prueba',
-        'USER': 'root',
-        'PASSWORD': 'verde21000',
-        'HOST': 'localhost',
+        'NAME': 'bd_academico',
+        'USER': 'academico',
+        'PASSWORD': 'academico123',
+        'HOST': '200.124.241.83',
         'PORT': 3306,
     }
 }
@@ -156,6 +156,6 @@ SESSION_EXPIRE_SECONDS = 6000
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
 SESSION_SAVE_EVERY_REQUEST = True
-
+ALLOWED_HOSTS=['*']
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
