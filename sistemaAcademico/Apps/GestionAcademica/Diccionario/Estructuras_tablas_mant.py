@@ -141,8 +141,8 @@ class MantEmpleado(models.Model):
     id_empleado = models.AutoField(primary_key=True)
     id_persona = models.ForeignKey(MantPersona, on_delete=models.CASCADE, blank=False, null=False,
                                    related_name="fk_empleado_persona", db_column='id_persona')
-    id_detalle_empleado = models.ForeignKey('MovDetalleEmpleado', on_delete=models.CASCADE, blank=False, null=False,
-                                            related_name="fk_empleado_detalle", db_column='id_detalle_empleado')
+   # id_detalle_empleado = models.ForeignKey('MovDetalleEmpleado', on_delete=models.CASCADE, blank=False, null=False,
+       #                                     related_name="fk_empleado_detalle", db_column='id_detalle_empleado')
     id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE, blank=False, null=False,
                                         related_name="fk_empleado_anio_lectivo", db_column='id_anio_lectivo')
     id_usuario = models.ForeignKey('ConfUsuario', on_delete=models.CASCADE, blank=False, null=False,

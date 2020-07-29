@@ -81,7 +81,6 @@ class menu_form(forms.ModelForm):
             'name': 'Name:',
                     'view': 'Controlador del menu(View):'
         }
-
         widgets = {
             'descripcion': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese nombre para este menu"}),
             'url': forms.TextInput(attrs={"class": "form-control text-dark", "placeholder": "Ingrese una url para este  menu"}),
@@ -94,7 +93,7 @@ class menu_form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(menu_form, self).__init__(*args, **kwargs)
         self.fields['id_padre'] = forms.ChoiceField(choices=[(
-            m.id_menu, m.descripcion) for m in ConfMenu.objects.filter(Q(id_padre=0) | Q(url__contains
+            m.id_menu, m.descripcion ) for m in ConfMenu.objects.filter(Q(id_padre=0) | Q(url__contains
     ='#'))], widget={})
 
 

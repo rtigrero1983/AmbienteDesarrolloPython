@@ -177,7 +177,7 @@ class ConfAccion(models.Model):
     ]
 
     id_accion = models.AutoField(primary_key=True)
-    id_rol = models.ForeignKey(ConfRol,on_delete=models.CASCADE,db_column='rol')
+    id_rol = models.ForeignKey(ConfRol,on_delete=models.CASCADE,db_column='rol',default=1)
     descripcion = models.CharField(max_length=50,choices=ACCIONES_CHOICES,blank=False,null=False)
     id_menu = models.ManyToManyField(ConfMenu,db_table='conf_accion_menu')
 
@@ -222,7 +222,7 @@ class ConfPermiso(models.Model):
     menu = models.ManyToManyField(
         ConfMenu, related_name="fk_permiso_modmenu", db_table='conf_permiso_menu')
     id_rol = models.ForeignKey(ConfRol, on_delete=models.CASCADE,
-                               related_name="fk_permiso_rol", db_column='id_rol',unique=True,blank=False, null=False)
+                               related_name="fk_permiso_rol", db_column='id_rol',blank=False, null=False)
     class Meta:
         verbose_name = 'Permiso',
         verbose_name_plural = 'Permisos',

@@ -57,6 +57,8 @@ class MovCabRegistroNotas(models.Model):
     def __int__(self):
         return self.id_genr_materia
 
+
+'''''
 class MovDetalleEmpleado(models.Model):
     id_detalle_empleado = models.AutoField(primary_key=True)
     id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detalleEmpleado_cabcurso",db_column='id_curso')
@@ -71,13 +73,16 @@ class MovDetalleEmpleado(models.Model):
 
     def __int__(self):
         return self.id_genr_paralelo
-
+'''
 class MovDetalleMateriaCurso(models.Model):
     id_detalle_curso = models.AutoField(primary_key=True)
     id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_cabcurso",db_column='id_curso')
     anio = models.IntegerField(blank=False, null=False)
+    total_horas = models.IntegerField(null=False, blank=False, default=1)
     estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado')
     id_genr_materias = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias')
+
+
 
     class Meta:
         verbose_name = 'Detalle Materia Curso'
@@ -148,3 +153,35 @@ class Mov_Aniolectivo_curso(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso'], name='Unicos')
         ]
+
+
+class Mov_Materia_profesor(models.Model):
+    id_materia_profesor = models.AutoField(primary_key=True)
+    id_empleado = models.ForeignKey('MantEmpleado',on_delete=models.CASCADE,blank=False,null=False,related_name='fk_materiaprof_empleado',db_column='id_empleado')
+    id_genr_modalidad = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False,null=False, related_name='fk_materiaprof_modalidad',db_column='id_genr_modalidad')
+    id_genr_jornada = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE,blank=False, null=False, related_name='fk_materiaprof_jornada',db_column='id_genr_jornada')
+    id_genr_tipo_edu = models.ForeignKey('GenrGeneral',on_delete=models.CASCADE, blank=False,null=False, related_name='fk_materiaprof_tipoedu',db_column='id_genr_tipo_educacion')
+    id_detalle_materia_curso = models.ForeignKey('MovDetalleMateriaCurso', on_delete=models.CASCADE, blank=False,null=False,related_name='fk_materiaprf_materiacurso', db_column='id_materia_curso')
+
+    class Meta:
+        verbose_name='Mov_Materia_profesor'
+        verbose_name_plural='Mov_Materia_profesores'
+        db_table='mov_materia_profesor'
+
+
+
+class Mov_Horario_materia(models.Model):
+    id_horario = models.AutoField(primary_key=True)
+    id_materia_profesor = models.ForeignKey('Mov_Materia_profesor',on_delete=models.CASCADE, blank=False,null=False, related_name='fk_horario_materiaprof',db_column='id_materia_profesor')
+    hora_inicio = models.TimeField(null=False,blank=False)
+    hora_fin = models.TimeField(null=False,blank=False)
+    id_genr_dia = models.ForeignKey('GenrGeneral',null=False,blank=False,on_delete=models.CASCADE,default=97, related_name='fk_materiaprof_genrdia',db_column='id_genr_dia')
+    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
+    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+
+    class Meta:
+        verbose_name='Mov_Horario_materia'
+        verbose_name_plural='Mov_Horario_materias'
+        db_table='mov_horario_materia'
+
