@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+{% endblock footer %}
+{% block contenido_principal %}
+{% load crispy_forms_tags %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light">Horas Docentes </h4></header>
+
+<br/><br/>
+
+<br/><br/>
+ <form action="" method="POST">
+ {% csrf_token %}
+     {{form|crispy}}
+
+ <input type="submit" class="btn btn-primary" value="guardar">
+    </form>
+
+
+
+
+{% endblock contenido_principal %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+      "searching": true,
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ por página",
+        "zeroRecords": "Sin datos",
+        "info": "Mostrando página _PAGE_ de _PAGES_",
+        "infoEmpty": "",
+        "search": "Buscar:",
+        "paginate": {
+          "first": "Primero",
+          "last": "Último",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        },
+      }
+    });
+
+    $('.dataTables_length').addClass('bs-select');
+  });
+</script>
+<script>
+     $(function
+</script>
+{% endblock extrajs %}
