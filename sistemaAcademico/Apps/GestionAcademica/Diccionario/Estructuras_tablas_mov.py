@@ -185,3 +185,15 @@ class Mov_Horario_materia(models.Model):
         verbose_name_plural='Mov_Horario_materias'
         db_table='mov_horario_materia'
 
+
+class Mov_Horas_docente(models.Model):
+    id_horas_docente = models.AutoField(primary_key=True)
+    id_anio_lectivo = models.ForeignKey('MantAnioLectivo', on_delete=models.CASCADE, blank= False,null=False, related_name='fk_horario_docente_anio_lectivo', db_column='id_anio_lectivo')
+    total_horas = models.DecimalField(null=False,decimal_places=2,max_digits=65)
+    horas_disponible =  models.DecimalField(null=False,decimal_places=2,max_digits=65)
+    id_docente = models.ForeignKey('MantPersona',on_delete=models.CASCADE, blank= False,null=False, related_name='fk_horario_docente_docente', db_column='id_docente')
+
+    class Meta:
+        verbose_name = 'Mov_Horas_docente'
+        verbose_name_plural = 'Mov_Horas_docentes'
+        db_table = 'mov_horas_docentes'

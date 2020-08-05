@@ -14,65 +14,8 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Dumping data for table `auth_group`
---
 
-LOCK TABLES `auth_group` WRITE;
-/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
-UNLOCK TABLES;
 
---
--- Dumping data for table `auth_group_permissions`
---
-
-LOCK TABLES `auth_group_permissions` WRITE;
-/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `auth_permission`
---
-
-LOCK TABLES `auth_permission` WRITE;
-/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add (\'Menu\',)',7,'add_confmenu'),(26,'Can change (\'Menu\',)',7,'change_confmenu'),(27,'Can delete (\'Menu\',)',7,'delete_confmenu'),(28,'Can view (\'Menu\',)',7,'view_confmenu'),(29,'Can add (\'Modulo\',)',8,'add_confmodulo'),(30,'Can change (\'Modulo\',)',8,'change_confmodulo'),(31,'Can delete (\'Modulo\',)',8,'delete_confmodulo'),(32,'Can view (\'Modulo\',)',8,'view_confmodulo'),(33,'Can add (\'Rol\',)',9,'add_confrol'),(34,'Can change (\'Rol\',)',9,'change_confrol'),(35,'Can delete (\'Rol\',)',9,'delete_confrol'),(36,'Can view (\'Rol\',)',9,'view_confrol'),(37,'Can add (\'Usuario\',)',10,'add_confusuario'),(38,'Can change (\'Usuario\',)',10,'change_confusuario'),(39,'Can delete (\'Usuario\',)',10,'delete_confusuario'),(40,'Can view (\'Usuario\',)',10,'view_confusuario'),(41,'Can add (\'Lista\',)',11,'add_genrgeneral'),(42,'Can change (\'Lista\',)',11,'change_genrgeneral'),(43,'Can delete (\'Lista\',)',11,'delete_genrgeneral'),(44,'Can view (\'Lista\',)',11,'view_genrgeneral'),(45,'Can add (\'Año lectivo\',)',12,'add_mantaniolectivo'),(46,'Can change (\'Año lectivo\',)',12,'change_mantaniolectivo'),(47,'Can delete (\'Año lectivo\',)',12,'delete_mantaniolectivo'),(48,'Can view (\'Año lectivo\',)',12,'view_mantaniolectivo'),(49,'Can add (\'Empleado\',)',13,'add_mantempleado'),(50,'Can change (\'Empleado\',)',13,'change_mantempleado'),(51,'Can delete (\'Empleado\',)',13,'delete_mantempleado'),(52,'Can view (\'Empleado\',)',13,'view_mantempleado'),(53,'Can add (\'Estudiante\',)',14,'add_mantestudiante'),(54,'Can change (\'Estudiante\',)',14,'change_mantestudiante'),(55,'Can delete (\'Estudiante\',)',14,'delete_mantestudiante'),(56,'Can view (\'Estudiante\',)',14,'view_mantestudiante'),(57,'Can add (\'Persona\',)',15,'add_mantpersona'),(58,'Can change (\'Persona\',)',15,'change_mantpersona'),(59,'Can delete (\'Persona\',)',15,'delete_mantpersona'),(60,'Can view (\'Persona\',)',15,'view_mantpersona'),(61,'Can add Curso',16,'add_movcabcurso'),(62,'Can change Curso',16,'change_movcabcurso'),(63,'Can delete Curso',16,'delete_movcabcurso'),(64,'Can view Curso',16,'view_movcabcurso'),(65,'Can add Usuario_temp',17,'add_usuariotemp'),(66,'Can change Usuario_temp',17,'change_usuariotemp'),(67,'Can delete Usuario_temp',17,'delete_usuariotemp'),(68,'Can view Usuario_temp',17,'view_usuariotemp'),(69,'Can add Matriculacion estudiante',18,'add_movmatriculacionestudiante'),(70,'Can change Matriculacion estudiante',18,'change_movmatriculacionestudiante'),(71,'Can delete Matriculacion estudiante',18,'delete_movmatriculacionestudiante'),(72,'Can view Matriculacion estudiante',18,'view_movmatriculacionestudiante'),(73,'Can add Asignacion de curso',19,'add_movestudianteasignacioncurso'),(74,'Can change Asignacion de curso',19,'change_movestudianteasignacioncurso'),(75,'Can delete Asignacion de curso',19,'delete_movestudianteasignacioncurso'),(76,'Can view Asignacion de curso',19,'view_movestudianteasignacioncurso'),(77,'Can add Detalle Registro de Curso',20,'add_movdetalleregistronotas'),(78,'Can change Detalle Registro de Curso',20,'change_movdetalleregistronotas'),(79,'Can delete Detalle Registro de Curso',20,'delete_movdetalleregistronotas'),(80,'Can view Detalle Registro de Curso',20,'view_movdetalleregistronotas'),(81,'Can add Detalle Materia Curso',21,'add_movdetallemateriacurso'),(82,'Can change Detalle Materia Curso',21,'change_movdetallemateriacurso'),(83,'Can delete Detalle Materia Curso',21,'delete_movdetallemateriacurso'),(84,'Can view Detalle Materia Curso',21,'view_movdetallemateriacurso'),(85,'Can add Detalle Empleado',22,'add_movdetalleempleado'),(86,'Can change Detalle Empleado',22,'change_movdetalleempleado'),(87,'Can delete Detalle Empleado',22,'delete_movdetalleempleado'),(88,'Can view Detalle Empleado',22,'view_movdetalleempleado'),(89,'Can add Registro Notas',23,'add_movcabregistronotas'),(90,'Can change Registro Notas',23,'change_movcabregistronotas'),(91,'Can delete Registro Notas',23,'delete_movcabregistronotas'),(92,'Can view Registro Notas',23,'view_movcabregistronotas'),(93,'Can add Admision',24,'add_movadmision'),(94,'Can change Admision',24,'change_movadmision'),(95,'Can delete Admision',24,'delete_movadmision'),(96,'Can view Admision',24,'view_movadmision'),(97,'Can add (\'Representante\',)',25,'add_mantrepresentante'),(98,'Can change (\'Representante\',)',25,'change_mantrepresentante'),(99,'Can delete (\'Representante\',)',25,'delete_mantrepresentante'),(100,'Can view (\'Representante\',)',25,'view_mantrepresentante'),(101,'Can add (\'Lista\',)',26,'add_genrhistorial'),(102,'Can change (\'Lista\',)',26,'change_genrhistorial'),(103,'Can delete (\'Lista\',)',26,'delete_genrhistorial'),(104,'Can view (\'Lista\',)',26,'view_genrhistorial'),(105,'Can add (\'Permiso\',)',27,'add_confpermiso'),(106,'Can change (\'Permiso\',)',27,'change_confpermiso'),(107,'Can delete (\'Permiso\',)',27,'delete_confpermiso'),(108,'Can view (\'Permiso\',)',27,'view_confpermiso'),(109,'Can add Modulo_Menu',28,'add_confmodulo_menu'),(110,'Can change Modulo_Menu',28,'change_confmodulo_menu'),(111,'Can delete Modulo_Menu',28,'delete_confmodulo_menu'),(112,'Can view Modulo_Menu',28,'view_confmodulo_menu'),(113,'Can add (\'Empresa\',)',29,'add_confempresa'),(114,'Can change (\'Empresa\',)',29,'change_confempresa'),(115,'Can delete (\'Empresa\',)',29,'delete_confempresa'),(116,'Can view (\'Empresa\',)',29,'view_confempresa'),(117,'Can add (\'Correos Smpt\',)',30,'add_confcorreossmpt'),(118,'Can change (\'Correos Smpt\',)',30,'change_confcorreossmpt'),(119,'Can delete (\'Correos Smpt\',)',30,'delete_confcorreossmpt'),(120,'Can view (\'Correos Smpt\',)',30,'view_confcorreossmpt'),(121,'Can add Accion',31,'add_confaccion'),(122,'Can change Accion',31,'change_confaccion'),(123,'Can delete Accion',31,'delete_confaccion'),(124,'Can view Accion',31,'view_confaccion');
-/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `auth_user`
---
-
-LOCK TABLES `auth_user` WRITE;
-/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$150000$gVDAiFdujXsD$XfVqFkZpxav5FYM03sKN+bnp1qFVa0jWicGWncrDeww=','2020-03-05 21:28:25.630149',1,'root','','','',1,1,'2020-03-05 21:25:29.474365');
-/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `auth_user_groups`
---
-
-LOCK TABLES `auth_user_groups` WRITE;
-/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `auth_user_user_permissions`
---
-
-LOCK TABLES `auth_user_user_permissions` WRITE;
-/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `conf_accion`
---
 
 LOCK TABLES `conf_accion` WRITE;
 /*!40000 ALTER TABLE `conf_accion` DISABLE KEYS */;
@@ -199,45 +142,7 @@ UNLOCK TABLES;
 
 --
 -- Dumping data for table `django_admin_log`
---
-
-LOCK TABLES `django_admin_log` WRITE;
-/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2020-03-05 22:26:04.946216','3','Luis Eduardo',1,'[{\"added\": {}}]',16,1);
-/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `django_content_type`
---
-
-LOCK TABLES `django_content_type` WRITE;
-/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(31,'GestionAcademica','confaccion'),(30,'GestionAcademica','confcorreossmpt'),(29,'GestionAcademica','confempresa'),(7,'GestionAcademica','confmenu'),(8,'GestionAcademica','confmodulo'),(28,'GestionAcademica','confmodulo_menu'),(27,'GestionAcademica','confpermiso'),(9,'GestionAcademica','confrol'),(10,'GestionAcademica','confusuario'),(11,'GestionAcademica','genrgeneral'),(26,'GestionAcademica','genrhistorial'),(12,'GestionAcademica','mantaniolectivo'),(13,'GestionAcademica','mantempleado'),(14,'GestionAcademica','mantestudiante'),(15,'GestionAcademica','mantpersona'),(25,'GestionAcademica','mantrepresentante'),(24,'GestionAcademica','movadmision'),(16,'GestionAcademica','movcabcurso'),(23,'GestionAcademica','movcabregistronotas'),(22,'GestionAcademica','movdetalleempleado'),(21,'GestionAcademica','movdetallemateriacurso'),(20,'GestionAcademica','movdetalleregistronotas'),(19,'GestionAcademica','movestudianteasignacioncurso'),(18,'GestionAcademica','movmatriculacionestudiante'),(17,'GestionAcademica','usuariotemp'),(6,'sessions','session');
-/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `django_migrations`
---
-
-LOCK TABLES `django_migrations` WRITE;
-/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'GestionAcademica','0001_initial','2020-03-09 03:04:50.729920'),(2,'contenttypes','0001_initial','2020-03-09 03:10:02.197121'),(3,'auth','0001_initial','2020-03-09 03:10:08.296882'),(4,'admin','0001_initial','2020-03-09 03:10:41.661212'),(5,'admin','0002_logentry_remove_auto_add','2020-03-09 03:10:48.397228'),(6,'admin','0003_logentry_add_action_flag_choices','2020-03-09 03:10:48.680638'),(7,'contenttypes','0002_remove_content_type_name','2020-03-09 03:10:55.767319'),(8,'auth','0002_alter_permission_name_max_length','2020-03-09 03:10:58.657201'),(9,'auth','0003_alter_user_email_max_length','2020-03-09 03:10:59.439201'),(10,'auth','0004_alter_user_username_opts','2020-03-09 03:10:59.543924'),(11,'auth','0005_alter_user_last_login_null','2020-03-09 03:11:01.534714'),(12,'auth','0006_require_contenttypes_0002','2020-03-09 03:11:01.652159'),(13,'auth','0007_alter_validators_add_error_messages','2020-03-09 03:11:01.949331'),(14,'auth','0008_alter_user_username_max_length','2020-03-09 03:11:04.840910'),(15,'auth','0009_alter_user_last_name_max_length','2020-03-09 03:11:10.687778'),(16,'auth','0010_alter_group_name_max_length','2020-03-09 03:11:11.424887'),(17,'auth','0011_update_proxy_permissions','2020-03-09 03:11:11.654862'),(18,'sessions','0001_initial','2020-03-09 03:11:13.276704'),(19,'GestionAcademica','0002_auto_20200326_1517','2020-03-26 20:19:49.721466'),(20,'GestionAcademica','0003_auto_20200326_1530','2020-03-26 20:31:07.155840');
-/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `django_session`
---
-
-LOCK TABLES `django_session` WRITE;
-/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('5ox0kpusdq0n69pd74portl0hy2q115v','NzU2MmUyODBiMzZiNjVhNTE5ODY1ZTc3MDU0NmYxYmRiNzMyMGJlZTp7InVzdWFyaW8iOjF9','2020-03-08 02:02:55.556067'),('5tf3zwi62685btf94bpxoouispdx1roa','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-24 22:27:49.086145'),('7w2ns5wx1maf2ojpznj771unka65uwl1','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-09 06:03:57.995894'),('bi22iot55sasv1il39ejno5qo5bwvf18','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-07-29 02:54:41.085706'),('cnfmu1kjw258qkisgzttselkz6bno89u','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-10 00:18:26.623546'),('f6my1utxsrd8deil57gwf0xgeiag57m9','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-20 23:59:45.960582'),('hy5d64xdoc23af8wc5qsxkq8310e2624','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-18 23:56:06.221553'),('ohjf1iu63gsci2npesj8q2nqyopxs8jl','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-11 00:49:07.844732'),('pu4hb4sy5l45iapxmwfgdqne7in7ko6v','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-26 22:06:52.606888'),('rgee89yrp5x8hi4sn03tbmqs6mp9pn16','YTZhOTU5YWYyNTk2ZWI3ZTkzNTNjMzNhMDhjMGUzYzNhODBiZTAyMzp7fQ==','2020-03-08 21:51:14.671699'),('rij4yqh5uhfvqmtxpgh1bypa3t6cx4nf','ZjZjYmE5ZTg2NmNlNDM4OTljNzdlMjkxNGVhYzIwZmFiNTY4ODg3Yjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIxYTU4YjA0NDRiZjlhZDYxNjMzOTBhZmFkOWRmMDA5NjkwZDlkODFmIn0=','2020-03-06 00:46:52.216866'),('udlv2nsbjxh43h956yflfb6rod2pcn8z','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-20 03:41:17.382298'),('z869s1mekx72gouo3u3qyyhuihm22v6f','ZjYzZjI0ZmU3ZThiYWFhY2U0YTc4MmYwMWVjOWIxMzhlMTA5YWJiZTp7InVzdWFyaW8iOjJ9','2020-03-12 00:27:47.158646');
-/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
+-
 -- Dumping data for table `genr_general`
 --
 
@@ -262,7 +167,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `mant_anio_lectivo` WRITE;
 /*!40000 ALTER TABLE `mant_anio_lectivo` DISABLE KEYS */;
-INSERT INTO `mant_anio_lectivo` VALUES (1,2019,1,'2000-12-12','2001-12-12',97),(2,2020,1,'2013-12-12','2014-12-12',97);
+INSERT INTO `mant_anio_lectivo` VALUES (1,2019,1,'2000-12-12','2001-12-12',97),(2,2020,2,'2013-12-12','2014-12-12',97);
 /*!40000 ALTER TABLE `mant_anio_lectivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,16 +253,7 @@ LOCK TABLES `mov_cab_registro_notas` WRITE;
 /*!40000 ALTER TABLE `mov_cab_registro_notas` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping data for table `mov_detalle_empleado`
---
 
-LOCK TABLES `mov_detalle_empleado` WRITE;
-/*!40000 ALTER TABLE `mov_detalle_empleado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mov_detalle_empleado` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `mov_detalle_materia_curso`
 --
 

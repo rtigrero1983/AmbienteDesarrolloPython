@@ -10,6 +10,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Es
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
+from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
 from .Controladores.Matriculacion.estructura_view_genr_general import *
 from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
 
@@ -148,7 +149,12 @@ urlpatterns = [
     # ------Matriculacion - Tabla general-----------
     path('general/', General.as_view(), name='general'),
     path('crear_general', CreateGeneral.as_view(), name='crear_general'),
-    path('editar_general/<int:pk>', UpdateGeneral.as_view(), name='editar_general')
+    path('editar_general/<int:pk>', UpdateGeneral.as_view(), name='editar_general'),
+
+
+    #----------- Asignacion horas a docentes ---------------
+
+    path('horas_docentes/',CreateHorasDocentes.as_view(),name='horas_docentes'),
 ]
 
 
