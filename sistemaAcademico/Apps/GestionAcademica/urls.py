@@ -166,7 +166,7 @@ urlpatterns = [
     #----------- Horario Mod ------------------------------
     path('horario_mod/',MovMateriProfesorList.as_view(),name='horario_mod'),
 
-    path('prueba/', List_docente.as_view(), name='prueba'),
+    path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
 
     # ----------- Ingreso horario por cursos ---------------
 
