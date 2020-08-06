@@ -1,0 +1,142 @@
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<html>
+    <head>
+        <style>
+            .tdbreak{
+                word-break: break-all;
+            }
+            @page{
+                size: landscape;
+
+
+                @frame header_frame {
+/* Cabecera estilos  */
+                -pdf-frame-content: header_content;
+                left: 5pt; width: 830pt; top: 10pt; height:120pt;
+                -pdf-frame-border = 1;
+                }
+
+                @frame imagen1 {
+                -pdf-frame-content: imagen1;
+                left: 5pt; width:220pt; top: 10pt; height: 120pt;
+                -pdf-frame-border = 1;
+                } 
+
+                @frame imagen {
+                -pdf-frame-content: imagen;
+                left: 50pt; width:220pt; top: 10pt; height: 120pt;
+                
+                }
+
+                @frame contenido_head {
+                -pdf-frame-content: content_head;
+                left: 380pt; width: 200pt; top: 60pt; height: 30pt;
+                font-size: 14px;
+                /*-pdf-frame-border = 1;*/
+                }
+                @frame codigo {
+                -pdf-frame-content: content_codigo;
+                left: 743pt; width: 95pt; margin-left: 10pt; top: 50pt; height: 20pt;
+                font-size: 14px; 
+                /*-pdf-frame-border = 1;*/
+                }
+
+                @frame content_frame {
+                left: 10pt; width: 820pt; top: 140pt; height: 400pt;
+                 -pdf-frame-border = 1;
+                }
+                @frame standar {
+                    -pdf-frame-content: standar;
+                    left: 5pt; width:300pt; top: 96pt; height: 150pt;
+                     /* -pdf-frame-border = 1;*/
+                }
+                @frame detalle_eventos {
+                    -pdf-frame-content: detalle_eventos;
+                    left: 5pt; width:550pt; top: 690pt; height: 100pt;
+                    /* -pdf-frame-border = 1;*/
+                }
+
+/* Pie de  Pagina */
+
+                @frame footer_frame { /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 10pt; width: 580pt; top: 545pt; height: 40pt;
+                /*-pdf-frame-border = 1;*/
+                }
+
+                @frame contador { /* Another static Frame */
+                -pdf-frame-content: contador;
+                left: 775pt; width: 100pt; top: 578pt; height: 20pt;
+                }
+
+                @frame contenido_del_footer { /* Another static Frame */
+                -pdf-frame-content: contenido_del_footer;
+                left: 10pt; width: 550pt; top: 559pt; height: 50pt;
+                }
+                
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header_content">
+        <img src="static/img/logo-login.png" id="imagen"  alt="">
+        <div id="content_head">
+        <label style="font-size: 25px;"><strong>Reporte Estudiante</strong></label>
+        </div>
+
+        <div id="content_codigo">
+            <label style="background-color: yellow; margin-left: 5px; font-size: 15px;"><strong>Hora: {{hora_actual}}</strong></label>
+        
+        </div>
+        </div>
+        {% if lista_estudiante %}
+            <table id="table" style="width: 100%;">
+                <thead>
+                    <tr style="border: 0.5px solid black; height: 50px; font-size: 13px;">
+                        <td><strong><center>N.-</center></strong></td>
+                        <td><strong><center>Nombre</center></strong></td>
+                        <td><strong><center>Tipo Estudiante</center></strong></td>
+                        <td><strong><center>Fecha Ingreso</center></strong></td>
+                        <td><strong><center>Usuario</center></strong></td>
+                        <td><strong><center>Direccion</center></strong></td>
+                    </tr>
+                
+                <tbody>
+                    {% for estudy in lista_estudiante %}
+                        <tr style="border: 0.5px solid black; height: 40px; font-size: 13px;">
+                            <td><center>{{ forloop.counter }}</center></td>
+                            <td><center>{{ estudy.id_persona.nombres }}</center></td>
+                            <td><center>{{ estudy.tipo_estudiante }}</center></td>
+                            <td><center>{{ estudy.fecha_ingreso}}</center></td>
+                            <td><center>{{ estudy.usuario_ing}}</center></td>
+                            <td><center>{{ estudy.id_persona.direccion}}</center></td>
+                        </tr>
+                    {% endfor %}
+                </thead>
+                </tbody>     
+            </table>
+        {% endif %}
+            
+    
+        <div id="footer_content">
+            <label style="color: #3c5634;">///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</label>
+            <br>
+            <div id="contador">
+                <label style="font-size: 15px;">Pag <pdf:pagenumber> | <pdf:pagecount> </label>
+            
+            </div>
+            <div id = "contenido_del_footer" style="font-size: 15px;">
+            <label for="">Fecha: {{fecha_actual}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Usuario: {{nombre_usuario}}</label> 
+            </div>
+        </div>
+    </body>
+
+
+
+
+
+
+
+</html>

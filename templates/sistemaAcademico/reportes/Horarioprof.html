@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+{%load staticfiles%}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block contenido_principal %}
+{%block body%}
+<script>
+  function Reportes(numero){
+   var hidden = document.getElementById('comboR').value = numero;
+   var formulario = document.getElementById('myform').submit();
+      console.log(hidden);
+  }
+</script>
+
+
+<div class="card shadow mb-45">
+  <div class="card-header py-3">
+    <h4 class="m-0 font-weight-bold text-primary text-center">Horario | Docente</h6>
+  </div>
+
+  <div class="card-body ">
+
+
+<form  method="POST" id="myform">
+    {% csrf_token %}
+    <div class="label label-info">
+          <label for="combo" class="text-dark h6"><b>Seleccione el metodo de busqueda:</b></label>
+        <select name="combo" id="combo" class="form-control" required>
+            <option selected="" value="3">--------------------</option>
+            <option  value="1">Mostrar todos los horarios</option>
+            <option value="2" name="user">Filtrar Por Nombre Docente</option>
+        </select>
+
+
+        </select>&nbsp; <input type="text" class="form-control" name="buscador" placeholder="buscar">
+        <br>
+        <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input type="checkbox"  id="check" name="check" required>
+        <br>
+        <label class="text-dark h6"><b>Imprimir:</b></label>
+        <br>
+        
+         <div class="row darkwhite-bg py-2 text-center">
+                    <div class="col-12">
+                      <div class="form-row">
+                        <div class=" col-6 col-md-4 mb-0">
+                        <button class="btn btn-danger btn-block" type="button" id="pd" onclick="Reportes(2)"><img src="{%static 'img/pdf1.ico'%}" class="img-thumbnail"  alt="REPORTE EN PDF" height="30" width="30"> Generar reporte en PDF</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+        <br>
+        <input type="hidden" name="comboR" id="comboR" value="">
+    </div>
+
+</form>
+</div>
+</div>
+
+{% endblock body %}
+
+{% endblock contenido_principal %}
+
+
+
+
+

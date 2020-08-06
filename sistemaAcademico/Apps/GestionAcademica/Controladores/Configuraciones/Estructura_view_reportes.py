@@ -17,12 +17,18 @@ from reportlab.lib import colors
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
+
 
 #from trunk.sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfRol
 
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from datetime import datetime,date
+from sistemaAcademico.utils import link_callback
+
 
 def reporte_usuarios(request, *args, **kwargs):
-    try:
         if 'usuario' in request.session:
             usuarios = None
             if request.method == 'POST':
@@ -40,16 +46,18 @@ def reporte_usuarios(request, *args, **kwargs):
                     usuarios = ConfUsuario.objects.filter(id_persona__nombres=campo2)
                 elif (combo == 3):
                     usuarios = ConfUsuario.objects.all()
+                elif (combo == 5):
+                    return render(request, 'sistemaAcademico/reportes/reportes.html')
+                    
 
                 if (comboR == 1):
                     return reporte_excell(usuarios, campoChk, usuario)
                 elif (comboR == 2):
-                    return reportePdf(usuarios, campoChk, usuario)
+                    return ReporteUsuario(usuarios, campoChk, usuario)
             return render(request, 'sistemaAcademico/reportes/reportes.html')
         else:
             return HttpResponseRedirect('timeout/')
-    except Exception:
-        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
+
 
 
 
@@ -75,7 +83,7 @@ def reporte_excell(usuarios,campoChk=None,usuarioph=None):
     ws['C2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C2'].font = Font(name='times new roman', size=11)
-    ws['C2'] = datetime.datetime.now().date()
+    ws['C2'] = date.today()
 
     ws['B3'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -200,86 +208,33 @@ def usur(ws, usuario):
     ws['C4'] = ' {0}'.format(usuario)
 
 
-
-
-def reportePdf(usuarios,campoChk=None,usuarioph=None):
+def ReporteUsuario(usuarios,campoChk=None,usuarioph=None ):
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoUsuario.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_Usuario.pdf'
-    buffer = BytesIO()
-    high = 650
-    this_U = None
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=ReporteUsuario.pdf'
+    context['lista_usuario'] = usuarios
+    if campoChk != None: 
+        usu(context,usuarioph)
 
-    styles = getSampleStyleSheet()
-    sytlesBH = styles["Heading3"]
-    sytlesBH.alignment = TA_CENTER
-    sytlesBH.fontSinze = 7
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def usu(context,usuario):
+    context['nombre_usuario'] = usuario
 
-    # styles = getSampleStyleSheet()
-    styleN = styles["BodyText"]
-    styleN.alignment = TA_CENTER
-    styleN.fontSize = 7
-    width, height = A4
-
-    usuario = Paragraph('''Usuario''', sytlesBH)
-    persona = Paragraph('''Nombre''', sytlesBH)
-    tipoU = Paragraph('''Tipo Usuario''', sytlesBH)
-    data = []
-    data.append([usuario, persona, tipoU])
-    this_U = []
-    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
-    for pdf in usuarios:
-        this_U += [{'#':pdf.usuario,'h':pdf.id_persona.nombres + " " + pdf.id_persona.apellidos, 'l':pdf.id_genr_tipo_usuario.nombre}]
-        #data.append(this_usuario)
-        high = high-18
-
-
-    for students in this_U:
-         u = [students['#'], students['h'], students['l']]
-         data.append(u)
-
-    c = canvas.Canvas(buffer, pagesize=A4)
-    cabecerapdfU(high,data,width,height,buffer,c)
-    if campoChk != None:
-        piePagina(c,usuarioph)
-
-    c.showPage()
-    c.save()
-    pd = buffer.getvalue()
-    buffer.close()
-    response.write(pd)
-    return response
-
-def cabecerapdfU(high,data,width, height,buffer,c):
-    c.setLineWidth(.3)
-    c.setFont('Helvetica-Bold', 22)
-    c.drawString(240, 760, 'Reporte Usuario')
-
-    fecha2 = datetime.datetime.now().date()
-    hora = time.strftime("%H:%M")
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(300, 50, 'Fecha: {0}'.format(fecha2)+' '+'  hora:{0}'.format(hora))
-
-    c.line(90, 747, 550, 747)
-    c.drawImage("static/img/logo-login.png", 50, 760, width=50, height=50)
-    table = Table(data, colWidths=[2.9 * cm, 8 * cm, 8.5 * cm])
-    table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                               ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
-    table.wrapOn(c, width, height)
-    table.drawOn(c, 30, high)
-
-
-def piePagina(c,usuario):
-    print(usuario)
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(100, 50, 'Usuario: {0}'.format(usuario))
 
 
 #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-def reporte_roles(request, *args, **kwargs):
-    try:
+def reporte_roles(request, *args, **kwargs): 
         if 'usuario' in request.session:
             rol = None
             if request.method == 'POST':
@@ -291,7 +246,10 @@ def reporte_roles(request, *args, **kwargs):
                 if (combo == 1):
                     rol = ConfUsuario.objects.all()
                 elif (combo == 2):
-                    rol = ConfUsuario.objects.filter(id_rol__nombre=campo2)
+                    rol = ConfUsuario.objects.filter(id_rol__nombre=campo2) 
+                elif (combo == 3):
+                    return render(request, 'sistemaAcademico/reportes/reporterol.html')   
+                    
 
                 print('kjkjkjkj', campo2)
                 comboR = int(request.POST.get('comboR'))
@@ -299,13 +257,11 @@ def reporte_roles(request, *args, **kwargs):
                 if (comboR == 1):
                     return reporte_excel_rol(rol, campoChk2, usuario)
                 elif (comboR == 2):
-                    return reportePdf_Rol(rol, campoChk2, usuario)
+                    return ReporteRol(rol, campoChk2, usuario)
             return render(request, 'sistemaAcademico/reportes/reporterol.html')
         else:
             return HttpResponseRedirect('timeout/')
 
-    except Exception:
-        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
 
 def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
@@ -330,7 +286,7 @@ def reporte_excel_rol(rol, campoChk2=None,usuarioph=None):
     ws['C2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C2'].font = Font(name='times new roman', size=11)
-    ws['C2'] = datetime.datetime.now().date()
+    ws['C2'] = date.today()
 
     ws['B3'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -463,78 +419,122 @@ def usur(ws, usuario):
 
 
 
-def reportePdf_Rol(rol,campoChk2=None,usuarioph=None):
+def ReporteRol(rol,campoChk2=None,usuarioph=None):
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoRol.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_Rol.pdf'
-    buffer = BytesIO()
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=ReporteRol.pdf'
+    context['lista_rol'] = rol
+    if campoChk2 != None: 
+        rol(context,usuarioph)
 
-    styles = getSampleStyleSheet()
-    sytlesBH = styles["Heading3"]
-    sytlesBH.alignment = TA_CENTER
-    sytlesBH.fontSinze = 7
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def rol(context,usuario):
+    context['nombre_usuario'] = usuario
 
-    # styles = getSampleStyleSheet()
-    styleN = styles["BodyText"]
-    styleN.alignment = TA_CENTER
-    styleN.fontSize = 7
-    width, height = A4
 
-    roles = Paragraph('''Nombre del Rol''', sytlesBH)
-    usu = Paragraph('''Usuario''', sytlesBH)
-    nomb = Paragraph('''Nombre''', sytlesBH)
-    data = []
-    data.append([roles, usu , nomb])
+###############################################################################################################
+def reporte_horarioEst(request, *args, **kwargs): 
+        if 'usuario' in request.session:
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                campoChk2 = request.POST.get('check')
+                buscador1 = request.POST.get('buscador')
+                combo = int(request.POST.get('combo'))
+                if (combo == 1):
+                    horario = Mov_Horario_materia.objects.all()
+                elif (combo == 2):
+                    horario = Mov_Horario_materia.objects.filter(id_curso__nombre=buscador1) 
 
-    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
-    #contro = 2
-    this_rol = []
-    for pdfrol in rol:
-        miguel = [r.nombre for r in pdfrol.id_rol.all()]
-        print(miguel)
-        this_rol += [{'R':','.join(miguel) ,'U': pdfrol.usuario, 'N': pdfrol.id_persona.nombres }]
-        #this_rol += this_rol
-
-    high = 650
-    for Rrol in this_rol:
-        u = [Rrol['R'], Rrol['U'], Rrol['N']]
-        data.append(u)
-        high = high - 18
-
-    c = canvas.Canvas(buffer, pagesize=A4)
-    cabecerapdfrol(high,data,width,height,buffer,c)
-    if campoChk2 != None:
-        piePagina(c,usuarioph)
-
-    c.showPage()
-    c.save()
-    pd = buffer.getvalue()
-    buffer.close()
-    response.write(pd)
-    return response
-def cabecerapdfrol(high,data,width, height,buffer,c):
-    c.setLineWidth(.3)
-    c.setFont('Helvetica-Bold', 22)
-    c.drawString(240, 760, 'REPORTE ROL')
-
-    fecha = datetime.datetime.now().date()
-    hora = time.strftime("%H:%M")
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(300, 50, 'FECHA: {0}'.format(fecha)+' '+'  HORA:{0}'.format(hora))
-
-    c.line(90, 747, 550, 747)
-    c.drawImage("static/img/logo-login.png", 50, 760, width=50, height=50)
+                elif (combo == 3):
+                    return render(request, 'sistemaAcademico/reportes/Horario_est.html')   
+                    
+                comboR = int(request.POST.get('comboR'))
+                if (comboR == 2):
+                    return HorarioEst(horario, campoChk2, usuario)
+                else:
+                    return render(request, 'sistemaAcademico/reportes/Horario_est.html')
+            return render(request, 'sistemaAcademico/reportes/Horario_est.html')
+        else:
+            return HttpResponseRedirect('timeout/')
 
 
 
-    table = Table(data, colWidths=[8.5 * cm, 5 * cm, 5 * cm])
-    table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                               ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
-    table.wrapOn(c, width, height)
-    table.drawOn(c, 30, high)
+def HorarioEst(horario,campoChk2=None,usuarioph=None ):
+
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoHorarioest.html'
+    response = HttpResponse(content_type='application/pdf')
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=HorarioEst.pdf'
+    context['horario_estudiante'] = horario
+    if campoChk2 != None: 
+        horario1(context,usuarioph)
+
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def horario1(context,usuario):
+    context['nombre_usuario'] = usuario  
+
+
+################################################################################################
+
+def reporte_horarioprofe(request, *args, **kwargs): 
+        if 'usuario' in request.session:
+            if request.method == 'POST':
+                usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+                campoChk2 = request.POST.get('check')
+                buscador1 = request.POST.get('buscador')
+                combo = int(request.POST.get('combo'))
+                if (combo == 1):
+                    horario = Mov_Horario_materia.objects.all()
+                elif (combo == 2):
+                    horario = Mov_Horario_materia.objects.filter(id_materia_profesor__id_empleado__id_persona__nombres=buscador1) 
+
+                elif (combo == 3):
+                    return render(request, 'sistemaAcademico/reportes/Horarioprof.html')   
+                    
+                comboR = int(request.POST.get('comboR'))
+                if (comboR == 2):
+                    return HorarioProf(horario, campoChk2, usuario)
+                else:
+                    return render(request, 'sistemaAcademico/reportes/Horarioprof.html')
+            return render(request, 'sistemaAcademico/reportes/Horarioprof.html')
+        else:
+            return HttpResponseRedirect('timeout/')
 
 
 
-def piePagina(c,usuario):
-    print(usuario)
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(100, 50, 'Usuario: {0}'.format(usuario))
+def HorarioProf(horario,campoChk2=None,usuarioph=None ):
+
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoHorarioprofe.html'
+    response = HttpResponse(content_type='application/pdf')
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=HorarioDocente.pdf'
+    context['horario_profesor'] = horario
+    if campoChk2 != None: 
+        horarios(context,usuarioph)
+
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def horarios(context,usuario):
+    context['nombre_usuario'] = usuario
+    

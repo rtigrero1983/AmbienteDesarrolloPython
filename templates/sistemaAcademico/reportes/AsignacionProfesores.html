@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+  
+{% endblock footer %}
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Asiganacion | Profesores  </h4></header>
+
+<br/>
+     <a href="" class="btn bg-gradient-primary text-light"  id="">Profesores Asignados</a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+     <a href="" class="btn bg-gradient-primary text-light" id="">Profesores Sin Asignar</a>
+<br/>
+<br/>
+
+<div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Registros de Docentes</h6>
+            </div>
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                      <th>Codigo</th>
+                      <th>Profesor</th>
+                        <th>Materias</th>
+                        <th>Opciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  {% for info in lista_profesor %}
+                    <tr class="text-dark">
+                      <td>{{info.id_materia_profesor}}</td>
+                      <td>{{info.id_empleado.id_persona.nombres}}</td>
+                        <td>{{info.id_materia_curso.id_genr_materias.nombre}}</td>
+                      <td align="center">
+                          <a href="" class="btn bg-gradient-primary text-light" title="Editar">Editar</a>
+                          <a href="" class="btn bg-gradient-danger text-light" title="Eliminar">Eliminar</a>
+                          <a href="" class="btn bg-gradient-danger text-light" title="Eliminar">Asignar Materia</a>
+
+
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+</div>
+
+<div class="modal fade" id="modal_crear" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_editar" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_eliminar" role="dialog">
+</div>
+{% endblock contenido_principal %}

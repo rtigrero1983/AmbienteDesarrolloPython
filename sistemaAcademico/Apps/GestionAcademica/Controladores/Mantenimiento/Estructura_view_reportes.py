@@ -2,13 +2,11 @@ import openpyxl
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from openpyxl import Workbook #nos permite crear libro de trabajo en excel
-import datetime
-import time
 from openpyxl.styles import Alignment,Border,Font,PatternFill,Side
 from openpyxl.drawing.image import Image
 from django.http.response import HttpResponse, HttpResponseRedirect
 from io import BytesIO
-
+import time
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen import canvas
@@ -20,9 +18,12 @@ from reportlab.lib import colors
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from datetime import datetime,date
+from sistemaAcademico.utils import link_callback
 
 def reporte_estudiante(request):
-    try:
         if 'usuario' in request.session:
             persona = None
             if request.method == 'POST':
@@ -39,16 +40,16 @@ def reporte_estudiante(request):
                     persona = MantEstudiante.objects.all()
                 elif (combo == 3):
                     persona = MantEstudiante.objects.filter(usuario_ing=campoP)
+                elif(combo == 4):
+                    return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
                 if (comboR == 1):
                     return mant_estudiante(persona, campoChk, usuario)
                 elif (comboR == 2):
-                    return reportePdf_estudiante(persona, campoChk, usuario)
+                    return ReporteEstudiante(persona, campoChk, usuario)
             return render(request, 'sistemaAcademico/reportes/reportePersona.html')
         else:
             return HttpResponseRedirect('timeout/')
-    except Exception:
-        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
 
 
 
@@ -73,7 +74,7 @@ def mant_estudiante(persona,campoChk3=None,usuariophh=None):
     ws['D2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['D2'].font = Font(name='times new roman', size=11)
-    ws['D2'] = datetime.datetime.now().date()
+    ws['D2'] = date.today()
 
     ws['B3'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -233,88 +234,28 @@ def usur2(ws, usuario):
     ws['B4'] = 'Usuario: '
     ws['D4'] = ' {0}'.format(usuario)
 
-def reportePdf_estudiante(persona,campoChk2=None,usuarioph=None):
+def ReporteEstudiante(persona,campoChk=None,usuarioph=None):
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoEstudiante.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_estudiante.pdf'
-    buffer = BytesIO()
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=ReporteEstudiante.pdf'
+    context['lista_estudiante'] = persona
+    if campoChk != None: 
+        estu(context,usuarioph)
 
-    styles = getSampleStyleSheet()
-    sytlesBH = styles["Heading3"]
-    sytlesBH.alignment = TA_CENTER
-    sytlesBH.fontSinze = 7
-
-    # styles = getSampleStyleSheet()
-    styleN = styles["BodyText"]
-    styleN.alignment = TA_CENTER
-    styleN.fontSize = 7
-    width, height = A4
-
-    estu = Paragraph('''Nombre''', sytlesBH)
-    testud = Paragraph('''Tipo Estudiante''', sytlesBH)
-    datee = Paragraph('''Fecha de ingreso''', sytlesBH)
-    usuario = Paragraph('''Usuario''', sytlesBH)
-    telefono = Paragraph('''Dirección ''',sytlesBH)
-    data = []
-    data.append([estu, testud,datee,usuario, telefono])
-
-    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
-    #contro = 2
-    this_estudiante = []
-    for pdfes in persona:
-        this_estudiante += [{'E': pdfes.id_persona.nombres,'S': pdfes.tipo_estudiante, 'T': pdfes.fecha_ingreso, 'U': pdfes.usuario_ing, 'C':pdfes.id_persona.direccion}]
-        #this_rol += this_rol
-
-    high = 650
-    for estudent in this_estudiante:
-        u = [estudent['E'], estudent['S'], estudent['T'], estudent['U'],estudent['C']]
-        data.append(u)
-        high = high - 18
-
-    c = canvas.Canvas(buffer, pagesize=A4)
-    cabecerapdf(high,data,width,height,buffer,c)
-    if campoChk2 != None:
-        piePagina(c,usuarioph)
-
-    c.showPage()
-    c.save()
-    pd = buffer.getvalue()
-    buffer.close()
-    response.write(pd)
-    return response
-def cabecerapdf(high,data,width, height,buffer,c):
-    c.setLineWidth(.3)
-    c.setFont('Helvetica-Bold', 22)
-    c.drawString(200, 760, 'REPORTE ESTUDIANTE')
-
-    fecha = datetime.datetime.now().date()
-    hora = time.strftime("%H:%M")
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(300, 50, 'FECHA: {0}'.format(fecha)+' '+'  HORA:{0}'.format(hora))
-
-    c.line(90, 747, 550, 747)
-    c.drawImage("static/img/logo-login.png", 50, 760, width=50, height=50)
-
-
-
-    table = Table(data, colWidths=[4 * cm, 4 * cm, 5 * cm, 4 * cm, 3*cm])
-    table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                               ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
-    table.wrapOn(c, width, height)
-    table.drawOn(c, 20, high)
-
-
-
-def piePagina(c,usuario):
-    print(usuario)
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(100, 50, 'Usuario: {0}'.format(usuario))
-
-
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def estu(context,usuario):
+    context['nombre_usuario'] = usuario
 ##############################################################################################################################################
 
 def reporte_empleado(request):
-    try:
-
         if 'usuario' in request.session:
             empleado = None
             if request.method == 'POST':
@@ -331,16 +272,17 @@ def reporte_empleado(request):
                     empleado = MantEmpleado.objects.filter(id_usuario__usuario=campoP)
                 elif (combo == 2):
                     empleado = MantEmpleado.objects.all()
+                elif (combo == 4): 
+                    return render(request, 'sistemaAcademico/reportes/reporteEmpleado.html')
 
                 if (comboR == 1):
                     return mant_empleado(empleado, campoChk, usuario)
                 elif (comboR == 2):
-                    return reportePdf_empleado(empleado, campoChk, usuario)
+                    return ReporteEmpleado(empleado, campoChk, usuario)
             return render(request, 'sistemaAcademico/reportes/reporteEmpleado.html')
         else:
             return HttpResponseRedirect('timeout/')
-    except Exception:
-        return render(request, 'sistemaAcademico/reportes/reportePersona.html')
+
 
 
 
@@ -364,7 +306,7 @@ def mant_empleado(empleado,campoChk=None, usuarioph=None):
     ws['C2'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C2'].font = Font(name='times new roman', size=11)
-    ws['C2'] = datetime.datetime.now().date()
+    ws['C2'] = date.today()
 
     ws['B3'].alignment = Alignment(horizontal="center", vertical="center")
     ws['B3'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -520,78 +462,22 @@ def usur(ws, usuario):
     ws['C4'] = ' {0}'.format(usuario)
 
 
-def reportePdf_empleado(empleado,campoChk2=None,usuarioph=None):
+def ReporteEmpleado(empleado,campoChk=None,usuarioph=None ):
+    template_path = 'sistemaAcademico/DiseñoReporte/DiseñoEmpleado.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_Empleado.pdf'
-    buffer = BytesIO()
+    context = {}
+    context['fecha_actual'] = date.today()
+    context['hora_actual'] = time.strftime("%H:%M")
+    response['Content-Disposition'] = 'attachment; filename=ReporteEmpleado.pdf'
+    context['lista_empleado'] = empleado
+    if campoChk != None: 
+        usu(context,usuarioph)
 
-    styles = getSampleStyleSheet()
-    sytlesBH = styles["Heading3"]
-    sytlesBH.alignment = TA_CENTER
-    sytlesBH.fontSinze = 7
-
-    # styles = getSampleStyleSheet()
-    styleN = styles["BodyText"]
-    styleN.alignment = TA_CENTER
-    styleN.fontSize = 7
-    width, height = A4
-
-    nom = Paragraph('''Nombre''', sytlesBH)
-    usua = Paragraph('''Usuario''', sytlesBH)
-    datex = Paragraph('''Fecha de ingreso''', sytlesBH)
-    anio = Paragraph('''Año Electivo''', sytlesBH)
-    data = []
-    data.append([nom,usua,datex,anio])
-
-    #response['Content-Disposition']='attachment; filename=ReportePdf.pdf'
-    #contro = 2
-    this_estudiante = []
-    for emp in empleado:
-        this_estudiante += [{'E': emp.id_persona.nombres,'M': emp.id_usuario.usuario, 'P': emp.fecha_ingreso, 'L': emp.id_anio_lectivo.anio}]
-        #this_rol += this_rol
-
-    high = 650
-    for es in this_estudiante:
-        u = [es['E'], es['M'], es['P'], es['L']]
-        data.append(u)
-        high = high - 18
-
-    c = canvas.Canvas(buffer, pagesize=A4)
-    cabecerapdfem(high,data,width,height,buffer,c)
-    if campoChk2 != None:
-        piePagina(c,usuarioph)
-
-    c.showPage()
-    c.save()
-    pd = buffer.getvalue()
-    buffer.close()
-    response.write(pd)
-    return response
-def cabecerapdfem(high,data,width, height,buffer,c):
-    c.setLineWidth(.3)
-    c.setFont('Helvetica-Bold', 22)
-    c.drawString(200, 760, 'REPORTE EMPLEADO')
-
-    fecha = datetime.datetime.now().date()
-    hora = time.strftime("%H:%M")
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(300, 50, 'FECHA: {0}'.format(fecha)+' '+'  HORA:{0}'.format(hora))
-
-    c.line(90, 747, 550, 747)
-    c.drawImage("static/img/logo-login.png", 50, 760, width=50, height=50)
-
-
-
-    table = Table(data, colWidths=[5 * cm, 5 * cm, 5 * cm, 5 * cm])
-    table.setStyle(TableStyle([('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
-                               ('BOX', (0, 0), (-1, -1), 0.25, colors.black), ]))
-    table.wrapOn(c, width, height)
-    table.drawOn(c, 20, high)
-
-
-
-def piePagina(c,usuario):
-    print(usuario)
-    c.setFont('Helvetica-Bold',10)
-    c.drawString(100, 50, 'Usuario: {0}'.format(usuario))
-
+    template = get_template(template_path)
+    html = template.render(context)
+    pisaStatus = pisa.CreatePDF(html, dest=response, link_callback=link_callback)
+    if pisaStatus.err:
+        return HttpResponse('we had some errors <pre>'+html+'</pre>')
+    return response 
+def usu(context,usuario):
+    context['nombre_usuario'] = usuario

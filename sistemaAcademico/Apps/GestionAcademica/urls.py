@@ -12,6 +12,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructu
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
 from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
 from .Controladores.Matriculacion.estructura_view_materiaProfesor import MovMateriProfesorList
+from .Controladores.Matriculacion.Estructura_view_asignacionprof import *
 
 from .Controladores.Matriculacion.estructura_view_genr_general import *
 from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
@@ -127,7 +128,8 @@ urlpatterns = [
     #------------Reportes de Configuraciones---------------
     path('reporte_usuarios/', reporte_usuarios, name='reporte_usuarios'),
     path('reporte_roles/', reporte_roles, name='reporte_roles'),
-
+    path('reporte_horarioestudy/', reporte_horarioEst, name='reporte_horarioestudy'),
+    path('Horario_profesor/', reporte_horarioprofe, name='Horario_profesor'),
     # ------------Reportes de Mantenimiento---------------
     path('reporte_estudiante/',reporte_estudiante, name='reporte_estudiante'),
     path('reporte_empleado/', reporte_empleado, name='reporte_empleado'),
@@ -161,6 +163,8 @@ urlpatterns = [
 
     #----------- Horario Mod ------------------------------
     path('horario_mod/',MovMateriProfesorList.as_view(),name='horario_mod'),
+
+    path('prueba/', List_docente.as_view(), name='prueba'), 
 
 ]
 
