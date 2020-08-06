@@ -3,7 +3,7 @@ from django.db.models import Q
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import Mov_Aniolectivo_curso, \
-    MovCabCurso, Mov_Horas_docente
+    MovCabCurso, Mov_Horas_docente,Mov_Materia_profesor
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 
 class Mov_Aniolectivo_curso_forms(forms.ModelForm):
@@ -62,3 +62,39 @@ class MovHorasDocentesForm(forms.ModelForm):
         super(MovHorasDocentesForm, self).__init__(*args, **kwargs)
         self.fields['id_anio_lectivo'].query = MantAnioLectivo.objects.filter(id_genr_estado=97)
         self.fields['id_docente'].query = MantPersona.objects.filter(id_genr_tipo_usuario=20)
+
+
+
+#-------HORARIO MOD JOEL JOSUE HUACON LOPEZ 
+class MovMateriaProfesorForm(forms.ModelForm):
+
+
+        class Meta:
+                model = Mov_Materia_profesor
+                fields =['id_materia_profesor',
+                        'id_empleado',
+                        'id_genr_modalidad',
+                        'id_genr_tipo_edu',
+                        'id_genr_jornada',
+                        'id_detalle_materia_curso',
+                        ]
+                exclude = [
+                    'id_empleado',
+                    'id_detalle_materia_curso'
+                ]
+                labels={
+                        'id_genr_modalidad':'Modalidad',
+                        'id_genr_jornada':'Jornada',
+                        'id_genr_tipo_edu':'Tipo Educacion',
+                }
+
+
+
+        def __init__(self, *args, **kwargs):
+                super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
+                self.fields['id_genr_modalidad'].queryset = GenrGeneral.objects.filter(tipo='MOD' )
+                self.fields['id_genr_modalidad'].empty_label = "Seleccione Modalidad"
+                self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR' )
+                self.fields['id_genr_jornada'].empty_label = "Seleccione Jornada"
+                self.fields['id_genr_tipo_edu'].queryset = GenrGeneral.objects.filter(tipo='TEP' )
+                self.fields['id_genr_tipo_edu'].empty_label = "Seleccione Tipo Educacion"
