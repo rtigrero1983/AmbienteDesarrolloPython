@@ -11,6 +11,8 @@ from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
 from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_horario_curso import *
+
 from .Controladores.Matriculacion.estructura_view_materiaProfesor import MovMateriProfesorList
 from .Controladores.Matriculacion.Estructura_view_asignacionprof import *
 
@@ -164,7 +166,11 @@ urlpatterns = [
     #----------- Horario Mod ------------------------------
     path('horario_mod/',MovMateriProfesorList.as_view(),name='horario_mod'),
 
-    path('prueba/', List_docente.as_view(), name='prueba'), 
+    path('prueba/', List_docente.as_view(), name='prueba'),
+
+    # ----------- Ingreso horario por cursos ---------------
+
+    path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
 
 ]
 

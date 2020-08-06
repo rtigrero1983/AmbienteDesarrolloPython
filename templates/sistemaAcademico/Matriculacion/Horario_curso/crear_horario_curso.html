@@ -1,0 +1,219 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% load crispy_forms_tags %}
+
+{% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculación | Ingreso Horario por Curso </h4>
+                </header>
+
+                <div class="card-body ">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                        <div class="row justify-content-center">
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                          <h5 class="card-title">Jornada</h5>
+                                          <a  href="#" data-toggle="modal" data-target="#exampleModal">Matutina</a>
+                                      </div>
+                                </div>
+                                    <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Regimen</h5>
+                                        <p class="card-text">...</p>
+                                      </div>
+                                    </div>
+                                    <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Año Electivo</h5>
+                                        <p class="card-text">...</p>
+                                      </div>
+                                    </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Modalidad</h5>
+                                        <p class="card-text">...</p>
+                                      </div>
+                                    </div>
+                                    <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Tipo De Educacion </h5>
+                                        <p class="card-text">...</p>
+                                      </div>
+                                    </div>
+                                    <div class="card" style="width: 20rem;">
+                                      <div class="card-body">
+                                        <h5 class="card-title">Niveles</h5>
+                                        <p class="card-text">...</p>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Jornada</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="div_id_fecha_nacimiento" class="control-group">
+                                            <label for="id_fecha_nacimiento" class="control-label requiredField">Nombre de la jornada<span class="asteriskField">*</span></label>
+                                            <div class="controls">
+                                                <input type="text" name="fecha_nacimiento" class="form-control " required="" id="id_fecha_nacimiento">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div id="div_id_fecha_nacimiento" class="control-group">
+                                                    <label for="id_fecha_nacimiento" class="control-label requiredField">Hora De Inicio<span class="asteriskField">*</span></label>
+                                                    <div class="controls">
+                                                        <input type="time" name="fecha_nacimiento" class="form-control dateinput" required="" id="id_fecha_nacimiento">
+                                                    </div>
+                                                </div>
+                                             </div>
+                                            <div class="col-md-6">
+                                                <div id="div_id_fecha_nacimiento" class="control-group">
+                                                    <label for="id_fecha_nacimiento" class="control-label requiredField">Hora De Fin<span class="asteriskField">*</span></label>
+                                                    <div class="controls">
+                                                        <input type="time" name="fecha_nacimiento" class="form-control " required="" id="id_fecha_nacimiento">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                                        <button type="button"  class="btn btn-outline-primary" data-dismiss="modal">Guardar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <br>
+                            <div class="row justify-content-center">
+                                <div class="text-center">
+                                    <div class="row">
+                                        <div class="card" style="width: 20rem;">
+                                          <div class="card-body">
+                                            <h5 class="card-title">Curso</h5>
+                                            <p class="card-text">...</p>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                                <div class="row justify-content-center">
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Hora</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white "><h5><strong>Lunes</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Martes</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Miercoles</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Jueves</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Viernes</strong></h5></div>
+                                        <div class="col-md-auto" style="width: 11rem; background-color: #2e59d9; color:white"><h5><strong>Sabado</strong></h5></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                        <div class="col-md-auto" style="width: 11rem;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="text-center">
+                                <a class="btn btn-outline-danger" href="{% url 'Academico:usuarios' %}">Cancelar</a>
+                                <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                            </div>
+                    </form>
+                </div>
+    {% endif %}
+
+{% endblock contenido_principal %} {% block footer %}
+{% endblock %}
+
+{% block extrajs %}
+    <style>
+    .col-md-auto
+		{
+			border: 1px solid #ddd;
+			padding: 35px;
+		}
+    </style>
+{% endblock extrajs %}
+
+
