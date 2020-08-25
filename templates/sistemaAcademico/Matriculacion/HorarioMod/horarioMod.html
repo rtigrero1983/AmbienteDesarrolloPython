@@ -1,234 +1,33 @@
-
 {% extends 'base/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
 {% load crispy_forms_tags %}
-
 {% block contenido_principal %}
 <form method="POST" action="#">
     {% csrf_token %}
-      {% if error %}
+    {% if error %}
         <h2>{{ error }}</h2>
-     {% else %}
+    {% else %}
         <header class="cuadro_titulo rounded bg-gradient-primary text-center">
             <h4 class="title text-light">Horario Mod </h4>
         </header>
         <div class="card-body card-block">
             <div class="row">
-                <div class="col-md-3 order-md-2 mb-4" style="margin-top:20px;">
-                    <div class="card-body card-block">
-                        <a data-toggle="modal" href="#regimen" class="btn btn-primary"><i class="fas fa-list"></i></a>
-                        <div class="modal" id="regimen">
-                                <div class="modal-dialog  modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Regimen</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div><div class="container"></div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                               <table class="table table-bordered"  width="100%" cellspacing="0" data-page-length='5'>
-                                                    <thead class="bg-gradient-primary text-light">
-                                                        <tr class="text-center">
-                                                            <th>Tipo</th>
-                                                            <th>Codigo</th>
-                                                            <th>Nombre</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            {% for reg in regimen %}
-                                                                                <tr>
-                                                                                    <td><strong>{{reg.tipo}}</strong></td>
-                                                                                    <td><strong>{{reg.codigo}}</strong></td>
-                                                                                    <td><strong>{{reg.nombre}}</strong></td>
-                                                                                </tr>
-                                                            {% endfor %}
-                                                    </tbody>
-                                                 </table>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="{% url 'Academico:crear_general' %}" class="btn btn-danger">Agregar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="card-body card-block">
-                        <a data-toggle="modal" href="#jornada" class="btn btn-primary"><i class="fas fa-list"></i></a>
-                            <div class="modal" id="jornada">
-                                <div class="modal-dialog  modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h4 class="modal-title">Jornada</h4>
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        </div><div class="container"></div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                               <table class="table table-bordered"  width="100%" cellspacing="0" data-page-length='5'>
-                                                    <thead class="bg-gradient-primary text-light">
-                                                        <tr class="text-center">
-                                                            <th>Tipo</th>
-                                                            <th>Codigo</th>
-                                                            <th>Nombre</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            {% for jor in jornada %}
-                                                                                <tr>
-                                                                                    <td><strong>{{jor.tipo}}</strong></td>
-                                                                                    <td><strong>{{jor.codigo}}</strong></td>
-                                                                                    <td><strong>{{jor.nombre}}</strong></td>
-                                                                                </tr>
-                                                            {% endfor %}
-                                                    </tbody>
-                                                 </table>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="{% url 'Academico:crear_general' %}" class="btn btn-danger">Agregar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-
-                    <div class="card-body card-block">
-                        <a data-toggle="modal" href="#modalidad" class="btn btn-primary"><i class="fas fa-list"></i></a>
-                            <div class="modal" id="modalidad">
-                                    <div class="modal-dialog  modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h4 class="modal-title">Modalidad</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div><div class="container"></div>
-                                            <div class="modal-body">
-                                                <div class="table-responsive">
-                                                <table class="table table-bordered"  width="100%"  cellspacing="0" data-page-length='5'>
-                                                        <thead class="bg-gradient-primary text-light">
-                                                            <tr class="text-center">
-                                                                <th>Tipo</th>
-                                                                <th>Codigo</th>
-                                                                <th>Nombre</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                {% for mod in modalidad %}
-                                                                                    <tr>
-                                                                                        <td><strong>{{mod.tipo}}</strong></td>
-                                                                                        <td><strong>{{mod.codigo}}</strong></td>
-                                                                                        <td><strong>{{mod.nombre}}</strong></td>
-                                                                                    </tr>
-                                                                {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="{% url 'Academico:crear_general' %}" class="btn btn-danger">Agregar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                    </div>
-
-                    <div class="card-body card-block">
-                        <a data-toggle="modal" href="#tipoedu" class="btn btn-primary"><i class="fas fa-list"></i></a>
-                            <div class="modal" id="tipoedu">
-                                    <div class="modal-dialog  modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h4 class="modal-title">Tipo de Educacion</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div><div class="container"></div>
-                                            <div class="modal-body">
-                                                <div class="table-responsive">
-                                                <table class="table table-bordered"  width="100%"  cellspacing="0" data-page-length='5'>
-                                                        <thead class="bg-gradient-primary text-light">
-                                                            <tr class="text-center">
-                                                                <th>Tipo</th>
-                                                                <th>Codigo</th>
-                                                                <th>Nombre</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                {% for tep in tipo_educacion %}
-                                                                                    <tr>
-                                                                                        <td><strong>{{tep.tipo}}</strong></td>
-                                                                                        <td><strong>{{tep.codigo}}</strong></td>
-                                                                                        <td><strong>{{tep.nombre}}</strong></td>
-                                                                                    </tr>
-                                                                {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="{% url 'Academico:crear_general' %}" class="btn btn-danger">Agregar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                    </div>
-                    <div class="card-body card-block">
-                        <a data-toggle="modal" href="#nivel" class="btn btn-primary"><i class="fas fa-list"></i></a>
-                            <div class="modal" id="nivel">
-                                    <div class="modal-dialog  modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h4 class="modal-title">Niveles</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            </div><div class="container"></div>
-                                            <div class="modal-body">
-                                                <div class="table-responsive">
-                                                <table class="table table-bordered"  width="100%" cellspacing="0" data-page-length='5'>
-                                                        <thead class="bg-gradient-primary text-light">
-                                                            <tr class="text-center">
-                                                                <th>Tipo</th>
-                                                                <th>Codigo</th>
-                                                                <th>Nombre</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                                {% for niv in nivel %}
-                                                                                    <tr>
-                                                                                        <td><strong>{{niv.tipo}}</strong></td>
-                                                                                        <td><strong>{{niv.codigo}}</strong></td>
-                                                                                        <td><strong>{{niv.nombre}}</strong></td>
-                                                                                    </tr>
-                                                                {% endfor %}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="{% url 'Academico:crear_general' %}" class="btn btn-danger">Agregar</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                    </div>
-                </div>
                 <div class="col-md-9 order-md-1">
-                        <form action="#" enctype="multipart/form-data" class="form-vertical" method="post">
-                            <div class="col-auto my-1">
-                                    {{form|crispy}}
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-upload"></i> Cargar Asignatura
-                                </button>
-                            </div>
+                    <form action="#" enctype="multipart/form-data" class="form-vertical" method="post">
+                        <div class="col-auto my-1">{{form|crispy}}</div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-danger">Cargar Asignatura</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-
+    {% endif %}
 </form>
-{% endif %}
+
 
 {% endblock contenido_principal %} {% block footer %}
 {% endblock %}
