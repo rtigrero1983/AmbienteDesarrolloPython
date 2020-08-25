@@ -30,7 +30,6 @@ class MovCabCurso(models.Model):
     id_genr_paralelo = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_asignacion_paralelo",db_column='id_genr_paralelo')
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_jornada",db_column='id_genr_jornada')
     cupo = models.IntegerField()
-    id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_cabcurso_aniolectivo",db_column='id_anio_lectivo')
 
     class Meta:
         verbose_name = 'Curso'
@@ -79,7 +78,7 @@ class MovDetalleEmpleado(models.Model):
 '''
 class MovDetalleMateriaCurso(models.Model):
     id_detalle_materia_curso = models.AutoField(primary_key=True)
-    id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_cabcurso",db_column='id_curso')
+    id_mov_anio_lectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_curso')
     anio = models.IntegerField(blank=False, null=False)
     total_horas = models.IntegerField(null=False, blank=False, default=1)
     estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado')
