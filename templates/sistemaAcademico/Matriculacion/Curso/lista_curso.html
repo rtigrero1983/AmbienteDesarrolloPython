@@ -1,0 +1,84 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+  
+{% endblock footer %}
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Matriculacion | Cursos  </h4></header>
+
+<br/>
+     <a href="{% url 'Academico:create_curso' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar </a>
+<br/>
+<br/>
+
+<div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Cursos</h6>
+            </div>
+<div class="card-body">
+  <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                      <th>Codigo</th>
+                      <th>Nombre</th>
+                        <th>Regimen</th>
+                        <th>Modalidad</th>
+                        <th>Tipo Educacion</th>
+                        <th>Formacion</th>
+                        <th>Curso</th>
+                        <th>Paralelo</th>
+                        <th>Cupo</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  {% for c in cursos %}
+                    <tr class="text-dark">
+                      <td>{{c.codigo}}</td>
+                      <td>{{c.nombre}}</td>
+                        <td>{{c.id_genr_regimen}}</td>
+                        <td>{{c.id_genr_modalidad}}</td>
+                        <td>{{c.id_genr_tipo_edu}}</td>
+                        <td>{{ c.id_genr_formacion }}</td>
+                        <td>{{ c.id_genr_curso }}</td>
+                        <td>{{ c.id_genr_paralelo }}</td>
+                        <td>{{ c.cupo }}</td>
+
+                      <td align="center">
+                          <a href="{% url 'Academico:edit_curso' c.id_curso %}" class="btn bg-gradient-primary text-light" title="Editar"><i class="fas fa-info-circle"></i></a>
+                          <a href="#" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
+
+                      </td>
+                    </tr>
+                  {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+</div>
+
+<div class="modal fade" id="modal_crear" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_editar" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_eliminar" role="dialog">
+</div>
+{% endblock contenido_principal %}
+

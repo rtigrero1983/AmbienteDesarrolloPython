@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculacion | Curso</h4>
+                </header>
+        <div class="card-body card-block">
+            <form action="{% url 'Academico:edit_curso' c.id_curso %}" enctype="multipart/form-data" class="form-horizontal" method="POST">
+               <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+            <div class="form-row">
+                <div class="col-auto col-md-auto">
+                  {{ form.codigo  | as_crispy_field}}
+                    {{ form.id_genr_regimen  | as_crispy_field}}
+                </div>
+                <div class="col-auto col-md-auto">
+                    {{ form.nombre  | as_crispy_field}}
+                    {{ form.id_genr_modalidad  | as_crispy_field}}
+
+
+                </div>
+                <div class="col-auto">
+                    {{ form.id_genr_formacion  | as_crispy_field}}
+                    {{ form.id_genr_curso  | as_crispy_field}}
+
+                </div>
+                    <div class="col-auto">
+                        {{ form.id_genr_paralelo  | as_crispy_field}}
+                    {{ form.id_genr_jornada  | as_crispy_field}}
+
+                  </div>
+                <div class="col-auto">
+                     {{ form.id_genr_tipo_edu  | as_crispy_field}}
+                    {{ form.cupo  | as_crispy_field}}
+                </div>
+            </div>
+
+
+
+
+          </div>
+        </div>
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:cursos' %}">Cancelar</a>
+            </div>
+  			</form>
+        </div>
+</form>
+    {% endif %}
+{% endblock contenido_principal %}

@@ -10,6 +10,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Es
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
+from .Controladores.Matriculacion.Estructura_view_curso import ListaCurso, CreateCurso, UpdateCurso
 from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_horario_curso import *
 
@@ -142,4 +143,10 @@ urlpatterns = [
     path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
     # ----------- Ingreso horario por cursos ---------------
     path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
+
+    #------------ CURSOS -------------------------------
+    path('cursos/', ListaCurso.as_view(),name='cursos'),
+    path('create_curso/',CreateCurso.as_view(),name='create_curso'),
+    path('edit_curso/<int:pk>', UpdateCurso.as_view(),name='edit_curso')
+
 ]
