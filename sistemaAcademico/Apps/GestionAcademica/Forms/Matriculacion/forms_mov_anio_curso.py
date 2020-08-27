@@ -1,5 +1,6 @@
 from django import forms
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona, \
+    MantEmpleado
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import Mov_Aniolectivo_curso,MovCabCurso, Mov_Horas_docente
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 
@@ -19,27 +20,24 @@ class Mov_Aniolectivo_curso_forms(forms.ModelForm):
         widgets = {
             "id_anio_electivo": forms.Select(),
             "id_curso": forms.Select(),
-            "id_genr_paralelo": forms.SelectMultiple(),
+
         }
     def __init__(self, *args, **kwargs):
         super(Mov_Aniolectivo_curso_forms, self).__init__(*args, **kwargs)
-        self.fields['id_genr_paralelo']=forms.MultipleChoiceField(choices=[(
-            i.idgenr_general, i.nombre) for i in GenrGeneral.objects.filter(tipo='PAR')], widget={})
+        self.fields['id_genr_paralelo'].queryset = GenrGeneral.objects.filter(tipo='TPL')
 
 class MovHorasDocentesForm(forms.ModelForm):
     class Meta:
         model = Mov_Horas_docente
         fields = [
-            'id_anio_lectivo',
             'total_horas',
             'horas_disponible',
-            'id_docente'
+            'id_empleado'
         ]
         labels = {
-            'id_anio_lectivo': 'Año Lectivo',
             'total_horas': 'Horas Laborables',
             'horas_disponible': 'Horas Disponibles',
-            'id_docente': 'Docente'
+            'id_empleado': 'Docente'
         }
         widgets = {
             'total_horas': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -47,8 +45,7 @@ class MovHorasDocentesForm(forms.ModelForm):
         }
     def __init__(self, *args, **kwargs):
         super(MovHorasDocentesForm, self).__init__(*args, **kwargs)
-        self.fields['id_anio_lectivo'].query = MantAnioLectivo.objects.filter(id_genr_estado=97)
-        self.fields['id_docente'].query = MantPersona.objects.filter(id_genr_tipo_usuario=20)
+        self.fields['id_empleado'].query = MantEmpleado.objects.all()
 
 #-------HORARIO MOD JOEL JOSUE HUACON LOPEZ 
 class MovMateriaProfesorForm(forms.ModelForm):

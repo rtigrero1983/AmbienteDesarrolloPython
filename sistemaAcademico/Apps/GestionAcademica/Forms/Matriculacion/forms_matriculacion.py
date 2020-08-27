@@ -50,7 +50,6 @@ class CabCursoForm (forms.ModelForm):
             'id_genr_tipo_edu',
             'id_genr_formacion',
             'id_genr_curso',
-            'id_genr_paralelo',
             'id_genr_jornada',
             'cupo'
         ]
@@ -63,7 +62,7 @@ class CabCursoForm (forms.ModelForm):
             'id_genr_tipo_edu':'Tipo de Educación',
             'id_genr_formacion': 'Nivel',
             'id_genr_curso': 'Curso',
-            'id_genr_paralelo':'Paralelo',
+
             'id_genr_jornada':'Jornada',
             'cupo':'Numero de cupos'
         }
@@ -88,5 +87,4 @@ class CabCursoForm (forms.ModelForm):
             tipo='NIV')
         self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(
             tipo='JOR')
-        self.fields['id_genr_paralelo'].queryset = GenrGeneral.objects.filter(
-            tipo='TPL')
+

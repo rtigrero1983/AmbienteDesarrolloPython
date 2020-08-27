@@ -24,7 +24,6 @@ class MovCabCurso(models.Model):
     id_genr_tipo_edu = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_materiaprof_tipoedu', db_column='id_genr_tipo_educacion')
     id_genr_formacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_cabcurso_formacion", db_column='id_genr_formacion')
     id_genr_curso = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_cabcurso_curso", db_column='id_genr_curso')#silenciar
-    id_genr_paralelo = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_asignacion_paralelo", db_column='id_genr_paralelo')
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_cabcurso_jornada", db_column='id_genr_jornada')
     cupo = models.IntegerField()
     class Meta:
@@ -32,7 +31,7 @@ class MovCabCurso(models.Model):
         verbose_name_plural = 'Cursos'
         db_table = 'mov_cab_curso'
     def __str__(self):
-        return self.nombre
+        return self.nombre + " "+self.id_genr_formacion.nombre
 
 class MovCabRegistroNotas(models.Model):
     id_registro_notas = models.AutoField(primary_key=True)
@@ -66,8 +65,7 @@ class MovDetalleEmpleado(models.Model):
 '''
 class MovDetalleMateriaCurso(models.Model):
     id_detalle_materia_curso = models.AutoField(primary_key=True)
-    id_mov_anio_lectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_curso')
-    anio = models.IntegerField(blank=False, null=False)
+    id_mov_anio_lectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_mov_aniolectivo_curso')
     total_horas = models.IntegerField(null=False, blank=False, default=1)
     estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado')
     id_genr_materias = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias')
@@ -125,11 +123,11 @@ class Mov_Aniolectivo_curso(models.Model):
     id_mov_anioelectivo_curso=models.AutoField(primary_key=True)
     id_anio_electivo=models.ForeignKey(MantAnioLectivo,on_delete=models.CASCADE)
     id_curso=models.ForeignKey(MovCabCurso,on_delete=models.CASCADE,blank=False, null=False,db_column='id_curso')
-    id_genr_paralelo=models.ManyToManyField(GenrGeneral,blank=False, related_name="fk_cabcurso_paralelo", db_column='id_genr_paralelo')
-    id_estado_gnral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,default=97, db_column='estado')
+    id_genr_paralelo=models.ForeignKey('GenrGeneral',on_delete=models.CASCADE,blank=False, related_name="fk_mavaniolectivo_curso_genrparalelo", db_column='id_genr_paralelo')
+    id_estado_gnral = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False, null=False,default=97, db_column='estado')
     class Meta:
-        verbose_name = 'Ani_electivo_curso'
-        db_table = 'Mov_anioelectivo_curso'
+        verbose_name = 'Ani_electivo_curso_paralelo'
+        db_table = 'Mov_anioelectivo_curso_paralelo'
         constraints = [
             models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso'], name='Unicos')
         ]
@@ -159,10 +157,9 @@ class Mov_Horario_materia(models.Model):
 
 class Mov_Horas_docente(models.Model):
     id_horas_docente = models.AutoField(primary_key=True)
-    id_anio_lectivo = models.ForeignKey('MantAnioLectivo', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_horario_docente_anio_lectivo', db_column='id_anio_lectivo')
     total_horas = models.DecimalField(null=False, decimal_places=2,max_digits=65)
     horas_disponible =  models.DecimalField(null=False, decimal_places=2,max_digits=65)
-    id_docente = models.ForeignKey('MantPersona', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_horario_docente_docente', db_column='id_docente')
+    id_empleado = models.ForeignKey('MantEmpleado', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_horario_docente_empelado', db_column='id_empleado')
     class Meta:
         verbose_name = 'Mov_Horas_docente'
         verbose_name_plural = 'Mov_Horas_docentes'
