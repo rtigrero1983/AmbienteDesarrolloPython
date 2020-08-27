@@ -5,13 +5,14 @@
 {% endblock sidebar %}
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
+
 <form method="POST" action="#">
     {% csrf_token %}
     {% if error %}
         <h2>{{ error }}</h2>
     {% else %}
         <header class="cuadro_titulo rounded bg-gradient-primary text-center">
-            <h4 class="title text-light">Horario Mod </h4>
+            <h4 class="title text-light">Asignar materia a profesor</h4>
         </header>
         <div class="card-body card-block">
             <div class="row">
@@ -19,7 +20,8 @@
                     <form action="#" enctype="multipart/form-data" class="form-vertical" method="post">
                         <div class="col-auto my-1">{{form|crispy}}</div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-danger">Cargar Asignatura</button>
+                            <button class="btn btn-outline-primary" type="submit">Añadir</button>
+                            <a class="btn btn-outline-danger" href="{% url 'Academico:anio_lectivo' %}">Cancelar</a>
                         </div>
                     </form>
                 </div>

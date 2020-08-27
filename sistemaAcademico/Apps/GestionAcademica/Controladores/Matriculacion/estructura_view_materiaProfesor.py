@@ -17,5 +17,4 @@ class MovMateriProfesorList(CreateView):
         context["tipo_educacion"] = GenrGeneral.objects.filter(tipo='TEP')
         context["nivel"] = GenrGeneral.objects.filter(tipo='NIV')
         return context"""
-class AsigMateriProfesor(TemplateView):
-    template_name = 'sistemaAcademico/Matriculacion/HorarioMod/horarioAsigMod.html'
+

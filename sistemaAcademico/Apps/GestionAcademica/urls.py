@@ -139,14 +139,11 @@ urlpatterns = [
     path('horas_docentes/', CreateHorasDocentes.as_view(), name='horas_docentes'),
     # ----------- Horario Mod ------------------------------
     path('horario_mod/', MovMateriProfesorList.as_view(), name='horario_mod'),
-    path('asignar_horas_prof/', AsigMateriProfesor.as_view(), name='asignarhorasprofesor'),
     path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
     # ----------- Ingreso horario por cursos ---------------
     path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
-
     #------------ CURSOS -------------------------------
-    path('cursos/', ListaCurso.as_view(),name='cursos'),
-    path('create_curso/',CreateCurso.as_view(),name='create_curso'),
-    path('edit_curso/<int:pk>', UpdateCurso.as_view(),name='edit_curso')
-
+    path('cursos/', ListaCurso.as_view(), name='cursos'),
+    path('create_curso/', CreateCurso.as_view(), name='create_curso'),
+    path('edit_curso/<int:pk>', UpdateCurso.as_view(), name='edit_curso')
 ]

@@ -1,7 +1,6 @@
 from django import forms
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona, \
-    MantEmpleado
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import Mov_Aniolectivo_curso,MovCabCurso, Mov_Horas_docente
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona, MantEmpleado
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 
 class Mov_Aniolectivo_curso_forms(forms.ModelForm):
@@ -20,7 +19,6 @@ class Mov_Aniolectivo_curso_forms(forms.ModelForm):
         widgets = {
             "id_anio_electivo": forms.Select(),
             "id_curso": forms.Select(),
-
         }
     def __init__(self, *args, **kwargs):
         super(Mov_Aniolectivo_curso_forms, self).__init__(*args, **kwargs)
@@ -47,29 +45,21 @@ class MovHorasDocentesForm(forms.ModelForm):
         super(MovHorasDocentesForm, self).__init__(*args, **kwargs)
         self.fields['id_empleado'].query = MantEmpleado.objects.all()
 
-#-------HORARIO MOD JOEL JOSUE HUACON LOPEZ 
+#-------HORARIO MOD
 class MovMateriaProfesorForm(forms.ModelForm):
     class Meta:
-        model = MovCabCurso
+        model = Mov_Materia_profesor
         fields = [
-                'id_genr_regimen',
-                'id_genr_jornada',
-                'id_genr_modalidad',
-                'id_genr_tipo_edu',
+                'id_detalle_materia_curso',
                 ]
         labels = {
-                'id_genr_modalidad': 'Modalidad',
-                'id_genr_jornada': 'Jornada',
-                'id_genr_tipo_edu': 'Tipo Educacion',
-                'id_genr_regimen': 'Regimen',
+                'id_detalle_materia_curso': 'Materias',
+                }
+        widgets = {
+
                 }
     def __init__(self, *args, **kwargs):
         super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
-        self.fields['id_genr_modalidad'].queryset = GenrGeneral.objects.filter(tipo='MOD')
-        self.fields['id_genr_modalidad'].empty_label = "Seleccione la Modalidad"
-        self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
-        self.fields['id_genr_jornada'].empty_label = "Seleccione la Jornada"
-        self.fields['id_genr_tipo_edu'].queryset = GenrGeneral.objects.filter(tipo='TEP')
-        self.fields['id_genr_tipo_edu'].empty_label = "Seleccione el Tipo Educacion"
-        self.fields['id_genr_regimen'].queryset = GenrGeneral.objects.filter(tipo='REG')
-        self.fields['id_genr_regimen'].empty_label = "Seleccione el Regimen"
+        self.fields['id_detalle_materia_curso'].queryset = GenrGeneral.objects.filter(tipo='MAT')
+        #self.fields['id_detalle_materia_curso'].empty_label = "Seleccione las materias"
+
