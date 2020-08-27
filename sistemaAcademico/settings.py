@@ -91,9 +91,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico',
-        'USER': 'academico',
-        'PASSWORD': 'academico123',
-        'HOST': '200.124.241.83',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
         'PORT': 3306,
     }
 }
@@ -156,6 +156,5 @@ SESSION_EXPIRE_SECONDS = 6000
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_LOGOUT_REDIRECT_URL = 'timeout/'
 SESSION_SAVE_EVERY_REQUEST = True
-ALLOWED_HOSTS=['*']
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

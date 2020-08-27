@@ -1,11 +1,11 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovCabCurso
+from django.views.generic import CreateView, UpdateView
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_mov_anio_curso import MovMateriaProfesorForm
 
 class MovMateriProfesorList(CreateView):
-    model = MovCabCurso
+    model = Mov_Materia_profesor
     template_name = 'sistemaAcademico/Matriculacion/HorarioMod/horarioMod.html'
     form_class = MovMateriaProfesorForm
     success_url = reverse_lazy('Academico:inicio')
@@ -17,4 +17,3 @@ class MovMateriProfesorList(CreateView):
         context["tipo_educacion"] = GenrGeneral.objects.filter(tipo='TEP')
         context["nivel"] = GenrGeneral.objects.filter(tipo='NIV')
         return context"""
-

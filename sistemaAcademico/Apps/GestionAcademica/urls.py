@@ -137,7 +137,7 @@ urlpatterns = [
     path('editar_general/<int:pk>', UpdateGeneral.as_view(), name='editar_general'),
     # ----------- Asignacion horas a docentes ---------------
     path('horas_docentes/', CreateHorasDocentes.as_view(), name='horas_docentes'),
-    # ----------- Horario Mod ------------------------------
+    # ----------- Asignacion materias a docentes ------------------------------
     path('horario_mod/', MovMateriProfesorList.as_view(), name='horario_mod'),
     path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
     # ----------- Ingreso horario por cursos ---------------

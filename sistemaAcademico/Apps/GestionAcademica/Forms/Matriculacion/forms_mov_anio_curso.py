@@ -45,14 +45,16 @@ class MovHorasDocentesForm(forms.ModelForm):
         super(MovHorasDocentesForm, self).__init__(*args, **kwargs)
         self.fields['id_empleado'].query = MantEmpleado.objects.all()
 
-#-------HORARIO MOD
+#-------Asignacion materia a profesor
 class MovMateriaProfesorForm(forms.ModelForm):
     class Meta:
         model = Mov_Materia_profesor
         fields = [
+                'id_empleado',
                 'id_detalle_materia_curso',
                 ]
         labels = {
+                'id_empleado': 'Profesor',
                 'id_detalle_materia_curso': 'Materias',
                 }
         widgets = {
