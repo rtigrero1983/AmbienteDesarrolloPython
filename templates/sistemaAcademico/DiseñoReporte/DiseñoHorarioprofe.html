@@ -87,7 +87,7 @@
         
         </div>
         </div>
-        {%if horario_estudiante%}
+        {%if horario_profesor%}
             <table id="table" style="width: 100%;">
                 <thead>
                     <tr style="border: 0.5px solid black; height: 50px; font-size: 13px;">
@@ -100,14 +100,38 @@
                     
                     </tr>    
                 <tbody class="bg bg-green">
-                    {%for datos in horario_estudiante%}
+                    {%for datos in horario_profesor%}
                         <tr style="border: 0.5px solid black; height: 100px; font-size: 13px;">
                             <td><center>{{ forloop.counter }}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
+                            <td><center>
+                                {%if datos.id_genr_dia.nombre == 'Lunes'%}
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
+                                {%endif%}
+                            <td><center> {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
+                            <td><center> {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
+                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                            
+                            <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
+                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                            <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> 
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                {{che.id_curso.nombre}}
+                            {%endfor%}
+                            
+                            </center></td>
                         </tr>
                     {%endfor%}
 

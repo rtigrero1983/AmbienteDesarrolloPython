@@ -14,8 +14,9 @@
 <header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Asignacion | Profesores  </h4></header>
 
 <br/>
-     <a href="" class="btn bg-gradient-primary text-light"  id="">Profesores Asignados</a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-     <a href="" class="btn bg-gradient-primary text-light" id="">Profesores Sin Asignar</a>
+     <a href="{% url 'Academico:asignacion_materiasprof'%}" class="btn bg-gradient-primary text-light"  id="">Todos Los Profesores</a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+     <a href="{% url 'Academico:profesoresAsignados'%}" class="btn bg-gradient-primary text-light"  id="">Profesores Asignados</a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+     <a href="{% url 'Academico:profesoresSinAsignar'%}" class="btn bg-gradient-primary text-light" id="">Profesores Sin Asignar</a>
 <br/>
 <br/>
 
@@ -30,8 +31,7 @@
                     <tr class="text-light text-center">
                       <th>Codigo</th>
                       <th>Profesor</th>
-                        <th>Materias</th>
-                        <th>Opciones</th>
+                      <th>Opciones</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -40,17 +40,53 @@
                     <tr class="text-dark">
                       <td>{{info.id_materia_profesor}}</td>
                       <td>{{info.id_empleado.id_persona.nombres}}</td>
-                        <td>{{info.id_materia_curso.id_genr_materias.nombre}}</td>
                       <td align="center">
                           <a href="" class="btn bg-gradient-primary text-light" title="Editar">Editar</a>
-                          <a href="" class="btn bg-gradient-danger text-light" title="Eliminar">Eliminar</a>
-                          <a href="" class="btn bg-gradient-danger text-light" title="Eliminar">Asignar Materia</a>
+                          
+                          <a href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor  %}" class="btn bg-gradient-danger text-light" title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
 
-
+                                                
+                          
+                          <a href="" class="btn bg-gradient-danger text-light" title="">Asignar Materia</a>
                       </td>
                     </tr>
-                  {% endfor %}
+                  {% endfor %} 
 
+
+                  {%if lista_profesor_asignados%}
+                    {% for info in lista_profesor_asignados %}
+                      <tr class="text-dark">
+                        <td>{{info.id_materia_profesor}}</td>
+                        <td>{{info.id_empleado.id_persona.nombres}}</td>
+                        <td align="center">
+                        <a href="" class="btn bg-gradient-primary text-light" title="Editar">Editar</a>
+                        <a href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}" class="btn bg-gradient-danger text-light" title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
+                        <a href="" class="btn bg-gradient-danger text-light" title="">Asignar Materia</a>
+  
+  
+                        </td>
+                      </tr>
+                    {% endfor %}
+                      
+                  {%endif%}
+
+
+                  {%if lista_profesor_sin_asignar%}
+                  {% for info in lista_profesor_sin_asignar %}
+                  <tr class="text-dark">
+                    <td>{{info.id_materia_profesor}}</td>
+                    <td>{{info.id_empleado.id_persona.nombres}}</td>
+                    <td align="center">
+                      <a href="" class="btn bg-gradient-primary text-light" title="Editar">Editar</a>
+                      <a href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}" class="btn bg-gradient-danger text-light" title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
+                      <a href="" class="btn bg-gradient-danger text-light" title="">Asignar Materia</a>
+
+
+                </td>
+              </tr>
+                  {% endfor %}
+                    
+                {%endif%}
                   </tbody>
                 </table>
               </div>

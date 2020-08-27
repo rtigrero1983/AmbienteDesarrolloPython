@@ -103,11 +103,32 @@
                     {%for datos in horario_estudiante%}
                         <tr style="border: 0.5px solid black; height: 100px; font-size: 13px;">
                             <td><center>{{ forloop.counter }}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
-                            <td><center>{{datos.id_materia_profesor.id_materia_curso.id_genr_materias.nombre}} <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
+                               
+                            <td><center>{%if datos.id_genr_dia.nombre == 'Lunes'%}
+                            
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all %}
+                                            {{che.id_genr_materias.nombre}}
+                              {%endfor%} 
+                                 <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}} 
+                                 {%endif%}</center></td>
+                                 
+                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                            <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
+                            <td><center> {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
+                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%} 
+                                <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
+                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                            {{che.id_genr_materias.nombre}}
+                                        {%endfor%}
+                            
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_empleado.id_persona.nombres}}</center></td>
                         </tr>
                     {%endfor%}
 

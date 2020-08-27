@@ -140,6 +140,15 @@ urlpatterns = [
     # ----------- Asignacion materias a docentes ------------------------------
     path('horario_mod/', MovMateriProfesorList.as_view(), name='horario_mod'),
     path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
+
+    path('eliminar_profesor/<int:id>', eliminar_profesor, name='eliminar_profesor'),
+    path('profesoresAsignados', List_docente_asignado.as_view(), name= 'profesoresAsignados'),
+    path('profesoresSinAsignar', List_docente_sin_asignar.as_view(), name= 'profesoresSinAsignar'),
+
+
+
+
+
     # ----------- Ingreso horario por cursos ---------------
     path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
     #------------ CURSOS -------------------------------

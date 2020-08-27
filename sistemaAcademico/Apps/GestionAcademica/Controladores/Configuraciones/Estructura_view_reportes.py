@@ -14,7 +14,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import cm
 from reportlab.platypus import Paragraph, Table, TableStyle,Image
 from reportlab.lib import colors
-
+from django.db.models import Q
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
@@ -449,10 +449,10 @@ def reporte_horarioEst(request, *args, **kwargs):
                 buscador1 = request.POST.get('buscador')
                 combo = int(request.POST.get('combo'))
                 if (combo == 1):
-                    horario = Mov_Horario_materia.objects.all()
+                    horario = Mov_Horario_materia.objects.all().select_related('id_materia_profesor', 'id_genr_dia')
                 elif (combo == 2):
-                    horario = Mov_Horario_materia.objects.filter(id_curso__nombre=buscador1) 
-
+                    horario = Mov_Horario_materia.objects.filter(id_materia_profesor__id_detalle_materia_curso__id_mov_anio_lectivo_curso__id_curso__nombre = buscador1 ).select_related('id_materia_profesor', 'id_genr_dia') 
+                    print(horario)
                 elif (combo == 3):
                     return render(request, 'sistemaAcademico/reportes/Horario_est.html')   
                     
