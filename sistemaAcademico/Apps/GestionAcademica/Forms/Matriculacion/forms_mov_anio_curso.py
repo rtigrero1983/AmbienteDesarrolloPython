@@ -1,7 +1,7 @@
 from django import forms
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo, MantPersona, MantEmpleado
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 from crispy_forms.layout import *
 from crispy_forms.helper import *
 from django.forms.widgets import *
@@ -49,7 +49,7 @@ class MovHorasDocentesForm(forms.ModelForm):
         super(MovHorasDocentesForm, self).__init__(*args, **kwargs)
         self.fields['id_empleado'].query = MantEmpleado.objects.all()
 
-#-------Asignacion materia a profesor
+# -------Asignacion materia a profesor
 class MovMateriaProfesorForm(forms.ModelForm):
     class Meta:
         model = Mov_Materia_profesor
@@ -63,19 +63,16 @@ class MovMateriaProfesorForm(forms.ModelForm):
                 }
         widgets = {
             "id_detalle_materia_curso": forms.CheckboxSelectMultiple(),
-
-
         }
 
-        def __init__(self, *args, **kwargs):
-            super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
-            self.helper = FormHelper()
-            self.helper.layout = Layout(
-                Field('checkboxselectmultiple'),
-                Field('multiple'),
-            )
     def __init__(self, *args, **kwargs):
         super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
-        self.fields['id_detalle_materia_curso'].queryset = GenrGeneral.objects.filter(tipo='MAT')
-        # self.fields['id_detalle_materia_curso'].empty_label = "Seleccione las materias"
+        self.fields['id_detalle_materia_curso'].queryset = MovDetalleMateriaCurso.objects.filter(id_genr_materias__tipo='MAT')#.select_related('nombre')
+        self.fields['id_empleado'].empty_label = "Seleccione un profesor"
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field('checkboxselectmultiple'),
+            Field('multiple'),
+        )
+
 
