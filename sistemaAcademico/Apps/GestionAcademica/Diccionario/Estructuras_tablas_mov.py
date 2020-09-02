@@ -75,8 +75,9 @@ class MovDetalleMateriaCurso(models.Model):
         db_table = 'mov_detalle_materia_curso'
     def __int__(self):
         return self.anio
-    #def __str__(self):
-     #   return self.id_mov_anio_lectivo_curso
+    def __str__(self):
+
+        return self.id_genr_materias.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_genr_paralelo.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
 
 
 class MovDetalleRegistroNotas(models.Model):
