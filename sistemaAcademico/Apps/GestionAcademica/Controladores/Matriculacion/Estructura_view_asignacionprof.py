@@ -45,7 +45,7 @@ class List_docente_sin_asignar(ListView):
         for q in self.queryset:
             if not q.id_detalle_materia_curso.exists():
                 profesores.append(q)
-                print("kjkjkjk", profesores)
+                print("NM", profesores)
         context['lista_profesor_sin_asignar'] = profesores
         return render(request, self.template_name, context)
 
