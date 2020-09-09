@@ -33,21 +33,25 @@ class MovCabCurso(models.Model):
     def __str__(self):
         return self.nombre + " "+self.id_genr_formacion.nombre
 
+
 class MovCabRegistroNotas(models.Model):
     id_registro_notas = models.AutoField(primary_key=True)
-    id_empleado = models.ForeignKey('MantEmpleado', on_delete=models.CASCADE, blank=False, null=False, related_name="fk_registronotas_empleado", db_column='id_empleado')
-    id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_registronotas_cabcurso", db_column='id_curso')
-    id_genr_materia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_registronotas_materia", db_column='id_genr_materia')
-    id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_registronotas_anniolectivo", db_column='id_anio_lectivo')
+    id_detalle_registro_notas = models.ForeignKey('MovDetalleRegistroNotas', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_detalleregistronotas", db_column='id_detalle_registro_notas')
+    id_mov_anioelectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_aniolectivocurso", db_column='id_mov_anioelectivo_curso')
+    id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_materiaprofesor", db_column='id_materia_profesor')
     promedio_curso_1q = models.FloatField(blank=False, null=False)
     promedio_curso_2q = models.FloatField(blank=False, null=False)
     promedio_curso_general = models.FloatField(blank=False, null=False)
+    fecha_ingreso = models.DateTimeField(blank=True, null=True)
+    usuario_ing = models.CharField(max_length=45, blank=True, null=True)
+    terminal_ing = models.CharField(max_length=45, blank=True, null=True)
+
     class Meta:
         verbose_name = 'Registro Notas'
         verbose_name_plural = 'Registro Notas'
         db_table = 'mov_cab_registro_notas'
     def __int__(self):
-        return self.id_genr_materia
+        return self.id_registro_notas
 
 '''''
 class MovDetalleEmpleado(models.Model):
@@ -82,6 +86,7 @@ class MovDetalleMateriaCurso(models.Model):
 
 class MovDetalleRegistroNotas(models.Model):
     id_detalle_registro_notas = models.AutoField(primary_key=True)
+    id_matriculacion_estudiante = models.ForeignKey('MovMatriculacionEstudiante', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_detalleregistronotas_matriestudiante", db_column='id_matriculacion_estudiante')
     primer_parcial = models.FloatField(blank=False, null=False)
     segundo_parcial = models.FloatField(blank=False, null=False)
     tercer_parcial = models.FloatField(blank=False, null=False)
@@ -89,33 +94,23 @@ class MovDetalleRegistroNotas(models.Model):
     promedio = models.FloatField(blank=False, null=False)
     total_promedio_general = models.FloatField(blank=False, null=False)
     id_general_quimestre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre", db_column='id_general_quimestre')
-    id_estudiante = models.ForeignKey(MantEstudiante, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_estudiante", db_column='id_estudiante')
     class Meta:
         verbose_name = 'Detalle Registro de Curso'
         verbose_name_plural = 'Detalle Registro de Curso'
         db_table = 'mov_detalle_registro_notas'
     def __float__(self):
-        return self.primer_parcial
+        return self.primer_parcial, self.segundo_parcial, self.tercer_parcial, self.examen, self.promedio, self.total_promedio_general
 
-class MovEstudianteAsignacionCurso(models.Model):
-    id_estudiante_curso = models.AutoField(primary_key=True)
-    id_estudiante = models.ForeignKey(MantEstudiante, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_estudianteAsignacioncurso_estudiante", db_column='id_estudiante')
-    id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_estudianteAsignacioncurso_movcabcurso", db_column='id_curso')
-    fecha_ingreso = models.DateTimeField(blank=False, null=False)
-    usuario_ing = models.CharField(max_length=45, blank=False, null=False)
-    terminal_ing = models.CharField(max_length=45, blank=False, null=False)
-    class Meta:
-        verbose_name = 'Asignacion de curso'
-        verbose_name_plural = 'Asignacion de curso'
-        db_table = 'mov_estudiante_asignacion_curso'
-    def __str__(self):
-        return self.usuario_ing
 
 class MovMatriculacionEstudiante(models.Model):
     id_matriculacion_estudiante = models.AutoField(primary_key=True)
     id_estudiante = models.ForeignKey(MantEstudiante, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_matriculacionestudiante_estudiante", db_column='id_estudiante')
-    id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_matriculacionestudiante_aniolectivo", db_column='id_anio_lectivo')
-    id_curso = models.ForeignKey(MovCabCurso, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_matriculacionestudiante_cabcurso", db_column='id_curso')
+    id_mov_anioelectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_matriculacionestudiante_aniolectivo_curso", db_column='id_mov_anioelectivo_curso')
+    estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, default=97 , related_name="fk_matriculacionestudiante_estado", db_column='estado')
+    fecha_ingreso = models.DateTimeField(blank=True, null=True)
+    usuario_ing = models.CharField(max_length=45, blank=True, null=True)
+    terminal_ing = models.CharField(max_length=45, blank=True, null=True)
+
     class Meta:
         verbose_name = 'Matriculacion estudiante'
         verbose_name_plural = 'Matriculacion estudiante'
