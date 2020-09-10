@@ -138,7 +138,7 @@ urlpatterns = [
     # ----------- Asignacion horas a docentes ---------------
     path('horas_docentes/', CreateHorasDocentes.as_view(), name='horas_docentes'),
     # ----------- Asignacion materias a docentes ------------------------------
-    path('horario_mod/', MovMateriProfesorList.as_view(), name='horario_mod'),
+    path('horario_mod/<int:pk>', MovMateriProfesorList.as_view(), name='horario_mod'),
     path('asignacion_materiasprof/', List_docente.as_view(), name='asignacion_materiasprof'),
 
     path('eliminar_profesor/<int:id>', eliminar_profesor, name='eliminar_profesor'),

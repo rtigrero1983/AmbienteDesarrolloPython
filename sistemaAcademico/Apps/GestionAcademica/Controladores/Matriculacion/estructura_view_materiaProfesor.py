@@ -4,7 +4,7 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_mov_anio_curso import MovMateriaProfesorForm
 
-class MovMateriProfesorList(CreateView):
+class MovMateriProfesorList(UpdateView):
     model = Mov_Materia_profesor
     template_name = 'sistemaAcademico/Matriculacion/HorarioMod/horarioMod.html'
     form_class = MovMateriaProfesorForm
@@ -17,3 +17,4 @@ class MovMateriProfesorList(CreateView):
         context["tipo_educacion"] = GenrGeneral.objects.filter(tipo='TEP')
         context["nivel"] = GenrGeneral.objects.filter(tipo='NIV')
         return context"""
+

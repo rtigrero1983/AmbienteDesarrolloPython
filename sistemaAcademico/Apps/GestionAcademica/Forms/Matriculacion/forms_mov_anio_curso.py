@@ -68,11 +68,13 @@ class MovMateriaProfesorForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
         self.fields['id_detalle_materia_curso'].queryset = MovDetalleMateriaCurso.objects.all().select_related('id_genr_materias')
+        self.fields['id_empleado'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_empleado'].queryset = MantEmpleado.objects.all()
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Field('checkboxselectmultiple'),
             Field('multiple'),
+
         )
 
 
