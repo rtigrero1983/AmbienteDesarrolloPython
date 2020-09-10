@@ -145,7 +145,7 @@ class MantEmpleado(models.Model):
        #                                     related_name="fk_empleado_detalle", db_column='id_detalle_empleado')
     id_anio_lectivo = models.ForeignKey(MantAnioLectivo, on_delete=models.CASCADE, blank=False, null=False,
                                         related_name="fk_empleado_anio_lectivo", db_column='id_anio_lectivo')
-    id_usuario = models.ForeignKey('ConfUsuario', on_delete=models.CASCADE, blank=False, null=False,
+    id_usuario = models.ForeignKey('ConfUsuario', on_delete=models.CASCADE, blank=False, null=True,
                                    related_name="fk_empleado_usuario", db_column='id_usuario')
     fecha_ingreso = models.DateTimeField(blank=False, null=True)
     usuario_ing = models.CharField(max_length=45, blank=False, null=False)

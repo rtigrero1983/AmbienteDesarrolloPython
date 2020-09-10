@@ -57,6 +57,11 @@ class NuevoEmpleado(CreateView):
             empleado.fecha_ingreso = timezone.now()
             empleado.usuario_ing = usuario.usuario
             empleado.terminal_ing = socket.gethostname()
+            id_anio_lectivo = MantAnioLectivo.objects.get(id_genr_estado=97)
+            id_empleado = MantPersona.objects.get(id_persona=empleado.id_persona)
+            empleado_model = MantEmpleado(id_persona=id_empleado ,id_anio_lectivo=id_anio_lectivo
+                                          ,terminal_ing=socket.gethostname(),usuario_ing=usuario.usuario,fecha_ingreso=timezone.now())
+            empleado_model.save()
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
