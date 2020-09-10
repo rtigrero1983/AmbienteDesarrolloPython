@@ -38,7 +38,6 @@ class MovCabRegistroNotas(models.Model):
     id_registro_notas = models.AutoField(primary_key=True)
     id_detalle_registro_notas = models.ForeignKey('MovDetalleRegistroNotas', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_detalleregistronotas", db_column='id_detalle_registro_notas')
     id_mov_anioelectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_aniolectivocurso", db_column='id_mov_anioelectivo_curso')
-    id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_materiaprofesor", db_column='id_materia_profesor')
     promedio_curso_1q = models.FloatField(blank=False, null=False)
     promedio_curso_2q = models.FloatField(blank=False, null=False)
     promedio_curso_general = models.FloatField(blank=False, null=False)
@@ -93,6 +92,7 @@ class MovDetalleRegistroNotas(models.Model):
     examen = models.FloatField(blank=False, null=False)
     promedio = models.FloatField(blank=False, null=False)
     total_promedio_general = models.FloatField(blank=False, null=False)
+    id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_detalleregistronotas_materiaprofesor", db_column='id_materia_profesor')
     id_general_quimestre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre", db_column='id_general_quimestre')
     class Meta:
         verbose_name = 'Detalle Registro de Curso'
