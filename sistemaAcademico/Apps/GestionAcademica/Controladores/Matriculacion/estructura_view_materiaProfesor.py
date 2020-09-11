@@ -8,7 +8,7 @@ class MovMateriProfesorList(UpdateView):
     model = Mov_Materia_profesor
     template_name = 'sistemaAcademico/Matriculacion/HorarioMod/horarioMod.html'
     form_class = MovMateriaProfesorForm
-    success_url = reverse_lazy('Academico:inicio')
+    success_url = reverse_lazy('Academico:asignacion_materiasprof')
     """def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["regimen"] = GenrGeneral.objects.filter(tipo='REG')

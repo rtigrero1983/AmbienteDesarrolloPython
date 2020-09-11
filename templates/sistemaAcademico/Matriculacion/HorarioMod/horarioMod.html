@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-md-9 order-md-1">
                     <form action="#" enctype="multipart/form-data" class="form-vertical" method="post">
-                        <div class="col-auto my-1">{{form|crispy}}</div>
+                        <div class="col-auto my-1" id="myDIV">{{form|crispy}}</div>
                         <div class="text-center">
                             <button class="btn btn-outline-primary" type="submit">Añadir</button>
                             <a class="btn btn-outline-danger" href="{% url 'Academico:asignacion_materiasprof' %}">Cancelar</a>
@@ -27,6 +27,7 @@
                 </div>
             </div>
         </div>
+
     {% endif %}
 </form>
 
@@ -36,9 +37,17 @@
 
 {% block extrajs %}
 
-<script>
-$('#openBtn').click(function(){
-        $('#myModal').modal({show:true})
-});
+
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_id_detalle_materia_curso").toggleClass("js-example-basic-multiple");
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Seleccione las materias que desea asignarle al profesor"
+    });
+  });
 </script>
+
+
 {% endblock extrajs %}
