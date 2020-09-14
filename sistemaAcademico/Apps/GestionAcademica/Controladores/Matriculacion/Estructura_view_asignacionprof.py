@@ -55,8 +55,9 @@ def eliminar_profesor(request, id):
     inactivo = GenrGeneral.objects.get(idgenr_general=98)
     if request.method == 'POST':
         profesor.id_empleado.id_persona.estado = inactivo
-        profesor.save()
+        profesor.id_empleado.id_persona.save()
         print('cheche', profesor.id_empleado.id_persona.estado)
+
         return redirect('Academico:asignacion_materiasprof')
     return render(request, 'sistemaAcademico/Matriculacion/Asignacion_Mprofesor/eliminarProfesor.html', {'asignacion_materiasprof': profesor})
 

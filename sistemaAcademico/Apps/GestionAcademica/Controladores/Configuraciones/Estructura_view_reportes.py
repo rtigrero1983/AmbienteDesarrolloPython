@@ -448,9 +448,7 @@ def reporte_horarioEst(request, *args, **kwargs):
                 campoChk2 = request.POST.get('check')
                 buscador1 = request.POST.get('buscador')
                 combo = int(request.POST.get('combo'))
-                if (combo == 1):
-                    horario = Mov_Horario_materia.objects.all().select_related('id_materia_profesor', 'id_genr_dia')
-                elif (combo == 2):
+                if (combo == 2):
                     horario = Mov_Horario_materia.objects.filter(id_materia_profesor__id_detalle_materia_curso__id_mov_anio_lectivo_curso__id_curso__nombre = buscador1 ).select_related('id_materia_profesor', 'id_genr_dia') 
                     print(horario)
                 elif (combo == 3):
@@ -498,9 +496,7 @@ def reporte_horarioprofe(request, *args, **kwargs):
                 campoChk2 = request.POST.get('check')
                 buscador1 = request.POST.get('buscador')
                 combo = int(request.POST.get('combo'))
-                if (combo == 1):
-                    horario = Mov_Horario_materia.objects.all()
-                elif (combo == 2):
+                if (combo == 2):
                     horario = Mov_Horario_materia.objects.filter(id_materia_profesor__id_empleado__id_persona__nombres=buscador1) 
 
                 elif (combo == 3):

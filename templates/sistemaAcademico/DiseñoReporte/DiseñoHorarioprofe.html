@@ -87,10 +87,11 @@
         
         </div>
         </div>
+        <pdf: next page/>
         {%if horario_profesor%}
             <table id="table" style="width: 100%;">
                 <thead>
-                    <tr style="border: 0.5px solid black; height: 50px; font-size: 13px;">
+                    <tr style="border: 0.5px solid black; height: 85px; font-size: 13px;">
                         <td><strong><center>N.-</center></strong></td>
                         <td><strong><center>Lunes</center></strong></td>
                         <td><strong><center>Martes</center></strong></td>
@@ -101,39 +102,68 @@
                     </tr>    
                 <tbody class="bg bg-green">
                     {%for datos in horario_profesor%}
-                        <tr style="border: 0.5px solid black; height: 100px; font-size: 13px;">
+                        <tr style="border: 0.5px solid black; height: 89px; font-size: 13px;">
                             <td><center>{{ forloop.counter }}</center></td>
                             <td><center>
                                 {%if datos.id_genr_dia.nombre == 'Lunes'%}
                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
                                             {{che.id_genr_materias.nombre}}
                                         {%endfor%}
-                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br>
+                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                {{che.id_mov_anio_lectivo_curso.id_curso.nombre}}
+                                {%endfor%}
                                 {%endif%}
-                            <td><center> {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                             </center></td>
+                                
+
+                            <td><center>{%if datos.id_genr_dia.nombre == 'Martes'%}
+                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
                                             {{che.id_genr_materias.nombre}}
                                         {%endfor%}
-                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
-                            <td><center> {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br>
+                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                {{che.id_mov_anio_lectivo_curso.id_curso.nombre}}
+                                {%endfor%}
+                                {%endif%}
+                             </center></td>
+
+                            <td><center>{%if datos.id_genr_dia.nombre == 'Miercoles'%} 
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
                                             {{che.id_genr_materias.nombre}}
                                         {%endfor%}
-                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
-                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> 
+                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                {{che.id_mov_anio_lectivo_curso.id_curso.nombre}}
+                                {%endfor%}
+                                {%endif%}
+                             </center></td>
+
+                            <td><center>{%if datos.id_genr_dia.nombre == 'Jueves'%}
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
                                             {{che.id_genr_materias.nombre}}
                                         {%endfor%}
                             
-                            <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> {{datos.id_materia_profesor.id_detalle_materia_curso.id_mov_anio_lectivo_curso.id_curso.nombre}}</center></td>
-                            <td><center>{%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                            <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> 
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
+                                {{che.id_mov_anio_lectivo_curso.id_curso.nombre}}
+                                {%endfor%}
+                                {%endif%}
+                            </center></td>
+
+                            <td><center>{%if datos.id_genr_dia.nombre == 'Viernes'%}
+                            {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
                                             {{che.id_genr_materias.nombre}}
                                         {%endfor%}
                             <br> {{datos.hora_inicio}} &nbsp; {{datos.hora_fin}} <br> 
                             {%for che in datos.id_materia_profesor.id_detalle_materia_curso.all%}
-                                {{che.id_curso.nombre}}
+                                {{che.id_mov_anio_lectivo_curso.id_curso.nombre}}
                             {%endfor%}
-                            
+                            {%endif%}
                             </center></td>
                         </tr>
                     {%endfor%}
+                    
 
                 </tbody>    
                 </thead>   
