@@ -13,12 +13,28 @@ from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_mov_horario_curso import *
 
 
+class HorarioCurso (ListView):
+    model= Mov_Horario_materia
+    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/horario_curso.html'
+    context_object_name = 'horario'
+
+    def get_context_data(self, **kwargs):
+        context = super(HorarioCurso, self).get_context_data(**kwargs)
+        context['jor'] = GenrGeneral.objects.filter(tipo='JOR')
+        context['tre'] = GenrGeneral.objects.filter(tipo='TRE')
+        context['mod'] = GenrGeneral.objects.filter(tipo='MOD')
+        context['ted'] = GenrGeneral.objects.filter(tipo='TED')
+        context['niv'] = GenrGeneral.objects.filter(tipo='NIV')
+        context['tic'] = GenrGeneral.objects.filter(tipo='TIC')
+        context['lec'] = MantAnioLectivo.objects.all()
+
+        return context
 
 class CrearHorarioCurso(CreateView):
     model = Mov_Horario_materia
     form_class = HorarioCursoForm
-    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/crear_horario_curso.html'
-    success_url = reverse_lazy('Academico:horariocurso')
+    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/crear_HorarioCurso.html'
+    success_url = reverse_lazy('Academico:crear_horariocurso')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object

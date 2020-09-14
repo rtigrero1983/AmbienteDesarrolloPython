@@ -144,9 +144,8 @@ urlpatterns = [
     path('profesoresAsignados', List_docente_asignado.as_view(), name= 'profesoresAsignados'),
     path('profesoresSinAsignar', List_docente_sin_asignar.as_view(), name= 'profesoresSinAsignar'),
 
-
-
     # ----------- Ingreso horario por cursos ---------------
+    path('horario_curso/', HorarioCurso.as_view(), name='horario_curso'),
     path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
     #------------ CURSOS -------------------------------
     path('cursos/', ListaCurso.as_view(), name='cursos'),

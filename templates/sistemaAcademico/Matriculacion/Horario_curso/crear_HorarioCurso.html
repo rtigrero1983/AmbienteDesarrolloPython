@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% load crispy_forms_tags %}
+
+{% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculación | Ingreso Horario por Curso </h4>
+                </header>
+
+                <div class="card-body ">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                        {{ form.id_materia_profesor|as_crispy_field }}
+                        {{ form.id_genr_dia|as_crispy_field }}
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div id="div_id_hora_inicio" class="form-group"> <label for="id_hora_inicio" class=" requiredField">Hora De Inicio<span class="asteriskField">*</span> </label>
+                                    <div class=""> <input type="time" name="hora_inicio" class="timeinput form-control" required="" id="id_hora_inicio"> </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="div_id_hora_fin" class="form-group"> <label for="id_hora_fin" class=" requiredField">Hora De Fin<span class="asteriskField">*</span> </label>
+                                    <div class=""> <input type="time" name="hora_fin" class="timeinput form-control" required="" id="id_hora_fin"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div class="text-center">
+                            <a class="btn btn-outline-danger" href="{% url 'Academico:crear_horariocurso' %}">Cancelar</a>
+                            <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+    {% endif %}
+
+{% endblock contenido_principal %} {% block footer %}
+{% endblock %}
+
+{% block extrajs %}
+{% endblock extrajs %}
+
+

@@ -16,11 +16,20 @@ class HorarioCursoForm(ModelForm):
         model = Mov_Horario_materia
         fields = [
             "hora_inicio",
-            "hora_fin"
+            "hora_fin",
+            "id_genr_dia",
+            "id_materia_profesor",
+
         ]
-        label = {
+        labels = {
             "hora_inicio": "Hora De Inicio",
             "hora_fin": "Hora De Fin",
+            "id_genr_dia":"Dia",
+            "id_materia_profesor": "Materia",
         }
 
+    ''' filtar por dia 
+    def __init__(self, *args, **kwargs):
+        super(HorarioCursoForm, self).__init__(*args, **kwargs)
+        self.fields['id_genr_dia'].queryset =GenrGeneral.objects.filter(tipo='JOR')'''
 

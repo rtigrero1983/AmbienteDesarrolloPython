@@ -1,0 +1,260 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% load crispy_forms_tags %}
+
+{% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculación | Ingreso Horario por Curso </h4>
+                </header>
+
+                <div class="card-body ">
+                    <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                            <div class="text-center">
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5>Jornada</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in jor  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5 >Regimen</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in tre  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5>Año Electivo</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_anio_lectivo }}">
+                                            {% for horario in lec  %}
+                                                <option value={{ horario.id_anio_lectivo}}>{{horario.anio}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h5 >Modalidad</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in mod  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5 >Tipo De Educacion </h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in ted  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h5 >Niveles</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in niv  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-4">
+                                        <h5 >Curso</h5>
+                                        <select name="id_materia_profesor" class="select form-control" required="" id="{{ horario.id_genr_general }}">
+                                            {% for horario in tic  %}
+                                                <option value={{ horario.id_genr_general}}>{{horario.nombre}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br><br><br><br>
+                                <center><table border="1" class="text-center" >
+                                    <tr >
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">HORA</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">LUNES</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">MARTES</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">MIERCOLES</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">JUEVES</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">VIERNES</th>
+                                        <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">SABADO</th>
+                                    </tr>
+                                    <tr >
+                                       <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                    <tr >
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                        <td style="padding: 20px"></td>
+                                    </tr>
+                                </table></center>
+                                <!--<div class="row justify-content-center">
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white"><h4>Hora</h4></div>
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white "><h4><strong>Lunes</strong></h4></div>
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white"><h4><strong>Martes</strong></h4></div>
+                                        <div class="col-md-auto" style="width: 8em; background-color: #2e59d9; color:white"><h4><strong>Miercoles</strong></h4></div>
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white"><h4><strong>Jueves</strong></h4></div>
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white"><h4><strong>Viernes</strong></h4></div>
+                                        <div class="col-md-auto" style="width: 8rem; background-color: #2e59d9; color:white"><h4><strong>Sabado</strong></h4></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto"  style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                        <div class="col-md-auto" style="width: 8rem"></div>
+                                    </div>
+                                </div>-->
+                            </div>
+                            <br><br>
+                            <div class="text-center">
+                                <a class="btn btn-outline-danger" href="{% url 'Academico:horario_curso' %}">Cancelar</a>
+                                <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                            </div>
+                    </form>
+                </div>
+    {% endif %}
+
+{% endblock contenido_principal %} {% block footer %}
+{% endblock %}
+
+{% block extrajs %}
+    <style>
+    .col-md-auto
+		{
+			border: 1px solid #ddd;
+			padding: 10px;
+		}
+    </style>
+
+{% endblock extrajs %}
+
+
