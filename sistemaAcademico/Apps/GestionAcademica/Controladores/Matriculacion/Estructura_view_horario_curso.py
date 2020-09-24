@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -18,6 +18,9 @@ class HorarioCurso (ListView):
     template_name = 'sistemaAcademico/Matriculacion/Horario_curso/horario_curso.html'
     context_object_name = 'horario'
 
+
+
+
     def get_context_data(self, **kwargs):
         context = super(HorarioCurso, self).get_context_data(**kwargs)
         context['jor'] = GenrGeneral.objects.filter(tipo='JOR')
@@ -25,10 +28,36 @@ class HorarioCurso (ListView):
         context['mod'] = GenrGeneral.objects.filter(tipo='MOD')
         context['ted'] = GenrGeneral.objects.filter(tipo='TED')
         context['niv'] = GenrGeneral.objects.filter(tipo='NIV')
-        context['tic'] = GenrGeneral.objects.filter(tipo='TIC')
+        context['tic'] = Mov_Aniolectivo_curso.objects.all()
         context['lec'] = MantAnioLectivo.objects.all()
+        
 
         return context
+
+
+
+    def post(self, request, *args, **kwargs):
+
+        id_anio_lectivo_curso_paralelo = request.POST['curso']
+        a =MovDetalleMateriaCurso.objects.filter(id_mov_anio_lectivo_curso=id_anio_lectivo_curso_paralelo).values()
+
+        context={}
+        for i in a:
+            id_materia_curso= i['id_detalle_materia_curso']
+            materia_profesor = Mov_Materia_profesor.objects.filter(id_detalle_materia_curso=id_materia_curso)
+            for e in materia_profesor:
+                id_materia_profesor= e['id_materia_profesor']
+                b = Mov_Horario_materia.objects.filter(id_materia_profesor=id_materia_profesor)
+                context.__setitem__(b)
+
+        context['bool']=True
+
+
+
+        return render(request, self.template_name, context)
+
+
+
 
 class CrearHorarioCurso(CreateView):
     model = Mov_Horario_materia

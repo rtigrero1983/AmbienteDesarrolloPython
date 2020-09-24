@@ -130,6 +130,9 @@ class Mov_Aniolectivo_curso(models.Model):
             models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso'], name='Unicos')
         ]
 
+    def __str__(self):
+        return  self.id_curso.nombre +" / "+self.id_genr_paralelo.nombre+" "+self.id_curso.id_genr_formacion.nombre
+
 class Mov_Materia_profesor(models.Model):
     id_materia_profesor = models.AutoField(primary_key=True)
     id_empleado = models.ForeignKey('MantEmpleado', on_delete=models.CASCADE, blank=False, null=False,related_name='fk_materiaprof_empleado',db_column='id_empleado')
