@@ -13,6 +13,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignaci
 from .Controladores.Matriculacion.Estructura_view_curso import ListaCurso, CreateCurso, UpdateCurso
 from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_horario_curso import *
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Asignacion_materia_curso import *
 
 from .Controladores.Matriculacion.estructura_view_materiaProfesor import *
 from .Controladores.Matriculacion.Estructura_view_asignacionprof import *
@@ -126,11 +127,18 @@ urlpatterns = [
     path('Editar_Aniolectivo/<int:pk>', UpdateAniolectivo.as_view(), name='editarAniolectivo'),
     path('Crear_Aniolectivo/', CreateAniolectivo.as_view(), name='crearAniolectivo'),
     path('Eliminar_Aniolectivo/<int:id>', eliminar_Aniolectivo, name='eliminarAniolectivo'),
-    # ------Matriculacion - Asignacion de curso a año electivo-----------
+    # ------Matriculacion - Asignacion de curso - año electivo-----------
     path('asignacion_curso/', ListaAnioElectivoCurso.as_view(), name='asignacion_curso'),
     path('crear_asigancion_curso/', Create_Mov_Aniolectivo_curso.as_view(), name='crear_asigancion_curso'),
     path('editar_esignacion_curso/<int:pk>', Update_Mov_Aniolectivo_curso.as_view(), name='editar_esignacion_curso'),
     path('eliminar_asig_curso/<int:id>', eliminar_Asignacion_Curso, name='eliminar_asig_curso'),
+
+    # --------Matriculacion - Asignar - MAteria - Curso------------------
+    path('asignacion_materia_curso/', Listar_materia_curso.as_view(), name='asignacion_materia_curso'),
+    path('crear_materia_curso/', Crear_materia_curso.as_view(), name='crear_materia_curso'),
+    path('editar_materia_curso/<int:pk>', Editar_materia_curso.as_view(), name='editar_materia_curso'),
+    path('eliminar_materia_curso/<int:id>', eliminar_materia_curso, name='eliminar_materia_curso'),
+
     # ------Matriculacion - Tabla general-----------
     path('general/', General.as_view(), name='general'),
     path('crear_general', CreateGeneral.as_view(), name='crear_general'),
