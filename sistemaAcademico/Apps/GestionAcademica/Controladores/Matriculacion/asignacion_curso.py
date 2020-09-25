@@ -26,10 +26,10 @@ class ListaAnioElectivoCurso(ListView):
 def eliminar_Asignacion_Curso(request, id):
     dic={  }
     anio = Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id)
-    lis_anio = Mov_Aniolectivo_curso.objects.filter(id_mov_anioelectivo_curso=id)
+    list_p = Mov_Aniolectivo_curso.objects.filter(id_mov_anioelectivo_curso=id)
     inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    dic['anio']=anio
-    dic['lis_anio']=lis_anio
+    dic['list_p']=list_p
+    dic['anio'] = anio
     if request.method == 'POST':
         anio.id_estado_gnral = inactivo
         anio.save()
