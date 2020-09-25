@@ -13,7 +13,13 @@
                     Curso: <label>{{ anio.id_curso }}</label><br>
                     Paralelo: <label>
 
-                    {{ anio.id_genr_paralelo}} </label><br>
+                    {% for i in list_p %}
+                        {% for a in i.id_genr_paralelo.all %}
+                            {{ a }},
+                    {% endfor %}
+                    {% endfor %}
+
+                </label><br>
                     <div class="text-center">
                         <br/>
                         <button type="submit" class="btn btn-outline-danger btn-user">Eliminar</button>
