@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block contenido_principal %}
+    <header class="cuadro_titulo text-center bg-gradient-primary">
+        <h4 class="title text-light"> Matriculación | Asignación | Materia | Curso</h4>
+    </header>
+    <br/>
+
+    <a id="registrar" href="{% url 'Academico:crear_materia_curso' %}" class="text-light btn bg-gradient-primary">
+        Agregar
+    </a>
+    <br/><br/>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Asignaciones disponibles en el sistema</h6>
+        </div>
+
+        <div class="card-body ">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0"
+                       data-sort='false'
+                       data-page-length='5'>
+                    <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                        <th>Curso</th>
+                        <th>Materia</th>
+                        <th>Hora</th>
+                        <th>Acciones</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for a in mat %}
+                        <tbody>
+                        <tr class="text-center" style="border-width:3px;">
+                            <td>{{ a.id_mov_anio_lectivo_curso }}</td>
+                            <td>{% for i in a.id_genr_materias.all %}<label style="font-family: serif" for="">{{ i }},</label>{% endfor %}</td>
+                        <td>{{a.total_horas }}</td>
+                            <td>
+                                <div class="text-center">
+                                    <a onclick="modal('{% url 'Academico:editar_materia_curso' a.id_detalle_materia_curso %}')"
+                                       class="btn text-light bg-gradient-primary" title="Editar"><i
+                                            class="fas fa-info-circle"></i></a>
+                                    <a onclick="modal('{% url 'Academico:eliminar_materia_curso' a.id_detalle_materia_curso %}')"
+                                       class="btn text-light bg-gradient-danger" title="Eliminar"><i
+                                            class="fas fa-exclamation-triangle"></i></a>
+                                </div>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+{% endblock contenido_principal %}
+{% block extrajs %}
+    <div class="modal fade" id="mostrar_modal" role="dialog">
+    </div>
+{% endblock extrajs %}

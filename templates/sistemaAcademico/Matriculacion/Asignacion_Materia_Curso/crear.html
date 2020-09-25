@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Matriculación | Asignación | Materia | Curso </h4>
+                </header>
+        <div class="card-body card-block " >
+            <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
+               <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+            <div class="form-row justify-content-center align-items-center minh-100">
+              <div class=" col-0 col-md-8 mb-0" >
+                {{ form.id_mov_anio_lectivo_curso| as_crispy_field  }}
+              </div>
+
+              <div class=" col-0 col-md-8 mb-0">
+                {{ form.id_genr_materias | as_crispy_field }}
+              </div>
+                <div class=" col-0 col-md-8 mb-0">
+                {{ form.total_horas | as_crispy_field }}
+              </div>
+            </div>
+          </div>
+        </div>
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:asignacion_materia_curso' %}">Cancelar</a>
+            </div>
+  			</form>
+        </div>
+</form>
+    {% endif %}
+{% endblock contenido_principal %}
+{% block extrajs %}
+<script type="text/javascript">
+  var $ = jQuery.noConflict();
+  $(document).ready(function() {
+    $("#id_menu").toggleClass("js-example-basic-multiple");
+    $("#id_materia").toggleClass("js-example-basic-multiple");
+    $(".js-example-basic-multiple").select2({
+      width: "resolve", // need to override the changed default
+      placeholder: "Selecciona una opcion "
+    });
+  });
+</script>
+{% endblock extrajs %}

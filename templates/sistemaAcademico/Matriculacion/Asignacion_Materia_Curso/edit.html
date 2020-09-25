@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+<div class="modal-dialog modal-lg-8" role="document">
+    <div class="modal-content">
+        <form class="formulario" action="{% url 'Academico:editar_materia_curso' mat.id_detalle_materia_curso %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <h4 class="titulo">Matriculación | Asignación | Materia | Curso </h4>
+                <br>
+                    {{ form.id_mov_anio_lectivo_curso| as_crispy_field  }}
+                    {{ form.id_genr_materias | as_crispy_field }}
+                    {{ form.total_horas | as_crispy_field }}
+
+                <center>
+                    <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                </center>
+            </div>
+        </form>
+    </div>
+</div>

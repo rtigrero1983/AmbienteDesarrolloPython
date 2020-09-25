@@ -1,0 +1,32 @@
+<div class="modal-dialog modal-mg-8" role="document">
+    <div class="modal-content ">
+        <form method="POST" action="{% url 'Academico:eliminar_materia_curso' mat.id_detalle_materia_curso %}"> {% csrf_token %}
+
+            <div class="modal-body ">
+
+                <header class="cuadro_titulo bg-danger ">
+                    <h4 class="titulo">Matriculación | Asignación | Materia | Curso</h4>
+                </header>
+                <div class="contenido text-dark">
+                    Esta seguro que deseas eliminar esta Asignación?<br>
+                    Materias: <label>
+                    {% for i in materia %}
+                        {% for a in i.id_genr_materias.all %}
+                    {{ a }}
+                    {% endfor %}
+                    {% endfor %}
+
+                </label><br>
+                    Curso: <label>{{ mat.id_mov_anio_lectivo_curso }}</label><br>
+                    Hora: <label>{{ mat.total_horas }}</label><br>
+                    <div class="text-center">
+                        <br/>
+                        <button type="submit" class="btn btn-outline-danger btn-user">Eliminar</button>
+                        <button class="btn btn-outline-primary btn-user" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
