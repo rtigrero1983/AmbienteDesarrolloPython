@@ -85,8 +85,8 @@ class MovDetalleMateriaCurso(models.Model):
     id_detalle_materia_curso = models.AutoField(primary_key=True)
     id_mov_anio_lectivo_curso = models.ForeignKey(Mov_Aniolectivo_curso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_mov_aniolectivo_curso')
     total_horas = models.IntegerField(null=False, blank=False, default=1)
-    estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado')
-    id_genr_materias = models.ManyToManyField(GenrGeneral, blank=False, null=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias')
+    estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado' ,default='97')
+    id_genr_materias = models.ManyToManyField(GenrGeneral, blank=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias')
     class Meta:
         verbose_name = 'Detalle Materia Curso'
         verbose_name_plural = 'Detalle Materia Curso'
