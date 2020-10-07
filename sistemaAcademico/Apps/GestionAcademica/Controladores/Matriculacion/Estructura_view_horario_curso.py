@@ -30,7 +30,6 @@ class HorarioCurso (ListView):
         context['niv'] = GenrGeneral.objects.filter(tipo='NIV')
         context['tic'] = Mov_Aniolectivo_curso.objects.all()
         context['lec'] = MantAnioLectivo.objects.all()
-        
 
         return context
 

@@ -40,7 +40,7 @@
                         <tbody>
                         <tr class="text-center" style="border-width:3px;">
                             <td>{{ a.id_mov_anio_lectivo_curso }}</td>
-                            <td>{% for i in a.id_genr_materias.all %}<label style="font-family: serif" for="">{{ i }},</label>{% endfor %}</td>
+                            <td>{{ a.id_genr_materias }}</td>
                         <td>{{a.total_horas }}</td>
                             <td>
                                 <div class="text-center">

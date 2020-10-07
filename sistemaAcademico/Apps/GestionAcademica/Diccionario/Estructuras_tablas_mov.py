@@ -86,14 +86,15 @@ class MovDetalleMateriaCurso(models.Model):
     id_mov_anio_lectivo_curso = models.ForeignKey(Mov_Aniolectivo_curso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_mov_aniolectivo_curso')
     total_horas = models.IntegerField(null=False, blank=False, default=1)
     estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado' ,default='97')
-    id_genr_materias = models.ManyToManyField(GenrGeneral, blank=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias')
+    id_genr_materias = models.ForeignKey('GenrGeneral', blank=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias', on_delete=models.CASCADE)
     class Meta:
         verbose_name = 'Detalle Materia Curso'
         verbose_name_plural = 'Detalle Materia Curso'
         db_table = 'mov_detalle_materia_curso'
 
     def __str__(self):
-        return self.id_genr_materias.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_genr_paralelo.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
+        return self.id_genr_materias.nombre+" "+""+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
+
 
 
 class MovDetalleRegistroNotas(models.Model):

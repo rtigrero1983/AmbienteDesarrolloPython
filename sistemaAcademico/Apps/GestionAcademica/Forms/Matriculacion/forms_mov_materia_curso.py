@@ -18,7 +18,6 @@ class Mov_Materia_Curso_forms(forms.ModelForm):
         }
         widgets={
             "id_mov_anio_lectivo_curso":forms.Select(),
-            "id_genr_materias": forms.SelectMultiple(),
             'total_horas':forms.TextInput()
         }
     def __init__(self, *args, **kwargs):

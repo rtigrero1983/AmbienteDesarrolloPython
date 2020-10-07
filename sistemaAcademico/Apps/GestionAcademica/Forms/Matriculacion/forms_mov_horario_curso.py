@@ -32,4 +32,3 @@ class HorarioCursoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(HorarioCursoForm, self).__init__(*args, **kwargs)
         self.fields['id_genr_dia'].queryset =GenrGeneral.objects.filter(tipo='JOR')'''
-
