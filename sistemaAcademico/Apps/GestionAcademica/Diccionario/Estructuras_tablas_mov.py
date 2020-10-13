@@ -86,7 +86,7 @@ class MovDetalleMateriaCurso(models.Model):
     id_mov_anio_lectivo_curso = models.ForeignKey(Mov_Aniolectivo_curso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_mov_aniolectivo_curso')
     total_horas = models.IntegerField(null=False, blank=False, default=1)
     estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detallemateriacurso_estado",db_column='estado' ,default='97')
-    id_genr_materias = models.ForeignKey('GenrGeneral', blank=False, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias', on_delete=models.CASCADE)
+    id_genr_materias = models.ForeignKey('GenrGeneral', blank=False,default=24, related_name="fk_detallemateriacurso_materias",db_column='id_genr_materias', on_delete=models.CASCADE)
     class Meta:
         verbose_name = 'Detalle Materia Curso'
         verbose_name_plural = 'Detalle Materia Curso'
@@ -100,14 +100,17 @@ class MovDetalleMateriaCurso(models.Model):
 class MovDetalleRegistroNotas(models.Model):
     id_detalle_registro_notas = models.AutoField(primary_key=True)
     id_matriculacion_estudiante = models.ForeignKey('MovMatriculacionEstudiante', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_detalleregistronotas_matriestudiante", db_column='id_matriculacion_estudiante')
-    primer_parcial = models.FloatField(blank=False, null=False)
-    segundo_parcial = models.FloatField(blank=False, null=False)
-    tercer_parcial = models.FloatField(blank=False, null=False)
-    examen = models.FloatField(blank=False, null=False)
-    promedio = models.FloatField(blank=False, null=False)
-    total_promedio_general = models.FloatField(blank=False, null=False)
+    primer_parcial = models.FloatField(blank=True, null=True)
+    segundo_parcial = models.FloatField(blank=True, null=True)
+    tercer_parcial = models.FloatField(blank=True, null=True)
+    promedio_parciales = models.FloatField(blank=True, null=True)
+    examen = models.FloatField(blank=True, null=True)
+    examen_supletorio = models.FloatField(blank=True, null=True)
+    examen_gracia = models.FloatField(blank=True, null=True)
+    disciplina = models.CharField(max_length=1,blank=True, null=True)
+    total_promedio_general = models.FloatField(blank=True, null=True)
     id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_detalleregistronotas_materiaprofesor", db_column='id_materia_profesor')
-    id_general_quimestre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre", db_column='id_general_quimestre')
+    id_general_quimestre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="fk_detalleregistronotas_quimestre", db_column='id_general_quimestre')
     class Meta:
         verbose_name = 'Detalle Registro de Curso'
         verbose_name_plural = 'Detalle Registro de Curso'
