@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_matriculacion import *
@@ -8,7 +9,7 @@ class List_AnioLectivo (ListView):
     model = MantAnioLectivo
     template_name = 'sistemaAcademico/Matriculacion/Aniolectivo/Aniolectivo.html'
     context_object_name = 'anio_lectivo'
-    queryset = MantAnioLectivo.objects.filter(id_genr_estado=97)
+    queryset = MantAnioLectivo.objects.filter(Q(id_genr_estado=97) | Q(id_genr_estado=99) |Q(id_genr_estado=1784))
 
 class UpdateAniolectivo (UpdateView):
     model = MantAnioLectivo

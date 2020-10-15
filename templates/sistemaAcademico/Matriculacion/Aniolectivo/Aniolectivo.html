@@ -11,7 +11,7 @@
 {% endblock footer %}
 {% block contenido_principal %}
 
-<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Año Lectivo </h4></header>
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Año Lectivos </h4></header>
 
 <br/>
      <a href="{% url 'Academico:crearAniolectivo' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar </a>
@@ -31,6 +31,7 @@
                       <th>Ciclo</th>
                         <th>Inicio del ciclo</th>
                         <th>Fin del ciclo</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                   </thead>
@@ -42,6 +43,7 @@
                       <td>{{Aniolectivo.ciclo}}</td>
                         <td>{{Aniolectivo.fecha_incio_ciclo}}</td>
                         <td>{{Aniolectivo.fecha_fin_ciclo}}</td>
+                        <td>{{Aniolectivo.id_genr_estado}}</td>
                       <td align="center">
                           <a href="{% url 'Academico:editarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn bg-gradient-primary text-light" title="Editar"><i class="fas fa-info-circle"></i></a>
                           <a href="{% url 'Academico:eliminarAniolectivo' Aniolectivo.id_anio_lectivo %}" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>

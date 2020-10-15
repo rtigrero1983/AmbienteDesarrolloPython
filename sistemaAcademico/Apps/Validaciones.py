@@ -3,6 +3,7 @@ from rest_framework.exceptions import *
 from django.core.exceptions import ValidationError
 
 
+
 def validate_codigo(value):
     if value == "":
         raise ValidationError(
@@ -391,3 +392,12 @@ def validar_ced_ruc(nro,tipo):
     return val == d_ver
 
 
+def anio_lectivos(value):
+    from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantAnioLectivo
+    queryset=MantAnioLectivo.objects.filter(id_genr_estado=97)
+
+    if len(queryset) >= 1 and value == 97:
+        raise ValidationError('No se puede ingresar otro año lectivo mientras otro aun este activo')
+        return queryset
+    else:
+        return queryset
