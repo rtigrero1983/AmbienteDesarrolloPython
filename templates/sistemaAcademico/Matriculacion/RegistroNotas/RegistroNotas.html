@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Registro Notas </h4></header>
+
+<br/>
+     <a href="{% url 'Academico:crear_registro_notas' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar </a>
+<br/>
+<br/>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registros de Notas</h6>
+    </div>
+<div class="card-body">
+  <div class="table-responsive">
+      <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+          <thead class="bg-gradient-primary">
+          <tr class="text-light text-center">
+              <th>Estudiante</th>
+              <th>Primer parcial</th>
+              <th>Segundo parcial</th>
+              <th>Tercer parcial</th>
+              <th>Examen</th>
+              <th>Quimestre</th>
+              <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for notas in object_list %}
+          <tr class="text-dark">
+              <td>{{notas.id_matriculacion_estudiante}}</td>
+              <td>{{notas.primer_parcial}}</td>
+              <td>{{notas.segundo_parcial}}</td>
+              <td>{{notas.tercer_parcial}}</td>
+              <td>{{notas.examen}}</td>
+              <td>{{notas.id_general_quimestre}}</td>
+              <td align="center">
+                  <a href="{% url 'Academico:consultar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-primary text-light" title="Consultar"><i class="fas fa-info-circle"></i></a>
+                  <a href="{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-success text-light" title="Editar"><i class="fas fa fa-male"></i></a>
+                  <a href="{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
+              </td>
+          </tr>
+          {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="modal_crear" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_editar" role="dialog">
+
+
+</div>
+
+<div class="modal fade" id="modal_eliminar" role="dialog">
+</div>
+{% endblock contenido_principal %}
+

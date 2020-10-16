@@ -20,7 +20,7 @@ from .Controladores.Matriculacion.Estructura_view_asignacionprof import *
 
 from .Controladores.Matriculacion.estructura_view_genr_general import *
 from .Controladores.Reportes_especiales.Estructura_view_reportes import reportes
-
+from .Controladores.Matriculacion.Estructura_view_registronotas import *
 from .views import *
 from .Controladores.Configuraciones.Estructura_view_acciones import *
 from .Controladores.Mantenimiento.Estructura_view_mantenimientos import *
@@ -158,5 +158,11 @@ urlpatterns = [
     #------------ CURSOS -------------------------------
     path('cursos/', ListaCurso.as_view(), name='cursos'),
     path('create_curso/', CreateCurso.as_view(), name='create_curso'),
-    path('edit_curso/<int:pk>', UpdateCurso.as_view(), name='edit_curso')
+    path('edit_curso/<int:pk>', UpdateCurso.as_view(), name='edit_curso'),
+    # ---------registro notas -----
+    path('registronotas/', List_Notas.as_view(), name='registro_notas'),
+    path('crear_registronotas/', Create_notas.as_view(), name='crear_registro_notas'),
+    path('actualizar_registronotas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
+    path('consultar_registronotas/<int:pk>', Consultar_notas.as_view(), name='consultar_registro_notas'),
+    path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas')
 ]
