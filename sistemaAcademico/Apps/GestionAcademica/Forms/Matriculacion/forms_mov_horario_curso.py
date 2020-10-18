@@ -28,7 +28,6 @@ class HorarioCursoForm(ModelForm):
             "id_materia_profesor": "Materia",
         }
 
-    ''' filtar por dia 
     def __init__(self, *args, **kwargs):
         super(HorarioCursoForm, self).__init__(*args, **kwargs)
-        self.fields['id_genr_dia'].queryset =GenrGeneral.objects.filter(tipo='JOR')'''
+        self.fields['id_genr_dia'].queryset =GenrGeneral.objects.filter(tipo='DLS')
