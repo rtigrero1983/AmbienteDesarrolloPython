@@ -11,7 +11,7 @@
 {% endblock footer %}
 {% block contenido_principal %}
 
-<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Registro Notas </h4></header>
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Movimiento | Registro Notas </h4></header>
 
 <br/>
      <a href="{% url 'Academico:crear_registro_notas' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar </a>
@@ -46,8 +46,7 @@
               <td>{{notas.examen}}</td>
               <td>{{notas.id_general_quimestre}}</td>
               <td align="center">
-                  <a href="{% url 'Academico:consultar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-primary text-light" title="Consultar"><i class="fas fa-info-circle"></i></a>
-                  <a href="{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-success text-light" title="Editar"><i class="fas fa fa-male"></i></a>
+                  <a href="{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-primary text-light" title="Editar"><i class="fas fa-info-circle"></i></a>
                   <a href="{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}" class="btn bg-gradient-danger text-light" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
               </td>
           </tr>

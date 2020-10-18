@@ -33,11 +33,19 @@ class Registro_notas_form(forms.ModelForm):
             "id_materia_profesor": "Materia profesor",
             "id_general_quimestre": "Quimestre",
         }
-        """widgets = {
-            "id_anio_electivo": forms.Select(),
-            "id_curso": forms.Select(),
-        }"""
+        widgets = {
+            "primer_parcial": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del primer parcial"}),
+            "segundo_parcial": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del segundo parcial"}),
+            "tercer_parcial": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del tercer parcial"}),
+            "examen": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen"}),
+            "examen_supletorio": forms.NumberInput( attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen de supletorio"}),
+            "examen_gracia": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen de gracia"}),
+            "disciplina": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la disciplina"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(Registro_notas_form, self).__init__(*args, **kwargs)
         self.fields['id_general_quimestre'].queryset = GenrGeneral.objects.filter(tipo='QUI')
+        self.fields['total_promedio_general'].widget.attrs['disabled'] = 'disabled'
+        self.fields['promedio_parciales'].widget.attrs['disabled'] = 'disabled'

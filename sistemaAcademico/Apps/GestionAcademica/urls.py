@@ -163,6 +163,5 @@ urlpatterns = [
     path('registronotas/', List_Notas.as_view(), name='registro_notas'),
     path('crear_registronotas/', Create_notas.as_view(), name='crear_registro_notas'),
     path('actualizar_registronotas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
-    path('consultar_registronotas/<int:pk>', Consultar_notas.as_view(), name='consultar_registro_notas'),
     path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas')
 ]

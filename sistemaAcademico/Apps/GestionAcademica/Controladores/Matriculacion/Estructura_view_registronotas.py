@@ -13,8 +13,12 @@ class Create_notas (CreateView):
     success_url = reverse_lazy('Academico:registro_notas')
     #context_object_name = 'a'
 class Update_notas (UpdateView):
-    pass
+    model = MovDetalleRegistroNotas
+    template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/ActualizarNotas.html'
+    form_class = Registro_notas_form
+    success_url = reverse_lazy('Academico:registro_notas')
+    context_object_name = 'a'
 class Delete_notas (DeleteView):
-    pass
-class Consultar_notas (UpdateView):
-    pass
+    model = MovDetalleRegistroNotas
+    template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/ActualizarNotas.htm'
+    success_url = reverse_lazy('Academico:registro_notas')
