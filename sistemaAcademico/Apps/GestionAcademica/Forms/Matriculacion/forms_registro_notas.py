@@ -42,10 +42,12 @@ class Registro_notas_form(forms.ModelForm):
             "examen_gracia": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen de gracia"}),
             "disciplina": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la disciplina"}),
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
+            "promedio_parciales":forms.TextInput(attrs={"class": "form-control"}),
+            "total_promedio_general": forms.TextInput(attrs={"class": "form-control"}),
         }
 
     def __init__(self, *args, **kwargs):
         super(Registro_notas_form, self).__init__(*args, **kwargs)
         self.fields['id_general_quimestre'].queryset = GenrGeneral.objects.filter(tipo='QUI')
-        self.fields['total_promedio_general'].widget.attrs['disabled'] = 'disabled'
-        self.fields['promedio_parciales'].widget.attrs['disabled'] = 'disabled'
+        '''self.fields['total_promedio_general'].widget.attrs['disabled'] = 'disabled'
+        self.fields['promedio_parciales'].widget.attrs['disabled'] = 'disabled'''
