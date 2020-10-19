@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from sistemaAcademico.Apps.GestionAcademica import forms
 from django.utils import timezone
@@ -129,10 +129,21 @@ class ConsultarEstudiante(UpdateView):
 
 class UpdateEstudiante(UpdateView):
     model = MantPersona
+    second_model= MovMatriculacionEstudiante
     form_class = EstudianteEditForm
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_estudiante.html'
     success_url = reverse_lazy('Academico:estudiante')
     context_object_name = 'm'
+
+
+class DatosEstudiante(UpdateView):
+    model = MovMatriculacionEstudiante
+    form_class = Editarste
+    queryset = MantPersona.objects.all()
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/datos_estudiante_htmldepruebas.html'
+    success_url = reverse_lazy('Academico:estudiante')
+    context_object_name = 's'
+
 
 def eliminar_estudiante(request, id):
     estudiantes = MantPersona.objects.get(id_persona=id)

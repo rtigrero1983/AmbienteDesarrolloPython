@@ -7,6 +7,7 @@ import django_filters
 from django.forms.widgets import *
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
 TPA = ['ECUADOR', 'AREGENTINA', 'MEXICO', 'AMERICA SAMOA', 'BOUVET ISLAND', 'ESTADOS UNIDOS', 'VENEZUELA', 'COLOMBIA']
@@ -1011,3 +1012,24 @@ class ConsultarEstudianteForm(ModelForm):
         self.fields['rcorreo'].widget.attrs['readonly'] = True
         self.fields['rhorario_laboral'].widget.attrs['readonly'] = True
         self.fields['mienbros_hogar'].widget.attrs['readonly'] = True
+
+class Editarste(ModelForm):
+    class Meta:
+        model = MovMatriculacionEstudiante
+        fields = [
+
+            "id_mov_anioelectivo_curso",
+
+
+
+
+        ]
+        labels = {
+
+            "id_mov_anioelectivo_curso":"Curso",
+
+
+        }
+    def __init__(self, *args, **kwargs):
+        super(Editarste, self).__init__(*args, **kwargs)
+        self.fields['id_mov_anioelectivo_curso'].queryset = MovMatriculacionEstudiante.objects.filter(id_mov_anioelectivo_curso_id_curso=1).values('id_mov_anioelectivo_cursoid_curso_nombre')
