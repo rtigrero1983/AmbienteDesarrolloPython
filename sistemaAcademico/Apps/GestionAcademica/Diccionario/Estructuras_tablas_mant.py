@@ -157,5 +157,5 @@ class MantEmpleado(models.Model):
         db_table = 'mant_empleado'
 
     def __str__(self):
-        return self.usuario_ing
+        return self.id_persona.nombres+" "+self.id_persona.apellidos
 

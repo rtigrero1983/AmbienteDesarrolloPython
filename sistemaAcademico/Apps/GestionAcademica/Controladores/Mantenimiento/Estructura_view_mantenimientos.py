@@ -62,6 +62,8 @@ class NuevoEmpleado(CreateView):
             empleado_model = MantEmpleado(id_persona=id_empleado ,id_anio_lectivo=id_anio_lectivo
                                           ,terminal_ing=socket.gethostname(),usuario_ing=usuario.usuario,fecha_ingreso=timezone.now())
             empleado_model.save()
+            movMateria = Mov_Materia_profesor(id_empleado=MantEmpleado.objects.get(id_persona=empleado_model.id_persona))
+            movMateria.save()
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
