@@ -19,23 +19,22 @@
             <div class="row justify-content-center">
                 <div class="col-4">
                     {{ form.id_matriculacion_estudiante|as_crispy_field }}
-                    {{ form.primer_parcial|as_crispy_field }}
-                    {{ form.segundo_parcial|as_crispy_field }}
-                    {{ form.tercer_parcial|as_crispy_field }}
-                </div>
-                <div class="col-4">
-                    {{ form.promedio_parciales|as_crispy_field }}
-                    {{ form.examen|as_crispy_field }}
-                    {{ form.examen_supletorio|as_crispy_field }}
-                    {{ form.examen_gracia|as_crispy_field }}
-                </div>
-                <div class="col-4">
                     {{ form.disciplina|as_crispy_field }}
-                    {{ form.total_promedio_general|as_crispy_field }}
                     {{ form.id_materia_profesor|as_crispy_field }}
                     {{ form.id_general_quimestre|as_crispy_field }}
                 </div>
-
+                <div class="col-4">
+                    {{ form.primer_parcial|as_crispy_field }}
+                    {{ form.segundo_parcial|as_crispy_field }}
+                    {{ form.tercer_parcial|as_crispy_field }}
+                    {{ form.promedio_parciales|as_crispy_field }}
+                </div>
+                <div class="col-4">
+                    {{ form.examen|as_crispy_field }}
+                    {{ form.examen_gracia|as_crispy_field }}
+                    {{ form.examen_supletorio|as_crispy_field }}
+                    {{ form.total_promedio_general|as_crispy_field }}
+                </div>
             </div><br><br><br>
             <div class=" text-center">
                 <button type="submit" class="btn btn-outline-primary">Registrar</button>

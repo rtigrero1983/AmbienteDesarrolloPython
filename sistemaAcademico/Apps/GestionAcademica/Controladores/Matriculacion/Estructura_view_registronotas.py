@@ -20,5 +20,6 @@ class Update_notas (UpdateView):
     context_object_name = 'a'
 class Delete_notas (DeleteView):
     model = MovDetalleRegistroNotas
-    template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/ActualizarNotas.htm'
+    template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/EliminarNotas.html'
     success_url = reverse_lazy('Academico:registro_notas')
+    context_object_name = 'a'
