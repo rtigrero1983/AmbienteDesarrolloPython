@@ -128,6 +128,20 @@ class ConsultarEstudiante(UpdateView):
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_consultar_estudiante.html'
     context_object_name = 'm'
 
+    def get_context_data(self, **kwargs):
+        context = super(ConsultarEstudiante, self).get_context_data(**kwargs)
+        id_persona = context['m'].id_persona
+        persona = MantEstudiante.objects.get(id_persona = id_persona)
+        id_estudiante = persona.id_estudiante
+        c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante = id_estudiante)
+        curso_estudiante = MovCabCurso.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
+        paralelo_estudiante = Mov_Aniolectivo_curso.objects.get(id_anio_electivo_id = c_estudiante.id_mov_anioelectivo_curso.id_anio_electivo_id)
+        jornada_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
+        context['curso_estudiante'] = curso_estudiante
+        context['paralelo_estudiante'] = paralelo_estudiante
+        context['jornada_estudiante'] = jornada_estudiante
+        return context
+
 
 class UpdateEstudiante(UpdateView):
     model = MantPersona
@@ -137,6 +151,19 @@ class UpdateEstudiante(UpdateView):
     success_url = reverse_lazy('Academico:estudiante')
     context_object_name = 'm'
 
+    def get_context_data(self, **kwargs):
+        context = super(UpdateEstudiante, self).get_context_data(**kwargs)
+        id_persona = context['m'].id_persona
+        persona = MantEstudiante.objects.get(id_persona = id_persona)
+        id_estudiante = persona.id_estudiante
+        c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante = id_estudiante)
+        curso_estudiante = MovCabCurso.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
+        paralelo_estudiante = Mov_Aniolectivo_curso.objects.get(id_anio_electivo_id = c_estudiante.id_mov_anioelectivo_curso.id_anio_electivo_id)
+        jornada_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
+        context['curso_estudiante'] = curso_estudiante
+        context['paralelo_estudiante'] = paralelo_estudiante
+        context['jornada_estudiante'] = jornada_estudiante
+        return context
 
 class DatosEstudiante(UpdateView):
     model = MovMatriculacionEstudiante
