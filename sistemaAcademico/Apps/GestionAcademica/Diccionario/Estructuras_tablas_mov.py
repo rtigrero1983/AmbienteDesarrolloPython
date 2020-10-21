@@ -151,8 +151,8 @@ class Mov_Horario_materia(models.Model):
     id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_horario_materiaprof',db_column='id_materia_profesor')
     hora_inicio = models.TimeField(null=False, blank=False)
     hora_fin = models.TimeField(null=False, blank=False)
-    id_genr_dia = models.ForeignKey('GenrGeneral', null=False,blank=False,on_delete=models.CASCADE, default=97, related_name='fk_materiaprof_genrdia', db_column='id_genr_dia')
-    fecha_ingreso = models.DateTimeField(blank=False, null=False)
+    id_genr_dia = models.ForeignKey('GenrGeneral', null=False,blank=False, on_delete=models.CASCADE, default=97, related_name='fk_materiaprof_genrdia', db_column='id_genr_dia')
+    fecha_ingreso = models.DateTimeField(blank=False, null=False, auto_now_add=True)
     usuario_ing = models.CharField(max_length=45, blank=False, null=False)
     terminal_ing = models.CharField(max_length=45, blank=False, null=False)
     class Meta:

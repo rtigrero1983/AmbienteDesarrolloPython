@@ -62,7 +62,7 @@ class CrearHorarioCurso(CreateView):
     model = Mov_Horario_materia
     form_class = HorarioCursoForm
     template_name = 'sistemaAcademico/Matriculacion/Horario_curso/crear_HorarioCurso.html'
-    success_url = reverse_lazy('Academico:crear_horariocurso')
+    success_url = reverse_lazy('Academico:horario_curso')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
