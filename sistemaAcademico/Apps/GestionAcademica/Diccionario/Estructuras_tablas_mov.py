@@ -31,7 +31,7 @@ class MovCabCurso(models.Model):
         verbose_name_plural = 'Cursos'
         db_table = 'mov_cab_curso'
     def __str__(self):
-        return self.nombre + " "+self.id_genr_formacion.nombre
+        return self.nombre+" "+self.id_genr_formacion.nombre
 
 
 class MovCabRegistroNotas(models.Model):
@@ -70,7 +70,7 @@ class Mov_Aniolectivo_curso(models.Model):
     id_mov_anioelectivo_curso=models.AutoField(primary_key=True)
     id_anio_electivo=models.ForeignKey(MantAnioLectivo,on_delete=models.CASCADE)
     id_curso=models.ForeignKey(MovCabCurso,on_delete=models.CASCADE, blank=False, null=False,db_column='id_curso')
-    id_genr_paralelo=models.ForeignKey('GenrGeneral', blank=False, related_name="fk_mavaniolectivo_curso_genrparalelo",on_delete=models.CASCADE)
+    id_genr_paralelo=models.ForeignKey('GenrGeneral', blank=False, related_name="fk_mavaniolectivo_curso_genrparalelo", on_delete=models.CASCADE)
     id_estado_gnral = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False, null=False, default=97, db_column='estado')
     class Meta:
         verbose_name = 'Ani_electivo_curso_paralelo'
@@ -130,8 +130,8 @@ class MovMatriculacionEstudiante(models.Model):
         verbose_name = 'Matriculacion estudiante'
         verbose_name_plural = 'Matriculacion estudiante'
         db_table = 'mov_matriculacion_estudiante'
-    def __int__(self):
-        return self.id_matriculacion_estudiante
+    def __str__(self):
+        return self.id_estudiante.id_persona.nombres+" "+self.id_estudiante.id_persona.apellidos
 
 
 
@@ -140,9 +140,11 @@ class Mov_Materia_profesor(models.Model):
     id_empleado = models.ForeignKey('MantEmpleado', on_delete=models.CASCADE, blank=False, null=False,related_name='fk_materiaprof_empleado',db_column='id_empleado')
     id_detalle_materia_curso = models.ManyToManyField('MovDetalleMateriaCurso',  db_table="mov_profesor_materiacurso",related_name="fk_materia_profesor")
     class Meta:
-        verbose_name='Mov_Materia_profesor'
-        verbose_name_plural='Mov_Materia_profesores'
-        db_table='mov_materia_profesor'
+        verbose_name = 'Mov_Materia_profesor'
+        verbose_name_plural = 'Mov_Materia_profesores'
+        db_table = 'mov_materia_profesor'
+    def __str__(self):
+        return self.id_empleado.id_persona.nombres+" "+self.id_empleado.id_persona.apellidos
 
 class Mov_Horario_materia(models.Model):
     id_horario = models.AutoField(primary_key=True)
@@ -161,7 +163,7 @@ class Mov_Horario_materia(models.Model):
 class Mov_Horas_docente(models.Model):
     id_horas_docente = models.AutoField(primary_key=True)
     total_horas = models.DecimalField(null=False, decimal_places=2, max_digits=65)
-    horas_disponible =  models.DecimalField(null=False, decimal_places=2, max_digits=65)
+    horas_disponible = models.DecimalField(null=False, decimal_places=2, max_digits=65)
     id_empleado = models.ForeignKey('MantEmpleado', on_delete=models.CASCADE, blank=False, null=False, related_name='fk_horario_docente_empelado', db_column='id_empleado')
     class Meta:
         verbose_name = 'Mov_Horas_docente'
