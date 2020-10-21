@@ -163,5 +163,10 @@ urlpatterns = [
     path('registronotas/', List_Notas.as_view(), name='registro_notas'),
     path('crear_registronotas/', Create_notas.as_view(), name='crear_registro_notas'),
     path('actualizar_registronotas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
-    path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas')
+    path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas'),
+    path('estudiantes_filtro/',filtro_estudiantes,name='estudiante_filtro'),
+    path('estudiantes_lista/',filtro_estudiantes_lista,name="estudiante_lista"),
+    path('tipo_estudiantes/<int:pk>',FilterTipoEstudinates.as_view(),name='tipo_estudiantes'),
+    path('matriculacion_estados/<int:pk>',FilterEstudinatesestado.as_view(),name='matriculacion_estados'),
+
 ]
