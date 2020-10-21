@@ -4,7 +4,7 @@
         <form class="formulario" action="{% url 'Academico:editar_materia_curso' mat.id_detalle_materia_curso %}" method="POST">
             {% csrf_token %}
             <div class="modal-body">
-                <h4 class="titulo">Matriculación | Asignación | Materia | Curso </h4>
+                <h4 class="titulo">Matriculación  </h4>
                 <br>
                     {{ form.id_mov_anio_lectivo_curso| as_crispy_field  }}
                     {{ form.id_genr_materias | as_crispy_field }}

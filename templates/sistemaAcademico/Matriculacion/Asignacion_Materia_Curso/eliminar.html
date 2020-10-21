@@ -5,16 +5,11 @@
             <div class="modal-body ">
 
                 <header class="cuadro_titulo bg-danger ">
-                    <h4 class="titulo">Matriculación | Asignación | Materia | Curso</h4>
+                    <h4 class="titulo">Matriculación </h4>
                 </header>
                 <div class="contenido text-dark">
                     Esta seguro que deseas eliminar esta Asignación?<br>
-                    Materias: <label>
-                    {% for i in materia %}
-                        {% for a in i.id_genr_materias.all %}
-                    {{ a }}
-                    {% endfor %}
-                    {% endfor %}
+                    Materias: <label>{{ mat.id_genr_materias }}
 
                 </label><br>
                     Curso: <label>{{ mat.id_mov_anio_lectivo_curso }}</label><br>
