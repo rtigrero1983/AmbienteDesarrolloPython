@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block contenido_principal %}
+    <header class="cuadro_titulo text-center bg-gradient-primary">
+        <h4 class="title text-light"> Matriculación | Estudiante </h4>
+    </header>
+    <br/>
+    <form action="{% url 'Academico:estudiante_lista' %}" method="get">
+        <div class="row darkwhite-bg py-2">
+            <div class="card-body card-block">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-control-sm col-md-4" for="nombres">Nombres:</label>
+                        <input class="form-control " type="text" name="nombres" id="nombres">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-control-sm" for="apellidos">Apellidos:</label>
+                        <input class="form-control " type="text" name="apellidos" id="apellidos">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-control-sm" for="curso">Curso:</label>
+                        <input class="form-control " type="text" name="curso" id="curso">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-control-sm" for="paralelo">Paralelo:</label>
+                        <input class="form-control " type="text" name="paralelo" id="paralelo">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-control-sm" for="anio">Año electivo:</label>
+                        <input class="form-control " type="text" name="anio" id="anio">
+                    </div>
+                    </div>
+                <div class="row">
+                <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+                        <a class="btn btn-outline-primary" href="{% url 'Academico:estudiante_filtro' %}"><i class="fa fa-list" aria-hidden="true"></i> Ver todo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Estudiantes registrado en el sistema</h6>
+        </div>
+        <div class="card-body ">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0"
+                       data-sort='false'
+                       data-page-length='5'>
+                    <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                        <th>id</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Curso</th>
+                        <th>Paralelos</th>
+                        <th>Año electivo</th>
+                        <th>Tipo de estudiante</th>
+                        <th></th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for est in consultas %}
+                        <tr>
+                            <td>{{ est.idEstudiante }}</td>
+                            <td>{{ est.nombres }}</td>
+                            <td>{{ est.apellidos }}</td>
+                            <td>{{ est.curso }}</td>
+                            <td>{{ est.paralelo }}</td>
+                            <td>{{ est.anio }}</td>
+                            <td>{{ est.tipo_estudiante }}</td>
+                                <td><a onclick="modal('{% url 'Academico:tipo_estudiantes' est.idEstudiante %}')" ><i class="fas fa-edit"></i></a></td>
+                            <td>{{ est.estado }} </td>
+                                <td><a onclick="modal('{% url 'Academico:matriculacion_estados' est.id_matriculacion_estudiante %}')"><i class="fas fa-edit"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock contenido_principal %}
+{% block extrajs %}
+    <div class="modal fade" id="mostrar_modal" role="dialog"></div>
+{% endblock extrajs %}
