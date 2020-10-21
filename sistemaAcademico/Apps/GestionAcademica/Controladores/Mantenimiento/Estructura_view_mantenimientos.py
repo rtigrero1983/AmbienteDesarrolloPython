@@ -135,7 +135,7 @@ class ConsultarEstudiante(UpdateView):
         id_estudiante = persona.id_estudiante
         c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante = id_estudiante)
         curso_estudiante = MovCabCurso.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
-        paralelo_estudiante = Mov_Aniolectivo_curso.objects.get(id_anio_electivo_id = c_estudiante.id_mov_anioelectivo_curso.id_anio_electivo_id)
+        paralelo_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre)
         jornada_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
         context['curso_estudiante'] = curso_estudiante
         context['paralelo_estudiante'] = paralelo_estudiante
@@ -158,7 +158,7 @@ class UpdateEstudiante(UpdateView):
         id_estudiante = persona.id_estudiante
         c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante = id_estudiante)
         curso_estudiante = MovCabCurso.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
-        paralelo_estudiante = Mov_Aniolectivo_curso.objects.get(id_anio_electivo_id = c_estudiante.id_mov_anioelectivo_curso.id_anio_electivo_id)
+        paralelo_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre)
         jornada_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
         context['curso_estudiante'] = curso_estudiante
         context['paralelo_estudiante'] = paralelo_estudiante
