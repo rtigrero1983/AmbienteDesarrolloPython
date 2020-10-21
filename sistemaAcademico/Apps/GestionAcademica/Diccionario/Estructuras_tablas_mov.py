@@ -70,15 +70,14 @@ class Mov_Aniolectivo_curso(models.Model):
     id_mov_anioelectivo_curso=models.AutoField(primary_key=True)
     id_anio_electivo=models.ForeignKey(MantAnioLectivo,on_delete=models.CASCADE)
     id_curso=models.ForeignKey(MovCabCurso,on_delete=models.CASCADE, blank=False, null=False,db_column='id_curso')
-    id_genr_paralelo=models.ManyToManyField('GenrGeneral', blank=False, related_name="fk_mavaniolectivo_curso_genrparalelo", db_column='id_genr_paralelo')
+    id_genr_paralelo=models.ForeignKey('GenrGeneral', blank=False, related_name="fk_mavaniolectivo_curso_genrparalelo",on_delete=models.CASCADE)
     id_estado_gnral = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False, null=False, default=97, db_column='estado')
     class Meta:
         verbose_name = 'Ani_electivo_curso_paralelo'
         db_table = 'Mov_anioelectivo_curso_paralelo'
         constraints = [
-            models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso'], name='Unicos')
+            models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso','id_genr_paralelo'], name='Unicos')
         ]
-
     def __str__(self):
         return  self.id_curso.nombre
 class MovDetalleMateriaCurso(models.Model):
@@ -94,7 +93,6 @@ class MovDetalleMateriaCurso(models.Model):
 
     def __str__(self):
         return self.id_genr_materias.nombre+" "+""+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
-
 
 
 class MovDetalleRegistroNotas(models.Model):
