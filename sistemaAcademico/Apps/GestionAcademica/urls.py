@@ -28,6 +28,7 @@ from .Diccionario.Estructuras_tablas_conf import *
 from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_file import Upload_File
 
 
 urlpatterns = [
@@ -168,5 +169,9 @@ urlpatterns = [
     path('estudiantes_lista/',filtro_estudiantes_lista,name="estudiante_lista"),
     path('tipo_estudiantes/<int:pk>',FilterTipoEstudinates.as_view(),name='tipo_estudiantes'),
     path('matriculacion_estados/<int:pk>',FilterEstudinatesestado.as_view(),name='matriculacion_estados'),
+
+    #------------ subir excel ---------
+    path('read_file/',Upload_File.as_view(),name='read_file')
+
 
 ]

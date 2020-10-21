@@ -61,3 +61,6 @@ class MovMateriaProfesorForm(forms.ModelForm):
                 'id_empleado': 'Profesor',
                 'id_detalle_materia_curso': 'Materias',
                 }
+    def __init__(self, *args, **kwargs):
+        super(MovMateriaProfesorForm, self).__init__(*args, **kwargs)
+        self.fields['id_detalle_materia_curso'].query = MantEmpleado.objects.all()
