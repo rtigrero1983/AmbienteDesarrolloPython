@@ -37,11 +37,8 @@
                       <td><strong>{{general.tipo}}</strong></td>
                       <td><strong>{{general.codigo}}</strong></td>
                         <td><strong>{{general.nombre}}</strong></td>
-                        <td>
-                          <a href="{% url 'Academico:editar_general' general.idgenr_general %}" class="btn btn-primary" title="Editar"><i class="fas fa-info-circle"></i></a>
-                      </td>
-
-
+                        <td><a onclick="modal('{% url 'Academico:editar_general' general.idgenr_general %}')"class="btn text-light bg-gradient-primary" title="Editar"><i
+                                            class="fas fa-info-circle"></i></a>
                     </tr>
                   {% endfor %}
 
@@ -55,31 +52,7 @@
 
 {% endblock contenido_principal %}
 
+
 {% block extrajs %}
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
-      "searching": true,
-      "language": {
-        "lengthMenu": "Mostrar _MENU_ por página",
-        "zeroRecords": "Sin datos",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "",
-        "search": "Buscar:",
-        "paginate": {
-          "first": "Primero",
-          "last": "Último",
-          "next": "Siguiente",
-          "previous": "Anterior"
-        },
-      }
-    });
-
-    $('.dataTables_length').addClass('bs-select');
-  });
-</script>
-<script>
-     $(function
-</script>
+    <div class="modal fade" id="mostrar_modal" role="dialog"></div>
 {% endblock extrajs %}
