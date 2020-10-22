@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -56,13 +56,17 @@ class HorarioCurso (ListView):
         return render(request, self.template_name, context)
 
 
-
+class ListViewHorario(ListView):
+    model= Mov_Horario_materia
+    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/list_horario.html'
+    context_object_name = 'h'
+    queryset = model.objects.filter(estado=97)
 
 class CrearHorarioCurso(CreateView):
     model = Mov_Horario_materia
     form_class = HorarioCursoForm
     template_name = 'sistemaAcademico/Matriculacion/Horario_curso/crear_HorarioCurso.html'
-    success_url = reverse_lazy('Academico:horario_curso')
+    success_url = reverse_lazy('Academico:lista_horario')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
@@ -77,3 +81,24 @@ class CrearHorarioCurso(CreateView):
             return HttpResponseRedirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))
+
+class UpdateHorario(UpdateView):
+    model = Mov_Horario_materia
+    form_class = HorarioCursoForm
+    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/update_horario.html'
+    success_url = reverse_lazy('Academico:lista_horario')
+    context_object_name = 'h'
+
+class DeleteHorario(DeleteView):
+    model = Mov_Horario_materia
+    template_name = 'sistemaAcademico/Matriculacion/Horario_curso/delete_horario.html'
+    success_url = reverse_lazy('Academico:lista_horario')
+    context_object_name = 'h'
+def deleteHorario(request, id):
+    horarios = Mov_Horario_materia.objects.get(id_horario=id)
+    inactivo = GenrGeneral.objects.get(idgenr_general=98)
+    if request.method == 'POST':
+        horarios.estado = inactivo
+        horarios.save()
+        return redirect('Academico:lista_horario')
+    return render(request, 'sistemaAcademico/Matriculacion/Horario_curso/delete_horario.html', {'horario': horarios})

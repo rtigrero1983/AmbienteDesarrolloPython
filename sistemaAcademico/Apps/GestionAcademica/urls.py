@@ -155,7 +155,11 @@ urlpatterns = [
 
     # ----------- Ingreso horario por cursos ---------------
     path('horario_curso/', HorarioCurso.as_view(), name='horario_curso'),
+    path('lista_horario/', ListViewHorario.as_view(), name='lista_horario'),
     path('crear_horariocurso/', CrearHorarioCurso.as_view(), name='crear_horariocurso'),
+    path('editar_horario/<int:pk>', UpdateHorario.as_view(), name='editar_horario'),
+    path('eliminar_horario/<int:id>', deleteHorario, name='eliminar_horario'),
+
     #------------ CURSOS -------------------------------
     path('cursos/', ListaCurso.as_view(), name='cursos'),
     path('create_curso/', CreateCurso.as_view(), name='create_curso'),

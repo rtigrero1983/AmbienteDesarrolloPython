@@ -155,6 +155,7 @@ class Mov_Horario_materia(models.Model):
     fecha_ingreso = models.DateTimeField(blank=False, null=False, auto_now_add=True)
     usuario_ing = models.CharField(max_length=45, blank=False, null=False)
     terminal_ing = models.CharField(max_length=45, blank=False, null=False)
+    estado = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, default=97 , related_name="fk_horario_estado", db_column='estado')
     class Meta:
         verbose_name ='Mov_Horario_materia'
         verbose_name_plural='Mov_Horario_materias'

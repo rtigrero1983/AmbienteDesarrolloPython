@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from dal import autocomplete
 from django.forms import CharField, ChoiceField, ModelForm
 from django.db.models import Q
@@ -5,7 +7,7 @@ from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
 import django_filters
 from django.forms.widgets import *
-
+from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
@@ -25,7 +27,11 @@ class HorarioCursoForm(ModelForm):
             "hora_inicio": "Hora De Inicio",
             "hora_fin": "Hora De Fin",
             "id_genr_dia":"Dia",
-            "id_materia_profesor": "Materia",
+            "id_materia_profesor": "Profesor",
+        }
+        widgets ={
+            "hora_inicio": forms.TimeInput() ,
+            "hora_fin":  forms.TimeInput()
         }
 
     def __init__(self, *args, **kwargs):

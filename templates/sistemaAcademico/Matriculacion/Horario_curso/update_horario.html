@@ -6,14 +6,14 @@
 {% load crispy_forms_tags %}
 
 {% block contenido_principal %}
-<form method="POST" action="#">
+<form method="POST" action="{% url 'Academico:editar_horario' h.id_horario  %}">
     {% csrf_token %}
       {% if error %}
         <h2>{{ error }}</h2>
 
      {% else %}
                 <header class="cuadro_titulo">
-                    <h4 class="titulo text-center">Asignación |  Horario </h4>
+                    <h4 class="titulo text-center">Asignación | Horario  </h4>
                 </header>
 
                 <div class="card-body ">
@@ -21,15 +21,11 @@
                         <div class="row">
                             <div class="col-6">
                                 {{ form.id_materia_profesor|as_crispy_field }}
-                                <div id="div_id_hora_inicio" class="form-group"> <label for="id_hora_inicio" class=" requiredField">Hora De Inicio<span class="asteriskField">*</span> </label>
-                                    <div class=""> <input type="time" name="hora_inicio" class="timeinput form-control" required="" id="id_hora_inicio"> </div>
-                                </div>
+                                {{ form.hora_inicio|as_crispy_field }}
                             </div>
                             <div class="col-6">
                                 {{ form.id_genr_dia|as_crispy_field }}
-                                <div id="div_id_hora_fin" class="form-group"> <label for="id_hora_fin" class=" requiredField">Hora De Fin<span class="asteriskField">*</span> </label>
-                                    <div class=""> <input type="time" name="hora_fin" class="timeinput form-control" required="" id="id_hora_fin"> </div>
-                                </div>
+                                {{ form.hora_fin|as_crispy_field }}
                             </div>
                         </div>
 

@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block footer %}
+  
+{% endblock footer %}
+
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Asignación | Horario </h4></header>
+<br/>
+                            <br/>
+<a href="{% url 'Academico:crear_horariocurso' %}" type="button" class="btn bg-gradient-primary text-light">Agregar<span class="glyphicon glyphicon-plus"></span></a>
+                            <br/>
+                            <br/>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Horario</h6>
+            </div>
+
+            <div class="card-body ">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
+                  <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center" >
+                      <th>#</th>
+                        <th>Nombres</th>
+                      <th>Dia</th>
+                      <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Acciones</th>
+                    </tr>
+                  </thead>
+                   <tbody>
+                    {% for m in h %}
+                        <tr class="text-dark">
+                        <td>{{m.id_horario}}</td>
+                            <td>{{m.id_materia_profesor}}</td>
+                            <td>{{m.id_genr_dia}}</td>
+                            <td>{{m.hora_inicio}}</td>
+                            <td>{{m.hora_fin}}</td>
+                          <td class="text-center">
+                              <a href="{% url 'Academico:editar_horario' m.id_horario %}" class="btn bg-gradient-primary text-light" title="Editar {{m.id_materia_profesor}}"><i class="fas fa-info-circle"></i></a>
+                              <a href="{% url 'Academico:eliminar_horario' m.id_horario %}" class="btn bg-gradient-danger text-light" title="Eliminar {{m.id_materia_profesor}}"><i class="fas fa-exclamation-triangle"></i></a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+{% endblock contenido_principal %}
+
+
+
+
+
+
