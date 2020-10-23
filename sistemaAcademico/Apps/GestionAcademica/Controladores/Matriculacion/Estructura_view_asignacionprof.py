@@ -21,7 +21,7 @@ class List_docente(ListView):
 
 class List_docente_asignado(ListView):
     model = Mov_Materia_profesor
-    template_name = 'sistemaAcademico/reportes/AsignacionProfesores.html'
+    template_name = 'sistemaAcademico/reportes/ProfesoresAsignados.html'
     context_object_name = 'lista_profesor_asignados'
     queryset = Mov_Materia_profesor.objects.filter(id_empleado__id_persona__estado = 97)
     def get(self, request):
