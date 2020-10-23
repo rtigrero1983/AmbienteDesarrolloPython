@@ -40,7 +40,7 @@ class Registro_notas_form(forms.ModelForm):
             "examen": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen"}),
             "examen_supletorio": forms.NumberInput( attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen de supletorio"}),
             "examen_gracia": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del examen de gracia"}),
-            "disciplina": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la disciplina"}),
+            "disciplina": forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese la disciplina"}),
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
             "promedio_parciales":forms.TextInput(attrs={"class": "form-control"}),
             "total_promedio_general": forms.TextInput(attrs={"class": "form-control"}),
