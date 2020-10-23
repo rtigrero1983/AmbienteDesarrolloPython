@@ -40,6 +40,7 @@
               <td>{{info.id_materia_profesor}}</td>
               <td>{{info.id_empleado.id_persona.nombres}}</td>
               <td align="center">
+                  <a href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" class="btn bg-gradient-primary text-light" title="">Asignar Materia</a>
                   <a href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor  %}" class="btn bg-gradient-danger text-light" title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
               </td>
           </tr>
