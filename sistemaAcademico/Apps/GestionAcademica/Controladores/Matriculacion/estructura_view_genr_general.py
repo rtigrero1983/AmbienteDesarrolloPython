@@ -9,7 +9,7 @@ class General(ListView):
     model = GenrGeneral
 
 
-    template_name = 'sistemaAcademico/Matriculacion/general/Listar_general.html'
+    template_name = 'sistemaAcademico/Matriculacion/General/Listar_general.html'
 
 
 
