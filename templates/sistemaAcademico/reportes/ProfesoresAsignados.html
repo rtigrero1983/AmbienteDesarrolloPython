@@ -31,7 +31,6 @@
           <tr class="text-light text-center">
               <th>Codigo</th>
               <th>Profesor</th>
-              <th>Materias</th>
               <th>Opciones</th>
           </tr>
           </thead>
@@ -41,7 +40,6 @@
           <tr class="text-dark">
               <td>{{info.id_materia_profesor}}</td>
               <td>{{info.id_empleado.id_persona.nombres}}</td>
-              <td>{{info.id_detalle_materia_curso}}</td>
               <td align="center">
                   <a href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" class="btn bg-gradient-primary text-light" title="Editar">Editar</a>
                   <a href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}" class="btn bg-gradient-danger text-light" title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
