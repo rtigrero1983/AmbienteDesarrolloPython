@@ -74,12 +74,12 @@ class Mov_Aniolectivo_curso(models.Model):
     id_estado_gnral = models.ForeignKey('GenrGeneral', on_delete=models.CASCADE, blank=False, null=False, default=97, db_column='estado')
     class Meta:
         verbose_name = 'Ani_electivo_curso_paralelo'
-        db_table = 'Mov_anioelectivo_curso_paralelo'
-        constraints = [
-            models.UniqueConstraint(fields=['id_anio_electivo', 'id_curso','id_genr_paralelo'], name='Unicos')
-        ]
+        db_table = 'mov_anioelectivo_curso_paralelo'
+       
     def __str__(self):
-        return  self.id_curso.nombre
+        return  self.id_curso.nombre+" "+self.id_curso.id_genr_formacion.nombre+" "+self.id_genr_paralelo.nombre+" "+str(self.id_anio_electivo.anio)
+
+
 class MovDetalleMateriaCurso(models.Model):
     id_detalle_materia_curso = models.AutoField(primary_key=True)
     id_mov_anio_lectivo_curso = models.ForeignKey(Mov_Aniolectivo_curso, on_delete=models.CASCADE,blank=False, null=False, related_name="fk_detallemateriacurso_aniolectivocurso",db_column='id_mov_aniolectivo_curso')
@@ -92,7 +92,7 @@ class MovDetalleMateriaCurso(models.Model):
         db_table = 'mov_detalle_materia_curso'
 
     def __str__(self):
-        return self.id_genr_materias.nombre+" "+""+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
+        return self.id_genr_materias.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.nombre+" "+self.id_mov_anio_lectivo_curso.id_genr_paralelo.nombre+" "+self.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
 
 
 class MovDetalleRegistroNotas(models.Model):
@@ -143,8 +143,10 @@ class Mov_Materia_profesor(models.Model):
         verbose_name = 'Mov_Materia_profesor'
         verbose_name_plural = 'Mov_Materia_profesores'
         db_table = 'mov_materia_profesor'
+
+
     def __str__(self):
-        return self.id_empleado.id_persona.nombres+" "+self.id_empleado.id_persona.apellidos
+        return self.id_empleado.id_persona.nombres+" "+self.id_empleado.id_persona.apellidos+""+",".join([item.id_genr_materias.nombre  for item in self.id_detalle_materia_curso.filter(estado=97).select_related('id_genr_materias')])
 
 class Mov_Horario_materia(models.Model):
     id_horario = models.AutoField(primary_key=True)

@@ -99,18 +99,9 @@
                                         <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">VIERNES</th>
                                         <th style="padding: 20px;width: 9rem; background-color: #2e59d9; color:white">SABADO</th>
                                     </tr>
-                                    {% if item %}
-                                        {% for a in item %}
-                                             <tr >
-                                       <td style="padding: 20px">{{ a.hora_inicio }}/{{ a.hora_fin }}</td>
-                                        <td style="padding: 20px">{{ a.materia_profesor }}</td>
-                                        <td style="padding: 20px"></td>
-                                        <td style="padding: 20px"></td>
-                                        <td style="padding: 20px"></td>
-                                        <td style="padding: 20px"></td>
-                                        <td style="padding: 20px"></td>
-                                    </tr>
-                                        {% endfor %}
+                                    {% if value %}
+                                    {{ value }}
+                                       
                                     {% endif %}
 
                                 </table></center>

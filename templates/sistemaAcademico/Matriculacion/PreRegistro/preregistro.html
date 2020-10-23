@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-black">Pre-Registro de Estudiantes</h6>
+    </div>
+    <div class="card-body">
+        {{ form }}
+        <div class="botones">
+            <br/>
+            <button type="submit" class="btn btn-primary" id="save" onclick="mostrar()" >Guardar</button>
+        </div>
+    </div>
+</div>
+
+<div id="status"><div>
+</form>
+
+
+
+{% endblock contenido_principal %}
+
+{% block extrajs %}
+
+<script>
+
+
+    function mostrar(){
+        document.getElementById('status').innerHTML="<div class='d-flex justify-content-center'>"+
+      "<div class='spinner-border' role='status'>"+
+        "<span class='sr-only'>Loading...</span>"+
+      "</div>"+
+    "</div>";
+    document.addEventListener("DOMContentLoaded", function(event) {
+  document.getElementById("save").disabled = true;
+});
+    
+    }
+   
+    
+    
+    </script>
+  {% endblock extrajs %}

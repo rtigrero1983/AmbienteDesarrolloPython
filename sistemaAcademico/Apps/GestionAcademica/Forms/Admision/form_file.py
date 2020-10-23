@@ -1,5 +1,15 @@
 from django import forms
+from sistemaAcademico.Apps.GestionAcademica.models import Mov_Aniolectivo_curso
+
 
 class UploadFileForm(forms.Form):
-    curso= forms.CharField(required=True,max_length=25,min_length=5)
-    file = forms.FileField(required=True)
+    
+    
+    LISTA = Mov_Aniolectivo_curso.objects.filter(id_estado_gnral=97)
+    print(LISTA)
+    curso= forms.ChoiceField(choices=( (x.id_mov_anioelectivo_curso, x) for x in LISTA ),widget=forms.Select(attrs={'class':'form-control'}))
+    file = forms.FileField(required=True,widget=forms.FileInput(attrs={'class':'form-control'}))
+
+        
+
+    

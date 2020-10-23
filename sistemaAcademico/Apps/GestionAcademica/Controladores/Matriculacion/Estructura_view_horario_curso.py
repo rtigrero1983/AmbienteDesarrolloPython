@@ -41,17 +41,21 @@ class HorarioCurso (ListView):
         a =MovDetalleMateriaCurso.objects.filter(id_mov_anio_lectivo_curso=id_anio_lectivo_curso_paralelo).values()
 
         context={}
+        count=1
         for i in a:
             id_materia_curso= i['id_detalle_materia_curso']
-            materia_profesor = Mov_Materia_profesor.objects.filter(id_detalle_materia_curso=id_materia_curso)
+            materia_profesor = Mov_Materia_profesor.objects.filter(id_detalle_materia_curso=id_materia_curso).values()
             for e in materia_profesor:
+                
                 id_materia_profesor= e['id_materia_profesor']
                 b = Mov_Horario_materia.objects.filter(id_materia_profesor=id_materia_profesor)
-                context.__setitem__(b)
+                context[str(count)]= b
+            
+                count=+1
 
         context['bool']=True
 
-
+        print(context)
 
         return render(request, self.template_name, context)
 
