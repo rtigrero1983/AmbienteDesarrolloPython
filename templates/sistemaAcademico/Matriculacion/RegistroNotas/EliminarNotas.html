@@ -1,16 +1,7 @@
-{% extends 'base/base.html' %}
-{% load staticfiles %}
-
-{% block encabezado %}
-{% endblock encabezado %}
-{% block sidebar %}
-{% endblock sidebar %}
-
-{% block contenido_principal %}
-<div class="modal-dialog modal-lg" role="document">
+<div class="modal-dialog modal-lg-4" role="document">
     <div class="modal-content">
         <div class="contenido">
-            <form method="POST">
+            <form method="POST" action="{% url 'Academico:eliminar_registro_notas' a.id_detalle_registro_notas  %}">
                 {% csrf_token %}
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -31,4 +22,3 @@
         </div>
 	</div>
 </div>
-{% endblock contenido_principal %}

@@ -49,9 +49,9 @@
                     <td>{{notas.id_general_quimestre}}</td>
                     <td align="center">
                         <a class="btn bg-gradient-primary text-light"
-                           href="{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}" title="Editar"><i class="fas fa-info-circle"></i></a>
+                           onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
                         <a class="btn bg-gradient-danger text-light"
-                           href="{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}" title="Eliminar"><i
+                           onclick="modal('{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}')" title="Eliminar"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                     </td>
                 </tr>
@@ -62,17 +62,13 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal_crear" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="modal_editar" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="modal_eliminar" role="dialog">
-</div>
 {% endblock contenido_principal %}
+{% block extrajs %}
 
+
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+
+
+{% endblock extrajs %}
