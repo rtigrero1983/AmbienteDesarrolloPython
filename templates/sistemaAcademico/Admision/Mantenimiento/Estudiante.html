@@ -4,54 +4,62 @@
 {% block sidebar %}
 {% endblock sidebar %}
 {% block footer %}
-  
+
 {% endblock footer %}
 
 {% block contenido_principal %}
 
-<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | Estudiantes </h4></header>
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Mantenimiento |
+    Estudiantes </h4></header>
 <br/>
-                            <br/>
-<a href="{% url 'Academico:registro_estudiante' %}" type="button" class="btn bg-gradient-primary text-light">Agregar<span class="glyphicon glyphicon-plus"></span></a>
-                            <br/>
-                            <br/>
+<br/>
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:registro_estudiante' %}"
+   type="button">Agregar<span class="glyphicon glyphicon-plus"></span></a>
+<br/>
+<br/>
 
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Registro de estudiantes</h6>
-            </div>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registro de estudiantes</h6>
+    </div>
 
-            <div class="card-body ">
-              <div class="table-responsive">
-                <table class="table table-bordered table-hover"  id="dtBasicExample2" width="100%" cellspacing="0" data-sort='false' data-page-length='5'>
-                  <thead class="bg-gradient-primary">
-                    <tr class="text-light text-center" >
-                      <th>#</th>
-                      <th>Nombres</th>
-                      <th>Apellidos</th>
-                      <th>Identificacion</th>
-                        <th>Acciones</th>
-                    </tr>
-                  </thead>
-                   <tbody>
-                    {% for m in mantenimiento %}
-                        <tr class="text-dark">
-                            <td class="text-dark">{{m.id_persona}}</td>
-                            <td>{{m.nombres}}</td>
-                            <td>{{m.apellidos}}</td>
-                            <td>{{m.identificacion}}</td>
-                          <td class="text-center">
-                              <a href="{% url 'Academico:consultar_estudiante' m.id_persona %}" class="btn bg-gradient-success text-light" title="Consultar {{m.nombres}}"><i class="fas fa fa-male"></i></a>
-                              <a href="{% url 'Academico:editar_estudiante' m.id_persona %}" class="btn bg-gradient-primary text-light" title="Editar {{m.nombres}}"><i class="fas fa-info-circle"></i></a>
-                              <a href="{% url 'Academico:eliminar_estudiante' m.id_persona %}" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}"><i class="fas fa-exclamation-triangle"></i></a>
-                          </td>
-                        </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+    <div class="card-body ">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                <thead class="bg-gradient-primary">
+                <tr class="text-light text-center">
+                    <th>#</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Identificacion</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for m in mantenimiento %}
+                <tr class="text-dark">
+                    <td class="text-dark">{{m.id_persona}}</td>
+                    <td>{{m.nombres}}</td>
+                    <td>{{m.apellidos}}</td>
+                    <td>{{m.identificacion}}</td>
+                    <td class="text-center">
+                        <a class="btn bg-gradient-success text-light"
+                           href="{% url 'Academico:consultar_estudiante' m.id_persona %}" title="Consultar {{m.nombres}}"><i
+                                class="fas fa fa-male"></i></a>
+                        <a class="btn bg-gradient-primary text-light"
+                           href="{% url 'Academico:editar_estudiante' m.id_persona %}" title="Editar {{m.nombres}}"><i
+                                class="fas fa-info-circle"></i></a>
+                        <a class="btn bg-gradient-danger text-light"
+                           href="{% url 'Academico:eliminar_estudiante' m.id_persona %}" title="Eliminar {{m.nombres}}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock contenido_principal %}
 
 

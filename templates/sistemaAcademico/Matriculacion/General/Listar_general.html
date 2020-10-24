@@ -9,50 +9,48 @@
 {% endblock footer %}
 {% block contenido_principal %}
 
-<header class="cuadro_titulo rounded bg-gradient-primary text-center"> <h4 class="title text-light"> Mantenimiento | General </h4></header>
-
-<br/><br/>
-     <a href="{% url 'Academico:crear_general' %}" class="btn bg-gradient-primary text-light"  id="registrar"><span class="glyphicon glyphicon-plus"></span>Agregar</a>
-<br/><br/>
- <form action="/" method="POST">
-    </form>
-<div class="card-body">
-  <div class="table-responsive">
-                <table class="table table-bordered"  width="100%" id="dataTable" cellspacing="0"data-page-length='5'>
-                  <thead class="bg-gradient-primary text-light">
-
-                    <tr class="text-center">
-                      <th>Tipo</th>
-                      <th>Codigo</th>
-                        <th>Nombre</th>
-                        <th>Opcion</th>
-
-
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  {% for general in object_list %}
-                    <tr>
-                      <td><strong>{{general.tipo}}</strong></td>
-                      <td><strong>{{general.codigo}}</strong></td>
-                        <td><strong>{{general.nombre}}</strong></td>
-                        <td><a onclick="modal('{% url 'Academico:editar_general' general.idgenr_general %}')"class="btn text-light bg-gradient-primary" title="Editar"><i
-                                            class="fas fa-info-circle"></i></a>
-                    </tr>
-                  {% endfor %}
-
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-
-
-
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Mantenimiento |
+    General</h4></header>
+<br/>
+<br/>
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:crear_general' %}" id="registrar"><span
+        class="glyphicon glyphicon-plus"></span>Agregar</a>
+<br/>
+<br/>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered" id="dtBasicExample">
+                <thead class="bg-gradient-primary text-light">
+                <tr class="text-center">
+                    <th>Tipo</th>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Opcion</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for general in object_list %}
+                <tr>
+                    <td><strong>{{general.tipo}}</strong></td>
+                    <td><strong>{{general.codigo}}</strong></td>
+                    <td><strong>{{general.nombre}}</strong></td>
+                    <td>
+                        <a class="btn text-light bg-gradient-primary"
+                           onclick="modal('{% url 'Academico:editar_general' general.idgenr_general %}')"
+                           title="Editar">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock contenido_principal %}
 
-
 {% block extrajs %}
-    <div class="modal fade" id="mostrar_modal" role="dialog"></div>
+<div class="modal fade" id="mostrar_modal" role="dialog"></div>
 {% endblock extrajs %}

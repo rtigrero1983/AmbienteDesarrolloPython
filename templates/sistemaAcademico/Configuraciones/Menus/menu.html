@@ -1,4 +1,4 @@
- {% extends 'base/base.html' %}
+{% extends 'base/base.html' %}
 {% block encabezado %}
 {% endblock encabezado %}
 {% block sidebar %}
@@ -6,85 +6,81 @@
 
 {% block contenido_principal %}
 <header class="cuadro_titulo text-center bg-gradient-primary">
-  <h4 class="title text-light"> Configuracion | Menu </h4>
+    <h4 class="title text-light"> Configuracion | Menu </h4>
 </header>
-<br />
+<br/>
 
-  {% for m in permisos %}
-    {% for acciones in agregar %}
-        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
-            <a id="registrar" href="{% url 'Academico:nuevo_menu' %}" class="text-light btn bg-gradient-primary">
-              Agregar
-            </a>
-        {% endif %}
-    {% endfor %}    
-  {% endfor %}
+{% for m in permisos %}
+{% for acciones in agregar %}
+{% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
+<a class="text-light btn bg-gradient-primary" href="{% url 'Academico:nuevo_menu' %}" id="registrar">
+    Agregar
+</a>
+{% endif %}
+{% endfor %}
+{% endfor %}
 
-<br /><br />
+<br/><br/>
 
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Menus disponibles en el sistema</h6>
-  </div>
-
-  <div class="card-body ">
-
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0" data-sort='false'
-        data-page-length='5'>
-        <thead class="bg-gradient-primary">
-          <tr class="text-light text-center">
-            <th>Nombre del menu</th>
-            <th>Url</th>
-            <th>Icono</th>
-            <th>Acciones</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          {% for m in menu %}
-              {% if m.id_padre != 0 %}
-                <tr class="text-center" style="border-width:3px;">
-                  <td class="text-dark" style="border-width:1px;">{{m.descripcion}}</td>
-                  <td>{{m.url}}</td>
-                  <td>{{m.icono}}</td>
-      
-                        <td>
-                          {% for mp in permisos %}
-      
-                            {% for acciones in editar %}
-                                {% if mp.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
-                                    <a href="{% url 'Academico:editar_menu' m.id_menu %}" class="btn bg-gradient-primary text-light"
-                                    title="Editar {{m.descripcion}}">
-                                    <i class="fas fa-info-circle"></i></a>
-                                {% endif %}
-                            {% endfor %}    
-      
-                            {% for acciones in eliminar %}
-                                {% if mp.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
-                                     <button onclick="modal('{% url 'Academico:eliminar_menu' m.id_menu %}')"
-                                      class="btn bg-gradient-danger text-light" title="Eliminar {{m.descripcion}}">
-                                      <i class="fas fa-exclamation-triangle"></i></button>
-                                {% endif %}
-                            {% endfor %}
-                            {% endfor %}
-                          </td>
-                </tr>
-              {% endif %}
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Menus disponibles en el sistema</h6>
     </div>
-  </div>
-</div>
 
+    <div class="card-body ">
+
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                <thead class="bg-gradient-primary">
+                <tr class="text-light text-center">
+                    <th>Nombre del menu</th>
+                    <th>Url</th>
+                    <th>Icono</th>
+                    <th>Acciones</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for m in menu %}
+                {% if m.id_padre != 0 %}
+                <tr class="text-center" style="border-width:3px;">
+                    <td class="text-dark" style="border-width:1px;">{{m.descripcion}}</td>
+                    <td>{{m.url}}</td>
+                    <td>{{m.icono}}</td>
+
+                    <td>
+                        {% for mp in permisos %}
+
+                        {% for acciones in editar %}
+                        {% if mp.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
+                        <a class="btn bg-gradient-primary text-light" href="{% url 'Academico:editar_menu' m.id_menu %}"
+                           title="Editar {{m.descripcion}}">
+                            <i class="fas fa-info-circle"></i></a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% for acciones in eliminar %}
+                        {% if mp.descripcion == acciones.descripcion and acciones.url == 'Academico:menu' %}
+                        <button class="btn bg-gradient-danger text-light"
+                                onclick="modal('{% url 'Academico:eliminar_menu' m.id_menu %}')" title="Eliminar {{m.descripcion}}">
+                            <i class="fas fa-exclamation-triangle"></i></button>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 
 {% endblock contenido_principal %}
 
 {% block extrajs %}
-
 
 
 <div class="modal fade" id="mostrar_modal" role="dialog">
@@ -94,28 +90,5 @@
 
 
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
-      "searching": true,
-      "ordering": false,
-      "language": {
-        "lengthMenu": "Mostrar _MENU_ por página",
-        "zeroRecords": "Sin datos",
-        "info": "Mostrando página _PAGE_ de _PAGES_",
-        "infoEmpty": "",
-        "search": "Buscar:",
-        "paginate": {
-          "first": "Primero",
-          "last": "Último",
-          "next": "Siguiente",
-          "previous": "Anterior"
-        },
-      }
-    });
-
-    $('.dataTables_length').addClass('bs-select');
-  });
-</script>
 
 {% endblock extrajs %}

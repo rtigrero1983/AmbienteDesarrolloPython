@@ -7,77 +7,64 @@
 {% block encabezado %}
 {% endblock encabezado %}
 {% block footer %}
-  
 {% endblock footer %}
 {% block contenido_principal %}
-
-<header class="cuadro_titulo bg-gradient-primary"> <h4 class="title" align="center"> Configuracion | Usuario</h4></header>
+<header class="cuadro_titulo bg-gradient-primary"><h4 align="center" class="title">Configuracion | Usuario</h4>
+</header>
 <br/>
-
-    {% for m in permisos %}
-    {% for acciones in agregar %}
-        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:usuarios' %}
-            <a href="{% url 'Academico:nuevo_usuario' %}" class="btn bg-gradient-primary text-light"  id="registrar">Agregar</a>
-        {% endif %}
-    {% endfor %}    
-  {% endfor %}
-
-     
-
-<br/><br/>
-
+{% for m in permisos %}
+{% for acciones in agregar %}
+{% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:usuarios' %}
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:nuevo_usuario' %}" id="registrar">Agregar</a>
+{% endif %}
+{% endfor %}
+{% endfor %}
+<br/>
+<br/>
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Usuarios disponibles en el sistema</h6>
-  </div>
-<div class="card-body">
-  <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr class="bg-gradient-primary text-light text-center">
-                      <th>Codigo</th>
-                      <th>Usuario</th>
-                        <th>Nombre</th>
-                        <th>Tipo usuario</th>
-                        <th>Acciones</th>
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Usuarios disponibles en el sistema</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered" id="dtBasicExample" width="100%">
+                <thead>
+                <tr class="bg-gradient-primary text-light text-center">
+                    <th>Codigo</th>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Tipo usuario</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for u in lista_usuarios %}
+                <tr>
+                    <td><strong>{{u.id_usuario}}</strong></td>
+                    <td><strong>{{u.usuario}}</strong></td>
+                    <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
+                    <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
+                    <td>
+                        <a class="btn bg-gradient-primary text-light"
+                           href="{% url 'Academico:editar_usuario' u.id_usuario %}" title="Editar {{u.usuario}}"><i
+                                class="fas fa-info-circle"></i></a>
+                        <a class="btn bg-gradient-danger text-light"
+                           href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" title="Eliminar {{u.usuario}}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
 
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  {% for u in lista_usuarios %}
-                    <tr>
-                      <td><strong>{{u.id_usuario}}</strong></td>
-                      <td><strong>{{u.usuario}}</strong></td>
-                        <td><strong>{{u.id_persona}} {{u.id_persona.apellidos}}</strong></td>
-                        <td><strong>{{u.id_genr_tipo_usuario}}</strong></td>
-                      <td>
-                          <a href="{% url 'Academico:editar_usuario' u.id_usuario %}" class="btn bg-gradient-primary text-light" title="Editar {{u.usuario}}"><i class="fas fa-info-circle"></i></a>
-                          <a href="{% url 'Academico:eliminar_usuario' u.id_usuario %}" class="btn bg-gradient-danger text-light" title="Eliminar {{u.usuario}}"><i class="fas fa-exclamation-triangle"></i></a>
-
-                      </td>
-                    </tr>
-                  {% endfor %}
-
-                  </tbody>
-                </table>
-              </div>
-
-            </div>
-          </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="modal_crear" role="dialog">
-
-
 </div>
-
 <div class="modal fade" id="modal_editar" role="dialog">
-
-
 </div>
-
 <div class="modal fade" id="modal_eliminar" role="dialog">
-
+</div>
 {% endblock contenido_principal %}
-
-

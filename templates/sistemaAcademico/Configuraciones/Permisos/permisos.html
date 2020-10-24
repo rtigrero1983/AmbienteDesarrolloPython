@@ -2,73 +2,69 @@
 {% block sidebar %} {% endblock sidebar %} {% block contenido_principal %}
 
 <header class="cuadro_titulo" class="title">
-  <h4>Configuracion | Permisos</h4>
+    <h4>Configuracion | Permisos</h4>
 </header>
-<br />
-     {% for m in permisos %}
-    {% for acciones in agregar %}
-        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
-            <a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a>
-            <br>
-        {% endif %}
-    {% endfor %}
-  {% endfor %}
+<br/>
+{% for m in permisos %}
+{% for acciones in agregar %}
+{% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
+<a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a>
+<br>
+{% endif %}
+{% endfor %}
+{% endfor %}
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary float-left">
-      Roles disponibles en el sistema
-    </h6>
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary float-left">
+            Roles disponibles en el sistema
+        </h6>
 
 
-
-        
-  </div>
-
-  <div class="card-body ">
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover" id="dtBasicExample" width="100%" cellspacing="0" data-sort="false"
-        data-page-length="5">
-        <thead class="bg-gradient-primary ">
-          <tr class="text-light text-center">
-            <th>Codigo rol</th>
-            <th>Menus disponibles para el rol</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for rol in p %}
-          <tr>
-            <td>{{ rol.id_rol.nombre }}</td>
-            <td class="text-dark">
-              {% for m in rol.menu.all %}
-              <!---->
-              {{ m }},
-              <!-- -->
-              {% endfor %}
-            </td>
-            <td class="text-center">
-
-                {% for m in permisos %}
-                {% for acciones in editar %}
-                    {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
-                        <a href="{% url 'Academico:editar_permiso' rol.id_permiso %}" class="btn bg-gradient-primary text-light"
-                        title="Asignar permiso a {{rol.nombre}}">
-                        <i class="fas fa-info-circle"></i></a>
-                    {% endif %}
-                {% endfor %}    
-                {% endfor %}
-
-              
-
-
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
     </div>
-  </div>
-  {% endblock contenido_principal %} {% block footer %} {% endblock footer %}
-  <!-- -->
-  {% block scrool %} {% endblock scrool %}
+
+    <div class="card-body ">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                <thead class="bg-gradient-primary ">
+                <tr class="text-light text-center">
+                    <th>Codigo rol</th>
+                    <th>Menus disponibles para el rol</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for rol in p %}
+                <tr>
+                    <td>{{ rol.id_rol.nombre }}</td>
+                    <td class="text-dark">
+                        {% for m in rol.menu.all %}
+                        <!---->
+                        {{ m }},
+                        <!-- -->
+                        {% endfor %}
+                    </td>
+                    <td class="text-center">
+
+                        {% for m in permisos %}
+                        {% for acciones in editar %}
+                        {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
+                        <a class="btn bg-gradient-primary text-light"
+                           href="{% url 'Academico:editar_permiso' rol.id_permiso %}"
+                           title="Asignar permiso a {{rol.nombre}}">
+                            <i class="fas fa-info-circle"></i></a>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+
+
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endblock contenido_principal %} {% block footer %} {% endblock footer %}
+    <!-- -->
+    {% block scrool %} {% endblock scrool %}
 </div>
