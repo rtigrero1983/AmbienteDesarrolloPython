@@ -1,51 +1,56 @@
-        {% if roles %}
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <form class="formulario" action="{% url 'Academico:editar_rol' roles.id_rol %}" method="POST">{% csrf_token %}
-                    <div class="modal-body">
-                        <h4 class="titulo">Configuracion | Editar Rol: {{roles.nombre}} </h4>
-                        <br><br>
-                        <label class="texto" for="id_modulo">Id: </label>
-                        <input type="text" id="id_modulo" name="id_modulo" value="{{roles.id_rol}}" readonly class="form-control">
-                        <br><br>
-                        <label class="texto">Nombre:</label>
-                        <input type="text" name="nombre" id="nombre" value="{{roles.nombre}}" required class="form-control">
-                        <br/>
-                        <label class="texto">Codigo:</label>
-                        <input type="text" class="form-control" name="codigo" id="codigo" value="{{roles.codigo}}">
-                        <br/>
-                        <center>
-                            <button type="submit" class="btn btn-outline-primary">Guardar</button>
-                            <button type="reset" class="btn btn-outline-info">Restablecer </button>
-                            <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                        </center>
-                    </div>
-                </form>
+{% if roles %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <form action="{% url 'Academico:editar_rol' roles.id_rol %}" class="formulario" method="POST">{% csrf_token %}
+            <div class="modal-body">
+                <div class="card-header bg-primary">
+                    <h4 class="cuadro-titulo text-center text-light">Configuracion | Editar Rol: {{roles.nombre}} </h4>
+                </div>
+                <br>
+                <label class="texto" for="id_modulo">Id: </label>
+                <input class="form-control" id="id_modulo" name="id_modulo" readonly type="text"
+                       value="{{roles.id_rol}}">
+                <br>
+                <label class="texto">Nombre:</label>
+                <input class="form-control" id="nombre" name="nombre" required type="text" value="{{roles.nombre}}">
+                <br/>
+                <label class="texto">Codigo:</label>
+                <input class="form-control" id="codigo" name="codigo" type="text" value="{{roles.codigo}}">
+                <br/>
+                <center>
+                    <button class="btn btn-outline-primary" type="submit">Guardar</button>
+                    <button class="btn btn-outline-info" type="reset">Restablecer</button>
+                    <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                </center>
             </div>
-        </div>
-        {% else %}
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                    <form action=" {% url 'Academico:nuevo_rol' %}" class="formulario" method="POST">{% csrf_token %}
-                        <div class="card-header bg-primary">
-                            <h4 class="cuadro-titulo text-center text-light">Configuracion | Registrar Rol</h4>
-                        </div>
-                        <div class="modal-body">
-                            <br/>
-                            <label class="texto">Codigo:</label>
-                            <input class="form-control text-dark" name="codigo" placeholder="ingrese un codigo" type="text" value="{{ roles.codigo }}" required>
-                            <br/>
-                            <label class="texto">Nombre:</label>
-                            <input class="form-control text-dark" placeholder="ingrese un nombre" name="nombre" type="text" required>
-                            <br/>
-                            <div class="text-center">
-                                <button class="btn btn-outline-primary" type="submit">Registrar</button>
-                                <button class="btn btn-outline-info" type="reset">Resetear</button>
-                                <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </div>
-                    </form>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <form action=" {% url 'Academico:nuevo_rol' %}" class="formulario" method="POST">{% csrf_token %}
+            <div class="modal-body">
+                <div class="card-header bg-primary">
+                    <h4 class="cuadro-titulo text-center text-light">Configuracion | Registrar Rol</h4>
+                </div>
+                <br><br>
+                <label class="texto">Codigo:</label>
+                <input class="form-control text-dark" name="codigo" placeholder="ingrese un codigo" required
+                       type="text" value="{{ roles.codigo }}">
+                <br><br>
+                <label class="texto">Nombre:</label>
+                <input class="form-control text-dark" name="nombre" placeholder="ingrese un nombre" required
+                       type="text">
+                <br/>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary" type="submit">Registrar</button>
+                    <button class="btn btn-outline-info" type="reset">Resetear</button>
+                    <button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                </div>
             </div>
-        </div>
-        {% endif %}
+        </form>
+    </div>
+</div>
+{% endif %}
 
