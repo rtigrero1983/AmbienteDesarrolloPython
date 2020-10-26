@@ -43,7 +43,7 @@
                     <td class="text-center">
                         <a href="{% url 'Academico:consultar_empleado' m.id_persona %}" class="btn bg-gradient-success text-light" title="Consultar {{m.nombres}}"><i class="fas fa fa-male"></i></a>
                         <a href="{% url 'Academico:editar_empleado' m.id_persona %}" class="btn bg-gradient-primary text-light" title="Editar {{m.nombres}}"><i class="fas fa-info-circle"></i></a>
-                        <a href="{% url 'Academico:eliminar_empleado' m.id_persona %}" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}"><i class="fas fa-exclamation-triangle"></i></a>
+                        <a onclick="modal('{% url 'Academico:eliminar_empleado' m.id_persona %}')" class="btn bg-gradient-danger text-light" title="Eliminar {{m.nombres}}"><i class="fas fa-exclamation-triangle"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -53,3 +53,8 @@
     </div>
 </div>
 {% endblock contenido_principal %}
+{% block extrajs %}
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+{% endblock extrajs %}

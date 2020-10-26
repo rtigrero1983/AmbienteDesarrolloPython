@@ -44,14 +44,14 @@
                     <td>{{m.identificacion}}</td>
                     <td class="text-center">
                         <a class="btn bg-gradient-success text-light"
-                           href="{% url 'Academico:consultar_estudiante' m.id_persona %}" title="Consultar {{m.nombres}}"><i
-                                class="fas fa fa-male"></i></a>
+                           href="{% url 'Academico:consultar_estudiante' m.id_persona %}" title="Consultar {{m.nombres}}">
+                            <i class="fas fa fa-male"></i></a>
                         <a class="btn bg-gradient-primary text-light"
-                           href="{% url 'Academico:editar_estudiante' m.id_persona %}" title="Editar {{m.nombres}}"><i
-                                class="fas fa-info-circle"></i></a>
+                           href="{% url 'Academico:editar_estudiante' m.id_persona %}" title="Editar {{m.nombres}}">
+                            <i class="fas fa-info-circle"></i></a>
                         <a class="btn bg-gradient-danger text-light"
-                           href="{% url 'Academico:eliminar_estudiante' m.id_persona %}" title="Eliminar {{m.nombres}}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
+                           onclick="modal('{% url 'Academico:eliminar_estudiante' m.id_persona %}')" title="Eliminar {{m.nombres}}">
+                            <i class="fas fa-exclamation-triangle"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -61,6 +61,11 @@
     </div>
 </div>
 {% endblock contenido_principal %}
+{% block extrajs %}
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+{% endblock extrajs %}
 
 
 
