@@ -1,31 +1,25 @@
 <div class="modal-dialog modal-lg-4" role="document">
-
     <div class="modal-content">
+        <form action="{% url 'Academico:eliminar_empleado' empleado.id_persona %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <header class="cuadro_titulo bg-danger">
+                    <h4 class="titulo">Eliminar</h4>
+                </header>
 
-        <div class="contenido">
-
-            <form action="{% url 'Academico:eliminar_empleado' empleado.id_persona %}" method="POST"> {% csrf_token %}
-
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-danger">Eliminar</h6>
-                    </div>
-
-                    <div class="card-body">
-                        Esta seguro que deseas eliminar este empleado ?<br><br>
-                        Nombre del empleado: <label>{{ empleado.nombres }}</label><br>
-                        Apellido del empleado: <label>{{ empleado.apellidos }}</label><br>
-                        Numero de Identificacion: <label>{{ empleado.identificacion }}</label><br>
-
-                        <div class="botones">
-                            <br/>
-                            <button class="btn btn-outline-danger" type="submit">Eliminar</button>
-                            <a class="btn btn-outline-primary" href="{% url 'Academico:empleado' %}">Cancelar</a>
-                        </div>
+                <div class="contenido text-dark">
+                    Esta seguro que deseas eliminar este empleado ?<br><br>
+                    Nombre del empleado: <label>{{ empleado.nombres }}</label><br>
+                    Apellido del empleado: <label>{{ empleado.apellidos }}</label><br>
+                    Numero de Identificacion: <label>{{ empleado.identificacion }}</label><br>
+                    <div class="botones">
+                        <br/>
+                        <button class="btn btn-outline-danger" type="submit">Eliminar</button>
+                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 
