@@ -8,7 +8,7 @@
 {% for m in permisos %}
 {% for acciones in agregar %}
 {% if m.descripcion == acciones.descripcion and acciones.url == 'Academico:permisos' %}
-<a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a>
+<a class="btn bg-gradient-primary text-light " href="{% url 'Academico:agregar_per' %}"> Agregar</a><br>
 <br>
 {% endif %}
 {% endfor %}

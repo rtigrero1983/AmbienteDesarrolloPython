@@ -48,9 +48,13 @@
             <td class="text-center">
               <a href="{% url 'Academico:editar_empresa' em.id_empresa %}" class="btn bg-gradient-primary text-light"
                 title="Editar {{em.nombre}}"><i class="fas fa-info-circle"></i></a>
-              <a href="{% url 'Academico:eliminar' em.id_empresa %}" class="btn bg-gradient-danger text-light"
-                title="Eliminar {{em.nombre}}"><i class="fas fa-exclamation-triangle"></i></a>
-              <!--   <a href="#opcion_{{m.id_menu}}" data-toggle="collapse" role="button"  aria-dropeffect="link" aria-controls="opcion_{{m.id_menu}}" class="btn btn-success btn-circle" title="Ver contenido de {{m.descripcion}}"><i class="fas fa-arrow-down"></i></a>-->
+
+
+               <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_unidad('{% url 'Academico:eliminar' em.id_empresa  %}')"
+                           title="Eliminar {{em.nombre}}" data-toggle="modal" data-target="eliminar_unidades"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                        <div class="modal fade" id="eliminar_unidades" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
             </td>
           </tr>
           {% endfor %}
@@ -65,20 +69,11 @@
 {% endblock contenido_principal %}
 
 {% block extrajs %}
-
-
-
-
-<div class="modal fade" id="modal_crear" role="dialog">
-
-</div>
-<div class="modal fade" id="modal_eliminar" role="dialog">
-
-</div>
-
-<div class="modal fade" id="modal_editar" role="dialog">
-
-</div>
-
-
+    <script>
+        function eliminar_unidad(url) {
+            $('#eliminar_unidades').load(url,function () {
+                $(this).modal('show');
+            });
+        }
+    </script>
 {% endblock extrajs %}

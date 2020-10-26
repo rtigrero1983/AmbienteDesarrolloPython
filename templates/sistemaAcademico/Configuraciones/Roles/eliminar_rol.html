@@ -1,22 +1,28 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-				<form method="POST" action="{% url 'Academico:eliminar_rol' roles.id_rol %}"> {% csrf_token %}
-					 <div class="modal-body">
-             			<header class="cuadro_titulo bg-danger">
-                    		<h4 class="titulo">Configuracion | Eliminar Rol</h4>
-                    	</header>
-								<div class="contenido text-dark">
-             			   			 Esta seguro que deseas eliminar este opcion del rol {{roles.nombre}}?<br>
-             			   			 Nombre del Rol: <label>{{roles.nombre}}</label><br>
-                                    <div class="botones">
-                                        <br/>
-                                        <button class="btn btn-outline-danger" type="submit">Eliminar</button>
-                                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                                    </div>
-        						</div>
-             			 		</div>
-             		</div>
-				</form>
+        <form method="POST" action="{% url 'Academico:eliminar_rol' roles.id_rol %}"> {% csrf_token %}
+            <div class="modal-body">
+                <header class="cuadro_titulo bg-danger">
+                    <h4 class="titulo">Configuracion | Eliminar Rol</h4>
+                </header>
+                <div class="contenido text-dark text-center">
+                    ¿Esta seguro que deseas eliminar esta opción?<br>
+                    Nombre del Rol: <strong>{{roles.nombre}}</strong><br><br>
+                    <div class="row darkwhite-bg py-2">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class=" col-5 col-md-6 mb-0">
+                                    <button type="submit" class="btn btn-outline-danger btn-block">Eliminar</button>
+                                </div>
+                                <div class=" col-5 col-md-6 mb-0">
+                                    <button class="btn btn-outline-primary btn-block" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 	</div>
 </div>
 
