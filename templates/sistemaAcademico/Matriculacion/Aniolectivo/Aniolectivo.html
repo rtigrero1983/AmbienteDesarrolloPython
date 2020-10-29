@@ -49,10 +49,11 @@
                         <a class="btn bg-gradient-primary text-light"
                            href="{% url 'Academico:editarAniolectivo' Aniolectivo.id_anio_lectivo %}" title="Editar"><i
                                 class="fas fa-info-circle"></i></a>
-                        <a class="btn bg-gradient-danger text-light"
-                           href="{% url 'Academico:eliminarAniolectivo' Aniolectivo.id_anio_lectivo %}"
-                           title="Eliminar"><i
+
+                        <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_anio('{%url 'Academico:eliminarAniolectivo' Aniolectivo.id_anio_lectivo %}')"
+                           title="Eliminar" data-toggle="modal" data-target="eliminar_anios"><i
                                 class="fas fa-exclamation-triangle"></i></a>
+                        <div class="modal fade" id="eliminar_anios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 
                     </td>
                 </tr>
@@ -65,17 +66,16 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal_crear" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="modal_editar" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="modal_eliminar" role="dialog">
-</div>
 {% endblock contenido_principal %}
+{% block extrajs %}
+<script>
+
+    function eliminar_anio(url) {
+        $('#eliminar_anios').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}
+
 

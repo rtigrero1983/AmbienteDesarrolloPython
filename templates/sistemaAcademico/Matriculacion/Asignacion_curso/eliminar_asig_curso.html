@@ -1,29 +1,28 @@
-<div class="modal-dialog modal-mg-8" role="document">
+<div class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
         <form method="POST" action="{% url 'Academico:eliminar_asig_curso' anio.id_mov_anioelectivo_curso %}"> {% csrf_token %}
 
             <div class="modal-body ">
 
                 <header class="cuadro_titulo bg-danger ">
-                    <h4 class="titulo">Configuracion | Eliminar Asignación Curso</h4>
+                    <h4 class="titulo">Matriculacion | Eliminar Asignación Curso</h4>
                 </header>
-                <div class="contenido text-dark">
-                    Esta seguro que deseas eliminar esta Asignación?<br>
-                    Año Electivo: <label>{{ anio.id_anio_electivo }}</label><br>
-                    Curso: <label>{{ anio.id_curso }}</label><br>
-                    Paralelo: <label>
-
-                    {% for i in list_p %}
-                        {% for a in i.id_genr_paralelo.all %}
-                            {{ a }},
-                    {% endfor %}
-                    {% endfor %}
-
-                </label><br>
-                    <div class="text-center">
-                        <br/>
-                        <button type="submit" class="btn btn-outline-danger btn-user">Eliminar</button>
-                        <button class="btn btn-outline-primary btn-user" data-dismiss="modal">Cancelar</button>
+                <div class="contenido text-dark text-center">
+                    ¿Esta seguro que desea eliminar esta Asignación?<br>
+                    Año Electivo: <strong>{{ anio.id_anio_electivo }}</strong><br>
+                    Curso: <strong>{{ anio.id_curso }}</strong><br>
+                    Paralelo: <strong>{{ anio.id_genr_paralelo}}</strong><br><br>
+                    <div class="row darkwhite-bg py-2">
+                        <div class="col-12">
+                            <div class="form-row">
+                                <div class=" col-5 col-md-6 mb-0">
+                                    <button type="submit" class="btn btn-outline-danger btn-block">Eliminar</button>
+                                </div>
+                                <div class=" col-5 col-md-6 mb-0">
+                                    <button class="btn btn-outline-primary btn-block" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

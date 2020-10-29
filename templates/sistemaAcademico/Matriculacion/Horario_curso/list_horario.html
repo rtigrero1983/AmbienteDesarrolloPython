@@ -42,9 +42,13 @@
                             <td>{{m.id_genr_dia}}</td>
                             <td>{{m.hora_inicio}}</td>
                             <td>{{m.hora_fin}}</td>
-                          <td class="text-center">
+                          <td align="center">
                               <a href="{% url 'Academico:editar_horario' m.id_horario %}" class="btn bg-gradient-primary text-light" title="Editar {{m.id_materia_profesor}}"><i class="fas fa-info-circle"></i></a>
-                              <a href="{% url 'Academico:eliminar_horario' m.id_horario %}" class="btn bg-gradient-danger text-light" title="Eliminar {{m.id_materia_profesor}}"><i class="fas fa-exclamation-triangle"></i></a>
+
+                              <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_horario('{% url 'Academico:eliminar_horario' m.id_horario %}')"
+                               title="Eliminar {{m.id_materia_profesor}}" data-toggle="modal" data-target="eliminar_horarios"><i
+                                    class="fas fa-exclamation-triangle"></i></a>
+                                <div class="modal fade" id="eliminar_horarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
                           </td>
                         </tr>
                     {% endfor %}
@@ -54,6 +58,16 @@
             </div>
           </div>
 {% endblock contenido_principal %}
+{% block extrajs %}
+<script>
+
+    function eliminar_horario(url) {
+        $('#eliminar_horarios').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}
 
 
 

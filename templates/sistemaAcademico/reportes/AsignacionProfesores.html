@@ -46,9 +46,9 @@
                     <td align="center">
                         <a class="btn bg-gradient-primary text-light"
                            href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" title="">Asignar Materia</a>
-                        <a class="btn bg-gradient-danger text-light"
-                           href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor  %}"
-                           title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
+                         <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_prof('{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}')"
+                           title="Eliminar" data-toggle="modal" data-target="eliminar_profe">Eliminar</a>
+                        <div class="modal fade" id="eliminar_profe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
                     </td>
                 </tr>
                 {% endfor %}
@@ -60,9 +60,11 @@
                     <td align="center">
                         <a class="btn bg-gradient-primary text-light"
                            href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" title="">Asignar Materia</a>
-                        <a class="btn bg-gradient-danger text-light"
-                           href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}"
-                           title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
+
+
+                        <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_prof('{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}')"
+                           title="Eliminar" data-toggle="modal" data-target="eliminar_profe">Eliminar</a>
+                        <div class="modal fade" id="eliminar_profe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
                     </td>
                 </tr>
                 {% endfor %}
@@ -73,16 +75,15 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal_crear" role="dialog">
 
-
-</div>
-
-<div class="modal fade" id="modal_editar" role="dialog">
-
-
-</div>
-
-<div class="modal fade" id="modal_eliminar" role="dialog">
-</div>
 {% endblock contenido_principal %}
+{% block extrajs %}
+<script>
+
+    function eliminar_prof(url) {
+        $('#eliminar_profe').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}

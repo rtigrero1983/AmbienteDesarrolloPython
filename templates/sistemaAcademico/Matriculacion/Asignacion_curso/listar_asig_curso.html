@@ -45,9 +45,10 @@
                             <a class="btn text-light bg-gradient-primary"
                                onclick="modal('{% url 'Academico:editar_esignacion_curso' a.id_mov_anioelectivo_curso %}')" title="Editar"><i
                                     class="fas fa-info-circle"></i></a>
-                            <a class="btn text-light bg-gradient-danger"
-                               onclick="modal('{% url 'Academico:eliminar_asig_curso' a.id_mov_anioelectivo_curso %}')" title="Eliminar"><i
+                            <a type="button" class="btn text-light bg-gradient-danger"
+                               onclick="modal_d('{% url 'Academico:eliminar_asig_curso' a.id_mov_anioelectivo_curso %}')" title="Eliminar"><i
                                     class="fas fa-exclamation-triangle"></i></a>
+                            <div class="modal fade" id="modales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
                         </div>
                     </td>
                 </tr>
@@ -64,10 +65,14 @@
 
 {% block extrajs %}
 
+<script>
 
-<div class="modal fade" id="mostrar_modal" role="dialog">
-
-</div>
+    function modal_d(url) {
+        $('#modales').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+</script>
 
 
 {% endblock extrajs %}
