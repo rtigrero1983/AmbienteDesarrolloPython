@@ -10,7 +10,7 @@ from sistemaAcademico.Apps.GestionAcademica.Controladores.Reportes_especiales.Es
 from sistemaAcademico.Apps.GestionAcademica.Filters.filters_admision import GEN_autocomplete, TID_autocomplete
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_aniolectivo import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.asignacion_curso import *
-from .Controladores.Matriculacion.Estructura_view_curso import ListaCurso, CreateCurso, UpdateCurso
+from .Controladores.Matriculacion.Estructura_view_curso import ListaCurso, CreateCurso, UpdateCurso, DeleteCurso
 from .Controladores.Matriculacion.Estructura_view_horasDocentes import CreateHorasDocentes
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_horario_curso import *
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Asignacion_materia_curso import *
@@ -164,6 +164,7 @@ urlpatterns = [
     path('cursos/', ListaCurso.as_view(), name='cursos'),
     path('create_curso/', CreateCurso.as_view(), name='create_curso'),
     path('edit_curso/<int:pk>', UpdateCurso.as_view(), name='edit_curso'),
+    path('eliminar_curso/<int:pk>', DeleteCurso.as_view(), name='eliminar_curso'),
     # ---------registro notas -----
     path('registronotas/', List_Notas.as_view(), name='registro_notas'),
     path('crear_registronotas/', Create_notas.as_view(), name='crear_registro_notas'),

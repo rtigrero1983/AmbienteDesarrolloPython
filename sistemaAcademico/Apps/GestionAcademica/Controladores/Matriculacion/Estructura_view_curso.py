@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovCabCurso
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_matriculacion import CabCursoForm
@@ -23,5 +23,11 @@ class UpdateCurso(UpdateView):
     model = MovCabCurso
     form_class = CabCursoForm
     template_name = 'sistemaAcademico/Matriculacion/Curso/edit_curso.html'
+    success_url = reverse_lazy('Academico:cursos')
+    context_object_name = 'c'
+
+class DeleteCurso(DeleteView):
+    model =  MovCabCurso
+    template_name = 'sistemaAcademico/Matriculacion/Curso/eliminar_curso.html'
     success_url = reverse_lazy('Academico:cursos')
     context_object_name = 'c'
