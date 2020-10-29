@@ -1,3 +1,16 @@
+{% extends 'base/base.html' %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+
+    <title>Editar Empleado</title>
+
+{% endblock encabezado %}
+{% block footer %}
+{% endblock footer %}
+{% block contenido_principal%}
 {% load crispy_forms_tags %}
 <form method="POST" action="{% url 'Academico:editar_empleado' e.id_persona  %}">
 {% csrf_token %}
@@ -128,3 +141,4 @@
             </div>
 </form>
 {% endif %}
+{% endblock contenido_principal%}
