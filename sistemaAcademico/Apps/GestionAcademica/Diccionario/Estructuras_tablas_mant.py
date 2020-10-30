@@ -115,7 +115,7 @@ class MantRepresentante(models.Model):
 
 
     def __str__(self):
-        return self.usuario_ing, self.terminal_ing
+        return self.id_persona.nombres, self.id_persona.apellidos
 
 
 
@@ -138,7 +138,7 @@ class MantEstudiante(models.Model):
 
 
     def __str__(self):
-        return self.tipo_estudiante, self.usuario_ing
+        return self.id_persona.nombres, self.id_persona.apellidos
 
 
 

@@ -4,17 +4,68 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_mov_materi
 from django.shortcuts import render, redirect
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleMateriaCurso
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+
+
 class Crear_materia_curso(CreateView):
     model = MovDetalleMateriaCurso
     form_class = Mov_Materia_Curso_forms
     template_name = 'sistemaAcademico/Matriculacion/Asignacion_Materia_Curso/crear.html'
     success_url = reverse_lazy('Academico:asignacion_materia_curso')
+
+    def post(self,  request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            data = form.save()
+            materia = data.id_genr_materias
+            anio = data.id_mov_anio_lectivo_curso
+            query =MovDetalleMateriaCurso.objects.filter(id_genr_materias=materia,id_mov_anio_lectivo_curso=anio,estado=97).count()
+
+            if query >1:
+                print(query)
+                data.delete()
+                messages.error(request, 'Esta materia ya se encuentra asignada')
+                return self.render_to_response(self.get_context_data(form=form))
+
+            else:
+                return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+
+        
+
+    
 class Editar_materia_curso(UpdateView):
     model = MovDetalleMateriaCurso
     form_class = Mov_Materia_Curso_forms
     context_object_name = 'mat'
     template_name = 'sistemaAcademico/Matriculacion/Asignacion_Materia_Curso/edit.html'
     success_url = reverse_lazy('Academico:asignacion_materia_curso')
+
+    def post(self,  request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            data = form.save()
+            materia = data.id_genr_materias
+            anio = data.id_mov_anio_lectivo_curso
+            query =MovDetalleMateriaCurso.objects.filter(id_genr_materias=materia,id_mov_anio_lectivo_curso=anio,estado=97).count()
+
+            if query >1:
+                print(query)
+                data.delete()
+                messages.error(request, 'Esta materia ya se encuentra asignada')
+                return self.render_to_response(self.get_context_data(form=form))
+
+            else:
+                return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+    
 class Listar_materia_curso(ListView):
     model = MovDetalleMateriaCurso
     context_object_name = 'mat'

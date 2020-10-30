@@ -6,7 +6,11 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantEstudiante,MantPersona
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 from django.urls import reverse_lazy
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovMatriculacionEstudiante
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
+from django.utils import timezone
+import socket
+
 def filtro_estudiantes_lista(request):
     if request.GET:
         cox = {}
@@ -49,6 +53,40 @@ class FilterEstudinatesestado(UpdateView):
     context_object_name = 'id'
     template_name = 'sistemaAcademico/Matriculacion/Estudiantes_filtros/Actualizar_estado.html'
     success_url = reverse_lazy('Academico:estudiante_filtro')
+
+   
+    def post(self, request, **kwargs):
+        request.POST = request.POST.copy()
+        usuario = ConfUsuario.objects.get(
+               id_usuario=request.session.get('usuario'))
+        # matricula
+        id_matricula=kwargs['pk']
+        matricula = MovMatriculacionEstudiante.objects.get(id_matriculacion_estudiante=id_matricula)
+
+        if matricula.estado.idgenr_general==97:
+            #anio lectivo curso de la matricula
+            id_aniolectivo_curso = matricula.id_mov_anioelectivo_curso.id_mov_anioelectivo_curso
+            curso = Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id_aniolectivo_curso)
+            print(curso)
+            materia_curso = MovDetalleMateriaCurso.objects.filter(id_mov_anio_lectivo_curso=curso.id_mov_anioelectivo_curso)
+            print(materia_curso)
+            for i in materia_curso:
+               materia = Mov_Materia_profesor.objects.get(id_detalle_materia_curso=i.id_detalle_materia_curso)
+               detaRegistroNotas = MovDetalleRegistroNotas(id_matriculacion_estudiante=matricula.id_matriculacion_estudiante,id_materia_profesor=materia.id_materia_profesor)
+               detaRegistroNotas.save()
+               print(detaRegistroNotas)
+               cabRegistro = MovCabRegistroNotas(id_detalle_registro_notas=detaRegistroNotas.id_detalle_registro_notas,id_mov_anioelectivo_curso=i.id_mov_anio_lectivo_curso,
+               promedio_curso_1q=0,promedio_curso_2q=0,promedio_curso_general=0,fecha_ingreso=timezone.now(),usuario_ing=usuario.usuario,terminal_ing=socket.gethostname())
+               print(cabRegistro)
+               cabRegistro.save()
+
+        return super(FilterEstudinatesestado, self).post(request, **kwargs)
+        
+
+        
+            
+
+
 class FilterTipoEstudinates(UpdateView):
     model = MantEstudiante
     form_class = FilterTipoEstudinatesforms

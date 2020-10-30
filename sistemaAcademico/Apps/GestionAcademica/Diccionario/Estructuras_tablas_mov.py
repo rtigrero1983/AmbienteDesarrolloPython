@@ -146,7 +146,7 @@ class Mov_Materia_profesor(models.Model):
 
 
     def __str__(self):
-        return self.id_empleado.id_persona.nombres+" "+self.id_empleado.id_persona.apellidos+""+",".join([item.id_genr_materias.nombre  for item in self.id_detalle_materia_curso.filter(estado=97).select_related('id_genr_materias')])
+        return self.id_empleado.id_persona.nombres+" "+self.id_empleado.id_persona.apellidos
 
 class Mov_Horario_materia(models.Model):
     id_horario = models.AutoField(primary_key=True)

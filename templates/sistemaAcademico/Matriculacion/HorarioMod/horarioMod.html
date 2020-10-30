@@ -18,6 +18,16 @@
             <div class="row">
                 <div class="col-md-9 order-md-1">
                     <form action="#" enctype="multipart/form-data" class="form-vertical" method="post">
+                      {% if messages %}
+                <div class="alert alert-danger  col-0 col-md-8 mb-0" role="alert">
+                    <ul>
+                    {% for message in messages %}
+                   <li> {{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                {% endif %}
                         <div class="col-auto my-1" id="myDIV">{{form|crispy}}</div>
                         <div class="text-center">
                             <button class="btn btn-outline-primary" type="submit">Añadir</button>
