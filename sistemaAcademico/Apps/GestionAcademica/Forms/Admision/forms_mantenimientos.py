@@ -572,7 +572,7 @@ class EstudianteForm(ModelForm):
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
-            "celular": forms.NumberInput(attrs={"class": "form-control",'minlength':'10', "placeholder": "Celular"}),
+            "celular": forms.TextInput(attrs={"class": "form-control", 'minlength':'10', "placeholder": "Celular"}),
 
             "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
