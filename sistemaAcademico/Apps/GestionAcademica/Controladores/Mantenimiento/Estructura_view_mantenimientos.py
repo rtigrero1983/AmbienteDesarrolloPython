@@ -117,6 +117,10 @@ class NuevoEstudiante(CreateView):
             estudiante.fecha_ingreso = timezone.now()
             estudiante.usuario_ing = usuario.usuario
             estudiante.terminal_ing = socket.gethostname()
+            id_persona = MantEmpleado.objects.get(id_persona=estudiante.id_persona)
+            estudiante_model = MantEstudiante(id_persona=id_persona,fecha_ingreso=timezone.now(),tipo_estudiante='Asignado',usuario_ing=usuario.usuario
+            ,terminal_ing=socket.gethostname())
+            estudiante_model.save()
             form.save()
             return HttpResponseRedirect(self.get_success_url())
         else:
