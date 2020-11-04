@@ -23,6 +23,7 @@ class EmpleadoForm(ModelForm):
             "apellidos",
             "id_genr_tipo_identificacion",
             "identificacion",
+            "direccion",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -67,6 +68,7 @@ class EmpleadoForm(ModelForm):
             "apellidos": "Apellidos",
             "id_genr_tipo_identificacion": "Tipo de Identificacion",
             "identificacion": "Identificacion",
+            "direccion": "Direccion",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
             "id_genr_genero": "Genero",
@@ -152,6 +154,7 @@ class EditarEmpleadoForm(ModelForm):
             "apellidos",
             "id_genr_tipo_identificacion",
             "identificacion",
+            "direccion",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -196,6 +199,7 @@ class EditarEmpleadoForm(ModelForm):
             "apellidos": "Apellidos",
             "id_genr_tipo_identificacion": "Tipo de Identificacion",
             "identificacion": "Identificacion",
+            "direccion": "Direccion",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
             "id_genr_genero": "Genero",
@@ -283,6 +287,7 @@ class ConsultarEmpleadoForm(ModelForm):
             "apellidos",
             "id_genr_tipo_identificacion",
             "identificacion",
+            "direccion",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -327,6 +332,7 @@ class ConsultarEmpleadoForm(ModelForm):
             "apellidos": "Apellidos",
             "id_genr_tipo_identificacion": "Tipo de Identificacion",
             "identificacion": "Identificacion",
+            "direccion": "Direcccion",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
             "id_genr_genero": "Genero",
@@ -411,6 +417,7 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['fecha_de_nacimiento'].widget.attrs['readonly'] = True
         self.fields['lugar_nacimiento'].widget.attrs['readonly'] = True
         self.fields['id_genr_genero'].widget.attrs['disabled'] = 'disabled'
+        self.fields['direccion'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_pais'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_provincia'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_ciudad'].widget.attrs['disabled'] = 'disabled'
