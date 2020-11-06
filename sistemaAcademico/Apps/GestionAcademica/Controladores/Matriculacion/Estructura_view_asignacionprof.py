@@ -44,8 +44,8 @@ class List_docente_asignado(ListView):
 class List_docente_sin_asignar(ListView):
     model = Mov_Materia_profesor
     template_name = 'sistemaAcademico/reportes/ProfesorSinAsignar.html'
-    context_object_name = 'lista_profesor_sin_asignar'
     queryset = Mov_Materia_profesor.objects.filter(id_empleado__id_persona__estado = 97)
+
     def get(self, request):
         context = {'lista_profesor_sin_asignar': None}
         profesores = []
