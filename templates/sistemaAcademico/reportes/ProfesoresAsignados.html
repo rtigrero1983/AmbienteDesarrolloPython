@@ -1,5 +1,4 @@
 {% extends 'base/base.html' %}
-
 {% block sidebar %}
 {% endblock sidebar %}
 {% block modulo %}
@@ -7,13 +6,10 @@
 {% block encabezado %}
 {% endblock encabezado %}
 {% block footer %}
-
 {% endblock footer %}
 {% block contenido_principal %}
-
 <header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Asignacion |
     Profesores </h4></header>
-
 <br/>
 <a class="btn bg-gradient-primary text-light" href="{% url 'Academico:asignacion_materiasprof'%}">Todos Los
     Profesores</a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -23,10 +19,9 @@
     Asignar</a>
 <br/>
 <br/>
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Registros de Docentes</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Registros de Docentess</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -35,40 +30,78 @@
                 <tr class="text-light text-center">
                     <th>Codigo</th>
                     <th>Profesor</th>
+                    <th>Materia</th>
+                    <th>Curso</th>
                     <th>Opciones</th>
                 </tr>
+
                 </thead>
+
                 <tbody>
-                {%if lista_profesor_asignados%}
-                {% for info in lista_profesor_asignados %}
+
+                {% for info in lista_profesor %}
+
                 <tr class="text-dark">
-                    <td>{{info.id_materia_profesor}}</td>
-                    <td>{{info.id_empleado.id_persona.nombres}}</td>
-                    <td align="center">
-                        <a class="btn bg-gradient-primary text-light"
-                           href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" title="Editar">Editar</a>
+
+                    {% for a in info  %}
 
 
-                        <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_prof('{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}')"
-                           title="Eliminar {{info.id_empleado.id_persona.nombres}}" data-toggle="modal" data-target="eliminar_profe">Eliminar</a>
-                        <div class="modal fade" id="eliminar_profe" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+                    {% if not a.id_materia_profesor %}
+
+                     <td>
+
+                    {{ a }}
+
                     </td>
+
+                     {% else %}
+
+                     <td align="center">
+
+                        <a class="btn bg-gradient-success text-light"
+
+                           href="{% url 'Academico:horario_mod' a.id_materia_profesor  %}" title="Asignar Materia"> <i class="fas fa-atlas"></i></a>
+
+                       <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_prof('{% url 'Academico:eliminar_profesor' a.id_materia_profesor %}')"
+                           title="Eliminar" data-toggle="modal" data-target="eliminar_profs"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                        <div class="modal fade" id="eliminar_profs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+
+                    </td>
+
+                    {% endif %}
+
+                    {% endfor %}
+
+
+
+
+
                 </tr>
+
                 {% endfor %}
-                {%endif%}
+
+
                 </tbody>
+
             </table>
+
         </div>
+
     </div>
+
 </div>
+
+
 
 
 {% endblock contenido_principal %}
 {% block extrajs %}
 <script>
-
+    var $ = jQuery.noConflict();
     function eliminar_prof(url) {
-        $('#eliminar_profe').load(url,function () {
+        $('#eliminar_profs').load(url,function () {
             $(this).modal('show');
         });
     }

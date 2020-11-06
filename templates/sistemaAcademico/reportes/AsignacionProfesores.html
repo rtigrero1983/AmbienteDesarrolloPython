@@ -30,8 +30,6 @@
                 <tr class="text-light text-center">
                     <th>Codigo</th>
                     <th>Profesor</th>
-                    <th>Materia</th>
-                    <th>Curso</th>
                     <th>Opciones</th>
                 </tr>
 
@@ -39,53 +37,10 @@
 
                 <tbody>
 
+
+                {%if lista_profesor%}
+
                 {% for info in lista_profesor %}
-
-                <tr class="text-dark">
-
-                    {% for a in info  %}
-
-                   
-
-                    {% if not a.id_materia_profesor %}
-
-                     <td>
-
-                    {{ a }}
-
-                    </td>
-
-                     {% else %}
-
-                     <td align="center">
-
-                        <a class="btn bg-gradient-success text-light"
-
-                           href="{% url 'Academico:horario_mod' a.id_materia_profesor  %}" title="Asignar Materia"> <i class="fas fa-atlas"></i></a>
-
-                        <a class="btn bg-gradient-danger text-light"
-
-                           href="{% url 'Academico:eliminar_profesor' a.id_materia_profesor  %}"
-
-                           title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
-
-                    </td>
-
-                    {% endif %}
-
-                    {% endfor %}
-
-
-
-                   
-
-                </tr>
-
-                {% endfor %}
-
-                {%if lista_profesor_sin_asignar%}
-
-                {% for info in lista_profesor_sin_asignar %}
 
                 <tr class="text-dark">
 
@@ -99,11 +54,9 @@
 
                            href="{% url 'Academico:horario_mod' info.id_materia_profesor  %}" title="">Asignar Materia</a>
 
-                        <a class="btn bg-gradient-danger text-light"
-
-                           href="{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}"
-
-                           title="Eliminar {{info.id_empleado.id_persona.nombres}}">Eliminar</a>
+                       <a type="button" class="btn bg-gradient-danger text-light" onclick="eliminar_prof('{% url 'Academico:eliminar_profesor' info.id_materia_profesor %}')"
+                           title="Eliminar {{info.id_empleado.id_persona.nombres}}" data-toggle="modal" data-target="eliminar_profs">Eliminar</a>
+                        <div class="modal fade" id="eliminar_profs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
 
                     </td>
 
@@ -125,28 +78,16 @@
 
 
 
-<div class="modal fade" id="modal_crear" role="dialog">
 
-
-
-
-
-</div>
-
-
-
-<div class="modal fade" id="modal_editar" role="dialog">
-
-
-
-
-
-</div>
-
-
-
-<div class="modal fade" id="modal_eliminar" role="dialog">
-
-</div>
 
 {% endblock contenido_principal %}
+{% block extrajs %}
+<script>
+    var $ = jQuery.noConflict();
+    function eliminar_prof(url) {
+        $('#eliminar_profs').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+{% endblock extrajs %}
