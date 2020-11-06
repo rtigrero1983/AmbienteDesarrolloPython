@@ -16,6 +16,16 @@
         <h6 class="m-0 font-weight-bold text-black">Pre-Registro de Estudiantes</h6>
     </div>
     <div class="card-body">
+         {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    {% for message in messages %}
+                   <li> {{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
+                {% endif %}
         {{ form }}
         <div class="botones">
             <br/>

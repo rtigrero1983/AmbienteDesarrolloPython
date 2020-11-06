@@ -54,6 +54,7 @@ class NuevoEmpleado(CreateView):
         if form.is_valid():
             empleado = form.save()
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+            empleado.estado = GenrGeneral.objects.get(idgenr_general=97)
             empleado.fecha_ingreso = timezone.now()
             empleado.usuario_ing = usuario.usuario
             empleado.terminal_ing = socket.gethostname()
@@ -117,7 +118,7 @@ class NuevoEstudiante(CreateView):
             estudiante.fecha_ingreso = timezone.now()
             estudiante.usuario_ing = usuario.usuario
             estudiante.terminal_ing = socket.gethostname()
-            id_persona = MantEmpleado.objects.get(id_persona=estudiante.id_persona)
+            id_persona = MantPersona.objects.get(id_persona=estudiante.id_persona)
             estudiante_model = MantEstudiante(id_persona=id_persona,fecha_ingreso=timezone.now(),tipo_estudiante='Asignado',usuario_ing=usuario.usuario
             ,terminal_ing=socket.gethostname())
             estudiante_model.save()

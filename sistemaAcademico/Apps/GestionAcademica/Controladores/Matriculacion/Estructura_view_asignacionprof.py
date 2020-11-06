@@ -24,7 +24,7 @@ class List_docente(ListView):
         id_empleado__id_persona__estado=97).prefetch_related('id_detalle_materia_curso')
         count=1
         for materia in queryset:
-           
+            print(materia)
             roles = materia.id_detalle_materia_curso.all()
             for role in roles:
                 lista.append((count,materia.id_empleado,role.id_genr_materias.nombre,role.id_mov_anio_lectivo_curso,materia))

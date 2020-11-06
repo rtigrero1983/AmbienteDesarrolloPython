@@ -18,28 +18,31 @@ class MovMateriProfesorList(UpdateView):
         lista =[]
         id_materia_profesor = kwargs['pk']
         form = self.form_class(request.POST)
+        array_form = request.POST.getlist('id_detalle_materia_curso')
+        
+    
+        for i in array_form:
+            #si 
+            materia = MovDetalleMateriaCurso.objects.get(id_detalle_materia_curso=i)
+            print(materia)
 
-        for i in request.POST['id_detalle_materia_curso']:
-            print(i)
-            value_materia= Mov_Materia_profesor.objects.filter(id_detalle_materia_curso=i).filter(~Q(id_empleado = request.POST['id_empleado'])).count()
-            if value_materia>0:
-                
-                materia = MovDetalleMateriaCurso.objects.get(id_detalle_materia_curso=i)
+            value_materia= Mov_Materia_profesor.objects.filter(id_detalle_materia_curso=i).filter(~Q(id_materia_profesor=id_materia_profesor))
+            for a in value_materia:
+               
                 lista.append(materia)
-            else:
-                continue
+                
+
         if len(lista)>0:
             for i in lista:
                 
-                materia =i.id_genr_materias.nombre
+                materia_item =i.id_genr_materias.nombre
                 curso = i.id_mov_anio_lectivo_curso.id_curso.nombre
                 paralelo = i.id_mov_anio_lectivo_curso.id_genr_paralelo.nombre
                 formacion = i.id_mov_anio_lectivo_curso.id_curso.id_genr_formacion.nombre
-                messages.error(request,"{0} del curso {1}/{2} {3} ya se encuentra asignada".format(materia,curso,paralelo,formacion))
+                messages.error(request,"{0} del curso {1}/{2} {3} ya se encuentra asignada".format(materia_item,curso,paralelo,formacion))
 
             return self.render_to_response(self.get_context_data())
         else:
-        
             return super(MovMateriProfesorList, self).post(request, **kwargs)
 
             

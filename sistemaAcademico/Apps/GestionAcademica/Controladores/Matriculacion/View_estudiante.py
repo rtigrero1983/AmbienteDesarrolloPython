@@ -10,6 +10,8 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov i
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
 from django.utils import timezone
 import socket
+from django.contrib import messages
+
 
 def filtro_estudiantes_lista(request):
     if request.GET:
@@ -47,6 +49,7 @@ def filtro_estudiantes(request):
     cox={}
     cox['consultas']=query
     return render(request, 'sistemaAcademico/Matriculacion/Estudiantes_filtros/Filtrar.html', cox)
+
 class FilterEstudinatesestado(UpdateView):
     model = MovMatriculacionEstudiante
     form_class = FilterEstudinatesestadoforms
@@ -57,30 +60,64 @@ class FilterEstudinatesestado(UpdateView):
    
     def post(self, request, **kwargs):
         request.POST = request.POST.copy()
-        usuario = ConfUsuario.objects.get(
-               id_usuario=request.session.get('usuario'))
-        # matricula
-        id_matricula=kwargs['pk']
-        matricula = MovMatriculacionEstudiante.objects.get(id_matriculacion_estudiante=id_matricula)
+        self.object = self.get_object() 
+        form = self.form_class(request.POST)
+        usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
+        #obtiene los quimestres
+        quimestres = GenrGeneral.objects.filter(tipo='QUI')
 
-        if matricula.estado.idgenr_general==97:
-            #anio lectivo curso de la matricula
-            id_aniolectivo_curso = matricula.id_mov_anioelectivo_curso.id_mov_anioelectivo_curso
-            curso = Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id_aniolectivo_curso)
-            print(curso)
-            materia_curso = MovDetalleMateriaCurso.objects.filter(id_mov_anio_lectivo_curso=curso.id_mov_anioelectivo_curso)
-            print(materia_curso)
-            for i in materia_curso:
-               materia = Mov_Materia_profesor.objects.get(id_detalle_materia_curso=i.id_detalle_materia_curso)
-               detaRegistroNotas = MovDetalleRegistroNotas(id_matriculacion_estudiante=matricula.id_matriculacion_estudiante,id_materia_profesor=materia.id_materia_profesor)
-               detaRegistroNotas.save()
-               print(detaRegistroNotas)
-               cabRegistro = MovCabRegistroNotas(id_detalle_registro_notas=detaRegistroNotas.id_detalle_registro_notas,id_mov_anioelectivo_curso=i.id_mov_anio_lectivo_curso,
-               promedio_curso_1q=0,promedio_curso_2q=0,promedio_curso_general=0,fecha_ingreso=timezone.now(),usuario_ing=usuario.usuario,terminal_ing=socket.gethostname())
-               print(cabRegistro)
-               cabRegistro.save()
+        #validador 
+        val = False
+        # estado de la matricula enviado del formulario
+        id_estado_form = request.POST['estado']
 
-        return super(FilterEstudinatesestado, self).post(request, **kwargs)
+        #consulta para verificar que existe
+        estado = GenrGeneral.objects.get(idgenr_general=id_estado_form)
+        
+        #si existe
+        if estado:
+            #si el estado es matriculado
+            if estado.nombre =='MATRICULADO' :
+                #obtiene el id de la matricula
+                id_matricula=kwargs['pk']
+                #realiza una consulta para verificar que exista
+                matricula = MovMatriculacionEstudiante.objects.get(id_matriculacion_estudiante=id_matricula)
+                #si el estado actual de la matricula antes de guardar los cambios no es matriculado
+                if matricula.estado.nombre !='MATRICULADO':
+
+                    id_aniolectivo_curso = matricula.id_mov_anioelectivo_curso.id_mov_anioelectivo_curso
+                    curso = Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id_aniolectivo_curso)
+                    print(curso)
+                    materia_curso = MovDetalleMateriaCurso.objects.filter(id_mov_anio_lectivo_curso=curso.id_mov_anioelectivo_curso)
+                    print(materia_curso)
+                    for i in materia_curso:
+                            try:
+                                materia = Mov_Materia_profesor.objects.get(id_detalle_materia_curso=i.id_detalle_materia_curso)
+                                if materia:
+                                    for qui in quimestres:
+                                        print(i.id_mov_anio_lectivo_curso.id_mov_anioelectivo_curso)
+                                        anio_lectivo =Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=i.id_mov_anio_lectivo_curso.id_mov_anioelectivo_curso)
+                                        detaRegistroNotas = MovDetalleRegistroNotas(id_matriculacion_estudiante=matricula,id_materia_profesor=materia,id_general_quimestre=qui)
+                                        detaRegistroNotas.save()
+                                        print(detaRegistroNotas)
+                                        cabRegistro = MovCabRegistroNotas(id_detalle_registro_notas=detaRegistroNotas,id_mov_anioelectivo_curso=anio_lectivo,
+                                        promedio_curso_1q=0,promedio_curso_2q=0,promedio_curso_general=0,fecha_ingreso=timezone.now(),usuario_ing=usuario.usuario,terminal_ing=socket.gethostname())
+                                        print(cabRegistro)
+                                        cabRegistro.save()
+                                val = True
+                            except Exception as e:
+                                print(e)
+                                val=False
+                                messages.error(request,'{0} no tiene un profesor asignado'.format(i))
+            else:
+                val=True
+
+        if val:
+            return super(FilterEstudinatesestado, self).post(request, **kwargs)
+        else:
+            return self.render_to_response(self.get_context_data())
+
+
         
 
         

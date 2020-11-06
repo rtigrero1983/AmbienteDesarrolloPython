@@ -12,19 +12,22 @@
     <div class="card-body card-block">
         <form action="#" enctype="multipart/form-data" class="form-horizontal">
             <div class="row justify-content-center">
-                <div class="col-4">
-                    {{ form.id_matriculacion_estudiante|as_crispy_field }}
+                <div class="col-12">
+                    <h2>{{ alumno }}</h2>
+                    <label><b>Materia-Curso:</b>{{ materia }}</label><br>
+                    <label><b>Profesor:</b>{{ profesor }}</label><br>
+                    <label><b>Quimestre:</b>{{ quimestre }}</label>
+                <div> 
+                <div class="col-12">
                     {{ form.disciplina|as_crispy_field }}
-                    {{ form.id_materia_profesor|as_crispy_field }}
-                    {{ form.id_general_quimestre|as_crispy_field }}
                 </div>
-                <div class="col-4">
+                <div class="col-12">
                     {{ form.primer_parcial|as_crispy_field }}
                     {{ form.segundo_parcial|as_crispy_field }}
                     {{ form.tercer_parcial|as_crispy_field }}
                     {{ form.promedio_parciales|as_crispy_field }}
                 </div>
-                <div class="col-4">
+                <div class="col-12">
                     {{ form.examen|as_crispy_field }}
                     {{ form.examen_supletorio|as_crispy_field }}
                     {{ form.examen_gracia|as_crispy_field }}

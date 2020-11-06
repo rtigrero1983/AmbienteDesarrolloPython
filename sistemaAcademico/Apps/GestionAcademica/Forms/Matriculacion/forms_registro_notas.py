@@ -6,7 +6,6 @@ class Registro_notas_form(forms.ModelForm):
     class Meta:
         model = MovDetalleRegistroNotas
         fields = [
-            "id_matriculacion_estudiante",
             "primer_parcial",
             "segundo_parcial",
             "tercer_parcial",
@@ -16,11 +15,8 @@ class Registro_notas_form(forms.ModelForm):
             "examen_gracia",
             "disciplina",
             "total_promedio_general",
-            "id_materia_profesor",
-            "id_general_quimestre",
         ]
         labels = {
-            "id_matriculacion_estudiante": "Nombre del estudiante",
             "primer_parcial": "Nota del primer parcial",
             "segundo_parcial": "Nota del segundo parcial",
             "tercer_parcial": "Nota del tercer parcial",
@@ -30,8 +26,6 @@ class Registro_notas_form(forms.ModelForm):
             "disciplina": "Conducta",
             "total_promedio_general": "Promedio total",
             "promedio_parciales": "Promedio de los parciales",
-            "id_materia_profesor": "Materia profesor",
-            "id_general_quimestre": "Quimestre",
         }
         widgets = {
             "primer_parcial": forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese la calificación del primer parcial"}),
@@ -46,8 +40,4 @@ class Registro_notas_form(forms.ModelForm):
             "total_promedio_general": forms.TextInput(attrs={"class": "form-control"}),
         }
 
-    def __init__(self, *args, **kwargs):
-        super(Registro_notas_form, self).__init__(*args, **kwargs)
-        self.fields['id_general_quimestre'].queryset = GenrGeneral.objects.filter(tipo='QUI')
-        '''self.fields['total_promedio_general'].widget.attrs['disabled'] = 'disabled'
-        self.fields['promedio_parciales'].widget.attrs['disabled'] = 'disabled'''
+    
