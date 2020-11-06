@@ -1,107 +1,73 @@
 {% extends 'base/base.html' %}
-{% block encabezado %}
-{% endblock encabezado %}
+
 {% block sidebar %}
 {% endblock sidebar %}
-{% load crispy_forms_tags %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
 
+{% endblock footer %}
 {% block contenido_principal %}
-<form method="POST" action="#">
-    {% csrf_token %}
-    {% if error %}
-    <h2>{{ error }}</h2>
-    {% else %}
-    <header class="cuadro_titulo">
-        <h4 class="titulo text-center">Matriculacion | Registrar Notas</h4>
-    </header>
-    <div class="card-body card-block">
-        <form action="#" enctype="multipart/form-data" class="form-horizontal" method="post">
-            <div class="row justify-content-center">
-                <div class="col-4">
-                    {{ form.disciplina|as_crispy_field }}
-                </div>
-                <div class="col-4">
-                    {{ form.primer_parcial|as_crispy_field }}
-                    {{ form.segundo_parcial|as_crispy_field }}
-                    {{ form.tercer_parcial|as_crispy_field }}
-                    <label for="id_promedio_parciales" class="">
-                        Promedio de los parciales
-                    </label>
-                    <div class="row">
-                        <div class="col-8">
-                            <div id="div_id_promedio_parciales" class="form-group">
-                                <div class="">
-                                    <input type="number" name="promedio_parciales" step="any"  class="numberinput form-control" id="id_promedio_parciales" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <input  class="btn btn-primary" type="button" value="Calcular" onclick="total();">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    {{ form.examen|as_crispy_field }}
-                    {{ form.examen_supletorio|as_crispy_field }}
-                    {{ form.examen_gracia|as_crispy_field }}
-                    <label for="id_total_promedio_general" class="">
-                            Promedio total
-                        </label>
-                    <div class="row">
-                        <div class="col-8">
-                            <div id="div_id_total_promedio_general" class="form-group">
-                                <div class="">
-                                    <input type="number" name="total_promedio_general" step="any"  class="numberinput form-control" id="id_total_promedio_general">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <input class="btn btn-primary" type="button" value="calcular" onclick="resultado();">
-                        </div>
-                    </div>
-                </div>
 
-            </div><br><br><br>
-            <div class=" text-center">
-                <button type="submit" class="btn btn-outline-primary">Registrar</button>
-                <button type="reset" class="btn btn-outline-info">Restablecer</button>
-                <a class="btn btn-outline-danger" href="{% url 'Academico:registro_notas' %}">Cancelar</a>
-            </div>
-        </form>
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Movimiento |
+    Registro Notas </h4></header>
+
+<br/>
+
+<br/>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registros de Notas</h6>
     </div>
-</form>
-    {% endif %}
-{% endblock contenido_principal %} {% block footer %}
-{% endblock %}
+    <div class="col-12">
+    <form action="" method="post" class="form-row">
+        <select name="cursos" class="form-control">
+            {% for i in  cursos %}
+            <option value={{ i.id_detalle_materia_curso }}>{{ i }}</option> 
+            {% endfor %}
+            </select>
+
+    </form>
+    
+    
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                <thead class="bg-gradient-primary">
+                <tr class="text-light text-center">
+                    <th>Estudiante</th>
+                    <th>1 Parcial</th>
+                    <th>2 Parcial</th>
+                    <th>3 Parcial</th>
+                    <th>Promedio Parcial</th>
+                    <th>Examen</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for notas in object_list %}
+                <tr class="text-dark">
+                    <td>{{notas.id_matriculacion_estudiante}}</td>
+                    <td>{{notas.primer_parcial}}</td>
+                    <td>{{notas.segundo_parcial}}</td>
+                    <td>{{notas.tercer_parcial}}</td>
+                    <td>{{notas.promedio_parciales}}</td>
+                    <td >{{notas.examen}}</td>
+                    <td align="center">
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido_principal %}
 {% block extrajs %}
-    <script>
-     function total() {
-     //primer parcial
-     var n1 = document.getElementById('id_primer_parcial').value;
-     var n2 = document.getElementById('id_segundo_parcial').value;
-     var n3 = document.getElementById('id_tercer_parcial').value;
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
 
-
-
-
-     x = document.getElementById("id_promedio_parciales");
-
-    x.value = pr;
-
-
- }
- function resultado(){
-     var n1 = document.getElementById('id_examen').value;
-     var n2 = document.getElementById('id_examen_gracia').value;
-     var n3 = document.getElementById('id_examen_supletorio').value;
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
-
-
-     x = document.getElementById("id_total_promedio_general");
-
-    x.value = pr;
-
- }
-    </script>
 {% endblock extrajs %}

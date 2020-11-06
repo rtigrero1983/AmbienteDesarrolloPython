@@ -1,5 +1,5 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleRegistroNotas,Mov_Materia_profesor,MovMatriculacionEstudiante,MovDetalleMateriaCurso
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovDetalleRegistroNotas,Mov_Materia_profesor,MovMatriculacionEstudiante,MovDetalleMateriaCurso,MovCabRegistroNotas,Mov_Aniolectivo_curso
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import ConfUsuario
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.forms_registro_notas import Registro_notas_form
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
@@ -8,20 +8,19 @@ from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 
 class List_Notas (ListView):
-    model = MovDetalleRegistroNotas
+    model = MovCabRegistroNotas
     template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/RegistroNotas.html'
     context_object_name = 'm'
     
     def get(self, request):
         context = {}
         materias = []
-        
         if 'usuario' in request.session:
             usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
             if usuario:
                 tipo = usuario.id_genr_tipo_usuario.codigo
                 if tipo == 'ADM':
-                    queryset = self.model.objects.all()
+                    queryset = self.model.objects.all().select_related('id_detalle_registro_notas')
                     context['object_list'] = queryset  
 
                 elif tipo =='PRO':
@@ -38,11 +37,22 @@ class List_Notas (ListView):
     
     
 
-class Create_notas (CreateView):
+class NotasMaterias (ListView):
     model = MovDetalleRegistroNotas
     template_name = 'sistemaAcademico/Matriculacion/RegistroNotas/CrearRegistroNotas.html'
-    form_class = Registro_notas_form
-    success_url = reverse_lazy('Academico:registro_notas')
+
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(NotasMaterias, self).get_context_data(**kwargs)
+        cursos = MovDetalleMateriaCurso.objects.filter(estado=97)
+        
+        context['cursos'] = cursos
+        return context
+
+    
+    
+
+
     #context_object_name = 'a'
 class Update_notas (UpdateView):
     model = MovDetalleRegistroNotas
