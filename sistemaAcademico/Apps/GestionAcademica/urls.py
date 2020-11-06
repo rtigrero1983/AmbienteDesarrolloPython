@@ -167,7 +167,7 @@ urlpatterns = [
     path('eliminar_curso/<int:pk>', DeleteCurso.as_view(), name='eliminar_curso'),
     # ---------registro notas -----
     path('registronotas/', List_Notas.as_view(), name='registro_notas'),
-    path('crear_registronotas/', Create_notas.as_view(), name='crear_registro_notas'),
+    path('notas_materias/', NotasMaterias.as_view(), name='notas_materias'),
     path('actualizar_registronotas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
     path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas'),
     path('estudiantes_filtro/',filtro_estudiantes,name='estudiante_filtro'),

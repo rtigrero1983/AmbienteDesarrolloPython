@@ -11,6 +11,8 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf 
 from django.utils import timezone
 import socket
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+
 
 
 def filtro_estudiantes_lista(request):
@@ -65,7 +67,8 @@ class FilterEstudinatesestado(UpdateView):
         usuario = ConfUsuario.objects.get(id_usuario=request.session.get('usuario'))
         #obtiene los quimestres
         quimestres = GenrGeneral.objects.filter(tipo='QUI')
-
+        errores ={}
+        listaErrores =[]
         #validador 
         val = False
         # estado de la matricula enviado del formulario
@@ -108,14 +111,15 @@ class FilterEstudinatesestado(UpdateView):
                             except Exception as e:
                                 print(e)
                                 val=False
-                                messages.error(request,'{0} no tiene un profesor asignado'.format(i))
+                                listaErrores.append('{0} no tiene un profesor asignado'.format(i))
             else:
                 val=True
 
+        errores['messages']=listaErrores
         if val:
             return super(FilterEstudinatesestado, self).post(request, **kwargs)
         else:
-            return self.render_to_response(self.get_context_data())
+            return HttpResponseRedirect(self.success_url)
 
 
         

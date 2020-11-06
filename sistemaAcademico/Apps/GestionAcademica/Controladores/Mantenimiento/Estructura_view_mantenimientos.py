@@ -162,7 +162,7 @@ class UpdateEstudiante(UpdateView):
         persona = MantEstudiante.objects.get(id_persona = id_persona)
         id_estudiante = persona.id_estudiante
         c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante = id_estudiante)
-        curso_estudiante = MovCabCurso.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
+        curso_estudiante = MovCabCurso.objects.get(id_curso = c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
         paralelo_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre)
         jornada_estudiante = GenrGeneral.objects.get(nombre = c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
         context['curso_estudiante'] = curso_estudiante

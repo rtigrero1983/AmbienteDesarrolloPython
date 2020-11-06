@@ -15,7 +15,7 @@
     Registro Notas </h4></header>
 
 <br/>
-<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:crear_registro_notas' %}"
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:notas_materias' %}"
    id="registrar">Agregar </a>
 <br/>
 <br/>
@@ -30,29 +30,27 @@
                 <thead class="bg-gradient-primary">
                 <tr class="text-light text-center">
                     <th>Estudiante</th>
-                    <th>Primer parcial</th>
-                    <th>Segundo parcial</th>
-                    <th>Tercer parcial</th>
-                    <th>Examen</th>
-                    <th>Quimestre</th>
+                    <th>Curso</th>
+                    <th>Profesor</th>
+                    <th>1 Quimestre</th>
+                    <th>2 Quimestre</th>
+                    <th>Promedio Final</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for notas in object_list %}
                 <tr class="text-dark">
-                    <td>{{notas.id_matriculacion_estudiante}}</td>
-                    <td>{{notas.primer_parcial}}</td>
-                    <td>{{notas.segundo_parcial}}</td>
-                    <td>{{notas.tercer_parcial}}</td>
-                    <td>{{notas.examen}}</td>
-                    <td >{{notas.id_general_quimestre}}</td>
+                    <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
+                    <td>{{notas.id_mov_anioelectivo_curso}}</td>
+                    <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
+                    <td>{{notas.promedio_curso_1q}}</td>
+                    <td>{{notas.promedio_curso_2q}}</td>
+                    <td >{{notas.promedio_curso_general}}</td>
                     <td align="center">
                         <a class="btn bg-gradient-primary text-light"
-                           onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
-                        <a class="btn bg-gradient-danger text-light"
-                           onclick="modal('{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}')" title="Eliminar"><i
-                                class="fas fa-exclamation-triangle"></i></a>
+                           onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+                        
                     </td>
                 </tr>
                 {% endfor %}
