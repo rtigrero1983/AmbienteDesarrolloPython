@@ -55,7 +55,7 @@ class List_docente_sin_asignar(ListView):
                 print("NM", profesores)
         context['lista_profesor_sin_asignar'] = profesores
         return render(request, self.template_name, context)
-
+#
 
 def eliminar_profesor(request, id):
     profesor = Mov_Materia_profesor.objects.get(id_materia_profesor=id)
