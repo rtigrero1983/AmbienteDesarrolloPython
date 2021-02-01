@@ -1,14 +1,9 @@
-from dal import autocomplete
-from django.forms import CharField, ChoiceField, ModelForm
-from django.db.models import Q
-from sistemaAcademico.Apps.GestionAcademica import models
 from django import forms
-import django_filters
-from django.forms.widgets import *
+from django.db.models import Q
+from django.forms import ModelForm
 
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import *
 
 TPA = ['ECUADOR', 'AREGENTINA', 'MEXICO', 'AMERICA SAMOA', 'BOUVET ISLAND', 'ESTADOS UNIDOS', 'VENEZUELA', 'COLOMBIA']
 GEN = [('MASCULINO', 'FEMENINO')]
@@ -81,7 +76,6 @@ class EmpleadoForm(ModelForm):
             "id_genr_indigena": "Raza indigena",
             "id_genr_idioma_ancestral": "Idioma Ancestral",
 
-
             "discapacidad": "Discapacidad",
             "discapacidad_renal": "Discapacidad renal",
             "discapacidad_neurologica": "Discapacidad neurologica",
@@ -106,33 +100,32 @@ class EmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
-
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Empleado"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Empleado"}),
-            "identificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Numero de Cedula"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Empleado"}),
+            "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
-            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control","placeholder": "Lugar de Nacimiento"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Familiar"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Familiar"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Numero de Cedula"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Familiar"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Familiar"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Telefono"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
 
-            "rcorreo": forms.TextInput(attrs={"class": "form-control","type": "email", "placeholder": "Email"}),
+            "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
 
         }
 
     def __init__(self, *args, **kwargs):
         super(EmpleadoForm, self).__init__(*args, **kwargs)
 
-        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID' )
-        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(Q(idgenr_general=20) | Q(idgenr_general=21))
-        self.fields['id_genr_genero'].queryset =GenrGeneral.objects.filter(tipo='GEN')
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
+            Q(idgenr_general=20) | Q(idgenr_general=21))
+        self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
@@ -141,10 +134,11 @@ class EmpleadoForm(ModelForm):
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+
 
 class EditarEmpleadoForm(ModelForm):
     class Meta:
@@ -212,7 +206,6 @@ class EditarEmpleadoForm(ModelForm):
             "id_genr_indigena": "Raza indigena",
             "id_genr_idioma_ancestral": "Idioma Ancestral",
 
-
             "discapacidad": "Discapacidad",
             "discapacidad_renal": "Discapacidad renal",
             "discapacidad_neurologica": "Discapacidad neurologica",
@@ -237,33 +230,34 @@ class EditarEmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
-
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Empleado"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Empleado"}),
-            "identificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10',"placeholder": "Numero de Cedula"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Empleado"}),
+            "identificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10',
+                                                     "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
-            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control","placeholder": "Lugar de Nacimiento"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Familiar"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Familiar"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10',"placeholder": "Numero de Cedula"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Familiar"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Familiar"}),
+            "pidentificacion": forms.TextInput(
+                attrs={"class": "form-control", 'minlength': '10', "placeholder": "Numero de Cedula"}),
             "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Telefono"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
 
-            "rcorreo": forms.TextInput(attrs={"class": "form-control","type": "email", "placeholder": "Email"}),
+            "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
 
         }
 
     def __init__(self, *args, **kwargs):
         super(EditarEmpleadoForm, self).__init__(*args, **kwargs)
 
-        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID' )
-        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(Q(idgenr_general=20) | Q(idgenr_general=21))
-        self.fields['id_genr_genero'].queryset =GenrGeneral.objects.filter(tipo='GEN')
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
+        self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(
+            Q(idgenr_general=20) | Q(idgenr_general=21))
+        self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
@@ -272,11 +266,10 @@ class EditarEmpleadoForm(ModelForm):
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
-
 
 
 class ConsultarEmpleadoForm(ModelForm):
@@ -345,7 +338,6 @@ class ConsultarEmpleadoForm(ModelForm):
             "id_genr_indigena": "Raza indigena",
             "id_genr_idioma_ancestral": "Idioma Ancestral",
 
-
             "discapacidad": "Discapacidad",
             "discapacidad_renal": "Discapacidad renal",
             "discapacidad_neurologica": "Discapacidad neurologica",
@@ -371,31 +363,29 @@ class ConsultarEmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
-
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Empleado"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Empleado"}),
-            "identificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Numero de Cedula"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Empleado"}),
+            "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
-            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control","placeholder": "Lugar de Nacimiento"}),
+            "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Familiar"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Familiar"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Numero de Cedula"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Familiar"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Familiar"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Telefono"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
 
-            "rcorreo": forms.TextInput(attrs={"class": "form-control","type": "email", "placeholder": "Email"}),
+            "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
 
         }
 
     def __init__(self, *args, **kwargs):
         super(ConsultarEmpleadoForm, self).__init__(*args, **kwargs)
 
-        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID' )
+        self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_tipo_usuario'].queryset = GenrGeneral.objects.filter(nombre='ROL PROFESOR')
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
@@ -406,7 +396,7 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
@@ -517,8 +507,8 @@ class EstudianteForm(ModelForm):
             "identificacion": "Identificacion",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
-            "direccion":"direccion",
-            "telefono":"Telefono",
+            "direccion": "direccion",
+            "telefono": "Telefono",
             "celular": "Celular",
             "id_genr_genero": "Genero",
             "id_genr_pais": "Pais",
@@ -559,49 +549,57 @@ class EstudianteForm(ModelForm):
 
             "rnombres": "Nombres",
             "rapellidos": "Apellidos",
-            "rtelefono": "telefono",
+            "rtelefono": "Telefono Celular",
             "id_genr_tipo_identificacion": "Tipo de Identificacion",
             "ridentificacion": "Identificacion",
             "tipo_parentesco": "Parentesco",
             "rvive_con_usted": "El estudiante vive con usted?",
             "rdireccion_trabajo": "direccion de trabajo",
-            "rtelefono_trabajo": "telefono ",
+            "rtelefono_trabajo": "Telefono Convencional",
             "rcorreo": "Email ",
             "rhorario_laboral": "horario laboral",
             "mienbros_hogar": "Miembros del hogar",
 
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
-            "identificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10','maxlength':'20', "placeholder": "Numero de Cedula"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control","type": "date"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
+            "identificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', 'maxlength': '20',
+                                                     "placeholder": "Numero de Cedula"}),
+            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control", "type": "date"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
-            "celular": forms.TextInput(attrs={"class": "form-control", 'minlength':'10', "placeholder": "Celular"}),
+            "celular": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', "placeholder": "Celular"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10','maxlength':'20',"placeholder": "Cedula del padre"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "ptelefono": forms.TextInput(attrs={"class": "form-control","placeholder": "Telefono del Padre"}),
-            "mnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres de la Madre"}),
-            "mapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos de la Madre"}),
-            "midentificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10','maxlength':'20',"placeholder": "Cedula de la Madre"}),
-            "mdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "mtelefono": forms.TextInput(attrs={"class": "form-control",'minlength':'10',"placeholder": "Telefono de la Madre"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Padre"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Padre"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', 'maxlength': '20',
+                                                      "placeholder": "Cedula del padre"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono del Padre"}),
+            "mnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres de la Madre"}),
+            "mapellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos de la Madre"}),
+            "midentificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', 'maxlength': '20',
+                                                      "placeholder": "Cedula de la Madre"}),
+            "mdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "mtelefono": forms.TextInput(
+                attrs={"class": "form-control", 'minlength': '10', "placeholder": "Telefono de la Madre"}),
 
-            "rnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombre del Representante"}),
-            "rapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Representante"}),
-            "rtelefono": forms.TextInput(attrs={"class": "form-control",'minlength':'10', "placeholder": "Telefono del Representante"}),
-            "ridentificacion": forms.TextInput(attrs={"class": "form-control",'minlength':'10','maxlength':'20',"placeholder": "Cedula del Representante"}),
+            "rnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombre del Representante"}),
+            "rapellidos": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Apellidos del Representante"}),
+            "rtelefono": forms.TextInput(
+                attrs={"class": "form-control", 'minlength': '10', "placeholder": "Telefono del Representante"}),
+            "ridentificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', 'maxlength': '20',
+                                                      "placeholder": "Cedula del Representante"}),
             "tipo_parentesco": forms.TextInput(attrs={"class": "form-control", "placeholder": "Parentesco"}),
-            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
-            "rtelefono_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de Trabajo"}),
+            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
+            "rtelefono_trabajo": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Telefono convencional"}),
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "placeholder": "email"}),
-            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control","placeholder": "Horario"}),
-            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control","placeholder": "Miembros del Hogar"}),
+            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control", "placeholder": "Horario"}),
+            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del Hogar"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -610,14 +608,14 @@ class EstudianteForm(ModelForm):
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
-      #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+        #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
         self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
         self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_estado_laboralm'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
@@ -689,8 +687,8 @@ class EstudianteEditForm(ModelForm):
             "apellidos": "Apellidos",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
-            "direccion":"direccion",
-            "telefono":"Telefono",
+            "direccion": "direccion",
+            "telefono": "Telefono",
             "celular": "Celular",
             "id_genr_genero": "Genero",
             "id_genr_pais": "Pais",
@@ -744,35 +742,37 @@ class EstudianteEditForm(ModelForm):
 
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
             "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
             "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula del padre"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "ptelefono": forms.TextInput(attrs={"class": "form-control","placeholder": "Telefono del Padre"}),
-            "mnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres de la Madre"}),
-            "mapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos de la Madre"}),
-            "midentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula de la Madre"}),
-            "mdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "mtelefono": forms.TextInput(attrs={"class": "form-control","placeholder": "Telefono de la Madre"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Padre"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Padre"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula del padre"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono del Padre"}),
+            "mnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres de la Madre"}),
+            "mapellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos de la Madre"}),
+            "midentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula de la Madre"}),
+            "mdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "mtelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de la Madre"}),
 
-            "rnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombre del Representante"}),
-            "rapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Representante"}),
+            "rnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombre del Representante"}),
+            "rapellidos": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Apellidos del Representante"}),
             "rtelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono del Representante"}),
-            "ridentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula del Representante"}),
+            "ridentificacion": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Cedula del Representante"}),
             "tipo_parentesco": forms.TextInput(attrs={"class": "form-control", "placeholder": "Parentesco"}),
-            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
+            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "rtelefono_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de Trabajo"}),
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control","placeholder": "Horario"}),
-            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control","placeholder": "Miembros del Hogar"}),
+            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control", "placeholder": "Horario"}),
+            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del Hogar"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -780,18 +780,19 @@ class EstudianteEditForm(ModelForm):
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
-      #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+        #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
         self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
         self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_estado_laboralm'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+
 
 class ConsultarEstudianteForm(ModelForm):
     class Meta:
@@ -860,8 +861,8 @@ class ConsultarEstudianteForm(ModelForm):
             "identificacion": "Identificacion",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
-            "direccion":"direccion",
-            "telefono":"Telefono",
+            "direccion": "direccion",
+            "telefono": "Telefono",
             "celular": "Celular",
             "id_genr_genero": "Genero",
             "id_genr_pais": "Pais",
@@ -915,8 +916,8 @@ class ConsultarEstudianteForm(ModelForm):
 
         }
         widgets = {
-            "nombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Estudiante"}),
-            "apellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Estudiante"}),
+            "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
+            "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
@@ -924,27 +925,29 @@ class ConsultarEstudianteForm(ModelForm):
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
             "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
 
-            "pnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres del Padre"}),
-            "papellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Padre"}),
-            "pidentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula del padre"}),
-            "pdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "ptelefono": forms.TextInput(attrs={"class": "form-control","placeholder": "Telefono del Padre"}),
-            "mnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombres de la Madre"}),
-            "mapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos de la Madre"}),
-            "midentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula de la Madre"}),
-            "mdireccion": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion del Padre"}),
-            "mtelefono": forms.TextInput(attrs={"class": "form-control","placeholder": "Telefono de la Madre"}),
+            "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Padre"}),
+            "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Padre"}),
+            "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula del padre"}),
+            "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono del Padre"}),
+            "mnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres de la Madre"}),
+            "mapellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos de la Madre"}),
+            "midentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula de la Madre"}),
+            "mdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
+            "mtelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de la Madre"}),
 
-            "rnombres": forms.TextInput(attrs={"class": "form-control","placeholder": "Nombre del Representante"}),
-            "rapellidos": forms.TextInput(attrs={"class": "form-control","placeholder": "Apellidos del Representante"}),
+            "rnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombre del Representante"}),
+            "rapellidos": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Apellidos del Representante"}),
             "rtelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono del Representante"}),
-            "ridentificacion": forms.TextInput(attrs={"class": "form-control","placeholder": "Cedula del Representante"}),
+            "ridentificacion": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Cedula del Representante"}),
             "tipo_parentesco": forms.TextInput(attrs={"class": "form-control", "placeholder": "Parentesco"}),
-            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control","placeholder": "Direccion"}),
+            "rdireccion_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "rtelefono_trabajo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de Trabajo"}),
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Email"}),
-            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control","placeholder": "Horario"}),
-            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control","placeholder": "Miembros del Hogar"}),
+            "rhorario_laboral": forms.TextInput(attrs={"class": "form-control", "placeholder": "Horario"}),
+            "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del Hogar"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -953,14 +956,14 @@ class ConsultarEstudianteForm(ModelForm):
         self.fields['id_genr_genero'].queryset = GenrGeneral.objects.filter(
             tipo='GEN')
         self.fields['id_genr_pais'].queryset = GenrGeneral.objects.filter(tipo='TPA')
-      #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
+        #  self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_tipo_sangre'].queryset = GenrGeneral.objects.filter(tipo='TSA')
         self.fields['id_genr_etnia'].queryset = GenrGeneral.objects.filter(tipo='ETN')
         self.fields['id_genr_jornada'].queryset = GenrGeneral.objects.filter(tipo='JOR')
         self.fields['id_genr_indigena'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_idioma_ancestral'].queryset = GenrGeneral.objects.filter(tipo='IDA')
         self.fields['id_genr_provincia'].queryset = GenrGeneral.objects.filter(tipo='593')
-        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt= 24)
+        self.fields['id_genr_ciudad'].queryset = GenrGeneral.objects.filter(tipo__lt=24)
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_estado_laboralm'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
@@ -1020,6 +1023,7 @@ class ConsultarEstudianteForm(ModelForm):
         self.fields['rhorario_laboral'].widget.attrs['readonly'] = True
         self.fields['mienbros_hogar'].widget.attrs['readonly'] = True
 
+
 class Editarste(ModelForm):
     class Meta:
         model = MovMatriculacionEstudiante
@@ -1027,16 +1031,14 @@ class Editarste(ModelForm):
 
             "id_mov_anioelectivo_curso",
 
-
-
-
         ]
         labels = {
 
-            "id_mov_anioelectivo_curso":"Curso",
-
+            "id_mov_anioelectivo_curso": "Curso",
 
         }
+
     def __init__(self, *args, **kwargs):
         super(Editarste, self).__init__(*args, **kwargs)
-        self.fields['id_mov_anioelectivo_curso'].queryset = MovMatriculacionEstudiante.objects.filter(id_mov_anioelectivo_curso_id_curso=1).values('id_mov_anioelectivo_cursoid_curso_nombre')
+        self.fields['id_mov_anioelectivo_curso'].queryset = MovMatriculacionEstudiante.objects.filter(
+            id_mov_anioelectivo_curso_id_curso=1).values('id_mov_anioelectivo_cursoid_curso_nombre')

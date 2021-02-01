@@ -1,7 +1,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <html>
-    <head>
-        <style>
+<head>
+    <style>
             .tdbreak{
                 word-break: break-all;
             }
@@ -76,67 +76,94 @@
                 
 
             }
-        </style>
-    </head>
-    <body>
-        <div id="header_content">
-        <img src="static/img/logo-login.png" id="imagen"  alt="">
-        <div id="content_head">
+
+
+
+
+    </style>
+</head>
+<body>
+<div id="header_content">
+    <img id="imagen" src="static/img/logo-login.png">
+    <div id="content_head">
         <label style="font-size: 25px;"><strong>Reporte Estudiante</strong></label>
-        </div>
+    </div>
 
-        <div id="content_codigo">
-            <label style="background-color: yellow; margin-left: 5px; font-size: 15px;"><strong>Hora: {{hora_actual}}</strong></label>
-        
-        </div>
-        </div>
-        {% if lista_estudiante %}
-            <table id="table" style="width: 100%;">
-                <thead>
-                    <tr style="border: 0.5px solid black; height: 50px; font-size: 13px;">
-                        <td><strong><center>N.-</center></strong></td>
-                        <td><strong><center>Nombre</center></strong></td>
-                        <td><strong><center>Tipo Estudiante</center></strong></td>
-                        <td><strong><center>Fecha Ingreso</center></strong></td>
-                        <td><strong><center>Usuario</center></strong></td>
-                        <td><strong><center>Direccion</center></strong></td>
-                    </tr>
-                
-                <tbody>
-                    {% for estudy in lista_estudiante %}
-                        <tr style="border: 0.5px solid black; height: 40px; font-size: 13px;">
-                            <td><center>{{ forloop.counter }}</center></td>
-                            <td><center>{{ estudy.id_persona.nombres }}</center></td>
-                            <td><center>{{ estudy.tipo_estudiante }}</center></td>
-                            <td><center>{{ estudy.fecha_ingreso}}</center></td>
-                            <td><center>{{ estudy.usuario_ing}}</center></td>
-                            <td><center>{{ estudy.id_persona.direccion}}</center></td>
-                        </tr>
-                    {% endfor %}
-                </thead>
-                </tbody>     
-            </table>
-        {% endif %}
-            
-    
-        <div id="footer_content">
-            <label style="color: #3c5634;">///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</label>
-            <br>
-            <div id="contador">
-                <label style="font-size: 15px;">Pag <pdf:pagenumber> | <pdf:pagecount> </label>
-            
-            </div>
-            <div id = "contenido_del_footer" style="font-size: 15px;">
-            <label for="">Fecha: {{fecha_actual}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Usuario: {{nombre_usuario}}</label> 
-            </div>
-        </div>
-    </body>
+    <div id="content_codigo">
+        <label style="margin-left: 5px; font-size: 15px;"><strong>Hora:
+            {{hora_actual}}</strong></label>
+
+    </div>
+</div>
+{% if lista_estudiante %}
+<table id="table" style="width: 100%;">
+    <thead>
+    <tr style="border: 0.5px solid black; height: 50px; font-size: 13px;">
+        <th style="text-align: center; vertical-align: middle; width:50px">
+            N.-
+        </th>
+        <th style="text-align: center; vertical-align: middle; width:250px">
+            Apellidos y Nombres
+        </th>
+        <th style="text-align: center; vertical-align: middle; width:100px">
+            Tipo Estudiante
+        </th>
+        <th style="text-align: center; vertical-align: middle; width:150px">
+            Fecha Ingreso
+        </th>
+        <th style="text-align: center; vertical-align: middle; width:100px">
+            Usuario
+        </th>
+        <th style="text-align: center; vertical-align: middle;">
+            Direccion
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for estudy in lista_estudiante %}
+    <tr style="border: 0.5px solid black; height: 40px; font-size: 13px;">
+        <td style="text-align: center; vertical-align: middle;">
+            {{ forloop.counter }}
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            {{ estudy.id_persona.apellidos }} {{ estudy.id_persona.nombres }}
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            {{ estudy.tipo_estudiante }}
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            {{ estudy.fecha_ingreso}}
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            {{ estudy.usuario_ing}}
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            {{ estudy.id_persona.direccion}}
+        </td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+{% endif %}
 
 
+<div id="footer_content">
+    <label style="color: #3c5634;">///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</label>
+    <br>
+    <div id="contador">
+        <label style="font-size: 15px;">Pag
+            <pdf:pagenumber> |
+                <pdf:pagecount>
+        </label>
 
-
-
+    </div>
+    <div id="contenido_del_footer" style="font-size: 15px;">
+        <label>Fecha: {{fecha_actual}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Usuario: {{nombre_usuario}}</label>
+    </div>
+</div>
+</body>
 
 
 </html>
