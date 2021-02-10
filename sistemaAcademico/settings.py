@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'bd_academico',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'NAME': 'saber_academico',
+        'USER': 'saber_user',
+        'PASSWORD': '!yP4@@8M6aJj@!5',
+        'HOST': 'mysql-saber.alwaysdata.net',
         'PORT': 3306,
     }
 }
@@ -101,14 +101,23 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'bd_academico_2020',
-        'USER': 'python',
-        'PASSWORD':'python.2007',
-        'HOST': '173.212.207.238',
-        'PORT': 57635,
+        'NAME': 'saber_academico',
+        'USER': 'saber_user',
+        'PASSWORD': '!yP4@@8M6aJj@!5',
+        'HOST': 'mysql-saber.alwaysdata.net',
+        'PORT': 3306,
     }
 }
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'mysql_cymysql',
+        'NAME': 'bd_academico',
+        'USER': 'root',
+        'PASSWORD': 'J10SK4',
+        'HOST': 'localhost',
+        'PORT': 3306,
+    }
+}
 """
 
 # Password validation
