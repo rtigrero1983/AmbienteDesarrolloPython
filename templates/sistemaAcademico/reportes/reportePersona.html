@@ -34,35 +34,222 @@
             <option hidden selected value="4">Seleccione una opción</option>
 
         </select>&nbsp;
-        <input class="form-control" name="campoPersona" placeholder="Buscar" type="text" id="campoPersona">
+        <select name="combo" id="combo" class="form-control" required>
+          <option value="1">Lengua y Literatura</option> 
+          <option value="2">Matemática</option>
+          <option value="3">Estudios Sociales</option>
+          <option value="4">Ciencias Naturales</option>
+          <option value="5">Educación Cultural y Artística</option>
+          <option value="6">Educación Fisica</option>
+          <option value="7">Inglés</option>
+          <option value="8">Todas las Materias</option>
+          <option hidden selected value="9">Buscar por materia</option>
+        </select>&nbsp;
+        <select name="combo" id="combo" class="form-control" required>
+          <option name="" value="1">curso 1</option>
+          <option name="" value="3">curso 2</option>
+          <option value="2" name="">Mostrar todos los cursos</option>
+          <option hidden selected value="4">Buscar por cursos</option>
+
+      </select>&nbsp;
+      <select name="combo" id="combo" class="form-control" required>
+        <option name="" value="1">1er Quimestre</option>
+        <option name="" value="3">2do Quimestre</option>
+        <option value="2" name="">Mostrar el año lectivo</option>
+        <option hidden selected value="4">Buscar por Quimestre</option>
+
+    </select>&nbsp;
+        <!-- <input class="form-control" name="campoPersona" placeholder="Buscar" type="text" id="campoPersona"> -->
         <br>
         <label>Mostrar Usuario que genera el reporte</label>&nbsp; <input id="check1" name="check1" required
                                                                           type="checkbox">
         <br>
-        <label class="text-dark h6"><b>Elegir formato a imprimir:</b></label>
         <br>
-        <div class="row darkwhite-bg py-2 text-center">
-            <div class="col-12">
-                <div class="form-row">
-                    <div class=" col-6 col-md-4 mb-0">
-                        <button class="btn btn-success btn-block text-light" id="ex" onclick="Reportes(1)"
-                                type="button"><img alt="REPORTE EN EXCEL" class="img-thumbnail"
-                                                   height="30" src="{%static 'img/excel1.png'%}" width="30"> Generar
-                            reporte en EXCEL
-                        </button> &nbsp;
-                    </div>
-                    <div class=" col-6 col-md-4 mb-0">
-                        <button class="btn btn-danger btn-block" id="pd" onclick="Reportes(2)" type="button"><img
-                                alt="REPORTE EN PDF" class="img-thumbnail" height="30" src="{%static 'img/pdf1.ico'%}"
-                                width="30"> Generar reporte en PDF
-                        </button>
-                    </div>
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Promedio de las notas de todas las materias</h6>
+          </div>
+          <div class="card-body" style="text-align: center; margin: auto;">
+              <div class="table-responsive">
+                  <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                      <thead class="bg-gradient-primary">
+                      <tr class="text-light text-center">
+                          <th>Estudiante</th>
+                          <th>Curso</th>
+                          <th>Leng. y Literatura</th>
+                          <th>Matemática</th>
+                          <th>Est. Sociales</th>
+                          <th>Ciencias Naturales</th>
+                          <th>Educ. Cultural y Artística</th>
+                          <th>Educ. Fisica</th>
+                          <th>Inglés</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {% for notas in object_list %}
+                      <tr class="text-dark">
+                          <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
+                          <td>{{notas.id_mov_anioelectivo_curso}}</td>
+                          <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
+                          <td>{{notas.promedio_curso_1q}}</td>
+                          <td>{{notas.promedio_curso_2q}}</td>
+                          <td >{{notas.promedio_curso_general}}</td>
+                          <td align="center">
+                              <a class="btn bg-gradient-primary text-light"
+                                 onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+                              
+                          </td>
+                      </tr>
+                      {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+       <!-- <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Promedio de las notas del 1er Quimestre</h6>
+        </div>
+        <div class="card-body" style="text-align: center; margin: auto;">
+            <div class="table-responsive">
+                <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                    <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                        <th>Usuario</th>
+                        <th>Curso</th>
+                        <th>Materia</th>
+                        <th>1er Q 1P</th>
+                        <th>1er Q 2P</th>
+                        <th>1er Q 3P</th>
+                        <th>1er Q Examen</th>
+                        <th>1er Q Promedio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for notas in object_list %}
+                    <tr class="text-dark">
+                        <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
+                        <td>{{notas.id_mov_anioelectivo_curso}}</td>
+                        <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
+                        <td>{{notas.promedio_curso_1q}}</td>
+                        <td>{{notas.promedio_curso_2q}}</td>
+                        <td >{{notas.promedio_curso_general}}</td>
+                        <td align="center">
+                            <a class="btn bg-gradient-primary text-light"
+                               onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div> 
+    </div>-->
+    <!-- <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Promedio de las notas del 2do Quimestre</h6>
+      </div>
+      <div class="card-body" style="text-align: center; margin: auto;">
+          <div class="table-responsive">
+              <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                  <thead class="bg-gradient-primary">
+                  <tr class="text-light text-center">
+                      <th>Usuario</th>
+                      <th>Curso</th>
+                      <th>Materia</th>
+                      <th>2do Q 1P</th>
+                      <th>2do Q 2P</th>
+                      <th>2do Q 3P</th>
+                      <th>2do Q Examen</th>
+                      <th>2do Q Promedio</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for notas in object_list %}
+                  <tr class="text-dark">
+                      <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
+                      <td>{{notas.id_mov_anioelectivo_curso}}</td>
+                      <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
+                      <td>{{notas.promedio_curso_1q}}</td>
+                      <td>{{notas.promedio_curso_2q}}</td>
+                      <td >{{notas.promedio_curso_general}}</td>
+                      <td align="center">
+                          <a class="btn bg-gradient-primary text-light"
+                             onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+                          
+                      </td>
+                  </tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div> -->
+      <!-- <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Promedio del año lectivo</h6>
+        </div>
+        <div class="card-body" style="text-align: center; margin: auto;">
+            <div class="table-responsive">
+                <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                    <thead class="bg-gradient-primary">
+                    <tr class="text-light text-center">
+                        <th>Usuario</th>
+                        <th>Curso</th>
+                        <th>1er Q Promedio</th>
+                        <th>2do Q Promedio</th>
+                        <th>Promedio FAS</th>
+                        <th>supletorio</th>
+                        <th>remedial</th>
+                        <th>gracia</th>
+                        <th>PFAS</th>
+                        <th>EFAS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for notas in object_list %}
+                    <tr class="text-dark">
+                        <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
+                        <td>{{notas.id_mov_anioelectivo_curso}}</td>
+                        <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
+                        <td>{{notas.promedio_curso_1q}}</td>
+                        <td>{{notas.promedio_curso_2q}}</td>
+                        <td >{{notas.promedio_curso_general}}</td>
+                        <td align="center">
+                            <a class="btn bg-gradient-primary text-light"
+                               onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> -->
+    <!-- <label class="text-dark h6"><b>Elegir formato a imprimir:</b></label> -->
+    <br>
+    <div class="row darkwhite-bg py-2 text-center">
+        <div class="col-12">
+            <div class="form-row" style="justify-content: center;">
+                <div class=" col-6 col-md-4 mb-0">
+                    <button class="btn btn-success btn-block text-light" id="ex" onclick="Reportes(1)"
+                            type="button"><img alt="REPORTE EN EXCEL" class="img-thumbnail"
+                                               height="30" src="{%static 'img/excel1.png'%}" width="30"> Generar
+                        reporte en EXCEL
+                    </button> &nbsp;
+                </div>
+                <div class=" col-6 col-md-4 mb-0">
+                    <button class="btn btn-danger btn-block" id="pd" onclick="Reportes(2)" type="button"><img
+                            alt="REPORTE EN PDF" class="img-thumbnail" height="30" src="{%static 'img/pdf1.ico'%}"
+                            width="30"> Generar reporte en PDF
+                    </button>
                 </div>
             </div>
         </div>
-        <br>
-        <input type="hidden" name="comboR" id="comboR" value="">
     </div>
+    <br>
+    <input type="hidden" name="comboR" id="comboR" value="">
 </form>
 </div>
 </div>
