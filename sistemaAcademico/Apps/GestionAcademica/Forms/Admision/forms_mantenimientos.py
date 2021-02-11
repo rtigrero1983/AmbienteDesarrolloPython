@@ -5,8 +5,28 @@ from django.forms import ModelForm
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import *
 
-TPA = ['ECUADOR', 'AREGENTINA', 'MEXICO', 'AMERICA SAMOA', 'BOUVET ISLAND', 'ESTADOS UNIDOS', 'VENEZUELA', 'COLOMBIA']
-GEN = [('MASCULINO', 'FEMENINO')]
+TPA = [
+    'ECUADOR', 'AREGENTINA', 'MEXICO',
+    'AMERICA SAMOA', 'BOUVET ISLAND',
+    'ESTADOS UNIDOS', 'VENEZUELA',
+    'COLOMBIA', 'PERU',
+]
+GEN = [
+    (
+    'MASCULINO', 'FEMENINO',
+    'HOMOSEXUAL', 'BISEXUAL',
+    'OTRO GENERO',
+    )
+]
+DEP = [
+    'DOCENTE', 'ADMINISTRATIVO'
+]
+CAR = [
+    'DOCENTE', 'VICERRECTORA',
+    'BIBLIOTECA', 'RECTORA',
+    'DEOE', 'CONSERJE',
+    'INSPECTOR GENERAL',
+]
 TSA = ['O-', 'O+', 'A+', 'A-', 'B-', 'B+']
 
 
@@ -19,6 +39,8 @@ class EmpleadoForm(ModelForm):
             "id_genr_tipo_identificacion",
             "identificacion",
             "direccion",
+            "telefono",
+            "celular",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -48,6 +70,13 @@ class EmpleadoForm(ModelForm):
             "ptelefono",
             "pdireccion",
 
+            "titulo1_nivel3",
+            "nombre_titulo1",
+            "titulo2_nivel3",
+            "nombre_titulo2",
+            "titulo1_nivel4",
+            "nombre_titulo3",
+
             "id_genr_tipo_usuario",
             "rcorreo",
             "id_genr_estado_civil",
@@ -56,14 +85,25 @@ class EmpleadoForm(ModelForm):
             "mienbros_hogar",
             "bono_solidario",
 
+            "estado",
+            "fecha_ingreso",
+            "fecha_ingreso_jor",
+            "categoria_doc",
+            "mot_ingreso",
+            "fech_sal_jor",
+            "mot_salida",
+            "mot_ingreso"
+
         ]
 
         labels = {
             "nombres": "Nombres ",
             "apellidos": "Apellidos",
-            "id_genr_tipo_identificacion": "Tipo de Identificacion",
-            "identificacion": "Identificacion",
-            "direccion": "Direccion",
+            "id_genr_tipo_identificacion": "Tipo de Identificación",
+            "identificacion": "Identificación",
+            "direccion": "Dirección",
+            "telefono": "Teléfono*",
+            "celular": "Celular*",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
             "id_genr_genero": "Genero",
@@ -100,6 +140,14 @@ class EmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
+            "titulo1_nivel3": "Titutlo de 3er nivel",
+            "nombre_titulo1": "Nombre del primer titutlo",
+            "titulo2_nivel3": "2do Titutlo de 3er nivel",
+            "nombre_titulo2": "Nombre del segundo titulo",
+            "titulo1_nivel4": "Titutlo de 4to nivel",
+            "nombre_titulo3": "Titutlo de tercer nivel",
+
+            "estado": "Estado jra",
         }
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
@@ -107,6 +155,9 @@ class EmpleadoForm(ModelForm):
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
+            "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de telefono"}),
+            "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de celular"}),
+            "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
 
             "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Familiar"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Familiar"}),
@@ -114,9 +165,26 @@ class EmpleadoForm(ModelForm):
             "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Telefono"}),
             "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
 
-            "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
+            "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email Institucional"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
+            "nombre_titulo1": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del primer titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo2": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del segundo titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo3": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del Titulo de 4to nivel"
+                }
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -138,6 +206,7 @@ class EmpleadoForm(ModelForm):
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+
 
 
 class EditarEmpleadoForm(ModelForm):

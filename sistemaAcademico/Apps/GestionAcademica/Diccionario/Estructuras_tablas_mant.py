@@ -12,6 +12,7 @@ from sistemaAcademico.Apps.Validaciones import *
 
 class MantPersona(models.Model):
     id_persona = models.AutoField(primary_key=True)
+    """Informacion Personal"""
     nombres = models.CharField(max_length=50, blank=False, null=False)
     apellidos = models.CharField(max_length=50, blank=False, null=False)
     identificacion = models.CharField(max_length=50, blank=False, null=False, validators=[validate_cedula])
@@ -29,6 +30,7 @@ class MantPersona(models.Model):
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="jornada",db_column='id_genr_jornada',null=True)
     id_genr_indigena = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="indigena",db_column='id_genr_indigena',null=True)
     id_genr_idioma_ancestral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="acestral",db_column='id_genr_idioma_ancestral',null=True)
+
     id_genr_categoria_migratoria = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="categoria_migratoria", db_column='id_genr_categoria_migratoria',null=True)
 
 
@@ -39,8 +41,7 @@ class MantPersona(models.Model):
     usuario_ing = models.CharField(max_length=60, blank=False, null=False)
     terminal_ing = models.CharField(max_length=60, blank=False, null=False)
 
-
-
+    """Salud"""
     discapacidad = models.BooleanField(blank=True, null=True)
     discapacidad_renal = models.BooleanField(blank=True, null=True)
     discapacidad_neurologica = models.BooleanField(blank=True, null=True)
@@ -50,21 +51,26 @@ class MantPersona(models.Model):
     enfermedad_congenita = models.BooleanField(blank=True, null=True)
     enfermedad_respiratoria = models.BooleanField(blank=True, null=True)
     atencion_psicologica = models.BooleanField(blank=True, null=True)
+
     id_genr_tipo_usuario = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,default=19, related_name="persona_tipo_usuario", db_column='id_genr_tipo_usuario')
 
+    """Datos Familiar"""
     pnombres = models.CharField(max_length=45, blank=True, null=True )
     papellidos = models.CharField(max_length=45, blank=True, null=True )
     pidentificacion = models.CharField(max_length=15, blank=True, null=True,validators=[validate_cedula])
     pdireccion = models.CharField(max_length=45, blank=True, null=True,validators=[validar_espacios])
     ptelefono = models.CharField(max_length=45,blank=True, null=True)
     pvive_con_usted = models.BooleanField(blank=True, null=True)
+    #
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp", db_column='id_genr_estado_laboralp', blank=False, null=True)
+
     mnombres = models.CharField(max_length=45, blank=True, null=True)
     mapellidos = models.CharField(max_length=45, blank=True, null=True)
     midentificacion = models.CharField(max_length=15, blank=True, null=True,validators=[validate_cedula])
     mdireccion = models.CharField(max_length=45, blank=True, null=True)
     mtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     mvive_con_usted = models.BooleanField(blank=True, null=True)
+    #
     id_genr_estado_laboralm = models.ForeignKey(GenrGeneral,blank=True, null=True, on_delete=models.CASCADE, related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
 
@@ -82,7 +88,27 @@ class MantPersona(models.Model):
     rhorario_laboral = models.CharField(max_length=40, blank=True, null=True)
     mienbros_hogar = models.IntegerField(blank=True, null=True)
 
+    """Informacion Profesional"""
+    titulo1_nivel3 = models.BooleanField(blank=True,null=True)
+    nombre_titulo1 = models.CharField(max_length=75, blank=False, null=True)
 
+    titulo2_nivel3 = models.BooleanField(blank=True,null=True)
+    nombre_titulo2 = models.CharField(max_length=75, blank=False, null=True)
+
+    titulo1_nivel4 = models.BooleanField(blank=True,null=True)
+    nombre_titulo3 = models.CharField(max_length=75, blank=False, null=True)
+
+    """Otros"""
+    #departamento = models.CharField(max_length=20,blank=False)
+    #cargo = models.CharField(max_length=15, blank=false)
+
+    fecha_ingreso = models.DateField(blank=False, null=True)
+    fecha_ingreso_jor = models.DateField(blank=False,null=True)
+    categoria_doc = models.CharField(max_length=20,blank=True)
+    mot_ingreso = models.CharField(max_length=100,blank=True)
+    fech_sal_jor = models.DateField(blank=False,null=True)
+    mot_salida = models.CharField(max_length=100,blank=True)
+    mot_ingreso = models.CharField(max_length=100,blank=True)
 
     class Meta:
         verbose_name = 'Persona',
