@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView
-
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from sistemaAcademico.Apps.GestionAcademica import forms
 from django.utils import timezone
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
@@ -77,7 +77,6 @@ class UpdateEmpleado(UpdateView):
     template_name = 'sistemaAcademico/Admision/Mantenimiento/form_edit_empleado.html'
     success_url = reverse_lazy('Academico:empleado')
     context_object_name = 'e'
-
 
 class ConsultarEmpleado(UpdateView):
     model = MantPersona

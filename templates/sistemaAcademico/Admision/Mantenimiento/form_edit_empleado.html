@@ -36,6 +36,9 @@
                         <a class="nav-link" id="pills-info3-tab" data-toggle="pill" href="#pills-info3" role="tab" aria-controls="pills-info3" aria-selected="false">Datos Familiar</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="pills-info5-tab" data-toggle="pill" href="#pills-info5" role="tab" aria-controls="pills-info5" aria-selected="false">Formacion Profesional</a>
+                      </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="pills-info4-tab" data-toggle="pill" href="#pills-info4" role="tab" aria-controls="pills-info4" aria-selected="false">Otros</a>
                     </li>
                 </ul>
@@ -48,6 +51,7 @@
                                 {{form.id_genr_tipo_identificacion|as_crispy_field}}
                                 {{form.identificacion|as_crispy_field}}
                                 {{form.fecha_de_nacimiento|as_crispy_field}}
+                                {{form.telefono|as_crispy_field}}
 
                             </div>
                             <div class="col-4">
@@ -57,6 +61,7 @@
                                 {{form.id_genr_provincia|as_crispy_field}}
                                 {{form.id_genr_ciudad|as_crispy_field}}
                                 {{form.direccion|as_crispy_field}}
+                                {{form.id_genr_estado_civil|as_crispy_field}}
                             </div>
                             <div class="col-4">
                                 {{form.id_genr_tipo_sangre|as_crispy_field}}
@@ -64,6 +69,7 @@
                                 {{form.id_genr_jornada|as_crispy_field}}
                                 {{form.id_genr_indigena|as_crispy_field}}
                                 {{form.id_genr_idioma_ancestral|as_crispy_field}}
+                                {{form.celular|as_crispy_field}}
                             </div>
                         </div>
                         <div align="center">
@@ -113,20 +119,47 @@
                                 <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="pills-info5" role="tabpanel" aria-labelledby="pills-info5-tab">
+                        <div class="row">
+                            <div class="col-4">
+                                {{form.titulo1_nivel3|as_crispy_field}}
+                                {{form.nombre_titulo1|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.titulo2_nivel3|as_crispy_field}}
+                                {{form.nombre_titulo2|as_crispy_field}}
+                            </div>
+                            <div class="col-4">
+                                {{form.titulo1_nivel4|as_crispy_field}}
+                                {{form.nombre_titulo3|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div align="center">
+                                <a class="btn btn-danger" href="{% url 'Academico:empleado' %}">Cancelar</a>
+                        </div>
+                    </div>
                     <div class="tab-pane fade" id="pills-info4" role="tabpanel" aria-labelledby="pills-info4-tab">
                         <div class="row">
                             <div class="col-4">
-                                {{form.id_genr_tipo_usuario|as_crispy_field}}
+                                {{form.fecha_ingreso_magis|as_crispy_field}}
                                 {{form.rcorreo|as_crispy_field}}
+                                {{form.fecha_ingreso_jor|as_crispy_field}}
+                                {{form.fech_sal_jor|as_crispy_field}}
+                                {{form.fecha_ult_acc_personal|as_crispy_field}}
                             </div>
                             <div class="col-4">
-                                {{form.id_genr_estado_civil|as_crispy_field}}
-                                {{form.id_genr_estado_laboralp|as_crispy_field}}
+                                {{form.cargo|as_crispy_field}}
+                                {{form.estado_jornada|as_crispy_field}}
                                 {{form.bono_solidario|as_crispy_field}}
+                                {{form.categoria_doc|as_crispy_field}}
+                                {{form.departamento|as_crispy_field}}
                             </div>
                             <div class="col-4">
                                 {{form.id_genr_categoria_migratoria|as_crispy_field}}
-                                {{form.mienbros_hogar|as_crispy_field}}
+                                {{form.tipo_nombramiento|as_crispy_field}}
+                                {{form.mot_ingreso|as_crispy_field}}
+                                {{form.mot_salida|as_crispy_field}}
+                                {{form.num_ult_accion_personal|as_crispy_field}}
                             </div>
                         </div>
                         <div align="center">

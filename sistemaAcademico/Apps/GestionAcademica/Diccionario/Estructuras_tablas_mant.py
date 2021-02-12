@@ -88,7 +88,7 @@ class MantPersona(models.Model):
     rhorario_laboral = models.CharField(max_length=40, blank=True, null=True)
     mienbros_hogar = models.IntegerField(blank=True, null=True)
 
-    """Informacion Profesional"""
+    #"""Informacion Profesional"""
     titulo1_nivel3 = models.BooleanField(blank=True,null=True)
     nombre_titulo1 = models.CharField(max_length=75, blank=False, null=True)
 
@@ -99,16 +99,23 @@ class MantPersona(models.Model):
     nombre_titulo3 = models.CharField(max_length=75, blank=False, null=True)
 
     """Otros"""
-    #departamento = models.CharField(max_length=20,blank=False)
-    #cargo = models.CharField(max_length=15, blank=false)
-
-    fecha_ingreso = models.DateField(blank=False, null=True)
-    fecha_ingreso_jor = models.DateField(blank=False,null=True)
-    categoria_doc = models.CharField(max_length=20,blank=True)
-    mot_ingreso = models.CharField(max_length=100,blank=True)
+    #fechas
+    fecha_ingreso_magis = models.DateTimeField(blank=False,null=True)
+    fecha_ingreso_jor = models.DateTimeField(blank=False,null=True)
     fech_sal_jor = models.DateField(blank=False,null=True)
-    mot_salida = models.CharField(max_length=100,blank=True)
+    fecha_ult_acc_personal = models.DateTimeField(blank=True,null=True)
+    #seleccionmultiple
+    cargo = models.CharField(max_length=20,blank=True)
+    estado_jornada = models.CharField(max_length=20,blank=True)
+    categoria_doc = models.CharField(max_length=20,blank=True)
+    departamento = models.CharField(max_length=20,blank=True)
+    tipo_nombramiento = models.CharField(max_length=20,blank=True)
+    #ingreso teclado
     mot_ingreso = models.CharField(max_length=100,blank=True)
+    mot_salida = models.CharField(max_length=100,blank=True)
+    num_ult_accion_personal = models.CharField(max_length=100,blank=True)
+
+
 
     class Meta:
         verbose_name = 'Persona',
@@ -189,7 +196,7 @@ class MantAnioLectivo(models.Model):
     def __str__(self):
         return  str(self.anio)
 
-
+ 
 
 
 

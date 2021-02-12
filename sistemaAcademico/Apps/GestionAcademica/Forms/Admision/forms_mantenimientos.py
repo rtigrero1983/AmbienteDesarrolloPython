@@ -76,7 +76,7 @@ class EmpleadoForm(ModelForm):
             "nombre_titulo2",
             "titulo1_nivel4",
             "nombre_titulo3",
-
+ 
             "id_genr_tipo_usuario",
             "rcorreo",
             "id_genr_estado_civil",
@@ -85,14 +85,18 @@ class EmpleadoForm(ModelForm):
             "mienbros_hogar",
             "bono_solidario",
 
-            "estado",
-            "fecha_ingreso",
+            "fecha_ingreso_magis",
             "fecha_ingreso_jor",
-            "categoria_doc",
-            "mot_ingreso",
             "fech_sal_jor",
+            "fecha_ult_acc_personal",
+            "cargo",
+            "estado_jornada",
+            "categoria_doc",
+            "departamento",
+            "tipo_nombramiento",
+            "mot_ingreso",
             "mot_salida",
-            "mot_ingreso"
+            "num_ult_accion_personal",
 
         ]
 
@@ -147,7 +151,17 @@ class EmpleadoForm(ModelForm):
             "titulo1_nivel4": "Titutlo de 4to nivel",
             "nombre_titulo3": "Titutlo de tercer nivel",
 
-            "estado": "Estado jra",
+            "fecha_ingreso_magis": "Fecha de ingreso magis.",
+            "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
+            "fech_sal_jor": "Fecha de salida de la jornada",
+            "fecha_ult_acc_personal": "Ultimo acceso al personal",
+            "cargo": "Cargo",
+            "estado_jornada": "Estado jornada",
+            "departamento": "Departamento",
+            "tipo_nombramiento": "Tipo de nombramiento",
+            "mot_ingreso": "Motivo de ingreso",
+            "mot_salida": "Motivo de salida",
+            "num_ult_accion_personal": "numero de ultimo acceso del personal",
         }
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
@@ -185,6 +199,78 @@ class EmpleadoForm(ModelForm):
                     "placeholder": "Nombre del Titulo de 4to nivel"
                 }
             ),
+            "fecha_ingreso_magis": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fecha_ingreso_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fech_sal_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"    
+                }
+            ),
+            "fecha_ult_acc_personal": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"                    
+                }
+            ),
+            "cargo": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Cargo"                    
+                }
+            ),
+            "estado_jornada": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Estado jornada"                     
+                }
+            ),
+            "categoria_doc":forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Categoria de documento"                     
+                }                
+            ),
+            "departamento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }
+            ),
+            "tipo_nombramiento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                
+            ),
+            "mot_ingreso": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                  
+            ),
+            "mot_salida": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }               
+            ),
+            "num_ult_accion_personal": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }                  
+            )
         }
 
     def __init__(self, *args, **kwargs):
@@ -218,6 +304,8 @@ class EditarEmpleadoForm(ModelForm):
             "id_genr_tipo_identificacion",
             "identificacion",
             "direccion",
+            "telefono",
+            "celular",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -247,6 +335,13 @@ class EditarEmpleadoForm(ModelForm):
             "ptelefono",
             "pdireccion",
 
+            "titulo1_nivel3",
+            "nombre_titulo1",
+            "titulo2_nivel3",
+            "nombre_titulo2",
+            "titulo1_nivel4",
+            "nombre_titulo3",
+ 
             "id_genr_tipo_usuario",
             "rcorreo",
             "id_genr_estado_civil",
@@ -254,6 +349,19 @@ class EditarEmpleadoForm(ModelForm):
             "id_genr_categoria_migratoria",
             "mienbros_hogar",
             "bono_solidario",
+
+            "fecha_ingreso_magis",
+            "fecha_ingreso_jor",
+            "fech_sal_jor",
+            "fecha_ult_acc_personal",
+            "cargo",
+            "estado_jornada",
+            "categoria_doc",
+            "departamento",
+            "tipo_nombramiento",
+            "mot_ingreso",
+            "mot_salida",
+            "num_ult_accion_personal",
 
         ]
 
@@ -299,6 +407,24 @@ class EditarEmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
+            "titulo1_nivel3": "Titutlo de 3er nivel",
+            "nombre_titulo1": "Nombre del primer titutlo",
+            "titulo2_nivel3": "2do Titutlo de 3er nivel",
+            "nombre_titulo2": "Nombre del segundo titulo",
+            "titulo1_nivel4": "Titutlo de 4to nivel",
+            "nombre_titulo3": "Titutlo de tercer nivel",
+
+            "fecha_ingreso_magis": "Fecha de ingreso magis.",
+            "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
+            "fech_sal_jor": "Fecha de salida de la jornada",
+            "fecha_ult_acc_personal": "Ultimo acceso al personal",
+            "cargo": "Cargo",
+            "estado_jornada": "Estado jornada",
+            "departamento": "Departamento",
+            "tipo_nombramiento": "Tipo de nombramiento",
+            "mot_ingreso": "Motivo de ingreso",
+            "mot_salida": "Motivo de salida",
+            "num_ult_accion_personal": "numero de ultimo acceso del personal",
         }
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
@@ -317,7 +443,96 @@ class EditarEmpleadoForm(ModelForm):
 
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
+            "nombre_titulo1": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del primer titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo2": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del segundo titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo3": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del Titulo de 4to nivel"
+                }
+            ),
+            "fecha_ingreso_magis": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fecha_ingreso_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fech_sal_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"    
+                }
+            ),
+            "fecha_ult_acc_personal": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"                    
+                }
+            ),
+            "cargo": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Cargo"                    
+                }
+            ),
+            "estado_jornada": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Estado jornada"                     
+                }
+            ),
+            "categoria_doc":forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Categoria de documento"                     
+                }                
+            ),
+            "departamento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }
+            ),
+            "tipo_nombramiento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                
+            ),
+            "mot_ingreso": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                  
+            ),
+            "mot_salida": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }               
+            ),
+            "num_ult_accion_personal": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }                  
+            )
         }
 
     def __init__(self, *args, **kwargs):
@@ -350,6 +565,8 @@ class ConsultarEmpleadoForm(ModelForm):
             "id_genr_tipo_identificacion",
             "identificacion",
             "direccion",
+            "telefono",
+            "celular",
             "fecha_de_nacimiento",
             "lugar_nacimiento",
             "id_genr_genero",
@@ -379,6 +596,13 @@ class ConsultarEmpleadoForm(ModelForm):
             "ptelefono",
             "pdireccion",
 
+            "titulo1_nivel3",
+            "nombre_titulo1",
+            "titulo2_nivel3",
+            "nombre_titulo2",
+            "titulo1_nivel4",
+            "nombre_titulo3",
+ 
             "id_genr_tipo_usuario",
             "rcorreo",
             "id_genr_estado_civil",
@@ -387,6 +611,18 @@ class ConsultarEmpleadoForm(ModelForm):
             "mienbros_hogar",
             "bono_solidario",
 
+            "fecha_ingreso_magis",
+            "fecha_ingreso_jor",
+            "fech_sal_jor",
+            "fecha_ult_acc_personal",
+            "cargo",
+            "estado_jornada",
+            "categoria_doc",
+            "departamento",
+            "tipo_nombramiento",
+            "mot_ingreso",
+            "mot_salida",
+            "num_ult_accion_personal",
         ]
 
         labels = {
@@ -432,6 +668,24 @@ class ConsultarEmpleadoForm(ModelForm):
             "mienbros_hogar": "Miembros del hogar",
             "bono_solidario": "Bono solidario",
 
+            "titulo1_nivel3": "Titutlo de 3er nivel",
+            "nombre_titulo1": "Nombre del primer titutlo",
+            "titulo2_nivel3": "2do Titutlo de 3er nivel",
+            "nombre_titulo2": "Nombre del segundo titulo",
+            "titulo1_nivel4": "Titutlo de 4to nivel",
+            "nombre_titulo3": "Titutlo de tercer nivel",
+
+            "fecha_ingreso_magis": "Fecha de ingreso magis.",
+            "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
+            "fech_sal_jor": "Fecha de salida de la jornada",
+            "fecha_ult_acc_personal": "Ultimo acceso al personal",
+            "cargo": "Cargo",
+            "estado_jornada": "Estado jornada",
+            "departamento": "Departamento",
+            "tipo_nombramiento": "Tipo de nombramiento",
+            "mot_ingreso": "Motivo de ingreso",
+            "mot_salida": "Motivo de salida",
+            "num_ult_accion_personal": "numero de ultimo acceso del personal",
         }
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Empleado"}),
@@ -448,7 +702,96 @@ class ConsultarEmpleadoForm(ModelForm):
 
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
+            "nombre_titulo1": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del primer titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo2": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del segundo titutlo de 3er nivel"
+                }
+            ),
+            "nombre_titulo3": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Nombre del Titulo de 4to nivel"
+                }
+            ),
+            "fecha_ingreso_magis": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fecha_ingreso_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"
+                }
+            ),
+            "fech_sal_jor": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"    
+                }
+            ),
+            "fecha_ult_acc_personal": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date"                    
+                }
+            ),
+            "cargo": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Cargo"                    
+                }
+            ),
+            "estado_jornada": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Estado jornada"                     
+                }
+            ),
+            "categoria_doc":forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Categoria de documento"                     
+                }                
+            ),
+            "departamento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }
+            ),
+            "tipo_nombramiento": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                
+            ),
+            "mot_ingreso": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"                       
+                }                  
+            ),
+            "mot_salida": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }               
+            ),
+            "num_ult_accion_personal": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Departamento"
+                }                  
+            )
         }
 
     def __init__(self, *args, **kwargs):
@@ -477,6 +820,8 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['lugar_nacimiento'].widget.attrs['readonly'] = True
         self.fields['id_genr_genero'].widget.attrs['disabled'] = 'disabled'
         self.fields['direccion'].widget.attrs['disabled'] = 'disabled'
+        self.fields['telefono'].widget.attrs['disabled'] = 'disabled'
+        self.fields['celular'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_pais'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_provincia'].widget.attrs['disabled'] = 'disabled'
         self.fields['id_genr_ciudad'].widget.attrs['disabled'] = 'disabled'
@@ -508,6 +853,25 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['mienbros_hogar'].widget.attrs['readonly'] = True
         self.fields['bono_solidario'].widget.attrs['disabled'] = 'disabled'
 
+        self.fields['titulo1_nivel3'].widget.attrs['disabled'] = 'disabled'
+        self.fields['nombre_titulo1'].widget.attrs['disabled'] = 'disabled'
+        self.fields['titulo2_nivel3'].widget.attrs['disabled'] = 'disabled'
+        self.fields['nombre_titulo2'].widget.attrs['disabled'] = 'disabled'
+        self.fields['titulo1_nivel4'].widget.attrs['disabled'] = 'disabled'
+        self.fields['nombre_titulo3'].widget.attrs['disabled'] = 'disabled'
+        self.fields['fecha_ingreso_magis'].widget.attrs['disabled'] = 'disabled'
+        self.fields['fecha_ingreso_jor'].widget.attrs['disabled'] = 'disabled'
+        self.fields['fech_sal_jor'].widget.attrs['disabled'] = 'disabled'
+        self.fields['fecha_ult_acc_personal'].widget.attrs['disabled'] = 'disabled'
+        self.fields['cargo'].widget.attrs['disabled'] = 'disabled'
+        self.fields['estado_jornada'].widget.attrs['disabled'] = 'disabled'
+        self.fields['categoria_doc'].widget.attrs['disabled'] = 'disabled'
+        self.fields['departamento'].widget.attrs['disabled'] = 'disabled'
+        self.fields['tipo_nombramiento'].widget.attrs['disabled'] = 'disabled'
+        self.fields['mot_ingreso'].widget.attrs['disabled'] = 'disabled'
+        self.fields['mot_salida'].widget.attrs['disabled'] = 'disabled'
+        self.fields['num_ult_accion_personal'].widget.attrs['disabled'] = 'disabled'
+
 
 class EstudianteForm(ModelForm):
     class Meta:
@@ -515,12 +879,13 @@ class EstudianteForm(ModelForm):
         fields = [
             "nombres",
             "apellidos",
+            "id_genr_tipo_identificacion",
             "identificacion",
-            "fecha_de_nacimiento",
-            "lugar_nacimiento",
             "direccion",
             "telefono",
             "celular",
+            "fecha_de_nacimiento",
+            "lugar_nacimiento",
             "id_genr_genero",
             "id_genr_pais",
             "id_genr_provincia",
@@ -530,7 +895,7 @@ class EstudianteForm(ModelForm):
             "id_genr_jornada",
             "id_genr_indigena",
             "id_genr_idioma_ancestral",
-            "id_genr_categoria_migratoria",
+
             "discapacidad",
             "discapacidad_renal",
             "discapacidad_neurologica",
@@ -540,33 +905,41 @@ class EstudianteForm(ModelForm):
             "enfermedad_congenita",
             "enfermedad_respiratoria",
             "atencion_psicologica",
+
+            "pvive_con_usted",
             "pnombres",
             "papellidos",
             "pidentificacion",
-            "pdireccion",
             "ptelefono",
-            "pvive_con_usted",
-            "id_genr_estado_laboralp",
-            "mnombres",
-            "mapellidos",
-            "midentificacion",
-            "mdireccion",
-            "mtelefono",
-            "mvive_con_usted",
-            "id_genr_estado_laboralm",
-            "bono_solidario",
-            "rnombres",
-            "rapellidos",
-            "rtelefono",
-            "id_genr_tipo_identificacion",
-            "ridentificacion",
-            "tipo_parentesco",
-            "rvive_con_usted",
-            "rdireccion_trabajo",
-            "rtelefono_trabajo",
+            "pdireccion",
+
+            "titulo1_nivel3",
+            "nombre_titulo1",
+            "titulo2_nivel3",
+            "nombre_titulo2",
+            "titulo1_nivel4",
+            "nombre_titulo3",
+ 
+            "id_genr_tipo_usuario",
             "rcorreo",
-            "rhorario_laboral",
+            "id_genr_estado_civil",
+            "id_genr_estado_laboralp",
+            "id_genr_categoria_migratoria",
             "mienbros_hogar",
+            "bono_solidario",
+
+            "fecha_ingreso_magis",
+            "fecha_ingreso_jor",
+            "fech_sal_jor",
+            "fecha_ult_acc_personal",
+            "cargo",
+            "estado_jornada",
+            "categoria_doc",
+            "departamento",
+            "tipo_nombramiento",
+            "mot_ingreso",
+            "mot_salida",
+            "num_ult_accion_personal",
 
         ]
 
