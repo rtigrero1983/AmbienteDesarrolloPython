@@ -1,0 +1,4 @@
+venv/
+*.pyc
+sistemaAcademico/Apps/GestionAcademica/migrations/
+sistemaAcademico/Apps/settings.py
