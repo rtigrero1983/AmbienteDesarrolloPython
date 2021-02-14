@@ -5,11 +5,25 @@ from django.urls import reverse_lazy
 from sistemaAcademico.Apps.GestionAcademica.Forms.Matriculacion.froms_general import *
 from django.shortcuts import render, redirect
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
 class General(ListView):
     model = GenrGeneral
-
-
     template_name = 'sistemaAcademico/Matriculacion/General/Listar_general.html'
+
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['general'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 
 
@@ -20,6 +34,19 @@ class CreateGeneral (CreateView):
     context_object_name = 'F'
     success_url = reverse_lazy('Academico:general')
 
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['form'] = self.form_class()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request,self.template_name,self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
+
+    
+
 
 class UpdateGeneral (UpdateView):
     model = GenrGeneral
@@ -28,3 +55,10 @@ class UpdateGeneral (UpdateView):
     success_url = reverse_lazy('Academico:general')
     context_object_name = 'F'
 
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            return render(request, self.template_name,context )
+        else:
+            return HttpResponseRedirect('/timeout/')

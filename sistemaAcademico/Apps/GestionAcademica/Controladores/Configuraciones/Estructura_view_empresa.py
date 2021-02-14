@@ -24,9 +24,8 @@ class NuevaEmpre(CreateView):
         if 'form' not in context:
             context['form'] = self.form_class(self.request.GET)
         return context
-
-
-
+    
+        
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         form = self.form_class(request.POST)
@@ -63,6 +62,14 @@ class UpdateEmpre(UpdateView):
     template_name = 'sistemaAcademico/Configuraciones/Empresas/editar_empresa.html'
     success_url = reverse_lazy('Academico:empresas')
 
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            return render(request, self.template_name,context )
+        else:
+            return HttpResponseRedirect('timeout/')
+
 
 
 
@@ -74,7 +81,7 @@ def empresas(request):
         return HttpResponseRedirect('timeout/')
 
 
-def nueva_empresa(request):
+"""def nueva_empresa(request):
     if 'usuario' in request.session:
         contexto = {}
         tip_ident = GenrGeneral.objects.filter(
@@ -110,44 +117,48 @@ def nueva_empresa(request):
             return redirect('Academico:empresas')
         return render(request, 'sistemaAcademico/Configuraciones/Empresas/add_empresa.html', contexto)
     else:
-        return HttpResponseRedirect('timeout/')
+        return HttpResponseRedirect('timeout/')"""
 
 
 def editar_empresa(request, id):
-    empresa = ConfEmpresa.objects.get(id_empresa=id)
-    var_tip_ident = GenrGeneral.objects.filter(tipo='TID')
-    contexto = {}
-    empresa.fecha_creacion = empresa.fecha_creacion.strftime('%Y-%m-%d')
-    contexto['empresa'] = empresa
-    contexto['ident'] = var_tip_ident
-    estado = GenrGeneral.objects.get(idgenr_general=97)
-    if request.method == 'POST':
-        var_empresa_nombre = request.POST.get('nombre')
-        var_rsocial = request.POST.get('rsocial')
-        var_tip_ident = GenrGeneral.objects.get(
-            idgenr_general=(int(request.POST.get('tip_ident'))))
-        var_ident = request.POST.get('identificacion')
-        direccion = request.POST.get('direccion')
-        representante_legal = request.POST.get('rlegal')
-        correo = request.POST.get('inputEmail3')
-        telefono = request.POST.get('telefono')
-        fecha_creacion = request.POST.get('f_creacion')
-        empresa = ConfEmpresa(id_empresa=id, nombre=var_empresa_nombre, razon_social=var_rsocial,
-                              id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
-                              direccion=direccion, representante_legal=representante_legal, correo=correo,
-                              telefono=telefono, fecha_creacion=fecha_creacion,
-                              id_genr_estado=estado)
-        empresa.save()
-        return redirect('Academico:empresas')
-    return render(request, 'sistemaAcademico/Configuraciones/Empresas/Editar_empresa.html', contexto)
-
+    if 'usuario' in request.session:
+        empresa = ConfEmpresa.objects.get(id_empresa=id)
+        var_tip_ident = GenrGeneral.objects.filter(tipo='TID')
+        contexto = {}
+        empresa.fecha_creacion = empresa.fecha_creacion.strftime('%Y-%m-%d')
+        contexto['empresa'] = empresa
+        contexto['ident'] = var_tip_ident
+        estado = GenrGeneral.objects.get(idgenr_general=97)
+        if request.method == 'POST':
+            var_empresa_nombre = request.POST.get('nombre')
+            var_rsocial = request.POST.get('rsocial')
+            var_tip_ident = GenrGeneral.objects.get(
+                idgenr_general=(int(request.POST.get('tip_ident'))))
+            var_ident = request.POST.get('identificacion')
+            direccion = request.POST.get('direccion')
+            representante_legal = request.POST.get('rlegal')
+            correo = request.POST.get('inputEmail3')
+            telefono = request.POST.get('telefono')
+            fecha_creacion = request.POST.get('f_creacion')
+            empresa = ConfEmpresa(id_empresa=id, nombre=var_empresa_nombre, razon_social=var_rsocial,
+                                id_genr_tipo_identificacion=var_tip_ident, identificacion=var_ident,
+                                direccion=direccion, representante_legal=representante_legal, correo=correo,
+                                telefono=telefono, fecha_creacion=fecha_creacion,
+                                id_genr_estado=estado)
+            empresa.save()
+            return redirect('Academico:empresas')
+        return render(request, 'sistemaAcademico/Configuraciones/Empresas/Editar_empresa.html', contexto)
+    else:
+        return HttpResponseRedirect('timeout/')
 
 def eliminar_empresa(request, id):
-    empresas = ConfEmpresa.objects.get(id_empresa=id)
-    inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    if request.method == 'POST':
-        empresas.id_genr_estado = inactivo
-        empresas.save()
-        return redirect('Academico:empresas')
-    return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'empresa': empresas})
-
+    if 'usuario' in request.session:
+        empresas = ConfEmpresa.objects.get(id_empresa=id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
+        if request.method == 'POST':
+            empresas.id_genr_estado = inactivo
+            empresas.save()
+            return redirect('Academico:empresas')
+        return render(request, 'sistemaAcademico/Configuraciones/Empresas/eliminar.html', {'empresa': empresas})
+    else:
+        return HttpResponseRedirect('timeout/')

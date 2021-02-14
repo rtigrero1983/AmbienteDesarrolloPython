@@ -1,5 +1,5 @@
 import hashlib
-
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -46,23 +46,25 @@ def smtp_reenviar(request,pk):
     return render(request, "sistemaAcademico/Configuraciones/SMTP/Usuario_temp.html", {"form":form,"error": error,"persona":persona})
 
 def smtp_view(request):
-    error = None
-    form = None
-    if(request.method == "POST"):
-        form = forms.SMTPForm(request.POST)
-        if(form.is_valid()):
-            form.save()
-            return redirect("Academico:menu")
-        else:
-            error = "No se pudo Guardar el formulario"
-    else:
-            campo = ConfCorreosSmpt.objects.all().exists()
-            if campo is True:
-                return redirect("Academico:edit_smtp", 1)
+    if 'usuario' in request.session:
+        error = None
+        form = None
+        if(request.method == "POST"):
+            form = forms.SMTPForm(request.POST)
+            if(form.is_valid()):
+                form.save()
+                return redirect("Academico:menu")
             else:
-                form = forms.SMTPForm()
-    return render(request, "sistemaAcademico/Configuraciones/SMTP/Ingresar_SMTP.html", {"form": form, "error": error})
-
+                error = "No se pudo Guardar el formulario"
+        else:
+                campo = ConfCorreosSmpt.objects.all().exists()
+                if campo is True:
+                    return redirect("Academico:edit_smtp", 1)
+                else:
+                    form = forms.SMTPForm()
+        return render(request, "sistemaAcademico/Configuraciones/SMTP/Ingresar_SMTP.html", {"form": form, "error": error})
+    else:
+        return HttpResponseRedirect('timeout/')
 
 class smtp_edit(UpdateView):
     model = ConfCorreosSmpt

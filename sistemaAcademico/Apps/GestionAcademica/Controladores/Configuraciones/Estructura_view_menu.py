@@ -18,6 +18,21 @@ class Menu(ListView):
     template_name = 'sistemaAcademico/Configuraciones/Menus/menu.html'
     queryset = ConfMenu.objects.filter(id_genr_estado=97)
     context_object_name = 'menu'
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['menu'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
+
     
 #--------------------------------
 
@@ -32,15 +47,17 @@ class UpdateMenu(UpdateView):
 #--------------------------------
 
 def eliminar_menu(request,id):
-    menu = ConfMenu.objects.get(id_menu = id)
-    inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    if request.method == 'POST':
-        menu.id_genr_estado = inactivo
-        menu.save()
-        return redirect('Academico:menu')
-    return render(request,'sistemaAcademico/Configuraciones/Menus/eliminar_menu.html',{'menu':menu})
-
-
+    if 'usuario' in request.session:
+        menu = ConfMenu.objects.get(id_menu = id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
+        if request.method == 'POST':
+            menu.id_genr_estado = inactivo
+            menu.save()
+            return redirect('Academico:menu')
+        return render(request,'sistemaAcademico/Configuraciones/Menus/eliminar_menu.html',{'menu':menu})
+    else:
+        return HttpResponseRedirect('timeout/')
+        
 class CreateMenu(CreateView):
     model = ConfMenu
     form_class = menu_form

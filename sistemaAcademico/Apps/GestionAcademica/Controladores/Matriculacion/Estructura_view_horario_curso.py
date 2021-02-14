@@ -21,6 +21,10 @@ class HorarioCurso (ListView):
 
 
 
+
+
+
+
     def get_context_data(self, **kwargs):
         context = super(HorarioCurso, self).get_context_data(**kwargs)
         context['jor'] = GenrGeneral.objects.filter(tipo='JOR')
@@ -64,7 +68,21 @@ class ListViewHorario(ListView):
     model= Mov_Horario_materia
     template_name = 'sistemaAcademico/Matriculacion/Horario_curso/list_horario.html'
     context_object_name = 'h'
-    queryset = model.objects.filter(estado=97)
+
+    
+    def get_queryset(self):
+        return self.model.objects.filter(estado=97)
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['h'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 class CrearHorarioCurso(CreateView):
     model = Mov_Horario_materia
@@ -98,11 +116,15 @@ class DeleteHorario(DeleteView):
     template_name = 'sistemaAcademico/Matriculacion/Horario_curso/delete_horario.html'
     success_url = reverse_lazy('Academico:lista_horario')
     context_object_name = 'h'
+
 def deleteHorario(request, id):
-    horarios = Mov_Horario_materia.objects.get(id_horario=id)
-    inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    if request.method == 'POST':
-        horarios.estado = inactivo
-        horarios.save()
-        return redirect('Academico:lista_horario')
-    return render(request, 'sistemaAcademico/Matriculacion/Horario_curso/delete_horario.html', {'horario': horarios})
+    if 'usuario' in request.session:
+        horarios = Mov_Horario_materia.objects.get(id_horario=id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
+        if request.method == 'POST':
+            horarios.estado = inactivo
+            horarios.save()
+            return redirect('Academico:lista_horario')
+        return render(request, 'sistemaAcademico/Matriculacion/Horario_curso/delete_horario.html', {'horario': horarios})
+    else:
+        return self.render_to_response(self.get_context_data(form=form))

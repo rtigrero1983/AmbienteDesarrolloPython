@@ -16,12 +16,25 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Admision.forms_mantenimientos 
 
 class Empleado(ListView):
     model = MantPersona
-    queryset = model.objects.filter(Q(estado=97),
+    context_object_name = 'empleado'
+    template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(Q(estado=97),
                                     Q(id_genr_tipo_usuario=20) |
                                     Q(id_genr_tipo_usuario=21)
                                     ).select_related('id_genr_tipo_usuario')
-    context_object_name = 'empleado'
-    template_name = 'sistemaAcademico/Admision/Mantenimiento/admision_personas.html'
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['empleado'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 
 class Estudiante(ListView):
@@ -117,14 +130,16 @@ class ConsultarEmpleado(UpdateView):
     context_object_name = 'm'
 
 def eliminar_empleado(request, id):
-    empleados = MantPersona.objects.get(id_persona=id)
-    inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    if request.method == 'POST':
-        empleados.estado = inactivo
-        empleados.save()
-        return redirect('Academico:empleado')
-    return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_empleado.html', {'empleado': empleados})
-
+    if 'usuario' in request.session:
+        empleados = MantPersona.objects.get(id_persona=id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
+        if request.method == 'POST':
+            empleados.estado = inactivo
+            empleados.save()
+            return redirect('Academico:empleado')
+        return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_empleado.html', {'empleado': empleados})
+    else:
+        return HttpResponseRedirect('timeout/')
 
 class NuevoEstudiante(CreateView):
     model = MantPersona
@@ -211,13 +226,15 @@ class DatosEstudiante(UpdateView):
 
 
 def eliminar_estudiante(request, id):
-    estudiantes = MantPersona.objects.get(id_persona=id)
-    inactivo = GenrGeneral.objects.get(idgenr_general=98)
-    if request.method == 'POST':
-        estudiantes.estado = inactivo
-        estudiantes.save()
-        return redirect('Academico:estudiante')
-    return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_estudiante.html', {'estudiante': estudiantes})
-
+    if 'usuario' in request.session:
+        estudiantes = MantPersona.objects.get(id_persona=id)
+        inactivo = GenrGeneral.objects.get(idgenr_general=98)
+        if request.method == 'POST':
+            estudiantes.estado = inactivo
+            estudiantes.save()
+            return redirect('Academico:estudiante')
+        return render(request, 'sistemaAcademico/Admision/Mantenimiento/form_eliminar_estudiante.html', {'estudiante': estudiantes})
+    else:
+        return HttpResponseRedirect('timeout/')
 
 
