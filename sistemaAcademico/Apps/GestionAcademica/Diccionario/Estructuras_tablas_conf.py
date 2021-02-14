@@ -203,7 +203,7 @@ class UsuarioTemp(models.Model):
         blank=True, null=True, auto_now=True)
     correo = models.EmailField(max_length=254, blank=False, null=False)
     id_rol= models.ForeignKey(ConfRol,db_column='id_rol',related_name="fk_usuario_temp",default=8,on_delete=models.CASCADE)
-
+    id_persona = models.ForeignKey(MantPersona,db_column="id_persona",related_name='fk_persona_usuario_tem',null=True,blank=False,on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Usuario_temp'
@@ -260,7 +260,7 @@ class ConfDetallePermiso(models.Model):
 """
 class ConfCorreosSmpt(models.Model):
     id_correos_smpt = models.AutoField(primary_key=True)
-    ssl = models.CharField(max_length=30, blank=False, null=False)
+    ssl = models.CharField(max_length=30, blank=False, null=False,default='True')
     dominio = models.CharField(max_length=30, blank=False, null=False)
     puerto = models.CharField(max_length=20, blank=False, null=False)
     usuario_c = models.CharField(

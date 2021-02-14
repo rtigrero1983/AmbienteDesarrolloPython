@@ -29,6 +29,8 @@
         <form action="" method="post" id="forma_test" novalidate>
             {% csrf_token %}
            <div class="contenido">
+                   <h5>Estudiante: {{persona.nombres}} {{persona.apellidos}}</h5>
+                   <h4>Identificacion: {{persona.identificacion}}</h4>
                 {{form.usuario|as_crispy_field}}
                {{form.clave|as_crispy_field}}
                {{form.fecha_limite|as_crispy_field}}

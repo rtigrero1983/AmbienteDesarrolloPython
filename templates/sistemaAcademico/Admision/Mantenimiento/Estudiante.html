@@ -43,6 +43,15 @@
                     <td>{{m.apellidos}}</td>
                     <td>{{m.identificacion}}</td>
                     <td class="text-center">
+                        {% if m.val %}
+                         <a class="btn bg-gradient-secondary text-light"
+                           href="#" title="Consultar {{m.nombres}}">
+                            <i class="fas fa-envelope"></i></a>
+                        {% else %}
+                        <a class="btn bg-gradient-warning text-light"
+                           href="{% url 'Academico:usuario_temp' m.id_persona %}" title="Consultar {{m.nombres}}">
+                            <i class="fas fa-envelope"></i></a>
+                        {% endif %}
                         <a class="btn bg-gradient-success text-light"
                            href="{% url 'Academico:consultar_estudiante' m.id_persona %}" title="Consultar {{m.nombres}}">
                             <i class="fas fa fa-male"></i></a>

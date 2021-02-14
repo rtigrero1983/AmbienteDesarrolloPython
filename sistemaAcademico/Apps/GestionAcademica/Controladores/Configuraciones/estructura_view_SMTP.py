@@ -12,30 +12,38 @@ from django.views.generic import UpdateView
 from sistemaAcademico import settings
 from sistemaAcademico.Apps.GestionAcademica import forms
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
+
 from django.core.mail import EmailMultiAlternatives
 
 from email.mime.text import MIMEText
 from smtplib import *
 
-def smtp_reenviar(request):
+def smtp_reenviar(request,pk):
+    print(request.POST)
     error = None
+    persona= MantPersona.objects.get(id_persona=pk)
     if (request.method == "POST"):
         form = forms.UsuarioTempForm(request.POST)
         if(form.is_valid()):
             cualquiera = form.save()
             h = hashlib.new("sha1")
+            pwd = cualquiera.clave
             var_contra = str.encode(cualquiera.clave)
             h.update(var_contra)
             cualquiera.clave = h.hexdigest()
             cualquiera.save()
-            usuario = {"nombre_usuario":cualquiera.usuario,"password":cualquiera.clave}
+            update = UsuarioTemp.objects.get(id_usuario_temp=cualquiera.id_usuario_temp)
+            update.id_persona=persona
+            update.save()
+            usuario = {"nombre_usuario":cualquiera.usuario,"password":pwd}
             enviar_correo_usuario(cualquiera.correo,None,usuario)
-            return redirect("Academico:usuario_temp")
+            return redirect("Academico:estudiante")
         else:
             error = "No se pudo guardar"
     else:
         form = forms.UsuarioTempForm()
-    return render(request, "sistemaAcademico/Configuraciones/SMTP/Usuario_temp.html", {"form":form,"error": error})
+    return render(request, "sistemaAcademico/Configuraciones/SMTP/Usuario_temp.html", {"form":form,"error": error,"persona":persona})
 
 def smtp_view(request):
     error = None
@@ -93,18 +101,22 @@ def enviar_correo_usuario(correo, url_template, usuario):
         except SMTPException as e:
             print("EL ERROR ES: ",e)
     else:
-        client = SMTP(str(smtp.dominio), int(smtp.puerto))
-        client.login(str(smtp.usuario_c), str(smtp.contrasenia_c))
-        client.set_debuglevel(int(1))
-        client.starttls()
-        client.login(str(smtp.usuario_c),
-                     str(smtp.contrasenia_c))
-        client.sendmail(smtp.usuario_c, correo, mine_message.as_string())
-        client.quit()
+        try:
+            client = SMTP(str(smtp.dominio), int(smtp.puerto))
+            client.login(str(smtp.usuario_c), str(smtp.contrasenia_c))
+            client.set_debuglevel(int(1))
+            client.login(str(smtp.usuario_c),
+                        str(smtp.contrasenia_c))
+            client.sendmail(smtp.usuario_c, correo, mine_message.as_string())
+            client.quit()
+        except SMTPException as e:
+            print("EL ERROR ES: ",e)
+        
 
 def view_temporal(request):
     error = None
     if(request.method == "POST"):
+        print(request.POST)
         form = forms.SMTPForm(request.POST)
         if(form.is_valid()):
             form.save()

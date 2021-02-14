@@ -33,6 +33,37 @@ class Estudiante(ListView):
     context_object_name = 'mantenimiento'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/Estudiante.html'
 
+    def get_context_data(self,**kwargs):
+        context = {}
+        queryset = self.model.objects.filter(estado=97, id_genr_tipo_usuario=19).select_related('id_genr_tipo_usuario').values(
+        'id_persona', 'nombres',
+        'apellidos',
+        'identificacion')
+        lista=[]
+        for i in queryset.values():
+            newDict={}
+            try:
+                usuarioTemp = UsuarioTemp.objects.get(id_persona=i['id_persona'])
+                newDict = {'val':True}
+                newDict.update(i)
+                lista.append(newDict)
+
+            except UsuarioTemp.DoesNotExist:
+                newDict = {'val':False}
+                newDict.update(i)
+                lista.append(newDict)
+                continue
+            newDict={}
+
+
+        context['mantenimiento']=lista
+        return context
+    def get(self,request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request,self.template_name,self.get_context_data())
+        else:
+            return redirect('Academico:timeout')
+
 
 class NuevoEmpleado(CreateView):
     model = MantPersona

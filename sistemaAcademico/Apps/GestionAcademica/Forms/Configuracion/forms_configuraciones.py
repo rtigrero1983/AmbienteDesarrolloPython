@@ -269,7 +269,7 @@ class UsuarioeditModelForm(ModelForm):
 class UsuarioTempForm(forms.ModelForm):
     class Meta:
         model = UsuarioTemp
-        exclude = ('fecha_creacion','id_rol')
+        exclude = ('fecha_creacion','id_rol','id_persona')
         labels = {
             "Usuario Temporal:":"usuario",
             "Clave Temporal:":"clave",
