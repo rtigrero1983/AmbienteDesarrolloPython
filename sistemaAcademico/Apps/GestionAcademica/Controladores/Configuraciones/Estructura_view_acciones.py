@@ -66,7 +66,17 @@ class Nueva_Accion(CreateView):
     form_class = AccionesForm
     template_name = 'sistemaAcademico/Configuraciones/Acciones/add_acciones.html'
     success_url = reverse_lazy('Academico:acciones')
+    
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['form'] = self.form_class()
+        return contexto
 
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request,self.template_name,self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 class Edit_acciones(UpdateView):
     model = ConfAccion
@@ -74,3 +84,14 @@ class Edit_acciones(UpdateView):
     success_url = reverse_lazy('Academico:acciones')
     form_class = AccionesForm
     context_object_name = 'm'
+
+# Este codigo funciona para el timeout de pantallas update, delete con tengan un modal    
+"""    
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            return render(request, self.template_name,context )
+        else:
+            return HttpResponseRedirect('timeout/')
+"""

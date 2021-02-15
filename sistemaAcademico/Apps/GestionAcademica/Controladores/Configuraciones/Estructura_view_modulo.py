@@ -11,9 +11,24 @@ from sistemaAcademico.Apps.GestionAcademica.Forms.Configuracion.forms_configurac
 
 class Modulo(ListView):
     model= ConfModulo
-    queryset = model.objects.filter(id_genr_estado=97).values('id_modulo','codigo','nombre')
+
     context_object_name='modulo'
     template_name = 'sistemaAcademico/Configuraciones/Modulos/modulo.html'
+
+    
+    def get_queryset(self):
+        return self.model.objects.filter(id_genr_estado=97).values('id_modulo','codigo','nombre')
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['modulo'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 class NuevoModulo(CreateView):
     model = ConfModulo
@@ -93,5 +108,4 @@ def eliminar_modulo(request,id):
            return redirect('Academico:modulo')
     except Exception as e:
         raise e
-    
     return render(request,'sistemaAcademico/Configuraciones/Modulos/eliminar_modulo.html',{'modulo':modulo})

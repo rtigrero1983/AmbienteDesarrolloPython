@@ -5,6 +5,7 @@
     <title>timeout</title>
       <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/formularios.css' %}" />
+    <link rel="icon" href="{% static 'img/icono.ico' %}" />
     <script type="text/javascript">
 if (top != self) top.location.href = location.href;
 </script>
@@ -16,12 +17,17 @@ if (top != self) top.location.href = location.href;
 
 
     </script>
-
-<center>
-    <label>Su sesion ha caducado</label>
-<br/>
-    <h3>por favor vuelva a iniciar sesion</h3>
-    <a href="{% url 'Academico:login' %}" class="btn btn-primary btn-user  " >Iniciar session</a>
-</center>
+<div class="modal-dialog modal-lg-8" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+    <center>
+        <label>Su sesión ha caducado</label>
+    <br/>
+        <h3>Por favor vuelva a iniciar sesión</h3>
+        <a href="{% url 'Academico:login' %}" class="btn btn-primary btn-user  " >Iniciar sessión</a>
+    </center>
+        </div>
+    </div>
+</div>
 </body>
 </html>

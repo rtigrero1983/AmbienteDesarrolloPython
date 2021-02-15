@@ -12,8 +12,21 @@ from django.views.decorators.cache import cache_page
 class Roles(ListView):
     model = ConfRol
     template_name = 'sistemaAcademico/Configuraciones/Roles/rol.html'
-    queryset = model.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
     context_object_name = 'roles'
+    
+    def get_queryset(self):
+        return self.model.objects.filter(id_genr_estado=97).values('id_rol','codigo','nombre')
+
+    def get_context_data(self,**kwargs):
+        contexto = {}
+        contexto['roles'] = self.get_queryset()
+        return contexto
+
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in request.session:
+            return render(request, self.template_name, self.get_context_data())
+        else:
+            return HttpResponseRedirect('timeout/')
 
 def roles(request):
     if 'usuario' in request.session:

@@ -89,10 +89,17 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
+<<<<<<< HEAD
         'NAME': 'saber_academico',
         'USER': 'saber_user',
         'PASSWORD': '!yP4@@8M6aJj@!5',
         'HOST': 'mysql-saber.alwaysdata.net',
+=======
+        'NAME': 'bd_academico',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+>>>>>>> c7e783d58f1d7ff9298d7ac21430b11793491203
         'PORT': 3306,
     }
 }

@@ -593,7 +593,7 @@ def mant_estudiante(persona):
 
 def reportePdf_estudiante(persona,campoChk2=None,usuarioph=None):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_estudiante.pdf'
+    response['Content-Disposition'] = 'attachment; filename=.pdf'
     buffer = BytesIO()
 
     styles = getSampleStyleSheet()
@@ -796,7 +796,7 @@ def mant_empleado(empleado):
 
 def reportePdf_empleado(empleado,campoChk2=None,usuarioph=None):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=Reporte_estudiante.pdf'
+    response['Content-Disposition'] = 'attachment; filename=.pdf'
     buffer = BytesIO()
 
     styles = getSampleStyleSheet()

@@ -30,14 +30,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for general in object_list %}
+                {% for m in general %}
                 <tr>
-                    <td><strong>{{general.tipo}}</strong></td>
-                    <td><strong>{{general.codigo}}</strong></td>
-                    <td><strong>{{general.nombre}}</strong></td>
+                    <td><strong>{{m.tipo}}</strong></td>
+                    <td><strong>{{m.codigo}}</strong></td>
+                    <td><strong>{{m.nombre}}</strong></td>
                     <td>
                         <a class="btn text-light bg-gradient-primary"
-                           onclick="modal('{% url 'Academico:editar_general' general.idgenr_general %}')"
+                           onclick="modal('{% url 'Academico:editar_general' m.idgenr_general %}')"
                            title="Editar">
                             <i class="fas fa-info-circle"></i>
                         </a>

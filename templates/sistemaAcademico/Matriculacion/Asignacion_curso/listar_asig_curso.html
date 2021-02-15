@@ -42,7 +42,7 @@
                     <td>{{ a.id_genr_paralelo }}
                     <td>
                         <div class="text-center">
-                            <a class="btn text-light bg-gradient-primary"
+                            <a type="button" class="btn text-light bg-gradient-primary"
                                onclick="modal('{% url 'Academico:editar_esignacion_curso' a.id_mov_anioelectivo_curso %}')" title="Editar"><i
                                     class="fas fa-info-circle"></i></a>
                             <a type="button" class="btn text-light bg-gradient-danger"
@@ -68,6 +68,12 @@
 <script>
 
     function modal_d(url) {
+        $('#modales').load(url,function () {
+            $(this).modal('show');
+        });
+    }
+
+    function modal(url) {
         $('#modales').load(url,function () {
             $(this).modal('show');
         });
