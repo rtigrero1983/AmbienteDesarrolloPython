@@ -92,7 +92,7 @@ DATABASES = {
         'ENGINE': 'mysql_cymysql',
         'NAME': 'bd_academico',
         'USER': 'root',
-        'PASSWORD': 'Anderson10001',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': 3306,
     }
