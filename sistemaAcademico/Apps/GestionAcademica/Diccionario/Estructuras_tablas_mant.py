@@ -105,11 +105,12 @@ class MantPersona(models.Model):
     fech_sal_jor = models.DateField(blank=False,null=True)
     fecha_ult_acc_personal = models.DateTimeField(blank=True,null=True)
     #seleccionmultiple
-    cargo = models.CharField(max_length=20,blank=True)
-    estado_jornada = models.CharField(max_length=20,blank=True)
-    categoria_doc = models.CharField(max_length=20,blank=True)
-    departamento = models.CharField(max_length=20,blank=True)
-    tipo_nombramiento = models.CharField(max_length=20,blank=True)
+    id_cargo = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True, related_name="cargo", db_column='id_cargo')
+    id_estado_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True, related_name="estados", db_column='id_estado_jornada')
+    id_categoria_doc = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True, related_name="categoria_docente", db_column='id_categoria_doc')
+    id_departamento = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True, related_name="departamento", db_column='id_departamento')
+    id_tipo_nombramiento = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True, related_name="nombramiento", db_column='id_tipo_nombramiento')
+
     #ingreso teclado
     mot_ingreso = models.CharField(max_length=100,blank=True)
     mot_salida = models.CharField(max_length=100,blank=True)

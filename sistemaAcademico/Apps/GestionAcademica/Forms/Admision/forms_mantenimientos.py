@@ -89,11 +89,11 @@ class EmpleadoForm(ModelForm):
             "fecha_ingreso_jor",
             "fech_sal_jor",
             "fecha_ult_acc_personal",
-            "cargo",
-            "estado_jornada",
-            "categoria_doc",
-            "departamento",
-            "tipo_nombramiento",
+            "id_cargo",
+            "id_estado_jornada",
+            "id_categoria_doc",
+            "id_departamento",
+            "id_tipo_nombramiento",
             "mot_ingreso",
             "mot_salida",
             "num_ult_accion_personal",
@@ -155,10 +155,11 @@ class EmpleadoForm(ModelForm):
             "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
             "fech_sal_jor": "Fecha de salida de la jornada",
             "fecha_ult_acc_personal": "Ultimo acceso al personal",
-            "cargo": "Cargo",
-            "estado_jornada": "Estado jornada",
-            "departamento": "Departamento",
-            "tipo_nombramiento": "Tipo de nombramiento",
+            "id_cargo": "Cargo",
+            "id_estado_jornada": "Estado jornada",
+            "id_departamento": "Departamento",
+            "id_categoria_doc": "Categoria de docente",
+            "id_tipo_nombramiento": "Tipo de nombramiento",
             "mot_ingreso": "Motivo de ingreso",
             "mot_salida": "Motivo de salida",
             "num_ult_accion_personal": "numero de ultimo acceso del personal",
@@ -292,6 +293,13 @@ class EmpleadoForm(ModelForm):
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+        
+        self.fields['id_cargo'].queryset = GenrGeneral.objects.filter(tipo='CAR')
+        self.fields['id_estado_jornada'].queryset = GenrGeneral.objects.filter(tipo='STA')
+        self.fields['id_categoria_doc'].queryset = GenrGeneral.objects.filter(tipo='CAT_DOC')
+        self.fields['id_departamento'].queryset = GenrGeneral.objects.filter(tipo='DEP')
+        self.fields['id_tipo_nombramiento'].queryset = GenrGeneral.objects.filter(tipo='NOMBRAM')
+
 
 
 
@@ -354,11 +362,11 @@ class EditarEmpleadoForm(ModelForm):
             "fecha_ingreso_jor",
             "fech_sal_jor",
             "fecha_ult_acc_personal",
-            "cargo",
-            "estado_jornada",
-            "categoria_doc",
-            "departamento",
-            "tipo_nombramiento",
+            "id_cargo",
+            "id_estado_jornada",
+            "id_categoria_doc",
+            "id_departamento",
+            "id_tipo_nombramiento",
             "mot_ingreso",
             "mot_salida",
             "num_ult_accion_personal",
@@ -418,10 +426,11 @@ class EditarEmpleadoForm(ModelForm):
             "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
             "fech_sal_jor": "Fecha de salida de la jornada",
             "fecha_ult_acc_personal": "Ultimo acceso al personal",
-            "cargo": "Cargo",
-            "estado_jornada": "Estado jornada",
-            "departamento": "Departamento",
-            "tipo_nombramiento": "Tipo de nombramiento",
+            "id_cargo": "Cargo",
+            "id_estado_jornada": "Estado jornada",
+            "id_departamento": "Departamento",
+            "id_categoria_doc": "Categoria de docente",
+            "id_tipo_nombramiento": "Tipo de nombramiento",
             "mot_ingreso": "Motivo de ingreso",
             "mot_salida": "Motivo de salida",
             "num_ult_accion_personal": "numero de ultimo acceso del personal",
@@ -555,6 +564,11 @@ class EditarEmpleadoForm(ModelForm):
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
 
+        self.fields['id_cargo'].queryset = GenrGeneral.objects.filter(tipo='CAR')
+        self.fields['id_estado_jornada'].queryset = GenrGeneral.objects.filter(tipo='STA')
+        self.fields['id_categoria_doc'].queryset = GenrGeneral.objects.filter(tipo='CAT_DOC')
+        self.fields['id_departamento'].queryset = GenrGeneral.objects.filter(tipo='DEP')
+        self.fields['id_tipo_nombramiento'].queryset = GenrGeneral.objects.filter(tipo='NOMBRAM')
 
 class ConsultarEmpleadoForm(ModelForm):
     class Meta:
@@ -615,11 +629,11 @@ class ConsultarEmpleadoForm(ModelForm):
             "fecha_ingreso_jor",
             "fech_sal_jor",
             "fecha_ult_acc_personal",
-            "cargo",
-            "estado_jornada",
-            "categoria_doc",
-            "departamento",
-            "tipo_nombramiento",
+            "id_cargo",
+            "id_estado_jornada",
+            "id_categoria_doc",
+            "id_departamento",
+            "id_tipo_nombramiento",
             "mot_ingreso",
             "mot_salida",
             "num_ult_accion_personal",
@@ -679,10 +693,11 @@ class ConsultarEmpleadoForm(ModelForm):
             "fecha_ingreso_jor": "Fecha de ingreso a la jornada",
             "fech_sal_jor": "Fecha de salida de la jornada",
             "fecha_ult_acc_personal": "Ultimo acceso al personal",
-            "cargo": "Cargo",
-            "estado_jornada": "Estado jornada",
-            "departamento": "Departamento",
-            "tipo_nombramiento": "Tipo de nombramiento",
+            "id_cargo": "Cargo",
+            "id_estado_jornada": "Estado jornada",
+            "id_departamento": "Departamento",
+            "id_categoria_doc": "Categoria de docente",
+            "id_tipo_nombramiento": "Tipo de nombramiento",
             "mot_ingreso": "Motivo de ingreso",
             "mot_salida": "Motivo de salida",
             "num_ult_accion_personal": "numero de ultimo acceso del personal",
@@ -812,6 +827,13 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['id_genr_categoria_migratoria'].queryset = GenrGeneral.objects.filter(tipo='CMI')
         self.fields['id_genr_estado_civil'].queryset = GenrGeneral.objects.filter(tipo='EST')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+
+        self.fields['id_cargo'].queryset = GenrGeneral.objects.filter(tipo='CAR')
+        self.fields['id_estado_jornada'].queryset = GenrGeneral.objects.filter(tipo='STA')
+        self.fields['id_categoria_doc'].queryset = GenrGeneral.objects.filter(tipo='CAT_DOC')
+        self.fields['id_departamento'].queryset = GenrGeneral.objects.filter(tipo='DEP')
+        self.fields['id_tipo_nombramiento'].queryset = GenrGeneral.objects.filter(tipo='NOMBRAM')
+
         self.fields['nombres'].widget.attrs['readonly'] = True
         self.fields['apellidos'].widget.attrs['readonly'] = True
         self.fields['id_genr_tipo_identificacion'].widget.attrs['disabled'] = 'disabled'
@@ -863,11 +885,11 @@ class ConsultarEmpleadoForm(ModelForm):
         self.fields['fecha_ingreso_jor'].widget.attrs['disabled'] = 'disabled'
         self.fields['fech_sal_jor'].widget.attrs['disabled'] = 'disabled'
         self.fields['fecha_ult_acc_personal'].widget.attrs['disabled'] = 'disabled'
-        self.fields['cargo'].widget.attrs['disabled'] = 'disabled'
-        self.fields['estado_jornada'].widget.attrs['disabled'] = 'disabled'
-        self.fields['categoria_doc'].widget.attrs['disabled'] = 'disabled'
-        self.fields['departamento'].widget.attrs['disabled'] = 'disabled'
-        self.fields['tipo_nombramiento'].widget.attrs['disabled'] = 'disabled'
+        self.fields['id_cargo'].widget.attrs['disabled'] = 'disabled'
+        self.fields['id_estado_jornada'].widget.attrs['disabled'] = 'disabled'
+        self.fields['id_categoria_doc'].widget.attrs['disabled'] = 'disabled'
+        self.fields['id_departamento'].widget.attrs['disabled'] = 'disabled'
+        self.fields['id_tipo_nombramiento'].widget.attrs['disabled'] = 'disabled'
         self.fields['mot_ingreso'].widget.attrs['disabled'] = 'disabled'
         self.fields['mot_salida'].widget.attrs['disabled'] = 'disabled'
         self.fields['num_ult_accion_personal'].widget.attrs['disabled'] = 'disabled'
@@ -932,11 +954,11 @@ class EstudianteForm(ModelForm):
             "fecha_ingreso_jor",
             "fech_sal_jor",
             "fecha_ult_acc_personal",
-            "cargo",
-            "estado_jornada",
-            "categoria_doc",
-            "departamento",
-            "tipo_nombramiento",
+            "id_cargo",
+            "id_estado_jornada",
+            "id_categoria_doc",
+            "id_departamento",
+            "id_tipo_nombramiento",
             "mot_ingreso",
             "mot_salida",
             "num_ult_accion_personal",
