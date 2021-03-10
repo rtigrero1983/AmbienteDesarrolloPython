@@ -42,16 +42,19 @@ def login(request):
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             print(h.hexdigest())
-            usu = ConfUsuario.objects.get(
-                usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97)
+            usu = ConfUsuario.objects.filter(
+                usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97).first()
             if usu:
                 request.session['usuario'] = usu.id_usuario
                 return redirect("Academico:inicio")
             else:
-                usu = UsuarioTemp.objects.get(usuario=var_usuario,clave=h.hexdigest())
+                usu = UsuarioTemp.objects.filter(usuario=var_usuario,clave=h.hexdigest()).first()
                 if usu:
                     request.session['usuario'] = usu.id_usuario
                     return redirect("Academico:inicio")
+                else:
+                    contexto['error'] = "Usuario o contraseña incorrectos"
+                    return render(request, 'base/login.html', contexto)
 
     except Exception as e:
         contexto['error'] = "Usuario o contraseña incorrectos"
