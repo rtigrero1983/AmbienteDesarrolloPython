@@ -39,7 +39,7 @@ PyPDF2==1.26.0
 python-dateutil==2.8.1
 python-decouple==3.3
 pytz==2019.2
-PyYAML==5.3
+PyYAML==5.4
 reportlab==3.5.34
 requests==2.22.0
 shellescape==3.4.1
