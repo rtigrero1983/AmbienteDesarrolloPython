@@ -24,15 +24,15 @@
                 <div class="row pb-4 border-bottom-primary">
                         <div class="col-3">
                             <label for="c1">Jornada</label>
-                            <input type="text" id="c1" class="form-control" value="{{ jornada_estudiante }}" disabled="disabled">
+                            <input type="text" id="c1" class="form-control" value="{% if jornada_estudiante %}{{ jornada_estudiante }}{% else %}No Tiene jornada{% endif %}" disabled="disabled">
                         </div>
                         <div class="col-6">
                             <label for="c1">Curso</label>
-                            <input type="text" class="form-control" value="{{ curso_estudiante }}" disabled="disabled">
+                            <input type="text" class="form-control" value="{% if curso_estudiante %}{{ curso_estudiante }}{% else %}No Tiene curso{% endif %}" disabled="disabled">
                         </div>
                         <div class="col-3">
                             <label for="c1">Paralelo</label>
-                            <input type="text" class="form-control" value="{{ paralelo_estudiante }}" disabled="disabled">
+                            <input type="text" class="form-control" value="{% if paralelo_estudiante %}{{ paralelo_estudiante }}{% else %}No tiene paralelo{% endif %}" disabled="disabled">
                         </div>
                 </div>
                 <!-- ------------------------------------ -->

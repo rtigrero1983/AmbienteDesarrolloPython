@@ -11,11 +11,22 @@
             <br>
             <div class="container">
             <div class="row">
+                        {% if form.errors %}
+            {% for field in form %}
+            {% for error in field.errors %}
+            <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
             <div class="col">
-                {% if error %}
-            <h2>{{ error }}</h2>
-                {% else %}
-                {% endif %}
+
                 <header class="cuadro_titulo rounded">
                     <h4 class="titulo text-center">Mantenimiento | Editar Estudiante</h4>
                 </header>
@@ -24,15 +35,15 @@
                 <div class="row pb-4 border-bottom-primary">
                         <div class="col-3">
                             <label for="c1">Jornada</label>
-                            <input type="text" id="c1" class="form-control" value="{{ jornada_estudiante }}" disabled="disabled">
+                            <input type="text" id="c1" class="form-control" value="{% if jornada_estudiante %}{{ jornada_estudiante }}{% else %}No Tiene jornada{% endif %}" disabled="disabled">
                         </div>
                         <div class="col-6">
                             <label for="c1">Curso</label>
-                            <input type="text" class="form-control" value="{{ curso_estudiante }}" disabled="disabled">
+                            <input type="text" class="form-control" value="{% if curso_estudiante %}{{ curso_estudiante }}{% else %}No Tiene curso{% endif %}" disabled="disabled">
                         </div>
                         <div class="col-3">
                             <label for="c1">Paralelo</label>
-                            <input type="text" class="form-control" value="{{ paralelo_estudiante }}" disabled="disabled">
+                            <input type="text" class="form-control" value="{% if paralelo_estudiante %}{{ paralelo_estudiante }}{% else %}No tiene paralelo{% endif %}" disabled="disabled">
                         </div>
                 </div>
                 <!-- ------------------------------------ -->

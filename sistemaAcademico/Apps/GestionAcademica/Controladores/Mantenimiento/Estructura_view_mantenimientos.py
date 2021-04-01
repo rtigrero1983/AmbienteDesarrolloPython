@@ -38,6 +38,8 @@ class Estudiante(ListView):
     template_name = 'sistemaAcademico/Admision/Mantenimiento/Estudiante.html'
 
     def get_context_data(self,**kwargs):
+        if kwargs:
+            context['msj'] = kwargs['msj']
         context = {}
         queryset = self.model.objects.filter(estado=97, id_genr_tipo_usuario=19).select_related('id_genr_tipo_usuario').values(
         'id_persona', 'nombres',
@@ -46,17 +48,15 @@ class Estudiante(ListView):
         lista=[]
         for i in queryset.values():
             newDict={}
-            try:
-                usuarioTemp = UsuarioTemp.objects.get(id_persona=i['id_persona'])
-                newDict = {'val':True}
-                newDict.update(i)
-                lista.append(newDict)
+            usuarioTemp = UsuarioTemp.objects.filter(id_persona=i['id_persona']).first()
+            if usuarioTemp:
 
-            except UsuarioTemp.DoesNotExist:
+                newDict = {'val':True}
+            else:
                 newDict = {'val':False}
-                newDict.update(i)
-                lista.append(newDict)
-                continue
+            newDict.update(i)
+            lista.append(newDict)
+
             newDict={}
 
 
@@ -165,7 +165,7 @@ class NuevoEstudiante(CreateView):
                                               terminal_ing=socket.gethostname())
             estudiante_model.save()
             form.save()
-            return HttpResponseRedirect(self.get_success_url())
+            return redirect(to=self.get_success_url(),msj="Registrado exitosamente")
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
@@ -179,14 +179,20 @@ class ConsultarEstudiante(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(ConsultarEstudiante, self).get_context_data(**kwargs)
         id_persona = context['m'].id_persona
-        persona = MantEstudiante.objects.get(id_persona=id_persona)
-        id_estudiante = persona.id_estudiante
-        c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante=id_estudiante)
-        curso_estudiante = MovCabCurso.objects.get(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
-        paralelo_estudiante = GenrGeneral.objects.get(
-            nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre)
-        jornada_estudiante = GenrGeneral.objects.get(
-            nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
+        #========================================#
+        curso_estudiante = None
+        c_estudiante = None
+        paralelo_estudiante = None
+        jornada_estudiante = None
+        #=========================================#
+        persona = MantEstudiante.objects.filter(id_persona=id_persona).first()
+        if persona:
+            id_estudiante = persona.id_estudiante
+            c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
+            if c_estudiante: 
+                curso_estudiante = MovCabCurso.objects.filter(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
+                paralelo_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre).first()
+                jornada_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre).first()
         context['curso_estudiante'] = curso_estudiante
         context['paralelo_estudiante'] = paralelo_estudiante
         context['jornada_estudiante'] = jornada_estudiante
@@ -204,14 +210,20 @@ class UpdateEstudiante(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(UpdateEstudiante, self).get_context_data(**kwargs)
         id_persona = context['m'].id_persona
-        persona = MantEstudiante.objects.get(id_persona=id_persona)
-        id_estudiante = persona.id_estudiante
-        c_estudiante = MovMatriculacionEstudiante.objects.get(id_estudiante=id_estudiante)
-        curso_estudiante = MovCabCurso.objects.get(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre)
-        paralelo_estudiante = GenrGeneral.objects.get(
-            nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre)
-        jornada_estudiante = GenrGeneral.objects.get(
-            nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre)
+        #========================================#
+        curso_estudiante = None
+        c_estudiante = None
+        paralelo_estudiante = None
+        jornada_estudiante = None
+        #=========================================#
+        persona = MantEstudiante.objects.filter(id_persona=id_persona).first()
+        if persona:
+            id_estudiante = persona.id_estudiante
+            c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
+            if c_estudiante: 
+                curso_estudiante = MovCabCurso.objects.filter(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
+                paralelo_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre).first()
+                jornada_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre).first()
         context['curso_estudiante'] = curso_estudiante
         context['paralelo_estudiante'] = paralelo_estudiante
         context['jornada_estudiante'] = jornada_estudiante
