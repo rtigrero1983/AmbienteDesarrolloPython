@@ -61,6 +61,7 @@ class Upload_File(View):
             return False
 
     def handle_uploaded_file(self, file, filename, request,id_mov_anioelectivo_curso):
+            global nombres
             print('leyendo archivo...')
             usuario = ConfUsuario.objects.get(
                id_usuario=request.session.get('usuario'))
@@ -104,7 +105,7 @@ class Upload_File(View):
                                     else:
                                         continue
                         
-                        if nombres!='' or nombres is not None and apellidos !='' or apellidos is not None and cedula !='' or cedula is not None:
+                        if nombres !='' or nombres is not None and apellidos !='' or apellidos is not None and cedula !='' or cedula is not None:
                             
                             if self.validateCedula(cedula):
                                 persona = MantPersona.objects.filter(identificacion=cedula)
