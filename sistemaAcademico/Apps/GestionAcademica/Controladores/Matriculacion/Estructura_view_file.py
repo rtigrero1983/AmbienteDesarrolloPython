@@ -61,6 +61,7 @@ class Upload_File(View):
             return False
 
     def handle_uploaded_file(self, file, filename, request,id_mov_anioelectivo_curso):
+            global apellidos
             global nombres
             print('leyendo archivo...')
             usuario = ConfUsuario.objects.get(
