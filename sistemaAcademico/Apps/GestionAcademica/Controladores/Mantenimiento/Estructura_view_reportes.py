@@ -26,7 +26,7 @@ def reporte_estudiante(request):
             comboR = int(request.POST.get('comboR'))
             # Aqui se realizan los filtros
             if combo == 1:
-                persona = MantEstudiante.objects.filter(id_persona__apellidos=campoP)
+                persona = MantEstudiante.objects.filter(id_persona__apellidos__icontains=campoP)
             elif combo == 2:
                 persona = MantEstudiante.objects.all()
             elif combo == 3:
@@ -321,7 +321,7 @@ def reporte_empleado(request):
             combo = int(request.POST.get('combo'))
             comboR = int(request.POST.get('comboR'))
             if combo == 1:
-                empleado = MantEmpleado.objects.filter(id_persona__apellidos=campoP)
+                empleado = MantEmpleado.objects.filter(id_persona__apellidos__icontains=campoP)
             elif combo == 3:
                 empleado = MantEmpleado.objects.filter(id_persona__id_genr_tipo_usuario__nombre=campoP)
             elif combo == 2:
