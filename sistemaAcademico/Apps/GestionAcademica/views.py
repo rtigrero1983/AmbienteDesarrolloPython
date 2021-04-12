@@ -36,30 +36,36 @@ def login(request):
     contexto = {}
     try:
         if request.method == 'POST':
+            # trae el usuario y la contraseña del HTML
             var_usuario = request.POST.get('usu')
             var_contra = request.POST.get('pass')
             h = hashlib.new("sha1")
             var_contra = str.encode(var_contra)
             h.update(var_contra)
             print(h.hexdigest())
+            # registro usuario normal
             usu = ConfUsuario.objects.filter(
                 usuario=var_usuario, clave=h.hexdigest(), id_genr_estado=97).first()
             if usu:
                 request.session['usuario'] = usu.id_usuario
+                request.session['val'] = False
                 return redirect("Academico:inicio")
+            # registro usuario temporal
+            usu = UsuarioTemp.objects.filter(
+                usuario=var_usuario, clave=h.hexdigest()).first()
+            if usu:
+                request.session['usuario'] = usu.id_usuario_temp
+                request.session['val'] = True
+                return redirect("Academico:editar_estudiante", pk=usu.id_persona.id_persona)
+            # contraseña incorrecta
             else:
-                usu = UsuarioTemp.objects.filter(usuario=var_usuario,clave=h.hexdigest()).first()
-                if usu:
-                    request.session['usuario'] = usu.id_usuario
-                    return redirect("Academico:inicio")
-                else:
-                    contexto['error'] = "Usuario o contraseña incorrectos"
-                    return render(request, 'base/login.html', contexto)
+                contexto['error'] = "Usuario o contraseña incorrectos"
+                return render(request, 'base/login.html', contexto)
 
-    except Exception as e:
+    except Exception:
         contexto['error'] = "Usuario o contraseña incorrectos"
         return render(request, 'base/login.html', contexto)
-    return render(request,'base/login.html',contexto)
+    return render(request, 'base/login.html', contexto)
 
 
 def salir(request):
@@ -71,9 +77,9 @@ def pantalla_principal(request):
     usuarios = ConfUsuario.objects.filter(id_genr_estado=97).count()
     personas = MantPersona.objects.filter().count()
     alumnos = MantEstudiante.objects.filter().count()
-    empleados =  MantEmpleado.objects.filter().count()
+    empleados = MantEmpleado.objects.filter().count()
 
-    return render(request,'sistemaAcademico/Pantalla_principal.html',{'usuarios':usuarios,'personas':personas,'alumnos':alumnos,'empleados':empleados})
+    return render(request, 'sistemaAcademico/Pantalla_principal.html', {'usuarios': usuarios, 'personas': personas, 'alumnos': alumnos, 'empleados': empleados})
 
 
 def timeout(request):

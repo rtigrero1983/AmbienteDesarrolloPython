@@ -37,23 +37,24 @@ class Estudiante(ListView):
     context_object_name = 'mantenimiento'
     template_name = 'sistemaAcademico/Admision/Mantenimiento/Estudiante.html'
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
+        context = {}
         if kwargs:
             context['msj'] = kwargs['msj']
-        context = {}
-        queryset = self.model.objects.filter(estado=97, id_genr_tipo_usuario=19).select_related('id_genr_tipo_usuario').values(
-        'id_persona', 'nombres',
-        'apellidos',
-        'identificacion')
-        lista=[]
+        queryset = self.model.objects.filter(estado=97, id_genr_tipo_usuario=19).select_related(
+            'id_genr_tipo_usuario').values(
+            'id_persona', 'nombres',
+            'apellidos',
+            'identificacion')
+        lista = []
         for i in queryset.values():
-            newDict={}
+            newDict = {}
             usuarioTemp = UsuarioTemp.objects.filter(id_persona=i['id_persona']).first()
             if usuarioTemp:
 
-                newDict = {'val':True}
+                newDict = {'val': True}
             else:
-                newDict = {'val':False}
+                newDict = {'val': False}
             newDict.update(i)
             lista.append(newDict)
 
@@ -64,7 +65,7 @@ class Estudiante(ListView):
         return context
     def get(self,request, *args, **kwargs):
         if 'usuario' in request.session:
-            return render(request,self.template_name,self.get_context_data())
+            return render(request, self.template_name, self.get_context_data())
         else:
             return redirect('Academico:timeout')
 
@@ -207,10 +208,30 @@ class UpdateEstudiante(UpdateView):
     success_url = reverse_lazy('Academico:estudiante')
     context_object_name = 'm'
 
+    def get(self, request, *args, **kwargs):
+        if 'usuario' in self.request.session:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            variable = self.request.session.get("val")
+            var_1 = kwargs["pk"]
+            print("este es el ", kwargs)
+            if variable:
+                usu = self.request.session.get('usuario')
+                var_3 = UsuarioTemp.objects.filter(id_usuario_temp=usu).first()
+                var_2 = MantPersona.objects.filter(id_persona=var_3.id_persona.id_persona).first()
+                print(f"esto es {usu} y esto {var_1}")
+                if var_2.id_persona == var_1:
+                    return render(self.request, self.template_name, context)
+                else:
+                    return redirect('Academico:logout')
+        else:
+            return HttpResponseRedirect('timeout/')
+
     def get_context_data(self, **kwargs):
+        variable = self.request.session.get("val")
         context = super(UpdateEstudiante, self).get_context_data(**kwargs)
         id_persona = context['m'].id_persona
-        #========================================#
+        # ========================================#
         curso_estudiante = None
         c_estudiante = None
         paralelo_estudiante = None
@@ -227,6 +248,7 @@ class UpdateEstudiante(UpdateView):
         context['curso_estudiante'] = curso_estudiante
         context['paralelo_estudiante'] = paralelo_estudiante
         context['jornada_estudiante'] = jornada_estudiante
+        context["val"] = variable
         return context
 
 

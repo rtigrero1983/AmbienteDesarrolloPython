@@ -1,21 +1,104 @@
 {% extends 'base/base.html' %}
 {% block encabezado %}
-    <title>Editar Estudiante</title>
+{% if val %}
+<nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
+    <!-- Sidebar Toggle (Topbar) -->
+    <button class="btn btn-primary d-md-none rounded-circle mr-3" id="sidebarToggleTop">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Dropdown - Messages -->
+        <div aria-labelledby="searchDropdown"
+             class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in">
+            <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                    <input aria-describedby="basic-addon2" aria-label="Search"
+                           class="form-control bg-light border-0 small"
+                           placeholder="Search for..." type="text">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
+               href="#"
+               id="userDropdown" role="button">
+                <span class="mr-2 d-none d-lg-inline small initialism">{{info_usuario.usuario}}</span>
+                <img class="img-profile rounded-circle"
+                     src="../../media/user.jpg">
+            </a>
+            <!-- Dropdown - User Information -->
+            <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Perfil
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Configurar mi cuenta
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-target="#logoutModal" data-toggle="modal"
+                   href="{% url 'Academico:logout' %}">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar Sesion
+                </a>
+            </div>
+        </li>
+
+    </ul>
+</nav>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="logoutModal" role="dialog"
+     tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Cancelar</button>
+                <a class="btn btn-primary" href="{% url 'Academico:logout' %}">Cerrar Sesion</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+
+<title>Editar Estudiante</title>
+{% endif %}
 {% endblock encabezado %}
 {% block sidebar %}
 {% endblock sidebar %}
 {% load crispy_forms_tags %}
 {% block contenido_principal %}
 <form method="POST" action="{% url 'Academico:editar_estudiante' m.id_persona  %}">
-{% csrf_token %}
-            <br>
-            <div class="container">
-            <div class="row">
-                        {% if form.errors %}
+    {% csrf_token %}
+    <br>
+    <div class="container">
+        <div class="row">
+            {% if form.errors %}
             {% for field in form %}
             {% for error in field.errors %}
             <div class="alert alert-danger">
-            <strong>{{ error|escape }}</strong>
+                <strong>{{ error|escape }}</strong>
             </div>
             {% endfor %}
             {% endfor %}
@@ -91,7 +174,9 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% if not val %}
+                            <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -115,7 +200,9 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% if not val %}
+                            <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -146,7 +233,9 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% if not val %}
+                            <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -177,7 +266,9 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
-                                <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% if not val %}
+                            <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
