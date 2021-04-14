@@ -36,8 +36,6 @@ class MovCabCurso(models.Model):
 
 class MovCabRegistroNotas(models.Model):
     id_registro_notas = models.AutoField(primary_key=True)
-    id_detalle_registro_notas = models.ForeignKey('MovDetalleRegistroNotas', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_detalleregistronotas", db_column='id_detalle_registro_notas')
-    id_mov_anioelectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_aniolectivocurso", db_column='id_mov_anioelectivo_curso')
     promedio_curso_1q = models.FloatField(blank=False, null=False)
     promedio_curso_2q = models.FloatField(blank=False, null=False)
     promedio_curso_general = models.FloatField(blank=False, null=False)
@@ -51,6 +49,7 @@ class MovCabRegistroNotas(models.Model):
         db_table = 'mov_cab_registro_notas'
     def __int__(self):
         return self.id_registro_notas
+
 
 '''''
 class MovDetalleEmpleado(models.Model):
@@ -98,23 +97,46 @@ class MovDetalleMateriaCurso(models.Model):
 class MovDetalleRegistroNotas(models.Model):
     id_detalle_registro_notas = models.AutoField(primary_key=True)
     id_matriculacion_estudiante = models.ForeignKey('MovMatriculacionEstudiante', on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_matriestudiante", db_column='id_matriculacion_estudiante')
+    #Notas Primer_Quimestre
     primer_parcial = models.FloatField(blank=True, null=True)
     segundo_parcial = models.FloatField(blank=True, null=True)
     tercer_parcial = models.FloatField(blank=True, null=True)
     promedio_parciales = models.FloatField(blank=True, null=True)
     examen = models.FloatField(blank=True, null=True)
+
+    #Notas Segundo_Quimestre
+    primer_parcial_2Q = models.FloatField(blank=True, null=True)
+    segundo_parcial_2Q = models.FloatField(blank=True, null=True)
+    tercer_parcial_2Q = models.FloatField(blank=True, null=True)
+    promedio_parciales_2Q = models.FloatField(blank=True, null=True)
+    examen_2Q = models.FloatField(blank=True, null=True)
+
+    #Promedio de la Suma Divicion de los dos Quimestre
+    promedio_general_1 = models.FloatField(blank=True, null=True)
+
+    promedio_general_2 = models.FloatField(blank=True, null=True)
+    total_promedio_general = models.FloatField(blank=False, null=True)
+
+    #Si se Queda Supretorio,remedial o gracia
     examen_supletorio = models.FloatField(blank=True, null=True)
+    examen_remedial = models.FloatField(blank=True, null=True)
     examen_gracia = models.FloatField(blank=True, null=True)
     disciplina = models.CharField(max_length=1,blank=True, null=True)
-    total_promedio_general = models.FloatField(blank=True, null=True)
+
+    #Materia
     id_materia_profesor = models.ForeignKey('Mov_Materia_profesor', on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_materiaprofesor", db_column='id_materia_profesor')
-    id_general_quimestre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre", db_column='id_general_quimestre')
+    #Para Quimestre1
+    id_general_quimestre_1 = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre1", db_column='id_general_quimestre1',default=28)
+    # Para Quimestre2
+    id_general_quimestre_2 = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False,related_name="fk_detalleregistronotas_quimestre2",db_column='id_general_quimestre2',default=29)
+    # Año Lectivo
+    id_mov_anioelectivo_curso = models.ForeignKey('Mov_Aniolectivo_curso', on_delete=models.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_aniolectivocurso", db_column='id_mov_anioelectivo_curso')
     class Meta:
         verbose_name = 'Detalle Registro de Curso'
         verbose_name_plural = 'Detalle Registro de Curso'
         db_table = 'mov_detalle_registro_notas'
     def __float__(self):
-        return self.primer_parcial, self.segundo_parcial, self.tercer_parcial, self.examen, self.promedio, self.total_promedio_general
+        return self.primer_parcial, self.segundo_parcial, self.tercer_parcial, self.examen, self.promedio_parciales, self.total_promedio_general
 
 
 class MovMatriculacionEstudiante(models.Model):

@@ -1,0 +1,125 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+{% endblock footer %}
+{% block contenido_principal %}
+
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Registro Notas | Notas Primer Quimestre</h4>
+                </header>
+
+
+
+        <div class="card-body card-block">
+            <form action="{% url 'Academico:Crear_RegistroNotas' %}" enctype="multipart/form-data" class="form-horizontal" method="POST">
+
+               <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+
+
+            <div class="row">
+
+                <div class="col-3">
+                 {{ form.id_materia_profesor  | as_crispy_field}}
+
+                </div>
+
+                <div class="col-3">
+                 {{ form.id_matriculacion_estudiante  | as_crispy_field}}
+
+                </div>
+
+                <div class="col-3" oninput="resultado()" >
+                    {{ form.primer_parcial  | as_crispy_field}}
+
+                </div>
+
+                <div class="col-3" oninput="resultado()">
+                    {{ form.segundo_parcial  | as_crispy_field}}
+
+                </div>
+                <div class="col-3" oninput="resultado()">
+                    {{ form.tercer_parcial  | as_crispy_field}}
+
+
+                </div>
+                    <div class="col-3" oninput="resultado()">
+
+                    {{ form.promedio_parciales  | as_crispy_field}}
+
+                  </div>
+
+                <div class="col-3" oninput="resultado()">
+                     {{ form.examen  | as_crispy_field}}
+
+
+                </div>
+
+                <div class="col-3" >
+                 {{ form.promedio_general_1  | as_crispy_field}}
+                </div>
+
+            </div>
+
+            </div>
+
+          </div>
+        </div>
+
+			<div class="text-center">
+                    <button type="submit"  class="btn btn-outline-primary" >Registrar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:registro_notas' %}">Cancelar</a>
+            </div>
+  			</form>
+        </div>
+
+
+</form>
+
+
+    {% endif %}
+{% endblock contenido_principal %}
+{% block extrajs %}
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+    <script>
+ function resultado(){
+     var n1 = document.getElementById('id_primer_parcial').value;
+
+     var n2 = document.getElementById('id_segundo_parcial').value;
+
+     var n3 = document.getElementById('id_tercer_parcial').value;
+
+     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
+
+     var pre = (parseFloat (pr));
+
+     x = document.getElementById("id_promedio_parciales");
+     x.value = pre;
+
+     var valor2 = document.getElementById('id_examen').value;
+     var resultado = (parseFloat(pre)+parseFloat(valor2))/2;
+
+     x = document.getElementById("id_promedio_general_1");
+     x.value = resultado;
+
+ }
+
+
+
+    </script>
+{% endblock extrajs %}
+

@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg-4" role="document">
+    <div class="modal-content">
+        <form action="{% url 'Academico:eliminar_registro_notas' a.id_detalle_registro_notas  %}" method="POST">
+            {% csrf_token %}
+            <div class="modal-body">
+                <header class="cuadro_titulo bg-danger">
+                    <h4 class="titulo">Eliminar Registro de Notas</h4>
+                </header>
+                <div class="contenido text-dark">
+                    <label>¿Esta seguro que desea eliminar este Registro?</label><br>
+                    Estudiante: <label>{{ a.id_matriculacion_estudiante }}</label><br>
+                    Quimestre: <label>{{ a.id_general_quimestre }}</label><br>
+                    <div class="botones">
+                        <br/>
+                        <button class="btn btn-outline-danger" type="submit">Eliminar</button>
+                        <button class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

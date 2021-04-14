@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Movimiento |
+    Registro Notas Primer Quimestre </h4></header>
+
+
+<br/>
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:registro_notas' %}"
+   id="registrar">Regresar </a>
+
+   <a class="btn bg-gradient-primary text-light" href="{% url 'Academico:Crear_RegistroNotas' %}"  id="registrar">Registrar </a>
+
+<br/>
+
+<br/>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registros de Notas</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                <thead class="bg-gradient-primary">
+                <tr class="text-light text-center">
+                    <th>Estudiante</th>
+                    <th>1 Parcial</th>
+                    <th>2 Parcial</th>
+                    <th>3 Parcial</th>
+                    <th>Promedio Parcial</th>
+                    <th>Examen</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for notas in object_list %}
+                <tr class="text-dark">
+                    <td>{{notas.id_matriculacion_estudiante}}</td>
+                    <td>{{notas.primer_parcial}}</td>
+                    <td>{{notas.segundo_parcial}}</td>
+                    <td>{{notas.tercer_parcial}}</td>
+                    <td>{{notas.promedio_parciales}}</td>
+                    <td >{{notas.examen}}</td>
+                    <td align="center">
+                        <a class="btn bg-gradient-primary text-light"
+                           onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido_principal %}
+{% block extrajs %}
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+</div>
+    <script>
+     function total() {
+     //primer parcial
+     var n1 = document.getElementById('id_primer_parcial').value;
+     var n2 = document.getElementById('id_segundo_parcial').value;
+     var n3 = document.getElementById('id_tercer_parcial').value;
+     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
+
+
+
+
+     x = document.getElementById("id_promedio_parciales");
+
+    x.value = pr;
+
+
+ }
+ function resultado(){
+     var n1 = document.getElementById('id_examen').value;
+     var n2 = document.getElementById('id_examen_gracia').value;
+     var n3 = document.getElementById('id_examen_supletorio').value;
+     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
+
+
+     x = document.getElementById("id_total_promedio_general");
+
+    x.value = pr;
+
+ }
+    </script>
+{% endblock extrajs %}

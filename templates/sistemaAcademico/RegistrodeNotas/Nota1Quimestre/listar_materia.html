@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}z
+{% block footer %}
+
+{% endblock footer %}
+{% block contenido_principal %}
+
+<header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Movimiento |
+    Registro Notas Primer Quimestre</h4></header>
+
+<br/>
+<a class="btn bg-gradient-primary text-light"  href="{% url 'Academico:registro_notas' %}"
+   id="registrar">Regresar </a>
+
+    <a class="btn bg-gradient-primary text-light" href="{% url 'Academico:Crear_RegistroNotas' %}"
+   id="registrar">Registrar Notas </a>
+<br/>
+<br/>
+
+    <div class="card shadow mb-4">
+            <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Registro Notas | Notas Primer Quimestre</h6>
+        </div>
+
+
+
+
+          <div class="card-body">
+                <div class="table-responsive">
+                    <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
+                        <thead class="bg-gradient-primary">
+                        <tr class="text-light text-center">
+                            <th>#</th>
+                            <th>Estudiante</th>
+                            <th>Profesor</th>
+                            <th>Quimestre</th>
+                            <th>1 Parcial</th>
+                            <th>2 Parcial</th>
+                            <th>3 Parcial</th>
+                            <th>Promedio Parciales</th>
+                            <th>Examen </th>
+                            <th>Promedio Quimestral</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for notas in inst %}
+                            <tr class="text-dark">
+                                 <td>{{notas.id_detalle_registro_notas}}</td>
+
+                                 <td>{{notas.id_matriculacion_estudiante}}</td>
+
+                                 <td>{{notas.id_materia_profesor}}</td>
+
+                                <td>{{notas.id_general_quimestre_1}}</td>
+                                <td>{{notas.primer_parcial}}</td>
+                                <td>{{notas.segundo_parcial}}</td>
+                                <td>{{notas.tercer_parcial}}</td>
+                                <td>{{notas.promedio_parciales}}</td>
+                                <td>{{notas.examen}}</td>
+                                <td>{{notas.promedio_general_1}}</td>
+
+
+
+                                    <td align="center">
+                                    <a class="btn bg-gradient-primary text-light"
+                                       onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+
+                                    <a class="btn bg-gradient-danger text-light"
+                                       onclick="modal('{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}')" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
+
+                                    </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock contenido_principal %}
+{% block extrajs %}
+<div class="modal fade" id="mostrar_modal" role="dialog">
+
+{% endblock extrajs %}

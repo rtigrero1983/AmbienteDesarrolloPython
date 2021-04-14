@@ -12,46 +12,64 @@
 {% block contenido_principal %}
 
 <header class="cuadro_titulo rounded bg-gradient-primary text-center"><h4 class="title text-light"> Movimiento |
-    Registro Notas </h4></header>
+    Registro Notas Generales </h4></header>
 
 <br/>
-<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:notas_materias' %}"
-   id="registrar">Agregar </a>
+
+<a class="btn bg-gradient-primary text-light" href="{% url 'Academico:listar_materia' %}"
+   id="registrar">Agregar Notas del 1 Quimestre </a>
+    <a class="btn bg-gradient-primary text-light" href="{% url 'Academico:listar_materia2' %}"
+   id="registrar">Agregar Notas del 2 Quimestre</a>
+
+
 <br/>
+
 <br/>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Registros de Notas</h6>
     </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
                 <thead class="bg-gradient-primary">
                 <tr class="text-light text-center">
-                    <th>Estudiante</th>
                     <th>Curso</th>
+                    <th>Estudiante</th>
                     <th>Profesor</th>
-                    <th>1 Quimestre</th>
-                    <th>2 Quimestre</th>
+                    <th>Promedio 1 Quimestre</th>
+                    <th>Promedio 2 Quimestre</th>
                     <th>Promedio Final</th>
+                    <th>Examen Supretorio</th>
+                    <th>Examen Remedial</th>
+                    <th>Examen Gracia</th>
+                    <th>Disciplina</th>
                     <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for notas in object_list %}
-                <tr class="text-dark">
-                    <td>{{notas.id_detalle_registro_notas.id_matriculacion_estudiante}}</td>
-                    <td>{{notas.id_mov_anioelectivo_curso}}</td>
-                    <td>{{notas.id_detalle_registro_notas.id_materia_profesor}}</td>
-                    <td>{{notas.promedio_curso_1q}}</td>
-                    <td>{{notas.promedio_curso_2q}}</td>
-                    <td >{{notas.promedio_curso_general}}</td>
-                    <td align="center">
+                     {% for notas in object_list %}
+                         <td >{{notas.id_matriculacion_estudiante.id_mov_anioelectivo_curso}}</td>
+                         <td >{{notas.id_matriculacion_estudiante}}</td>
+                         <td >{{notas.id_materia_profesor}}</td>
+                         <td >{{notas.promedio_general_1}}</td>
+                         <td >{{notas.promedio_general_2}}</td>
+                         <td >{{notas.total_promedio_general}}</td>
+                         <td >{{notas.examen_supletorio}}</td>
+                         <td >{{notas.examen_remedial}}</td>
+                         <td >{{notas.examen_gracia}}</td>
+                         <td >{{notas.disciplina}}</td>
+
+                   <td align="center">
                         <a class="btn bg-gradient-primary text-light"
-                           onclick="modal('{% url 'Academico:actualizar_registro_notas' notas.id_detalle_registro_notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
-                        
-                    </td>
+                           onclick="modal('{% url 'Academico:actualizar_registro_notasSupre' notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>
+
+                    <a class="btn bg-gradient-danger text-light"
+                           onclick="modal('{% url 'Academico:eliminar_registro_notas' notas.id_detalle_registro_notas %}')" title="Eliminar"><i class="fas fa-exclamation-triangle"></i></a>
+                         </td>
+
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -65,34 +83,6 @@
 <div class="modal fade" id="mostrar_modal" role="dialog">
 
 </div>
-    <script>
-     function total() {
-     //primer parcial
-     var n1 = document.getElementById('id_primer_parcial').value;
-     var n2 = document.getElementById('id_segundo_parcial').value;
-     var n3 = document.getElementById('id_tercer_parcial').value;
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
 
 
-
-
-     x = document.getElementById("id_promedio_parciales");
-
-    x.value = pr;
-
-
- }
- function resultado(){
-     var n1 = document.getElementById('id_examen').value;
-     var n2 = document.getElementById('id_examen_gracia').value;
-     var n3 = document.getElementById('id_examen_supletorio').value;
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
-
-
-     x = document.getElementById("id_total_promedio_general");
-
-    x.value = pr;
-
- }
-    </script>
 {% endblock extrajs %}
