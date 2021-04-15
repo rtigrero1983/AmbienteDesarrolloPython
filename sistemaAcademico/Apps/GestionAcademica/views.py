@@ -84,3 +84,22 @@ def pantalla_principal(request):
 
 def timeout(request):
     return render(request, 'sistemaAcademico/timeout.html')
+
+
+class Error404 (TemplateView):
+    template_name = 'errores/404.html'
+
+class Error500 (TemplateView):
+    template_name = 'errores/500.html'
+
+    @classmethod
+    def as_error_view(cls):
+
+        v = cls.as_view()
+        def view(request):
+            r = v(request)
+            r.render()
+            return r
+        return view
+
+

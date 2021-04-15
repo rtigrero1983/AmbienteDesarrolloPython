@@ -24,9 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '9m0pt#*&j_2&@m9g0z&7w8@1-4ekitk8^m60_=e0^f_uya2+do'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+#modifcar el archivo url.py que esta dentro de la carpeta sistemaAcademico
+#comentar la linea 30 y 31 para el debug=True y tambien  la linea 150 de este archivo
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -89,9 +90,9 @@ WSGI_APPLICATION = 'sistemaAcademico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mysql_cymysql',
-        'NAME': 'bd_academico',
+        'NAME': 'prueba',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '05715',
         'HOST': 'localhost',
         'PORT': 3306,
     }
@@ -146,9 +147,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 INTERNAL_IPS = {'127.0.0.1', }
+#modificacion para debug=Flase
+STATIC_ROOT = 'static' 
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, '/static/'), ##Editar lugar
+]
+#--------------------------------------------
 
+# modificacion para debug=True
+"""
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
+"""
+#----------------------------------------
 SESSION_COOKIE_AGE = 36000
 SESSION_EXPIRE_SECONDS = 36000
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True

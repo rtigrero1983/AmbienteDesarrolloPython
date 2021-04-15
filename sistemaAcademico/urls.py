@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
+from django.conf.urls import *
+from sistemaAcademico.Apps.GestionAcademica.views import*
+from django.views import static 
+from django.conf import settings
 import debug_toolbar
 
 urlpatterns = [
@@ -23,9 +27,18 @@ urlpatterns = [
     path('__debug__', include(debug_toolbar.urls)),
     path('', include(('sistemaAcademico.Apps.GestionAcademica.urls', 'Academico'))),
     #path('', include(('sistemaAcademico.Apps.reportes.urls', 'Reporte'))),
+    url(r'^static/(?P<path>.*)$', static.serve,
+      {'document_root': settings.STATIC_ROOT}, name='static'),
+
 
 
 ]
+#------------Error404-------------
+handler404=Error404.as_view()
+#------------Error500------------
+handler500=Error500.as_error_view()
+#------------Error403------------
+
 
 from . import settings
 from django.contrib.staticfiles.urls import static
