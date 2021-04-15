@@ -56,7 +56,13 @@
                          <td >{{notas.id_materia_profesor}}</td>
                          <td >{{notas.promedio_general_1}}</td>
                          <td >{{notas.promedio_general_2}}</td>
-                         <td >{{notas.total_promedio_general}}</td>
+
+                          {% if notas.total_promedio_general < 7 %}
+                                <td style="color: red">{{notas.total_promedio_general}}<br>Supretorio</td>
+                                {% else %}
+                                 <td style="color: green">{{notas.total_promedio_general}}</td>
+                                {% endif %}
+
                          <td >{{notas.examen_supletorio}}</td>
                          <td >{{notas.examen_remedial}}</td>
                          <td >{{notas.examen_gracia}}</td>

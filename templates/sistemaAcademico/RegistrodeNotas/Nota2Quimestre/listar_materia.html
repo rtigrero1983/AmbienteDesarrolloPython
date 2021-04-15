@@ -60,7 +60,14 @@
                                  <td>{{notas.tercer_parcial_2Q}}</td>
                                  <td>{{notas.promedio_parciales_2Q}}</td>
                                  <td>{{notas.examen_2Q}}</td>
-                                 <td>{{notas.promedio_general_2}}</td>
+
+                                  {% if notas.promedio_general_2 < 7 %}
+                                <td style="color: red">{{notas.promedio_general_2}}</td>
+                                {% else %}
+                                 <td style="color: green">{{notas.promedio_general_2}}</td>
+                                {% endif %}
+
+
                                     <td align="center">
                                     <a class="btn bg-gradient-primary text-light"
                                        onclick="modal('{% url 'Academico:actualizar_registro_notas2' notas.id_detalle_registro_notas %}')" title="Editar"><i class="fas fa-info-circle"></i></a>

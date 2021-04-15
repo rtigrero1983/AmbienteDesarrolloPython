@@ -58,15 +58,18 @@
                                  <td>{{notas.id_matriculacion_estudiante}}</td>
 
                                  <td>{{notas.id_materia_profesor}}</td>
-
                                 <td>{{notas.id_general_quimestre_1}}</td>
                                 <td>{{notas.primer_parcial}}</td>
                                 <td>{{notas.segundo_parcial}}</td>
                                 <td>{{notas.tercer_parcial}}</td>
-                                <td>{{notas.promedio_parciales}}</td>
+                                <td >{{notas.promedio_parciales}}</td>
                                 <td>{{notas.examen}}</td>
-                                <td>{{notas.promedio_general_1}}</td>
 
+                                 {% if notas.promedio_general_1 < 7 %}
+                                <td style="color: red">{{notas.promedio_general_1}}</td>
+                                {% else %}
+                                 <td style="color: green">{{notas.promedio_general_1}}</td>
+                                {% endif %}
 
 
                                     <td align="center">
