@@ -1,0 +1,81 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_tags %}
+{% block sidebar %}
+{% endblock sidebar %}
+{% block modulo %}
+{% endblock modulo %}
+{% block encabezado %}
+{% endblock encabezado %}
+{% block footer %}
+{% endblock footer %}
+{% block contenido_principal %}
+
+<form method="POST" action="#">
+    {% csrf_token %}
+      {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+                <header class="cuadro_titulo">
+                    <h4 class="titulo text-center">Registro Notas | Notas Primer Quimestre</h4>
+                </header>
+        <div class="card-body card-block">
+            <form action="{% url 'Academico:crear_notas_generales' %}" enctype="multipart/form-data" class="form-horizontal" method="POST">
+               <div class="row darkwhite-bg py-2">
+          <div class="col-12">
+            <div class="form-row">
+
+                <div class="col-auto" >
+                   {{ form.id_detalle_registro_notas  | as_crispy_field}}
+
+                </div>
+                <div class="col-auto" >
+                    {{ form.id_detalle_registro_notas2  | as_crispy_field}}
+
+
+
+                </div>
+                <div class="col-auto" >
+                    {{ form.id_mov_anioelectivo_curso  | as_crispy_field}}
+
+
+                </div>
+                    <div class="col-auto" >
+                    {{ form.promedio_curso_general | as_crispy_field}}
+
+                  </div>
+
+                <div class="col-auto"  >
+                     {{ form.examen_supletorio  | as_crispy_field}}
+
+
+                </div>
+                <div class="col-auto" >
+                     {{ form.examen_remedial  | as_crispy_field}}
+
+                </div>
+                <div class="col-auto" >
+                     {{ form.examen_gracia  | as_crispy_field}}
+
+                </div>
+                <div class="col-auto" >
+                     {{ form.disciplina  | as_crispy_field}}
+
+                </div>
+            </div>
+
+          </div>
+        </div>
+			<div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Registrar</button>
+                    <button type="reset" class="btn btn-outline-info">Restablecer</button>
+                    <a class="btn btn-outline-danger" href="{% url 'Academico:registro_notas' %}">Cancelar</a>
+            </div>
+  			</form>
+        </div>
+
+
+</form>
+
+
+    {% endif %}
+{% endblock contenido_principal %}

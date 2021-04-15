@@ -218,11 +218,24 @@ urlpatterns = [
     path('create_curso/' + 'timeout/' ,timeout, name='timeout_create_curso'),
     path('eliminar_curso/' + 'timeout/' ,timeout, name='timeout_eliminar_curso'),
     path('cursos/' + 'timeout/' ,timeout, name='timeout_cursos'),
-    # ---------registro notas -----
+    # ---------registro notas ---------------------------
     path('registronotas/', List_Notas.as_view(), name='registro_notas'),
-    path('notas_materias/', NotasMaterias.as_view(), name='notas_materias'),
-    path('actualizar_registronotas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
+
+    # Nota 1 Quimestre
+    path('CrearRegistroNotas/', CrearRegistroNotas.as_view(), name='Crear_RegistroNotas'),
+    path('listarMateria/', ListarMateria.as_view(), name='listar_materia'),
+    path('actualizar_notas/<int:pk>', Update_notas.as_view(), name='actualizar_registro_notas'),
+
+    # NOTA 2 QUIMESTRE
+    path('listarMateria2/', ListarMateria2.as_view(), name='listar_materia2'),
+    path('actualizar_notas2/<int:pk>', Update_notas2.as_view(), name='actualizar_registro_notas2'),
+
+    # Si se Queda
+    path('actualizar_notasSupre/<int:pk>', Update_notasSupre.as_view(), name='actualizar_registro_notasSupre'),
+
+    # Eliminar Nota Definitivamente
     path('eliminar_registronotas/<int:pk>', Delete_notas.as_view(), name='eliminar_registro_notas'),
+
     path('estudiantes_filtro/',filtro_estudiantes,name='estudiante_filtro'),
     path('estudiantes_lista/',filtro_estudiantes_lista,name="estudiante_lista"),
     path('tipo_estudiantes/<int:pk>',FilterTipoEstudinates.as_view(),name='tipo_estudiantes'),
