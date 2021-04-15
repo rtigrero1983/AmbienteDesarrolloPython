@@ -224,6 +224,8 @@ class UpdateEstudiante(UpdateView):
                     return render(self.request, self.template_name, context)
                 else:
                     return redirect('Academico:logout')
+            else:
+                return render(self.request, self.template_name, context)
         else:
             return HttpResponseRedirect('timeout/')
 
