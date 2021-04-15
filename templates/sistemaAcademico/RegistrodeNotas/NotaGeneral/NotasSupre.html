@@ -19,7 +19,7 @@
                     <label><b>Profesor:</b>{{ profesor }}</label><br>
 
                 <div>
-                <div class="col-12" oninput="resultado()">
+                <div class="col-12">
                     {{ form.disciplina  | as_crispy_field}}
                     {{ form.examen_supletorio|as_crispy_field }}
                     {{ form.examen_remedial|as_crispy_field }}
@@ -38,26 +38,3 @@
     </div>
 </div>
 
-<script>
- function resultado(){
-     var n1 = document.getElementById('id_primer_parcial_2Q').value;
-
-     var n2 = document.getElementById('id_segundo_parcial_2Q').value;
-
-     var n3 = document.getElementById('id_tercer_parcial_2Q').value;
-
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
-
-     x = document.getElementById("id_promedio_parciales_2Q");
-     x.value = pr;
- }
-
- function PromedioTotal(){
-     var valor1 = document.getElementById('id_promedio_parciales_2Q').value;
-     var valor2 = document.getElementById('id_examen_2Q').value;
-     var resultado = (parseFloat(valor1)+parseFloat(valor2))/2;
-
-     x = document.getElementById("id_promedio_general_2");
-     x.value = resultado;
- }
-</script>

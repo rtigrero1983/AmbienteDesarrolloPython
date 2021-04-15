@@ -45,25 +45,28 @@
 </div>
 
 <script>
+
  function resultado(){
      var n1 = document.getElementById('id_primer_parcial').value;
-
      var n2 = document.getElementById('id_segundo_parcial').value;
-
      var n3 = document.getElementById('id_tercer_parcial').value;
+     var pr = ((parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3);
 
-     var pr = (parseFloat(n1)+parseFloat(n2)+parseFloat(n3))/3;
+     var  condecimal1=pr.toFixed(2);
 
-     var pre = (parseFloat (pr));
+     var pre = (parseFloat (condecimal1))*0.8;
 
      x = document.getElementById("id_promedio_parciales");
-     x.value = pre;
+     x.value = condecimal1;
 
-     var valor2 = document.getElementById('id_examen').value;
-     var resultado = (parseFloat(pre)+parseFloat(valor2))/2;
+     var valor = document.getElementById('id_examen').value;
+     var porcentaje20 = (parseFloat(valor))*0.2;
+
+     var resultado = (parseFloat(pre)+parseFloat(porcentaje20));
+     var  condecimales=resultado.toFixed(2);
 
      x = document.getElementById("id_promedio_general_1");
-     x.value = resultado;
+     x.value = condecimales;
 
  }
 
