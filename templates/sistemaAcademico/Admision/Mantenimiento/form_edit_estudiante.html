@@ -36,7 +36,7 @@
                id="userDropdown" role="button">
                 <span class="mr-2 d-none d-lg-inline small initialism">{{info_usuario.usuario}}</span>
                 <img class="img-profile rounded-circle"
-                     src="../../media/user.jpg">
+                     src="../static/media/user.jpg">
             </a>
             <!-- Dropdown - User Information -->
             <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
@@ -264,8 +264,9 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit"  class="btn btn-primary">Guardar</button>
                                 <button type="reset" class="btn btn-info">Restablecer</button>
+
                             {% if not val %}
                             <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
                             {% endif %}
