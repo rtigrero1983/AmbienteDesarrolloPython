@@ -734,7 +734,7 @@ class EstudianteEditForm(ModelForm):
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
-            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control text-dark"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control text-dark", "placeholder": "Dia/Mes/Año "}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
