@@ -79,8 +79,8 @@ class MantPersona(models.Model):
                                                 related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
 
-    rnombres = models.CharField(max_length=45, blank=True, null=True, default="nombre representante")
-    rapellidos = models.CharField(max_length=45, blank=True, null=True, default="apellido representante")
+    rnombres = models.CharField(max_length=45, blank=True, null=True, )
+    rapellidos = models.CharField(max_length=45, blank=True, null=True, )
     rtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                                     related_name="identificacion",
