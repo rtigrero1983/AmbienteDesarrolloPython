@@ -252,6 +252,12 @@ class UpdateEstudiante(UpdateView):
         context['jornada_estudiante'] = jornada_estudiante
         context["val"] = variable
         return context
+    def get_success_url(self):
+        variable = self.request.session.get("val")
+        if variable:
+            return reverse_lazy("Academico:logout")
+        else:
+            return reverse_lazy("Academico:estudiante")
 
 
 class DatosEstudiante(UpdateView):
