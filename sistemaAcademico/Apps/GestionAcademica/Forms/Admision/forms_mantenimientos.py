@@ -744,12 +744,11 @@ class EstudianteEditForm(ModelForm):
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
             "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
-
             "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Padre"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Padre"}),
             "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula del padre"}),
@@ -792,6 +791,7 @@ class EstudianteEditForm(ModelForm):
         self.fields['id_genr_tipo_identificacion'].queryset = GenrGeneral.objects.filter(tipo='TID')
         self.fields['id_genr_estado_laboralm'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
         self.fields['id_genr_estado_laboralp'].queryset = GenrGeneral.objects.filter(tipo='ESTL')
+        
 
 
 class ConsultarEstudianteForm(ModelForm):
