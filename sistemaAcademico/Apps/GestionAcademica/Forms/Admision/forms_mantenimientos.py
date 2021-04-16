@@ -238,17 +238,14 @@ class EditarEmpleadoForm(ModelForm):
                                                      "placeholder": "Numero de Cedula"}),
             "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
-
             "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Familiar"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Familiar"}),
             "pidentificacion": forms.TextInput(
                 attrs={"class": "form-control", 'minlength': '10', "placeholder": "Numero de Cedula"}),
             "ptelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Telefono"}),
             "pdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
-
             "rcorreo": forms.TextInput(attrs={"class": "form-control", "type": "email", "placeholder": "Email"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del hogar"}),
-
         }
 
     def __init__(self, *args, **kwargs):
@@ -292,7 +289,6 @@ class ConsultarEmpleadoForm(ModelForm):
             "id_genr_jornada",
             "id_genr_indigena",
             "id_genr_idioma_ancestral",
-
             "discapacidad",
             "discapacidad_renal",
             "discapacidad_neurologica",
@@ -302,14 +298,12 @@ class ConsultarEmpleadoForm(ModelForm):
             "enfermedad_congenita",
             "enfermedad_respiratoria",
             "atencion_psicologica",
-
             "pvive_con_usted",
             "pnombres",
             "papellidos",
             "pidentificacion",
             "ptelefono",
             "pdireccion",
-
             "id_genr_tipo_usuario",
             "rcorreo",
             "id_genr_estado_civil",
@@ -546,7 +540,6 @@ class EstudianteForm(ModelForm):
             "mvive_con_usted": "La Madre vive con el estudiante?",
             "id_genr_estado_laboralm": "Estado Laboral de la Madre",
             "bono_solidario": "Bono solidario",
-
             "rnombres": "Nombres",
             "rapellidos": "Apellidos",
             "rtelefono": "Telefono Celular",
@@ -710,7 +703,6 @@ class EstudianteEditForm(ModelForm):
             "enfermedad_congenita": "Enfermedad congenitiva",
             "enfermedad_respiratoria": "Enfermedad respiratoria",
             "atencion_psicologica": "Atencion psicologica",
-
             "pnombres": "Nombres del Padre",
             "papellidos": "Apellidos del Padre",
             "pidentificacion": "Identificacion (padre)",
@@ -726,7 +718,6 @@ class EstudianteEditForm(ModelForm):
             "mvive_con_usted": "La Madre vive con el estudiante?",
             "id_genr_estado_laboralm": "Estado Laboral de la Madre",
             "bono_solidario": "Bono solidario",
-
             "rnombres": "Nombres",
             "rapellidos": "Apellidos",
             "rtelefono": "telefono",
@@ -739,7 +730,6 @@ class EstudianteEditForm(ModelForm):
             "rcorreo": "Email ",
             "rhorario_laboral": "horario laboral",
             "mienbros_hogar": "Miembros del hogar",
-
         }
         widgets = {
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
@@ -759,7 +749,6 @@ class EstudianteEditForm(ModelForm):
             "midentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula de la Madre"}),
             "mdireccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion del Padre"}),
             "mtelefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono de la Madre"}),
-
             "rnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombre del Representante"}),
             "rapellidos": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Apellidos del Representante"}),
@@ -919,12 +908,11 @@ class ConsultarEstudianteForm(ModelForm):
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Numero de Cedula"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Nacimiento"}),
             "direccion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Direccion"}),
             "telefono": forms.TextInput(attrs={"class": "form-control", "placeholder": "Telefono"}),
             "celular": forms.TextInput(attrs={"class": "form-control", "placeholder": "Celular"}),
-
             "pnombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Padre"}),
             "papellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Padre"}),
             "pidentificacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Cedula del padre"}),
