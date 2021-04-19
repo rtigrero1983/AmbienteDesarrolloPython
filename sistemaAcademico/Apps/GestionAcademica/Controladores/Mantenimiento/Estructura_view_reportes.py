@@ -1,6 +1,6 @@
 import time
 from datetime import date
-
+from django.shortcuts import render
 import openpyxl
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -97,9 +97,8 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
     ws.column_dimensions['E'].width = 13
     ws.column_dimensions['F'].width = 50
     ws.column_dimensions['G'].width = 13
-    ws.column_dimensions['H'].width = 20
-    ws.column_dimensions['I'].width = 20
-    ws.column_dimensions['J'].width = 13
+    ws.column_dimensions['H'].width = 15
+    ws.column_dimensions['J'].width = 20
     ws.column_dimensions['k'].width = 13
     ws.column_dimensions['L'].width = 13
     # Cabecera de la tabla
@@ -150,14 +149,14 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['H5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['H5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['H5'] = 'Apellidos y Nombres'
+    ws['H5'] = 'Apellidos '
 
     ws['J5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['J5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['J5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['J5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['J5'] = 'Parentesco'
+    ws['J5'] = 'Nombres'
 
     ws['K5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['K5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -233,7 +232,8 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=8).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=8).value = mant.id_persona.rapellidos + ' ' + mant.id_persona.rnombres
+        ws.cell(row=controlador, column=8).value = mant.id_persona.rapellidos 
+
 
         ws.cell(row=controlador, column=10).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=10).border = Border(left=Side(border_style="thin"),
@@ -241,7 +241,7 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                                                             top=Side(border_style="thin"),
                                                             bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=10).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=10).value = mant.id_persona.tipo_parentesco
+        ws.cell(row=controlador, column=10).value = mant.id_persona.rnombres
 
         ws.cell(row=controlador, column=11).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=11).border = Border(left=Side(border_style="thin"),
