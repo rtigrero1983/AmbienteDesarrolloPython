@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block encabezado %}
+{%load staticfiles%}
 {% if val %}
 <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
@@ -265,11 +266,15 @@
                         <div class="text-center">
                                 <br>
                                 <button type="submit"  class="btn btn-primary">Guardar</button>
-                                <button type="reset" class="btn btn-info">Restablecer</button>
 
                             {% if not val %}
                             <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
                             {% endif %}
+                            <br><br>
+                            <button class="btn btn-danger" id="pd" onclick="Reportes(2)" type="button"><img
+                                alt="REPORTE EN PDF" class="img-thumbnail" height="30" src="{%static 'img/pdf1.ico'%}"
+                                width="30"> Generar reporte en PDF
+                                </button>
                         </div>
                     </div>
                 </div>
