@@ -42,7 +42,7 @@
     </tr>
     <tr>
         <td>{{Estudiante.identificacion}}</td>
-        <td>37344</td>
+        <td>No hay campos</td>
         <td colspan="3">No asignado</td>
     </tr>
     <tr>
@@ -178,9 +178,9 @@
         <th>VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td>28755</td>
-        <td colspan="5">#¡REF!</td>
-        <td>28755</td>
+        <td>{{Estudiante.midentificacion}}</td>
+        <td colspan="5">{{Estudiante.mapellidos}} &nbsp; {{Estudiante.mnombres}}</td>
+        <td>{{Estudiante.mvive_con_usted}}</td>
     </tr>
     <tr>
         <th>FECHA / NACIMIENTO:</th>
@@ -191,20 +191,20 @@
         <th colspan="2">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td></td>
-        <td>20</td>
-        <td>F</td>
-        <td></td>
-        <td></td>
-        <td colspan="2"></td>
+        <td>No hay campo</td>
+        <td>no hay campo</td>
+        <td>No hay campo</td>
+        <td>No hay campo</td>
+        <td>No hay campo</td>
+        <td colspan="2">{{Estudiante.mtelefono}}</td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
         <th colspan="4">OCUPACION</th>
     </tr>
     <tr>
-        <td colspan="3"></td>
-        <td colspan="4">ESTRIPER</td>
+        <td colspan="3">No hay datos</td>
+        <td colspan="4">{{Estudiante.id_genr_estado_laboralm}}</td>
     </tr>
 </table>
 <br>
@@ -216,9 +216,9 @@
         <th>VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td>28755</td>
-        <td colspan="5">#¡REF!</td>
-        <td>28755</td>
+        <td>{{Estudiante.pidentificacion}}</td>
+        <td colspan="5">{{Estudiante.pnombres}} &nbsp; {{Estudiante.papellidos}}</td>
+        <td>{{Estudiante.pvive_con_usted}}</td>
     </tr>
     <tr>
         <th>FECHA / NACIMIENTO:</th>
@@ -229,20 +229,20 @@
         <th colspan="2">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td></td>
-        <td>20</td>
-        <td>F</td>
-        <td></td>
-        <td></td>
-        <td colspan="2"></td>
+        <td>No hay campos</td>
+        <td>No hay campos</td>
+        <td>No hay campos</td>
+        <td>No hay campos</td>
+        <td>No hay campos</td>
+        <td colspan="2">{{Estudiante.ptelefono}}</td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
         <th colspan="4">OCUPACION</th>
     </tr>
     <tr>
-        <td colspan="3"></td>
-        <td colspan="4">ESTRIPER</td>
+        <td colspan="3">No hay datos</td>
+        <td colspan="4">{{Estudiante.id_genr_estado_laboralp}}</td>
     </tr>
 </table>
 <br>
@@ -258,6 +258,7 @@
 <div id="footer_content">
     <br>
       <div id="contenido_del_footer" style="font-size: 15px;">
+        <br>
         <label>Fecha: {{fecha_actual}}</label>
     </div>
 </div>

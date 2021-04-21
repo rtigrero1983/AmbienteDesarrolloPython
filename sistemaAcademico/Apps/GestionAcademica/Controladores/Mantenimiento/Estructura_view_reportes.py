@@ -907,6 +907,7 @@ class Reportepor_estudiante(View):
                 context={
                     'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk'])
                 }
+                context['fecha_actual'] = date.today()
                 
                 html=template.render(context)
                 response= HttpResponse(content_type='aplication/pdf')
