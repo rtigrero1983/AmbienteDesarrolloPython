@@ -2,7 +2,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="content-type">
 <html>
 <head>
-    <style type="text/css">
+    <style >
   td{
   text-align: center;
   }
@@ -18,9 +18,10 @@
     </style>
 </head>
 <body>
-<table>
+<table style="text-align:center;">
+    <br>
     <tr>
-        <td rowspan="3">Imagen</td>
+
         <td>UNIDAD EDUCATIVA FISCAL JAIME ROLDÓS AGUILERA</td>
     </tr>
     <tr>
@@ -42,7 +43,7 @@
     <tr>
         <td>{{Estudiante.identificacion}}</td>
         <td>37344</td>
-        <td colspan="3">#¡REF!</td>
+        <td colspan="3">No asignado</td>
     </tr>
     <tr>
         <th colspan="5">APELLIDOS / NOMBRES COMPLETOS</th>
@@ -59,7 +60,7 @@
     </tr>
     <tr>
         <td>{{Estudiante.fecha_de_nacimiento}}</td>
-        <td>14</td>
+        <td>No hay campo</td>
         <td>{{Estudiante.id_genr_genero}}</td>
         <td>{{Estudiante.id_genr_pais}}</td>
         <td>{{Estudiante.id_genr_ciudad}}</td>
@@ -75,8 +76,8 @@
         <th colspan="5">REFERENCIA DE UBICACIÓN</th>
     </tr>
     <tr>
-        <td>#¡REF!</td>
-        <td colspan="5">3880363</td>
+        <td>No hay campo</td>
+        <td colspan="5">no hay campo</td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
@@ -84,8 +85,8 @@
         <th>MAMÁ/PAPÁ</th>
     </tr>
     <tr>
-        <td colspan="3">MESTIZO</td>
-        <td colspan="2">NINGUNA</td>
+        <td colspan="3">no hay campo</td>
+        <td colspan="2">No hay campo</td>
         <td></td>
     </tr>
     <tr>
@@ -94,17 +95,17 @@
         <th colspan="3">Discapacidad</th>
     </tr>
     <tr>
-        <td>123456879</td>
-        <td colspan="2">123456789</td>
-        <td colspan="3">Trabajar en el academico</td>
+        <td>{{Estudiante.rtelefono_trabajo}}</td>
+        <td colspan="2">{{Estudiante.celular}}</td>
+        <td colspan="3">{{Estudiante.discapacidad}}</td>
     </tr>
     <tr>
         <th colspan="3">PLANTEL DE PROCEDENCIA</th>
         <th colspan="3">CURSO 2018 - 2019</th>
     </tr>
     <tr>
-        <td colspan="3">1 DE BACHILLERATO</td>
-        <td colspan="3">#¡REF!</td>
+        <td colspan="3">No hay campo</td>
+        <td colspan="3">No asignado</td>
     </tr>
 </table>
 <br>
@@ -116,8 +117,8 @@
         <th COLSPAN="2" ROWSPAN="10">Imagen DEL REPRESENTANTE</th>
     </tr>
     <tr>
-        <td>28755</td>
-        <td colspan="4">#¡REF!</td>
+        <td>{{Estudiante.ridentificacion}}</td>
+        <td colspan="4">{{Estudiante.rapellidos}} &nbsp; {{Estudiante.rnombres}}</td>
     </tr>
     <tr>
         <th>FECHA / NACIMIENTO:</th>
@@ -127,25 +128,25 @@
         <th>CIUDAD</th>
     </tr>
     <tr>
-        <td></td>
-        <td>20</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>No hay campos</td>
+        <td>No hay campos</td>
+        <td>No hay Campos</td>
+        <td>no hay campos</td>
+        <td>no hay campos</td>
     </tr>
     <tr>
         <th colspan="5">DIRECCIÓN</th>
     </tr>
     <tr>
-        <td colspan="5">LA CHALA</td>
+        <td colspan="5">No hay campos</td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
         <th colspan="2">PARENTEZCO CON ESTUD.</th>
     </tr>
     <tr>
-        <td colspan="3">PutoAcademico@hotmail.com</td>
-        <td colspan="2"></td>
+        <td colspan="3">{{Estudiante.rcorreo}} </td>
+        <td colspan="2">{{Estudiante.tipo_parentesco}}</td>
     </tr>
     <tr>
         <th>No. TEL. CONVENCIONAL</th>
@@ -153,9 +154,9 @@
         <th colspan="2">PROFESIÓN</th>
     </tr>
     <tr>
-        <td>123456789</td>
-        <td colspan="2"></td>
-        <td colspan="2">Puto Ingeniero</td>
+        <td>{{Estudiante.rtelefono_trabajo}}</td>
+        <td colspan="2">{{Estudiante.rtelefono}}</td>
+        <td colspan="2">No hay campos</td>
     </tr>
     <tr>
         <th colspan="4">LUGAR DE TRABAJO</th>
@@ -163,9 +164,9 @@
         <th>VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td colspan="4"></td>
-        <td colspan="2">123456789</td>
-        <td></td>
+        <td colspan="4">No hay campos</td>
+        <td colspan="2">No hay campos</td>
+        <td>{{Estudiante.rvive_con_usted}}</td>
     </tr>
 </table>
 <br>
@@ -247,6 +248,7 @@
 <br>
 <table>
   <tr>
+      <br>
     <td>Repres. Legal </td>
     <td>SECRETARIA</td>
     <td>RECTORA</td>
