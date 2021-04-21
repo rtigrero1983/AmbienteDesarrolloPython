@@ -13,7 +13,7 @@
   size: letter;
   }
   table{
-  width: 100%;
+  width: 75%;
   }
     </style>
 </head>
@@ -40,7 +40,7 @@
         <th ROWSPAN="8">Imagen DEL ESTUDIANTE</th>
     </tr>
     <tr>
-        <td>0958803298</td>
+        <td>{{Estudiante.identificacion}}</td>
         <td>37344</td>
         <td colspan="3">#¡REF!</td>
     </tr>
@@ -48,7 +48,7 @@
         <th colspan="5">APELLIDOS / NOMBRES COMPLETOS</th>
     </tr>
     <tr>
-        <td colspan="5">#¡REF!</td>
+        <td colspan="5">{{Estudiante.apellidos}} &nbsp; {{Estudiante.nombres}}  </td>
     </tr>
     <tr>
         <th>FECHA / NACIMIENTO</th>
@@ -58,17 +58,17 @@
         <th>CIUDAD</th>
     </tr>
     <tr>
-        <td>00/01/1900</td>
-        <td>#¡REF!</td>
-        <td>Hombre</td>
-        <td>Rusia</td>
-        <td>GYE</td>
+        <td>{{Estudiante.fecha_de_nacimiento}}</td>
+        <td>14</td>
+        <td>{{Estudiante.id_genr_genero}}</td>
+        <td>{{Estudiante.id_genr_pais}}</td>
+        <td>{{Estudiante.id_genr_ciudad}}</td>
     </tr>
     <tr>
         <th colspan="5">DIRECCIÓN</th>
     </tr>
     <tr>
-        <td colspan="5">ENTRADA DE FERTIZA</td>
+        <td colspan="5">{{Estudiante.direccion}}</td>
     </tr>
     <tr>
         <th>SECTOR</th>

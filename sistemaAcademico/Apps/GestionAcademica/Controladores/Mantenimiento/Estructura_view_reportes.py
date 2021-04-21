@@ -9,7 +9,7 @@ from openpyxl import Workbook
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from xhtml2pdf import pisa
-
+from django.views.generic import View
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.utils import link_callback
@@ -898,3 +898,21 @@ def ReporteEmpleado(empleado, campoChk=None, usuarioph=None):
 
 def usu(context, usuario):
     context['nombre_usuario'] = usuario
+
+class Reportepor_estudiante(View):
+        def get(self,request,*args,**kwargs):
+            try:
+                print("Imprime esto",kwargs)
+                template = get_template('sistemaAcademico/reportes/Ficha_matricula.html')
+                context={
+                    'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk'])
+                }
+                
+                html=template.render(context)
+                response= HttpResponse(content_type='aplication/pdf')
+                response['Content-Disposition'] = 'attachment; filename=Ficha de Ficha de matricula.pdf'
+                pisaStatus= pisa.CreatePDF(html,dest=response, link_callback=link_callback)
+                return response
+            except:
+                pass
+            return HttpResponseRedirect(reverse_lazy("Academico:inicio"))

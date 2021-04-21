@@ -242,7 +242,8 @@ urlpatterns = [
     path('matriculacion_estados/<int:pk>',FilterEstudinatesestado.as_view(),name='matriculacion_estados'),
 
     #------------ subir excel ---------
-    path('read_file/',Upload_File.as_view(),name='read_file')
+    path('read_file/',Upload_File.as_view(),name='read_file'),
+    path('ficha_matricula/<int:pk>',Reportepor_estudiante.as_view(),name='ficha_reporte'),
 
 
 ]
