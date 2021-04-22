@@ -61,6 +61,9 @@
                         <a class="btn bg-gradient-danger text-light"
                            onclick="modal('{% url 'Academico:eliminar_estudiante' m.id_persona %}')" title="Eliminar {{m.nombres}}">
                             <i class="fas fa-exclamation-triangle"></i></a>
+                        <a class="btn bg-gradient-info text-light"
+                            href="{% url 'Academico:ficha_reporte' m.id_persona %}" target="_blank" title="Ficha de matricula {{m.nombres}}">
+                             <i class="fas fa-file-pdf"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
