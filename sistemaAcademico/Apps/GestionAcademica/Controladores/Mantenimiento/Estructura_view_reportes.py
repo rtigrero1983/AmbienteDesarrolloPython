@@ -13,7 +13,7 @@ from django.views.generic import View
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
 from sistemaAcademico.utils import link_callback
-
+from django.urls import reverse_lazy
 
 def reporte_estudiante(request):
     if 'usuario' in request.session:
@@ -908,7 +908,6 @@ class Reportepor_estudiante(View):
                     'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk'])
                 }
                 context['fecha_actual'] = date.today()
-                
                 html=template.render(context)
                 response= HttpResponse(content_type='aplication/pdf')
                 response['Content-Disposition'] = 'attachment; filename=Ficha de Ficha de matricula.pdf'
