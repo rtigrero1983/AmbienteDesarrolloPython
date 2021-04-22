@@ -910,7 +910,7 @@ class Reportepor_estudiante(View):
                 context['fecha_actual'] = date.today()
                 html=template.render(context)
                 response= HttpResponse(content_type='aplication/pdf')
-                response['Content-Disposition'] = 'attachment; filename=Ficha de Ficha de matricula.pdf'
+                response['Content-Disposition'] = 'attachment; filename=Ficha de matricula.pdf'
                 pisaStatus= pisa.CreatePDF(html,dest=response, link_callback=link_callback)
                 return response
             except:
