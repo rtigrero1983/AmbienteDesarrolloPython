@@ -915,4 +915,4 @@ class Reportepor_estudiante(View):
                 return response
             except:
                 pass
-            return HttpResponseRedirect(reverse_lazy("Academico:inicio"))
+            return HttpResponseRedirect(reverse_lazy("Academico:logout"))

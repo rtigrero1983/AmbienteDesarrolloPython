@@ -35,9 +35,9 @@
             <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown"
                href="#"
                id="userDropdown" role="button">
-                <span class="mr-2 d-none d-lg-inline small initialism">{{info_usuario.usuario}}</span>
+                <span class="mr-2 d-none d-lg-inline small initialism">{{usuario_temporal.temp}}</span>
                 <img class="img-profile rounded-circle"
-                     src="static/media/user.jpg">
+                     src="../static/media/user.jpg">
             </a>
             <!-- Dropdown - User Information -->
             <div aria-labelledby="userDropdown" class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
@@ -112,7 +112,11 @@
             <div class="col">
 
                 <header class="cuadro_titulo rounded">
+                    {% if not val %}
                     <h4 class="titulo text-center">Mantenimiento | Editar Estudiante</h4>
+                    {% endif %}
+                    
+                    <h4 class="titulo text-center">Ficha de matricula</h4>
                 </header>
                 <br>
                 <!-- SECCION DATOS DE CURSO DEL ESTUDIANTE -->
@@ -265,16 +269,14 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <button type="submit"  class="btn btn-primary">Guardar</button>
+                                <button type="submit"  class="btn btn-primary">Descargar ficha de matrícula</button>
+                                <a class="btn btn-danger" href="{% url 'Academico:logout' %}">Salir</a>
 
                             {% if not val %}
+                            <button type="submit"  class="btn btn-primary">Guardar</button>
                             <a class="btn btn-danger" href="{% url 'Academico:estudiante' %}">Cancelar</a>
                             {% endif %}
                             <br><br>
-                            <button class="btn btn-danger" id="pd" onclick="Reportes(2)" type="button"><img
-                                alt="REPORTE EN PDF" class="img-thumbnail" height="30" src="{%static 'img/pdf1.ico'%}"
-                                width="30"> Generar reporte en PDF
-                                </button>
                         </div>
                     </div>
                 </div>

@@ -438,6 +438,7 @@ class EstudianteForm(ModelForm):
     class Meta:
         model = MantPersona
         fields = [
+            "id_persona",
             "nombres",
             "apellidos",
             "identificacion",

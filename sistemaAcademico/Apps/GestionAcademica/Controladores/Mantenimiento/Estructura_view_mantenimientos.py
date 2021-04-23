@@ -255,7 +255,7 @@ class UpdateEstudiante(UpdateView):
     def get_success_url(self):
         variable = self.request.session.get("val")
         if variable:
-            return reverse_lazy("Academico:logout")
+            return reverse_lazy("Academico:ficha_reporte", kwargs={'pk': self.object.pk})
         else:
             return reverse_lazy("Academico:estudiante")
 
