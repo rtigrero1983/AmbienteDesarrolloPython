@@ -18,6 +18,8 @@ class MantPersona(models.Model):
     celular = models.CharField(max_length=15, blank=True, null=True, validators=[validate_celular])
     id_genr_genero = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True,
                                        related_name="genero", db_column='id_genr_genero')
+
+
     id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True,
                                      db_column='id_genr_pais')
     id_genr_provincia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="provincia",
@@ -29,7 +31,7 @@ class MantPersona(models.Model):
     id_genr_etnia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="etnia",
                                       db_column='id_genr_etnia', null=True)
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="jornada",
-                                        db_column='id_genr_jornada', null=True)
+                                        db_column='id_genr_jornada', null=True,blank=True)
     id_genr_indigena = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="indigena",
                                          db_column='id_genr_indigena', null=True)
     id_genr_idioma_ancestral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="acestral",
@@ -79,8 +81,8 @@ class MantPersona(models.Model):
                                                 related_name="estado_laboralm", db_column='id_genr_estado_laboralm')
     bono_solidario = models.BooleanField(blank=True, null=True)
 
-    rnombres = models.CharField(max_length=45, blank=True, null=True, )
-    rapellidos = models.CharField(max_length=45, blank=True, null=True, )
+    rnombres = models.CharField(max_length=45, blank=True, null=True)
+    rapellidos = models.CharField(max_length=45, blank=True, null=True)
     rtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                                     related_name="identificacion",
@@ -93,6 +95,71 @@ class MantPersona(models.Model):
     rcorreo = models.EmailField(max_length=50, blank=False, null=True)
     rhorario_laboral = models.CharField(max_length=40, blank=True, null=True)
     mienbros_hogar = models.IntegerField(blank=True, null=True)
+
+
+
+    #Segmento del reporte Datos del Estudiante NUEVOS CAMPOS AGREGADOS
+    #estudiantes
+
+    edadEst=models.IntegerField(blank=True, null=True)
+    sector = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="sector",
+                                                 db_column='sector')#Seleccion
+    referenciadeubicacion=models.CharField(max_length=200, blank=True, null=True)
+    correo_elest=models.CharField(max_length=100, blank=True, null=True)
+    nacionalidadEst = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="nacionalidad",
+                                                 db_column='nacionalidadEst')#Seleccion
+    plantel_procedenciaEst=models.CharField(max_length=150, blank=True, null=True)
+
+
+    #Segmento del reporte Datos del Representante Legal
+    #Representante
+    fecha_nacimientoRe=models.DateField(blank=True, null=True)
+
+    edadRe=models.IntegerField(blank=True, null=True)
+    generoRe = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="GeneroRe",
+                                                 db_column='generoRe')#Seleccion
+
+    paisRe = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="paisRe",
+                                                 db_column='paisRe')#Seleccion
+
+    ciudadRe= models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="ciudadRe",
+                                                 db_column='ciudadRe')#Seleccion
+    direccionRe= models.CharField(max_length=200, blank=True, null=True)
+    profesionRe= models.CharField(max_length=100, blank=True, null=True)#Dudad= Seleccion o Escribir
+    lugardetrabajoRe= models.CharField(max_length=200, blank=True, null=True)
+
+    #Segmento del reporte Datos de la Mama
+
+    fecha_nacimientoMa = models.DateField(blank=True, null=True)
+    edadMam = models.IntegerField(blank=True, null=True)
+    generoMam = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="generoMam",
+                                                 db_column='generoMam')#Seleccion
+    paisMam = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="paisMam",
+                                                 db_column='paisMam')#Seleccion
+    ciudadMam = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="ciudadMam",
+                                                 db_column='ciudadMam')#Seleccion
+    correo_elMam=models.EmailField(max_length=50, blank=True, null=True)
+
+    #Segmento del reporte Datos del papa
+    fecha_nacimientoPap = models.DateField(blank=True, null=True)
+    edadPap = models.IntegerField(blank=True, null=True)
+    generoPap = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="generoPap",
+                                                 db_column='generoPap')#Seleccion
+
+    paisPap = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="paisPap",
+                                                 db_column='paisPap')#Seleccion
+
+    ciudadPap = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="ciudadPap",
+                                                 db_column='ciudadPap')#Seleccion
+
+    correo_elPap = models.EmailField(max_length=50, blank=True, null=True)
+
+
+
+
+
+
+
 
     class Meta:
         verbose_name = 'Persona',
