@@ -60,7 +60,7 @@
     </tr>
     <tr>
         <td>{{Estudiante.fecha_de_nacimiento}}</td>
-        <td> </td>
+        <td>{{Estudiante.edadEst}} </td>
         <td>{{Estudiante.id_genr_genero}}</td>
         <td>{{Estudiante.id_genr_pais}}</td>
         <td>{{Estudiante.id_genr_ciudad}}</td>
@@ -76,8 +76,8 @@
         <th colspan="5">REFERENCIA DE UBICACIÓN</th>
     </tr>
     <tr>
-        <td> </td>
-        <td colspan="5"> </td>
+        <td>{{Estudiante.sector}}</td>
+        <td colspan="5">{{Estudiante.referenciadeubicacion}}</td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
@@ -85,8 +85,8 @@
         <th>MAMÁ/PAPÁ</th>
     </tr>
     <tr>
-        <td colspan="3"> </td>
-        <td colspan="2"> </td>
+        <td colspan="3">{{Estudiante.correo_elest}} </td>
+        <td colspan="2">{{Estudiante.nacionalidadEst}} </td>
         <td></td>
     </tr>
     <tr>
@@ -104,8 +104,8 @@
         <th colspan="3">CURSO 2018 - 2019</th>
     </tr>
     <tr>
-        <td colspan="3"> </td>
-        <td colspan="3">No asignado</td>
+        <td colspan="3">{{Estudiante.plantel_procedenciaEst}} </td>
+        <td colspan="3">Curso anteriot</td>
     </tr>
 </table>
 <br>
@@ -128,17 +128,17 @@
         <th>CIUDAD</th>
     </tr>
     <tr>
-        <td>. </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <td>{{Estudiante.fecha_nacimientoRe}}</td>
+        <td>{{Estudiante.edadRe}} </td>
+        <td>{{Estudiante.generoRe}} </td>
+        <td>{{Estudiante.paisRe}} </td>
+        <td>{{Estudiante.ciudadRe}} </td>
     </tr>
     <tr>
         <th colspan="5">DIRECCIÓN</th>
     </tr>
     <tr>
-        <td colspan="5"> </td>
+        <td colspan="5">{{Estudiante.direccionRe}} </td>
     </tr>
     <tr>
         <th colspan="3">CORREO ELECTRÓNICO:</th>
@@ -156,7 +156,7 @@
     <tr>
         <td>{{Estudiante.rtelefono_trabajo}}</td>
         <td colspan="2">{{Estudiante.rtelefono}}</td>
-        <td colspan="2"> </td>
+        <td colspan="2">{{Estudiante.profesionRe}} </td>
     </tr>
     <tr>
         <th colspan="4">LUGAR DE TRABAJO</th>
@@ -164,8 +164,8 @@
         <th>VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td colspan="4"></td>
-        <td colspan="2"></td>
+        <td colspan="4">{{Estudiante.lugardetrabajoRe}}</td>
+        <td colspan="2">{{Estudiante.rtelefono_trabajo}}</td>
         <td>{{Estudiante.rvive_con_usted}}</td>
     </tr>
 </table>
@@ -191,11 +191,11 @@
         <th colspan="2">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <td>{{Estudiante.fecha_nacimientoMa}} </td>
+        <td>{{Estudiante.edadMam}} </td>
+        <td>{{Estudiante.generoMam}} </td>
+        <td>{{Estudiante.paisMam}} </td>
+        <td>{{Estudiante.ciudadMam}} </td>
         <td colspan="2">{{Estudiante.mtelefono}}</td>
     </tr>
     <tr>
@@ -203,7 +203,7 @@
         <th colspan="4">OCUPACION</th>
     </tr>
     <tr>
-        <td colspan="3"></td>
+        <td colspan="3">{{Estudiante.correo_elMam}</td>
         <td colspan="4">{{Estudiante.id_genr_estado_laboralm}}</td>
     </tr>
 </table>
@@ -229,11 +229,11 @@
         <th colspan="2">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <td>{{Estudiante.fecha_nacimientoPap}} </td>
+        <td>{{Estudiante.edadPap}} </td>
+        <td>{{Estudiante.generoPap}} </td>
+        <td>{{Estudiante.paisPap}} </td>
+        <td>{{Estudiante.ciudadPap}} </td>
         <td colspan="2">{{Estudiante.ptelefono}}</td>
     </tr>
     <tr>
@@ -241,7 +241,7 @@
         <th colspan="4">OCUPACION</th>
     </tr>
     <tr>
-        <td colspan="3"> </td>
+        <td colspan="3">{{Estudiante.correo_elPap}} </td>
         <td colspan="4">{{Estudiante.id_genr_estado_laboralp}}</td>
     </tr>
 </table>
