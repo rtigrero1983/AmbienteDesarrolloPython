@@ -449,7 +449,7 @@ class EstudianteForm(ModelForm):
         model = MantPersona
         fields = [
 
-
+            "cod_alfnum",
             "nombres",
             "apellidos",
             "identificacion",
@@ -542,6 +542,8 @@ class EstudianteForm(ModelForm):
         ]
 
         labels = {
+            "cod_alfnum": "CODIGO ALFNUM",
+
             "nombres": "Nombres ",
             "apellidos": "Apellidos",
             "identificacion": "Identificacion",
@@ -641,6 +643,8 @@ class EstudianteForm(ModelForm):
 
         }
         widgets = {
+            "cod_alfnum": forms.TextInput(attrs={"class": "form-control", "placeholder": "CODIGO ALFNUM"}),
+
             "nombres": forms.TextInput(attrs={"class": "form-control", "placeholder": "Nombres del Estudiante"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control", "placeholder": "Apellidos del Estudiante"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control", 'minlength': '10', 'maxlength': '20',
@@ -689,7 +693,7 @@ class EstudianteForm(ModelForm):
             "plantel_procedenciaEst": forms.TextInput(attrs={"class": "form-control", "placeholder": "Plantel de Procedencia"}),
 
                   # Representante
-            "fecha_nacimientoRe": DateInput(attrs={"class": "form-control"}),
+            "fecha_nacimientoRe": forms.DateTimeInput(attrs={"class": "form-control", "type": "date"}),
             "edadRe": forms.TextInput(attrs={"class": "form-control", "placeholder": "Edad"}),
             "generoRe": forms.Select(attrs={"class": "form-control", "placeholder": "Genero"}),
             "paisRe": forms.Select(attrs={"class": "form-control", "placeholder": "Pais"}),
@@ -699,7 +703,7 @@ class EstudianteForm(ModelForm):
             "lugardetrabajoRe": forms.TextInput(attrs={"class": "form-control", "placeholder": "Lugar de Trabajo"}),
 
                   # Nuevos Campos Mama
-            "fecha_nacimientoMa": DateInput(attrs={"class": "form-control"}),
+            "fecha_nacimientoMa": forms.DateTimeInput(attrs={"class": "form-control", "type": "date"}),
             "edadMam": forms.TextInput(attrs={"class": "form-control", "placeholder": "Edad"}),
             "generoMam": forms.Select(attrs={"class": "form-control", "placeholder": "Genero"}),
             "paisMam": forms.Select(attrs={"class": "form-control", "placeholder": "Pais"}),
@@ -707,7 +711,7 @@ class EstudianteForm(ModelForm):
             "correo_elMam": forms.TextInput(attrs={"class": "form-control", "placeholder": "Correo Electronico"}),
 
                   # Nuevos Campos Papa
-            "fecha_nacimientoPap": DateInput(attrs={"class": "form-control", "placeholder": "Fecha De Nacimiento"}),
+            "fecha_nacimientoPap": forms.DateTimeInput(attrs={"class": "form-control", "type": "date"}),
             "edadPap": forms.TextInput(attrs={"class": "form-control", "placeholder": "Edad"}),
             "generoPap": forms.Select(attrs={"class": "form-control", "placeholder": "Genero"}),
             "paisPap": forms.Select(attrs={"class": "form-control", "placeholder": "Pais"}),
@@ -762,6 +766,9 @@ class EstudianteEditForm(ModelForm):
     class Meta:
         model = MantPersona
         fields = [
+
+            "cod_alfnum",
+
             "nombres",
             "apellidos",
             "fecha_de_nacimiento",
@@ -816,6 +823,8 @@ class EstudianteEditForm(ModelForm):
             "rhorario_laboral",
             "mienbros_hogar",
             # Nuevos Campos Estudiantes
+
+
             "edadEst",
             "sector",
             "referenciadeubicacion",
@@ -852,11 +861,12 @@ class EstudianteEditForm(ModelForm):
         ]
 
         labels = {
+            "cod_alfnum":"CODIGO ALFNUM",
             "nombres": "Nombres ",
             "apellidos": "Apellidos",
             "fecha_de_nacimiento": "Fecha de Nacimiento",
             "lugar_nacimiento": "Lugar de Nacimiento",
-            "direccion": "direccion",
+            "direccion": "Direccion",
             "telefono": "Telefono",
             "celular": "Celular",
             "id_genr_genero": "Genero",
@@ -976,6 +986,10 @@ class EstudianteEditForm(ModelForm):
             "rhorario_laboral": forms.TextInput(attrs={"class": "form-control", "placeholder": "Horario"}),
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control", "placeholder": "Miembros del Hogar"}),
             # Nuevos Campos Estudiantes
+
+            "cod_alfnum": forms.TextInput(attrs={"class": "form-control", "placeholder": "CODIGO ALFNUM"}),
+
+
             "edadEst": forms.TextInput(attrs={"class": "form-control", "placeholder": "Edad de Estudiante"}),
             "sector": forms.Select(attrs={"class": "form-control", "placeholder": "Sector"}),
             "referenciadeubicacion": forms.TextInput(attrs={"class": "form-control", "placeholder": "Referencia de Ubicacion"}),
@@ -1052,6 +1066,8 @@ class ConsultarEstudianteForm(ModelForm):
     class Meta:
         model = MantPersona
         fields = [
+            "cod_alfnum",
+
             "nombres",
             "apellidos",
             "identificacion",
@@ -1145,6 +1161,7 @@ class ConsultarEstudianteForm(ModelForm):
         ]
 
         labels = {
+            "cod_alfnum": "CODIGO ALFNUM",
             "nombres": "Nombres ",
             "apellidos": "Apellidos",
             "identificacion": "Identificacion",
@@ -1202,6 +1219,7 @@ class ConsultarEstudianteForm(ModelForm):
             "rcorreo": "Email ",
             "rhorario_laboral": "horario laboral",
             "mienbros_hogar": "Miembros del hogar",
+
             # Nuevos Campos Estudiantes
             "edadEst": "Edad",
             "sector": "Sector",
@@ -1238,10 +1256,11 @@ class ConsultarEstudianteForm(ModelForm):
 
         }
         widgets = {
+
             "nombres": forms.TextInput(attrs={"class": "form-control"}),
             "apellidos": forms.TextInput(attrs={"class": "form-control"}),
             "identificacion": forms.TextInput(attrs={"class": "form-control"}),
-            "fecha_de_nacimiento": forms.DateTimeInput(attrs={"class": "form-control text-dark"}),
+            "fecha_de_nacimiento": forms.DateInput(attrs={"class": "form-control text-dark"}),
             "lugar_nacimiento": forms.TextInput(attrs={"class": "form-control"}),
             "direccion": forms.TextInput(attrs={"class": "form-control"}),
             "telefono": forms.TextInput(attrs={"class": "form-control"}),
@@ -1272,6 +1291,7 @@ class ConsultarEstudianteForm(ModelForm):
             "mienbros_hogar": forms.TextInput(attrs={"class": "form-control"}),
 
             # Nuevos Campos Estudiantes
+            "cod_alfnum": forms.TextInput(attrs={"class": "form-control", 'readonly': True}),
             "edadEst": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
             "sector": forms.Select(attrs={"class": "form-control",'readonly':True}),
             "referenciadeubicacion": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
@@ -1280,7 +1300,7 @@ class ConsultarEstudianteForm(ModelForm):
             "plantel_procedenciaEst": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
 
             # Representante
-            "fecha_nacimientoRe": DateInput(attrs={"class": "form-control",'readonly':True}),
+            "fecha_nacimientoRe": forms.DateInput(attrs={"class": "form-control",'readonly':True}),
             "edadRe": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
             "generoRe": forms.Select(attrs={"class": "form-control",'readonly':True}),
             "paisRe": forms.Select(attrs={"class": "form-control",'readonly':True}),
@@ -1290,7 +1310,7 @@ class ConsultarEstudianteForm(ModelForm):
             "lugardetrabajoRe": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
 
             # Nuevos Campos Mama
-            "fecha_nacimientoMa": DateInput(attrs={"class": "form-control",'readonly':True}),
+            "fecha_nacimientoMa": forms.DateInput(attrs={"class": "form-control",'readonly':True}),
             "edadMam": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
             "generoMam": forms.Select(attrs={"class": "form-control",'readonly':True}),
             "paisMam": forms.Select(attrs={"class": "form-control",'readonly':True}),
@@ -1298,7 +1318,7 @@ class ConsultarEstudianteForm(ModelForm):
             "correo_elMam": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
 
             # Nuevos Campos Papa
-            "fecha_nacimientoPap": DateInput(attrs={"class": "form-control",'readonly':True}),
+            "fecha_nacimientoPap": forms.DateInput(attrs={"class": "form-control",'readonly':True}),
             "edadPap": forms.TextInput(attrs={"class": "form-control",'readonly':True}),
             "generoPap": forms.Select(attrs={"class": "form-control",'readonly':True}),
             "paisPap": forms.Select(attrs={"class": "form-control",'readonly':True}),
