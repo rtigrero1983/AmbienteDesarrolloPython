@@ -101,7 +101,7 @@ class MantPersona(models.Model):
     #Segmento del reporte Datos del Estudiante NUEVOS CAMPOS AGREGADOS
     #estudiantes
 
-    cod_alfnum = models.IntegerField(blank=True, null=True) #Campito para numerico
+    cod_alfnum = models.CharField(max_length=200 ,blank=True, null=True) #Campito para numerico
 
     edadEst=models.IntegerField(blank=True, null=True)
     sector = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True, related_name="sector",
