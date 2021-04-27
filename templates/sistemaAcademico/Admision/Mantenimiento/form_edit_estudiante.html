@@ -153,9 +153,10 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-info1" role="tabpanel" aria-labelledby="pills-info1-tab">
                         <div class="row">
-                            <h1 style="color: #2e59d9;display: flex;justify-content: center;font-weight: bold;">Datos Del Estudiante:</h1>
+                            <h1 style="color: #2e59d9;display: flex;justify-content: center;font-weight: bold;">Datos Del Estudiante</h1>
+                            {% if not val %}
                             <div class="col-4" style="display: flex;justify-content: center;font-weight: bold;color: #0f0f0f"> {{form.cod_alfnum|as_crispy_field}}</div>
-
+                            {% endif %}
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
 
                             <div class="col-4" style="font-weight: bold;color: #0f0f0f">
