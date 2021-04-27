@@ -170,8 +170,8 @@ class Migration(migrations.Migration):
                 ('mtelefono', models.CharField(blank=True, max_length=45, null=True, validators=[sistemaAcademico.Apps.Validaciones.validate_celular])),
                 ('mvive_con_usted', models.BooleanField(blank=True, null=True)),
                 ('bono_solidario', models.BooleanField(blank=True, null=True)),
-                ('rnombres', models.CharField(blank=True, default='nombre representante', max_length=45, null=True)),
-                ('rapellidos', models.CharField(blank=True, default='apellido representante', max_length=45, null=True)),
+                ('rnombres', models.CharField(blank=True,  max_length=45, null=True)),
+                ('rapellidos', models.CharField(blank=True, max_length=45, null=True)),
                 ('rtelefono', models.CharField(blank=True, max_length=45, null=True, validators=[sistemaAcademico.Apps.Validaciones.validate_celular])),
                 ('ridentificacion', models.CharField(blank=True, max_length=13, null=True, validators=[sistemaAcademico.Apps.Validaciones.identificar])),
                 ('tipo_parentesco', models.CharField(blank=True, max_length=200, null=True)),
@@ -191,12 +191,39 @@ class Migration(migrations.Migration):
                 ('id_genr_genero', models.ForeignKey(db_column='id_genr_genero', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='genero', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_idioma_ancestral', models.ForeignKey(db_column='id_genr_idioma_ancestral', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='acestral', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_indigena', models.ForeignKey(db_column='id_genr_indigena', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='indigena', to='GestionAcademica.GenrGeneral')),
-                ('id_genr_jornada', models.ForeignKey(db_column='id_genr_jornada', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='jornada', to='GestionAcademica.GenrGeneral')),
+                ('id_genr_jornada', models.ForeignKey(db_column='id_genr_jornada', null=True,blank=True, on_delete=django.db.models.deletion.CASCADE, related_name='jornada', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_pais', models.ForeignKey(db_column='id_genr_pais', null=True, on_delete=django.db.models.deletion.CASCADE, to='GestionAcademica.GenrGeneral')),
                 ('id_genr_provincia', models.ForeignKey(db_column='id_genr_provincia', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='provincia', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_tipo_identificacion', models.ForeignKey(db_column='id_genr_tipo_identificacion', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='identificacion', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_tipo_sangre', models.ForeignKey(db_column='id_genr_tipo_sangre', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tipo_de_sangre', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_tipo_usuario', models.ForeignKey(db_column='id_genr_tipo_usuario', default=19, on_delete=django.db.models.deletion.CASCADE, related_name='persona_tipo_usuario', to='GestionAcademica.GenrGeneral')),
+                ('cod_alfnum' , models.IntegerField(blank=True, null=True)),
+                ('edadEst',models.IntegerField(blank=True, null=True)),
+                ('sector' ,models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="sector", db_column='sector',to='GestionAcademica.GenrGeneral')),
+                ('referenciadeubicacion',models.CharField(max_length=200, blank=True, null=True)),
+                ('correo_elest',models.CharField(max_length=100, blank=True, null=True)),
+                ('nacionalidadEst', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="nacionalidad",db_column='nacionalidadEst',to='GestionAcademica.GenrGeneral')),
+                ('plantel_procedenciaEst',models.CharField(max_length=150, blank=True, null=True)),
+                ('fecha_nacimientoRe',models.DateField(blank=True, null=True)),
+                ('edadRe',models.IntegerField(blank=True, null=True)),
+                ('generoRe' , models.ForeignKey( on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="GeneroRe",db_column='generoRe',to='GestionAcademica.GenrGeneral')),
+                ('paisRe' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="paisRe",db_column='paisRe',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('ciudadRe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="ciudadRe",db_column='ciudadRe',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('direccionRe', models.CharField(max_length=200, blank=True, null=True)),
+                ('profesionRe', models.CharField(max_length=100, blank=True, null=True)),#Dudad= Seleccion o Escribir
+                ('lugardetrabajoRe', models.CharField(max_length=200, blank=True, null=True)),
+                ('fecha_nacimientoMa', models.DateField(blank=True, null=True)),
+                ('edadMam' , models.IntegerField(blank=True, null=True)),
+                ('generoMam' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="generoMam",db_column='generoMam',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('paisMam' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="paisMam",db_column='paisMam',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('ciudadMam' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="ciudadMam",db_column='ciudadMam',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('correo_elMam',models.EmailField(max_length=50, blank=True, null=True)),
+                ('fecha_nacimientoPap' , models.DateField(blank=True, null=True)),
+                ('edadPap' , models.IntegerField(blank=True, null=True)),
+                ('generoPap' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="generoPap",db_column='generoPap',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('paisPap' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="paisPap",db_column='paisPap',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('ciudadPap' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="ciudadPap",db_column='ciudadPap',to='GestionAcademica.GenrGeneral')),#Seleccion
+                ('correo_elPap',  models.EmailField(max_length=50, blank=True, null=True)),
             ],
             options={
                 'verbose_name': ('Persona',),
@@ -265,18 +292,40 @@ class Migration(migrations.Migration):
             name='MovDetalleRegistroNotas',
             fields=[
                 ('id_detalle_registro_notas', models.AutoField(primary_key=True, serialize=False)),
-                ('primer_parcial', models.FloatField(blank=True, null=True)),
-                ('segundo_parcial', models.FloatField(blank=True, null=True)),
-                ('tercer_parcial', models.FloatField(blank=True, null=True)),
-                ('promedio_parciales', models.FloatField(blank=True, null=True)),
-                ('examen', models.FloatField(blank=True, null=True)),
-                ('examen_supletorio', models.FloatField(blank=True, null=True)),
-                ('examen_gracia', models.FloatField(blank=True, null=True)),
-                ('disciplina', models.CharField(blank=True, max_length=1, null=True)),
-                ('total_promedio_general', models.FloatField(blank=True, null=True)),
-                ('id_general_quimestre', models.ForeignKey(db_column='id_general_quimestre', on_delete=django.db.models.deletion.CASCADE, related_name='fk_detalleregistronotas_quimestre', to='GestionAcademica.GenrGeneral')),
-                ('id_materia_profesor', models.ForeignKey(db_column='id_materia_profesor', on_delete=django.db.models.deletion.CASCADE, related_name='fk_detalleregistronotas_materiaprofesor', to='GestionAcademica.Mov_Materia_profesor')),
-                ('id_matriculacion_estudiante', models.ForeignKey(db_column='id_matriculacion_estudiante', on_delete=django.db.models.deletion.CASCADE, related_name='fk_detalleregistronotas_matriestudiante', to='GestionAcademica.MovMatriculacionEstudiante')),
+  
+                ('id_matriculacion_estudiante' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_matriestudiante", db_column='id_matriculacion_estudiante',to='GestionAcademica.MovMatriculacionEstudiante')),
+                #Notas Primer_Quimestre
+                ('primer_parcial' , models.FloatField(blank=True, null=True)),
+                ('segundo_parcial' , models.FloatField(blank=True, null=True)),
+                ('tercer_parcial' , models.FloatField(blank=True, null=True)),
+                ('promedio_parciales' , models.FloatField(blank=True, null=True)),
+                ('examen' , models.FloatField(blank=True, null=True)),
+                 #Notas Segundo_Quimestre
+                ('primer_parcial_2Q' , models.FloatField(blank=True, null=True)),
+                ('segundo_parcial_2Q' , models.FloatField(blank=True, null=True)),
+                ('tercer_parcial_2Q' , models.FloatField(blank=True, null=True)),
+                ('promedio_parciales_2Q' , models.FloatField(blank=True, null=True)),
+                ('examen_2Q' , models.FloatField(blank=True, null=True)),
+
+                #Promedio de la Suma Divicion de los dos Quimestre
+                ('promedio_general_1' , models.FloatField(blank=True, null=True)),
+                ('promedio_general_2' , models.FloatField(blank=True, null=True)),
+                ('total_promedio_general' , models.FloatField(blank=False, null=True)),
+
+                #Si se Queda Supretorio,remedial o gracia
+                ('examen_supletorio' , models.FloatField(blank=True, null=True)),
+                ('examen_remedial' , models.FloatField(blank=True, null=True)),
+                ('examen_gracia' , models.FloatField(blank=True, null=True)),
+                ('disciplina' , models.CharField(max_length=1,blank=True, null=True)),
+
+                #Materia
+                ('id_materia_profesor',  models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_materiaprofesor", db_column='id_materia_profesor',to='GestionAcademica.Mov_Materia_profesor')),
+                #Para Quimestre1
+                ('id_general_quimestre_1' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=False, null=False, related_name="fk_detalleregistronotas_quimestre1", db_column='id_general_quimestre1',default=28,to='GestionAcademica.GenrGeneral')),
+                # Para Quimestre2
+                ('id_general_quimestre_2' , models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=False, null=False,related_name="fk_detalleregistronotas_quimestre2",db_column='id_general_quimestre2',default=29,to='GestionAcademica.GenrGeneral')),
+                # Año Lectivo
+                ('id_mov_anioelectivo_curso', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, blank=True, null=True, related_name="fk_cabregistronotas_aniolectivocurso", db_column='id_mov_anioelectivo_curso',to='GestionAcademica.Mov_Aniolectivo_curso')),
             ],
             options={
                 'verbose_name': 'Detalle Registro de Curso',
@@ -309,8 +358,6 @@ class Migration(migrations.Migration):
                 ('fecha_ingreso', models.DateTimeField(blank=True, null=True)),
                 ('usuario_ing', models.CharField(blank=True, max_length=45, null=True)),
                 ('terminal_ing', models.CharField(blank=True, max_length=45, null=True)),
-                ('id_detalle_registro_notas', models.ForeignKey(blank=True, db_column='id_detalle_registro_notas', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='fk_cabregistronotas_detalleregistronotas', to='GestionAcademica.MovDetalleRegistroNotas')),
-                ('id_mov_anioelectivo_curso', models.ForeignKey(blank=True, db_column='id_mov_anioelectivo_curso', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='fk_cabregistronotas_aniolectivocurso', to='GestionAcademica.Mov_Aniolectivo_curso')),
             ],
             options={
                 'verbose_name': 'Registro Notas',
