@@ -1,12 +1,13 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from sistemaAcademico.Apps.GestionAcademica.models  import MantPersona, MantEstudiante,MovDetalleMateriaCurso
-from sistemaAcademico.Apps.GestionAcademica.models  import GenrGeneral
-from sistemaAcademico.Apps.GestionAcademica.models  import ConfUsuario
+from sistemaAcademico.Apps.GestionAcademica.models  import GenrGeneral, UsuarioTemp
+from sistemaAcademico.Apps.GestionAcademica.models  import ConfUsuario, ConfRol
 from sistemaAcademico.Apps.GestionAcademica.models import MovMatriculacionEstudiante, Mov_Aniolectivo_curso
 from sistemaAcademico.Apps.GestionAcademica.Forms.Admision.form_file import UploadFileForm
 from django.urls import reverse_lazy
 from django.views import View
 from django.contrib import messages
+import hashlib
 
 import os
 from django.shortcuts import render
@@ -109,7 +110,7 @@ class Upload_File(View):
                         if nombres !='' or nombres is not None and apellidos !='' or apellidos is not None and cedula !='' or cedula is not None:
                             
                             if self.validateCedula(cedula):
-                                persona = MantPersona.objects.filter(identificacion=cedula)
+                                persona = MantPersona.objects.filter(identificacion=cedula).first()
 
                                 if persona:
                                     print('encontrada')
@@ -125,9 +126,13 @@ class Upload_File(View):
                                     matriculacion = MovMatriculacionEstudiante(id_estudiante=MantEstudiante.objects.get(id_estudiante=estudiante.id_estudiante),
                                     id_mov_anioelectivo_curso=Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id_mov_anioelectivo_curso),estado=GenrGeneral.objects.get(nombre='INACTIVO'),fecha_ingreso=timezone.now(),usuario_ing=usuario.usuario,terminal_ing=socket.gethostname())
                                     matriculacion.save()
+                                    h = hashlib.new("sha1")
+                                    var_contra = str.encode(cedula)
+                                    h.update(var_contra)
+                                    rol = ConfRol.objects.filter(codigo='003').first()
+                                    if rol:
+                                        UsuarioTemp.objects.create(usuario=cedula,clave=h.hexdigest(),id_rol=rol,id_persona=personSave)
 
-                                    
-                                    print(personSave)
                             else:
                                 messages.error(request, 'La cedula {0} es incorrecta'.format(cedula))
 
