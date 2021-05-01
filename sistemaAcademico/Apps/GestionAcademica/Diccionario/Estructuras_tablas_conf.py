@@ -201,7 +201,7 @@ class UsuarioTemp(models.Model):
     fecha_limite = models.DateField(blank=True, null=True)
     fecha_creacion = models.DateField(
         blank=True, null=True, auto_now=True)
-    correo = models.EmailField(max_length=254, blank=False, null=False)
+    correo = models.EmailField(max_length=254, blank=True, null=True)
     id_rol= models.ForeignKey(ConfRol,db_column='id_rol',related_name="fk_usuario_temp",default=8,on_delete=models.CASCADE)
     id_persona = models.ForeignKey(MantPersona,db_column="id_persona",related_name='fk_persona_usuario_tem',null=True,blank=False,on_delete=models.CASCADE)
 
