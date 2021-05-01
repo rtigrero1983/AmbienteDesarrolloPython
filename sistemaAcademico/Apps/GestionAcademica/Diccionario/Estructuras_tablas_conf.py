@@ -195,9 +195,9 @@ class ConfAccion(models.Model):
 class UsuarioTemp(models.Model):
     id_usuario_temp = models.AutoField(primary_key=True)
     usuario = models.CharField(max_length=45, unique=True, blank=False, null=False, validators=[
-                               validate_nombre, longitud, alfanumerico])
+                               validate_nombre, longitud, ])
     clave = models.CharField(max_length=45, blank=False, null=False, validators=[
-                             longitudPassword, minuscula, mayuscula, numero, espacios, alfanumericoPassword])
+                             longitudPassword,   numero, espacios, ])
     fecha_limite = models.DateField(blank=True, null=True)
     fecha_creacion = models.DateField(
         blank=True, null=True, auto_now=True)
