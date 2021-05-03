@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import sistemaAcademico.Apps.Validaciones
+import trunk.sistemaAcademico.Apps.Validaciones
 
 
 class Migration(migrations.Migration):
@@ -370,7 +370,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id_curso', models.AutoField(primary_key=True, serialize=False)),
                 ('codigo', models.CharField(max_length=10, unique=True)),
-                ('nombre', models.CharField(max_length=10)),
+                ('nombre', models.CharField(max_length=100)),
                 ('cupo', models.IntegerField()),
                 ('id_genr_curso', models.ForeignKey(db_column='id_genr_curso', default=97, on_delete=django.db.models.deletion.CASCADE, related_name='fk_cabcurso_curso', to='GestionAcademica.GenrGeneral')),
                 ('id_genr_formacion', models.ForeignKey(db_column='id_genr_formacion', on_delete=django.db.models.deletion.CASCADE, related_name='fk_cabcurso_formacion', to='GestionAcademica.GenrGeneral')),

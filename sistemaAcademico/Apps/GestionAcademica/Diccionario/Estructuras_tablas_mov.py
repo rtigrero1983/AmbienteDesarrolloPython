@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import AutoField
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantEstudiante, MantAnioLectivo
-from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
+from trunk.sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantEstudiante, MantAnioLectivo
+from trunk.sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
 
 class MovAdmision(models.Model):
     id_admision = models.AutoField(primary_key=True)
@@ -18,7 +18,7 @@ class MovAdmision(models.Model):
 class MovCabCurso(models.Model):
     id_curso = models.AutoField(primary_key=True)
     codigo = models.CharField(unique=True, max_length=10)
-    nombre = models.CharField(max_length=10)
+    nombre = models.CharField(max_length=100)
     id_genr_regimen = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE, blank=False, related_name='fk_cabcurso_regimen', null=False, db_column='id_genr_regimen')
     id_genr_modalidad = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE, blank=False, null=False, related_name='fk_cabcurso_modalidad', db_column='id_genr_modalidad')
     id_genr_tipo_edu = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=False, related_name='fk_materiaprof_tipoedu', db_column='id_genr_tipo_educacion')
