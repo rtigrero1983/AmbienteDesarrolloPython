@@ -1,269 +1,330 @@
 <!DOCTYPE html>
-<meta content="text/html; charset=utf-8" http-equiv="content-type">
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Matricula</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <head>
+    <meta charset="UTF-8">
     <style >
-  td{
-  text-align: center;
-  }
-  caption{
-  background-color: #cdcdcd;
-  }
-  @page{
-  size: letter;
-  }
-  table{
-  width: 75%;
-  }
+    table{
+      width: 100%;
+      }
+
+      th{
+
+          text-align: center;
+          left: auto;
+          width: 400px;
+          font-size:7pt;
+      }
+
+      td{
+      text-align: center;
+
+      position:absolute;top:0.49in;left:1.76in;
+
+
+      }
     </style>
-</head>
+
+
+  </head>
+<table>
+    <td ><img style="text-align:center;" width="115" height="80" src="static/reporte/ForosEcuador.png"> </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><img style="position: center" src="static/reporte/ri_1.png"></td>
+</table>
+
 <body>
+
+
 <table style="text-align:center;">
-    <br>
+
+
+
+
+    <tr>
+        <td STYLE="font-weight:bold;">UNIDAD EDUCATIVA FISCAL JAIME ROLDÓS AGUILERA</td>
+    </tr>
+
+    <tr>
+        <td STYLE="font-weight:bold;">PERÍODO LECTIVO 2019 - 2020</td>
+
+    </tr>
+    <tr>
+        <td STYLE="font-weight:bold;">FICHA DE MATRÍCULA</td>
+    </tr>
+</table>
+
+ <table width="100%" >
+ 	<thead>
+ 	<tr></tr>
+
+ </thead>
+ <tbody>
+
+ 	<td>
+
+<table border="1" >
+    <div style="text-align: center;font-weight:bold;font-size:8pt;color:#000000">DATOS DEL ESTUDIANTE</div>
+    <tr>
+        <th colspan="2"style="line-height:normal;">No. CÉDULA / PASAPORTE</th>
+        <th colspan="2"style="line-height:normal;">COD ALFNUM</th>
+        <th colspan="2" style="line-height:normal;">CURSO 2019 - 2020</th>
+        <th colspan="1" ROWSPAN="8" >Imagen DEL ESTUDIANTE</th>
+    </tr>
+    <tr>
+        <td  colspan="2" style="line-height:normal;">{{Estudiante.identificacion}}</td>
+        <td  colspan="2" style="line-height:normal;">{{Estudiante.cod_alfnum}}  </td>
+        <td colspan="2" style="line-height:normal;"> 3 DE BACHILLETARO  </td>
+    </tr>
+    <tr>
+        <th colspan="5" style="line-height:normal;">APELLIDOS / NOMBRES COMPLETOS</th>
+    </tr>
+    <tr>
+        <td colspan="5" style="line-height:normal;">{{Estudiante.apellidos}} &nbsp; {{Estudiante.nombres}}  </td>
+    </tr>
+    <tr style="line-height:normal;">
+        <th colspan="2">FECHA / NACIMIENTO</th>
+        <th colspan="1">EDAD</th>
+        <th colspan="1">GÉNERO</th>
+        <th colspan="1">PAIS NACIM.</th>
+        <th colspan="1">CIUDAD</th>
+    </tr>
+    <tr style="line-height:normal;">
+        <td colspan="2">{{Estudiante.fecha_de_nacimiento}}</td>
+        <td colspan="1">{{Estudiante.edadEst}} </td>
+        <td colspan="1">{{Estudiante.id_genr_genero}}</td>
+        <td colspan="1">{{Estudiante.id_genr_pais}}</td>
+        <td colspan="1">{{Estudiante.id_genr_ciudad}}</td>
+    </tr>
+    <tr>
+        <th colspan="6" style="line-height:normal;">DIRECCIÓN</th>
+    </tr>
+    <tr>
+        <td colspan="6" style="line-height:normal;">{{Estudiante.direccion}}</td>
+    </tr>
+    <tr>
+        <th colspan="2" style="line-height:normal;">SECTOR</th>
+        <th colspan="5" style="line-height:normal;">REFERENCIA DE UBICACIÓN</th>
+    </tr>
+    <tr>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.sector}}</td>
+        <td colspan="5" style="line-height:normal;">{{Estudiante.referenciadeubicacion}}</td>
+    </tr>
+    <tr>
+        <th colspan="3" style="line-height:normal;">CORREO ELECTRÓNICO:</th>
+        <th colspan="3" style="line-height:normal;">NACIONALIDAD</th>
+        <th colspan="1" style="line-height:normal;">MAMÁ/PAPÁ</th>
+    </tr>
+    <tr>
+        <td colspan="3" style="line-height:normal;">{{Estudiante.correo_elest}} </td>
+        <td colspan="3" style="line-height:normal;">{{Estudiante.nacionalidadEst}} </td>
+        <td colspan="1"></td>
+    </tr>
+    <tr>
+        <th colspan="2" style="line-height:normal;">No. TEL. CONVENCIONAL</th>
+        <th colspan="2" style="line-height:normal;">No. TEL. CELULAR</th>
+        <th colspan="3" style="line-height:normal;">Discapacidad</th>
+    </tr>
+    <tr>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.rtelefono_trabajo}}</td>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.celular}}</td>
+        <td colspan="3" style="line-height:normal;">{{Estudiante.discapacidad}}</td>
+    </tr>
+    <tr>
+        <th colspan="4" style="line-height:normal;">PLANTEL DE PROCEDENCIA</th>
+        <th colspan="3" style="line-height:normal;">CURSO 2018 - 2019</th>
+    </tr>
+    <tr>
+        <td colspan="4" style="line-height:normal;">{{Estudiante.plantel_procedenciaEst}} </td>
+        <td colspan="3" style="line-height:normal;">Curso anterior</td>
+    </tr>
+
+</table>
+<br>
+<br>
+
+
+
+<table border="1">
+
+    <div style="text-align: center;font-weight:bold;font-size:8pt;color:#000000">DATOS DEL REPRESENTANTE</div>
+    <tr>
+        <th colspan="2"style="line-height:normal;">No. CÉDULA / PASAPORTE</th>
+        <th colspan="4" style="line-height:normal;">NOMBRE COMPLETO (APELLIDOS / NOMBRES)</th>
+        <th colspan="1" ROWSPAN="8" >Imagen DEL REPRESENTANTE</th>
+    </tr>
+    <tr>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.ridentificacion}}</td>
+        <td colspan="4" style="line-height:normal;">{{Estudiante.rapellidos}} &nbsp; {{Estudiante.rnombres}} </td>
+
+    </tr>
+    <tr >
+        <th colspan="2" style="line-height:normal;">FECHA / NACIMIENTO:</th>
+        <th colspan="1" style="line-height: normal">EDAD:</th>
+        <th colspan="1" style="line-height: normal">GÉNERO</th>
+        <th colspan="1" style="line-height: normal">PAIS</th>
+        <th colspan="1" style="line-height: normal">CIUDAD</th>
+    </tr>
+    <tr>
+        <td colspan="2"style="line-height:normal;">{{Estudiante.fecha_nacimientoRe}}</td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.edadRe}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.generoRe}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.paisRe}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.ciudadRe}} </td>
+    </tr>
+    <tr>
+        <th colspan="2"style="line-height:normal;">CORREO ELECTRÓNICO:</th>
+        <th colspan="4"style="line-height:normal;">DIRECCIÓN</th>
+
+    </tr>
+    <tr>
+        <td colspan="2"style="line-height:normal;">{{Estudiante.rcorreo}} </td>
+        <td colspan="4"style="line-height:normal;">{{Estudiante.direccionRe}} </td>
+
+    </tr>
     <tr>
 
-        <td>UNIDAD EDUCATIVA FISCAL JAIME ROLDÓS AGUILERA</td>
+        <th  colspan="2"style="line-height:normal;">PARENTEZCO CON ESTUD.</th>
+        <th colspan="2"style="line-height:normal;">No. TEL. CELULAR</th>
+        <th colspan="2"style="line-height:normal;">No. TEL. CONVENCIONAL</th>
     </tr>
     <tr>
-        <td>PERÍODO LECTIVO 2019 - 2020</td>
+
+        <td colspan="2"style="line-height:normal;">{{Estudiante.tipo_parentesco}}</td>
+        <td colspan="2"style="line-height:normal;">{{Estudiante.rtelefono}}</td>
+        <td colspan="2"style="line-height:normal;">{{Estudiante.rtelefono_trabajo}}</td>
     </tr>
     <tr>
-        <td>FICHA DE MATRÍCULA</td>
+
+        <th colspan="1"style="line-height:normal;">PROFESIÓN</th>
+
+        <th colspan="4"style="line-height:normal;">LUGAR DE TRABAJO</th>
+        <th colspan="1"style="line-height:normal;">TELEF. LUGAR TRABAJO</th>
+
+        <th colspan="1" style="line-height:normal;">VIVE / ESTUD</th>
     </tr>
-</table>
+    <tr>
+
+        <td colspan="1"style="line-height:normal;">{{Estudiante.profesionRe}} </td>
+
+        <td colspan="4"style="line-height:normal;">{{Estudiante.lugardetrabajoRe}}</td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.rtelefono_trabajo}}</td>
+
+        <td colspan="1" style="line-height:normal;">{{Estudiante.rvive_con_usted}}</td>
+    </tr>
+
+    </table>
+
+<br>
+<br>
 <br>
 <table border="1">
-    <caption>DATOS DEL ESTUDIANTE</caption>
+        <div style="text-align: center;font-weight:bold;font-size:8pt;color:#000000">DATOS DE LA MADRE</div>
     <tr>
-        <th>No. CÉDULA / PASAPORTE</th>
-        <th>COD ALFNUM</th>
-        <th colspan="3">CURSO 2019 - 2020</th>
-        <th ROWSPAN="8">Imagen DEL ESTUDIANTE</th>
+        <th  colspan="2" style="line-height:normal;">No. CÉDULA / PASAPORTE</th>
+        <th colspan="4" style="line-height:normal;">APELLIDOS / NOMBRES COMPLETOS</th>
+        <th  colspan="1" style="line-height:normal;">VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td>{{Estudiante.identificacion}}</td>
-        <td>{{Estudiante.cod_alfnum}}  </td>
-        <td colspan="3"> </td>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.midentificacion}}</td>
+        <td   colspan="4" style="line-height:normal;">{{Estudiante.mapellidos}} &nbsp; {{Estudiante.mnombres}}</td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.mvive_con_usted}}</td>
     </tr>
     <tr>
-        <th colspan="5">APELLIDOS / NOMBRES COMPLETOS</th>
+        <th colspan="2" style="line-height:normal;">FECHA / NACIMIENTO:</th>
+        <th colspan="1" style="line-height:normal;">EDAD</th>
+        <th colspan="1" style="line-height:normal;">GENERO</th>
+        <th colspan="1" style="line-height:normal;">PAIS</th>
+        <th colspan="1" style="line-height:normal;">CIUDAD</th>
+        <th colspan="1" style="line-height:normal;">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td colspan="5">{{Estudiante.apellidos}} &nbsp; {{Estudiante.nombres}}  </td>
+        <td colspan="2" style="line-height:normal;" >{{Estudiante.fecha_nacimientoMa}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.edadMam}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.generoMam}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.paisMam}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.ciudadMam}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.mtelefono}}</td>
     </tr>
     <tr>
-        <th>FECHA / NACIMIENTO</th>
-        <th>EDAD</th>
-        <th>GÉNERO</th>
-        <th>PAIS NACIM.</th>
-        <th>CIUDAD</th>
+           <th colspan="3" style="line-height:normal;">CORREO ELECTRÓNICO:</th>
+        <th colspan="4" style="line-height:normal;">OCUPACION</th>
     </tr>
     <tr>
-        <td>{{Estudiante.fecha_de_nacimiento}}</td>
-        <td>{{Estudiante.edadEst}} </td>
-        <td>{{Estudiante.id_genr_genero}}</td>
-        <td>{{Estudiante.id_genr_pais}}</td>
-        <td>{{Estudiante.id_genr_ciudad}}</td>
-    </tr>
-    <tr>
-        <th colspan="5">DIRECCIÓN</th>
-    </tr>
-    <tr>
-        <td colspan="5">{{Estudiante.direccion}}</td>
-    </tr>
-    <tr>
-        <th>SECTOR</th>
-        <th colspan="5">REFERENCIA DE UBICACIÓN</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.sector}}</td>
-        <td colspan="5">{{Estudiante.referenciadeubicacion}}</td>
-    </tr>
-    <tr>
-        <th colspan="3">CORREO ELECTRÓNICO:</th>
-        <th colspan="2">NACIONALIDAD</th>
-        <th>MAMÁ/PAPÁ</th>
-    </tr>
-    <tr>
-        <td colspan="3">{{Estudiante.correo_elest}} </td>
-        <td colspan="2">{{Estudiante.nacionalidadEst}} </td>
-        <td></td>
-    </tr>
-    <tr>
-        <th>No. TEL. CONVENCIONAL</th>
-        <th colspan="2">No. TEL. CELULAR</th>
-        <th colspan="3">Discapacidad</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.rtelefono_trabajo}}</td>
-        <td colspan="2">{{Estudiante.celular}}</td>
-        <td colspan="3">{{Estudiante.discapacidad}}</td>
-    </tr>
-    <tr>
-        <th colspan="3">PLANTEL DE PROCEDENCIA</th>
-        <th colspan="3">CURSO 2018 - 2019</th>
-    </tr>
-    <tr>
-        <td colspan="3">{{Estudiante.plantel_procedenciaEst}} </td>
-        <td colspan="3">Curso anterior</td>
+        <td  colspan="3" style="line-height:normal;">{{Estudiante.correo_elMam}}</td>
+        <td colspan="4" style="line-height:normal;">{{Estudiante.id_genr_estado_laboralm}}</td>
     </tr>
 </table>
+
+<br>
+<br>
 <br>
 <table border="1">
-    <caption>DATOS DEL REPRESENTANTE LEGAL</caption>
+        <div style="text-align: center;font-weight:bold;font-size:8pt;color:#000000">DATOS DEL PADRE</div>
     <tr>
-        <th>No. CÉDULA / PASAPORTE</th>
-        <th colspan="4">NOMBRE COMPLETO (APELLIDOS / NOMBRES)</th>
-        <th COLSPAN="2" ROWSPAN="10">Imagen DEL REPRESENTANTE</th>
+        <th colspan="2"  style="line-height:normal;">No. CÉDULA / PASAPORTE</th>
+        <th colspan="4" style="line-height:normal;">APELLIDOS / NOMBRES COMPLETOS</th>
+        <th colspan="1" style="line-height:normal;">VIVE / ESTUD</th>
     </tr>
     <tr>
-        <td>{{Estudiante.ridentificacion}}</td>
-        <td colspan="4">{{Estudiante.rapellidos}} &nbsp; {{Estudiante.rnombres}}</td>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.pidentificacion}}</td>
+        <td colspan="4" style="line-height:normal;">{{Estudiante.pnombres}} &nbsp; {{Estudiante.papellidos}}</td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.pvive_con_usted}}</td>
     </tr>
     <tr>
-        <th>FECHA / NACIMIENTO:</th>
-        <th>EDAD:</th>
-        <th>GÉNERO</th>
-        <th>PAIS</th>
-        <th>CIUDAD</th>
+        <th colspan="2" style="line-height:normal;">FECHA / NACIMIENTO:</th>
+        <th colspan="1" style="line-height:normal;">EDAD</th>
+        <th colspan="1" style="line-height:normal;">GENERO</th>
+        <th colspan="1" style="line-height:normal;">PAIS</th>
+        <th colspan="1" style="line-height:normal;">CIUDAD</th>
+        <th colspan="1" style="line-height:normal;">No. TEL. CELULAR</th>
     </tr>
     <tr>
-        <td>{{Estudiante.fecha_nacimientoRe}}</td>
-        <td>{{Estudiante.edadRe}} </td>
-        <td>{{Estudiante.generoRe}} </td>
-        <td>{{Estudiante.paisRe}} </td>
-        <td>{{Estudiante.ciudadRe}} </td>
+        <td colspan="2" style="line-height:normal;">{{Estudiante.fecha_nacimientoPap}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.edadPap}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.generoPap}} </td>
+        <td colspan="1"style="line-height:normal;">{{Estudiante.paisPap}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.ciudadPap}} </td>
+        <td colspan="1" style="line-height:normal;">{{Estudiante.ptelefono}}</td>
     </tr>
     <tr>
-        <th colspan="5">DIRECCIÓN</th>
+        <th colspan="3" style="line-height:normal;">CORREO ELECTRÓNICO:</th>
+        <th colspan="4" style="line-height:normal;">OCUPACION</th>
     </tr>
     <tr>
-        <td colspan="5">{{Estudiante.direccionRe}} </td>
-    </tr>
-    <tr>
-        <th colspan="3">CORREO ELECTRÓNICO:</th>
-        <th colspan="2">PARENTEZCO CON ESTUD.</th>
-    </tr>
-    <tr>
-        <td colspan="3">{{Estudiante.rcorreo}} </td>
-        <td colspan="2">{{Estudiante.tipo_parentesco}}</td>
-    </tr>
-    <tr>
-        <th>No. TEL. CONVENCIONAL</th>
-        <th colspan="2">No. TEL. CELULAR</th>
-        <th colspan="2">PROFESIÓN</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.rtelefono_trabajo}}</td>
-        <td colspan="2">{{Estudiante.rtelefono}}</td>
-        <td colspan="2">{{Estudiante.profesionRe}} </td>
-    </tr>
-    <tr>
-        <th colspan="4">LUGAR DE TRABAJO</th>
-        <th colspan="2">TELEF. LUGAR TRABAJO</th>
-        <th>VIVE / ESTUD</th>
-    </tr>
-    <tr>
-        <td colspan="4">{{Estudiante.lugardetrabajoRe}}</td>
-        <td colspan="2">{{Estudiante.rtelefono_trabajo}}</td>
-        <td>{{Estudiante.rvive_con_usted}}</td>
+        <td colspan="3" style="line-height:normal;">{{Estudiante.correo_elPap}} </td>
+        <td colspan="4" style="line-height:normal;">{{Estudiante.id_genr_estado_laboralp}}</td>
     </tr>
 </table>
-<br>
-<table border="1">
-    <caption>DATOS DE LA MAMA</caption>
-    <tr>
-        <th>No. CÉDULA / PASAPORTE</th>
-        <th colspan="5">APELLIDOS / NOMBRES COMPLETOS</th>
-        <th>VIVE / ESTUD</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.midentificacion}}</td>
-        <td colspan="5">{{Estudiante.mapellidos}} &nbsp; {{Estudiante.mnombres}}</td>
-        <td>{{Estudiante.mvive_con_usted}}</td>
-    </tr>
-    <tr>
-        <th>FECHA / NACIMIENTO:</th>
-        <th>EDAD</th>
-        <th>GENERO</th>
-        <th>PAIS</th>
-        <th>CIUDAD</th>
-        <th colspan="2">No. TEL. CELULAR</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.fecha_nacimientoMa}} </td>
-        <td>{{Estudiante.edadMam}} </td>
-        <td>{{Estudiante.generoMam}} </td>
-        <td>{{Estudiante.paisMam}} </td>
-        <td>{{Estudiante.ciudadMam}} </td>
-        <td colspan="2">{{Estudiante.mtelefono}}</td>
-    </tr>
-    <tr>
-        <th colspan="3">CORREO ELECTRÓNICO:</th>
-        <th colspan="4">OCUPACION</th>
-    </tr>
-    <tr>
-        <td colspan="3">{{Estudiante.correo_elMam}}</td>
-        <td colspan="4">{{Estudiante.id_genr_estado_laboralm}}</td>
-    </tr>
-</table>
-<br>
-<table border="1">
-    <caption>DATOS DEL PAPA</caption>
-    <tr>
-        <th>No. CÉDULA / PASAPORTE</th>
-        <th colspan="5">APELLIDOS / NOMBRES COMPLETOS</th>
-        <th>VIVE / ESTUD</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.pidentificacion}}</td>
-        <td colspan="5">{{Estudiante.pnombres}} &nbsp; {{Estudiante.papellidos}}</td>
-        <td>{{Estudiante.pvive_con_usted}}</td>
-    </tr>
-    <tr>
-        <th>FECHA / NACIMIENTO:</th>
-        <th>EDAD</th>
-        <th>GENERO</th>
-        <th>PAIS</th>
-        <th>CIUDAD</th>
-        <th colspan="2">No. TEL. CELULAR</th>
-    </tr>
-    <tr>
-        <td>{{Estudiante.fecha_nacimientoPap}} </td>
-        <td>{{Estudiante.edadPap}} </td>
-        <td>{{Estudiante.generoPap}} </td>
-        <td>{{Estudiante.paisPap}} </td>
-        <td>{{Estudiante.ciudadPap}} </td>
-        <td colspan="2">{{Estudiante.ptelefono}}</td>
-    </tr>
-    <tr>
-        <th colspan="3">CORREO ELECTRÓNICO:</th>
-        <th colspan="4">OCUPACION</th>
-    </tr>
-    <tr>
-        <td colspan="3">{{Estudiante.correo_elPap}} </td>
-        <td colspan="4">{{Estudiante.id_genr_estado_laboralp}}</td>
-    </tr>
-</table>
-<br>
 <table>
   <tr>
-      <br>
-    <td>Repres. Legal </td>
+    <br>
+
+    <td >REPRES. LEGAL </td>
     <td>SECRETARIA</td>
     <td>RECTORA</td>
+
   </tr>
 </table>
 
+<br>
+</table>
 <div id="footer_content">
     <br>
-      <div id="contenido_del_footer" style="font-size: 15px;">
-        <br>
-        <label>Fecha: {{fecha_actual}}</label>
+    <br>
+      <div id="contenido_del_footer" style="font-size: 10px;">
+
+        <td >Fecha: {{fecha_actual}}</td>
     </div>
 </div>
 
 </body>
-
-
 </html>
