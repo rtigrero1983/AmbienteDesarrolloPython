@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import AutoField
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import MantEstudiante, MantAnioLectivo
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_genr import GenrGeneral
-
+from django.template.defaultfilters import slugify
 class MovAdmision(models.Model):
     id_admision = models.AutoField(primary_key=True)
     tipo_documento = models.CharField(max_length=45, blank=False, null=False)
@@ -76,7 +76,7 @@ class Mov_Aniolectivo_curso(models.Model):
         db_table = 'mov_anioelectivo_curso_paralelo'
        
     def __str__(self):
-        return  self.id_curso.nombre+" "+self.id_curso.id_genr_formacion.nombre+" "+self.id_genr_paralelo.nombre+" "+str(self.id_anio_electivo.anio)
+        return  self.id_curso.nombre+" "+self.id_curso.id_genr_formacion.nombre+" "+self.id_genr_paralelo.nombre
 
 
 class MovDetalleMateriaCurso(models.Model):
