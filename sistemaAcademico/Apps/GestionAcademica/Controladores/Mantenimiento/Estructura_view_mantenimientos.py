@@ -191,10 +191,10 @@ class ConsultarEstudiante(UpdateView):
             id_estudiante = persona.id_estudiante
             c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
             if c_estudiante: 
-                curso_estudiante = MovCabCurso.objects.filter(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
+                curso_estudiante = MovCabCurso.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
                 paralelo_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre).first()
                 jornada_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre).first()
-        context['curso_estudiante'] = curso_estudiante
+        context['curso_estudiante'] = str (object= curso_estudiante)
         context['paralelo_estudiante'] = paralelo_estudiante
         context['jornada_estudiante'] = jornada_estudiante
         return context
@@ -244,10 +244,10 @@ class UpdateEstudiante(UpdateView):
             id_estudiante = persona.id_estudiante
             c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
             if c_estudiante: 
-                curso_estudiante = MovCabCurso.objects.filter(id_curso=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
+                curso_estudiante = MovCabCurso.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
                 paralelo_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_genr_paralelo.nombre).first()
                 jornada_estudiante = GenrGeneral.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.id_genr_jornada.nombre).first()
-        context['curso_estudiante'] = curso_estudiante
+        context['curso_estudiante'] = str (object= curso_estudiante)
         context['paralelo_estudiante'] = paralelo_estudiante
         context['jornada_estudiante'] = jornada_estudiante
         context["val"] = variable
