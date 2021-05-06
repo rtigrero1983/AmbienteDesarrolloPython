@@ -27,6 +27,7 @@
             <table cellspacing="0" class="table table-bordered table-hover" id="dtBasicExample">
                 <thead class="bg-gradient-primary">
                 <tr class="text-light text-center">
+                    <th>#</th>
                     <th>Año Electivo</th>
                     <th>Curso</th>
                     <th style="width: 2cm">Paralelo</th>
@@ -37,6 +38,7 @@
                 <tbody>
                 {% for a in anio %}
                 <tr class="text-center" style="border-width:3px;">
+                    <td>{{ a.id_mov_anioelectivo_curso }}</td>
                     <td>{{ a.id_anio_electivo }}</td>
                     <td>{{ a.id_curso }}</td>
                     <td>{{ a.id_genr_paralelo }}
