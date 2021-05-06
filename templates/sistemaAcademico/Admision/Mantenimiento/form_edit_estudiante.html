@@ -2,6 +2,8 @@
 {% block encabezado %}
 {%load staticfiles%}
 {% if val %}
+
+
 <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
     <button class="btn btn-primary d-md-none rounded-circle mr-3" id="sidebarToggleTop">
@@ -157,38 +159,40 @@
                             {% if not val %}
                             <div class="col-4" style="display: flex;justify-content: center;font-weight: bold;color: #0f0f0f"> {{form.cod_alfnum|as_crispy_field}}</div>
                             {% endif %}
+
+
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
 
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
-                                {{form.nombres|as_crispy_field}}
-                                {{form.fecha_de_nacimiento|as_crispy_field}}
-                                {{form.lugar_nacimiento|as_crispy_field}}
-                                {{form.id_genr_etnia|as_crispy_field}}
-                                {{form.id_genr_pais|as_crispy_field}}
+                                <div style="color: red;">{{form.nombres|as_crispy_field}} </div>
+                                <div style="color: red;">{{form.fecha_de_nacimiento|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.lugar_nacimiento|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_etnia|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_pais|as_crispy_field}}</div>
                                 {{form.nacionalidadEst|as_crispy_field}}
-                                {{form.direccion|as_crispy_field}}
+                                <div style="color: red;">{{form.direccion|as_crispy_field}}</div>
 
                             </div>
 
-                             <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                             <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
-                                {{form.apellidos|as_crispy_field}}
+                                <div style="color: red;">{{form.apellidos|as_crispy_field}}</div>
                                 {{form.edadEst|as_crispy_field}}
-                                {{form.id_genr_tipo_sangre|as_crispy_field}}
-                                {{form.id_genr_idioma_ancestral|as_crispy_field}}
-                                {{form.id_genr_provincia|as_crispy_field}}
-                                {{form.id_genr_categoria_migratoria|as_crispy_field}}
+                                <div style="color: red;">{{form.id_genr_tipo_sangre|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_idioma_ancestral|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_provincia|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_categoria_migratoria|as_crispy_field}}</div>
                                 {{form.referenciadeubicacion|as_crispy_field}}
                                  {{form.plantel_procedenciaEst|as_crispy_field}}
 
 
                              </div>
-                             <div class="col-4" style="font-weight: bold;color: #0f0f0f">
-                                {{form.id_genr_genero|as_crispy_field}}
+                             <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
+                                <div style="color: red;">{{form.id_genr_genero|as_crispy_field}}</div>
                                 {{form.correo_elest|as_crispy_field}}
-                                {{form.id_genr_indigena|as_crispy_field}}
-                                {{form.id_genr_ciudad|as_crispy_field}}
+                                <div style="color: red;">{{form.id_genr_indigena|as_crispy_field}}</div>
+                                <div style="color: red;">{{form.id_genr_ciudad|as_crispy_field}}</div>
                                  {{form.sector|as_crispy_field}}
                                 {{form.celular|as_crispy_field}}
                                 {{form.telefono|as_crispy_field}}
@@ -207,17 +211,17 @@
                         <div class="row">
                                                         <h1 style="color: #2e59d9;font-weight: bold;">Datos Del Estudiante</h1>
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.discapacidad|as_crispy_field}}
                                 {{form.discapacidad_renal|as_crispy_field}}
                                 {{form.discapacidad_neurologica|as_crispy_field}}
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.enfermedad_alergica|as_crispy_field}}
                                 {{form.asma|as_crispy_field}}
                                 {{form.epilepsia|as_crispy_field}}
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.enfermedad_congenita|as_crispy_field}}
                                 {{form.enfermedad_respiratoria|as_crispy_field}}
                                 {{form.atencion_psicologica|as_crispy_field}}
@@ -235,7 +239,7 @@
                         <div class="row">
                             <h1 style="color: #2e59d9;font-weight: bold;">Datos Del Padre</h1>
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
                                 {{form.pnombres|as_crispy_field}}
                                 {{form.fecha_nacimientoPap|as_crispy_field}}
@@ -243,14 +247,14 @@
                                 {{form.ptelefono|as_crispy_field}}
 
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.papellidos|as_crispy_field}}
                                 {{form.edadPap|as_crispy_field}}
                                 {{form.ciudadPap|as_crispy_field}}
                                 {{form.correo_elPap|as_crispy_field}}
                             </div>
 
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.pidentificacion|as_crispy_field}}
                                 {{form.generoPap|as_crispy_field}}
                                 {{form.pdireccion|as_crispy_field}}
@@ -261,36 +265,36 @@
 
                                 <h1 style="color: #2e59d9; font-weight: bold;">Datos De La Madre</h1>
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.mnombres|as_crispy_field}}
                                 {{form.fecha_nacimientoMa|as_crispy_field}}
                                 {{form.paisMam|as_crispy_field}}
                                 {{form.mtelefono|as_crispy_field}}
 
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.mapellidos|as_crispy_field}}
                                 {{form.edadMam|as_crispy_field}}
                                 {{form.ciudadMam|as_crispy_field}}
                                 {{form.correo_elMam|as_crispy_field}}
                             </div>
 
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.midentificacion|as_crispy_field}}
                                 {{form.generoMam|as_crispy_field}}
                                 {{form.mdireccion|as_crispy_field}}
                                 {{form.mvive_con_usted|as_crispy_field}}
                             </div>
                              <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: red;text-transform: uppercase">
 
                                 {{form.id_genr_estado_laboralp|as_crispy_field}}
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.id_genr_estado_laboralm|as_crispy_field}}
 
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.bono_solidario|as_crispy_field}}
                             </div>
                         </div>
@@ -306,17 +310,17 @@
                         <div class="row">
                                                                                     <h1 style="color: #2e59d9;font-weight: bold;">Datos Del Representante</h1>
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                             <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                             <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.rnombres|as_crispy_field}}
                                 {{form.fecha_nacimientoRe|as_crispy_field}}
-                                {{form.rcorreo|as_crispy_field}}
+                                <div style="color: red">{{form.rcorreo|as_crispy_field}}</div>
                                 {{form.rtelefono|as_crispy_field}}
                                 {{form.paisRe|as_crispy_field}}
-                                {{form.id_genr_tipo_identificacion|as_crispy_field}}
+                                <div style="color: red">{{form.id_genr_tipo_identificacion|as_crispy_field}}</div>
                                 {{form.lugardetrabajoRe|as_crispy_field}}
 
                             </div>
-                             <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                             <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.rapellidos|as_crispy_field}}
 
                                 {{form.edadRe|as_crispy_field}}
@@ -326,7 +330,7 @@
                                 {{form.profesionRe|as_crispy_field}}
                                 {{form.rdireccion_trabajo|as_crispy_field}}
                             </div>
-                            <div class="col-4" style="font-weight: bold;color: #0f0f0f">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.ridentificacion|as_crispy_field}}
                                 {{form.rtelefono_trabajo|as_crispy_field}}
                                 {{form.generoRe|as_crispy_field}}
@@ -355,7 +359,14 @@
             </div>
             </div>
 </form>
+
 {% endblock contenido_principal%}
 
 {% block footer %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        Swal.fire({
+      title: '¡AVISO! ¡CAMPOS ROJOS SON OBLIGATORIOS!'
+    })
+    </script>
 {% endblock footer %}

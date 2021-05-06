@@ -15,6 +15,10 @@ from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant 
 from sistemaAcademico.utils import link_callback
 from django.urls import reverse_lazy
 
+from django.views.generic.detail import DetailView
+
+from sistemaAcademico.Apps.GestionAcademica.Forms.Admision.forms_mantenimientos import *
+
 def reporte_estudiante(request):
     if 'usuario' in request.session:
         persona = None
@@ -899,13 +903,19 @@ def ReporteEmpleado(empleado, campoChk=None, usuarioph=None):
 def usu(context, usuario):
     context['nombre_usuario'] = usuario
 
+
+
+
 class Reportepor_estudiante(View):
+
+
         def get(self,request,*args,**kwargs):
             try:
                 print("Imprime esto",kwargs)
                 template = get_template('sistemaAcademico/reportes/Ficha_matricula.html')
                 context={
-                    'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk'])
+                    'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk']),
+                    'Curso': MovMatriculacionEstudiante.objects.get(pk=self.kwargs['pk']),
                 }
                 context['fecha_actual'] = date.today()
                 html=template.render(context)
@@ -916,3 +926,6 @@ class Reportepor_estudiante(View):
             except:
                 pass
             return HttpResponseRedirect(reverse_lazy("Academico:logout"))
+
+
+
