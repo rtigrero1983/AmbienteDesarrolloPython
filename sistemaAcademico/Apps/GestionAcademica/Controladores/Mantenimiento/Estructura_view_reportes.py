@@ -12,6 +12,7 @@ from xhtml2pdf import pisa
 from django.views.generic import View
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_conf import *
 from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mant import *
+from sistemaAcademico.Apps.GestionAcademica.Diccionario.Estructuras_tablas_mov import MovMatriculacionEstudiante
 from sistemaAcademico.utils import link_callback
 from django.urls import reverse_lazy
 
@@ -907,16 +908,24 @@ def usu(context, usuario):
 
 
 class Reportepor_estudiante(View):
-
-
         def get(self,request,*args,**kwargs):
             try:
-                print("Imprime esto",kwargs)
                 template = get_template('sistemaAcademico/reportes/Ficha_matricula.html')
+                id = MantPersona.objects.filter(pk=self.kwargs['pk']).first()
+                curso_estudiante = None
+                c_estudiante = None
+
+                persona = MantEstudiante.objects.filter(id_persona=id.id_persona).first()
+                if persona:
+                    id_estudiante = persona.id_estudiante
+                    c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
+                    if c_estudiante: 
+                        curso_estudiante = MovCabCurso.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
                 context={
                     'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk']),
-                    'Curso': MovMatriculacionEstudiante.objects.get(pk=self.kwargs['pk']),
-                }
+                    
+                    }
+                context['curso_estudiante'] = str (object= curso_estudiante)
                 context['fecha_actual'] = date.today()
                 html=template.render(context)
                 response= HttpResponse(content_type='aplication/pdf')
