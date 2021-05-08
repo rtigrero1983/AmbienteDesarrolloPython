@@ -34,6 +34,11 @@ def reporte_estudiante(request):
                 persona = MantEstudiante.objects.filter(id_persona__apellidos__icontains=campoP)
             elif combo == 2:
                 persona = MantEstudiante.objects.all()
+
+
+
+
+
             elif combo == 3:
                 persona = MantEstudiante.objects.filter(usuario_ing=campoP)
             elif combo == 4:
@@ -46,6 +51,8 @@ def reporte_estudiante(request):
         return render(request, 'sistemaAcademico/reportes/reportePersona.html')
     else:
         return HttpResponseRedirect('timeout/')
+
+
 
 
 def mant_estudiante(persona, campoChk3=None, usuariophh=None):
@@ -79,16 +86,16 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
     ws['B1'].font = Font(name='times new roman', size=14, bold=True)
     ws['B1'] = 'Base De Datos De Estudiantes'
 
-    ws['G4'].alignment = Alignment(horizontal="center", vertical="center")
-    ws['G4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+    ws['K4'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['K4'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
-    ws['G4'].font = Font(name='times new roman', size=14, bold=True)
-    ws['G4'] = 'Representante Legal'
+    ws['K4'].font = Font(name='times new roman', size=14, bold=True)
+    ws['K4'] = 'Representante Legal'
     # Se fusionan las celdas
     ws.merge_cells('B1:L1')
-    ws.merge_cells('C5:D5')
-    ws.merge_cells('G4:L4')
-    ws.merge_cells('H5:I5')
+
+    ws.merge_cells('J4:M4')
+
     # Se da tamaño a las filas
     ws.row_dimensions[2].height = 20
     ws.row_dimensions[3].height = 20
@@ -97,15 +104,19 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
     # Se da tamaño a las columnas
     ws.column_dimensions['A'].width = 5
     ws.column_dimensions['B'].width = 13
-    ws.column_dimensions['C'].width = 20
-    ws.column_dimensions['D'].width = 20
-    ws.column_dimensions['E'].width = 13
-    ws.column_dimensions['F'].width = 50
-    ws.column_dimensions['G'].width = 13
-    ws.column_dimensions['H'].width = 15
-    ws.column_dimensions['J'].width = 20
-    ws.column_dimensions['k'].width = 13
+    ws.column_dimensions['C'].width = 50
+    ws.column_dimensions['D'].width = 13
+    ws.column_dimensions['E'].width = 50
+    ws.column_dimensions['F'].width = 13
+    ws.column_dimensions['G'].width = 50
+    ws.column_dimensions['H'].width = 14
+    ws.column_dimensions['I'].width = 14
+    ws.column_dimensions['J'].width = 14
+    ws.column_dimensions['k'].width = 50
     ws.column_dimensions['L'].width = 13
+    ws.column_dimensions['M'].width = 13
+    ws.column_dimensions['N'].width = 13
+    ws.column_dimensions['O'].width = 13
     # Cabecera de la tabla
     ws['A5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['A5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
@@ -119,70 +130,100 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['B5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['B5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['B5'] = 'Cedula Est'
+    ws['B5'] = 'CEDULA EST'
 
     ws['C5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['C5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['C5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['C5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['C5'] = 'Apellidos y Nombres'
+    ws['C5'] = 'APELLIDOS Y NOMBRES'
+
+
+    ws['D5'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['D5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
+    ws['D5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
+    ws['D5'].font = Font(name='times new roman', size=12, bold=True)
+    ws['D5'] = 'JORNADA'
 
     ws['E5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['E5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['E5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['E5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['E5'] = 'Fecha Nac'
+    ws['E5'] = 'CURSO'
 
     ws['F5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['F5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['F5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['F5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['F5'] = 'Dirección'
+    ws['F5'] = 'PARALELO'
 
     ws['G5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['G5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['G5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['G5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['G5'] = 'Cedula Rep'
+    ws['G5'] = 'DIRECCION'
 
     ws['H5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['H5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['H5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['H5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['H5'] = 'Apellidos '
+    ws['H5'] = 'FECHA NACI'
+
+    ws['I5'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['I5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
+    ws['I5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
+    ws['I5'].font = Font(name='times new roman', size=12, bold=True)
+    ws['I5'] = 'ESTADO'
 
     ws['J5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['J5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['J5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['J5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['J5'] = 'Nombres'
+    ws['J5'] = 'CEDULA REP'
 
     ws['K5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['K5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['K5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['K5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['K5'] = 'Num Conv'
+    ws['K5'] = 'APELLIDOS Y NOMBRES'
+
+
 
     ws['L5'].alignment = Alignment(horizontal="center", vertical="center")
     ws['L5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
                              top=Side(border_style="thin"), bottom=Side(border_style="thin"))
     ws['L5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
     ws['L5'].font = Font(name='times new roman', size=12, bold=True)
-    ws['L5'] = 'Num Celu'
+    ws['L5'] = 'NUM CONV'
+
+    ws['M5'].alignment = Alignment(horizontal="center", vertical="center")
+    ws['M5'].border = Border(left=Side(border_style="thin"), right=Side(border_style="thin"),
+                             top=Side(border_style="thin"), bottom=Side(border_style="thin"))
+    ws['M5'].fill = PatternFill(start_color='6BA3FF', end_color='6BA3FF', fill_type="solid")
+    ws['M5'].font = Font(name='times new roman', size=12, bold=True)
+    ws['M5'] = 'NUM CEL'
+
+
+
 
     # presentacion de los datos consultados en al base
     controlador = 6
     cont = 1
+
     for mant in persona:
-        ws.merge_cells(f"C{controlador}:D{controlador}")
-        ws.merge_cells(f"H{controlador}:I{controlador}")
+
+        #Unir Filas
+        #ws.merge_cells(f"C{controlador}:D{controlador}")
+        #ws.merge_cells(f"H{controlador}:I{controlador}")
         ws.cell(row=controlador, column=1).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=1).border = Border(left=Side(border_style="thin"),
                                                            right=Side(border_style="thin"),
@@ -199,29 +240,47 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
         ws.cell(row=controlador, column=2).font = Font(name='times new roman', size=11)
         ws.cell(row=controlador, column=2).value = mant.id_persona.identificacion
 
-        ws.cell(row=controlador, column=3).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=3).alignment = Alignment(horizontal="left")
         ws.cell(row=controlador, column=3).border = Border(left=Side(border_style="thin"),
                                                            right=Side(border_style="thin"),
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=3).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=3).value = mant.id_persona.nombres + ' ' + mant.id_persona.apellidos
+        ws.cell(row=controlador, column=3).value = mant.id_persona.apellidos + ' ' + mant.id_persona.nombres
 
-        ws.cell(row=controlador, column=5).alignment = Alignment(horizontal="center")
+
+
+        #AQUI VA LA JORNADA
+        ws.cell(row=controlador, column=4).alignment = Alignment(horizontal="left")
+        ws.cell(row=controlador, column=4).border = Border(left=Side(border_style="thin"),
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=4).font = Font(name='times new roman', size=11)
+        ws.cell(row=controlador, column=4).value = mant.id_persona.apellidos
+
+        # AQUI VA EL CURSO
+
+        ws.cell(row=controlador, column=5).alignment = Alignment(horizontal="left")
         ws.cell(row=controlador, column=5).border = Border(left=Side(border_style="thin"),
                                                            right=Side(border_style="thin"),
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=5).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=5).value = mant.id_persona.fecha_de_nacimiento
+        ws.cell(row=controlador, column=5).value = mant.id_persona.apellidos
 
-        ws.cell(row=controlador, column=6).alignment = Alignment(horizontal="center")
+        #AQUI VA EL PARALELO
+
+        ws.cell(row=controlador, column=6).alignment = Alignment(horizontal="left")
         ws.cell(row=controlador, column=6).border = Border(left=Side(border_style="thin"),
                                                            right=Side(border_style="thin"),
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=6).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=6).value = mant.id_persona.direccion
+        ws.cell(row=controlador, column=6).value = mant.id_persona.apellidos
+
+
+
 
         ws.cell(row=controlador, column=7).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=7).border = Border(left=Side(border_style="thin"),
@@ -229,7 +288,8 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=7).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=7).value = mant.id_persona.ridentificacion
+        ws.cell(row=controlador, column=7).value = str(mant.id_persona.direccion).upper()
+
 
         ws.cell(row=controlador, column=8).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=8).border = Border(left=Side(border_style="thin"),
@@ -237,24 +297,40 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                                                            top=Side(border_style="thin"),
                                                            bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=8).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=8).value = mant.id_persona.rapellidos 
+        ws.cell(row=controlador, column=8).value = mant.id_persona.fecha_de_nacimiento
+
+
+
+        #Aqui va el el Estado Creo que es si esta madtriculado o no
+        ws.cell(row=controlador, column=9).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=9).border = Border(left=Side(border_style="thin"),
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=9).font = Font(name='times new roman', size=11)
+        ws.cell(row=controlador, column=9).value = mant.id_persona.fecha_de_nacimiento
+
+
 
 
         ws.cell(row=controlador, column=10).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=10).border = Border(left=Side(border_style="thin"),
-                                                            right=Side(border_style="thin"),
-                                                            top=Side(border_style="thin"),
-                                                            bottom=Side(border_style="thin"))
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=10).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=10).value = mant.id_persona.rnombres
+        ws.cell(row=controlador, column=10).value = mant.id_persona.ridentificacion
 
-        ws.cell(row=controlador, column=11).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=11).alignment = Alignment(horizontal="left")
         ws.cell(row=controlador, column=11).border = Border(left=Side(border_style="thin"),
-                                                            right=Side(border_style="thin"),
-                                                            top=Side(border_style="thin"),
-                                                            bottom=Side(border_style="thin"))
+                                                           right=Side(border_style="thin"),
+                                                           top=Side(border_style="thin"),
+                                                           bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=11).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=11).value = mant.id_persona.rtelefono_trabajo
+
+        ws.cell(row=controlador, column=11).value =(str(mant.id_persona.rnombres) +' '+ str(mant.id_persona.rapellidos)).upper()
+
+
 
         ws.cell(row=controlador, column=12).alignment = Alignment(horizontal="center")
         ws.cell(row=controlador, column=12).border = Border(left=Side(border_style="thin"),
@@ -262,7 +338,15 @@ def mant_estudiante(persona, campoChk3=None, usuariophh=None):
                                                             top=Side(border_style="thin"),
                                                             bottom=Side(border_style="thin"))
         ws.cell(row=controlador, column=12).font = Font(name='times new roman', size=11)
-        ws.cell(row=controlador, column=12).value = mant.id_persona.rtelefono
+        ws.cell(row=controlador, column=12).value = mant.id_persona.rtelefono_trabajo
+
+        ws.cell(row=controlador, column=13).alignment = Alignment(horizontal="center")
+        ws.cell(row=controlador, column=13).border = Border(left=Side(border_style="thin"),
+                                                            right=Side(border_style="thin"),
+                                                            top=Side(border_style="thin"),
+                                                            bottom=Side(border_style="thin"))
+        ws.cell(row=controlador, column=13).font = Font(name='times new roman', size=11)
+        ws.cell(row=controlador, column=13).value = mant.id_persona.rtelefono
 
         controlador += 1
         cont += 1
@@ -914,16 +998,15 @@ class Reportepor_estudiante(View):
                 id = MantPersona.objects.filter(pk=self.kwargs['pk']).first()
                 curso_estudiante = None
                 c_estudiante = None
-
                 persona = MantEstudiante.objects.filter(id_persona=id.id_persona).first()
                 if persona:
                     id_estudiante = persona.id_estudiante
                     c_estudiante = MovMatriculacionEstudiante.objects.filter(id_estudiante=id_estudiante).first()
-                    if c_estudiante: 
+                    if c_estudiante:
                         curso_estudiante = MovCabCurso.objects.filter(nombre=c_estudiante.id_mov_anioelectivo_curso.id_curso.nombre).first()
                 context={
                     'Estudiante' : MantPersona.objects.get(pk=self.kwargs['pk']),
-                    
+
                     }
                 context['curso_estudiante'] = str (object= curso_estudiante)
                 context['fecha_actual'] = date.today()

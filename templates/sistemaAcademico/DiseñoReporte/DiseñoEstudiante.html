@@ -106,7 +106,7 @@
             Apellidos y Nombres
         </th>
         <th style="text-align: center; vertical-align: middle; width:100px">
-            Tipo Estudiante
+            Estado
         </th>
         <th style="text-align: center; vertical-align: middle; width:150px">
             Fecha Ingreso
@@ -117,7 +117,18 @@
         <th style="text-align: center; vertical-align: middle;">
             Direccion
         </th>
-    </tr>
+
+        <th style="text-align: center; vertical-align: middle;">
+            Jornada
+        </th>
+
+        <th style="text-align: center; vertical-align: middle;">
+            Curso
+        </th>
+
+        <th style="text-align: center; vertical-align: middle;">
+            Paralelo
+        </tr>
     </thead>
     <tbody>
     {% for estudy in lista_estudiante %}
@@ -131,6 +142,7 @@
         <td style="text-align: center; vertical-align: middle;">
             {{ estudy.tipo_estudiante }}
         </td>
+
         <td style="text-align: center; vertical-align: middle;">
             {{ estudy.fecha_ingreso}}
         </td>
@@ -140,6 +152,17 @@
         <td style="text-align: center; vertical-align: middle;">
             {{ estudy.id_persona.direccion}}
         </td>
+        <td style="text-align: center; vertical-align: middle;">
+            MATUTINO
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            3 BACHILLERATO
+        </td>
+        <td style="text-align: center; vertical-align: middle;">
+            A
+        </td>
+
+
     </tr>
     {% endfor %}
 
