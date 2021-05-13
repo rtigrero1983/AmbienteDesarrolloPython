@@ -110,9 +110,10 @@ class Upload_File(View):
                         if nombres !='' or nombres is not None and apellidos !='' or apellidos is not None and cedula !='' or cedula is not None:
                             
                             if self.validateCedula(cedula):
-                                persona = MantPersona.objects.filter(identificacion=cedula).first()
 
+                                persona = MantPersona.objects.filter(identificacion=cedula).first()
                                 if persona:
+                                    messages.error(request, 'Uno de los estudiantes ya esta ingresado' )
                                     print('encontrada')
                                 else:
                                     personSave = MantPersona(nombres=nombres,apellidos=apellidos,identificacion=cedula,
@@ -126,13 +127,14 @@ class Upload_File(View):
                                     matriculacion = MovMatriculacionEstudiante(id_estudiante=MantEstudiante.objects.get(id_estudiante=estudiante.id_estudiante),
                                     id_mov_anioelectivo_curso=Mov_Aniolectivo_curso.objects.get(id_mov_anioelectivo_curso=id_mov_anioelectivo_curso),estado=GenrGeneral.objects.get(nombre='INACTIVO'),fecha_ingreso=timezone.now(),usuario_ing=usuario.usuario,terminal_ing=socket.gethostname())
                                     matriculacion.save()
+                                    print(personSave)
                                     h = hashlib.new("sha1")
                                     var_contra = str.encode(cedula)
                                     h.update(var_contra)
                                     rol = ConfRol.objects.filter(codigo='003').first()
                                     if rol:
                                         UsuarioTemp.objects.create(usuario=cedula,clave=h.hexdigest(),id_rol=rol,id_persona=personSave)
-
+                                    
                             else:
                                 messages.error(request, 'La cedula {0} es incorrecta'.format(cedula))
 

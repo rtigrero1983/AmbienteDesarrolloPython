@@ -29,6 +29,7 @@ from .Diccionario.Estructuras_tablas_mant import *
 from .Diccionario.Estructuras_tablas_mov import *
 from django.views.decorators.cache import cache_page
 from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_file import Upload_File
+from sistemaAcademico.Apps.GestionAcademica.Controladores.Matriculacion.Estructura_view_file_ex import Upload_FileEX
 
 
 
@@ -243,6 +244,7 @@ urlpatterns = [
 
     #------------ subir excel ---------
     path('read_file/',Upload_File.as_view(),name='read_file'),
+    path('read_file_ex/',Upload_FileEX.as_view(),name='read_file_ex'),
     path('ficha_matricula/<int:pk>',Reportepor_estudiante.as_view(),name='ficha_reporte'),
 
 
