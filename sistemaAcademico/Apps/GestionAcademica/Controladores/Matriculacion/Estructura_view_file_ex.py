@@ -111,10 +111,10 @@ class Upload_FileEX(View):
                                         UsuarioTemp.objects.create(usuario=cedula,clave=h.hexdigest(),id_rol=rol,id_persona=personSave)
                                 except:
                                     pass
-                                
-                                messages.error(request, 'Uno de los estudiantes ingresados ya tiene usuario temporal verifique y asigne uno nuevo usuario' )
+                                messages.success(request, 'Ingreso correcto' )
                         else:
                             print('campo incorrecto')
+                            messages.success(request, 'Campo incorrecto' )
                     
                 else:
                     messages.error(request, 'Formato de archivo no sorportado')
