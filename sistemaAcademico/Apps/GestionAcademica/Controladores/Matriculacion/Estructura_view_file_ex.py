@@ -111,10 +111,10 @@ class Upload_FileEX(View):
                                         UsuarioTemp.objects.create(usuario=cedula,clave=h.hexdigest(),id_rol=rol,id_persona=personSave)
                                 except:
                                     pass
-                                messages.success(request, 'Ingreso correcto' )
+                                messages.success(request, 'Ingreso correcto', extra_tags='safe')
                         else:
                             print('campo incorrecto')
-                            messages.success(request, 'Campo incorrecto' )
+                            messages.error(request, 'Campo incorrecto' )
                     
                 else:
                     messages.error(request, 'Formato de archivo no sorportado')
