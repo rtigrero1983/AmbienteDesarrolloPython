@@ -22,13 +22,13 @@
                       {% if 'safe' in message.tags %}
                       
                       <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">{{ message|safe }}!</h4>
+                        {{ message|safe }}!
                         
                       </div>
                
                       {% else %}
                       <div class="alert alert-danger" role="alert">
-                        <h4 class="alert-heading">{{ message }}!</h4>
+                      {{ message }}!
                       
                       </div>
                       {% endif %}
