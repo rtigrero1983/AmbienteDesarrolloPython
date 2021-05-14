@@ -11,7 +11,7 @@ class MantPersona(models.Model):
     nombres = models.CharField(max_length=50, blank=False, null=False)
     apellidos = models.CharField(max_length=50, blank=False, null=False)
     identificacion = models.CharField(max_length=50, blank=False, null=False, validators=[validate_cedula])
-    fecha_de_nacimiento = models.DateField(blank=False, null=True)
+    fecha_de_nacimiento = models.DateField(blank=True, null=True)
     lugar_nacimiento = models.CharField(max_length=45, blank=True, null=True)
     direccion = models.CharField(max_length=150, blank=True, null=True, validators=[validar_espacios])
     telefono = models.CharField(max_length=15, blank=True, null=True)
@@ -86,7 +86,7 @@ class MantPersona(models.Model):
     rtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                                     related_name="identificacion",
-                                                    db_column='id_genr_tipo_identificacion', null=True)
+                                                    db_column='id_genr_tipo_identificacion', blank=True, null=True)
     ridentificacion = models.CharField(max_length=13, blank=True, null=True, validators=[identificar])
     tipo_parentesco = models.CharField(max_length=200, blank=True, null=True)
     rvive_con_usted = models.BooleanField(blank=True, null=True)

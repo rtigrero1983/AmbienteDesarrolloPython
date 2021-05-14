@@ -166,7 +166,7 @@
                             <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
                                 <div style="color: red;">{{form.nombres|as_crispy_field}} </div>
-                                <div style="color: red;">{{form.fecha_de_nacimiento|as_crispy_field}}</div>
+                                {{form.fecha_de_nacimiento|as_crispy_field}}
                                 {{form.lugar_nacimiento|as_crispy_field}}
                                 {{form.id_genr_etnia|as_crispy_field}}
                                 {{form.id_genr_pais|as_crispy_field}}
@@ -316,7 +316,7 @@
                                 {{form.rcorreo|as_crispy_field}}
                                 {{form.rtelefono|as_crispy_field}}
                                 {{form.paisRe|as_crispy_field}}
-                                <div style="color: red">{{form.id_genr_tipo_identificacion|as_crispy_field}}</div>
+                                {{form.id_genr_tipo_identificacion|as_crispy_field}}
                                 {{form.lugardetrabajoRe|as_crispy_field}}
 
                             </div>
