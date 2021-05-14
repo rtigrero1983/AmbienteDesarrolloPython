@@ -247,5 +247,7 @@ urlpatterns = [
     path('read_file_ex/',Upload_FileEX.as_view(),name='read_file_ex'),
     path('ficha_matricula/<int:pk>',Reportepor_estudiante.as_view(),name='ficha_reporte'),
 
+    path('estudiantes/<int:pk>/', Estudiantes.as_view(), name='estudiantes'),
+
 
 ]

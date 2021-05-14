@@ -12,33 +12,33 @@ class MantPersona(models.Model):
     apellidos = models.CharField(max_length=50, blank=False, null=False)
     identificacion = models.CharField(max_length=50, blank=False, null=False, validators=[validate_cedula])
     fecha_de_nacimiento = models.DateField(blank=False, null=True)
-    lugar_nacimiento = models.CharField(max_length=45, blank=False, null=True)
-    direccion = models.CharField(max_length=150, blank=False, null=True, validators=[validar_espacios])
+    lugar_nacimiento = models.CharField(max_length=45, blank=True, null=True)
+    direccion = models.CharField(max_length=150, blank=True, null=True, validators=[validar_espacios])
     telefono = models.CharField(max_length=15, blank=True, null=True)
     celular = models.CharField(max_length=15, blank=True, null=True, validators=[validate_celular])
     id_genr_genero = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True,
                                        related_name="genero", db_column='id_genr_genero')
 
 
-    id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=False, null=True,
+    id_genr_pais = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, blank=True, null=True,
                                      db_column='id_genr_pais')
     id_genr_provincia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="provincia",
-                                          db_column='id_genr_provincia', null=True)
+                                          db_column='id_genr_provincia',blank=True, null=True)
     id_genr_ciudad = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="ciudad",
-                                       db_column='id_genr_ciudad', null=True)
+                                       db_column='id_genr_ciudad',blank=True, null=True)
     id_genr_tipo_sangre = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="tipo_de_sangre",
-                                            db_column='id_genr_tipo_sangre', null=True)
-    id_genr_etnia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="etnia",
+                                            db_column='id_genr_tipo_sangre',blank=True, null=True)
+    id_genr_etnia = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,blank=True, related_name="etnia",
                                       db_column='id_genr_etnia', null=True)
     id_genr_jornada = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="jornada",
                                         db_column='id_genr_jornada', null=True,blank=True)
     id_genr_indigena = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="indigena",
-                                         db_column='id_genr_indigena', null=True)
+                                         db_column='id_genr_indigena',blank=True, null=True)
     id_genr_idioma_ancestral = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="acestral",
-                                                 db_column='id_genr_idioma_ancestral', null=True)
+                                                 db_column='id_genr_idioma_ancestral',blank=True, null=True)
     id_genr_categoria_migratoria = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                                      related_name="categoria_migratoria",
-                                                     db_column='id_genr_categoria_migratoria', null=True)
+                                                     db_column='id_genr_categoria_migratoria',blank=True, null=True)
 
     estado = models.ForeignKey(GenrGeneral, default=97, on_delete=models.CASCADE,
                                related_name="fk_persona_estado", db_column='estado')
@@ -70,7 +70,7 @@ class MantPersona(models.Model):
     ptelefono = models.CharField(max_length=45, blank=True, null=True)
     pvive_con_usted = models.BooleanField(blank=True, null=True)
     id_genr_estado_laboralp = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE, related_name="estado_laboralp",
-                                                db_column='id_genr_estado_laboralp', blank=False, null=True)
+                                                db_column='id_genr_estado_laboralp', blank=True, null=True)
     mnombres = models.CharField(max_length=45, blank=True, null=True)
     mapellidos = models.CharField(max_length=45, blank=True, null=True)
     midentificacion = models.CharField(max_length=15, blank=True, null=True, validators=[validate_cedula])
@@ -92,7 +92,7 @@ class MantPersona(models.Model):
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True)
     rtelefono_trabajo = models.CharField(max_length=20, blank=True, null=True)
-    rcorreo = models.EmailField(max_length=50, blank=False, null=True)
+    rcorreo = models.EmailField(max_length=50, blank=True, null=True)
     rhorario_laboral = models.CharField(max_length=40, blank=True, null=True)
     mienbros_hogar = models.IntegerField(blank=True, null=True)
 

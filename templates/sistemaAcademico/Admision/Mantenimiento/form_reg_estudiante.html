@@ -63,11 +63,11 @@
 
                                 <div style="color: red;">{{form.nombres|as_crispy_field}}</div>
                                 <div style="color: red;">{{form.fecha_de_nacimiento|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.lugar_nacimiento |as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_etnia|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_pais|as_crispy_field}}</div>
+                                {{form.lugar_nacimiento |as_crispy_field}}
+                                {{form.id_genr_etnia|as_crispy_field}}
+                                {{form.id_genr_pais|as_crispy_field}}
                                 {{form.nacionalidadEst|as_crispy_field}}
-                                <div style="color: red;">{{form.direccion|as_crispy_field}}</div>
+                                {{form.direccion|as_crispy_field}}
 
                             </div>
 
@@ -75,10 +75,10 @@
 
                                 <div style="color: red;">{{form.apellidos|as_crispy_field}}</div>
                                 {{form.edadEst|as_crispy_field}}
-                                <div style="color: red;">{{form.id_genr_tipo_sangre|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_idioma_ancestral|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_provincia|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_categoria_migratoria|as_crispy_field}}</div>
+                                {{form.id_genr_tipo_sangre|as_crispy_field}}
+                                {{form.id_genr_idioma_ancestral|as_crispy_field}}
+                                {{form.id_genr_provincia|as_crispy_field}}
+                                {{form.id_genr_categoria_migratoria|as_crispy_field}}
                                 {{form.referenciadeubicacion|as_crispy_field}}
                                 {{form.plantel_procedenciaEst|as_crispy_field}}
 
@@ -88,8 +88,8 @@
                                 <div style="color: red;">{{form.identificacion|as_crispy_field}}</div>
                                 <div style="color: red;">{{form.id_genr_genero|as_crispy_field}}</div>
                                 {{form.correo_elest|as_crispy_field}}
-                                <div style="color: red;">{{form.id_genr_indigena|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_ciudad|as_crispy_field}}</div>
+                                {{form.id_genr_indigena|as_crispy_field}}
+                                {{form.id_genr_ciudad|as_crispy_field}}
                                 {{form.sector|as_crispy_field}}
                                 {{form.celular|as_crispy_field}}
                                 {{form.telefono|as_crispy_field}}
@@ -183,7 +183,7 @@
                                 {{form.mvive_con_usted|as_crispy_field}}
                             </div>
                              <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: red;text-transform: uppercase">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
                                 {{form.id_genr_estado_laboralp|as_crispy_field}}
                             </div>
@@ -210,7 +210,7 @@
                              <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.rnombres|as_crispy_field}}
                                 {{form.fecha_nacimientoRe|as_crispy_field}}
-                                <div style="color: red">{{form.rcorreo|as_crispy_field}}</div>
+                                {{form.rcorreo|as_crispy_field}}
                                 {{form.rtelefono|as_crispy_field}}
                                 {{form.paisRe|as_crispy_field}}
                                 <div style="color: red">{{form.id_genr_tipo_identificacion|as_crispy_field}}</div>

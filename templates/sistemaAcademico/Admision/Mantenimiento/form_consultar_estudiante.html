@@ -226,7 +226,12 @@
                 </div>
                 <div align="center">
                     <br>
-                    <a class="btn btn-info" href="{% url 'Academico:estudiante' %}">Volver</a>
+
+                    {% if not val %}
+                       <a class="btn btn-info"  href="{% url 'Academico:estudiante'%}">Regresar a Listados</a>
+                    {% endif %}
+                    <a class="btn btn-info"  href="{% url 'Academico:estudiantes' m.id_persona %}">Regresar</a>
+
                 </div>
             </div>
             </div>

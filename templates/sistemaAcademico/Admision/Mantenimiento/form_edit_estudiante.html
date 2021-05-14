@@ -167,11 +167,11 @@
 
                                 <div style="color: red;">{{form.nombres|as_crispy_field}} </div>
                                 <div style="color: red;">{{form.fecha_de_nacimiento|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.lugar_nacimiento|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_etnia|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_pais|as_crispy_field}}</div>
+                                {{form.lugar_nacimiento|as_crispy_field}}
+                                {{form.id_genr_etnia|as_crispy_field}}
+                                {{form.id_genr_pais|as_crispy_field}}
                                 {{form.nacionalidadEst|as_crispy_field}}
-                                <div style="color: red;">{{form.direccion|as_crispy_field}}</div>
+                                {{form.direccion|as_crispy_field}}
 
                             </div>
 
@@ -179,21 +179,21 @@
 
                                 <div style="color: red;">{{form.apellidos|as_crispy_field}}</div>
                                 {{form.edadEst|as_crispy_field}}
-                                <div style="color: red;">{{form.id_genr_tipo_sangre|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_idioma_ancestral|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_provincia|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_categoria_migratoria|as_crispy_field}}</div>
+                                {{form.id_genr_tipo_sangre|as_crispy_field}}
+                                {{form.id_genr_idioma_ancestral|as_crispy_field}}
+                                {{form.id_genr_provincia|as_crispy_field}}
+                                {{form.id_genr_categoria_migratoria|as_crispy_field}}
                                 {{form.referenciadeubicacion|as_crispy_field}}
-                                 {{form.plantel_procedenciaEst|as_crispy_field}}
+                                {{form.plantel_procedenciaEst|as_crispy_field}}
 
 
                              </div>
                              <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 <div style="color: red;">{{form.id_genr_genero|as_crispy_field}}</div>
                                 {{form.correo_elest|as_crispy_field}}
-                                <div style="color: red;">{{form.id_genr_indigena|as_crispy_field}}</div>
-                                <div style="color: red;">{{form.id_genr_ciudad|as_crispy_field}}</div>
-                                 {{form.sector|as_crispy_field}}
+                                {{form.id_genr_indigena|as_crispy_field}}
+                                {{form.id_genr_ciudad|as_crispy_field}}
+                                {{form.sector|as_crispy_field}}
                                 {{form.celular|as_crispy_field}}
                                 {{form.telefono|as_crispy_field}}
 
@@ -207,7 +207,7 @@
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="pills-info2" role="tabpanel" aria-labelledby="pills-info2-tab">
+                    <div name="estudiante" class="tab-pane fade" id="pills-info2" role="tabpanel" aria-labelledby="pills-info2-tab">
                         <div class="row">
                                                         <h1 style="color: #2e59d9;font-weight: bold;">Datos Del Estudiante</h1>
                             <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
@@ -286,7 +286,7 @@
                                 {{form.mvive_con_usted|as_crispy_field}}
                             </div>
                              <div>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</div>
-                            <div class="col-4" style="font-weight: bold;color: red;text-transform: uppercase">
+                            <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
 
                                 {{form.id_genr_estado_laboralp|as_crispy_field}}
                             </div>
@@ -313,7 +313,7 @@
                              <div class="col-4" style="font-weight: bold;color: #0f0f0f;text-transform: uppercase">
                                 {{form.rnombres|as_crispy_field}}
                                 {{form.fecha_nacimientoRe|as_crispy_field}}
-                                <div style="color: red">{{form.rcorreo|as_crispy_field}}</div>
+                                {{form.rcorreo|as_crispy_field}}
                                 {{form.rtelefono|as_crispy_field}}
                                 {{form.paisRe|as_crispy_field}}
                                 <div style="color: red">{{form.id_genr_tipo_identificacion|as_crispy_field}}</div>
@@ -344,8 +344,7 @@
                         </div>
                         <div class="text-center">
                                 <br>
-                                <button type="submit"  class="btn btn-primary">Descargar ficha de matrícula</button>
-                                <a class="btn btn-danger" href="{% url 'Academico:logout' %}">Salir</a>
+                                <button type="submit"  class="btn btn-primary"  onclick="alertar()" >Guardar Datos</button>
 
                             {% if not val %}
                             <button type="submit"  class="btn btn-primary">Guardar</button>
@@ -366,7 +365,28 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         Swal.fire({
-      title: '¡AVISO! ¡CAMPOS ROJOS SON OBLIGATORIOS!'
+      title: '¡AVISO! ¡CAMPOS ROJOS SON OBLIGATORIOS!',
+      text:  '¡Recuerda Guardar Datos Antes de Imprimir!'
     })
+        function aler(){
+            Swal.fire({
+      title: '¡Datos Guardados!',
+
+    })
+        }
+
+        function alertar (){
+            Swal.fire({
+      title: '¡Por Favor Espere!',
+      text:  '¡Guardando Datos!'
+    })
+        }
+
+        function alertar2 (){
+            Swal.fire({
+      title: '¡Salistes Del Sistema!'
+    })
+        }
+
     </script>
 {% endblock footer %}
