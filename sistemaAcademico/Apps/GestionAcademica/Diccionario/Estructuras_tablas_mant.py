@@ -65,7 +65,7 @@ class MantPersona(models.Model):
 
     pnombres = models.CharField(max_length=45, blank=True, null=True)
     papellidos = models.CharField(max_length=45, blank=True, null=True)
-    pidentificacion = models.CharField(max_length=15, blank=True, null=True, validators=[validate_cedula])
+    pidentificacion = models.CharField(max_length=15, blank=True, null=True)
     pdireccion = models.CharField(max_length=45, blank=True, null=True, validators=[validar_espacios])
     ptelefono = models.CharField(max_length=45, blank=True, null=True)
     pvive_con_usted = models.BooleanField(blank=True, null=True)
@@ -73,7 +73,7 @@ class MantPersona(models.Model):
                                                 db_column='id_genr_estado_laboralp', blank=True, null=True)
     mnombres = models.CharField(max_length=45, blank=True, null=True)
     mapellidos = models.CharField(max_length=45, blank=True, null=True)
-    midentificacion = models.CharField(max_length=15, blank=True, null=True, validators=[validate_cedula])
+    midentificacion = models.CharField(max_length=15, blank=True, null=True)
     mdireccion = models.CharField(max_length=45, blank=True, null=True)
     mtelefono = models.CharField(max_length=45, blank=True, null=True, validators=[validate_celular])
     mvive_con_usted = models.BooleanField(blank=True, null=True)
@@ -87,7 +87,7 @@ class MantPersona(models.Model):
     id_genr_tipo_identificacion = models.ForeignKey(GenrGeneral, on_delete=models.CASCADE,
                                                     related_name="identificacion",
                                                     db_column='id_genr_tipo_identificacion', blank=True, null=True)
-    ridentificacion = models.CharField(max_length=13, blank=True, null=True, validators=[identificar])
+    ridentificacion = models.CharField(max_length=13, blank=True, null=True)
     tipo_parentesco = models.CharField(max_length=200, blank=True, null=True)
     rvive_con_usted = models.BooleanField(blank=True, null=True)
     rdireccion_trabajo = models.CharField(max_length=200, blank=True, null=True)
